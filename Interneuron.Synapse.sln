@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynapseDynamicAPI", "..\SynapseDynamicAPI\SynapseDynamicAPI\SynapseDynamicAPI.csproj", "{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynapseStudio", "..\SynapseStudio\SynapseStudio\SynapseStudio.csproj", "{2022A1A5-975F-4634-93A5-297AE31EE14D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SynapseSchema", "SynapseSchema", "{E81E2DDF-6F51-4312-BD2C-189FEA2CA5EF}"
+	ProjectSection(SolutionItems) = preProject
+		SynapseSchema\RestoreSynapseSchema_v1.0.sql = SynapseSchema\RestoreSynapseSchema_v1.0.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B594CD36-F71C-443C-B7F1-BB1ADB3D69BA}
+	EndGlobalSection
+EndGlobal

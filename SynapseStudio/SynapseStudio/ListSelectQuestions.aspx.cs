@@ -154,6 +154,7 @@ namespace SynapseStudio
 	                            LEFT OUTER JOIN listsettings.listquestion lq	
 	                            ON lm.list_id = lq.list_id
 	                            WHERE lm.list_id = @list_id
+                                AND isselected = true
 	                            ) lq
                             ON q.question_id = lq.question_id
                             WHERE defaultcontext = @defaultcontext
