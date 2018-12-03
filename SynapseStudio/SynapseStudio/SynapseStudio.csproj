@@ -230,6 +230,7 @@
     <Content Include="img\Studio.png" />
     <Content Include="img\Studio_White.png" />
     <Content Include="img\swift.png" />
+    <Content Include="js\jquery-3.3.1.js" />
     <Content Include="js\knockout.dragdrop.js" />
     <Content Include="ListAPIs.aspx" />
     <Content Include="ListManagerAttributes.aspx" />
