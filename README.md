@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This Read Me is provided to give guidance on the installation and configuration of Interneuron Synapse v1.0.0.
+This Read Me is provided to give guidance on the installation and configuration of Interneuron Synapse v0.1.
 
 ## Prerequisities
 
@@ -47,7 +47,7 @@ This section guides you through the deployment and configuration of your develop
 
 8. Use the new super register to logon.
 
-You have now successfully configured Synapse v1.0.0!
+You have now successfully configured Synapse v0.1!
 
 ## Issues & Feedback
 
