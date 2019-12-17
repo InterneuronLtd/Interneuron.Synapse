@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -23,8 +23,6 @@ using Newtonsoft.Json;
 using Npgsql;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Dynamic;
 using System.Text;
@@ -35,16 +33,24 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Configuration;
 
 namespace SynapseDynamicAPI.Controllers
 {
-    //[Authorize(AuthenticationSchemes = AuthSchemes)]
+  
+    [Authorize]
     public class DynamicController : Controller
     {
 
         private const string AuthSchemes =
         CookieAuthenticationDefaults.AuthenticationScheme + "," +
         JwtBearerDefaults.AuthenticationScheme;
+        private IConfiguration _configuration { get; }
+
+        public DynamicController(IConfiguration Configration)
+        {
+            _configuration = Configration;
+        }
 
         [HttpGet]
         [Route("")]
@@ -87,7 +93,7 @@ namespace SynapseDynamicAPI.Controllers
                 filterString = " AND " + filter;
             }
 
-            string sql = "SELECT " + fieldList + " FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ";";
+            string sql = "SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ";";
             var paramList = new List<KeyValuePair<string, object>>() { };
 
             DataSet ds = new DataSet();
@@ -175,7 +181,7 @@ namespace SynapseDynamicAPI.Controllers
                 filterString = " AND " + filter;
             }
 
-            string sql = "SELECT * FROM (SELECT " + fieldList + " FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ") entview " + filtersSQL + ";";
+            string sql = "SELECT * FROM (SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ") entview " + filtersSQL + ";";
 
             DataSet ds = new DataSet();
             try
@@ -243,7 +249,7 @@ namespace SynapseDynamicAPI.Controllers
 
 
 
-            string sql = "SELECT " + fieldList + " FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @p_keyAttributeValue" + " LIMIT 1;";
+            string sql = "SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @p_keyAttributeValue" + " LIMIT 1;";
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_keyAttributeValue", id)
                 };
@@ -291,7 +297,7 @@ namespace SynapseDynamicAPI.Controllers
             }
 
 
-            string sqlCount = "SELECT COUNT(*) AS entityRecords FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue;";
+            string sqlCount = "SELECT COUNT(*) AS entityRecords FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue;";
             var paramListCount = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_keyAttributeValue", attributevalue)
                 };
@@ -317,7 +323,10 @@ namespace SynapseDynamicAPI.Controllers
                 string keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
 
                 StringBuilder sb = new StringBuilder();
+                StringBuilder sb_materialised = new StringBuilder();
+
                 var paramListInsert = new List<KeyValuePair<string, object>>();
+                var paramListInsert_materialised = new List<KeyValuePair<string, object>>();
 
                 if (keyAttribute == synapseattributename)  //Only insert attributevalue
                 {
@@ -325,6 +334,13 @@ namespace SynapseDynamicAPI.Controllers
                     sb.Append(" (" + keyAttribute + ")");
                     sb.Append(" VALUES (@keyvalue)");
                     paramListInsert = new List<KeyValuePair<string, object>>() {
+                     new KeyValuePair<string, object>("keyvalue", attributevalue)
+                    };
+
+                    sb_materialised.Append("INSERT INTO entitystorematerialised." + synapsenamespace + "_" + synapseentityname);
+                    sb_materialised.Append(" (" + keyAttribute + ")");
+                    sb_materialised.Append(" VALUES (@keyvalue)");
+                    paramListInsert_materialised = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("keyvalue", attributevalue)
                     };
                 }
@@ -337,11 +353,21 @@ namespace SynapseDynamicAPI.Controllers
                      new KeyValuePair<string, object>("keyvalue", keyvalue),
                      new KeyValuePair<string, object>("synapseattributevalue", attributevalue)
                     };
+
+
+                    sb_materialised.Append("INSERT INTO entitystorematerialised." + synapsenamespace + "_" + synapseentityname);
+                    sb_materialised.Append(" (" + keyAttribute + "," + synapseattributename + ")");
+                    sb_materialised.Append(" VALUES (@keyvalue, @synapseattributevalue)");
+                    paramListInsert_materialised = new List<KeyValuePair<string, object>>() {
+                     new KeyValuePair<string, object>("keyvalue", keyvalue),
+                     new KeyValuePair<string, object>("synapseattributevalue", attributevalue)
+                    };
                 }
 
                 try
                 {
                     DataServices.executeSQLStatement(sb.ToString(), paramListInsert);
+                    DataServices.executeSQLStatement(sb_materialised.ToString(), paramListInsert_materialised);
                 }
                 catch
                 {
@@ -352,7 +378,6 @@ namespace SynapseDynamicAPI.Controllers
                     httpErr.ErrorDescription = "Invalid paramaters supplied";
                     return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
                 }
-
             }
 
             string fieldList = SynapseEntityHelperServices.GetEntityAttributes(synapsenamespace, synapseentityname, returnsystemattributes);
@@ -362,7 +387,7 @@ namespace SynapseDynamicAPI.Controllers
             }
 
 
-            string sql = "SELECT " + fieldList + " FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue LIMIT 1;";
+            string sql = "SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue LIMIT 1;";
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_keyAttributeValue", attributevalue)
                 };
@@ -433,7 +458,7 @@ namespace SynapseDynamicAPI.Controllers
             }
 
 
-            string sql = "SELECT " + fieldList + " FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue" + filterString + orderBySting + limitString + offsetString + ";";
+            string sql = "SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @p_keyAttributeValue" + filterString + orderBySting + limitString + offsetString + ";";
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_keyAttributeValue", attributevalue)
                 };
@@ -486,6 +511,33 @@ namespace SynapseDynamicAPI.Controllers
             int iKeyMatches = 0;
 
             var count = dataDict.Count();
+
+            //RK: 08012019 set_createdby : userid from access token  
+            #region set_createdby         
+            var useridClaim = User.FindFirst(_configuration["SynapseCore:Settings:TokenUserIdClaimType"]);
+            var userid = "unknown";
+
+            if (useridClaim != null)
+            {
+                userid = useridClaim.Value;
+            }
+            else if (dataDict.ContainsKey("_createdby"))
+            {
+                userid = Convert.ToString(dataDict["_createdby"]);
+            }
+
+            //check if dataDict has _createdby key
+            if (dataDict.ContainsKey("_createdby"))
+            {
+                //update they key value to userid from toke               
+                dataDict["_createdby"] = userid;
+            }
+            else
+            {
+                //add _createdby key and set value to userid from token 
+                dataDict.Add("_createdby", userid);
+            }
+            #endregion
 
             foreach (KeyValuePair<string, object> item in dataDict)
             {
@@ -676,12 +728,48 @@ namespace SynapseDynamicAPI.Controllers
 
         }
 
+        [HttpPost]
+        [Route("[action]/{synapsenamespace?}/{synapseentityname?}")]
+        public string PostObjectArray(string synapsenamespace, string synapseentityname, [FromBody] string data)
+        {
+            StringBuilder returnValue = new StringBuilder();
+
+            var dataToPost = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(data);
+
+            foreach (var item in dataToPost)
+            {
+                string postedData = PostObject(synapsenamespace, synapseentityname, JsonConvert.SerializeObject(item));
+
+                returnValue.Append(postedData.TrimStart('[').TrimEnd(']') + ",");
+            }
+
+            return "[" + returnValue.ToString().TrimEnd(",") + "]";
+        }
 
         [HttpDelete]
         [Route("")]
         [Route("[action]/{synapsenamespace?}/{synapseentityname?}/{synapseattributename?}/{attributevalue?}")]
         public string DeleteObjectByAttribute(string synapsenamespace, string synapseentityname, string synapseattributename, string attributevalue)
         {
+            string sqlDelete = "DELETE FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + synapseattributename + " = @keyValue;";
+
+            var paramListDelete = new List<KeyValuePair<string, object>>() {
+                     new KeyValuePair<string, object>("keyValue", attributevalue)
+                };
+
+            try
+            {
+                DataServices.executeSQLStatement(sqlDelete, paramListDelete);
+            }
+            catch
+            {
+                this.HttpContext.Response.StatusCode = 400;
+                var httpErr = new SynapseHTTPError();
+                httpErr.ErrorCode = "HTTP.500";
+                httpErr.ErrorType = "Server Error";
+                httpErr.ErrorDescription = "Unable to delete materialised entity history";
+                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            }
 
             string sql = "UPDATE entitystore." + synapsenamespace + "_" + synapseentityname + " SET _recordstatus = 2 WHERE _recordstatus = 1 AND " + synapseattributename + " = @p_attributevalue";
             var paramList = new List<KeyValuePair<string, object>>() {
@@ -740,6 +828,26 @@ namespace SynapseDynamicAPI.Controllers
                 httpErr.ErrorCode = "HTTP.400";
                 httpErr.ErrorType = "Client Error";
                 httpErr.ErrorDescription = "Invalid Parameters supplied - key attribute column not supplied";
+                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            }
+
+            string sqlDelete = "DELETE FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @keyValue;";
+
+            var paramListDelete = new List<KeyValuePair<string, object>>() {
+                     new KeyValuePair<string, object>("keyValue", id)
+                };
+
+            try
+            {
+                DataServices.executeSQLStatement(sqlDelete, paramListDelete);
+            }
+            catch
+            {
+                this.HttpContext.Response.StatusCode = 400;
+                var httpErr = new SynapseHTTPError();
+                httpErr.ErrorCode = "HTTP.500";
+                httpErr.ErrorType = "Server Error";
+                httpErr.ErrorDescription = "Unable to delete materialised entity history";
                 return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
 
@@ -847,7 +955,7 @@ namespace SynapseDynamicAPI.Controllers
 
         private string GetReturnObjectByID(string synapsenamespace, string synapseentityname, int sequenceid)
         {
-            string sql = "SELECT * FROM entityview." + synapsenamespace + "_" + synapseentityname + " WHERE _sequenceid = @p_sequenceid;";
+            string sql = "SELECT * FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE _sequenceid = @p_sequenceid;";
 
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_sequenceid", sequenceid)

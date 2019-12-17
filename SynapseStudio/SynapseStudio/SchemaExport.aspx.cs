@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -211,7 +211,7 @@ namespace SynapseStudio
             #endregion
 
             string xml = exp.SerializeToXML();
-            //StreamWriter wr = new StreamWriter("c:\\rahul\\export" + DateTime.Now.Ticks + ".xml");
+            //StreamWriter wr = new StreamWriter("c:\\export" + DateTime.Now.Ticks + ".xml");
             //wr.Write(xml);
             //wr.Close(); wr.Dispose();
 
@@ -286,7 +286,7 @@ namespace SynapseStudio
 
         public Export createObjectFromExport(string filename)
         {
-            StreamReader sr = new StreamReader("c:\\rahul\\" + filename);
+            StreamReader sr = new StreamReader("c:\\export\\" + filename);
             Export ex = SynapseHelpers.DeserialiseExport(sr.ReadToEnd());
             sr.Close(); sr.Dispose();
 

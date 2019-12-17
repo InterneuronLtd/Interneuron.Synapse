@@ -1,16 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynapseDynamicAPI", "..\SynapseDynamicAPI\SynapseDynamicAPI\SynapseDynamicAPI.csproj", "{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynapseStudio", "..\SynapseStudio\SynapseStudio\SynapseStudio.csproj", "{2022A1A5-975F-4634-93A5-297AE31EE14D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SynapseSchema", "SynapseSchema", "{E81E2DDF-6F51-4312-BD2C-189FEA2CA5EF}"
-	ProjectSection(SolutionItems) = preProject
-		SynapseSchema\RestoreSynapseSchema_v1.0.sql = SynapseSchema\RestoreSynapseSchema_v1.0.sql
-	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Synapse.STS", "Synapse.STS\Synapse.STS\Synapse.STS.csproj", "{C9778CC3-CBF5-4E76-8366-4161765FF9C0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynapseDynamicAPI", "SynapseDynamicAPI\SynapseDynamicAPI\SynapseDynamicAPI.csproj", "{311A9656-172C-42E1-B1AB-A5D6C0F40035}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynapseStudio", "SynapseStudio\SynapseStudio\SynapseStudio.csproj", "{2022A1A5-975F-4634-93A5-297AE31EE14D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynapseDynamicAPIClient", "SynapseDynamicAPIClient\SynapseDynamicAPIClient.csproj", "{E2E34C7B-ED47-46EF-A36C-DA8096F0A234}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SynapseDocumentsAPI", "SynapseDocumentsAPI\SynapseDocumentsAPI.csproj", "{BD849642-871B-4BC6-9209-576BFFD0AE99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,14 +21,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF9D51F9-1D26-468E-806B-EF5E6B1043CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9778CC3-CBF5-4E76-8366-4161765FF9C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9778CC3-CBF5-4E76-8366-4161765FF9C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9778CC3-CBF5-4E76-8366-4161765FF9C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9778CC3-CBF5-4E76-8366-4161765FF9C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{311A9656-172C-42E1-B1AB-A5D6C0F40035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{311A9656-172C-42E1-B1AB-A5D6C0F40035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{311A9656-172C-42E1-B1AB-A5D6C0F40035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{311A9656-172C-42E1-B1AB-A5D6C0F40035}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2022A1A5-975F-4634-93A5-297AE31EE14D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2E34C7B-ED47-46EF-A36C-DA8096F0A234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2E34C7B-ED47-46EF-A36C-DA8096F0A234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2E34C7B-ED47-46EF-A36C-DA8096F0A234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2E34C7B-ED47-46EF-A36C-DA8096F0A234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD849642-871B-4BC6-9209-576BFFD0AE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD849642-871B-4BC6-9209-576BFFD0AE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD849642-871B-4BC6-9209-576BFFD0AE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD849642-871B-4BC6-9209-576BFFD0AE99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

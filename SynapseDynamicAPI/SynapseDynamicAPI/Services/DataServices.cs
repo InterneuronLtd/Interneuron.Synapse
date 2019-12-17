@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@ namespace SynapseDynamicAPI.Services
 {
     public class DataServices
     {
-
         public static string ConvertDataTabletoJSONString(DataTable dt)
         {
             List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
@@ -49,7 +48,7 @@ namespace SynapseDynamicAPI.Services
             {
                 ret = JsonConvert.SerializeObject(rows);
             }
-            catch(Exception er)
+            catch (Exception er)
             {
                 throw new Exception("Error returning data table: " + er.ToString());
             }
@@ -62,11 +61,11 @@ namespace SynapseDynamicAPI.Services
             Dictionary<string, object> row;
             row = new Dictionary<string, object>();
             foreach (DataRow dr in dt.Rows)
-            {                
+            {
                 foreach (DataColumn col in dt.Columns)
                 {
                     row.Add(col.ColumnName, dr[col]);
-                }                
+                }
             }
             var ret = "";
             try
@@ -77,13 +76,13 @@ namespace SynapseDynamicAPI.Services
             {
                 throw new Exception("Error returning data table: " + er.ToString());
             }
-            return ret;            
+            return ret;
         }
 
-        public static void executeSQLStatement(string sql, List<KeyValuePair<string, object>> parameters = null)
+        public static void executeSQLStatement(string sql, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
         {
 
-            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable("connectionString_SynapseDataStore"));
+            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
 
             using (con)
             {
@@ -138,9 +137,9 @@ namespace SynapseDynamicAPI.Services
 
         }
 
-        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null)
+        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
         {
-            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable("connectionString_SynapseDataStore"));
+            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
             DataSet ds = new DataSet();
 
             using (con)
@@ -189,9 +188,9 @@ namespace SynapseDynamicAPI.Services
 
         }
 
-        public static String ExcecuteNonQueryFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null)
+        public static String ExcecuteNonQueryFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
         {
-            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable("connectionString_SynapseDataStore"));
+            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
 
             string retVal = "";
 
@@ -285,7 +284,74 @@ namespace SynapseDynamicAPI.Services
             }
         }
 
+        public static string ExcecuteNonQuerySQL(string query, string returnColumn = null, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
+        {
+            string retVal = string.Empty;
+
+            if (!string.IsNullOrEmpty(returnColumn))
+            {
+                query = query + " RETURNING " + returnColumn;
+            }
+
+            using (NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName)))
+            {
+
+                using (NpgsqlCommand cmd = new NpgsqlCommand(query, con))
+                {
+
+                    if (parameters != null && parameters.Count > 0)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            cmd.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+
+                    try
+                    {
+                        con.Open();
+
+                        using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                        {
+                            while (dr.Read())
+                            {
+                                retVal = "{ \"Status\": \"Success\", \"Message\": \"\", \"Value\": \"" + Convert.ToString(dr[0]) + "\"}";
+                            }
+                            dr.Close();
+                        }
+
+                        con.Close();
+                    }
+                    catch (NpgsqlException ex)
+                    {
+                        string errorId = Guid.NewGuid().ToString();
+                        string stacktrace = ex.StackTrace.ToString() ?? "";
+                        string message = ex.Message.ToString() ?? "";
+                        string source = ex.Source.ToString() ?? "";
+                        string where = ((PostgresException)ex).Where ?? "";
+
+
+                        StringBuilder sb = new StringBuilder();
+                        sb.AppendLine("<br />" + errorId);
+                        sb.AppendLine("<hr />");
+                        sb.AppendLine("Message: <br />" + message);
+                        sb.AppendLine("<hr />");
+                        sb.AppendLine("Statement: <br />" + where);
+                        sb.AppendLine("<hr />");
+                        sb.AppendLine("Stack Trace: <br />" + stacktrace);
+                        LogSQLError(query, stacktrace, message, source, errorId, where);
+                        retVal = "{ \"Status\": \"Failed\", \"Message\": \"" + message + stacktrace + "\", \"Value\": \"\"}";
+                    }
+                    finally
+                    {
+                        if (con.State == ConnectionState.Open)
+                            con.Close();
+                        cmd.Dispose();
+                        con.Dispose();
+                    }
+                }
+            }
+            return retVal;
+        }
     }
-
-
 }

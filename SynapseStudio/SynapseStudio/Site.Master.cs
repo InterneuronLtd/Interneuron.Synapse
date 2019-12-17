@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -31,23 +31,33 @@ namespace SynapseStudio
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            DataTable dt = null;
+            // DataTable dt = null;
+            //try
+            //{
+            //    dt = (Session["userFullName"]) as DataTable;
+            //}
+            //catch
+            //{
+            //    dt = null;
+            //}
+
+            string fullname = null;
             try
             {
-                dt = (Session["UserDetailsSxn"]) as DataTable;
+                fullname = (Session["userFullName"]) as string;
             }
             catch
             {
-                dt = null;
+                fullname = null;
             }
 
 
-            if (dt == null)
+            if (fullname == null && !Request.Url.AbsolutePath.ToLower().Contains("logout"))
             {
-                Response.Redirect("Logout.aspx");
+                Response.Redirect("Logout.aspx?oidccallback=true");
             }
 
-         
+
 
         }
     }

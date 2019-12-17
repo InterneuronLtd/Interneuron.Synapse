@@ -1,7 +1,7 @@
 ﻿<%--
 Interneuron Synapse
 
-Copyright (C) 2018  Interneuron CIC
+Copyright (C) 2019  Interneuron CIC
 
 
 

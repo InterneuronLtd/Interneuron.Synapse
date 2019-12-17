@@ -54,6 +54,15 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.3.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.3.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.3.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
     <Reference Include="MimeKit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>..\packages\MimeKit.2.0.1\lib\net45\MimeKit.dll</HintPath>
     </Reference>
@@ -63,7 +72,30 @@
     <Reference Include="Npgsql, Version=3.2.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.3.2.7\lib\net451\Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.3.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.Formatting.Extension.5.2.3.0\lib\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.2.0.20126.16343\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -86,6 +118,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddUsers.aspx" />
+    <Content Include="APIScopes.aspx" />
+    <Content Include="ApplicationListManager.aspx" />
+    <Content Include="ApplicationListMapping.aspx" />
+    <Content Include="ApplicationManager.aspx" />
+    <Content Include="ApplicationModuleMapping.aspx" />
     <Content Include="AttributeView.aspx" />
     <Content Include="BaseViewManagerAPIs.aspx" />
     <Content Include="BaseViewManagerAttributes.aspx" />
@@ -100,7 +138,15 @@
     <Content Include="BedBoardManagerNew.aspx" />
     <Content Include="BedBoardManagerView.aspx" />
     <Content Include="BoardManagerList.aspx" />
+    <Content Include="callback.aspx" />
+    <Content Include="ClientClaims.aspx" />
+    <Content Include="ClientGrantTypes.aspx" />
+    <Content Include="ClientRedirectUris.aspx" />
+    <Content Include="Clients.aspx" />
+    <Content Include="ClientScopes.aspx" />
+    <Content Include="ClientSecrets.aspx" />
     <Content Include="Content\SanchezFont\SanchezFont.css" />
+    <Content Include="DevOpsDashboard.aspx" />
     <Content Include="fonts\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\fonts\glyphicons-halflings-regular.woff" />
@@ -197,7 +243,10 @@
     <Content Include="font-awesome\scss\_spinning.scss" />
     <Content Include="font-awesome\scss\_stacked.scss" />
     <Content Include="font-awesome\scss\_variables.scss" />
+    <Content Include="GlobalSettings.js" />
     <Content Include="helperFunctions.js" />
+    <Content Include="IdentityClaimsManager.aspx" />
+    <Content Include="IdentityResourceManager.aspx" />
     <Content Include="img\android-icon-144x144.png" />
     <Content Include="img\android-icon-192x192.png" />
     <Content Include="img\android-icon-36x36.png" />
@@ -255,22 +304,36 @@
     <Content Include="img\manifest.json" />
     <Content Include="Content\SanchezFont\Ycm2sZJORluHnXbIfmdR_SwE.woff2" />
     <Content Include="Content\SanchezFont\Ycm2sZJORluHnXbIfmlR_Q.woff2" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="LoginHistory.aspx" />
+    <Content Include="LoginOidc.aspx" />
+    <Content Include="ManageAPIs.aspx" />
+    <Content Include="ManageExternalLogins.aspx" />
+    <Content Include="ManageRole.aspx" />
+    <Content Include="ManageRoleScope.aspx" />
+    <Content Include="Newapplication.aspx" />
+    <Content Include="NewModule.aspx" />
+    <Content Include="NewRole.aspx" />
     <Content Include="README.md" />
     <Content Include="RelationView.aspx" />
-    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
     <Content Include="SchemaImport.aspx" />
     <Content Include="SchemaExport.aspx" />
-    <Content Include="Scripts\jquery-1.12.4.js" />
-    <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\oidc\callback.js" />
+    <Content Include="Scripts\oidc\oidc-client.js" />
+    <Content Include="Scripts\oidc\oidc-client.min.js" />
+    <Content Include="Scripts\oidc\OidcLoginHelper.js" />
+    <Content Include="Scripts\oidc\OidcPageHelper.js" />
+    <Content Include="Scripts\oidc\silent.js" />
+    <Content Include="SecurityManager.aspx" />
+    <Content Include="SilentRenew.aspx" />
     <Content Include="Site.Master" />
     <None Include="Properties\PublishProfiles\SynapseStudio - Web Deploy.pubxml" />
-    <Content Include="Scripts\jquery-1.12.4.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -301,7 +364,6 @@
     <Content Include="img\Janssen.png" />
     <Content Include="img\NHS-Digital-logo.png" />
     <Content Include="img\SynapseStudio.png" />
-    <Content Include="js\jquery-1.10.2.min.js" />
     <Content Include="Login.aspx" />
     <Content Include="LoginNavBar.ascx" />
     <Content Include="LoginSideBar.ascx" />
@@ -313,9 +375,53 @@
     <Content Include="ResetPasswordFromLink.aspx" />
     <Content Include="Sidebar.ascx" />
     <Content Include="Unauthorised.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddUsers.aspx.cs">
+      <DependentUpon>AddUsers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddUsers.aspx.designer.cs">
+      <DependentUpon>AddUsers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="APIScopes.aspx.cs">
+      <DependentUpon>APIScopes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="APIScopes.aspx.designer.cs">
+      <DependentUpon>APIScopes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationListManager.aspx.cs">
+      <DependentUpon>ApplicationListManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationListManager.aspx.designer.cs">
+      <DependentUpon>ApplicationListManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationListMapping.aspx.cs">
+      <DependentUpon>ApplicationListMapping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationListMapping.aspx.designer.cs">
+      <DependentUpon>ApplicationListMapping.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationManager.aspx.cs">
+      <DependentUpon>ApplicationManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationManager.aspx.designer.cs">
+      <DependentUpon>ApplicationManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationModuleMapping.aspx.cs">
+      <DependentUpon>ApplicationModuleMapping.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ApplicationModuleMapping.aspx.designer.cs">
+      <DependentUpon>ApplicationModuleMapping.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AttributeView.aspx.cs">
       <DependentUpon>AttributeView.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -414,6 +520,55 @@
     <Compile Include="BoardManagerList.aspx.designer.cs">
       <DependentUpon>BoardManagerList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="callback.aspx.cs">
+      <DependentUpon>callback.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="callback.aspx.designer.cs">
+      <DependentUpon>callback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientClaims.aspx.cs">
+      <DependentUpon>ClientClaims.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientClaims.aspx.designer.cs">
+      <DependentUpon>ClientClaims.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientGrantTypes.aspx.cs">
+      <DependentUpon>ClientGrantTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientGrantTypes.aspx.designer.cs">
+      <DependentUpon>ClientGrantTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientRedirectUris.aspx.cs">
+      <DependentUpon>ClientRedirectUris.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientRedirectUris.aspx.designer.cs">
+      <DependentUpon>ClientRedirectUris.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Clients.aspx.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Clients.aspx.designer.cs">
+      <DependentUpon>Clients.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientScopes.aspx.cs">
+      <DependentUpon>ClientScopes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientScopes.aspx.designer.cs">
+      <DependentUpon>ClientScopes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClientSecrets.aspx.cs">
+      <DependentUpon>ClientSecrets.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClientSecrets.aspx.designer.cs">
+      <DependentUpon>ClientSecrets.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ConfirmAccount.aspx.cs">
       <DependentUpon>ConfirmAccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -422,6 +577,13 @@
       <DependentUpon>ConfirmAccount.aspx</DependentUpon>
     </Compile>
     <Compile Include="DataServices.cs" />
+    <Compile Include="DevOpsDashboard.aspx.cs">
+      <DependentUpon>DevOpsDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DevOpsDashboard.aspx.designer.cs">
+      <DependentUpon>DevOpsDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -509,6 +671,20 @@
     </Compile>
     <Compile Include="ExportSchema.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="IdentityClaimsManager.aspx.cs">
+      <DependentUpon>IdentityClaimsManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IdentityClaimsManager.aspx.designer.cs">
+      <DependentUpon>IdentityClaimsManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IdentityResourceManager.aspx.cs">
+      <DependentUpon>IdentityResourceManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="IdentityResourceManager.aspx.designer.cs">
+      <DependentUpon>IdentityResourceManager.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ListAPIs.aspx.cs">
       <DependentUpon>ListAPIs.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -670,6 +846,13 @@
     <Compile Include="LoginNavBar.ascx.designer.cs">
       <DependentUpon>LoginNavBar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="LoginOidc.aspx.cs">
+      <DependentUpon>LoginOidc.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginOidc.aspx.designer.cs">
+      <DependentUpon>LoginOidc.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LoginSideBar.ascx.cs">
       <DependentUpon>LoginSideBar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -684,12 +867,64 @@
     <Compile Include="logout.aspx.designer.cs">
       <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ManageAPIs.aspx.cs">
+      <DependentUpon>ManageAPIs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageAPIs.aspx.designer.cs">
+      <DependentUpon>ManageAPIs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageExternalLogins.aspx.cs">
+      <DependentUpon>ManageExternalLogins.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageExternalLogins.aspx.designer.cs">
+      <DependentUpon>ManageExternalLogins.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageRole.aspx.cs">
+      <DependentUpon>ManageRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageRole.aspx.designer.cs">
+      <DependentUpon>ManageRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManageRoleScope.aspx.cs">
+      <DependentUpon>ManageRoleScope.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManageRoleScope.aspx.designer.cs">
+      <DependentUpon>ManageRoleScope.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ApplicationModule.cs" />
+    <Compile Include="Models\ApplicationModuleMapping.cs" />
+    <Compile Include="Models\ModulesModel.cs" />
     <Compile Include="NavBar.ascx.cs">
       <DependentUpon>NavBar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="NavBar.ascx.designer.cs">
       <DependentUpon>NavBar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Newapplication.aspx.cs">
+      <DependentUpon>Newapplication.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Newapplication.aspx.designer.cs">
+      <DependentUpon>Newapplication.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewModule.aspx.cs">
+      <DependentUpon>NewModule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewModule.aspx.designer.cs">
+      <DependentUpon>NewModule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NewRole.aspx.cs">
+      <DependentUpon>NewRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NewRole.aspx.designer.cs">
+      <DependentUpon>NewRole.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterAsSuperUser.aspx.cs">
@@ -741,12 +976,27 @@
     <Compile Include="SchemaExport.aspx.designer.cs">
       <DependentUpon>SchemaExport.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SecurityManager.aspx.cs">
+      <DependentUpon>SecurityManager.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SecurityManager.aspx.designer.cs">
+      <DependentUpon>SecurityManager.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Services\APIservice.cs" />
     <Compile Include="Sidebar.ascx.cs">
       <DependentUpon>Sidebar.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Sidebar.ascx.designer.cs">
       <DependentUpon>Sidebar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="SilentRenew.aspx.cs">
+      <DependentUpon>SilentRenew.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SilentRenew.aspx.designer.cs">
+      <DependentUpon>SilentRenew.aspx</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

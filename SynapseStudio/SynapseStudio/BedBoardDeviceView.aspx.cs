@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -271,6 +271,27 @@ namespace SynapseStudio
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             Response.Redirect("BedBoardDeviceList.aspx");
+        }
+
+        protected void btnDelete_Click(object sender, EventArgs e)
+        {
+            string sql = "DELETE FROM eboards.bedboarddevice WHERE bedboarddevice_id = @bedboarddevice_id;";
+            DataSet ds = new DataSet();
+            var paramList = new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string, string>("bedboarddevice_id", this.hdnDeviceID.Value)
+            };
+            try
+            {
+                DataServices.ExcecuteNonQueryFromSQL(sql, paramList);
+                Response.Redirect("BedBoardDeviceList.aspx");
+            }
+            catch (Exception ex)
+            {
+                this.lblError.Text = ex.ToString();
+                this.lblError.Visible = true;
+                return;
+            }
+
         }
     }
 }

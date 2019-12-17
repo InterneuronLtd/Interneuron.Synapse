@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SynapseStudio {
-    
-    
-    public partial class LocatorBoardDeviceView {
-        
+namespace SynapseStudio
+{
+
+
+    public partial class LocatorBoardDeviceView
+    {
+
         /// <summary>
         /// lblSummaryType control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSummaryType;
-        
+
         /// <summary>
         /// hdnDeviceID control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnDeviceID;
-        
+
         /// <summary>
         /// hdnUserName control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnUserName;
-        
+
         /// <summary>
         /// hdnLocalNamespaceID control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnLocalNamespaceID;
-        
+
         /// <summary>
         /// hlPreview control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink hlPreview;
-        
+
         /// <summary>
         /// fgDeviceName control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgDeviceName;
-        
+
         /// <summary>
         /// lblDeviceName control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDeviceName;
-        
+
         /// <summary>
         /// errDeviceName control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errDeviceName;
-        
+
         /// <summary>
         /// txtDeviceName control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDeviceName;
-        
+
         /// <summary>
         /// fgIPAddress control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgIPAddress;
-        
+
         /// <summary>
         /// lblIPAddress control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIPAddress;
-        
+
         /// <summary>
         /// errIPAddress control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errIPAddress;
-        
+
         /// <summary>
         /// txtIPAddress control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIPAddress;
-        
+
         /// <summary>
         /// fgLocatorBoard control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgLocatorBoard;
-        
+
         /// <summary>
         /// lblLocatorBoard control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLocatorBoard;
-        
+
         /// <summary>
         /// errLocatorBoard control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errLocatorBoard;
-        
+
         /// <summary>
         /// ddlLocatorBoard control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlLocatorBoard;
-        
+
         /// <summary>
         /// fgLocationCode control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgLocationCode;
-        
+
         /// <summary>
         /// lblLocationCode control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblLocationCode;
-        
+
         /// <summary>
         /// Label2 control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
+
         /// <summary>
         /// txtLocationCode control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLocationCode;
-        
+
         /// <summary>
         /// btnSave control.
         /// </summary>
@@ -209,7 +211,16 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSave;
-        
+
+        /// <summary>
+        /// btnDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDelete;
+
         /// <summary>
         /// btnCancel control.
         /// </summary>
@@ -218,7 +229,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -227,7 +238,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// lblSuccess control.
         /// </summary>

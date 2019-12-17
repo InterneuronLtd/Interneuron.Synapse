@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -173,9 +173,59 @@ namespace SynapseStudio
             }
             catch { }
 
+            try
+            {
+                SetDDLSource(this.ddlWardPersonaContextField, dt.Rows[0]["wardpersonacontextfield"].ToString());
+            }
+            catch { }
 
+            try
+            {
+                SetDDLSource(this.ddlCUPersonaContextField, dt.Rows[0]["clinicalunitpersonacontextfield"].ToString());
+            }
+            catch { }
 
+            try
+            {
+                SetDDLSource(this.ddlSpecialtyPersonaContextField, dt.Rows[0]["specialtypersonacontextfield"].ToString());
+            }
+            catch { }
 
+            try
+            {
+                SetDDLSource(this.ddlTeamPersonaContextField, dt.Rows[0]["teampersonacontextfield"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlSnapshotLine1, dt.Rows[0]["snapshottemplateline1"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlSnapshotLine2, dt.Rows[0]["snapshottemplateline2"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlSnapshotBadge, dt.Rows[0]["snapshottemplatebadge"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlDefaultSortColumn, dt.Rows[0]["defaultsortcolumn"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlDefaultSortOrder, dt.Rows[0]["defaultsortorder"].ToString());
+            }
+            catch { }
         }
 
 
@@ -199,6 +249,14 @@ namespace SynapseStudio
             BindDropDownList(this.ddlPatientBannerField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlMatchedContextField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlRowCSSField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlWardPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlCUPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSpecialtyPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlTeamPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotLine1, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotLine2, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotBadge, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlDefaultSortColumn, sql, "attributename", "attributename", 1, paramList);
         }
 
         //Drop Down Lists
@@ -465,7 +523,25 @@ namespace SynapseStudio
             }
 
 
-            string sql = "UPDATE listsettings.listmanager SET listname = @listname, listdescription = @listdescription, matchedcontextfield = @matchedcontextfield, tablecssstyle = @tablecssstyle, tableheadercssstyle = @tableheadercssstyle, defaultrowcssstyle = @defaultrowcssstyle, patientbannerfield = @patientbannerfield, rowcssfield = @rowcssfield WHERE list_id = @list_id;";
+            string sql = "UPDATE listsettings.listmanager SET " +
+                         "listname = @listname, " +
+                         "listdescription = @listdescription, " +
+                         "matchedcontextfield = @matchedcontextfield, " +
+                         "tablecssstyle = @tablecssstyle, " +
+                         "tableheadercssstyle = @tableheadercssstyle, " +
+                         "defaultrowcssstyle = @defaultrowcssstyle, " +
+                         "patientbannerfield = @patientbannerfield, " +
+                         "rowcssfield = @rowcssfield, " +
+                         "wardpersonacontextfield = @wardpersonacontextfield, " +
+                         "clinicalunitpersonacontextfield = @clinicalunitpersonacontextfield, " +
+                         "specialtypersonacontextfield = @specialtypersonacontextfield, " +
+                         "teampersonacontextfield = @teampersonacontextfield, " +
+                         "snapshottemplateline1 = @snapshottemplateline1, " +
+                         "snapshottemplateline2 = @snapshottemplateline2, " +
+                         "snapshottemplatebadge = @snapshottemplatebadge, " +
+                         "defaultsortcolumn = @defaultsortcolumn, " +
+                         "defaultsortorder = @defaultsortorder " +
+                         "WHERE list_id = @list_id;";
 
             string newId = this.hdnListID.Value;
             var paramList = new List<KeyValuePair<string, string>>() {
@@ -477,8 +553,17 @@ namespace SynapseStudio
                 new KeyValuePair<string, string>("rowcssfield", this.ddlRowCSSField.SelectedValue),
                 new KeyValuePair<string, string>("tablecssstyle", this.txtTableClass.Text),
                 new KeyValuePair<string, string>("tableheadercssstyle", this.txtTableHeaderClass.Text),
-                new KeyValuePair<string, string>("defaultrowcssstyle", this.txtDefaultTableRowCSS.Text)
-
+                new KeyValuePair<string, string>("defaultrowcssstyle", this.txtDefaultTableRowCSS.Text),
+                new KeyValuePair<string, string>("wardpersonacontextfield", this.ddlWardPersonaContextField.SelectedValue == "0" ? null : this.ddlWardPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("clinicalunitpersonacontextfield", this.ddlCUPersonaContextField.SelectedValue == "0" ? null : this.ddlCUPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("specialtypersonacontextfield", this.ddlSpecialtyPersonaContextField.SelectedValue == "0" ? null : this.ddlSpecialtyPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("teampersonacontextfield", this.ddlTeamPersonaContextField.SelectedValue == "0" ? null : this.ddlTeamPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplateline1", this.ddlSnapshotLine1.SelectedValue == "0" ? null : this.ddlSnapshotLine1.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplateline2", this.ddlSnapshotLine2.SelectedValue == "0" ? null : this.ddlSnapshotLine2.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplatebadge", this.ddlSnapshotBadge.SelectedValue == "0" ? null : this.ddlSnapshotBadge.SelectedValue),
+                new KeyValuePair<string, string>("defaultsortcolumn", this.ddlDefaultSortColumn.SelectedValue == "0" ? null : this.ddlDefaultSortColumn.SelectedValue),
+                // Don't save defaultsortorder if defaultsortcolumn is not selected
+                new KeyValuePair<string, string>("defaultsortorder", this.ddlDefaultSortColumn.SelectedValue == "0" ? null : this.ddlDefaultSortOrder.SelectedValue)
             };
 
             try

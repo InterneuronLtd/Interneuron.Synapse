@@ -1,7 +1,7 @@
 ﻿<%--
 Interneuron Synapse
 
-Copyright (C) 2018  Interneuron CIC
+Copyright (C) 2019  Interneuron CIC
 
 
 
@@ -117,8 +117,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-4">
                                 <asp:Button ID="btnSave" runat="server" CssClass="btn btn-info pull-right" Text="Save" Width="200" OnClick="btnSave_Click" />
+                            </div>
+                            <div class="col-md-4">
+                                <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-danger pull-right" Text="Delete" Width="200" OnClick="btnDelete_Click"/>
+                            </div>
+                            <div class="col-md-4">
                                 <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-default pull-left" Text="Cancel" Width="200" OnClick="btnCancel_Click"/>                                
                             </div>
                         </div>

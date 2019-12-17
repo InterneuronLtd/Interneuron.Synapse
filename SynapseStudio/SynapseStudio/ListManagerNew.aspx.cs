@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -121,6 +121,14 @@ namespace SynapseStudio
             BindDropDownList(this.ddlPatientBannerField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlMatchedContextField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlRowCSSField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlWardPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlCUPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSpecialtyPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlTeamPersonaContextField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotLine1, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotLine2, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlSnapshotBadge, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.ddlDefaultSortColumn, sql, "attributename", "attributename", 1, paramList);
         }
 
 
@@ -330,7 +338,14 @@ namespace SynapseStudio
 
         private void CreateNewList()
         {
-            string sql = "INSERT INTO listsettings.listmanager(list_id, listname, listdescription, listcontextkey, baseview_id, listnamespaceid, listnamespace, defaultcontext, defaultcontextfield, matchedcontextfield, tablecssstyle, tableheadercssstyle, defaultrowcssstyle, patientbannerfield, rowcssfield) VALUES (@list_id, @listname, @listdescription, @listcontextkey, @baseview_id, @listnamespaceid, @listnamespace, @defaultcontext, @defaultcontextfield, @matchedcontextfield, @tablecssstyle, @tableheadercssstyle, @defaultrowcssstyle, @patientbannerfield, @rowcssfield);";
+            string sql = "INSERT INTO listsettings.listmanager(list_id, listname, listdescription, listcontextkey, baseview_id, listnamespaceid, " +
+                         "listnamespace, defaultcontext, defaultcontextfield, matchedcontextfield, tablecssstyle, tableheadercssstyle, defaultrowcssstyle, " +
+                         "patientbannerfield, rowcssfield, wardpersonacontextfield, clinicalunitpersonacontextfield, specialtypersonacontextfield, teampersonacontextfield, snapshottemplateline1, " +
+                         "snapshottemplateline2, snapshottemplatebadge, defaultsortcolumn, defaultsortorder) " +
+                         "VALUES (@list_id, @listname, @listdescription, @listcontextkey, @baseview_id, @listnamespaceid, " +
+                         "@listnamespace, @defaultcontext, @defaultcontextfield, @matchedcontextfield, @tablecssstyle, @tableheadercssstyle, @defaultrowcssstyle, @patientbannerfield, @rowcssfield, " +
+                         "@wardpersonacontextfield, @clinicalunitpersonacontextfield, @specialtypersonacontextfield, @teampersonacontextfield, @snapshottemplateline1, @snapshottemplateline2, @snapshottemplatebadge, " +
+                         "@defaultsortcolumn, @defaultsortorder)";
 
             string newId = System.Guid.NewGuid().ToString();
             var paramList = new List<KeyValuePair<string, string>>() {
@@ -348,8 +363,18 @@ namespace SynapseStudio
                 new KeyValuePair<string, string>("rowcssfield", this.ddlRowCSSField.SelectedValue),
                 new KeyValuePair<string, string>("tablecssstyle", this.txtTableClass.Text),
                 new KeyValuePair<string, string>("tableheadercssstyle", this.txtTableHeaderClass.Text),
-                new KeyValuePair<string, string>("defaultrowcssstyle", this.txtDefaultTableRowCSS.Text)
-                
+                new KeyValuePair<string, string>("defaultrowcssstyle", this.txtDefaultTableRowCSS.Text),
+                new KeyValuePair<string, string>("wardpersonacontextfield", this.ddlWardPersonaContextField.SelectedValue == "0" ? null : this.ddlWardPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("clinicalunitpersonacontextfield", this.ddlCUPersonaContextField.SelectedValue == "0" ? null : this.ddlCUPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("specialtypersonacontextfield", this.ddlSpecialtyPersonaContextField.SelectedValue == "0" ? null : this.ddlSpecialtyPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("teampersonacontextfield", this.ddlTeamPersonaContextField.SelectedValue == "0" ? null : this.ddlTeamPersonaContextField.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplateline1", this.ddlSnapshotLine1.SelectedValue == "0" ? null : this.ddlSnapshotLine1.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplateline2", this.ddlSnapshotLine2.SelectedValue == "0" ? null : this.ddlSnapshotLine2.SelectedValue),
+                new KeyValuePair<string, string>("snapshottemplatebadge", this.ddlSnapshotBadge.SelectedValue == "0" ? null : this.ddlSnapshotBadge.SelectedValue),
+                new KeyValuePair<string, string>("defaultsortcolumn", this.ddlDefaultSortColumn.SelectedValue == "0" ? null : this.ddlDefaultSortColumn.SelectedValue),
+                // Don't save defaultsortorder if defaultsortcolumn is not selected
+                new KeyValuePair<string, string>("defaultsortorder", this.ddlDefaultSortColumn.SelectedValue == "0" ? null : this.ddlDefaultSortOrder.SelectedValue)
+
             };
 
             try

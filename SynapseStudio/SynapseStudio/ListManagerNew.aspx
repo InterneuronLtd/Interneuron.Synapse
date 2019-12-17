@@ -1,7 +1,7 @@
 ﻿<%--
 Interneuron Synapse
 
-Copyright (C) 2018  Interneuron CIC
+Copyright (C) 2019  Interneuron CIC
 
 
 
@@ -140,6 +140,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="fgDefaultSortColumn" runat="server" class="form-group">
+                                            <asp:Label ID="lblDefaultSortColumn" runat="server" CssClass="control-label" for="ddlDefaultSortColumn" Text="Select the field from the baseview that defines the default sort column" Font-Bold="true"></asp:Label>
+                                            <asp:Label ID="errDefaultSortColumn" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlDefaultSortColumn" runat="server" CssClass="form-control input-lg" onchange="javascript:onDefaultSortColumnSelected(this.value);">
+                                            </asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                            
+                                <div class="row collapse" id="sortOrderRow">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="fgDefaultSortOrder" runat="server" class="form-group">
+                                            <asp:Label ID="lblDefaultSortOrder" runat="server" CssClass="control-label" for="ddlDefaultSortColumn" Text="Select the default sort order" Font-Bold="true"></asp:Label>
+                                            <asp:Label ID="errDefaultSortOrder" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlDefaultSortOrder" runat="server" CssClass="form-control input-lg">
+                                                <asp:ListItem Text="ASC" Value="asc"></asp:ListItem>
+                                                <asp:ListItem Text="DESC" Value="desc"></asp:ListItem>
+                                            </asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -213,6 +237,100 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                         </asp:Panel>
                                     </div>
                                 </div>
+                                <h3>Terminus Settings</h3>
+                                <h4>Persona Settings</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlWardPersonaContextField" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblWardPersonaContextField" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Ward Persona Context Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errWardPersonaContextField" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlWardPersonaContextField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlCUPersonaContextField" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblCUPersonaContextField" runat="server" CssClass="control-label" for="ddlCUPersonaContextField" Text="Select Clinical Unit Persona Context Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errCUPersonaContextField" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlCUPersonaContextField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlSpecialtyPersonaContextField" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblSpecialtyPersonaContextField" runat="server" CssClass="control-label" for="ddlSpecialtyPersonaContextField" Text="Select Specialty Persona Context Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errSpecialtyPersonaContextField" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlSpecialtyPersonaContextField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlTeamPersonaContextField" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblTeamPersonaContextField" runat="server" CssClass="control-label" for="ddlTeamPersonaContextField" Text="Select Team Persona Context Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errTeamPersonaContextField" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlTeamPersonaContextField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <h4>Snapshot View Settings</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlSnapshotLine1" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblSnapshotLine1" runat="server" CssClass="control-label" for="ddlSnapshotLine1" Text="Select Snapshot Line 1 Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errSnapshotLine1" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlSnapshotLine1" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlSnapshotLine2" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblSnapshotLine2" runat="server" CssClass="control-label" for="ddlSnapshotLine2" Text="Select Snapshot Line 2 Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errSnapshotLine2" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlSnapshotLine2" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="pnlSnapshotBadge" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblSnapshotBadge" runat="server" CssClass="control-label" for="ddlSnapshotBadge" Text="Select Snapshot Badge Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="errSnapshotBadge" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlSnapshotBadge" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -261,5 +379,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
     </div>
+    <script type="text/javascript">
+        function onDefaultSortColumnSelected(value) {
+            if (value != 0) {
+                $("#sortOrderRow").collapse("show");
+            }
+            else {
+                $("#sortOrderRow").collapse('hide');
+            }
+        }
+    </script>
 
 </asp:Content>

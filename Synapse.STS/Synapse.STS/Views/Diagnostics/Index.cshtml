@@ -1,0 +1,54 @@
+@*Interneuron Synapse
+
+    Copyright (C) 2019  Interneuron CIC
+
+
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+    See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.If not, see
+    <http://www.gnu.org/licenses/>.*@
+
+@model DiagnosticsViewModel
+
+<h1>Authentication cookie</h1>
+
+<h3>Claims</h3>
+<dl>
+    @foreach (var claim in Model.AuthenticateResult.Principal.Claims)
+    {
+        <dt>@claim.Type</dt>
+        <dd>@claim.Value</dd>
+    }
+</dl>
+
+<h3>Properties</h3>
+<dl>
+    @foreach (var prop in Model.AuthenticateResult.Properties.Items)
+    {
+        <dt>@prop.Key</dt>
+        <dd>@prop.Value</dd>
+    }
+</dl>
+
+@if (Model.Clients.Any())
+{
+    <h3>Clients</h3>
+    <ul>
+        @foreach (var client in Model.Clients)
+        {
+            <li>@client</li>
+        }
+    </ul>
+}

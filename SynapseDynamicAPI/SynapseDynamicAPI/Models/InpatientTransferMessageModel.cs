@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -18,9 +18,7 @@
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace SynapseDynamicAPI.Models
 {
@@ -40,5 +38,6 @@ namespace SynapseDynamicAPI.Models
         public string PatinetClassCode { get; set; }
         public string MRN { get; set; }
         public string EMPI { get; set; }
+        public DateTime? BedTransferDateTime { get; set; }
     }
 }

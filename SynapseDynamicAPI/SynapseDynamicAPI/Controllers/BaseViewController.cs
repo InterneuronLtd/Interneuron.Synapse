@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -28,13 +28,13 @@ using SynapseDynamicAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SynapseDynamicAPI.Controllers
 {
-    //[Authorize(AuthenticationSchemes = AuthSchemes)]
+  
+    [Authorize]
     public class BaseViewController : Controller
     {
         private const string AuthSchemes =
@@ -161,11 +161,8 @@ namespace SynapseDynamicAPI.Controllers
                 httpErr.ErrorCode = "HTTP.400";
                 httpErr.ErrorType = "Client Error";
                 httpErr.ErrorDescription = "Invalid Parameters supplied";
-
                 return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-
-
         }
 
 
@@ -211,8 +208,6 @@ namespace SynapseDynamicAPI.Controllers
 
                 return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-
-
         }
 
 
@@ -241,7 +236,6 @@ namespace SynapseDynamicAPI.Controllers
             {
                 paramListFromPost.Insert(0, new KeyValuePair<string, object>((string)paramApplied["paramName"], (string)paramApplied["paramValue"]));
             }
-
 
             string selectstatement = results[2].selectstatement.ToString();
 
@@ -279,9 +273,7 @@ namespace SynapseDynamicAPI.Controllers
             }
 
             string sql = selectstatement + " FROM (SELECT * FROM baseview." + baseviewname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ") bv " + filtersSQL + " " + ordergroupbystatement + ";";
-            
-
-            
+                        
             try
             {
                 DataSet ds = new DataSet();
@@ -300,8 +292,6 @@ namespace SynapseDynamicAPI.Controllers
 
                 return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-
-
         }
 
 
@@ -343,6 +333,5 @@ namespace SynapseDynamicAPI.Controllers
                 return false;
             }
         }
-
     }
 }

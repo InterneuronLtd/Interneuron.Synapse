@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -29,11 +29,11 @@ namespace SynapseStudio
     {
 
 
-        public static void executeSQLStatement(string sql, List<KeyValuePair<string, string>> parameters = null)
+        public static void executeSQLStatement(string sql, List<KeyValuePair<string, string>> parameters = null, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
 
             //Read Database Credentials from Web.config
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
 
             using (con)
             {
@@ -51,7 +51,7 @@ namespace SynapseStudio
                             cmd.Parameters.AddWithValue(param.Key, param.Value);
                         }
                     }
-                    catch{}
+                    catch { }
 
 
                     try
@@ -87,10 +87,10 @@ namespace SynapseStudio
             }
         }
 
-        private static void LogSQLError(string sql, string stacktrace, string message, string source, string errorlog_id, string ex_where)
+        private static void LogSQLError(string sql, string stacktrace, string message, string source, string errorlog_id, string ex_where, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
             string sqlInsert = "INSERT INTO log.errorlog (errorlog_sql, stacktrace, errorlog_message, errorlog_source, errorlog_id, ex_where) VALUES (@errorlog_sql, @stacktrace, @errorlog_message, @errorlog_source, @errorlog_id, @ex_where)";
-            var paramList = new List<KeyValuePair<string, string>>() {                
+            var paramList = new List<KeyValuePair<string, string>>() {
                 new KeyValuePair<string, string>("errorlog_sql", sql),
                 new KeyValuePair<string, string>("stacktrace", stacktrace),
                 new KeyValuePair<string, string>("errorlog_message", message),
@@ -99,7 +99,7 @@ namespace SynapseStudio
                 new KeyValuePair<string, string>("ex_where", ex_where)
             };
 
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
 
             using (con)
             {
@@ -132,9 +132,9 @@ namespace SynapseStudio
             }
         }
 
-        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null)
+        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
             DataSet ds = new DataSet();
 
             using (con)
@@ -150,7 +150,7 @@ namespace SynapseStudio
                         cmd.Parameters.AddWithValue(param.Key, param.Value);
                     }
                 }
-                catch{}
+                catch { }
                 da.SelectCommand.Connection = con;
 
                 try
@@ -182,8 +182,8 @@ namespace SynapseStudio
                     LogSQLError(sqlQueryString, stacktrace, message, source, errorId, where);
                     throw new Exception(sb.ToString());
                 }
-                
-               
+
+
             }
 
             return ds;
@@ -191,9 +191,9 @@ namespace SynapseStudio
 
         }
 
-        public static String ExcecuteNonQueryFromSQL(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null)
+        public static String ExcecuteNonQueryFromSQL(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
 
             string retVal = "";
 
@@ -204,7 +204,7 @@ namespace SynapseStudio
                 {
                     foreach (var param in parameters)
                     {
-                        cmd.Parameters.AddWithValue(param.Key, param.Value);
+                        cmd.Parameters.AddWithValue(param.Key, param.Value == null ? DBNull.Value : (object)param.Value);
                     }
                 }
                 catch { }
@@ -228,8 +228,8 @@ namespace SynapseStudio
                     {
                         where = ((Npgsql.PostgresException)ex).Where ?? ""; // "Where"; // ex..ToString() ?? "";
                     }
-                    catch(Exception exe)
-                    {                      
+                    catch (Exception exe)
+                    {
                     }
 
 
@@ -246,7 +246,7 @@ namespace SynapseStudio
                 }
 
 
-              
+
             }
 
             return retVal;
@@ -254,15 +254,15 @@ namespace SynapseStudio
         }
 
 
-        public static String StringFromSQL(string sqlQueryString, string valToRead, List<KeyValuePair<string, string>> parameters = null)
+        public static String StringFromSQL(string sqlQueryString, string valToRead, List<KeyValuePair<string, string>> parameters = null, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
 
             string retVal = "";
 
             using (con)
             {
-                NpgsqlCommand cmd = new NpgsqlCommand(sqlQueryString, con);                
+                NpgsqlCommand cmd = new NpgsqlCommand(sqlQueryString, con);
                 try
                 {
                     foreach (var param in parameters)
@@ -300,11 +300,11 @@ namespace SynapseStudio
                     LogSQLError(sqlQueryString, stacktrace, message, source, errorId, where);
                     throw new Exception(sb.ToString());
                 }
-                                
+
 
                 try
                 {
-                    retVal = (string)cmd.Parameters["_entityid"].Value.ToString(); 
+                    retVal = (string)cmd.Parameters["_entityid"].Value.ToString();
                 }
                 catch { }
 
@@ -323,9 +323,9 @@ namespace SynapseStudio
 
         }
 
-        public static string ExecuteScalar(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null)
+        public static string ExecuteScalar(string sqlQueryString, List<KeyValuePair<string, string>> parameters = null, SynapseHelpers.DBConnections dbConnection = SynapseHelpers.DBConnections.PGSQLConnection)
         {
-            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["PGSQLConnection"].ConnectionString);
+            NpgsqlConnection con = new NpgsqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings[dbConnection.ToString()].ConnectionString);
 
             string retVal = "";
 

@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -21,10 +21,6 @@ using NHapi.Base.Parser;
 using NHapi.Model.V24.Message;
 using SynapseDynamicAPI.Models;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SynapseDynamicAPI.Services
 {
@@ -83,7 +79,7 @@ namespace SynapseDynamicAPI.Services
             //adtMessage.PV1.HospitalService.Value = messageData.SpecialtyCode;
             adtMessage.PV1.PatientType.Value = messageData.PatinetClassCode.Equals("I") ? "1" : "2";
             adtMessage.PV1.VisitNumber.ID.Value = messageData.VisitNumber;
-            adtMessage.PV1.AdmitDateTime.TimeOfAnEvent.Value = messageDateTime;
+            adtMessage.PV1.AdmitDateTime.TimeOfAnEvent.Value = messageData.BedTransferDateTime == null ? null : ((DateTime)messageData.BedTransferDateTime).ToString("yyyyMMddHHmmss");
 
             adtMessage.PV2.ExpectedDischargeDateTime.TimeOfAnEvent.Value = messageData.ExpectedDischargeDate;
 

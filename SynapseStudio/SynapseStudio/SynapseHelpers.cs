@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2018  Interneuron CIC
+//Copyright(C) 2019  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -33,6 +34,13 @@ namespace SynapseStudio
 {
     public class SynapseHelpers
     {
+        public enum DBConnections
+        {
+            PGSQLConnection,
+            PGSQLConnectionSIS,
+            PGSQLConnectionPostgresDB,
+            PGSQLConnectionMirthDB
+        }
 
         //Entity Helpers
         public static string GetNamespaceNameFromID(string id)
@@ -594,6 +602,22 @@ namespace SynapseStudio
 
         }
 
+        public static object DecodeJWTToken(string tokenString)
+        {
+            JwtSecurityTokenHandler j = new JwtSecurityTokenHandler();
+            JwtSecurityToken jwttoken = new JwtSecurityToken();
+
+            try
+            {
+                jwttoken = j.ReadJwtToken(tokenString);
+            }
+            catch
+            {
+
+                return null;
+            }
+            return jwttoken;
+        }
         #region SchemaMigration
         public enum DataSetSerializerType { Json, Binary, Xml };
         public enum MigrationAction { New, Update, Delete, Skip };
@@ -1242,11 +1266,11 @@ namespace SynapseStudio
                     try
                     {
                         Guid.Parse(newentityid);
-                        AddImportMsg("Entity Added Successfully:" + entitymanager.Rows[0]["synapsenamespacename"].ToString() + "." + entitynamespace.Rows[0]["localnamespacename"].ToString() + "." + entity.Name, "success");
+                        AddImportMsg("Entity Added Successfully:" + entitymanager.Rows[0]["synapsenamespacename"].ToString() + (entitynamespace.Rows.Count > 0 ? "." + entitynamespace.Rows[0]["localnamespacename"].ToString() : "") + "." + entity.Name, "success");
                     }
-                    catch
+                    catch (Exception e)
                     {
-                        AddImportMsg("Error: Entity was not created:" + entitymanager.Rows[0]["synapsenamespacename"].ToString() + "." + entitynamespace.Rows[0]["localnamespacename"].ToString() + "." + entity.Name, "error");
+                        AddImportMsg("Error: Entity was not created:" + entitymanager.Rows[0]["synapsenamespacename"].ToString() + (entitynamespace.Rows.Count > 0 ? "." + entitynamespace.Rows[0]["localnamespacename"].ToString() : "") + "." + entity.Name, "error");
                     }
 
                 }
