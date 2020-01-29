@@ -64,61 +64,47 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
+            ds = DataServices.DataSetFromSQL(sql, selectParamList);
+            DataTable dt = ds.Tables[0];
+
+            if (dt.Rows.Count > 0)
             {
-                ds = DataServices.DataSetFromSQL(sql, selectParamList);
-                DataTable dt = ds.Tables[0];
-
-                if (dt.Rows.Count > 0)
+                InpatientTransferMessageModel messageData = new InpatientTransferMessageModel()
                 {
-                    InpatientTransferMessageModel messageData = new InpatientTransferMessageModel()
-                    {
-                        BayCode = Convert.ToString(dt.Rows[0]["baycode"]),
-                        BedCode = Convert.ToString(dt.Rows[0]["bedcode"]),
-                        ConsultingDoctorGMCCode = Convert.ToString(dt.Rows[0]["consultingdoctorgmccode"]),
-                        ConsultingDoctorName = Convert.ToString(dt.Rows[0]["consultingdoctortext"]),
-                        ConsultingDoctorPASId = Convert.ToString(dt.Rows[0]["consultingdoctorpasid"]),
-                        EMPI = Convert.ToString(dt.Rows[0]["empi"]),
-                        Encounter_id = Convert.ToString(dt.Rows[0]["encounter_id"]),
-                        ExpectedDischargeDate = Convert.ToString(dt.Rows[0]["edd"]),
-                        MRN = Convert.ToString(dt.Rows[0]["mrn"]),
-                        PatinetClassCode = Convert.ToString(dt.Rows[0]["patientclasscode"]),
-                        Person_Id = Convert.ToString(dt.Rows[0]["person_id"]),
-                        SpecialtyCode = Convert.ToString(dt.Rows[0]["specialtycode"]),
-                        VisitNumber = Convert.ToString(dt.Rows[0]["visitnumber"]),
-                        WardCode = Convert.ToString(dt.Rows[0]["wardcode"]),
-                        BedTransferDateTime = (dt.Rows[0]["bedtransferdatetime"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dt.Rows[0]["bedtransferdatetime"]))
-                    };
-
-                    var hl7Message = HL7MessageServices.GenerateInpatientTransferMessage(messageData, out messageControlId);
-
-                    OutboundMessageStore store = new OutboundMessageStore()
-                    {
-                        EMPINumber = Convert.ToString(dt.Rows[0]["empi"]),
-                        Encounter_Id = Convert.ToString(dt.Rows[0]["encounter_id"]),
-                        HospitalNumber = Convert.ToString(dt.Rows[0]["mrn"]),
-                        Message = hl7Message,
-                        Message_Id = Guid.NewGuid().ToString(),
-                        OutboundMessageStore_Id = Guid.NewGuid().ToString(),
-                        Person_Id = Convert.ToString(dt.Rows[0]["person_id"]),
-                        SendStatus = 0
-                    };
-
-                    InsertOutboundMessage(store);
-                }
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Error processing request."
+                    BayCode = Convert.ToString(dt.Rows[0]["baycode"]),
+                    BedCode = Convert.ToString(dt.Rows[0]["bedcode"]),
+                    ConsultingDoctorGMCCode = Convert.ToString(dt.Rows[0]["consultingdoctorgmccode"]),
+                    ConsultingDoctorName = Convert.ToString(dt.Rows[0]["consultingdoctortext"]),
+                    ConsultingDoctorPASId = Convert.ToString(dt.Rows[0]["consultingdoctorpasid"]),
+                    EMPI = Convert.ToString(dt.Rows[0]["empi"]),
+                    Encounter_id = Convert.ToString(dt.Rows[0]["encounter_id"]),
+                    ExpectedDischargeDate = Convert.ToString(dt.Rows[0]["edd"]),
+                    MRN = Convert.ToString(dt.Rows[0]["mrn"]),
+                    PatinetClassCode = Convert.ToString(dt.Rows[0]["patientclasscode"]),
+                    Person_Id = Convert.ToString(dt.Rows[0]["person_id"]),
+                    SpecialtyCode = Convert.ToString(dt.Rows[0]["specialtycode"]),
+                    VisitNumber = Convert.ToString(dt.Rows[0]["visitnumber"]),
+                    WardCode = Convert.ToString(dt.Rows[0]["wardcode"]),
+                    BedTransferDateTime = (dt.Rows[0]["bedtransferdatetime"] == DBNull.Value ? null : (DateTime?)Convert.ToDateTime(dt.Rows[0]["bedtransferdatetime"]))
                 };
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                var hl7Message = HL7MessageServices.GenerateInpatientTransferMessage(messageData, out messageControlId);
+
+                OutboundMessageStore store = new OutboundMessageStore()
+                {
+                    EMPINumber = Convert.ToString(dt.Rows[0]["empi"]),
+                    Encounter_Id = Convert.ToString(dt.Rows[0]["encounter_id"]),
+                    HospitalNumber = Convert.ToString(dt.Rows[0]["mrn"]),
+                    Message = hl7Message,
+                    Message_Id = Guid.NewGuid().ToString(),
+                    OutboundMessageStore_Id = Guid.NewGuid().ToString(),
+                    Person_Id = Convert.ToString(dt.Rows[0]["person_id"]),
+                    SendStatus = 0
+                };
+
+                InsertOutboundMessage(store);
             }
+             
 
             return messageControlId;
         }

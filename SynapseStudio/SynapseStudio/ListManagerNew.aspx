@@ -150,7 +150,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                         </asp:Panel>
                                     </div>
                                 </div>
-                            
+
                                 <div class="row collapse" id="sortOrderRow">
                                     <div class="col-md-12">
                                         <asp:Panel ID="fgDefaultSortOrder" runat="server" class="form-group">
@@ -240,8 +240,78 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 <h3>Terminus Settings</h3>
                                 <h4>Persona Settings</h4>
                                 <div class="row">
+                                    <div class="col-md-4">
+                                        <asp:Panel ID="Panel1" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="Label2" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Persona Context Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="Label3" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="DDLpersonaField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <asp:Panel ID="Panel2" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="Label4" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Base view Field" Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <asp:Label ID="Label5" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="DDlbaseviewfield" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <asp:Panel ID="Panel3" runat="server" class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <asp:Label ID="lblerrorfilter" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="  " Font-Bold="true"></asp:Label>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <asp:Button ID="ADDpersona" runat="server" CssClass="btn btn-primary pull-left" Text="ADD" Width="100" OnClick="ADDpersona_Click" />
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"><i class="fa fa-filter"></i>&nbsp;<asp:Label ID="Label7" runat="server" Text="List Filters"></asp:Label>
+                                        </h3>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <asp:DataGrid ID="dgpersonafilter" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="False" OnDeleteCommand="dgpersonafilter_DeleteCommand">
+
+                                                <Columns>
+
+                                                    <asp:BoundColumn DataField="displayname" HeaderText="Persona">
+                                                        <HeaderStyle Width="30%" />
+                                                    </asp:BoundColumn>
+                                                    <asp:BoundColumn DataField="persona_id" HeaderText="Persona" Visible="false">
+                                                        <HeaderStyle Width="30%" />
+                                                    </asp:BoundColumn>
+                                                    <asp:BoundColumn DataField="field" HeaderText="Base View field">
+                                                        <HeaderStyle Width="40%" />
+                                                    </asp:BoundColumn>
+                                                    <asp:ButtonColumn
+                                                        HeaderText=""
+                                                        ButtonType="LinkButton"
+                                                        Text="Delete"
+                                                        CommandName="Delete" />
+                                                </Columns>
+
+
+
+                                            </asp:DataGrid>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
                                     <div class="col-md-12">
-                                        <asp:Panel ID="pnlWardPersonaContextField" runat="server" class="form-group">
+                                        <asp:Panel ID="pnlWardPersonaContextField" Visible="false" runat="server" class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <asp:Label ID="lblWardPersonaContextField" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Ward Persona Context Field" Font-Bold="true"></asp:Label>
@@ -254,7 +324,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <asp:Panel ID="pnlCUPersonaContextField" runat="server" class="form-group">
+                                        <asp:Panel ID="pnlCUPersonaContextField" Visible="false" runat="server" class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <asp:Label ID="lblCUPersonaContextField" runat="server" CssClass="control-label" for="ddlCUPersonaContextField" Text="Select Clinical Unit Persona Context Field" Font-Bold="true"></asp:Label>
@@ -267,7 +337,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <asp:Panel ID="pnlSpecialtyPersonaContextField" runat="server" class="form-group">
+                                        <asp:Panel ID="pnlSpecialtyPersonaContextField" Visible="false" runat="server" class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <asp:Label ID="lblSpecialtyPersonaContextField" runat="server" CssClass="control-label" for="ddlSpecialtyPersonaContextField" Text="Select Specialty Persona Context Field" Font-Bold="true"></asp:Label>
@@ -280,7 +350,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <asp:Panel ID="pnlTeamPersonaContextField" runat="server" class="form-group">
+                                        <asp:Panel ID="pnlTeamPersonaContextField" Visible="false" runat="server" class="form-group">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <asp:Label ID="lblTeamPersonaContextField" runat="server" CssClass="control-label" for="ddlTeamPersonaContextField" Text="Select Team Persona Context Field" Font-Bold="true"></asp:Label>
@@ -291,6 +361,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                         </asp:Panel>
                                     </div>
                                 </div>
+
                                 <h4>Snapshot View Settings</h4>
                                 <div class="row">
                                     <div class="col-md-12">

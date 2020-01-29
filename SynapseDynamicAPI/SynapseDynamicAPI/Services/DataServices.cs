@@ -43,16 +43,8 @@ namespace SynapseDynamicAPI.Services
                 }
                 rows.Add(row);
             }
-            var ret = "";
-            try
-            {
-                ret = JsonConvert.SerializeObject(rows);
-            }
-            catch (Exception er)
-            {
-                throw new Exception("Error returning data table: " + er.ToString());
-            }
-            return ret;
+             
+            return JsonConvert.SerializeObject(rows);
         }
 
         public static string ConvertDataTabletoJSONObject(DataTable dt)
@@ -67,16 +59,8 @@ namespace SynapseDynamicAPI.Services
                     row.Add(col.ColumnName, dr[col]);
                 }
             }
-            var ret = "";
-            try
-            {
-                ret = JsonConvert.SerializeObject(row);
-            }
-            catch (Exception er)
-            {
-                throw new Exception("Error returning data table: " + er.ToString());
-            }
-            return ret;
+             
+            return JsonConvert.SerializeObject(row);
         }
 
         public static void executeSQLStatement(string sql, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
@@ -101,32 +85,8 @@ namespace SynapseDynamicAPI.Services
                         }
                     }
                     catch { }
-
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (Exception ex)
-                    {
-                        string errorId = System.Guid.NewGuid().ToString();
-                        string stacktrace = ex.StackTrace.ToString() ?? "";
-                        string message = ex.Message.ToString() ?? "";
-                        string source = ex.Source.ToString() ?? "";
-                        string where = ((Npgsql.PostgresException)ex).Where ?? ""; // "Where"; // ex..ToString() ?? "";
-
-
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("<br />" + errorId);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Message: <br />" + message);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Statement: <br />" + where);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Stack Trace: <br />" + stacktrace);
-                        LogSQLError(sql, stacktrace, message, source, errorId, where);
-                        throw new Exception(sb.ToString());
-                        throw new System.InvalidOperationException("Error:" + ex.InnerException.ToString());
-                    }
+                    cmd.ExecuteNonQuery();
+                     
 
 
                 }
@@ -157,30 +117,8 @@ namespace SynapseDynamicAPI.Services
                 }
                 catch { }
                 da.SelectCommand.Connection = con;
-                try
-                {
-                    da.Fill(ds);
-                }
-                catch (Exception ex)
-                {
-                    string errorId = System.Guid.NewGuid().ToString();
-                    string stacktrace = ex.StackTrace.ToString() ?? "";
-                    string message = ex.Message.ToString() ?? "";
-                    string source = ex.Source.ToString() ?? "";
-                    string where = ((Npgsql.PostgresException)ex).Where ?? ""; // "Where"; // ex..ToString() ?? "";
-
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("<br />" + errorId);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Message: <br />" + message);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Statement: <br />" + where);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Stack Trace: <br />" + stacktrace);
-                    LogSQLError(sqlQueryString, stacktrace, message, source, errorId, where);
-                    throw new Exception(sb.ToString());
-                }
+                da.Fill(ds);
+                 
             }
 
             return ds;
@@ -207,31 +145,8 @@ namespace SynapseDynamicAPI.Services
                 catch { }
 
                 con.Open();
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                }
-                catch (NpgsqlException ex)
-                {
-                    string errorId = System.Guid.NewGuid().ToString();
-                    string stacktrace = ex.StackTrace.ToString() ?? "";
-                    string message = ex.Message.ToString() ?? "";
-                    string source = ex.Source.ToString() ?? "";
-                    string where = ((Npgsql.PostgresException)ex).Where ?? ""; // "Where"; // ex..ToString() ?? "";
-
-
-                    StringBuilder sb = new StringBuilder();
-                    sb.AppendLine("<br />" + errorId);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Message: <br />" + message);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Statement: <br />" + where);
-                    sb.AppendLine("<hr />");
-                    sb.AppendLine("Stack Trace: <br />" + stacktrace);
-                    LogSQLError(sqlQueryString, stacktrace, message, source, errorId, where);
-                    throw new Exception(sb.ToString());
-                }
+                cmd.ExecuteNonQuery();
+                 
 
             }
 
@@ -306,49 +221,19 @@ namespace SynapseDynamicAPI.Services
                             cmd.Parameters.AddWithValue(param.Key, param.Value);
                         }
                     }
+                    con.Open();
 
-                    try
+                    using (NpgsqlDataReader dr = cmd.ExecuteReader())
                     {
-                        con.Open();
-
-                        using (NpgsqlDataReader dr = cmd.ExecuteReader())
+                        while (dr.Read())
                         {
-                            while (dr.Read())
-                            {
-                                retVal = "{ \"Status\": \"Success\", \"Message\": \"\", \"Value\": \"" + Convert.ToString(dr[0]) + "\"}";
-                            }
-                            dr.Close();
+                            retVal = "{ \"Status\": \"Success\", \"Message\": \"\", \"Value\": \"" + Convert.ToString(dr[0]) + "\"}";
                         }
-
-                        con.Close();
+                        dr.Close();
                     }
-                    catch (NpgsqlException ex)
-                    {
-                        string errorId = Guid.NewGuid().ToString();
-                        string stacktrace = ex.StackTrace.ToString() ?? "";
-                        string message = ex.Message.ToString() ?? "";
-                        string source = ex.Source.ToString() ?? "";
-                        string where = ((PostgresException)ex).Where ?? "";
 
-
-                        StringBuilder sb = new StringBuilder();
-                        sb.AppendLine("<br />" + errorId);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Message: <br />" + message);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Statement: <br />" + where);
-                        sb.AppendLine("<hr />");
-                        sb.AppendLine("Stack Trace: <br />" + stacktrace);
-                        LogSQLError(query, stacktrace, message, source, errorId, where);
-                        retVal = "{ \"Status\": \"Failed\", \"Message\": \"" + message + stacktrace + "\", \"Value\": \"\"}";
-                    }
-                    finally
-                    {
-                        if (con.State == ConnectionState.Open)
-                            con.Close();
-                        cmd.Dispose();
-                        con.Dispose();
-                    }
+                    con.Close();
+                    
                 }
             }
             return retVal;

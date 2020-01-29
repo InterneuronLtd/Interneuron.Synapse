@@ -42,7 +42,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             - List Details</h3>
 
         <div class="well" style="margin-top: 15px;">
-            <div class="row">                
+            <div class="row">
                 <div class="col-lg-3">
                     <asp:Button ID="btnViewDetails" runat="server" CssClass="btn btn-default btn-block" Text="Details" OnClick="btnViewDetails_Click" />
                 </div>
@@ -57,7 +57,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </div>
                 <div class="col-lg-3">
                     <asp:Button ID="btnManageAPI" runat="server" CssClass="btn btn-default btn-block" Text="APIs" OnClick="btnManageAPI_Click" />
-                </div>                                
+                </div>
             </div>
         </div>
 
@@ -105,30 +105,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
                             <h2>Edit</h2>
 
-                             <asp:Panel ID="fgListName" runat="server" class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <asp:Label ID="lblListName" runat="server" CssClass="control-label" for="txtListName" Text="* Please enter a name for the List" Font-Bold="true"></asp:Label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <%-- <span style="color: #c5997a; float: right;">(All non-alphanumeric characters willl be stripped out during validation)</span>--%>
-                                        </div>
+                            <asp:Panel ID="fgListName" runat="server" class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <asp:Label ID="lblListName" runat="server" CssClass="control-label" for="txtListName" Text="* Please enter a name for the List" Font-Bold="true"></asp:Label>
                                     </div>
-
-                                    <asp:Label ID="errListName" runat="server"></asp:Label>
-                                    <asp:TextBox ID="txtListName" runat="server" CssClass="form-control input-lg" MaxLength="255"></asp:TextBox>
-                                </asp:Panel>
-
-                                <asp:Panel ID="fgListComments" runat="server" class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <asp:Label ID="lblListComments" runat="server" CssClass="control-label" for="txtListName" Text="Enter a description for the  List" Font-Bold="true"></asp:Label>
-                                        </div>
+                                    <div class="col-md-6">
+                                        <%-- <span style="color: #c5997a; float: right;">(All non-alphanumeric characters willl be stripped out during validation)</span>--%>
                                     </div>
+                                </div>
 
-                                    <asp:Label ID="errListComments" runat="server"></asp:Label>
-                                    <asp:TextBox ID="txtListComments" runat="server" CssClass="form-control input-lg" TextMode="MultiLine"></asp:TextBox>
-                                </asp:Panel>
+                                <asp:Label ID="errListName" runat="server"></asp:Label>
+                                <asp:TextBox ID="txtListName" runat="server" CssClass="form-control input-lg" MaxLength="255"></asp:TextBox>
+                            </asp:Panel>
+
+                            <asp:Panel ID="fgListComments" runat="server" class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Label ID="lblListComments" runat="server" CssClass="control-label" for="txtListName" Text="Enter a description for the  List" Font-Bold="true"></asp:Label>
+                                    </div>
+                                </div>
+
+                                <asp:Label ID="errListComments" runat="server"></asp:Label>
+                                <asp:TextBox ID="txtListComments" runat="server" CssClass="form-control input-lg" TextMode="MultiLine"></asp:TextBox>
+                            </asp:Panel>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -151,7 +151,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                     </asp:Panel>
                                 </div>
                             </div>
-                            
+
                             <div class="row collapse" id="sortOrderRow">
                                 <div class="col-md-12">
                                     <asp:Panel ID="fgDefaultSortOrder" runat="server" class="form-group">
@@ -166,19 +166,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
 
                             <div class="row">
-                                    <div class="col-md-12">
-                                        <asp:Panel ID="fgPatientBannerField" runat="server" class="form-group">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <asp:Label ID="lblPatientBannerField" runat="server" CssClass="control-label" for="ddlPatientBannerField" Text="Select Patient Banner Field" Font-Bold="true"></asp:Label>
-                                                </div>
+                                <div class="col-md-12">
+                                    <asp:Panel ID="fgPatientBannerField" runat="server" class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <asp:Label ID="lblPatientBannerField" runat="server" CssClass="control-label" for="ddlPatientBannerField" Text="Select Patient Banner Field" Font-Bold="true"></asp:Label>
                                             </div>
+                                        </div>
 
-                                            <asp:Label ID="errPatientBannerField" runat="server"></asp:Label>
-                                            <asp:DropDownList ID="ddlPatientBannerField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
-                                        </asp:Panel>
-                                    </div>
+                                        <asp:Label ID="errPatientBannerField" runat="server"></asp:Label>
+                                        <asp:DropDownList ID="ddlPatientBannerField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                    </asp:Panel>
                                 </div>
+                            </div>
 
 
                             <div class="row">
@@ -241,8 +241,78 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             <h3>Terminus Settings</h3>
                             <h4>Persona Settings</h4>
                             <div class="row">
+                                <div class="col-md-4">
+                                    <asp:Panel ID="Panel1" runat="server" class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <asp:Label ID="Label2" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Persona Context Field" Font-Bold="true"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="Label3" runat="server"></asp:Label>
+                                        <asp:DropDownList ID="DDLpersonaField" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                    </asp:Panel>
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Panel ID="Panel2" runat="server" class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <asp:Label ID="Label4" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Base view Field" Font-Bold="true"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <asp:Label ID="Label5" runat="server"></asp:Label>
+                                        <asp:DropDownList ID="DDlbaseviewfield" runat="server" CssClass="form-control input-lg"></asp:DropDownList>
+                                    </asp:Panel>
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Panel ID="Panel3" runat="server" class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <asp:Label ID="lblerrorfilter" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="  " Font-Bold="true"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <asp:Button ID="ADDpersona" runat="server" CssClass="btn btn-primary pull-left" Text="ADD" Width="100" OnClick="ADDpersona_Click" />
+                                    </asp:Panel>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-filter"></i>&nbsp;<asp:Label ID="Label7" runat="server" Text="Context to List Mapping"></asp:Label>
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <asp:DataGrid ID="dgpersonafilter" runat="server" CssClass="table table-striped table-bordered" AutoGenerateColumns="False" OnDeleteCommand="dgpersonafilter_DeleteCommand">
+
+                                            <Columns>
+
+                                                <asp:BoundColumn DataField="displayname" HeaderText="Persona">
+                                                    <HeaderStyle Width="30%" Font-Bold="true" />
+                                                </asp:BoundColumn>
+                                                <asp:BoundColumn DataField="persona_id" HeaderText="Persona" Visible="false">
+                                                    <HeaderStyle Width="30%" Font-Bold="true" />
+                                                </asp:BoundColumn>
+                                                <asp:BoundColumn DataField="field" HeaderText="List Field">
+                                                    <HeaderStyle Width="40%" Font-Bold="true" />
+                                                </asp:BoundColumn>
+                                                <asp:ButtonColumn
+                                                    HeaderText=""
+                                                    ButtonType="LinkButton"
+                                                    Text="Delete"
+                                                    CommandName="Delete" />
+                                            </Columns>
+
+
+
+                                        </asp:DataGrid>
+                                    </div>
+                                </div>
+                            </div>
+                          
+                            <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Panel ID="pnlWardPersonaContextField" runat="server" class="form-group">
+                                    <asp:Panel ID="pnlWardPersonaContextField" Visible="false" runat="server" class="form-group">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <asp:Label ID="lblWardPersonaContextField" runat="server" CssClass="control-label" for="ddlWardPersonaContextField" Text="Select Ward Persona Context Field" Font-Bold="true"></asp:Label>
@@ -255,7 +325,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Panel ID="pnlCUPersonaContextField" runat="server" class="form-group">
+                                    <asp:Panel ID="pnlCUPersonaContextField"  Visible="false"  runat="server" class="form-group">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <asp:Label ID="lblCUPersonaContextField" runat="server" CssClass="control-label" for="ddlCUPersonaContextField" Text="Select Clinical Unit Persona Context Field" Font-Bold="true"></asp:Label>
@@ -268,7 +338,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Panel ID="pnlSpecialtyPersonaContextField" runat="server" class="form-group">
+                                    <asp:Panel ID="pnlSpecialtyPersonaContextField"  Visible="false"  runat="server" class="form-group">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <asp:Label ID="lblSpecialtyPersonaContextField" runat="server" CssClass="control-label" for="ddlSpecialtyPersonaContextField" Text="Select Specialty Persona Context Field" Font-Bold="true"></asp:Label>
@@ -281,7 +351,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:Panel ID="pnlTeamPersonaContextField" runat="server" class="form-group">
+                                    <asp:Panel ID="pnlTeamPersonaContextField"  Visible="false"  runat="server" class="form-group">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <asp:Label ID="lblTeamPersonaContextField" runat="server" CssClass="control-label" for="ddlTeamPersonaContextField" Text="Select Team Persona Context Field" Font-Bold="true"></asp:Label>
@@ -292,6 +362,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                     </asp:Panel>
                                 </div>
                             </div>
+                          
                             <h4>Snapshot View Settings</h4>
                             <div class="row">
                                 <div class="col-md-12">
@@ -334,11 +405,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                             </div>
 
                             <div class="row">
-                                <div class="col-md-12">                                    
+                                <div class="col-md-12">
                                     <asp:Button ID="btnCancel" runat="server" CssClass="btn btn-info pull-left" Text="Cancel" Width="200" OnClick="btnCancel_Click" />
-                                    <asp:Button ID="btnCreateNewList" runat="server" CssClass="btn btn-primary pull-right" Text="Save List" Width="200" onclick="btnCreateNewList_Click" />
+                                    <asp:Button ID="btnCreateNewList" runat="server" CssClass="btn btn-primary pull-right" Text="Save List" Width="200" OnClick="btnCreateNewList_Click" />
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
 
 

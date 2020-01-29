@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SynapseStudio {
-    
-    
-    public partial class ListManagerNew {
-        
+namespace SynapseStudio
+{
+
+
+    public partial class ListManagerNew
+    {
+
         /// <summary>
         /// lblSummaryType control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSummaryType;
-        
+
         /// <summary>
         /// hdnNamespaceID control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnNamespaceID;
-        
+
         /// <summary>
         /// hdnUserName control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnUserName;
-        
+
         /// <summary>
         /// hdnLocalNamespaceID control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdnLocalNamespaceID;
-        
+
         /// <summary>
         /// lblNamespaceName control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNamespaceName;
-        
+
         /// <summary>
         /// fgListName control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgListName;
-        
+
         /// <summary>
         /// lblListName control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblListName;
-        
+
         /// <summary>
         /// errListName control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errListName;
-        
+
         /// <summary>
         /// txtListName control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtListName;
-        
+
         /// <summary>
         /// fgListComments control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgListComments;
-        
+
         /// <summary>
         /// lblListComments control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblListComments;
-        
+
         /// <summary>
         /// errListComments control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errListComments;
-        
+
         /// <summary>
         /// txtListComments control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtListComments;
-        
+
         /// <summary>
         /// fgBaseViewNamespace control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgBaseViewNamespace;
-        
+
         /// <summary>
         /// lblBaseViewNamespace control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBaseViewNamespace;
-        
+
         /// <summary>
         /// errrBaseViewNamespace control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errrBaseViewNamespace;
-        
+
         /// <summary>
         /// ddlBaseViewNamespace control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBaseViewNamespace;
-        
+
         /// <summary>
         /// fgBaseView control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgBaseView;
-        
+
         /// <summary>
         /// lblBaseView control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBaseView;
-        
+
         /// <summary>
         /// errBaseView control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errBaseView;
-        
+
         /// <summary>
         /// ddlBaseView control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlBaseView;
-        
+
         /// <summary>
         /// fgDefaultContext control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgDefaultContext;
-        
+
         /// <summary>
         /// lblDefaultContext control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDefaultContext;
-        
+
         /// <summary>
         /// errDefaultContext control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errDefaultContext;
-        
+
         /// <summary>
         /// ddlDefaultContext control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDefaultContext;
-        
+
         /// <summary>
         /// lblDefaultContextField control.
         /// </summary>
@@ -245,7 +247,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDefaultContextField;
-        
+
         /// <summary>
         /// fgMatchedContextField control.
         /// </summary>
@@ -254,7 +256,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgMatchedContextField;
-        
+
         /// <summary>
         /// lblMatchedContextField control.
         /// </summary>
@@ -263,7 +265,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMatchedContextField;
-        
+
         /// <summary>
         /// errMatchedContextField control.
         /// </summary>
@@ -272,7 +274,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errMatchedContextField;
-        
+
         /// <summary>
         /// ddlMatchedContextField control.
         /// </summary>
@@ -281,7 +283,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMatchedContextField;
-        
+
         /// <summary>
         /// fgDefaultSortColumn control.
         /// </summary>
@@ -290,7 +292,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgDefaultSortColumn;
-        
+
         /// <summary>
         /// lblDefaultSortColumn control.
         /// </summary>
@@ -299,7 +301,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDefaultSortColumn;
-        
+
         /// <summary>
         /// errDefaultSortColumn control.
         /// </summary>
@@ -308,7 +310,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errDefaultSortColumn;
-        
+
         /// <summary>
         /// ddlDefaultSortColumn control.
         /// </summary>
@@ -317,7 +319,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDefaultSortColumn;
-        
+
         /// <summary>
         /// fgDefaultSortOrder control.
         /// </summary>
@@ -326,7 +328,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgDefaultSortOrder;
-        
+
         /// <summary>
         /// lblDefaultSortOrder control.
         /// </summary>
@@ -335,7 +337,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDefaultSortOrder;
-        
+
         /// <summary>
         /// errDefaultSortOrder control.
         /// </summary>
@@ -344,7 +346,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errDefaultSortOrder;
-        
+
         /// <summary>
         /// ddlDefaultSortOrder control.
         /// </summary>
@@ -353,7 +355,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDefaultSortOrder;
-        
+
         /// <summary>
         /// fgPatientBannerField control.
         /// </summary>
@@ -362,7 +364,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgPatientBannerField;
-        
+
         /// <summary>
         /// lblPatientBannerField control.
         /// </summary>
@@ -371,7 +373,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPatientBannerField;
-        
+
         /// <summary>
         /// errPatientBannerField control.
         /// </summary>
@@ -380,7 +382,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errPatientBannerField;
-        
+
         /// <summary>
         /// ddlPatientBannerField control.
         /// </summary>
@@ -389,7 +391,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPatientBannerField;
-        
+
         /// <summary>
         /// fgRowCSSField control.
         /// </summary>
@@ -398,7 +400,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel fgRowCSSField;
-        
+
         /// <summary>
         /// lblRowCSSField control.
         /// </summary>
@@ -407,7 +409,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRowCSSField;
-        
+
         /// <summary>
         /// errRowCSSField control.
         /// </summary>
@@ -416,7 +418,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errRowCSSField;
-        
+
         /// <summary>
         /// ddlRowCSSField control.
         /// </summary>
@@ -425,7 +427,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlRowCSSField;
-        
+
         /// <summary>
         /// pblTableClass control.
         /// </summary>
@@ -434,7 +436,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pblTableClass;
-        
+
         /// <summary>
         /// lblTableClass control.
         /// </summary>
@@ -443,7 +445,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTableClass;
-        
+
         /// <summary>
         /// errTableClass control.
         /// </summary>
@@ -452,7 +454,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errTableClass;
-        
+
         /// <summary>
         /// txtTableClass control.
         /// </summary>
@@ -461,7 +463,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTableClass;
-        
+
         /// <summary>
         /// pnlTableHeaderClass control.
         /// </summary>
@@ -470,7 +472,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlTableHeaderClass;
-        
+
         /// <summary>
         /// lblTableHeaderClass control.
         /// </summary>
@@ -479,7 +481,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTableHeaderClass;
-        
+
         /// <summary>
         /// errTableHeaderClass control.
         /// </summary>
@@ -488,7 +490,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errTableHeaderClass;
-        
+
         /// <summary>
         /// txtTableHeaderClass control.
         /// </summary>
@@ -497,7 +499,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTableHeaderClass;
-        
+
         /// <summary>
         /// pnlDefaultTableRowCSS control.
         /// </summary>
@@ -506,7 +508,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlDefaultTableRowCSS;
-        
+
         /// <summary>
         /// lblDefaultTableRowCSS control.
         /// </summary>
@@ -515,7 +517,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDefaultTableRowCSS;
-        
+
         /// <summary>
         /// errDefaultTableRowCSS control.
         /// </summary>
@@ -524,7 +526,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errDefaultTableRowCSS;
-        
+
         /// <summary>
         /// txtDefaultTableRowCSS control.
         /// </summary>
@@ -533,7 +535,124 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDefaultTableRowCSS;
-        
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
+        /// Label2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+
+        /// <summary>
+        /// Label3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+
+        /// <summary>
+        /// DDLpersonaField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLpersonaField;
+
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+
+        /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+
+        /// <summary>
+        /// Label5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label5;
+
+        /// <summary>
+        /// DDlbaseviewfield control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDlbaseviewfield;
+
+        /// <summary>
+        /// Panel3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel3;
+
+        /// <summary>
+        /// lblerrorfilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblerrorfilter;
+
+        /// <summary>
+        /// ADDpersona control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ADDpersona;
+
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+
+        /// <summary>
+        /// dgpersonafilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DataGrid dgpersonafilter;
+
         /// <summary>
         /// pnlWardPersonaContextField control.
         /// </summary>
@@ -542,7 +661,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlWardPersonaContextField;
-        
+
         /// <summary>
         /// lblWardPersonaContextField control.
         /// </summary>
@@ -551,7 +670,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblWardPersonaContextField;
-        
+
         /// <summary>
         /// errWardPersonaContextField control.
         /// </summary>
@@ -560,7 +679,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errWardPersonaContextField;
-        
+
         /// <summary>
         /// ddlWardPersonaContextField control.
         /// </summary>
@@ -569,7 +688,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlWardPersonaContextField;
-        
+
         /// <summary>
         /// pnlCUPersonaContextField control.
         /// </summary>
@@ -578,7 +697,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlCUPersonaContextField;
-        
+
         /// <summary>
         /// lblCUPersonaContextField control.
         /// </summary>
@@ -587,7 +706,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCUPersonaContextField;
-        
+
         /// <summary>
         /// errCUPersonaContextField control.
         /// </summary>
@@ -596,7 +715,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errCUPersonaContextField;
-        
+
         /// <summary>
         /// ddlCUPersonaContextField control.
         /// </summary>
@@ -605,7 +724,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCUPersonaContextField;
-        
+
         /// <summary>
         /// pnlSpecialtyPersonaContextField control.
         /// </summary>
@@ -614,7 +733,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSpecialtyPersonaContextField;
-        
+
         /// <summary>
         /// lblSpecialtyPersonaContextField control.
         /// </summary>
@@ -623,7 +742,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSpecialtyPersonaContextField;
-        
+
         /// <summary>
         /// errSpecialtyPersonaContextField control.
         /// </summary>
@@ -632,7 +751,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errSpecialtyPersonaContextField;
-        
+
         /// <summary>
         /// ddlSpecialtyPersonaContextField control.
         /// </summary>
@@ -641,7 +760,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSpecialtyPersonaContextField;
-        
+
         /// <summary>
         /// pnlTeamPersonaContextField control.
         /// </summary>
@@ -650,7 +769,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlTeamPersonaContextField;
-        
+
         /// <summary>
         /// lblTeamPersonaContextField control.
         /// </summary>
@@ -659,7 +778,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTeamPersonaContextField;
-        
+
         /// <summary>
         /// errTeamPersonaContextField control.
         /// </summary>
@@ -668,7 +787,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errTeamPersonaContextField;
-        
+
         /// <summary>
         /// ddlTeamPersonaContextField control.
         /// </summary>
@@ -677,7 +796,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTeamPersonaContextField;
-        
+
         /// <summary>
         /// pnlSnapshotLine1 control.
         /// </summary>
@@ -686,7 +805,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSnapshotLine1;
-        
+
         /// <summary>
         /// lblSnapshotLine1 control.
         /// </summary>
@@ -695,7 +814,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSnapshotLine1;
-        
+
         /// <summary>
         /// errSnapshotLine1 control.
         /// </summary>
@@ -704,7 +823,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errSnapshotLine1;
-        
+
         /// <summary>
         /// ddlSnapshotLine1 control.
         /// </summary>
@@ -713,7 +832,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSnapshotLine1;
-        
+
         /// <summary>
         /// pnlSnapshotLine2 control.
         /// </summary>
@@ -722,7 +841,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSnapshotLine2;
-        
+
         /// <summary>
         /// lblSnapshotLine2 control.
         /// </summary>
@@ -731,7 +850,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSnapshotLine2;
-        
+
         /// <summary>
         /// errSnapshotLine2 control.
         /// </summary>
@@ -740,7 +859,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errSnapshotLine2;
-        
+
         /// <summary>
         /// ddlSnapshotLine2 control.
         /// </summary>
@@ -749,7 +868,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSnapshotLine2;
-        
+
         /// <summary>
         /// pnlSnapshotBadge control.
         /// </summary>
@@ -758,7 +877,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSnapshotBadge;
-        
+
         /// <summary>
         /// lblSnapshotBadge control.
         /// </summary>
@@ -767,7 +886,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSnapshotBadge;
-        
+
         /// <summary>
         /// errSnapshotBadge control.
         /// </summary>
@@ -776,7 +895,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label errSnapshotBadge;
-        
+
         /// <summary>
         /// ddlSnapshotBadge control.
         /// </summary>
@@ -785,7 +904,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlSnapshotBadge;
-        
+
         /// <summary>
         /// btnValidateList control.
         /// </summary>
@@ -794,7 +913,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnValidateList;
-        
+
         /// <summary>
         /// btnCancel control.
         /// </summary>
@@ -803,7 +922,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
-        
+
         /// <summary>
         /// btnCreateNewList control.
         /// </summary>
@@ -812,7 +931,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCreateNewList;
-        
+
         /// <summary>
         /// lblError control.
         /// </summary>
@@ -821,7 +940,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-        
+
         /// <summary>
         /// lblSuccess control.
         /// </summary>
@@ -830,7 +949,7 @@ namespace SynapseStudio {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSuccess;
-        
+
         /// <summary>
         /// dgEntities control.
         /// </summary>

@@ -82,25 +82,10 @@ namespace SynapseDynamicAPI.Controllers
             var paramList = new List<KeyValuePair<string, object>>() { };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
-
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
         }
 
 
@@ -147,22 +132,11 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
         }
 
 
@@ -191,23 +165,11 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            return json;
+             
         }
 
 
@@ -273,25 +235,12 @@ namespace SynapseDynamicAPI.Controllers
             }
 
             string sql = selectstatement + " FROM (SELECT * FROM baseview." + baseviewname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ") bv " + filtersSQL + " " + ordergroupbystatement + ";";
-                        
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = DataServices.DataSetFromSQL(sql, paramListFromPost);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            DataSet ds = new DataSet();
+            ds = DataServices.DataSetFromSQL(sql, paramListFromPost);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
         }
 
 

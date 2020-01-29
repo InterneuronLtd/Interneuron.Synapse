@@ -18,25 +18,43 @@
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using System.Security.Authentication;
+using Interneuron.Infrastructure.Web.Exceptions.Handlers;
+using Interneuron.Web.Logging;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Serilog;
 using SynapseDynamicAPI.Formatters;
+using Swashbuckle.AspNetCore.Swagger;
+using SynapseDynamicAPI.Infrastructure.Filters;
+using Interneuron.Common.Extensions;
 
 namespace SynapseDynamicAPI
 {
     public class Startup
     {
+        IConfigurationSection SwaggerSection = null;
+        IConfigurationSection SynapseCoreSection = null;
+        IConfigurationSection SynapseCoreSettingsSection = null;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
             Environment.SetEnvironmentVariable("connectionString_SynapseDataStore", configuration["SynapseCore:ConnectionStrings:SynapseDataStore"]);
             Environment.SetEnvironmentVariable("connectionString_SynapseIdentityStore", configuration["SynapseCore:ConnectionStrings:SynapseIdentityStore"]);
             Environment.SetEnvironmentVariable("OutboundInterface_SendingApplicationName", configuration["OutboundInterface:SendingApplicationName"]);
+
+            SwaggerSection = Configuration.GetSection("Swagger");
+
+            SynapseCoreSection = Configuration.GetSection("SynapseCore");
+
+            SynapseCoreSettingsSection = SynapseCoreSection.GetSection("Settings");
         }
 
         public IConfiguration Configuration { get; }
@@ -45,12 +63,13 @@ namespace SynapseDynamicAPI
         public void ConfigureServices(IServiceCollection services)
         {
             string showPII = Configuration["SynapseCore:Settings:ShowIdentitySeverPIIinLogs"];
+
             if (!string.IsNullOrWhiteSpace(showPII) && showPII.ToLower() == "true")
                 Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 
             //services.AddCors(options => options.AddPolicy("AllowAll", p => p.AllowAnyOrigin()
             //                                                        .AllowAnyMethod()
-            //                                                         .AllowAnyHeader()));
+            //                                                         .AllowAnyHeader()))
 
             services.AddCors(options =>
             {
@@ -97,7 +116,56 @@ namespace SynapseDynamicAPI
                     builder.RequireScope(Configuration["SynapseCore:Settings:ReadAccessAPIScope"]);
                 });
             });
+
+            var swaggerName = SwaggerSection.GetValue<string>("DocumentName");
+            var swaggerVer = SwaggerSection.GetValue<string>("DocumentVersion");
+            var swaggerAccessScopes = SwaggerSection.GetValue<string>("AccessScopes");
+
+            services.AddSwaggerGen(conf =>
+            {
+                conf.DescribeAllEnumsAsStrings();
+                conf.SwaggerDoc(swaggerName, new Info
+                {
+                    Title = "Synapse Dynamic HTTP API",
+                    Version = swaggerVer,
+                    Description = "The Dynamic Service HTTP API",
+                    TermsOfService = "The Synapse Dynamic Service HTTP API"
+                });
+
+                conf.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                {
+                    Type = "oauth2",
+                    Flow = "implicit",
+                    AuthorizationUrl = $"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/authorize",
+                    TokenUrl = $"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/token",
+                    Scopes = GetScopes(swaggerAccessScopes)
+                });
+
+                conf.OperationFilter<AuthorizeCheckOperationFilter>();
+                conf.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+            });
         }
+
+        private static Dictionary<string, string> GetScopes(string swaggerAccessScopes)
+        {
+            var scopes = new Dictionary<string, string>();
+
+            swaggerAccessScopes.Split(';')
+                            .Each(scopeUnit =>
+                            {
+                                if (scopeUnit.IsNotEmpty())
+                                {
+                                    var scopeKV = scopeUnit.Split(':');
+                                    if (scopeKV.IsCollectionValid())
+                                    {
+                                        scopes[scopeKV[0]] = scopeKV[1];
+                                    }
+                                }
+                            });
+            return scopes;
+        }
+
         private static HttpClientHandler GetHandler()
         {
             var handler = new HttpClientHandler();
@@ -107,20 +175,53 @@ namespace SynapseDynamicAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            if (env.IsDevelopment())
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            app.UseInterneuronExceptionHandler(env, options =>
             {
-                app.UseDeveloperExceptionPage();
-            }
+                options.OnExceptionHandlingComplete = (ex, errorId) =>
+                {
+                    LogException(ex, errorId);
+                };
+            });
+
             app.UseAuthentication();
+
+            app.UseMiddleware<InterneuronSerilogLoggingMiddleware>();
 
             app.UseCors("AllowAllHeaders");
 
-
-
             app.UseMvc();
+
+            app.UseSwagger();
+
+            var swaggerName = SwaggerSection.GetValue<string>("DocumentName");
+            var oAuthClientId = SwaggerSection.GetValue<string>("OAuthClientId");
+            var oAuthClientName = SwaggerSection.GetValue<string>("OAuthClientName");
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint($"./{swaggerName}/swagger.json", $"SynapseDynamicAPI {Configuration["API_Version"]}");
+
+                c.OAuthClientId(oAuthClientId);
+                c.OAuthAppName(oAuthClientName);
+            });
+        }
+
+        private static void LogException(Exception ex, string errorId)
+        {
+            if (ex.Message.StartsWith("cannot open database", StringComparison.InvariantCultureIgnoreCase) || ex.Message.StartsWith("a network", StringComparison.InvariantCultureIgnoreCase))
+                Log.Logger.ForContext("ErrorId", errorId).Fatal(ex, ex.Message);
+            else
+                Log.Logger.ForContext("ErrorId", errorId).Error(ex, ex.Message);
         }
 
     }
+
+
 }

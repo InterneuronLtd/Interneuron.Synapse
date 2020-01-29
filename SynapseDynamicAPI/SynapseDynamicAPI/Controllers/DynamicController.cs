@@ -20,24 +20,22 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using Npgsql;
 using System.Data;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using System.Dynamic;
 using System.Text;
 using SynapseDynamicAPI.Services;
 using SynapseDynamicAPI.Models;
 using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Authorization;
-using System.Net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Configuration;
+using Interneuron.Infrastructure.CustomExceptions;
 
 namespace SynapseDynamicAPI.Controllers
 {
-  
+
     [Authorize]
     public class DynamicController : Controller
     {
@@ -97,24 +95,11 @@ namespace SynapseDynamicAPI.Controllers
             var paramList = new List<KeyValuePair<string, object>>() { };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
 
         }
 
@@ -184,23 +169,11 @@ namespace SynapseDynamicAPI.Controllers
             string sql = "SELECT * FROM (SELECT " + fieldList + " FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE 1=1 " + filterString + orderBySting + limitString + offsetString + ") entview " + filtersSQL + ";";
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramListFromPost);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramListFromPost);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
 
 
         }
@@ -222,29 +195,13 @@ namespace SynapseDynamicAPI.Controllers
                 fieldList = " * ";
             }
 
-            string keyAttribute = "";
-            try
-            {
-                keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
-            }
-            catch
-            {
-                this.HttpContext.Response.StatusCode = 500;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "System Error";
-                httpErr.ErrorDescription = "Unable to retrieve key attribute column";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            string keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
+             
 
             if (string.IsNullOrWhiteSpace(keyAttribute))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied - unable to retrieve key attribute column";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Invalid Parameters supplied - unable to retrieve key attribute column: " + keyAttribute, "Client Error");
+                
             }
 
 
@@ -257,23 +214,11 @@ namespace SynapseDynamicAPI.Controllers
 
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            return json;
+            
 
 
         }
@@ -309,8 +254,8 @@ namespace SynapseDynamicAPI.Controllers
             try
             {
                 dsCount = DataServices.DataSetFromSQL(sqlCount, paramListCount);
-                DataTable dt = dsCount.Tables[0];
-                iCount = System.Convert.ToInt32(dt.Rows[0]["entityRecords"].ToString());
+                DataTable dt1 = dsCount.Tables[0];
+                iCount = System.Convert.ToInt32(dt1.Rows[0]["entityRecords"].ToString());
             }
             catch (Exception ex)
             {
@@ -363,21 +308,9 @@ namespace SynapseDynamicAPI.Controllers
                      new KeyValuePair<string, object>("synapseattributevalue", attributevalue)
                     };
                 }
-
-                try
-                {
-                    DataServices.executeSQLStatement(sb.ToString(), paramListInsert);
-                    DataServices.executeSQLStatement(sb_materialised.ToString(), paramListInsert_materialised);
-                }
-                catch
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError();
-                    httpErr.ErrorCode = "HTTP.400";
-                    httpErr.ErrorType = "Client Error";
-                    httpErr.ErrorDescription = "Invalid paramaters supplied";
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                }
+                DataServices.executeSQLStatement(sb.ToString(), paramListInsert);
+                DataServices.executeSQLStatement(sb_materialised.ToString(), paramListInsert_materialised);
+                 
             }
 
             string fieldList = SynapseEntityHelperServices.GetEntityAttributes(synapsenamespace, synapseentityname, returnsystemattributes);
@@ -395,23 +328,11 @@ namespace SynapseDynamicAPI.Controllers
 
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            return json;
+             
 
 
         }
@@ -466,23 +387,11 @@ namespace SynapseDynamicAPI.Controllers
 
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
 
 
         }
@@ -572,12 +481,8 @@ namespace SynapseDynamicAPI.Controllers
 
                     if (keyAttribute == item.Key)
                     {
-                        this.HttpContext.Response.StatusCode = 400;
-                        var httpErr = new SynapseHTTPError();
-                        httpErr.ErrorCode = "HTTP.400";
-                        httpErr.ErrorType = "Client Error";
-                        httpErr.ErrorDescription = "No value supplied for Key Attribute: " + keyAttribute;
-                        return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                        throw new InterneuronBusinessException(errorCode: 400, errorMessage: "No value supplied for Key Attribute: " + keyAttribute, "Client Error");
+                        
                     }
 
                     //Relations
@@ -585,12 +490,8 @@ namespace SynapseDynamicAPI.Controllers
                     {
                         if (item.Key == row[0].ToString())
                         {
-                            this.HttpContext.Response.StatusCode = 400;
-                            var httpErr = new SynapseHTTPError();
-                            httpErr.ErrorCode = "HTTP.400";
-                            httpErr.ErrorType = "Client Error";
-                            httpErr.ErrorDescription = "No values supplpied for relation: " + item.Key;
-                            return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                            throw new InterneuronBusinessException(errorCode: 400, errorMessage: "No values supplpied for relation: " + item.Key, "Client Error");
+                             
                         }
                     }
 
@@ -600,23 +501,15 @@ namespace SynapseDynamicAPI.Controllers
 
             if (iRelationMatches < dtRel.Rows.Count)
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Not all relations have values specified. Please ensure that you have values are specified for all of the following fields: " + StringManipulationServices.TrimEnd(sb.ToString(), ",");
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Not all relations have values specified.Please ensure that you have values are specified for all of the following fields: " + StringManipulationServices.TrimEnd(sb.ToString(), ","), "Client Error");
+               
             }
 
 
             if (iKeyMatches < 1)
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "No value supplied for Key Attribute: " + keyAttribute;
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "No value supplied for Key Attribute: " + keyAttribute, "Client Error");
+                
             }
 
             string strCols = "INSERT INTO entitystore." + synapsenamespace + "_" + synapseentityname + "(" +
@@ -627,104 +520,56 @@ namespace SynapseDynamicAPI.Controllers
                                ") RETURNING _sequenceid;";
             var sql = strCols + strParams;
 
-            try
-            {
-                DataSet ds = new DataSet();
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                int id = System.Convert.ToInt32(dt.Rows[0][0].ToString());
+            DataSet ds = new DataSet();
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            int id = System.Convert.ToInt32(dt.Rows[0][0].ToString());
 
-                //Delete all occurances from entitystorematerialised
-                string sqlDelete = "DELETE FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @keyValue;";
+            //Delete all occurances from entitystorematerialised
+            string sqlDelete = "DELETE FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @keyValue;";
 
-                var paramListDelete = new List<KeyValuePair<string, object>>() {
+            var paramListDelete = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("keyValue", keyValue)
                 };
 
-                try
-                {
-                    DataServices.executeSQLStatement(sqlDelete, paramListDelete);
-                }
-                catch
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError();
-                    httpErr.ErrorCode = "HTTP.500";
-                    httpErr.ErrorType = "Server Error";
-                    httpErr.ErrorDescription = "Unable to delete materialised entity history";
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                }
+            DataServices.executeSQLStatement(sqlDelete, paramListDelete);
+            
 
-
-                //Get all the entity's columns 
-                string entityCols = "";
-                string sqlEntityCols = "SELECT entitysettings.getentityattributestring(@synapsenamespace, @synapseentityname, 1)";
-                var paramListEntityCols = new List<KeyValuePair<string, object>>() {
+            //Get all the entity's columns 
+            string entityCols = "";
+            string sqlEntityCols = "SELECT entitysettings.getentityattributestring(@synapsenamespace, @synapseentityname, 1)";
+            var paramListEntityCols = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("synapsenamespace", synapsenamespace),
                      new KeyValuePair<string, object>("synapseentityname", synapseentityname)
                 };
 
-                try
-                {
-                    DataSet dsEntityCols = new DataSet();
-                    dsEntityCols = DataServices.DataSetFromSQL(sqlEntityCols, paramListEntityCols);
-                    DataTable dtEntityCols = dsEntityCols.Tables[0];
-                    entityCols = dtEntityCols.Rows[0][0].ToString();
-                }
-                catch
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError();
-                    httpErr.ErrorCode = "HTTP.500";
-                    httpErr.ErrorType = "Server Error";
-                    httpErr.ErrorDescription = "Unable to get all entity columns";
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                }
+            DataSet dsEntityCols = new DataSet();
+            dsEntityCols = DataServices.DataSetFromSQL(sqlEntityCols, paramListEntityCols);
+            DataTable dtEntityCols = dsEntityCols.Tables[0];
+            entityCols = dtEntityCols.Rows[0][0].ToString();
+             
+
+            //Insert the newly inserted record into the materialised entity
+            string sqlMaterialisedInsert = "INSERT INTO entitystorematerialised." + synapsenamespace + "_" + synapseentityname + "(" +
+                          entityCols +
+                          ") "
+                           +
+                          " SELECT " +
+                          entityCols +
+                         " FROM entityview." + synapsenamespace + "_" + synapseentityname
+                          + " WHERE " + keyAttribute + " = @keyValue;";
 
 
-                //Insert the newly inserted record into the materialised entity
-                string sqlMaterialisedInsert = "INSERT INTO entitystorematerialised." + synapsenamespace + "_" + synapseentityname + "(" +
-                              entityCols +
-                              ") "
-                               +
-                              " SELECT " +
-                              entityCols +
-                             " FROM entityview." + synapsenamespace + "_" + synapseentityname
-                              + " WHERE " + keyAttribute + " = @keyValue;";
-
-
-                var paramListMaterialisedInsert = new List<KeyValuePair<string, object>>() {
+            var paramListMaterialisedInsert = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("keyValue", keyValue)
                 };
-
-                try
-                {
-                    DataServices.executeSQLStatement(sqlMaterialisedInsert, paramListMaterialisedInsert);
-                }
-                catch
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError();
-                    httpErr.ErrorCode = "HTTP.500";
-                    httpErr.ErrorType = "Server Error";
-                    httpErr.ErrorDescription = "Unable to insert into materialised entity";
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                }
+            DataServices.executeSQLStatement(sqlMaterialisedInsert, paramListMaterialisedInsert);
+            
+            //Get the return obext
+            return GetReturnObjectByID(synapsenamespace, synapseentityname, id);
 
 
-                //Get the return obext
-                return GetReturnObjectByID(synapsenamespace, synapseentityname, id);
-
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid paramaters supplied";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            
 
         }
 
@@ -757,47 +602,23 @@ namespace SynapseDynamicAPI.Controllers
                      new KeyValuePair<string, object>("keyValue", attributevalue)
                 };
 
-            try
-            {
-                DataServices.executeSQLStatement(sqlDelete, paramListDelete);
-            }
-            catch
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "Server Error";
-                httpErr.ErrorDescription = "Unable to delete materialised entity history";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            DataServices.executeSQLStatement(sqlDelete, paramListDelete);
+             
 
             string sql = "UPDATE entitystore." + synapsenamespace + "_" + synapseentityname + " SET _recordstatus = 2 WHERE _recordstatus = 1 AND " + synapseattributename + " = @p_attributevalue";
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_attributevalue", attributevalue)
                 };
 
-            try
-            {
-                DataServices.executeSQLStatement(sql, paramList);
-                KeyAttribute ka = new KeyAttribute();
-                ka.Namespace = synapsenamespace;
-                ka.EntityName = synapseentityname;
-                ka.KeyAttributeName = synapseattributename;
-                ka.Message = "Record(s) Deleted where " + synapseattributename + " = " + attributevalue;
-                this.HttpContext.Response.StatusCode = 200;
-                return JsonConvert.SerializeObject(ka, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
+            DataServices.executeSQLStatement(sql, paramList);
+            KeyAttribute ka = new KeyAttribute();
+            ka.Namespace = synapsenamespace;
+            ka.EntityName = synapseentityname;
+            ka.KeyAttributeName = synapseattributename;
+            ka.Message = "Record(s) Deleted where " + synapseattributename + " = " + attributevalue;
+            this.HttpContext.Response.StatusCode = 200;
+            return JsonConvert.SerializeObject(ka, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            
 
         }
 
@@ -806,29 +627,13 @@ namespace SynapseDynamicAPI.Controllers
         [Route("[action]/{synapsenamespace?}/{synapseentityname?}/{id?}")]
         public string DeleteObject(string synapsenamespace, string synapseentityname, string id)
         {
-            string keyAttribute = "";
-            try
-            {
-                keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
-            }
-            catch
-            {
-                this.HttpContext.Response.StatusCode = 500;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "System Error";
-                httpErr.ErrorDescription = "Unable to retrieve key attribute column - please ensure you have provided the correct namespace and entity";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            string keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
+             
 
             if (string.IsNullOrWhiteSpace(keyAttribute))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied - key attribute column not supplied";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Invalid Parameters supplied - key attribute column not supplied", "Client Error");
+                 
             }
 
             string sqlDelete = "DELETE FROM entitystorematerialised." + synapsenamespace + "_" + synapseentityname + " WHERE " + keyAttribute + " = @keyValue;";
@@ -836,50 +641,23 @@ namespace SynapseDynamicAPI.Controllers
             var paramListDelete = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("keyValue", id)
                 };
-
-            try
-            {
-                DataServices.executeSQLStatement(sqlDelete, paramListDelete);
-            }
-            catch
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "Server Error";
-                httpErr.ErrorDescription = "Unable to delete materialised entity history";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
+            DataServices.executeSQLStatement(sqlDelete, paramListDelete);
+            
 
 
             string sql = "UPDATE entitystore." + synapsenamespace + "_" + synapseentityname + " SET _recordstatus = 2 WHERE " + keyAttribute + " = @p_keyAttributeValue;";
             var paramList = new List<KeyValuePair<string, object>>() {
                      new KeyValuePair<string, object>("p_keyAttributeValue", id)
                 };
-
-            try
-            {
-                DataServices.executeSQLStatement(sql, paramList);
-                KeyAttribute ka = new KeyAttribute();
-                ka.Namespace = synapsenamespace;
-                ka.EntityName = synapseentityname;
-                ka.KeyAttributeName = keyAttribute;
-                ka.Message = "Record Deleted where " + keyAttribute + " = " + id;
-                this.HttpContext.Response.StatusCode = 200;
-                return JsonConvert.SerializeObject(ka, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
+            DataServices.executeSQLStatement(sql, paramList);
+            KeyAttribute ka = new KeyAttribute();
+            ka.Namespace = synapsenamespace;
+            ka.EntityName = synapseentityname;
+            ka.KeyAttributeName = keyAttribute;
+            ka.Message = "Record Deleted where " + keyAttribute + " = " + id;
+            this.HttpContext.Response.StatusCode = 200;
+            return JsonConvert.SerializeObject(ka, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            
 
         }
 
@@ -896,29 +674,13 @@ namespace SynapseDynamicAPI.Controllers
                 fieldList = " * ";
             }
 
-            string keyAttribute = "";
-            try
-            {
-                keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
-            }
-            catch
-            {
-                this.HttpContext.Response.StatusCode = 500;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "System Error";
-                httpErr.ErrorDescription = "Unable to retrieve key attribute column";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            string keyAttribute = SynapseEntityHelperServices.GetEntityKeyAttribute(synapsenamespace, synapseentityname);
+            
 
             if (string.IsNullOrWhiteSpace(keyAttribute))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied - unable to retrieve key attribute column";
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Invalid Parameters supplied - unable to retrieve key attribute column", "Client Error");
+                
             }
 
 
@@ -931,23 +693,11 @@ namespace SynapseDynamicAPI.Controllers
 
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.400";
-                httpErr.ErrorType = "Client Error";
-                httpErr.ErrorDescription = "Invalid Parameters supplied";
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
 
 
         }
@@ -962,23 +712,12 @@ namespace SynapseDynamicAPI.Controllers
                 };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 500;
-                var httpErr = new SynapseHTTPError();
-                httpErr.ErrorCode = "HTTP.500";
-                httpErr.ErrorType = "System Error";
-                httpErr.ErrorDescription = "Insert successful but unable to return newly inserted record";
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            
         }
 
     }

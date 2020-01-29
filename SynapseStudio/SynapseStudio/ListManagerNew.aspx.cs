@@ -64,7 +64,7 @@ namespace SynapseStudio
                 this.hdnLocalNamespaceID.Value = local;
 
 
-
+                  BindGrid();
                 string name = "";
                 try
                 {
@@ -115,12 +115,15 @@ namespace SynapseStudio
         private void BindBaseViewContextFields()
         {
             string sql = "SELECT attributename FROM listsettings.baseviewattribute WHERE baseview_id = @id ORDER BY attributename;";
+            string sqlpersona = "SELECT persona_id, displayname, personaname	FROM entitystorematerialised.meta_persona;";
             var paramList = new List<KeyValuePair<string, string>>() {
                 new KeyValuePair<string, string>("id", this.ddlBaseView.SelectedValue)
             };
             BindDropDownList(this.ddlPatientBannerField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlMatchedContextField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlRowCSSField, sql, "attributename", "attributename", 1, paramList);
+            BindDropDownList(this.DDLpersonaField, sqlpersona, "persona_id", "displayname", 1, paramList);
+            BindDropDownList(this.DDlbaseviewfield, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlWardPersonaContextField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlCUPersonaContextField, sql, "attributename", "attributename", 1, paramList);
             BindDropDownList(this.ddlSpecialtyPersonaContextField, sql, "attributename", "attributename", 1, paramList);
@@ -380,6 +383,7 @@ namespace SynapseStudio
             try
             {
                 DataServices.ExcecuteNonQueryFromSQL(sql, paramList);
+                updateTeminusFilter(newId);
             }
             catch (Exception ex)
             {
@@ -402,5 +406,88 @@ namespace SynapseStudio
             this.lblDefaultContextField.Text = SynapseHelpers.GetKeyColumnForEntity(this.ddlDefaultContext.SelectedValue);
             BindBaseViewContextFields();
         }
+
+        public void updateTeminusFilter(string listid)
+        {
+
+            DataTable dt = (DataTable)Session["personfilterTable"];
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                string sqlAddfilter = "INSERT INTO entitystorematerialised.meta_listcontexts(listcontexts_id,persona_id, field, list_id) " +
+
+                            "VALUES (@listcontexts_id, @persona_id, @field, @list_id) ";
+
+                string newId = System.Guid.NewGuid().ToString();
+                var paramListAddlist = new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string, string>("listcontexts_id", newId),
+                new KeyValuePair<string, string>("persona_id",dt.Rows[i]["persona_id"].ToString()),
+                new KeyValuePair<string, string>("field", dt.Rows[i]["field"].ToString()),
+                new KeyValuePair<string, string>("list_id", dt.Rows[i]["list_id"].ToString())       };
+
+                DataServices.ExcecuteNonQueryFromSQL(sqlAddfilter, paramListAddlist);
+            }
+        }
+
+        private void BindGrid()
+        {
+          
+            var paramList = new List<KeyValuePair<string, string>>() {
+                new KeyValuePair<string, string>("list_id","newid")
+            };
+            string pesonaListsql = "SELECT mp.displayname,lc.persona_id, field, list_id	FROM entitystorematerialised.meta_listcontexts lc join entitystorematerialised.meta_persona mp on mp.persona_id=lc.persona_id WHERE list_id = @list_id";
+
+
+            DataSet dspersona = DataServices.DataSetFromSQL(pesonaListsql, paramList);
+            DataTable dtpersona = dspersona.Tables[0];
+            Session["personfilterTable"] = dtpersona;
+            this.dgpersonafilter.DataSource = dtpersona;
+            this.dgpersonafilter.DataBind();
+
+        }
+        protected void ADDpersona_Click(object sender, EventArgs e)
+        {
+            DataTable dt = (DataTable)Session["personfilterTable"];
+            //dt =(DataTable)this.dgpersonafilter.DataSource;
+            if (this.DDLpersonaField.SelectedIndex != 0)
+            {
+                if (this.DDlbaseviewfield.SelectedIndex != 0)
+                {
+                    lblerrorfilter.Text = " ";
+                    DataRow dr = dt.NewRow();
+                    dr["displayname"] = this.DDLpersonaField.SelectedItem.Text;
+                    dr["persona_id"] = this.DDLpersonaField.SelectedValue;
+                    dr["field"] = this.DDlbaseviewfield.SelectedValue;
+                    dr["list_id"] = Request.QueryString["id"].ToString();
+                    dt.Rows.Add(dr);
+                    this.DDLpersonaField.Items.RemoveAt(this.DDLpersonaField.SelectedIndex);
+                    this.DDlbaseviewfield.Items.RemoveAt(this.DDlbaseviewfield.SelectedIndex);
+                }
+                else
+                {
+                    lblerrorfilter.Text = "Please Select BaseView field ";
+                }
+            }
+            else
+            {
+                lblerrorfilter.Text = "Please Select Persona";
+            }
+            this.dgpersonafilter.DataSource = dt;
+            this.dgpersonafilter.DataBind();
+
+
+        }
+
+        protected void dgpersonafilter_DeleteCommand(object source, DataGridCommandEventArgs e)
+        {
+            int i = e.Item.ItemIndex;
+            DataTable dt = (DataTable)Session["personfilterTable"];
+            dt.Rows.RemoveAt(i);
+            this.DDLpersonaField.Items.Add(new ListItem(e.Item.Cells[0].Text, e.Item.Cells[1].Text));
+            this.DDlbaseviewfield.Items.Add(new ListItem(e.Item.Cells[2].Text, e.Item.Cells[2].Text));
+            this.dgpersonafilter.DataSource = dt;
+            this.dgpersonafilter.DataBind();
+        }
+
     }
 }

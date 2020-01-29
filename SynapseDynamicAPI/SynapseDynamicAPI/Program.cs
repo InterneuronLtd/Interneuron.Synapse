@@ -19,22 +19,73 @@
 
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Builder;
+using Serilog;
+using System.IO;
+using Interneuron.Web.Logging;
 
 namespace SynapseDynamicAPI
 {
     public class Program
     {
-        public static void Main(string[] args)
+        static readonly string Namespace = typeof(Program).Namespace;
+        static readonly string AppName = Namespace;
+        const string ProgramExceptionMsg = "Program terminated unexpectedly ({ApplicationContext})!";
+        const string ProgramInitMsg = "Configuring web host ({ApplicationContext})...";
+        const string ProgramStartMsg = "Starting web host ({ApplicationContext})...";
+
+        public static int Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var configuration = GetConfiguration();
+
+            Log.Logger = new InterneuronSerilogLoggerService().CreateSerilogLogger(configuration, AppName);
+
+            try
+            {
+                Log.Information(ProgramInitMsg, AppName);
+                var host = BuildWebHost(configuration, args);
+
+                Log.Information(ProgramStartMsg, AppName);
+                host.Run();
+
+                return 0;
+            }
+            catch (System.Exception ex)
+            {
+                Log.Fatal(ex, ProgramExceptionMsg, AppName);
+                return 1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
+        public static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
+               .UseKestrel()
                 .UseStartup<Startup>()
                 .UseIISIntegration()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseConfiguration(configuration)
+                .UseSerilog()
                 .Build();
+
+
+        private static IConfiguration GetConfiguration()
+        {
+            var environmentName = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
+
+                .AddEnvironmentVariables();
+
+            return builder.Build();
+        }
     }
+
 }

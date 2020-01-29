@@ -21,18 +21,18 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Interneuron.Infrastructure.CustomExceptions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using SynapseDynamicAPI.Models;
 using SynapseDynamicAPI.Services;
 
 namespace SynapseDynamicAPI.Controllers
 {
-   
+
     [Authorize]
     [Route("List/")]
     public class ListController : Controller
@@ -55,25 +55,29 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+            //try
+            //{
+            //    ds = DataServices.DataSetFromSQL(sql, paramList);
+            //    DataTable dt = ds.Tables[0];
+            //    var json = DataServices.ConvertDataTabletoJSONString(dt);
+            //    return json;
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
         }
@@ -90,25 +94,29 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            return json;
+            //try
+            //{
+            //    ds = DataServices.DataSetFromSQL(sql, paramList);
+            //    DataTable dt = ds.Tables[0];
+            //    var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            //    return json;
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
         }
@@ -143,64 +151,107 @@ namespace SynapseDynamicAPI.Controllers
             string listMasterSortColumn = "";
             string listmasterOrderby = "";
             string ordergroupbystatement = "";
+            dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            DataTable dtListDetails = dsListDetails.Tables[0];
             try
             {
-                dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
-                DataTable dtListDetails = dsListDetails.Tables[0];
-                try
-                {
-                    baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
-                }
-                catch { }
-                try
-                {
-                    listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
-                    listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
-                }
-                catch
-                { }
-                if (rowcssfield == "0")
-                {
-                    rowcssfield = "''";
-                }
-                else if (String.IsNullOrWhiteSpace(rowcssfield))
-                {
-                    rowcssfield = "''";
-                }
-
-                snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
-                snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
-                snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
-
-                wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
-                clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
-                teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
-                specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
+                baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
             }
-            catch (Exception ex)
+            catch { }
+
+            try
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List:" + ex.ToString()
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
             }
+            catch { }
+
+            try
+            {
+                rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
+            }
+            catch { }
+            try
+            {
+                listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
+                listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
+            }
+            catch
+            { }
+            if (rowcssfield == "0")
+            {
+                rowcssfield = "''";
+            }
+            else if (String.IsNullOrWhiteSpace(rowcssfield))
+            {
+                rowcssfield = "''";
+            }
+
+            snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
+            snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
+            snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
+
+            wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
+            clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
+            teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
+            specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
+            //try
+            //{
+            //    dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            //    DataTable dtListDetails = dsListDetails.Tables[0];
+            //    try
+            //    {
+            //        baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            //    }
+            //    catch { }
+
+            //    try
+            //    {
+            //        matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
+            //    }
+            //    catch { }
+
+            //    try
+            //    {
+            //        rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
+            //    }
+            //    catch { }
+            //    try
+            //    {
+            //        listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
+            //        listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
+            //    }
+            //    catch
+            //    { }
+            //    if (rowcssfield == "0")
+            //    {
+            //        rowcssfield = "''";
+            //    }
+            //    else if (String.IsNullOrWhiteSpace(rowcssfield))
+            //    {
+            //        rowcssfield = "''";
+            //    }
+
+            //    snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
+            //    snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
+            //    snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
+
+            //    wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
+            //    clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
+            //    teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
+            //    specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Unable to retrieve List:" + ex.ToString()
+            //    };
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
             if (listMasterSortColumn.Trim() != "")
             {
@@ -214,15 +265,16 @@ namespace SynapseDynamicAPI.Controllers
 
             if (string.IsNullOrWhiteSpace(baseViewID))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview"
-                };
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview", "Client Error");
+                //this.HttpContext.Response.StatusCode = 400;
+                //var httpErr = new SynapseHTTPError
+                //{
+                //    ErrorCode = "HTTP.400",
+                //    ErrorType = "Client Error",
+                //    ErrorDescription = "Unable to retrieve baseview"
+                //};
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                //return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
 
 
@@ -234,42 +286,51 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewName = "";
             string baseViewNameSpace = "";
             DataSet dsBV = new DataSet();
+            dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            DataTable dtBV = dsBV.Tables[0];
             try
             {
-                dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
-                DataTable dtBV = dsBV.Tables[0];
-                try
-                {
-                    baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
-                    baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
-                }
-                catch { }
+                baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+                baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
             }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
+            catch { }
+            //try
+            //{
+            //    dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            //    DataTable dtBV = dsBV.Tables[0];
+            //    try
+            //    {
+            //        baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+            //        baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
+            //    }
+            //    catch { }
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Unable to retrieve List"
+            //    };
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
             if (string.IsNullOrWhiteSpace(baseViewName))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview name"
-                };
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview name", "Client Error");
+                //this.HttpContext.Response.StatusCode = 400;
+                //var httpErr = new SynapseHTTPError
+                //{
+                //    ErrorCode = "HTTP.400",
+                //    ErrorType = "Client Error",
+                //    ErrorDescription = "Unable to retrieve baseview name"
+                //};
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                //return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
 
 
@@ -300,113 +361,199 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet dsAttributes = new DataSet();
-            try
+            dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
+            DataTable dtAttributes = dsAttributes.Tables[0];
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            //sb.AppendLine("encounter_id,");
+            int iCount = 0;
+
+            foreach (DataRow row in dtAttributes.Rows)
             {
-                dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
-                DataTable dtAttributes = dsAttributes.Tables[0];
+                sb.AppendLine("json_build_object (");
+                sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
+                sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
+                sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
+                //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
+                sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("SELECT");
-                //sb.AppendLine("encounter_id,");
-                int iCount = 0;
+                sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
 
-                foreach (DataRow row in dtAttributes.Rows)
+                sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
+                sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
+                sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
+                sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + ", ");
+                sb.AppendLine("'wardpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["wardpersonacontextfield"])) ? "''" : row["wardpersonacontextfield"].ToString()) + ", ");
+                sb.AppendLine("'clinicalunitpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["clinicalunitpersonacontextfield"])) ? "''" : row["clinicalunitpersonacontextfield"].ToString()) + ", ");
+                sb.AppendLine("'teampersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["teampersonacontextfield"])) ? "''" : row["teampersonacontextfield"].ToString()) + ", ");
+                sb.AppendLine("'specialtypersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["specialtypersonacontextfield"])) ? "''" : row["specialtypersonacontextfield"].ToString()));
+
+                //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
+
+                if (iCount == dtAttributes.Rows.Count - 1)
                 {
-                    sb.AppendLine("json_build_object (");
-                    sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
-                    sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
-                    sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
-                    //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
-                    sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
-
-                    sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
-
-                    sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
-                    sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
-                    sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
-                    sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + ", ");
-                    sb.AppendLine("'wardpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["wardpersonacontextfield"])) ? "''" : row["wardpersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'clinicalunitpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["clinicalunitpersonacontextfield"])) ? "''" : row["clinicalunitpersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'teampersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["teampersonacontextfield"])) ? "''" : row["teampersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'specialtypersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["specialtypersonacontextfield"])) ? "''" : row["specialtypersonacontextfield"].ToString()));
-
-                    //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
-
-                    if (iCount == dtAttributes.Rows.Count - 1)
-                    {
-                        sb.AppendLine(") as col_" + iCount.ToString());
-                    }
-                    else
-                    {
-                        sb.AppendLine(") as col_" + iCount.ToString() + ",");
-                    }
-
-
-                    //TextBox1.Text = row["ImagePath"].ToString();
-                    iCount++;
+                    sb.AppendLine(") as col_" + iCount.ToString());
                 }
-                sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge, " +
-                              (string.IsNullOrWhiteSpace(wardPersonaContextField) ? "''" : wardPersonaContextField) + " AS wardpersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(clinicalUnitPersonaContextField) ? "''" : clinicalUnitPersonaContextField) + " AS clinicalunitpersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(teamPersonaContextField) ? "''" : teamPersonaContextField) + " AS teampersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(specialtyPersonaContextField) ? "''" : specialtyPersonaContextField) + " AS specialtypersonacontextfield " +
-                              "FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") bv;");
-
-                string listSQL = sb.ToString();
-
-                var paramList = new List<KeyValuePair<string, object>>()
+                else
                 {
-                    //new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
-                };
-
-                DataSet dsList = new DataSet();
-                try
-                {
-                    dsList = DataServices.DataSetFromSQL(listSQL, paramList);
-                    DataTable dtList = dsList.Tables[0];
-                    return DataServices.ConvertDataTabletoJSONString(dtList);
-                }
-                catch (Exception ex)
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError
-                    {
-                        ErrorCode = "HTTP.400",
-                        ErrorType = "Client Error",
-                        ErrorDescription = "Invalid Parameters supplied"
-                    };
-
-
-
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                    sb.AppendLine(") as col_" + iCount.ToString() + ",");
                 }
 
 
-
-
+                //TextBox1.Text = row["ImagePath"].ToString();
+                iCount++;
             }
-            catch (Exception ex)
+            sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge, " +
+                          (string.IsNullOrWhiteSpace(wardPersonaContextField) ? "''" : wardPersonaContextField) + " AS wardpersonacontextfield, " +
+                          (string.IsNullOrWhiteSpace(clinicalUnitPersonaContextField) ? "''" : clinicalUnitPersonaContextField) + " AS clinicalunitpersonacontextfield, " +
+                          (string.IsNullOrWhiteSpace(teamPersonaContextField) ? "''" : teamPersonaContextField) + " AS teampersonacontextfield, " +
+                          (string.IsNullOrWhiteSpace(specialtyPersonaContextField) ? "''" : specialtyPersonaContextField) + " AS specialtypersonacontextfield " +
+                          "FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") bv;");
+
+            string listSQL = sb.ToString();
+
+            var paramList = new List<KeyValuePair<string, object>>()
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
+                //new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
+            };
+
+            DataSet dsList = new DataSet();
+            dsList = DataServices.DataSetFromSQL(listSQL, paramList);
+            DataTable dtList = dsList.Tables[0];
+            return DataServices.ConvertDataTabletoJSONString(dtList);
+            //try
+            //{
+            //    dsList = DataServices.DataSetFromSQL(listSQL, paramList);
+            //    DataTable dtList = dsList.Tables[0];
+            //    return DataServices.ConvertDataTabletoJSONString(dtList);
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
 
 
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
+
+
+
+            //try
+            //{
+            //    dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
+            //    DataTable dtAttributes = dsAttributes.Tables[0];
+
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.AppendLine("SELECT");
+            //    //sb.AppendLine("encounter_id,");
+            //    int iCount = 0;
+
+            //    foreach (DataRow row in dtAttributes.Rows)
+            //    {
+            //        sb.AppendLine("json_build_object (");
+            //        sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
+            //        sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
+            //        sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
+            //        //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
+            //        sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
+
+            //        sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
+
+            //        sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
+            //        sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
+            //        sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
+            //        sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + ", ");
+            //        sb.AppendLine("'wardpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["wardpersonacontextfield"])) ? "''" : row["wardpersonacontextfield"].ToString()) + ", ");
+            //        sb.AppendLine("'clinicalunitpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["clinicalunitpersonacontextfield"])) ? "''" : row["clinicalunitpersonacontextfield"].ToString()) + ", ");
+            //        sb.AppendLine("'teampersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["teampersonacontextfield"])) ? "''" : row["teampersonacontextfield"].ToString()) + ", ");
+            //        sb.AppendLine("'specialtypersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["specialtypersonacontextfield"])) ? "''" : row["specialtypersonacontextfield"].ToString()));
+
+            //        //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
+
+            //        if (iCount == dtAttributes.Rows.Count - 1)
+            //        {
+            //            sb.AppendLine(") as col_" + iCount.ToString());
+            //        }
+            //        else
+            //        {
+            //            sb.AppendLine(") as col_" + iCount.ToString() + ",");
+            //        }
+
+
+            //        //TextBox1.Text = row["ImagePath"].ToString();
+            //        iCount++;
+            //    }
+            //    sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge, " +
+            //                  (string.IsNullOrWhiteSpace(wardPersonaContextField) ? "''" : wardPersonaContextField) + " AS wardpersonacontextfield, " +
+            //                  (string.IsNullOrWhiteSpace(clinicalUnitPersonaContextField) ? "''" : clinicalUnitPersonaContextField) + " AS clinicalunitpersonacontextfield, " +
+            //                  (string.IsNullOrWhiteSpace(teamPersonaContextField) ? "''" : teamPersonaContextField) + " AS teampersonacontextfield, " +
+            //                  (string.IsNullOrWhiteSpace(specialtyPersonaContextField) ? "''" : specialtyPersonaContextField) + " AS specialtypersonacontextfield " +
+            //                  "FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") bv;");
+
+            //    string listSQL = sb.ToString();
+
+            //    var paramList = new List<KeyValuePair<string, object>>()
+            //    {
+            //        //new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
+            //    };
+
+            //    DataSet dsList = new DataSet();
+            //    try
+            //    {
+            //        dsList = DataServices.DataSetFromSQL(listSQL, paramList);
+            //        DataTable dtList = dsList.Tables[0];
+            //        return DataServices.ConvertDataTabletoJSONString(dtList);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        this.HttpContext.Response.StatusCode = 400;
+            //        var httpErr = new SynapseHTTPError
+            //        {
+            //            ErrorCode = "HTTP.400",
+            //            ErrorType = "Client Error",
+            //            ErrorDescription = "Invalid Parameters supplied"
+            //        };
+
+
+
+            //        return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //    }
+
+
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
+
+
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
 
         }
-
 
         [HttpPost]
         [Route("")]
@@ -446,6 +593,8 @@ namespace SynapseDynamicAPI.Controllers
                 new KeyValuePair<string, object>("list_id", listId)
             };
 
+            DataSet dsListPersonaContexts = new DataSet();
+
             string baseViewID = "";
             DataSet dsListDetails = new DataSet();
             string matchedcontextfield = "";
@@ -455,63 +604,114 @@ namespace SynapseDynamicAPI.Controllers
             string snapshotTemplateLine2;
             string snapshotTemplateBadge;
 
-            string wardPersonaContextField;
-            string clinicalUnitPersonaContextField;
-            string teamPersonaContextField;
-            string specialtyPersonaContextField;
+            //string wardPersonaContextField;
+            //string clinicalUnitPersonaContextField;
+            //string teamPersonaContextField;
+            //string specialtyPersonaContextField;
             string listMasterSortColumn = "";
             string listmasterOrderby = "";
             string ordergroupbystatement = "";
+
+            dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            DataTable dtListDetails = dsListDetails.Tables[0];
             try
             {
-                dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
-                DataTable dtListDetails = dsListDetails.Tables[0];
-                try
-                {
-                    baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
-                }
-                catch { }
-                try
-                {
-                    listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
-                    listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
-                }
-                catch
-                { }
-                snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
-                snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
-                snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
-
-                wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
-                clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
-                teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
-                specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
-
+                baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
             }
-            catch (Exception ex)
+            catch { }
+
+            try
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
             }
+            catch { }
+
+            try
+            {
+                rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
+            }
+            catch { }
+            try
+            {
+                listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
+                listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
+            }
+            catch
+            { }
+            snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
+            snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
+            snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
+
+            //wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
+            //clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
+            //teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
+            //specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
+
+            //get all PersonaContexts defined for this list from list contexts table
+            string sqlPersonaContextsForList = "select lc.persona_id, lc.field, ps.displayname, ps.personaname from entitystorematerialised.meta_listcontexts lc " +
+                                                 "inner join entitystorematerialised.meta_persona ps on ps.persona_id = lc.persona_id " +
+                                                    "where list_id = @list_id;";
+
+            dsListPersonaContexts = DataServices.DataSetFromSQL(sqlPersonaContextsForList, paramListDetails);
+
+            //try
+            //{
+            //    dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            //    DataTable dtListDetails = dsListDetails.Tables[0];
+            //    try
+            //    {
+            //        baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            //    }
+            //    catch { }
+
+            //    try
+            //    {
+            //        matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
+            //    }
+            //    catch { }
+
+            //    try
+            //    {
+            //        rowcssfield = dtListDetails.Rows[0]["rowcssfield"].ToString();
+            //    }
+            //    catch { }
+            //    try
+            //    {
+            //        listMasterSortColumn = Convert.ToString(dtListDetails.Rows[0]["defaultsortcolumn"]);
+            //        listmasterOrderby = Convert.ToString(dtListDetails.Rows[0]["defaultsortorder"]);
+            //    }
+            //    catch
+            //    { }
+            //    snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline1"]);
+            //    snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshottemplateline2"]);
+            //    snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshottemplatebadge"]);
+
+            //    //wardPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["wardpersonacontextfield"]);
+            //    //clinicalUnitPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["clinicalunitpersonacontextfield"]);
+            //    //teamPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["teampersonacontextfield"]);
+            //    //specialtyPersonaContextField = Convert.ToString(dtListDetails.Rows[0]["specialtypersonacontextfield"]);
+
+            //    //get all PersonaContexts defined for this list from list contexts table
+            //    string sqlPersonaContextsForList = "select lc.persona_id, lc.field, ps.displayname, ps.personaname from entitystorematerialised.meta_listcontexts lc " +
+            //                                         "inner join entitystorematerialised.meta_persona ps on ps.persona_id = lc.persona_id " +
+            //                                            "where list_id = @list_id;";
+
+            //    dsListPersonaContexts = DataServices.DataSetFromSQL(sqlPersonaContextsForList, paramListDetails);
+
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Unable to retrieve List"
+            //    };
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
             if (results.Count > 3)
             {
@@ -530,15 +730,17 @@ namespace SynapseDynamicAPI.Controllers
 
             if (string.IsNullOrWhiteSpace(baseViewID))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview"
-                };
+                throw new InterneuronBusinessException(400, "Unable to retrieve baseview", "Client Error");
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                //this.HttpContext.Response.StatusCode = 400;
+                //var httpErr = new SynapseHTTPError
+                //{
+                //    ErrorCode = "HTTP.400",
+                //    ErrorType = "Client Error",
+                //    ErrorDescription = "Unable to retrieve baseview"
+                //};
+
+                //return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
 
 
@@ -550,45 +752,56 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewName = "";
             string baseViewNameSpace = "";
             DataSet dsBV = new DataSet();
+
+            dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            DataTable dtBV = dsBV.Tables[0];
             try
             {
-                dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
-                DataTable dtBV = dsBV.Tables[0];
-                try
-                {
-                    baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
-                    baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
-                }
-                catch { }
-
+                baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+                baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
             }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
+            catch { }
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //try
+            //{
+            //    dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            //    DataTable dtBV = dsBV.Tables[0];
+            //    try
+            //    {
+            //        baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+            //        baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
+            //    }
+            //    catch { }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Unable to retrieve List"
+            //    };
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
             if (string.IsNullOrWhiteSpace(baseViewName))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview name"
-                };
+                throw new InterneuronBusinessException(400, "Unable to retrieve baseview name", "Client Error");
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                //this.HttpContext.Response.StatusCode = 400;
+                //var httpErr = new SynapseHTTPError
+                //{
+                //    ErrorCode = "HTTP.400",
+                //    ErrorType = "Client Error",
+                //    ErrorDescription = "Unable to retrieve baseview name"
+                //};
+
+                //return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
             }
-
 
 
             //Get List and Attribute Details
@@ -596,133 +809,201 @@ namespace SynapseDynamicAPI.Controllers
                                    "@matchedcontextfield AS matchedcontext, " +
                                    "@snapshottemplateline1 AS snapshottemplateline1, " +
                                    "@snapshottemplateline2 AS snapshottemplateline2, " +
-                                   "@snapshottemplatebadge AS snapshottemplatebadge, " +
-                                   "@wardpersonacontextfield AS wardpersonacontextfield, " +
-                                   "@clinicalunitpersonacontextfield AS clinicalunitpersonacontextfield, " +
-                                   "@teampersonacontextfield AS teampersonacontextfield, " +
-                                   "@specialtypersonacontextfield AS specialtypersonacontextfield " +
+                                   "@snapshottemplatebadge AS snapshottemplatebadge " +
                                    "FROM listsettings.listattribute " +
                                    "WHERE list_id = @list_id AND isselected = true " +
                                    "ORDER BY ordinalposition;";
+
             var paramListAttributes = new List<KeyValuePair<string, object>>() {
                 new KeyValuePair<string, object>("list_id", listId),
                 new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
                 new KeyValuePair<string, object>("snapshottemplateline1", snapshotTemplateLine1),
                 new KeyValuePair<string, object>("snapshottemplateline2", snapshotTemplateLine2),
-                new KeyValuePair<string, object>("snapshottemplatebadge", snapshotTemplateBadge),
-                new KeyValuePair<string, object>("wardpersonacontextfield", wardPersonaContextField),
-                new KeyValuePair<string, object>("clinicalunitpersonacontextfield", clinicalUnitPersonaContextField),
-                new KeyValuePair<string, object>("teampersonacontextfield", teamPersonaContextField),
-                new KeyValuePair<string, object>("specialtypersonacontextfield", specialtyPersonaContextField)
+                new KeyValuePair<string, object>("snapshottemplatebadge", snapshotTemplateBadge)
             };
 
             DataSet dsAttributes = new DataSet();
-            try
+
+            dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
+            DataTable dtAttributes = dsAttributes.Tables[0];
+
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            //sb.AppendLine("encounter_id,");
+            int iCount = 0;
+            foreach (DataRow row in dtAttributes.Rows)
             {
-                dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
-                DataTable dtAttributes = dsAttributes.Tables[0];
 
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("SELECT");
-                //sb.AppendLine("encounter_id,");
-                int iCount = 0;
-                foreach (DataRow row in dtAttributes.Rows)
+
+                sb.AppendLine("json_build_object (");
+                sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
+                sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
+                sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
+                //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
+                sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
+
+                sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
+
+                sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
+                sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
+                sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
+                sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + " ");
+
+                //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
+
+
+                if (iCount == dtAttributes.Rows.Count - 1)
                 {
-
-
-                    sb.AppendLine("json_build_object (");
-                    sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
-                    sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
-                    sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
-                    //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
-                    sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
-
-                    sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
-
-                    sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
-                    sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
-                    sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
-                    sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + ", ");
-                    sb.AppendLine("'wardpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["wardpersonacontextfield"])) ? "''" : row["wardpersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'clinicalunitpersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["clinicalunitpersonacontextfield"])) ? "''" : row["clinicalunitpersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'teampersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["teampersonacontextfield"])) ? "''" : row["teampersonacontextfield"].ToString()) + ", ");
-                    sb.AppendLine("'specialtypersonacontextfield', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["specialtypersonacontextfield"])) ? "''" : row["specialtypersonacontextfield"].ToString()));
-
-                    //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
-
-
-                    if (iCount == dtAttributes.Rows.Count - 1)
-                    {
-                        sb.AppendLine(") as col_" + iCount.ToString());
-                    }
-                    else
-                    {
-                        sb.AppendLine(") as col_" + iCount.ToString() + ",");
-                    }
-
-
-                    //TextBox1.Text = row["ImagePath"].ToString();
-                    iCount++;
+                    sb.AppendLine(") as col_" + iCount.ToString());
                 }
-                sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
-                              (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge, " +
-                              (string.IsNullOrWhiteSpace(wardPersonaContextField) ? "''" : wardPersonaContextField) + " AS wardpersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(clinicalUnitPersonaContextField) ? "''" : clinicalUnitPersonaContextField) + " AS clinicalunitpersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(teamPersonaContextField) ? "''" : teamPersonaContextField) + " AS teampersonacontextfield, " +
-                              (string.IsNullOrWhiteSpace(specialtyPersonaContextField) ? "''" : specialtyPersonaContextField) + " AS specialtypersonacontextfield " +
-                    "FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") AS View " + filtersToApplySB.ToString() + ";");
-
-                string listSQL = sb.ToString();
-
-                var paramList = new List<KeyValuePair<string, object>>()
+                else
                 {
-                };
-
-                DataSet dsList = new DataSet();
-                try
-                {
-                    dsList = DataServices.DataSetFromSQL(listSQL, paramListFromPost);
-                    DataTable dtList = dsList.Tables[0];
-                    return DataServices.ConvertDataTabletoJSONString(dtList);
-                }
-                catch (Exception ex)
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError
-                    {
-                        ErrorCode = "HTTP.400",
-                        ErrorType = "Client Error",
-                        ErrorDescription = "Invalid Parameters supplied"
-                    };
-
-
-
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                    sb.AppendLine(") as col_" + iCount.ToString() + ",");
                 }
 
-
-
-
+                //TextBox1.Text = row["ImagePath"].ToString();
+                iCount++;
             }
-            catch (Exception ex)
+
+            sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
+                          (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge");
+
+            //append persona context filters
+            foreach (DataRow row in dsListPersonaContexts.Tables[0].Rows)
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
-
-
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                sb.AppendLine(", " + row["field"] + " AS " + "\"" + row["persona_id"] + "\"");
             }
+
+            sb.AppendLine("FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") AS View " + filtersToApplySB.ToString() + ";");
+            string listSQL = sb.ToString();
+
+            var paramList = new List<KeyValuePair<string, object>>()
+            {
+            };
+
+            DataSet dsList = new DataSet();
+
+            dsList = DataServices.DataSetFromSQL(listSQL, paramListFromPost);
+            DataTable dtList = dsList.Tables[0];
+            return DataServices.ConvertDataTabletoJSONString(dtList);
+
+            //try
+            //{
+            //    dsList = DataServices.DataSetFromSQL(listSQL, paramListFromPost);
+            //    DataTable dtList = dsList.Tables[0];
+            //    return DataServices.ConvertDataTabletoJSONString(dtList);
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
+
+            //try
+            //{
+            //    dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
+            //    DataTable dtAttributes = dsAttributes.Tables[0];
+
+            //    StringBuilder sb = new StringBuilder();
+            //    sb.AppendLine("SELECT");
+            //    //sb.AppendLine("encounter_id,");
+            //    int iCount = 0;
+            //    foreach (DataRow row in dtAttributes.Rows)
+            //    {
+
+
+            //        sb.AppendLine("json_build_object (");
+            //        sb.AppendLine("'attributevalue', " + row["attributename"].ToString() + ",");
+            //        sb.AppendLine("'attributename','" + row["attributename"].ToString() + "',");
+            //        sb.AppendLine("'displayname','" + row["displayname"].ToString() + "',");
+            //        //sb.AppendLine("'matchedcontext','" + row["matchedcontext"].ToString() + "',");
+            //        sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
+
+            //        sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
+
+            //        sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
+            //        sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
+            //        sb.AppendLine("'snapshottemplateline2', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline2"])) ? "''" : row["snapshottemplateline2"].ToString()) + ", ");
+            //        sb.AppendLine("'snapshottemplatebadge', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplatebadge"])) ? "''" : row["snapshottemplatebadge"].ToString()) + " ");
+
+            //        //sb.AppendLine("'ordinalposition', " + row["ordinalposition"].ToString() + "");
+
+
+            //        if (iCount == dtAttributes.Rows.Count - 1)
+            //        {
+            //            sb.AppendLine(") as col_" + iCount.ToString());
+            //        }
+            //        else
+            //        {
+            //            sb.AppendLine(") as col_" + iCount.ToString() + ",");
+            //        }
+
+            //        //TextBox1.Text = row["ImagePath"].ToString();
+            //        iCount++;
+            //    }
+
+            //    sb.AppendLine(" FROM (SELECT *, " + matchedcontextfield + " AS matchedcontext, " + rowcssfield + " AS rowcssfield, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1) + " AS snapshottemplateline1, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2) + " AS snapshottemplateline2, " +
+            //                  (string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge) + " AS snapshottemplatebadge");
+
+            //    //append persona context filters
+            //    foreach (DataRow row in dsListPersonaContexts.Tables[0].Rows)
+            //    {
+            //        sb.AppendLine(", " + row["field"] + " AS " + "\"" + row["persona_id"] + "\"");
+            //    }
+
+            //    sb.AppendLine("FROM baseview." + baseViewNameSpace + "_" + baseViewName + " " + ordergroupbystatement + ") AS View " + filtersToApplySB.ToString() + ";");
+            //    string listSQL = sb.ToString();
+
+            //    var paramList = new List<KeyValuePair<string, object>>()
+            //    {
+            //    };
+
+            //    DataSet dsList = new DataSet();
+            //    try
+            //    {
+            //        dsList = DataServices.DataSetFromSQL(listSQL, paramListFromPost);
+            //        DataTable dtList = dsList.Tables[0];
+            //        return DataServices.ConvertDataTabletoJSONString(dtList);
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        this.HttpContext.Response.StatusCode = 400;
+            //        var httpErr = new SynapseHTTPError
+            //        {
+            //            ErrorCode = "HTTP.400",
+            //            ErrorType = "Client Error",
+            //            ErrorDescription = "Invalid Parameters supplied"
+            //        };
+
+            //        return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //    }
+
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
+
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
         }
-
 
 
         [HttpGet]
@@ -737,25 +1018,29 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            return json;
+            //try
+            //{
+            //    ds = DataServices.DataSetFromSQL(sql, paramList);
+            //    DataTable dt = ds.Tables[0];
+            //    var json = DataServices.ConvertDataTabletoJSONObject(dt);
+            //    return json;
+            //}
+            //catch (Exception ex)
+            //{
+            //    this.HttpContext.Response.StatusCode = 400;
+            //    var httpErr = new SynapseHTTPError
+            //    {
+            //        ErrorCode = "HTTP.400",
+            //        ErrorType = "Client Error",
+            //        ErrorDescription = "Invalid Parameters supplied"
+            //    };
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            //    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+            //}
 
 
         }
@@ -855,25 +1140,11 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONString(dt);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONString(dt);
+            return json;
+             
 
 
 
@@ -900,54 +1171,32 @@ namespace SynapseDynamicAPI.Controllers
 
 
             string patientbannerfield = "";
+            dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            DataTable dtListDetails = dsListDetails.Tables[0];
+            try
+            {
+                baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            }
+            catch { }
 
             try
             {
-                dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
-                DataTable dtListDetails = dsListDetails.Tables[0];
-                try
-                {
-                    baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    patientbannerfield = dtListDetails.Rows[0]["patientbannerfield"].ToString();
-                }
-                catch { }
+                matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
             }
-            catch (Exception ex)
+            catch { }
+
+            try
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                patientbannerfield = dtListDetails.Rows[0]["patientbannerfield"].ToString();
             }
+            catch { }
+             
 
 
             if (string.IsNullOrWhiteSpace(baseViewID))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview", "Client Error");
+               
             }
 
 
@@ -959,42 +1208,21 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewName = "";
             string baseViewNameSpace = "";
             DataSet dsBV = new DataSet();
+            dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            DataTable dtBV = dsBV.Tables[0];
             try
             {
-                dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
-                DataTable dtBV = dsBV.Tables[0];
-                try
-                {
-                    baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
-                    baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
-                }
-                catch { }
+                baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+                baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
             }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            catch { }
+            
 
 
             if (string.IsNullOrWhiteSpace(baseViewName))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview name"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview name", "Client Error");
+                 
             }
 
 
@@ -1008,27 +1236,11 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet dsAttributes = new DataSet();
-            try
-            {
-                dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
-                DataTable dtAttributes = dsAttributes.Tables[0];
-                var json = DataServices.ConvertDataTabletoJSONObject(dtAttributes);
-                return json;
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
-
-
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            dsAttributes = DataServices.DataSetFromSQL(sqlAttributes, paramListAttributes);
+            DataTable dtAttributes = dsAttributes.Tables[0];
+            var json = DataServices.ConvertDataTabletoJSONObject(dtAttributes);
+            return json;
+            
         }
 
         [HttpGet]
@@ -1045,26 +1257,12 @@ namespace SynapseDynamicAPI.Controllers
             };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                //var json = DataServices.ConvertDataTabletoJSONString(dt);
-                //return json;
-                return dt.Rows[0][0].ToString();
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            //var json = DataServices.ConvertDataTabletoJSONString(dt);
+            //return json;
+            return dt.Rows[0][0].ToString();
+             
 
         }
 
@@ -1086,52 +1284,29 @@ namespace SynapseDynamicAPI.Controllers
             string snapshotTemplateLine1 = "";
             string snapshotTemplateLine2 = "";
             string snapshotTemplateBadge = "";
+            dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
+            DataTable dtListDetails = dsListDetails.Tables[0];
+            try
+            {
+                baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            }
+            catch { }
 
             try
             {
-                dsListDetails = DataServices.DataSetFromSQL(sqlListDetails, paramListDetails);
-                DataTable dtListDetails = dsListDetails.Tables[0];
-                try
-                {
-                    baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
-                }
-                catch { }
-
-                try
-                {
-                    matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
-                }
-                catch { }
-
-                snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateLine1"]);
-                snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateLine2"]);
-                snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateBadge"]);
-
+                matchedcontextfield = dtListDetails.Rows[0]["matchedcontextfield"].ToString();
             }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List:" + ex.ToString()
-                };
+            catch { }
 
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            snapshotTemplateLine1 = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateLine1"]);
+            snapshotTemplateLine2 = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateLine2"]);
+            snapshotTemplateBadge = Convert.ToString(dtListDetails.Rows[0]["snapshotTemplateBadge"]);
+             
 
             if (string.IsNullOrWhiteSpace(baseViewID))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview", "Client Error");
+                
             }
 
             //Get BaseView Details
@@ -1142,109 +1317,58 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewName = "";
             string baseViewNameSpace = "";
             DataSet dsBV = new DataSet();
+            dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
+            DataTable dtBV = dsBV.Tables[0];
             try
             {
-                dsBV = DataServices.DataSetFromSQL(sqlBV, paramListBV);
-                DataTable dtBV = dsBV.Tables[0];
-                try
-                {
-                    baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
-                    baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
-                }
-                catch { }
+                baseViewName = dtBV.Rows[0]["baseviewname"].ToString();
+                baseViewNameSpace = dtBV.Rows[0]["baseviewnamespace"].ToString();
             }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve List"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
-
+            catch { }
+             
             if (string.IsNullOrWhiteSpace(baseViewName))
             {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Unable to retrieve baseview name"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+                throw new InterneuronBusinessException(errorCode: 400, errorMessage: "Unable to retrieve baseview name", "Client Error");
+                
             }
 
             DataSet dsAttributes = new DataSet();
-            try
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("SELECT");
+            //sb.AppendLine("encounter_id,");
+            int iCount = 0;
+
+            string colSnapshotTemplateLine1 = string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1;
+            string colSnapshotTemplateLine2 = string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2;
+            string colSnapshotTemplateBadge = string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge;
+
+            sb.AppendLine("json_build_object (");
+            sb.AppendLine("'matchedcontext', " + matchedcontextfield + ",");
+            sb.AppendLine("'snapshottemplateline1', " + colSnapshotTemplateLine1 + ",");
+            sb.AppendLine("'snapshottemplateline2', " + colSnapshotTemplateLine2 + ",");
+            sb.AppendLine("'snapshottemplatebadge', " + colSnapshotTemplateBadge);
+
+            sb.AppendLine(") as snapshot ");
+
+            sb.AppendLine("FROM (SELECT *, " +
+                matchedcontextfield + " AS matchedcontext, " +
+                colSnapshotTemplateLine1 + " AS snapshottemplateline1, " +
+                colSnapshotTemplateLine2 + " AS snapshottemplateline2, " +
+                colSnapshotTemplateBadge + " AS snapshottemplatebadge " +
+                "FROM baseview." + baseViewNameSpace + "_" + baseViewName + ") bv;");
+
+            string listSQL = sb.ToString();
+
+            var paramList = new List<KeyValuePair<string, object>>()
             {
-                StringBuilder sb = new StringBuilder();
-                sb.AppendLine("SELECT");
-                //sb.AppendLine("encounter_id,");
-                int iCount = 0;
+                //new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
+            };
 
-                string colSnapshotTemplateLine1 = string.IsNullOrWhiteSpace(snapshotTemplateLine1) ? "''" : snapshotTemplateLine1;
-                string colSnapshotTemplateLine2 = string.IsNullOrWhiteSpace(snapshotTemplateLine2) ? "''" : snapshotTemplateLine2;
-                string colSnapshotTemplateBadge = string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge;
-
-                sb.AppendLine("json_build_object (");
-                sb.AppendLine("'matchedcontext', " + matchedcontextfield + ",");
-                sb.AppendLine("'snapshottemplateline1', " + colSnapshotTemplateLine1 + ",");
-                sb.AppendLine("'snapshottemplateline2', " + colSnapshotTemplateLine2 + ",");
-                sb.AppendLine("'snapshottemplatebadge', " + colSnapshotTemplateBadge);
-
-                sb.AppendLine(") as snapshot ");
-
-                sb.AppendLine("FROM (SELECT *, " +
-                    matchedcontextfield + " AS matchedcontext, " +
-                    colSnapshotTemplateLine1 + " AS snapshottemplateline1, " +
-                    colSnapshotTemplateLine2 + " AS snapshottemplateline2, " +
-                    colSnapshotTemplateBadge + " AS snapshottemplatebadge " +
-                    "FROM baseview." + baseViewNameSpace + "_" + baseViewName + ") bv;");
-
-                string listSQL = sb.ToString();
-
-                var paramList = new List<KeyValuePair<string, object>>()
-                {
-                    //new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
-                };
-
-                DataSet dsList = new DataSet();
-                try
-                {
-                    dsList = DataServices.DataSetFromSQL(listSQL, paramList);
-                    DataTable dtList = dsList.Tables[0];
-                    return DataServices.ConvertDataTabletoJSONString(dtList);
-                }
-                catch (Exception ex)
-                {
-                    this.HttpContext.Response.StatusCode = 400;
-                    var httpErr = new SynapseHTTPError
-                    {
-                        ErrorCode = "HTTP.400",
-                        ErrorType = "Client Error",
-                        ErrorDescription = "Invalid Parameters supplied"
-                    };
-
-                    return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-                }
-            }
-            catch (Exception ex)
-            {
-                this.HttpContext.Response.StatusCode = 400;
-                var httpErr = new SynapseHTTPError
-                {
-                    ErrorCode = "HTTP.400",
-                    ErrorType = "Client Error",
-                    ErrorDescription = "Invalid Parameters supplied"
-                };
-
-                return JsonConvert.SerializeObject(httpErr, Formatting.Indented, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
-            }
+            DataSet dsList = new DataSet();
+            dsList = DataServices.DataSetFromSQL(listSQL, paramList);
+            DataTable dtList = dsList.Tables[0];
+            return DataServices.ConvertDataTabletoJSONString(dtList);
+            
         }
     }
 }

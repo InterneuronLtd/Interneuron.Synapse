@@ -141,6 +141,9 @@ namespace SynapseStudio
                 case "master":
                     Response.Redirect("EntityManagerNew.aspx?id=" + this.ddlSynapseNamespace.SelectedValue);
                     break;
+                default:
+                    Response.Redirect("EntityManagerNew.aspx?id=" + this.ddlSynapseNamespace.SelectedValue);
+                    break;
             }
             
         }

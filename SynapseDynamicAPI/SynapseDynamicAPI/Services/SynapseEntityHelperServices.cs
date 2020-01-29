@@ -81,17 +81,10 @@ namespace SynapseDynamicAPI.Services
                 };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                return dt;
-            }
-            catch (Exception ex)
-            {
-                throw new System.InvalidOperationException("Error:" + ex.InnerException.ToString());
-            }
-
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            return dt;
+            
         }
 
         public static string GetEntityKeyAttribute(string synapsenamespace, string synapseentityname)
@@ -103,16 +96,10 @@ namespace SynapseDynamicAPI.Services
                 };
 
             DataSet ds = new DataSet();
-            try
-            {
-                ds = DataServices.DataSetFromSQL(sql, paramList);
-                DataTable dt = ds.Tables[0];
-                return dt.Rows[0][0].ToString();
-            }
-            catch (Exception ex)
-            {
-                throw new System.InvalidOperationException("Error:" + ex.InnerException.ToString());
-            }
+            ds = DataServices.DataSetFromSQL(sql, paramList);
+            DataTable dt = ds.Tables[0];
+            return dt.Rows[0][0].ToString();
+            
 
         }
     }
