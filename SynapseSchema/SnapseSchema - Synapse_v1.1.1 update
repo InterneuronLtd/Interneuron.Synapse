@@ -1,0 +1,365 @@
+--Supporting tables for Synapse and Terminus v1.1.1 update
+--This is an incremental update. Install RestoreSynapseSchema_v2.0 before running this script. 
+
+
+-- Table: entitystore.terminus_patientlist
+
+-- DROP TABLE entitystore.terminus_patientlist;
+
+CREATE TABLE entitystore.terminus_patientlist
+(
+    patientlist_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default" DEFAULT uuid_generate_v4(),
+    _sequenceid integer NOT NULL DEFAULT nextval('entitystore.terminus_patientlist__sequenceid_seq'::regclass),
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone DEFAULT timezone('UTC'::text, now()),
+    _createddate timestamp without time zone DEFAULT now(),
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint DEFAULT 1,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    patientlistname character varying(255) COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    isdefault boolean,
+    displayorder integer
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystore.terminus_patientlist
+    OWNER to synapse;
+
+-- Index: terminus_patientlist__recordstatus_idx
+
+-- DROP INDEX entitystore.terminus_patientlist__recordstatus_idx;
+
+CREATE INDEX terminus_patientlist__recordstatus_idx
+    ON entitystore.terminus_patientlist USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: terminus_patientlist__sequenceid_idx
+
+-- DROP INDEX entitystore.terminus_patientlist__sequenceid_idx;
+
+CREATE INDEX terminus_patientlist__sequenceid_idx
+    ON entitystore.terminus_patientlist USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: terminus_patientlist_patientlist_id_idx
+
+-- DROP INDEX entitystore.terminus_patientlist_patientlist_id_idx;
+
+CREATE INDEX terminus_patientlist_patientlist_id_idx
+    ON entitystore.terminus_patientlist USING btree
+    (patientlist_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+	
+	
+	
+	
+	
+-- Table: entitystore.terminus_personpatientlist
+
+-- DROP TABLE entitystore.terminus_personpatientlist;
+
+CREATE TABLE entitystore.terminus_personpatientlist
+(
+    personpatientlist_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default" DEFAULT uuid_generate_v4(),
+    _sequenceid integer NOT NULL DEFAULT nextval('entitystore.terminus_personpatientlist__sequenceid_seq'::regclass),
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone DEFAULT timezone('UTC'::text, now()),
+    _createddate timestamp without time zone DEFAULT now(),
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint DEFAULT 1,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    person_id character varying(255) COLLATE pg_catalog."default",
+    patientlist_id character varying(255) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystore.terminus_personpatientlist
+    OWNER to synapse;
+
+-- Index: terminus_personpatientlist__recordstatus_idx
+
+-- DROP INDEX entitystore.terminus_personpatientlist__recordstatus_idx;
+
+CREATE INDEX terminus_personpatientlist__recordstatus_idx
+    ON entitystore.terminus_personpatientlist USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: terminus_personpatientlist__sequenceid_idx
+
+-- DROP INDEX entitystore.terminus_personpatientlist__sequenceid_idx;
+
+CREATE INDEX terminus_personpatientlist__sequenceid_idx
+    ON entitystore.terminus_personpatientlist USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: terminus_personpatientlist_personpatientlist_id_idx
+
+-- DROP INDEX entitystore.terminus_personpatientlist_personpatientlist_id_idx;
+
+CREATE INDEX terminus_personpatientlist_personpatientlist_id_idx
+    ON entitystore.terminus_personpatientlist USING btree
+    (personpatientlist_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+
+
+
+-- Table: entitystorematerialised.terminus_patientlist
+
+-- DROP TABLE entitystorematerialised.terminus_patientlist;
+
+CREATE TABLE entitystorematerialised.terminus_patientlist
+(
+    patientlist_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default",
+    _sequenceid integer,
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone,
+    _createddate timestamp without time zone,
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    patientlistname character varying(255) COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    isdefault boolean,
+    displayorder integer
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystorematerialised.terminus_patientlist
+    OWNER to synapse;
+
+-- Index: terminus_patientlist__recordstatus_idx
+
+-- DROP INDEX entitystorematerialised.terminus_patientlist__recordstatus_idx;
+
+CREATE INDEX terminus_patientlist__recordstatus_idx
+    ON entitystorematerialised.terminus_patientlist USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: terminus_patientlist__sequenceid_idx
+
+-- DROP INDEX entitystorematerialised.terminus_patientlist__sequenceid_idx;
+
+CREATE INDEX terminus_patientlist__sequenceid_idx
+    ON entitystorematerialised.terminus_patientlist USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: terminus_patientlist_patientlist_id_idx
+
+-- DROP INDEX entitystorematerialised.terminus_patientlist_patientlist_id_idx;
+
+CREATE INDEX terminus_patientlist_patientlist_id_idx
+    ON entitystorematerialised.terminus_patientlist USING btree
+    (patientlist_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+
+
+-- Table: entitystorematerialised.terminus_personpatientlist
+
+-- DROP TABLE entitystorematerialised.terminus_personpatientlist;
+
+CREATE TABLE entitystorematerialised.terminus_personpatientlist
+(
+    personpatientlist_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default",
+    _sequenceid integer,
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone,
+    _createddate timestamp without time zone,
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    person_id character varying(255) COLLATE pg_catalog."default",
+    patientlist_id character varying(255) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystorematerialised.terminus_personpatientlist
+    OWNER to synapse;
+
+-- Index: terminus_personpatientlist__recordstatus_idx
+
+-- DROP INDEX entitystorematerialised.terminus_personpatientlist__recordstatus_idx;
+
+CREATE INDEX terminus_personpatientlist__recordstatus_idx
+    ON entitystorematerialised.terminus_personpatientlist USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: terminus_personpatientlist__sequenceid_idx
+
+-- DROP INDEX entitystorematerialised.terminus_personpatientlist__sequenceid_idx;
+
+CREATE INDEX terminus_personpatientlist__sequenceid_idx
+    ON entitystorematerialised.terminus_personpatientlist USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: terminus_personpatientlist_personpatientlist_id_idx
+
+-- DROP INDEX entitystorematerialised.terminus_personpatientlist_personpatientlist_id_idx;
+
+CREATE INDEX terminus_personpatientlist_personpatientlist_id_idx
+    ON entitystorematerialised.terminus_personpatientlist USING btree
+    (personpatientlist_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+
+
+
+-- Table: entitystore.meta_listcontexts
+
+-- DROP TABLE entitystore.meta_listcontexts;
+
+CREATE TABLE entitystore.meta_listcontexts
+(
+    listcontexts_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default" DEFAULT uuid_generate_v4(),
+    _sequenceid integer NOT NULL DEFAULT nextval('entitystore.meta_listcontexts__sequenceid_seq'::regclass),
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone DEFAULT timezone('UTC'::text, now()),
+    _createddate timestamp without time zone DEFAULT now(),
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint DEFAULT 1,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    persona_id character varying(255) COLLATE pg_catalog."default",
+    field character varying(255) COLLATE pg_catalog."default",
+    list_id character varying(255) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystore.meta_listcontexts
+    OWNER to synapse;
+
+-- Index: meta_listcontexts__recordstatus_idx
+
+-- DROP INDEX entitystore.meta_listcontexts__recordstatus_idx;
+
+CREATE INDEX meta_listcontexts__recordstatus_idx
+    ON entitystore.meta_listcontexts USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: meta_listcontexts__sequenceid_idx
+
+-- DROP INDEX entitystore.meta_listcontexts__sequenceid_idx;
+
+CREATE INDEX meta_listcontexts__sequenceid_idx
+    ON entitystore.meta_listcontexts USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: meta_listcontexts_listcontexts_id_idx
+
+-- DROP INDEX entitystore.meta_listcontexts_listcontexts_id_idx;
+
+CREATE INDEX meta_listcontexts_listcontexts_id_idx
+    ON entitystore.meta_listcontexts USING btree
+    (listcontexts_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;
+
+
+
+-- Table: entitystorematerialised.meta_listcontexts
+
+-- DROP TABLE entitystorematerialised.meta_listcontexts;
+
+CREATE TABLE entitystorematerialised.meta_listcontexts
+(
+    listcontexts_id character varying(255) COLLATE pg_catalog."default",
+    _row_id character varying(255) COLLATE pg_catalog."default",
+    _sequenceid integer,
+    _contextkey character varying(255) COLLATE pg_catalog."default",
+    _createdtimestamp timestamp with time zone,
+    _createddate timestamp without time zone,
+    _createdsource character varying(255) COLLATE pg_catalog."default",
+    _createdmessageid character varying(255) COLLATE pg_catalog."default",
+    _createdby character varying(255) COLLATE pg_catalog."default",
+    _recordstatus smallint,
+    _timezonename character varying(255) COLLATE pg_catalog."default",
+    _timezoneoffset integer,
+    _tenant character varying(255) COLLATE pg_catalog."default",
+    persona_id character varying(255) COLLATE pg_catalog."default",
+    field character varying(255) COLLATE pg_catalog."default",
+    list_id character varying(255) COLLATE pg_catalog."default"
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE entitystorematerialised.meta_listcontexts
+    OWNER to synapse;
+
+-- Index: meta_listcontexts__recordstatus_idx
+
+-- DROP INDEX entitystorematerialised.meta_listcontexts__recordstatus_idx;
+
+CREATE INDEX meta_listcontexts__recordstatus_idx
+    ON entitystorematerialised.meta_listcontexts USING btree
+    (_recordstatus)
+    TABLESPACE pg_default;
+
+-- Index: meta_listcontexts__sequenceid_idx
+
+-- DROP INDEX entitystorematerialised.meta_listcontexts__sequenceid_idx;
+
+CREATE INDEX meta_listcontexts__sequenceid_idx
+    ON entitystorematerialised.meta_listcontexts USING btree
+    (_sequenceid)
+    TABLESPACE pg_default;
+
+-- Index: meta_listcontexts_listcontexts_id_idx
+
+-- DROP INDEX entitystorematerialised.meta_listcontexts_listcontexts_id_idx;
+
+CREATE INDEX meta_listcontexts_listcontexts_id_idx
+    ON entitystorematerialised.meta_listcontexts USING btree
+    (listcontexts_id COLLATE pg_catalog."default")
+    TABLESPACE pg_default;	
