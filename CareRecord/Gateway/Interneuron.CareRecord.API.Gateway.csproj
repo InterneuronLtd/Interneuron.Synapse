@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="3.0.2" />
     <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="3.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.18" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
     <PackageReference Include="Ocelot" Version="14.0.3" />
