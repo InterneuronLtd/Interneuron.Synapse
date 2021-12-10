@@ -1,0 +1,2745 @@
+﻿{
+    "form_id": "POAform",
+    "formname": "Pre-Assessment Health Questionnaire",
+    "description": "Please complete the following questionnaire about your health. Your answers will help us provide the best care for you. If you have any questions, please ask a staff member.",
+    "forminstance_id": null,
+    "formparameters": [
+        {
+            "parametername": "Person_Id",
+            "parameterkey": "@personId",
+            "parametervalue": null
+        },
+        {
+            "parametername": "Encounter_Id",
+            "parameterkey": "@encounterId",
+            "parametervalue": null
+        },
+        {
+            "parametername": "Form_Context",
+            "parameterkey": "@personId",
+            "parametervalue": null
+        }
+    ],
+    "destinationentities": [],
+    "formsections": [
+        {
+            "formsection_id": "section1",
+            "title": "1. Heart Problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 1,
+            "sectionfields": [
+                {
+                    "field_id": "rbl1",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have high blood pressure or take medications to control your blood pressure?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl2",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you had a heart attack?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required.",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl3",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Was it in the past 12 months?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl2",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl4",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you suffer from chest pains or chest tightness?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl5",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Does it occur when you are resting?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 5,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl4",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl6",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Does it occur when you are exerting yourself?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl4",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl7",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been told you have angina?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 7,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl4",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl8",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you feel short of breath when you are resting or with light activity?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl9",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you get short of breath after one flight of stairs?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 9,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl8",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl10",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you had cardiac bypass surgery or had heart stents inserted?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 10,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl11",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Was it in the past 12 months?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 11,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl10",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl12",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you ever been treated for or been told you have heart failure?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 12,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl13",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you ever been treated for or been told you have pulmonary hypertension?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 13,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl14",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you ever wake at night gasping for breath for no reason?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 14,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl15",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you known to have a heart murmur, a problem with the valves in your heart, or had a valve replacement?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 15,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl16",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you suffer from palpitations or been told you have an irregular heartbeat?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 16,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl17",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have a pacemaker?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 17,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl18",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have an implantable defibrillator (a more complex form of pacemaker which can deliver shocks)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 18,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl19",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you suffer from dizziness or blackouts?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 19,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section2",
+            "title": "2. Breathing Problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 2,
+            "sectionfields": [
+                {
+                    "field_id": "rbl20",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have asthma or chronic obstructive pulmonary disease (COPD)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl21",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "If you have asthma, do you have more than one attack per month?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl22",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "If you have COPD, have you needed antibiotics +/- steroid tablets more than 3 times in the last year?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl23",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you use home nebulisers?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    },
+                                    {
+                                        "field_id": "rbl21",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl22",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl24",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you use home oxygen?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 5,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    },
+                                    {
+                                        "field_id": "rbl21",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl22",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl25",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been admitted to hospital because of your breathing in the past year?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    },
+                                    {
+                                        "field_id": "rbl21",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl22",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl26",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been admitted to an intensive care unit because of your breathing in the past?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 7,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl20",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    },
+                                    {
+                                        "field_id": "rbl21",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl22",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl27",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have any other breathing/lung conditions (eg lung fibrosis or asbestos lung disease)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "tb1",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "Please specify:",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "optionlist": null,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl27",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "and"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl28",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been told you snore heavily at night?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 9,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl29",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been told you seem to stop breathing during the night?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 10,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rbl30",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you drop off to sleep frequently during the day or get regular headaches?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 11,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl28",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl29",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl31",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been told you have obstructive sleep apnoea (OSA)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 12,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl28",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl29",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rbl32",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you use a CPAP mask at night?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 13,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rbl28",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    },
+                                    {
+                                        "field_id": "rbl29",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "formsection_id": "section3",
+            "title": "3. Diabetes, kidney, liver and thyroid problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 3,
+            "sectionfields": [
+                {
+                    "field_id": "rblDiabeticMedication",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you diabetic requiring medication?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblDiabeticMedicationOptions",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "If Yes, select",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "None",
+                            "optiontext": "None"
+                        },
+                        {
+                            "optionval": "Tablets only",
+                            "optiontext": "Tablets only"
+                        },
+                        {
+                            "optionval": "Insulin only",
+                            "optiontext": "Insulin only"
+                        },
+                        {
+                            "optionval": "insulin & tablets",
+                            "optiontext": "insulin & tablets"
+                        },
+                        {
+                            "optionval": "insulin pump",
+                            "optiontext": "insulin pump"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblDiabeticMedication",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblDiabetesWellControlled",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Is your diabetes well controlled?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblDaytimeBM",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "What has been your average daytime BM in last 2 weeks if you measure it?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4
+                },
+                {
+                    "field_id": "rblDiabeticKetoacidosis",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have a history of diabetic ketoacidosis (very high blood sugar needing hospital admission) or frequent hypoglycaemic (low blood sugar) episodes?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 5,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblKidneyOrUrinary",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have any kidney or urinary problems?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblKidneyDialysis",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you on kidney dialysis?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 7,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblThyroid",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have an overactive or underactive thyroid gland in your neck",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblLiverProblems",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have any liver problems requiring treatment?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 9,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section4",
+            "title": "4. Blood problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 4,
+            "sectionfields": [
+                {
+                    "field_id": "rblBloodDisorder",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have a blood disorder or a condition that makes you prone to bleeding/bruising easily?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "chkblBloodDisorderOptions",
+                    "fieldcontroltypename": "chkbl",
+                    "fieldlabeltext": "If Yes, please select",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "haemophilia",
+                            "optiontext": "haemophilia"
+                        },
+                        {
+                            "optionval": "Von Willebrands disease",
+                            "optiontext": "Von Willebrands disease"
+                        },
+                        {
+                            "optionval": "myeloma",
+                            "optiontext": "myeloma"
+                        },
+                        {
+                            "optionval": "leukaemia",
+                            "optiontext": "leukaemia"
+                        },
+                        {
+                            "optionval": "lymphoma",
+                            "optiontext": "lymphoma"
+                        },
+                        {
+                            "optionval": "sickle cell disease",
+                            "optiontext": "sickle cell disease"
+                        },
+                        {
+                            "optionval": "thalasseaemia",
+                            "optiontext": "thalasseaemia"
+                        },
+                        {
+                            "optionval": "haemochromatosis",
+                            "optiontext": "haemochromatosis"
+                        },
+                        {
+                            "optionval": "polycythaemia",
+                            "optiontext": "polycythaemia"
+                        },
+                        {
+                            "optionval": "Other",
+                            "optiontext": "Other"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblBloodDisorder",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "tbBloodDisorderOptionOther",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "Please specify",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "chkblBloodDisorderOptions",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Other" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblAnaemic",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you known to be anaemic?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblBloodClot",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you had a blood clot in your lung or legs?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 5,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblBloodTransfusion",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Would you accept a transfusion of blood if your surgeon thinks it would be in your best interest?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section5",
+            "title": "5. Brain, nerve, muscle and bone problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 5,
+            "sectionfields": [
+                {
+                    "field_id": "rblStroke",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you ever had a stroke or mini stroke?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblStrokeSixMonths",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Was it within the past 6 months",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblStroke",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblEpilepsy",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have epilepsy?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblFitPerMonth",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Is it difficult to control e.g. more than 1 fit per month?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblEpilepsy",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblBNM",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have any other brain/nerve/muscle disease?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 5,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "chkblBNMOptions",
+                    "fieldcontroltypename": "chkbl",
+                    "fieldlabeltext": "If Yes, please select",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "multiple sclerosis",
+                            "optiontext": "multiple sclerosis"
+                        },
+                        {
+                            "optionval": "a muscular dystrophy",
+                            "optiontext": "a muscular dystrophy"
+                        },
+                        {
+                            "optionval": "friedrich ataxia",
+                            "optiontext": "friedrich ataxia"
+                        },
+                        {
+                            "optionval": "Guillain Barre",
+                            "optiontext": "Guillain Barre"
+                        },
+                        {
+                            "optionval": "myasthenia gravis",
+                            "optiontext": "myasthenia gravis"
+                        },
+                        {
+                            "optionval": "Other",
+                            "optiontext": "Other"
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblBNM",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "tbBNMOptionOther",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "Please specify",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 7,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "chkblBNMOptions",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Other" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblDementia",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been diagnosed with dementia?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblMHC",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you currently being treated for any mental health condition?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 9,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "tbMHCSpecify",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "If yes, please specify",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 10,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblMHC",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblArthritis",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you been told you have rheumatoid arthritis (different to osteoarthritis)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 11,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblNJMovements",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have any restrictions of your neck or jaw movement?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 12,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section6",
+            "title": "6. Previous Anaesthetics Problems",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 6,
+            "sectionfields": [
+                {
+                    "field_id": "rblProbWithGenAnae",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have you or a family member had any problems with or allergic or anaphylactic reactions to general anaesthetics",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblBreathingTube",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Has an anaesthetist told you that your airway was difficult to manage or it was difficult to pass a breathing tube?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section7",
+            "title": "7. Pain Assessment",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 7,
+            "sectionfields": [
+                {
+                    "field_id": "rblChronicPainClinic",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you seen in a chronic pain clinic?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblMorphine",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you take regular morphine or oxycodone or similar?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "rblPostOperativePain",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Have had problems with pain postoperatively in the past?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "formsection_id": "section8",
+            "title": "8. Other Questions",
+            "banner": null,
+            "desciption": null,
+            "displayorder": 8,
+            "sectionfields": [
+                {
+                    "field_id": "rblOtherHosp",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you receiving treatment from another hospital or have any other significant medical conditions not already mentioned?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 1,
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ],
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ]
+                },
+                {
+                    "field_id": "tbOtherHospDetails",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "If yes, please give details",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 2,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblOtherHosp",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "field_id": "rblCongenital",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Do you have a syndromic / congenital condition (eg achondroplasia, mucopolysaccharidosis, Down’s syndrome) not already mentioned?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 3,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "tbContenitalDetails",
+                    "fieldcontroltypename": "tb",
+                    "fieldlabeltext": "If yes, please give details",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 4,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "displayrules": {
+                        "conditiongroup": [
+                            {
+                                "condition": [
+                                    {
+                                        "field_id": "rblCongenital",
+                                        "comparetype": null,
+                                        "compareoperator": "equalsto",
+                                        "comparevalue": [ "Yes" ],
+                                        "order": 1,
+                                        "logicoperator": "or"
+                                    }
+                                ],
+                                "logicoperator": "and"
+                            }
+                        ]
+                    }
+                },
+              {
+                "field_id": "chkblAnyMeds",
+                "fieldcontroltypename": "chkbl",
+                "fieldlabeltext": "Please select any of the following medications you are taking?",
+                "fieldvalue": null,
+                "defaultvalue": null,
+                "fielddisplayorder": 5,
+                "optionlisttype": "SQL",
+                "optionliststatement": "select 'Contraceptive pills'  as optionval, 'Contraceptive pills'  as optiontext union select 'Hormone Replacement Therapy (HRT)'  as optionval, 'Hormone Replacement Therapy (HRT)'  as optiontext union select 'Aspirin'  as optionval, 'Aspirin'  as optiontext union select 'Warfarin'  as optionval, 'Warfarin'  as optiontext union select 'Clopidogrel'  as optionval, 'Clopidogrel'  as optiontext union select 'Dabigitran'  as optionval, 'Dabigitran'  as optiontext union select 'Apixiban'  as optionval, 'Apixiban'  as optiontext union select 'Rivaroxiban'  as optionval, 'Rivaroxiban'  as optiontext",
+                "optionlist": []
+              },
+                {
+                    "field_id": "rblGPRecords",
+                    "fieldcontroltypename": "rbl",
+                    "fieldlabeltext": "Are you happy for us to view your GP medication records (Summary Care Record)?",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 6,
+                    "fieldvalidations": [
+                        {
+                            "validationtype": "req",
+                            "fieldvalidationpattern": null,
+                            "validationerrormsg": "Required",
+                            "compareField": null,
+                            "comparator": null,
+                            "compareValue": null,
+                            "minLength": null,
+                            "maxLength": null
+                        }
+                    ],
+                    "optionlist": [
+                        {
+                            "optionval": "Yes",
+                            "optiontext": "Yes"
+                        },
+                        {
+                            "optionval": "No",
+                            "optiontext": "No"
+                        }
+                    ]
+                },
+                {
+                    "field_id": "taOtherMeds",
+                    "fieldcontroltypename": "ta",
+                    "fieldlabeltext": "List all other medications you are taking or write \"NONE\"",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 7,
+                    "optionlist": null
+                },
+                {
+                    "field_id": "taDrugAllergies",
+                    "fieldcontroltypename": "ta",
+                    "fieldlabeltext": "List all Drug Allergies you are having or write \"NONE\"",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 8,
+                    "optionlist": null
+                },
+                {
+                    "field_id": "taOtherAllergies",
+                    "fieldcontroltypename": "ta",
+                    "fieldlabeltext": "List all other Allergies you are having or write \"NONE\"",
+                    "fieldvalue": null,
+                    "defaultvalue": null,
+                    "fielddisplayorder": 9,
+                    "optionlist": null
+                }
+            ]
+        }
+    ]
+}

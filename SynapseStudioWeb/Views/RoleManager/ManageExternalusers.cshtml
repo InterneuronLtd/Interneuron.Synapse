@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "Manage External users";
+}
+
+
+<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRole?id=" +ViewBag.roleid)>Local Logins</a>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRoleScope?id=" +ViewBag.roleid)>Scopes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>New <small>Role</small></h2>
+
+                @{
+                    var list = new SelectList(new[]
+                        {
+                 new {ID="ADFS", Name="ADFS"},
+                new {ID="AAD", Name="Azure AD"},
+                new {ID="Google", Name="Google"},
+                 new {ID="Twitter", Name="Twitter"},
+
+                },
+
+
+                    "ID", "Name", 1);
+                }
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                @using (Html.BeginForm("AddExternaluser", "RoleManager", FormMethod.Post))
+                {
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            * Please enter an External User-ID to add <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBox("ExternalUser", null, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Select an Identity Provider <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.DropDownList("provider", list, new { @class = "form-control" })
+                        </div>
+                        @Html.Hidden("roleid", (object)ViewBag.roleid)
+
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+
+                            <button type="submit" class="btn btn-sm btn-success">Add To Role</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <br />
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h2> External Users in Role( @ViewBag.ExpernalUsers.Rows.Count)</h2>
+                        <div class="card-body p-2">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>API Scope</th>
+                                        <th>Description</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.ExpernalUsers.Rows)
+                                    {
+                                        <tr>
+                                            <td>@item["ExternalSubjectId"]</td>
+                                            <td>@item["Idp"]</td>
+                                            <td>
+                                                <a href=@("RemoveExternaluser?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

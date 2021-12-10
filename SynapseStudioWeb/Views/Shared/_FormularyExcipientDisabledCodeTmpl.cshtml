@@ -1,0 +1,31 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("excipientDisabledTmpl")"  style="display:none;">
+    <!--Add Excipient Controls -->
+    <div class="excipient">
+        <div class="form-group row">
+            <div class="card col-sm-9 ml-2 mb-2 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="Ingredient" class="col-sm-3 col-form-label">Ingredient</label>
+                        <div class="col-sm-8">
+                            <input type="text" name="Ingredient" class="form-control studio-autocomplete" data-singleselect="true" id="@DeriveId("Excipient_Ingredient-{0}")" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Strength" class="col-sm-3 col-form-label">Strength</label>
+                        <div class="col-sm-4">
+                            <input type="text" name="Strength" class="form-control" id="@DeriveId("Excipient_Strength-{0}")" readonly>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="text" name="StrengthUnit" class="form-control studio-autocomplete" id="@DeriveId("Excipient_StrengthUnit-{0}")" data-singleselect="true" data-isdisabled="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

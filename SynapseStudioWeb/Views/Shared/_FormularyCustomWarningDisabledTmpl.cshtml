@@ -1,0 +1,23 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("customWarningDisabledTmpl")" disabled style="display:none;">
+    <!--Add Custom Warning Controls -->
+    <div class="custom-warning">
+        <div class="form-group row">
+            <div class="card col-sm-9 ml-2 mb-2 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-body">
+                    <div class="col-sm-8">
+                        <textarea name="Warning" class="form-control" id="@DeriveId("txtCustomWarning-{0}")" maxlength="255" readonly></textarea>
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="NeedResponse" class="col-sm-8 col-form-label text-right">Need Response</label>
+                        <input type="checkbox" name="NeedResponse" class="col-sm-2 form-control" id="@DeriveId("chkNeedResponse-{0}")" disabled>
+                        <input type="hidden" name="NeedResponse" class="col-sm-2 form-control" id="@DeriveId("hdnNeedResponse-{0}")">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

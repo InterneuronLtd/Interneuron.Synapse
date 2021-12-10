@@ -1,0 +1,262 @@
+﻿@{
+    ViewData["Title"] = "Mapping";
+
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1>
+            <label class="Rolenameclass">
+                @ViewBag.Rolename
+            </label> <small> Rights</small>
+        </h1>
+    </div>
+</div>
+<div class="well" style="margin-top: 15px;min-height: 934px;">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Add Rights</h5>
+            </div>
+            @{
+                var list = new SelectList(new[]
+                    {
+                new {ID="1", Name="Read"},
+                        new {ID="2", Name="ReadWrite"},
+                        new {ID="3", Name="Delete"},
+
+                },
+
+
+                "ID", "Name", 1);
+            }
+            <br />
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 ">
+                    <label>
+                        Select Role
+                    </label>
+                    @Html.DropDownList("ObjList", (IEnumerable<SelectListItem>)ViewBag.Rolelist, new { id = "ddlrolelist", @class = "form-control", onchange = "rolechange()" })
+                </div>
+                <div class="col-md-6 col-sm-6 ">
+                    <label>
+                        Select Object Type
+                    </label>
+                    @Html.DropDownList("ObjList", (IEnumerable<SelectListItem>)ViewBag.objecttypes, new { id = "ddloblecttype", @class = "form-control", onchange = "oblecttypechange()" })
+                </div>
+            </div>
+            <br />
+            <div class="item form-group">
+                <div class="col-md-12 col-sm-12 ">
+                    Select
+                    <label id="lbltreeview">
+
+                    </label> to add to this role
+                    <div id="jstree" class="treeview w-20 border">
+                    </div>
+                </div>
+            </div>
+            <div class="item form-group">
+                <div class="col-md-6 col-sm-6 ">
+                    <label>
+                        Select Permission Level
+                    </label>
+
+                    @Html.DropDownList("list", list, new { @class = "form-control" })
+                </div>
+            </div>
+            <input type="hidden" name="selectedItems" id="selectedItems" />
+            @Html.Hidden("rolename", (object)ViewBag.Rolename)
+            @Html.Hidden("Roleid", (object)ViewBag.Roleid)
+            <br />
+            <input type="submit" onclick="SavePermition()" class="btn btn-sm btn-success" value="Add" />
+        </div>
+        <d iv class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5>
+                        <i class="fa fa-list"></i>  <label id="lblselectobjtype">
+
+                        </label>
+                        <label class="Rolenameclass">
+                            @ViewBag.Rolename
+                        </label>
+
+                    </h5>
+                </div>
+                <table id="gridTbl" class="table table-hover">
+
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Permition
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="contacts"></tbody>
+                </table>
+            </div>
+    </div>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script type="text/javascript">
+                    oblecttypechange();
+
+
+                    function rolechange() {
+                        var roleid = $("#ddlrolelist").val();
+                        var rolename = $("#ddlrolelist option:selected").text();
+                        $(".Rolenameclass").val($("#ddlrolelist").val());
+                        $(".Rolenameclass").text($("#ddlrolelist option:selected").text());
+                        $("#Roleid").val($("#ddlrolelist").val());
+                        $("#rolename").val($("#ddlrolelist option:selected").text());
+                          oblecttypechange();
+                    }
+       function oblecttypechange() {
+
+        var ddloblecttype = $("#ddloblecttype").val();
+
+        $("#lblselectobjtype").text($("#ddloblecttype option:selected").text() + " in ");
+         $("#lbltreeview").text( $("#ddloblecttype option:selected").text());
+
+           if (ddloblecttype=="4") {
+              $("#list").prop("disabled", false);
+           } else {
+              $("#list").prop("disabled", true);
+           }
+                  $.ajax({
+
+                        url: '@Url.Action("objectypechange", "RoleMapping")',
+                        type: "Get",
+                        data: { objecttypeid: ddloblecttype },
+                      success: function (result) {
+
+                           $('#jstree').jstree({
+                                "core": {
+                                    "themes": {
+                                        "variant": "large"
+                                   },
+                                   "data": JSON.parse(result)
+                                    },
+                                "checkbox": {
+                                    "keep_selected_style": false
+                                },
+                                "plugins": ["wholerow", "checkbox"],
+                           });
+                          $('#jstree').jstree(true).settings.core.data = JSON.parse(result)
+                          $('#jstree').jstree(true).refresh();
+                          LoadGrid();
+                        },
+                        error:function()
+                        {
+                            alert("No Records Found");
+                        }
+                    });
+
+    }
+
+    function SavePermition() {
+        //degugger:
+        var roleid = $("#Roleid").val();
+        var rolename = $("#rolename").val();
+        var ddloblecttype = $("#ddloblecttype").val();
+        var permitionid = $("#list").val();
+        var selectedids = $("#selectedItems").val();
+
+        if (ddloblecttype != "4") {
+            permitionid = "1";
+        }
+
+        $.ajax({
+            url: '@Url.Action("savePermition", "RoleMapping")',
+            type: "POST",
+            data: {
+                savepermissiondata: { objecttypeid: ddloblecttype, permitions: permitionid, stringselected: selectedids, roleid: roleid, rolename: rolename }},
+            success: function (result) {
+                LoadGrid();
+            },
+            error: function (jqXHR) {
+                console.log(jqXHR);
+                alert("No Records Found");
+            }
+        });
+    }
+
+    function LoadGrid() {
+         var roleid= $("#Roleid").val();
+         var ddloblecttype = $("#ddloblecttype").val();
+    $.ajax({
+          url: '@Url.Action("LoadObjectGrid", "RoleMapping")',
+        type: "GET",
+
+        data: { objecttypeid: ddloblecttype,roleid:roleid },
+        dataType: "json",
+        success: function (data) {
+
+            var row = "";
+
+            var obj = jQuery.parseJSON(data);
+            $.each(obj, function (key, item) {
+
+                 row+="<tr><td>"+item.objectname+"</td><td>"+item.permission_type+"</td><td>  <input type='button' id='"+item.roleprevilage_id+"' onclick=\"Deleteobject('"+item.roleprevilage_id+"')\" class='btn btn-sm btn-danger' value='Delete' /></td></tr>";
+
+                });
+
+            $("#contacts").html(row);
+        },
+        error: function (result) {
+            alert("Error");
+        }
+    });
+}
+
+    function Deleteobject(roleprevilage_id) {
+
+    $.ajax({
+          url: '@Url.Action("DeleteRolePrevilage", "RoleMapping")',
+        type: "GET",
+
+        data: { roleprevilage_id: roleprevilage_id },
+        dataType: "json",
+        success: function (data) {
+               LoadGrid();
+        },
+        error: function (result) {
+            alert("Error");
+        }
+    });
+}
+
+    $('#jstree').on('changed.jstree', function (e, data) {
+        var i, j;
+        var selectedItems = [];
+        for (i = 0, j = data.selected.length; i < j; i++) {
+
+            //Fetch the Id.
+            var id = data.selected[i];
+
+            //Remove the ParentId.
+            if (id.indexOf('&') != -1) {
+                id = id.split("&")[1];
+            }
+
+            //Add the Node to the JSON Array.
+            selectedItems.push({
+                text: data.instance.get_node(data.selected[i]).text,
+                id: id,
+                parent: data.node.parents[0]
+            });
+        }
+
+        //Serialize the JSON Array and save in HiddenField.
+        $('#selectedItems').val(JSON.stringify(selectedItems));
+    });
+
+</script>
+

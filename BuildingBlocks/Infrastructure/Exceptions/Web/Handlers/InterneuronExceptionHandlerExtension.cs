@@ -1,4 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿//Interneuron Synapse
+
+//Copyright(C) 2021  Interneuron CIC
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+//See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using System;
@@ -9,15 +29,15 @@ namespace Interneuron.Infrastructure.Web.Exceptions.Handlers
 
     public static class InterneuronExceptionHandlerExtension
     {
-        public static IApplicationBuilder UseInterneuronExceptionHandler(this IApplicationBuilder app, IHostingEnvironment env)
+        public static IApplicationBuilder UseInterneuronExceptionHandler(this IApplicationBuilder app)
         {
             var options = new IntrneuronExceptionHandlerOptions();
             return app.UseExceptionHandler((excpnOptions) => HandleException(app, options));
         }
-        public static IApplicationBuilder UseInterneuronExceptionHandler(this IApplicationBuilder app, IHostingEnvironment env, Action<IntrneuronExceptionHandlerOptions> configureOptions)
+        public static IApplicationBuilder UseInterneuronExceptionHandler(this IApplicationBuilder app, Action<IntrneuronExceptionHandlerOptions> configureOptions = null)
         {
             var options = new IntrneuronExceptionHandlerOptions();
-            configureOptions(options);// it is set now
+            configureOptions?.Invoke(options);// it is set now
             return app.UseExceptionHandler((appbuilder) =>
             {
                 HandleException(appbuilder, options);

@@ -1,5 +1,6 @@
 ﻿//Interneuron Synapse
-//Copyright(C) 2019  Interneuron CIC
+
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -15,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +46,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Globalization;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using System.Security.Cryptography.X509Certificates;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Synapse.STS
 {
@@ -68,25 +73,25 @@ namespace Synapse.STS
             string connectionString = _configuration["Settings:ConnectionString"];//Configuration.GetConnectionString("DefaultConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            X509Store store = new X509Store(StoreLocation.LocalMachine);
-            X509Certificate2 cer = new X509Certificate2();
-            try
-            {
-                string tb = _configuration["Settings:SigningCredentialsTP"];
-                store.Open(OpenFlags.ReadOnly);
-                X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindByThumbprint,
-                  tb, false);
-                if (col == null || col.Count == 0)
-                {
+     //       X509Store store = new X509Store(StoreLocation.CurrentUser);
+              X509Certificate2 cer = new X509Certificate2();
+     //       try
+     //       {
+     //           string tb = _configuration["Settings:SigningCredentialsTP"];
+         //       store.Open(OpenFlags.ReadOnly);
+         //       X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindByThumbprint,
+         //         tb, false);
+         //       if (col == null || col.Count == 0)
+     //           {
 
-                }
-                else { cer = col[0]; }
+     //           }
+         //       else { cer = col[0]; }
 
-            }
-            finally
-            {
-                store = null;
-            }
+            //}
+            //finally
+            //{
+         //       store = null;
+     //       }
 
 
             services.AddDbContext<SynapseDbContext>(options =>
@@ -154,47 +159,47 @@ namespace Synapse.STS
 
 
             services.AddAuthentication().AddWsFederation(_configuration["Settings:ADFSSchemeName"], _configuration["Settings:ADFSDisplayName"], options =>
-                 {
-                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                     //options.SignOutScheme = IdentityServerConstants.SignoutScheme;
-                     // MetadataAddress represents the Active Directory instance used to authenticate users.
-                     options.MetadataAddress = _configuration["Settings:ADFSMetaAddress"];
+            {
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                //options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+                // MetadataAddress represents the Active Directory instance used to authenticate users.
+                options.MetadataAddress = _configuration["Settings:ADFSMetaAddress"];
 
-                     // Wtrealm is the app's identifier in the Active Directory instance.
-                     // For ADFS, use the relying party's identifier, its WS-Federation Passive protocol URL:
-                     // For AAD, use the App ID URI from the app registration's Properties blade:
+                // Wtrealm is the app's identifier in the Active Directory instance.
+                // For ADFS, use the relying party's identifier, its WS-Federation Passive protocol URL:
+                // For AAD, use the App ID URI from the app registration's Properties blade:
 
-                     options.Events.OnRemoteFailure = context => HandleRemoteFailure(context);
-                     options.Wtrealm = _configuration["Settings:ADFSWtrealm"];
-                     options.Events.OnTicketReceived += OnTicketReceived;
-                     options.RequireHttpsMetadata = false;
-                     options.SaveTokens = false;
-                     options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
+                options.Events.OnRemoteFailure = context => HandleRemoteFailure(context);
+                options.Wtrealm = _configuration["Settings:ADFSWtrealm"];
+                options.Events.OnTicketReceived += OnTicketReceived;
+                options.RequireHttpsMetadata = false;
+                options.SaveTokens = false;
+                options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
 
 
-                 }).AddOpenIdConnect(_configuration["Settings:AADSchemeName"], _configuration["Settings:AADDisplayName"], options =>
+            }).AddOpenIdConnect(_configuration["Settings:AADSchemeName"], _configuration["Settings:AADDisplayName"], options =>
+            {
+
+                options.ClientId = _configuration["Settings:AzureClientId"];
+                options.Authority = string.Format(CultureInfo.InvariantCulture, "https://login.microsoft.com/{0}", _configuration["Settings:AzureTenantId"]);
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
+                    ValidateIssuer = false
+                };
 
-                    options.ClientId = _configuration["Settings:AzureClientId"];
-                    options.Authority = string.Format(CultureInfo.InvariantCulture, "https://login.microsoft.com/{0}", _configuration["Settings:AzureTenantId"]);
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = false
-                    };
+                options.Scope.Add("openid");
+                options.Scope.Add("profile");
+                options.Events = new OpenIdConnectEvents
+                {
+                    OnRemoteFailure = context => HandleRemoteFailure(context)
+                };
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.CallbackPath = "/signin-oidc";
+                options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
+                //options.NonceCookie.Expiration = new TimeSpan(2, 0, 0, 0); 
+                options.ProtocolValidator.NonceLifetime = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
 
-                    options.Scope.Add("openid");
-                    options.Scope.Add("profile");
-                    options.Events = new OpenIdConnectEvents
-                    {
-                        OnRemoteFailure = context => HandleRemoteFailure(context)
-                    };
-                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.CallbackPath = "/signin-oidc";
-                    options.RemoteAuthenticationTimeout = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
-                    //options.NonceCookie.Expiration = new TimeSpan(2, 0, 0, 0); 
-                    options.ProtocolValidator.NonceLifetime = TimeSpan.FromSeconds(double.Parse(_configuration["Settings:RemoteAuthTimeoutSecs"]));
-
-                });
+            });
 
             builder.Services.AddTransient<IProfileService, CustomClaims>();
 
@@ -249,6 +254,17 @@ namespace Synapse.STS
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            var forwardOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+                RequireHeaderSymmetry = false
+            };
+
+            forwardOptions.KnownNetworks.Clear();
+            forwardOptions.KnownProxies.Clear();
+
+            // ref: https://github.com/aspnet/Docs/issues/2384
+            app.UseForwardedHeaders(forwardOptions);
 
             app.UseStaticFiles();
             app.UseIdentityServer();

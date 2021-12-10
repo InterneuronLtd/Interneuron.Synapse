@@ -1,0 +1,87 @@
+﻿@{
+    ViewData["Title"] = "Application List Mapping";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Application List</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-laptop"></i>&nbsp;Applications</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-sm btn-primary" href="~/ApplicationManager/AddNewApplication" role="button">New Application</a>
+                    </div>
+                </div>
+                <h3>Applications (@ViewBag.applicationcount)</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Application</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.Applicationlist)
+                                {
+                                    <tr>
+                                        <td> @item.applicationname</td>
+                                        <td>@Html.ActionLink("View", "ApplicationListMapping", new { id = item.application_id, name = item.applicationname })</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-briefcase"></i>&nbsp;List</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <br /><br />
+                </div>
+                <h3>Lists (@ViewBag.listcount)</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Lists</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.list)
+                                {
+                                    <tr>
+                                        <td> @item.listname</td>
+                                        <td> @item.listdescription</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

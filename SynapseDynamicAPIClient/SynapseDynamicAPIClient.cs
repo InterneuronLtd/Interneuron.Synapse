@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 
 using Interneuron.SynapseDynamicAPIClient.Models;
 using System;
@@ -70,7 +73,7 @@ namespace Interneuron.Synapse
                             (string.IsNullOrWhiteSpace(offset) ? "" : "/" + offset) +
                             (string.IsNullOrWhiteSpace(filter) ? "" : "/" + filter);
 
-            return GetData(endpoint);
+            return PostData(endpoint, postData);
         }
 
         public string GetObject(string synapseNamespace, string synapseEntityName, string id, bool? returnSystemAttributes = null)
@@ -115,6 +118,12 @@ namespace Interneuron.Synapse
             return PostData(endpoint, postData);
         }
 
+        public string PostObjectsInTransaction(object postData) {
+            string endpoint = "PostObjectsInTransaction";
+
+            return PostData(endpoint, postData);
+        }
+
         public string DeleteObjectByAttribute(string synapseNamespace, string synapseEntityName, string synapseAttributeName, string attributeValue)
         {
             string endpoint = string.Format("DeleteObjectByAttribute/{0}/{1}/{2}/{3}", synapseNamespace, synapseEntityName, synapseAttributeName, attributeValue);
@@ -142,7 +151,7 @@ namespace Interneuron.Synapse
         /* Baseview Controller */
         public string GetBaseViewList(string baseviewName, string orderBy = null, string limit = null, string offset = null, string filter = null)
         {
-            string endpoint = "GetBaseViewList/" + baseviewName + 
+            string endpoint = "GetBaseViewList/" + baseviewName +
                 (string.IsNullOrWhiteSpace(orderBy) ? "" : "/" + orderBy) +
                 (string.IsNullOrWhiteSpace(limit) ? "" : "/" + limit) +
                 (string.IsNullOrWhiteSpace(offset) ? "" : "/" + offset) +
@@ -228,6 +237,11 @@ namespace Interneuron.Synapse
         public string GetListSnapshot(string listId)
         {
             return GetData("list/GetListSnapshot/" + listId);
+        }
+
+        public string GetContext(string defaultcontext, string defaultcontextfield, string value)
+        {
+            return GetData("list/GetContext/" + defaultcontext + "/" + defaultcontextfield + "/" + value);
         }
 
         /* ListController Controller ends */

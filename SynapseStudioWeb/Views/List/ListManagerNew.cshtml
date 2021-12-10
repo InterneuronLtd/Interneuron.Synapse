@@ -1,0 +1,161 @@
+﻿@model SynapseStudioWeb.Models.ListManagerNewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>List Manager</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;New List</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="List" asp-action="ListManagerNewsave"
+                              data-ajax-failure="onListManagerFailed" data-ajax-success="onListManagerSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            @Html.HiddenFor(m => m.NamespaceId)
+                            <span class="section">New @ViewBag.Summary List</span>
+                            <label for="ListName">Please enter a name for the new List</label>
+                            @Html.TextBoxFor(m => m.ListName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ListName)
+                            <br />
+                            <label for="ListComments">Enter a description for the List</label>
+                            @Html.TextAreaFor(m => m.ListComments, new { @class = "form-control" })
+                            <br />
+                            <h4>Baseview for List</h4>
+                            <label for="BaseViewNamespaceId">* Select a baseview namespace from the list below</label>
+                            @Html.DropDownListFor(model => model.BaseViewNamespaceId, ViewBag.BaseviewNamespace as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewNamespaceId)
+                            <br />
+                            <label for="BaseViewId">Select a baseview from the list below</label>
+                            @Html.DropDownListFor(model => model.BaseViewId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewId)
+                            <br />
+                            <label for="DefaultContextId">Select the entity that defines the default context for this list</label>
+                            @Html.DropDownListFor(model => model.DefaultContextId, ViewBag.DefaultContext as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DefaultContextId)
+
+                            <br />
+                            <label for="MatchContextFieldId">Select the field from the baseview that defines the key for the default context</label>
+                            @Html.DropDownListFor(model => model.MatchContextFieldId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.MatchContextFieldId)
+
+                            <br />
+                            <label for="DateContextField">Select the field from the baseview that defines the key for the date context</label>
+                            @Html.DropDownListFor(model => model.DateContextField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DateContextField)
+
+                            <br />
+                            <label for="DefaultSortColumnId">Select the field from the baseview that defines the default sort column</label>
+                            @Html.DropDownListFor(model => model.DefaultSortColumnId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DefaultSortColumnId)
+
+                            <br />
+                            <label for="DefaultSortOrderId">Select the default sort order</label>
+                            @Html.DropDownListFor(model => model.DefaultSortOrderId, ViewBag.SortOrderList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DefaultSortOrderId)
+
+                            <br />
+                            <label for="PatientBannerFieldId">Select Patient Banner Field</label>
+                            @Html.DropDownListFor(model => model.PatientBannerFieldId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PatientBannerFieldId)
+
+                            <br />
+                            <label for="RowCSSFieldId">Select Dynamic Row CSS Field</label>
+                            @Html.DropDownListFor(model => model.RowCSSFieldId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RowCSSFieldId)
+
+                            <br />
+                            <label for="TableClass">Please enter css class for the table</label>
+                            @Html.TextBoxFor(m => m.TableClass, new { @class = "form-control" })
+                            <br />
+                            <label for="TableHeaderClass">Please enter css class for the table header</label>
+                            @Html.TextBoxFor(m => m.TableHeaderClass, new { @class = "form-control" })
+
+                            <br />
+                            <label for="DefaultTableRowCSS">Please enter the default css class for the table rows</label>
+                            @Html.TextBoxFor(m => m.DefaultTableRowCSS, new { @class = "form-control" })
+                            <br />
+                            <h4>Terminus Settings</h4>
+                            <h2>Persona Settings</h2>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="PersonaContextFieldId">Select Persona Context Field</label>
+                                    @Html.DropDownListFor(model => model.PersonaContextFieldId, ViewBag.Persona as SelectList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.PersonaContextFieldId)
+                                </div>
+                                <div class="col-4">
+                                    <label for="BaseviewFieldId">Select Base view Field Field</label>
+                                    @Html.DropDownListFor(model => model.BaseviewFieldId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.BaseviewFieldId)
+                                </div>
+                                <div class="col-4" style="margin-top:25px">
+                                    <input type="button" class="btn btn-sm btn-primary" value="Add" id="btn-AddPersona" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5><i class="fa fa-filter"></i>&nbsp;List Filter</h5>
+                                        </div>
+                                        <div class="card-body p-2">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Persona</th>
+                                                        <th>Base View field</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="list_persona">
+                                                    @foreach (var m in Model.PersonaListFilters)
+                                                    {
+                                                        <tr>
+                                                            <td>@m.displayname</td>
+                                                            <td>@m.field</td>
+                                                            <td><a href="javascript:void(0)" data-id="@m.persona_id" onclick="removePersona(@m.persona_id)" class="remove-persona"><i class="fa fa-remove"></i></a></td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2>Snapshot View Settings</h2>
+                            <br />
+                            <label for="SnapshotLine1Id">Select Snapshot Line 1 Field</label>
+                            @Html.DropDownListFor(model => model.SnapshotLine1Id, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SnapshotLine1Id)
+
+                            <br />
+                            <label for="SnapshotLine2Id">Select Snapshot Line 2 Field</label>
+                            @Html.DropDownListFor(model => model.SnapshotLine2Id, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SnapshotLine2Id)
+
+                            <br />
+                            <label for="SnapshotBadgeId">Select Snapshot Badge Field</label>
+                            @Html.DropDownListFor(model => model.SnapshotBadgeId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SnapshotBadgeId)
+                            <br />
+                            <a href="../List/ListManagerList" class="btn btn-sm btn-primary pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/listmanager.js"></script>
+

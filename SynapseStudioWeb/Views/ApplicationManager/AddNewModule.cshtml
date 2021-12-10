@@ -1,0 +1,85 @@
+﻿@model SynapseStudioWeb.Models.ModulesModel
+@{
+    ViewData["Title"] = "AddNewModule";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1> <small> Modules</small></h1>
+
+    </div>
+</div>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Add New Module</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                <form asp-action="saveNewModule" class="form-horizontal form-label-left" method="post" novalidate="">
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Module  Name<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBoxFor(m => m.modulename, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.modulename)
+                            <span class="text-danger">@ViewBag.errormessage</span>
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Description
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBoxFor(m => m.moduledescription, new { @class = "form-control" })
+                         
+                          
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                          URL
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBoxFor(m => m.jsurl, new { @class = "form-control" })
+                          
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            DOM selector
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBoxFor(m => m.domselector, new { @class = "form-control" })
+                           
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+                            <a class="btn btn-sm btn-info" href="~/ApplicationManager/ApplicationManager">Back</a>
+
+                            <button type="submit" class="btn btn-sm btn-success">Add new Module</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

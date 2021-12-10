@@ -1,0 +1,86 @@
+﻿@model SynapseStudioWeb.Models.ListOptionCollectionNewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Question Option Collections</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;New List Option Collection</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="List" asp-action="ListOptionCollectionViewSave"
+                              data-ajax-failure="onListQuestionFailed" data-ajax-success="onListQuestionSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            @Html.HiddenFor(m => m.OptionCollectionID)
+
+                            <label for="CollectionName">Please enter a name for the option collection</label>
+                            @Html.TextBoxFor(m => m.CollectionName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CollectionName)
+
+                            <br />
+                            <label for="CollectionDescription">Enter a description</label>
+                            @Html.TextAreaFor(m => m.CollectionDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.CollectionDescription)
+                            <br />
+                            <a href="../List/ListManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="col-6"><h3>Options (@Model.ListOptionDto.Count)</h3></div>
+                    <div class="col-6"><a href=@("ListOptionNew?id=" + Model.OptionCollectionID) class="btn btn-sm btn-success float-right">New Option</a></div>
+                    <div class="col-12">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Display</th>
+                                    <th>Value</th>
+                                    <th>Flag</th>
+                                    <th></th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var m in Model.ListOptionDto)
+                                {
+                                    <tr>
+                                        <td>@m.OptionDisplayText</td>
+                                        <td>@m.OptionDisplayText</td>
+                                        <td>@Html.Raw(m.OptionFlag)</td>
+                                        <td><a href=@("ListOptionView?id=" + m.QuestionOption_Id)>View</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    
+                    
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/listmanager.js"></script>

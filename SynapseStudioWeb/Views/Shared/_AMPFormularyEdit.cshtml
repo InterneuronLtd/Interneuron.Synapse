@@ -1,0 +1,1559 @@
+﻿@model SynapseStudioWeb.Models.MedicationMgmt.FormularyEditModel;
+
+<style type="text/css">
+    div.token-input-dropdown-facebook {
+        /*z-index: 1051 !important;*/
+        height: 200px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+    }
+
+    .accordion-menu > button {
+        display: block;
+        position: relative;
+    }
+
+        .accordion-menu > button:after {
+            content: "\f078"; /* fa-chevron-down */
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 12px;
+        }
+
+        .accordion-menu > button[aria-expanded="true"]:after {
+            content: "\f077"; /* fa-chevron-up */
+        }
+
+    .validation-summary-valid .header-msg {
+        display: none;
+    }
+</style>
+<link href="~/lib/token-input-1.6.0/styles/token-input-facebook.css" rel="stylesheet" type="text/css" />
+<div asp-validation-summary="All" class="text-danger" id="pnlMedicationValidationSmry">
+    <div class="header-msg m-1 p-1">Please correct the following errors</div>
+</div>
+<script type="text/javascript">
+    var rootCustomMedicationId = "@Model.ControlIdentifier";
+    var rootCustomMedicationIdSelector = "#@Model.ControlIdentifier";
+</script>
+@{
+    var DeriveId = new Func<string, string>((id) => $"{Model.ControlIdentifier}_{id}");
+
+    var baseURLPath = string.IsNullOrEmpty(Context.Request.PathBase) ? $"{ Context.Request.Scheme }://{Context.Request.Host}" : $"{ Context.Request.Scheme }://{Context.Request.Host}{Context.Request.PathBase}";
+
+    var DeriveAbsUrl = new Func<string, string>((actionPath) => string.IsNullOrEmpty(actionPath) ? "" : $"{ baseURLPath}/{actionPath.TrimStart('/')}");
+}
+<div class="vtm-edit-medication root-vtm-edit-medication" id="@Model.ControlIdentifier">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #productDetails" aria-expanded="true" aria-controls="productDetails">
+                        <i class="fas fa-tablets"></i> Product Details
+                    </button>
+                </h5>
+            </div>
+
+            <div id="productDetails" class="collapse show" aria-labelledby="headingOne" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-5 col-form-label">Name</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", data_isreadonly = "true" })
+                            @Html.ValidationMessageFor(m => m.Name)
+                            @Html.HiddenFor(m => m.IsBulkEdit)
+                            @Html.HiddenFor(m => m.IsImported)
+                            @Html.HiddenFor(m => m.RecSource)
+                            @Html.HiddenFor(m => m.ControlIdentifier)
+                            @Html.HiddenFor(m => m.IsDuplicate)
+                            @Html.HiddenFor(m => m.DuplicateOfFormularyId)
+                            @Html.HiddenFor(m => m.ParentCode)
+                            @Html.HiddenFor(m => m.ParentName)
+                            @Html.HiddenFor(m => m.ParentProductType)
+                            @*@Html.HiddenFor(m => m.ControlledDrugCategorySource)*@
+                            @Html.HiddenFor(m => m.HighAlertMedicationSource)
+                            @Html.HiddenFor(m => m.BlackTriangleSource)
+                            @Html.HiddenFor(m => m.PrescribableSource)
+                            @Html.HiddenFor(m => m.OriginalPrescribable)
+
+                            @for (var fvidIndex = 0; fvidIndex < Model.FormularyVersionIds.Count; fvidIndex++)
+                            {
+                            @Html.HiddenFor(m => m.FormularyVersionIds[fvidIndex])
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="producttype" class="col-sm-5 col-form-label">Product Type</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.ProductType, ViewBag.ProductTypes as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.ProductType, new { @id = DeriveId("hdnProductType") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="code" class="col-sm-5 col-form-label">Primary Code</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control", data_isreadonly = "true" })
+                            @Html.ValidationMessageFor(m => m.Code)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="codesystem" class="col-sm-5 col-form-label">Primary Code System</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.CodeSystem, new { @id = "hdnCodeSystem" })
+                            @Html.TextBoxFor(m => m.CodeSystem, new { @class = "form-control", data_isreadonly = "true", @id = "txtCodeSystem" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="formularystatus" class="col-sm-4 col-form-label">Formulary Status</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Formulary_Status_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Formulary_Status_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Formulary_Status_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Formulary_Status_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.RnohFormularyStatuscd, ViewBag.FormularyStatuses as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RnohFormularyStatuscd)
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Other Identification Codes
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-identification-code" id="@DeriveId("btnAddIdentificationCode")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="IdentificationCodeContainer" data-existingidentificationcode="@SynapseStudioWeb.Helpers.Extensions.SerializeAdditionalCodeToJsonArray(Model.FormularyIdentificationCodes)" data-isreadonly="false">
+                                <!--Add Identification Code Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Classification Codes
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-classification-code" id="@DeriveId("btnAddClassificationCode")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="AdditionalCodeContainer" data-existingadditionalcode="@SynapseStudioWeb.Helpers.Extensions.SerializeAdditionalCodeToJsonArray(Model.FormularyClassificationCodes)" data-isreadonly="false">
+                                <!--Add Classification Code Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="basisofpreferredname" class="col-sm-5 col-form-label">Basis of Preferred Name</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.BasisOfPreferredNameCd)
+                            @Html.DropDownListFor(m => m.BasisOfPreferredNameCd, ViewBag.BasisOfPreferredNameList as SelectList, new { @class = "form-control", @disabled = "disabled", @id = DeriveId("ddlBasisOfPreferredName") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="localLicensedUse" class="col-sm-4 col-form-label">Local Licensed Indications</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                <p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="localUnlicensedUse" class="col-sm-4 col-form-label">Local Unlicensed Indications</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p>
+                         </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="licenseduse" class="col-sm-4 col-form-label">Licensed Indications</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicenseduse" class="col-sm-4 col-form-label">Unlicensed Indications</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="currentlicensingauthority" class="col-sm-5 col-form-label">Current licensing authority</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.CurrentLicensingAuthorityCd)
+                            @Html.DropDownListFor(m => m.CurrentLicensingAuthorityCd, ViewBag.LicensingAuthorities as SelectList, new { @class = "form-control", @disabled = "disabled", @id = DeriveId("ddlCurrentLicensingAuthority") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Supplier" class="col-sm-5 col-form-label">Supplier</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Supplier, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Supplier")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.Supplier), data_singleselect = "true", data_isdisabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tradefamily" class="col-sm-5 col-form-label">Trade Family</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control form-control-sm studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.TradeFamily)" data-isdisabled="true" data-singleselect="true" name="tradefamily" id="@DeriveId("tradefamily")">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="virtualtherapeuticmoiety" class="col-sm-5 col-form-label">Virtual Therapeutic Moiety</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.VirtualTherapeuticMoiety, new { @class = "form-control", data_isreadonly = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="virtualMedicinalProduct" class="col-sm-5 col-form-label">Virtual Medicinal Product</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.VirtualMedicinalProduct, new { @class = "form-control", data_isreadonly = "true" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #posology" aria-expanded="false" aria-controls="posology">
+                        <i class="fas fa-flask"></i> Posology
+                    </button>
+                </h5>
+            </div>
+
+            <div id="posology" class="collapse" aria-labelledby="headingTwo" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="doseform" class="col-sm-4 col-form-label">Dose Form</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.DoseFormCd, ViewBag.DoseForms as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.DoseFormCd, new { @id = DeriveId("hdnDoseForm") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="roundingfactor" class="col-sm-4 col-form-label">Rounding Factor</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.RoundingFactorCd, ViewBag.RoundingFactors as SelectList, new { @id = DeriveId("txtRoundingFactor"), @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Route" class="col-sm-4 col-form-label">Local Licensed Route</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.LocalLicensedRoute, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("localLicensedRoute")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedRoute), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchRoutes") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicensedroute" class="col-sm-4 col-form-label">Local Unlicensed Route</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchRoutes") data-isdisabled="false" id="@DeriveId("localUnlicensedRoute")" type="text" name="LocalUnlicensedRoute" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Route" class="col-sm-4 col-form-label">Licensed Route</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Route, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Route")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Route), data_singleselect = "false", data_isdisabled = "true", data_query_url = DeriveAbsUrl("/Formulary/SearchRoutes") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicensedroute" class="col-sm-4 col-form-label">Unlicensed Route</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchRoutes") data-isdisabled="true" id="@DeriveId("unlicensedRoute")" name="unlicensedRoute" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="FormCd" class="col-sm-4 col-form-label">Formulation</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FormCd, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("FormCd")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.FormCd), data_singleselect = "true", data_isdisabled = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unitdoseformsize" class="col-sm-4 col-form-label">Unit dose form size</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.UnitDoseFormSize, new { @id = DeriveId("hdnUnitDoseFormSize") })
+                            @Html.TextBoxFor(m => m.UnitDoseFormSize, new { @id = DeriveId("txtUnitDoseFormSize"), @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unitdoseformunits" class="col-sm-4 col-form-label">Unit dose form units</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseFormUnits)" data-isdisabled="true" data-singleselect="true" id="@DeriveId("unitDoseFormUnits")" name="unitDoseFormUnits" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UnitDoseUnitOfMeasure" class="col-sm-4 col-form-label">Unit dose unit of measure</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.UnitDoseUnitOfMeasure, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("UnitDoseUnitOfMeasure")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseUnitOfMeasure), data_singleselect = "true", data_isdisabled = "true" })
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Ingredients
+                                <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="IngredientContainer" data-existingingredient="@SynapseStudioWeb.Helpers.Extensions.SerializeIngredientsToJsonArray(Model.Ingredients)" data-isreadonly="true">
+                                <!--Add Ingredient Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Excipients
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="ExcipientContainer" data-existingexcipient="@SynapseStudioWeb.Helpers.Extensions.SerializeExcipientsToJsonArray(Model.Excipients)" data-isreadonly="true">
+                                <!--Add Excipient Controls -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #guidance" aria-expanded="false" aria-controls="guidance">
+                        <i class="fas fa-book-reader"></i> Guidance
+                    </button>
+                </h5>
+            </div>
+
+            <div id="guidance" class="collapse" aria-labelledby="headingThree" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="contraindications" class="col-sm-4 col-form-label">Contraindications</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.ContraIndications)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("contraindications")" name="contraindications" type="text" />
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Custom Warnings
+                                <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Custom_Warning_Agg"), "all", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Custom_Warning_Agg"), "any", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Custom_Warning_Agg"), "all", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Custom_Warning_Agg"), "any", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                        }
+                                </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-custom-warning" id="@DeriveId("btnAddCustomWarning")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="CustomWarningContainer" data-existingcustomwarning="@SynapseStudioWeb.Helpers.Extensions.SerializeListToJsonArray(Model.CustomWarnings)">
+                                <!--Add Custom Warning Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Reminders
+                                <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Reminder_Agg"), "all", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Reminder_Agg"), "any", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Reminder_Agg"), "all", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                        }
+                                        @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Reminder_Agg"), "any", true) == 0)
+                                        {
+                                            <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                        }
+                                </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-reminder" id="@DeriveId("btnAddReminder")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="ReminderContainer" data-existingreminder="@SynapseStudioWeb.Helpers.Extensions.SerializeListToJsonArray(Model.Reminders)">
+                                <!--Add Reminder Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Endorsements
+                                <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-endorsement" id="@DeriveId("btnAddEndorsement")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="EndorsementContainer" data-existingendorsements="@SynapseStudioWeb.Helpers.Extensions.SerializeListToJsonArray(Model.Endorsements)">
+                                <!--Add Endorsement Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medusapreparationinstructions" class="col-sm-4 col-form-label">Medusa Preparation Instructions</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @*@Html.TextBoxFor(m => m.MedusaPreparationInstructionsEditable, new { @class = "form-control" })*@
+                            @Html.TextAreaFor(m => m.MedusaPreparationInstructionsEditable, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="form-group row">
+                        <label for="niceta" class="col-sm-5 col-form-label">NICE TA</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.NICETA, new { @class = "form-control" })
+                        </div>
+                    </div>*@
+                    <div class="form-group row">
+                        <label for="sideeffects" class="col-sm-4 col-form-label">Side Effects</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.SideEffects)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("sideEffects")" name="sideEffects" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cautions" class="col-sm-4 col-form-label">Warnings</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Cautions)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("cautions")" name="cautions" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="controlleddrugcategory" class="col-sm-4 col-form-label">Controlled Drug Category</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.ControlledDrugCategoriesEditableId, ViewBag.ControlledDrugCategories as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.ControlledDrugCategoriesEditableId, new { @id = DeriveId("hdnControlledDrugCategory") })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="restrictionsonavailability" class="col-sm-5 col-form-label">Restrictions on availability</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.RestrictionsOnAvailabilityCd)
+                            @Html.DropDownListFor(m => m.RestrictionsOnAvailabilityCd, ViewBag.RestrictionsOnAvailabilities as SelectList, new { @id = DeriveId("ddlRestrictionsOnAvailability"), @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="prescribingstatus" class="col-sm-4 col-form-label">Prescribing Status</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.PrescribingStatusCd)
+                            @Html.DropDownListFor(m => m.PrescribingStatusCd, ViewBag.PrescribingStatuses as SelectList, new { @id = DeriveId("ddlPrescribingStatus"), @class = "form-control", @disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="titrationtype" class="col-sm-4 col-form-label">Titration Type</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.TitrationTypesEditableId, ViewBag.TitrationTypes as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Diluents" class="col-sm-4 col-form-label">Compatible Diluents</label>
+                        <div class="col-sm-1 text-right">
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Diluents)" data-query-url="@DeriveAbsUrl("/Formulary/SearchDiluentsByName")" data-isdisabled="false" data-singleselect="false" id="@DeriveId("Diluents")" name="Diluents" type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #flagsClassification" aria-expanded="false" aria-controls="flagsClassification">
+                        <i class="fas fa-flag"></i> Flags / Classification
+                    </button>
+                </h5>
+            </div>
+
+            <div id="flagsClassification" class="collapse" aria-labelledby="headingFour" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="blacktriangle" class="col-sm-5 col-form-label">Black Triangle</label>
+                        <div class="col-sm-2">
+                            @if (Model.BlackTriangleSource != null && string.Compare(Model.BlackTriangleSource, SynapseStudioWeb.AppCode.Constants.TerminologyConstants.MANUAL_DATA_SOURCE, true) == 0)
+                            {
+                            @Html.CheckBoxFor(m => m.BlackTriangle)
+                            }
+                            else
+                            {
+                            @Html.HiddenFor(m => m.BlackTriangle, new { @id = DeriveId("hdnBlackTriangle") })
+                            @Html.CheckBoxFor(m => m.BlackTriangle, new { @disabled = "disabled", @id = DeriveId("chkBlackTriangle") })
+                            }
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                            <p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Black_Triangle_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Black_Triangle_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Black_Triangle_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Black_Triangle_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="clinicaltrialmedication" class="col-sm-5 col-form-label">Clinical Trial Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ClinicalTrialMedication)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Clinical_Trial_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Clinical_Trial_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Clinical_Trial_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Clinical_Trial_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="criticaldrug" class="col-sm-5 col-form-label">Critical Drug</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.CriticalDrug)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Critical_Drug_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Critical_Drug_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Critical_Drug_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Critical_Drug_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="EmaAdditionalMonitoring" class="col-sm-5 col-form-label">EMA Additional Monitoring</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.EmaAdditionalMonitoring, new { @id = DeriveId("chkEmaAdditionalMonitoring"), @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.EmaAdditionalMonitoring)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                            <p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_EMA_Addnl_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_EMA_Addnl_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_EMA_Addnl_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_EMA_Addnl_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsGastroResistant" class="col-sm-5 col-form-label">Gastro Resistant</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsGastroResistant, new { @id = DeriveId("chkIsGastroResistant") })
+                            @Html.HiddenFor(m => m.IsGastroResistant)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Gastro_Resistant_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Gastro_Resistant_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Gastro_Resistant_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Gastro_Resistant_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsModifiedRelease" class="col-sm-5 col-form-label">Modified Release</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsModifiedRelease, new { @id = DeriveId("chkIsModifiedRelease") })
+                            @Html.HiddenFor(m => m.IsModifiedRelease)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Modified_Release_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Modified_Release_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Modified_Release_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Modified_Release_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                            </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="EMAAdditionalMonitoring" class="col-sm-5 col-form-label">Expensive Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ExpensiveMedication)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Expensive_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Expensive_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Expensive_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Expensive_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="highalertmedication" class="col-sm-5 col-form-label">High Alert Medication</label>
+                        <div class="col-sm-7">
+                            @if (Model.HighAlertMedicationSource != null && string.Compare(Model.HighAlertMedicationSource, SynapseStudioWeb.AppCode.Constants.TerminologyConstants.MANUAL_DATA_SOURCE, true) != 0)
+                            {
+                            @Html.HiddenFor(m => m.HighAlertMedication, new { @id = DeriveId("hdnHighAlertMedication") })
+                            @Html.CheckBoxFor(m => m.HighAlertMedication, new { @disabled = "disabled", @id = DeriveId("chkHighAlertMedication") })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                <p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_High_Alert_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_High_Alert_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_High_Alert_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_High_Alert_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                            </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                            }
+                            else
+                            {
+                            @Html.CheckBoxFor(m => m.HighAlertMedication)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                                    @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_High_Alert_Med_Agg"), "all", true) == 0)
+                                    {
+                                        <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                    }
+                                    @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_High_Alert_Med_Agg"), "any", true) == 0)
+                                    {
+                                        <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                    }
+                                    @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_High_Alert_Med_Agg"), "all", true) == 0)
+                                    {
+                                        <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                    }
+                                    @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_High_Alert_Med_Agg"), "any", true) == 0)
+                                    {
+                                        <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                    }
+
+                                </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ivtooral" class="col-sm-5 col-form-label">IV to Oral</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IVToOral)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_IV_TO_Oral_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_IV_TO_Oral_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_IV_TO_Oral_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_IV_TO_Oral_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                            </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="NotForPrn" class="col-sm-5 col-form-label">Not for PRN</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.NotForPrn)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Not_For_PRN_Agg"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Not_For_PRN_Agg"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Not_For_PRN_Agg"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Not_For_PRN_Agg"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                            }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="bloodproduct" class="col-sm-5 col-form-label">Blood Product</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsBloodProduct)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Blood_Product_Agg"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Blood_Product_Agg"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Blood_Product_Agg"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Blood_Product_Agg"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                            }
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="diluent" class="col-sm-5 col-form-label">Diluent</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsDiluent)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Diluent_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Diluent_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Diluent_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Diluent_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="orderable" class="col-sm-5 col-form-label">Prescribable</label>
+                        <div class="col-sm-7">
+                            @if (Model.Prescribable == false && Model.PrescribableSource == SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE)
+                            {
+                            @Html.CheckBoxFor(m => m.Prescribable, new { @id = DeriveId("chkPrescribable"), @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.Prescribable, new { @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                            }
+                            else
+                            {
+                            @Html.CheckBoxFor(m => m.Prescribable)
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="outpatientmedication" class="col-sm-5 col-form-label">Outpatient Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.OutpatientMedication)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Outpatient_Medn_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Outpatient_Medn_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Outpatient_Medn_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Outpatient_Medn_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+                            </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sugarfree" class="col-sm-5 col-form-label">Sugar Free</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.SugarFree)
+                            @Html.CheckBoxFor(m => m.SugarFree, new { @id = DeriveId("chkSugarFree"), @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="glutenfree" class="col-sm-5 col-form-label">Gluten Free</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.GlutenFree)
+                            @Html.CheckBoxFor(m => m.GlutenFree, new { @id = DeriveId("chkGlutenFree"), @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="preservativefree" class="col-sm-5 col-form-label">Preservative Free</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.PreservativeFree)
+                            @Html.CheckBoxFor(m => m.PreservativeFree, new { @id = DeriveId("chkPreservativeFree"), @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cfcfree" class="col-sm-5 col-form-label">CFC Free</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.CFCFree)
+                            @Html.CheckBoxFor(m => m.CFCFree, new { @id = DeriveId("chkCFCFree"), @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicensedmedication" class="col-sm-5 col-form-label">Unlicensed Medication</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.UnlicensedMedication)
+                            @Html.CheckBoxFor(m => m.UnlicensedMedication, new { @id = DeriveId("chkUnlicensedMedication"), @class = "form-control", @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                            <p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Unlicensed_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Unlicensed_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Unlicensed_Med_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Unlicensed_Med_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="parallelimport" class="col-sm-5 col-form-label">Parallel import</label>
+                        <div class="col-sm-7">
+                            @Html.HiddenFor(m => m.ParallelImport)
+                            @Html.CheckBoxFor(m => m.ParallelImport, new { @id = DeriveId("chkParallelImport"), @class = "form-control", @disabled = "disabled" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.DMD_DATA_SOURCE_DISPLAY </p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ignoreduplicatewarnings" class="col-sm-5 col-form-label">Ignore Duplicate Warnings</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IgnoreDuplicateWarnings, new { @id = DeriveId("chkIgnoreDuplicateWarnings"), @class = "form-control" })
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Ignore_Dup_warnings_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Ignore_Dup_warnings_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Ignore_Dup_warnings_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Ignore_Dup_warnings_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsCustomControlledDrug" class="col-sm-5 col-form-label">Controlled Drug</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsCustomControlledDrug)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Custom_Controlled"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Custom_Controlled"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Custom_Controlled"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Custom_Controlled"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                            }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsIndicationMandatory" class="col-sm-5 col-form-label">Indication Is Mandatory</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsIndicationMandatory)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Indication_Mandatory_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Indication_Mandatory_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Indication_Mandatory_Agg"), "all", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                                }
+                                @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Indication_Mandatory_Agg"), "any", true) == 0)
+                                {
+                                    <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                                }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="witnessingrequired" class="col-sm-5 col-form-label">Witnessing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.WitnessingRequired)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (!Model.IsBulkEdit)
+        {
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #history" aria-expanded="false" aria-controls="history">
+                        <i class="fas fa-history"></i> Status
+                    </button>
+                </h5>
+            </div>
+            <div id="history" class="collapse" aria-labelledby="headingFive" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    @*<div class="form-group row">
+                        <label for="id" class="col-sm-5 col-form-label">ID</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FormularyVersionIds[0], new { @class = "form-control", data_isreadonly = "true" })
+                        </div>
+                    </div>*@
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-5 col-form-label">Status</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.Status, ViewBag.RecordStatuses as SelectList, new { @class = "form-control", @id = DeriveId("ddlRecordStatus") })
+                            @Html.HiddenFor(m => m.OriginalStatus)
+                        </div>
+                    </div>
+                    <div id="@DeriveId("pnlReason")" data-initialstatus="@Model.Status" class="form-group row">
+                        <label class="col-sm-5 col-form-label">Reason</label>
+                        <div class="col-sm-7">
+                            @Html.TextAreaFor(m => m.RecStatuschangeMsg, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.RecStatuschangeMsg)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@await Html.PartialAsync("_FormularyIdentificationCodeTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyAdditionalCodeDisabledTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyAdditionalCodeTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyIngredientDisabledCodeTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyExcipientDisabledCodeTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyCustomWarningTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyReminderTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+@await Html.PartialAsync("_FormularyEndorsementTmpl", new ViewDataDictionary(ViewData) { { "DeriveId", DeriveId } })
+
+<script type="text/javascript" src="~/lib/token-input-1.6.0/src/jquery.tokeninput.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        setTimeout(() => {
+            let inputs = $(".vtm-edit-medication :input");
+            if (inputs && inputs.length > 0) {
+                inputs.each(function(indx, el) {
+                    let isReadOnly = $(this).data('isreadonly');
+                    if (isReadOnly == true) $(this).attr('readonly', true);
+                });
+            }
+        }, 100);
+
+        initClassificationCodes('#@Model.ControlIdentifier');
+
+        initIdentificationCodes('#@Model.ControlIdentifier');
+
+        initIngredients('#@Model.ControlIdentifier');
+
+        initExcipients('#@Model.ControlIdentifier');
+
+        initCustomWarnings('#@Model.ControlIdentifier');
+
+        initReminders('#@Model.ControlIdentifier');
+
+        initEndorsements('#@Model.ControlIdentifier');
+
+        let rootCntrl = '#@Model.ControlIdentifier';
+
+        let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+        onRecordStatusChange(recStatusCntrolId, $(recStatusCntrolId).data('initialstatus'));
+
+        $(`${rootCntrl}_ddlRecordStatus`).on('change', function () {
+            let rootCntrl = '#@Model.ControlIdentifier';
+            let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+            onRecordStatusChange(recStatusCntrolId, $(this).val());
+        });
+
+        $(`${rootCntrl} :checkbox`).bootstrapToggle('destroy');
+
+        setTimeout(() => {
+            $(`${rootCntrl} :checkbox`).bootstrapToggle({
+                on: 'Yes',
+                off: 'No',
+                onstyle: 'success',
+                offstyle: 'danger',
+                width: 70,
+                size: 'sm'
+            });
+        }, 100);
+
+        var cautions = new studio.AutoComplete(`${rootCntrl}_cautions`, null, null, null, { allowFreeTagging: true });
+        cautions.init();
+
+        var contraindications = new studio.AutoComplete(`${rootCntrl}_contraindications`, null, null, null, { disabled: true });
+        contraindications.init();
+
+        var sideEffects = new studio.AutoComplete(`${ rootCntrl }_sideEffects`, null, null, null, { allowFreeTagging: true });
+        sideEffects.init();
+
+        var localLicensedUse = new studio.AutoComplete(`${rootCntrl}_localLicensedUse`, null, null, null, {});
+        localLicensedUse.init();
+
+        var localUnlicensedUse = new studio.AutoComplete(`${rootCntrl}_localUnlicensedUse`, null, null, null, {});
+        localUnlicensedUse.init();
+
+        var licensedUse = new studio.AutoComplete(`${rootCntrl}_licensedUse`, null, null, null, { });
+        licensedUse.init();
+
+        var unlicensedUse = new studio.AutoComplete(`${ rootCntrl }_unlicensedUse`, null, null, null, { });
+        unlicensedUse.init();
+
+        let unitDoseFormUnit = new studio.AutoComplete(`${rootCntrl}_unitDoseFormUnits`, null, null, null, { tokenLimit: 1, disabled: true });
+        unitDoseFormUnit.init();
+
+        let unitDoseUOM = new studio.AutoComplete(`${rootCntrl}_UnitDoseUnitOfMeasure`, null, null, null, { tokenLimit: 1, disabled: true });
+        unitDoseUOM.init();
+
+        let routeAutoComplete = new studio.AutoComplete(`${rootCntrl}_Route`);
+        routeAutoComplete.init();
+
+        let unlicensedRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_unlicensedRoute`);
+        unlicensedRouteAutoComplete.init();
+
+        let localRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_localLicensedRoute`);
+        localRouteAutoComplete.init();
+
+        let localUnlicensedRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_localUnlicensedRoute`);
+        localUnlicensedRouteAutoComplete.init();
+
+        let tradefamily = new studio.AutoComplete(`${rootCntrl}_tradefamily`);
+        tradefamily.init();
+
+        let form = new studio.AutoComplete(`${rootCntrl}_FormCd`);
+        form.init();
+
+        let supplier = new studio.AutoComplete(`${rootCntrl}_Supplier`);
+        supplier.init();
+
+        let diluents = new studio.AutoComplete(`${rootCntrl}_Diluents`);
+        diluents.init();
+
+        $(`${rootCntrl}_btnAddEndorsement`).click(function () {
+
+            let rootEl = $(this).closest('.root-vtm-edit-medication');
+            let roolElId = $(rootEl).attr('id');
+            let endorsementElSel = `#${roolElId} #EndorsementContainer`;
+
+            let currIndex = $(endorsementElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            var template = $.validator.format($.trim($(`#${roolElId}_endorsementTmpl`).html()));
+            $(template(currIndex)).appendTo(endorsementElSel);
+            $(endorsementElSel).data('currindex', currIndex);
+        });
+
+        $(`${rootCntrl}_btnAddCustomWarning`).click(function () {
+
+            let rootEl = $(this).closest('.root-vtm-edit-medication');
+            let roolElId = $(rootEl).attr('id');
+            let customWarningContainerElSel = `#${roolElId} #CustomWarningContainer`;
+
+            let currIndex = $(customWarningContainerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            var cwTemplate = $.validator.format($.trim($(`#${roolElId}_customWarningTmpl`).html()));
+            $(cwTemplate(currIndex)).appendTo(customWarningContainerElSel);
+            $(customWarningContainerElSel).data('currindex', currIndex);
+        });
+
+        $(`${rootCntrl}_btnAddReminder`).click(function () {
+
+            let rootEl = $(this).closest('.root-vtm-edit-medication');
+            let roolElId = $(rootEl).attr('id');
+            let reminderContainerElSel = `#${roolElId} #ReminderContainer`;
+
+            let currIndex = $(reminderContainerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            var remTemplate = $.validator.format($.trim($(`#${roolElId}_reminderTmpl`).html()));
+            $(remTemplate(currIndex)).appendTo(reminderContainerElSel);
+            $(reminderContainerElSel).data('currindex', currIndex);
+        });
+
+        $(`${rootCntrl}_btnAddIdentificationCode`).click(function () {
+
+            let rootEl = $(this).closest('.root-vtm-edit-medication');
+            let roolElId = $(rootEl).attr('id');
+            let idenContainerElSel = `#${roolElId} #IdentificationCodeContainer`;
+
+            let currIndex = $(idenContainerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            var indicationCodeTemplate = $.validator.format($.trim($(`#${roolElId}_identificationCodeTmpl`).html()));
+            $(indicationCodeTemplate(currIndex)).appendTo(idenContainerElSel);
+            $(idenContainerElSel).data('currindex', currIndex);
+        });
+
+        $(`${rootCntrl}_btnAddClassificationCode`).click(function () {
+
+            let rootEl = $(this).closest('.root-vtm-edit-medication');
+            let roolElId = $(rootEl).attr('id');
+            let containerElSel = `#${roolElId} #AdditionalCodeContainer`;
+
+            let currIndex = $(containerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            var template = $.validator.format($.trim($(`#${roolElId}_additionalCodeTmpl`).html()));
+            $(template(currIndex)).appendTo(containerElSel);
+            $(containerElSel).data('currindex', currIndex);
+        });
+    });
+
+
+
+    function initIdentificationCodes(rootCntrlSel) {
+        let idenContainerElSel = `${rootCntrlSel} #IdentificationCodeContainer`;
+
+        let idenCodeTmplSel = `${rootCntrlSel}_identificationCodeTmpl`;
+
+        let existingIdentCode = $(idenContainerElSel).data('existingidentificationcode');
+
+        if (existingIdentCode && existingIdentCode.length > 0) {
+
+            $(idenContainerElSel).html('');
+
+            existingIdentCode.forEach(function (item, index) {
+                //var addlCodeTemplate = (item && item.Source && item.Source === 'M') ? $.validator.format($.trim($(addlCodeTmplSel).html())) : $.validator.format($.trim($(addlCodeDisabledTmplSel).html()));
+                var idenCodeTemplate = $.validator.format($.trim($(idenCodeTmplSel).html()));
+
+                $(idenCodeTemplate(index)).appendTo(idenContainerElSel);
+
+                $(`${rootCntrlSel}_IdentificationCode-${index}`).val(item.AdditionalCode);
+                $(`${rootCntrlSel}_IdentificationCodeSystem-${index}`).val(item.AdditionalCodeSystem);
+
+                $(idenContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initClassificationCodes(rootCntrlSel) {
+        let addlContainerElSel = `${rootCntrlSel} #AdditionalCodeContainer`;
+        let addlCodeTmplSel = `${rootCntrlSel}_additionalCodeTmpl`;
+        let addlCodeDisabledTmplSel = `${rootCntrlSel}_additionalCodeDisabledTmpl`;
+
+        let existingAddnCode = $(addlContainerElSel).data('existingadditionalcode');
+
+        if (existingAddnCode && existingAddnCode.length > 0) {
+
+            $(addlContainerElSel).html('');
+
+            existingAddnCode.forEach(function (item, index) {
+                var addlCodeTemplate = (item && (!item.Source || (item.Source && item.Source === 'RNOH'))) ? $.validator.format($.trim($(addlCodeTmplSel).html())) : $.validator.format($.trim($(addlCodeDisabledTmplSel).html()));
+                //var addlCodeTemplate = $.validator.format($.trim($(addlCodeDisabledTmplSel).html()));
+
+                $(addlCodeTemplate(index)).appendTo(addlContainerElSel);
+
+                $(`${rootCntrlSel}_AdditionalCode-${index}`).val(item.AdditionalCode);
+                $(`${rootCntrlSel}_AdditionalCodeSystem-${index}`).val(item.AdditionalCodeSystem);
+                $(`${rootCntrlSel}_AdditionalCodeDesc-${index}`).val(item.AdditionalCodeDesc);
+                $(`${rootCntrlSel}_Attr1-${index}`).val(item.Attr1);
+                $(`${rootCntrlSel}_MetaJson-${index}`).val(item.MetaJson);
+                $(`${rootCntrlSel}_Source-${index}`).val(item.Source);
+                $(`${rootCntrlSel}_CodeType-${index}`).val(item.CodeType);
+
+                $(addlContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initExcipients(rootCntrlSel) {
+        let containerElSel = `${rootCntrlSel} #ExcipientContainer`;
+
+        let tmplSel = `${rootCntrlSel}_excipientDisabledTmpl`;
+
+        let existingexcipient = $(containerElSel).data('existingexcipient');
+
+        if (!existingexcipient || existingexcipient.length == 0) return;
+
+        $(containerElSel).html("");
+
+        existingexcipient.forEach(function (item, index) {
+
+            let template = $.validator.format($.trim($(tmplSel).html()));
+
+            $(template(index)).appendTo(containerElSel);
+
+            let ing = item.Ingredient != null ? [item.Ingredient] : null;
+
+            let strnValUnit = item.StrengthUnit != null ? [item.StrengthUnit] : null;
+
+            let excpAutoComplete = new studio.AutoComplete(`${rootCntrlSel}_Excipient_Ingredient-${index}`, null, null, ing, { tokenLimit: 1, disabled: true });
+            excpAutoComplete.init();
+
+            let strengthUnit = new studio.AutoComplete(`${rootCntrlSel}_Excipient_StrengthUnit-${index}`, null, null, strnValUnit, { tokenLimit: 1, disabled: true });
+            strengthUnit.init();
+
+            $(`${rootCntrlSel}_Excipient_Strength-${index}`).val(item.Strength);
+
+            $(containerElSel).data('currindex', index);
+        });
+    }
+
+    function initIngredients(rootCntrlSel) {
+
+        let containerElSel = `${rootCntrlSel} #IngredientContainer`;
+
+        let tmplSel = `${rootCntrlSel}_ingredientDisabledTmpl`;
+
+        let existingIngredient = $(containerElSel).data('existingingredient');
+
+        if (!existingIngredient || existingIngredient.length == 0) return;
+
+        $(containerElSel).html("");
+
+        existingIngredient.forEach(function (item, index) {
+
+            let ingredientTemplate = $.validator.format($.trim($(tmplSel).html()));
+
+            $(ingredientTemplate(index)).appendTo(containerElSel);
+
+            let ing = item.Ingredient != null ? [item.Ingredient] : null;
+
+            let strnValNumUnit = item.StrengthValueNumeratorUnit != null ? [item.StrengthValueNumeratorUnit] : null;
+
+            let strnValDenUnit = item.StrengthValueDenominatorUnit != null ? [item.StrengthValueDenominatorUnit] : null;
+
+            let ingredientAutoComplete = new studio.AutoComplete(`${rootCntrlSel}_Ingredient-${index}`, null, null, ing, { tokenLimit: 1, disabled: true });
+            ingredientAutoComplete.init();
+
+            let strengthValNumUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueNumeratorUnit-${index}`, null, null, strnValNumUnit, { tokenLimit: 1, disabled: true });
+            strengthValNumUnit.init();
+
+            let strengthValDenUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueDenominatorUnit-${index}`, null, null, strnValDenUnit, { tokenLimit: 1, disabled: true });
+            strengthValDenUnit.init();
+
+            $(`${rootCntrlSel}_hdnBasisOfPharmaceuticalStrength-${index}`).val(item.BasisOfPharmaceuticalStrength);
+
+            $(`${rootCntrlSel}_StrengthValNumerator-${index}`).val(item.StrengthValNumerator);
+            $(`${rootCntrlSel}_StrengthValDenominator-${index}`).val(item.StrengthValDenominator);
+            $(`${rootCntrlSel}_BasisOfPharmaceuticalStrength-${index}`).val(item.BasisOfPharmaceuticalStrength);
+
+            $(containerElSel).data('currindex', index);
+        });
+    }
+
+
+    function initEndorsements(rootCntrlSel) {
+
+        let containerElSel = `${rootCntrlSel} #EndorsementContainer`;
+
+        let tmplSel = `${rootCntrlSel}_endorsementTmpl`;
+
+        let existingData = $(containerElSel).data('existingendorsements');
+
+        if (existingData && existingData.length > 0) {
+
+            $(containerElSel).html("");
+
+            existingData.forEach(function (item, index) {
+                let template = $.validator.format($.trim($(tmplSel).html()));
+
+                $(template(index)).appendTo(containerElSel);
+
+                $(`${rootCntrlSel}_txtEndorsement-${index}`).val(item);
+
+                $(containerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initCustomWarnings(rootCntrlSel) {
+
+        let cwContainerElSel = `${rootCntrlSel} #CustomWarningContainer`;
+
+        let cwTmplSel = `${rootCntrlSel}_customWarningTmpl`;
+
+        let existingCW = $(cwContainerElSel).data('existingcustomwarning');
+
+        if (existingCW && existingCW.length > 0) {
+
+            $(cwContainerElSel).html("");
+
+            existingCW.forEach(function (item, index) {
+                let cwTemplate = $.validator.format($.trim($(cwTmplSel).html()));
+
+                $(cwTemplate(index)).appendTo(cwContainerElSel);
+
+                $(`${rootCntrlSel}_txtCustomWarning-${index}`).val(item.Warning);
+                $(`${rootCntrlSel}_chkNeedResponse-${index}`).prop('checked', (item.NeedResponse === true) ? true: false);
+
+                $(cwContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initReminders(rootCntrlSel) {
+
+        let remContainerElSel = `${rootCntrlSel} #ReminderContainer`;
+
+        let remTmplSel = `${rootCntrlSel}_reminderTmpl`;
+
+        let existingRem = $(remContainerElSel).data('existingreminder');
+
+        if (existingRem && existingRem.length > 0) {
+
+            $(remContainerElSel).html("");
+
+            existingRem.forEach(function (item, index) {
+                let remTemplate = $.validator.format($.trim($(remTmplSel).html()));
+
+                $(remTemplate(index)).appendTo(remContainerElSel);
+
+                $(`${rootCntrlSel}_txtReminder-${index}`).val(item.Reminder);
+                $(`${rootCntrlSel}_txtDuration-${index}`).val(item.Duration);
+                $(`${rootCntrlSel}_chkActive-${index}`).prop('checked', (item.Active === true) ? true : false);
+
+                $(remContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function onRecordStatusChange(reasonControlId, val) {
+        if (!reasonControlId) return;
+        if (val && val === "004")
+            $(reasonControlId).show();
+        else
+            $(reasonControlId).hide();
+    }
+</script>
+<script type="text/javascript" src="~/js/studio.autocomplete.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>

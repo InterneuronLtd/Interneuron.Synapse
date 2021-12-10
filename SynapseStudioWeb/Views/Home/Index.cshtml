@@ -1,0 +1,99 @@
+﻿@model SynapseStudioWeb.Models.EntityModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Synapse Studio <small>Dashboard</small></h4>
+        <div class="alert alert-dismissable alert-warning">
+            <button data-dismiss="alert" class="close" type="button">&times;</button>
+            Welcome to the admin dashboard!
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bar-chart-o"></i>Core Entities (@Model.CoreEntityModel.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="~/EntityManager/EntityManagerNew?id=d8851db1-68f8-45ee-be9a-628666512431">New Core Entity</a>
+                    </div>
+                </div>
+
+                @foreach (var m in Model.CoreEntityModel)
+                {
+                    <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="panel-title"><i class="fa fa-bar-chart-o"></i>Extended Entities (@Model.ExtendedEntityModel.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12  text-center">
+                        <a class="btn btn-primary btn-sm" href="~/EntityManager/EntityManagerExtendedNew?id=e8b78b52-641d-46eb-bb8b-16e2feb86fe7">New Extended Entity</a>
+                    </div>
+                </div>
+
+                @foreach (var m in Model.ExtendedEntityModel)
+                {
+                    <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="panel-title"><i class="fa fa-bar-chart-o"></i>Meta Entities (@Model.MetaEntityModel.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12  text-center">
+                        <a class="btn btn-primary btn-sm" href="~/EntityManager/EntityManagerMetaNew?id=76ce099d-0ab1-40c5-8b37-d0933b84ec8c">New Meta Entity</a>
+                    </div>
+                </div>
+
+                @foreach (var m in Model.MetaEntityModel)
+                {
+                    <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="panel-title"><i class="fa fa-bar-chart-o"></i>Local Entities (@Model.LocalEntityModel.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12  text-center">
+                        <a class="btn btn-primary btn-sm" href="~/EntityManager/EntityManagerLocalNew?id=468ac87d-f6a3-4d20-8800-58742b8952b6">New Local Entity</a>
+                    </div>
+                </div>
+
+                @foreach (var m in Model.LocalEntityModel)
+                {
+                    <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+
+                }
+            </div>
+        </div>
+    </div>
+     
+     
+</div>
+

@@ -1,0 +1,90 @@
+﻿@model SynapseStudioWeb.Models.ManageAPIsModel
+
+@{
+    ViewData["Title"] = "ApI Manager";
+}
+
+<h2>ApI Manager</h2>
+
+<h4>Manage APIs</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CreateApIManager">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="APIName" class="control-label"></label>
+                <input asp-for="APIName" required class="form-control" />
+                <span asp-validation-for="APIName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayName" class="control-label"></label>
+                <input asp-for="DisplayName" required class="form-control" />
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description"  class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Enabled" /> @Html.DisplayNameFor(model => model.Enabled)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Validate and Create" style="float:right" class="btn btn-sm btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<br />
+<br />
+<div>
+    <div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fa fa-list"></i> API Resources (@ViewBag.APIresource.Rows.Count)</h5>
+                    </div>
+                    <div class="card-body p-2">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Resource Name</th>
+                                    <th>Display Name</th>
+                                    <th>Description</th>
+                                    <th>Is Enabled?</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.APIresource.Rows)
+                                {
+                                    <tr>
+                                        <td>@item["Name"]</td>
+                                        <td>@item["DisplayName"]</td>
+                                        <td>@item["Description"]</td>
+                                        <td>@item["Enabled"]</td>
+                                        <td>
+                                            <a href=@("toggleAPIResource?id=" + item["Id"]+"&toggle=" + item["Enabled"]) onclick="return confirm('Are you sure?')" style="float:left;color:#2a9fd6">Toogle Status</a>
+
+                                            <a href=@("ApIScopeManager?id=" + item["Id"]+"&name=" + item["Name"]) style="float:right">View</a>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,43 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("reminderTmpl")" style="display:none;">
+    <!--Add Reminder Controls -->
+    <div class="reminder">
+        <div class="form-group row">
+            <div class="card col-sm-11 ml-2 mb-0 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-header text-right bg-light p-0 m-0 border-0">
+                    <a class="fas fa-times-circle text-danger" style="font-size: 1.2rem;" href="#" onclick="removeReminderItem(this)"></a>
+                </div>
+                <div class="card-body mt-n2">
+                    <div class="col-sm-6">
+                        <textarea name="Reminder" class="form-control" id="@DeriveId("txtReminder-{0}")" maxlength="256"></textarea>
+                        @Html.ValidationMessage("Reminder", new { @id = DeriveId("txtReminder-{0}") })
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Duration" class="col-sm-7 col-form-label text-right">Duration (hrs)</label>
+                        <input type="text" name="Duration" class="col-sm-5 form-control duration" onkeypress="validateInput(event)" id="@DeriveId("txtDuration-{0}")" />
+                        @Html.ValidationMessage("Duration", new { @id = DeriveId("txtDuration-{0}") })
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Active" class="col-sm-8 col-form-label text-right">Need Response</label>
+                        <input type="checkbox" name="Active" class="col-sm-1 form-control rem-active" id="@DeriveId("chkActive-{0}")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function removeReminderItem(item) {
+        $(item).closest('.reminder').remove();
+    }
+
+    function validateInput(event) {
+        if (event.which != 8 && event.which != 0 && event.which < 48 || event.which > 57) {
+            event.preventDefault();
+        }
+    }
+</script>

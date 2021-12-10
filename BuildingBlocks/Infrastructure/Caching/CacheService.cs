@@ -1,3 +1,23 @@
+﻿//Interneuron Synapse
+
+//Copyright(C) 2021  Interneuron CIC
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+//See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,13 +35,15 @@ namespace Interneuron.Caching
 
         private static TimeSpan defaultCacheDuration = TimeSpan.MinValue;
 
+        public static CacheSettings CacheSettings;
+
         static TimeSpan DefaultCacheDuration
         {
             get
             {
                 if(defaultCacheDuration == TimeSpan.MinValue)
                 {
-                    var cacheMinutes = CacheSettings.Instance.CacheDurationInMinutes;
+                    var cacheMinutes = CacheSettings.CacheDurationInMinutes;
                     defaultCacheDuration = TimeSpan.FromMinutes(cacheMinutes);
                 }
                 return defaultCacheDuration;
@@ -42,11 +64,11 @@ namespace Interneuron.Caching
 
         private static ICacheProvider BuildCacheProvider()
         {
-            var cacheEnabled = CacheSettings.Instance.Enabled;
+            var cacheEnabled = CacheSettings.Enabled;
 
             if(cacheEnabled)
             {
-                var cacheProviderType = CacheSettings.Instance.Provider;
+                var cacheProviderType = CacheSettings.Provider;
 
                 if (!string.IsNullOrWhiteSpace(cacheProviderType))
                 {

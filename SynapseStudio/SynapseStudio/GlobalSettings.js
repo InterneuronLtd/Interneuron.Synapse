@@ -1,11 +1,11 @@
 ﻿
-var GlobalServiceURL = 'YOUR DYNAMIC API URL';
+var GlobalServiceURL = 'SYNAPSE_DYNAMIC_URI/';
 
 var config = {
 
     //configure authority and client
-    
-    authority: "YOUR IDENTITY SERVER URL",
+
+    authority: "SYNAPSE_IDENTITY_URI",
     client_id: "SynapseStudio",
     redirect_uri: window.location.origin + "/callback.aspx",
     post_logout_redirect_uri: window.location.origin + "/logout.aspx?oidccallback=true",

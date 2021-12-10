@@ -1,0 +1,66 @@
+﻿@model List<SynapseStudioWeb.Models.DetailDto>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Relation Details</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-sm btn-primary block">Back</a>
+    </div>
+    <div class="col-md-9">
+
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;@ViewBag.Summary</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+
+                            <tbody>
+
+                                @foreach (var m in Model)
+                                {
+                                    <tr>
+                                        <td>@m.EntityDetail</td>
+                                        <td>@m.EntityDescription</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href=@("RelationDelete?id=" + ViewBag.RelationId) class="btn btn-sm btn-danger" id="btn-delete-relation">Delete Relation</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/entitymanager.js"></script>

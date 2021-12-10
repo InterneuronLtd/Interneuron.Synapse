@@ -1,0 +1,45 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("additionalCodeDisabledTmpl")" disabled style="display:none;">
+    <!--Add Additional Code Controls -->
+    <div class="additionalCode">
+        @Html.Hidden("AdditionalCodeDesc", null, new { @id = DeriveId("AdditionalCodeDesc-{0}"), @class = "form-control additional-code-desc" })
+        @Html.Hidden("Attr1", null, new { @id = DeriveId("Attr1-{0}"), @class = "form-control attr1" })
+        @Html.Hidden("MetaJson", null, new { @id = DeriveId("MetaJson-{0}"), @class = "form-control mata-json" })
+        @Html.Hidden("Source", null, new { @id = DeriveId("Source-{0}"), @class = "form-control source" })
+        @Html.Hidden("CodeType", null, new { @id = DeriveId("CodeType-{0}"), @class = "form-control code-type" })
+        <div class="form-group row">
+            <div class="card col-sm-11 ml-2 mb-0 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-body">
+                    <div class="col-sm-5">
+                        @Html.DropDownList("AdditionalCodeSystem", ViewBag.ClassificationCodeTypes as SelectList, new { @class = "form-control additional-code-system", @name = "AdditionalCodeSystem", @id = DeriveId("AdditionalCodeSystem-{0}"), @disabled = "disabled" })
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="col-sm-10">
+                            <input type="text" name="AdditionalCode" class="form-control additional-code-text" id="@DeriveId("AdditionalCode-{0}")" readonly>
+                        </div>
+                        <div class="col-sm-1">
+                            <span class="icon-tooltip fas fa-info-circle text-primary" onclick="showTooltip(this)" onmouseover="showTooltip(this)"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    function showTooltip(item) {
+        let pnlItem = $(item).closest('.additionalCode')
+        let desc = $(pnlItem).find(`.additional-code-desc`).val();
+        let source = $(pnlItem).find(`.source`).val();
+        $(item).data('html', true);
+        $(item).data('title', `<ul class="text-left"><li>Desc : ${desc}</li><li>Source : ${source}</li></ul>`);
+        $(item).tooltip('toggle');
+    }
+</script>

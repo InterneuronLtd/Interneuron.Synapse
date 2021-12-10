@@ -1,0 +1,73 @@
+﻿@model List<SynapseStudioWeb.Models.BaseViewAttributeDto>
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Baseview Attributes</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("BaseViewManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerSQL?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">SQL</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;Attributes</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@ViewBag.BaseviewNamespaceName</h4>
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Attributes(@Model.Count) </h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+
+                            <tbody>
+
+                                @foreach (var m in Model)
+                                {
+                                    <tr>
+                                        <td>@m.AttributeName</td>
+                                        <td>@m.DataType</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/basview.js"></script>

@@ -1,0 +1,97 @@
+﻿@model SynapseStudioWeb.Models.IdentityClaimModel;
+
+@{
+    ViewData["Title"] = "Identity Claims Manager";
+}
+
+<h2>Identity Claims Manager</h2>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("IdentityResourceManager") style="float:right">Identity Resources</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Identity <small>Claim</small></h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                @using (Html.BeginForm("CreatClaim", "IdentityManager", FormMethod.Post))
+                {
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Please enter a name for the new claim <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBox("Claimname", null, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                            Select an Identity Resource <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.DropDownListFor(model => model.ResourceNameId, ViewBag.BaseviewNamespace as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+
+                            <button type="submit" class="btn btn-sm btn-success">Create</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-list"></i></h5>
+                </div>
+                <div class="card-body p-2">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Claim</th>
+                                <th>Resource</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.Claims.Rows)
+                            {
+                                <tr>
+                                    <td>@item["claimname"]</td>
+                                    <td>@item["resourcename"]</td>
+                                    <td>
+                                        <a href=@("DeleteClaim?id=" + item["claimID"]) style="float:right">Delete</a>
+                                    </td>
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

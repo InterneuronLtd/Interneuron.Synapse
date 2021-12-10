@@ -1,0 +1,195 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using SynapseStudioWeb.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SynapseStudioWeb</title>
+
+    @await Component.InvokeAsync("Common")
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/developer.css" />
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <link href="~/css/toastr.min.css" rel="stylesheet" />
+    <!-- <snippet_Scripts> -->
+    <script src="~/lib/notify/notify.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/js/toastr.min.js"></script>
+    <script src="~/js/ajax.js"></script>
+
+    <script src="~/js/studio.storage.js"></script>
+    <script src="~/js/common.js"></script>
+    <script src="~/js/confirmalert.js"></script>
+
+    <!-- </snippet_Scripts> -->
+</head>
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="~/home" class="site_title"><img src="~/img/InterneuronIcon.jpeg" alt="Interneuron" style="width:30px;height:30px;" /> <span>Synapse Studio</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a href="~/home"><i class="fa fa-home"></i> Home</a>
+
+                                </li>
+                                <li>
+                                    <a href="~/EntityManager/EntityManagerList"><i class="fa fa-database"></i> Entity Manager</a>
+
+                                </li>
+                                <li>
+                                    <a href="~/BaseView/BaseViewManagerList"><i class="fa fa-anchor"></i>Baseview</a>
+
+                                </li>
+                                <li>
+                                    <a href="~/List/ListManagerList"><i class="fa fa-list"></i>Lists</a>
+
+                                </li>
+                                <li>
+                                    <a href="~/Board/BoardManagerList"><i class="fa fa-columns"></i> Boards</a>
+
+                                </li>
+                                @if (HttpContextAccessor.HttpContext.Session.GetString(SynapseSession.IsPharamacist) == "True")
+                                {
+                                    <li>
+                                        <a href="~/Formulary/FormularyList"><i class="fa fa-wpforms"></i> Medication Management</a>
+                                    </li>
+                                }
+                                @*<li>
+                                    <a href="~/htmls/mmc/mmc_landing.html"><i class="fa fa-wpforms"></i> Medication Management Prototype</a>
+                                </li>*@
+                                <li>
+                                    <a href="~/SchemaMigration/SchemaExport"><i class="fa fa-refresh"></i> Schema Migration</a>
+
+                                </li>
+                                <li>
+                                    <!-- <a href="~/DevOps/DevOpsDashboard"><i class="fa fa-server"></i>DevOps</a> -->
+                                    <a><i class="fa fa-server"></i> DevOps <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><i class="fa fa-dashboard"></i><a href="~/DevOps/DevOpsDashboard">Dashboard</a></li>
+                                        <li><i class="fa fa-handshake"></i><a href="#" onclick="javascript: window.open('https://interneuron-ne-jenkins-test.northeurope.cloudapp.azure.com/'); return false;" target="_blank">CI \ CD</a></li>
+
+                                    </ul>
+
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-user-secret"></i> Security <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><i class="fa fa-user"></i><a href="~/Security/SecurityManager">Security</a></li>
+                                        <li><i class="fa fa-check"></i><a href="~/RoleMapping/Roleobjectselection?id=2">Role</a></li>
+                                        <li><i class="fa fa-gear"></i><a href="~/Action/ActionList">Action</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bug"></i> Application <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><i class="fa fa-wpforms"></i><a href="~/ApplicationManager/ApplicationManager">Application Module</a></li>
+                                        <li><i class="fa fa-list-alt"></i><a href="~/ApplicationList/ApplicationList">Application List</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-list"></i> Meta Data <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><i class="fa fa-wpforms"></i><a href="~/Location/LocationList">Location</a></li>
+                                        <li><i class="fa fa-wpforms"></i><a href="~/Provider/ProviderList">Provider</a></li>
+                                        <li><i class="fa fa-wpforms"></i><a href="~/Specialty/SpecialtyList">Specialty</a></li>
+                                        <li><i class="fa fa-wpforms"></i><a href="~/Ward/WardList">Ward</a></li>
+                                        <li><i class="fa fa-wpforms"></i><a href="~/WardBay/WardBayList">Ward Bay</a></li>
+                                        <li><i class="fa fa-wpforms"></i><a href="~/WardBayBed/WardBayBedList">Ward Bay Bed</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="~/Account/Logout"><i class="fa fa-sign-out"></i> Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /sidebar menu -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    @HttpContextAccessor.HttpContext.Session.GetString(SynapseSession.FullName)
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="~/Account/Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                @RenderBody()
+            </div>
+            <!-- /page content -->
+        </div>
+    </div>
+    <div id="pnlUpdateProgress" class="pageloader" style="opacity: 0.4; filter: alpha(opacity:40)">
+        <div class="loadingIcon">
+            <img src="~/img/loader.gif")" />
+        </div>
+    </div>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+    @await Component.InvokeAsync("NToastNotify")
+</body>
+</html>

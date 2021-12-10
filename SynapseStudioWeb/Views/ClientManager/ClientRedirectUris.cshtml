@@ -1,0 +1,107 @@
+﻿@using SynapseStudioWeb.Models;
+
+@model ClientRedirectUris;
+
+@{
+    ViewData["Title"] = "ClientRedirectUris";
+}
+
+<h4>@ViewBag.ClientId Redirect URIs</h4>
+<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ClientClaims?id=" +ViewBag.id)>Client Claims</a>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ClientGrantTypes?id=" +ViewBag.id)>ClientGrantTypes</a>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ClientScopes?id=" +ViewBag.id)>Client Scopes</a>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ClientSecrets?id=" +ViewBag.id)>Client Secrets</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>
+                    <i class="fa fa-tasks"></i>&nbsp;
+                    @ViewBag.ClientId Redirect URIs
+                </h4>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>&nbsp;New Client Redirect URIs</h5>
+                    <div class="card-body p-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" asp-controller="ClientManager" asp-action="AddNewClientURI">
+                                    <label for="RedirectUri">* Please enter a redirect URI for client</label>
+                                    @Html.TextBoxFor(m => m.RedirectUri, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.RedirectUri)
+                                    <br />
+                                    <label for="uritype">* Please select a URI type</label>
+                                    @Html.DropDownListFor(m => m.URIType,
+                                        new SelectList(ViewBag.uriType),
+                                        "Please select ...",
+                                        new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.URIType)
+                                    <br />
+                                    @Html.Hidden("ClientId", (object)ViewBag.id)
+                                    <div class="item form-group">
+                                        <div class="col-md-6 col-sm-6 offset-md-5">
+                                            <input type="reset" class="btn btn-sm btn-primary" value="Cancel">
+                                            <input type="submit" class="btn btn-sm btn-primary" value="Add">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>&nbsp;@ViewBag.ClientId Redirect URIs(@ViewBag.clientUri.Rows.Count)</h5>
+                            <div class="card-body p-2">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>URI</th>
+                                                    <th>URI Type</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in ViewBag.clientUri.Rows)
+                                                {
+                                                    <tr>
+                                                        <td>@item["URI"]</td>
+                                                        <td>@item["URIType"]</td>
+                                                        <td>
+                                                            <a href=@("RemoveClientURI?id=" + item["Id"]+"&clientId="+item["ClientId"]+"&type="+item["URIType"])
+                                                               style="float:left;color:#2a9fd6" onclick="return confirm('Are you sure to remove this record?');">Remove</a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

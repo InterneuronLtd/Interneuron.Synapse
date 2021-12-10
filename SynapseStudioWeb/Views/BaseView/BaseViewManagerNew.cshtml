@@ -1,0 +1,52 @@
+﻿@model SynapseStudioWeb.Models.BaseViewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1>Baseview Manager</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;New Baseview</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="BaseView" asp-action="BaseViewManagerNewSave" data-ajax-begin="onBaseviewStart"
+                              data-ajax-failure="onBaseviewFailed" data-ajax-success="onBaseviewSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+
+                            <span class="section">New @Model.BaseviewNamespaceName Baseview</span>
+                            @Html.HiddenFor(m => m.BaseviewNamespaceName)
+                            <label for="BaseviewName">* Please enter a name for the new baseview</label>
+
+                            @Html.TextBoxFor(m => m.BaseviewName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseviewName)
+                            <br />
+                            <label for="BaseviewDesc">Enter a description for the new baseview</label>
+                            @Html.TextBoxFor(m => m.BaseviewDesc, new { @class = "form-control" })
+                            <br />
+                            <label for="BaseviewSQL">* Enter the SQL statement for the new baseview</label>
+                            @Html.TextAreaFor(m => m.BaseviewSQL, new { @class = "form-control", @rows = "20" })
+                            <br />
+                            <input type="button" class="btn btn-sm btn-info" id="btn-save-cancal" value="Cancel"  style="display:none" />
+                            <input type="submit" name="command" style="display:none" class="btn btn-sm btn-primary pull-right" id="btn-submit-save" onclick="onBaseviewStart()" value="Create Baseview" />
+                            <input type="submit" name="command" class="btn btn-sm btn-warning pull-right" value="Validate" id="btn-validate" />
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/basview.js"></script>
+
+
+

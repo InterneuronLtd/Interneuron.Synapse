@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Export Schema</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp; All Objects On This Server</h5>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm("ExportFile", "SchemaMigration", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            Please select the objects to export from the list below
+                        </div>
+                    </div>
+                    <br />
+                    <input type="hidden" name="selectedItems" id="selectedItems" />
+                    <div id="jstree" class="treeview w-20 border">
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12  text-center">
+                            <input type="submit" class="btn btn-sm btn-primary"  value="Export Selected Objects" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="panel-title"><i class="fa fa-list"></i>&nbsp; Import Schema Into This Server</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12  text-center">
+                        <a class="btn btn-sm btn-warning" href="~/SchemaMigration/SchemaImport?import=no">Take me to Import Schema</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+
+            $('#jstree').on('changed.jstree', function (e, data) {
+                var i, j;
+                var selectedItems = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+
+                    //Fetch the Id.
+                    var id = data.selected[i];
+
+                    //Remove the ParentId.
+                    if(id.indexOf('&') != -1){
+                        id = id.split("&")[1];
+                    }
+
+                    //Add the Node to the JSON Array.
+                    selectedItems.push({
+                        text: data.instance.get_node(data.selected[i]).text,
+                        id: id,
+                        parent: data.node.parents[0]
+                    });
+                }
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });
+</script>
+

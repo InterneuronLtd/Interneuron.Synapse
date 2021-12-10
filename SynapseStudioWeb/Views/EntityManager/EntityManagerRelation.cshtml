@@ -1,0 +1,97 @@
+﻿@model SynapseStudioWeb.Models.RelationModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Entity Relations</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Relations</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("EntityManagerModel?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Models</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Relations</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@ViewBag.Summary</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="EntityManager" asp-action="EntityManagerRelationSave"
+                              data-ajax-failure="onRelationFailed" data-ajax-success="onRelationSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            <label for="SynapseNamespaceId">*Select a namespace from the list below</label>
+                            @Html.DropDownListFor(model => model.SynapseNamespaceId, ViewBag.SynapseNamespaceList as SelectList, "Please Select...", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.SynapseNamespaceId)
+                            <br />
+                            <label for="EntityId">*Select an entity from the list below</label>
+                            @Html.DropDownListFor(model => model.EntityId, ViewBag.EntityList as SelectList, "Please Select...", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.EntityId)
+                            <br />
+
+                            <label for="AttributeId">Optional - Select a the local attribute that you want to create the relationship for</label>
+                            @Html.DropDownListFor(model => model.AttributeId, ViewBag.AttributeList as SelectList, "No Local Attribute", new { @class = "form-control" })
+                             
+                            <br />
+                            <input type="submit" class="btn btn-primary btn-sm pull-right" id="btn-submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="relationList">
+                        <table class="table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Parent Namespace</th>
+                                    <th>Parent Entity</th>
+                                    <th>Parent Attribute</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var m in Model.RelationDto)
+                                {
+                                    <tr>
+                                        <td>@m.ParentSynapseNamespaceName</td>
+                                        <td>@m.ParentEntityName</td>
+                                        <td>@m.ParentAttributeName</td>
+                                        <td><a href=@("RelationView?id=" + m.AttributeId)>View</a></td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/entitymanager.js"></script>

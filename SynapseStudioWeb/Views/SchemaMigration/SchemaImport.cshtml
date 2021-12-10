@@ -1,0 +1,143 @@
+﻿@model SynapseStudioWeb.Controllers.ImportFileUpload
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Import Schema</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bar-chart-o"></i> Import Objects On This Server</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <br />
+                        <form method="post" enctype="multipart/form-data" asp-controller="SchemaMigration" asp-action="ImportFile">
+                            <dl>
+                                <dt>
+                                    @Html.LabelFor(m => m.FormFile, "Please select a synapse schema export file");
+                                </dt>
+                                <dd>
+                                    @Html.TextBoxFor(m => m.FormFile, new { type = "file" }) <br />
+                                    @Html.ValidationMessageFor(m => m.FormFile)
+                                </dd>
+                            </dl>
+                            <input class="btn btn-sm btn-primary pull-right" type="submit" value="Process Export" />
+                        </form>
+                    </div>
+                    <br />
+                    <div class="col-md-12" id="importDiv" style="display:none">
+                        @using (Html.BeginForm("SaveImportFile", "SchemaMigration", FormMethod.Post))
+                        {
+                            <label><strong>Please select the objects to import</strong></label>
+                            <br />
+                            <input type="hidden" name="treeViewNodes" id="selectedItems" />
+                            <div id="jstree" class="treeview w-20 border">
+                            </div>
+                            <br />
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" value="Import Selected Objects" />
+                        }
+                    </div>
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="col-md-12 successmsg" style="display:none">
+                        <div>
+                            <div id="msgDiv" style="color:red;">
+                                @ViewBag.Message
+                            </div>
+                            <a class="btn btn-sm btn-warning" href="/SchemaMigration/SchemaImport?import=no">Import New Schema</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+         var msg = '@ViewBag.Message';
+            if (msg)
+                $(".successmsg").show();
+            else
+                 $(".successmsg").hide();
+    });
+
+    $(function () {
+
+        window.setInterval(function() {
+            $.getJSON("/SchemaMigration/showMessage", function (data) {
+                console.log(data);
+                    });
+        }, 1000);
+
+
+    $('#jstree').on('changed.jstree', function (e, data) {
+                var i, j;
+                var selectedItems = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+
+                    //Fetch the Id.
+                    var id = data.selected[i];
+
+                    //Remove the ParentId.
+                    if(id.indexOf('&') != -1){
+                        id = id.split("&")[1];
+                    }
+
+                    //Add the Node to the JSON Array.
+                    selectedItems.push({
+                        text: data.instance.get_node(data.selected[i]).text,
+                        id: id,
+                        parent: data.node.parents[0]
+                    });
+                }
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+
+        console.log($("#jstree").hasClass("jstree-node"));
+
+        $('#jstree').on('model.jstree', function (e, data) {
+            if (data && data.nodes && data.nodes.length > 0) {
+                $("#importDiv").show();
+            } else {
+                $("#importDiv").hide();
+                $(".successmsg").show();
+                $("#msgDiv").html("The schema export file has no changes compared to the existing schema.");
+            }
+        });
+
+        /*if ($("#jstree>ul li").length > 0) {
+            $("#importDiv").show();
+        } else {
+            $("#importDiv").hide();
+        }*/
+
+    });
+
+</script>

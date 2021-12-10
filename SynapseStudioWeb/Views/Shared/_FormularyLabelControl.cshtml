@@ -1,0 +1,61 @@
+﻿@model SynapseStudioWeb.Models.MedicinalMgmt.FormularyLabelControlModel
+
+<style>
+    label i.fdb-src {
+        color: var(--warning);
+    }
+
+    label i.dmd-src {
+        color: var(--primary);
+    }
+
+    label i.org1-src {
+        color: var(--info);
+    }
+
+    label i.sg-src {
+        color: var(--secondary);
+    }
+
+    /*label.label-fdb-src:before {
+        font-family: "FontAwesome";
+        color: orange;
+        content: "\f05a";
+    }*/
+    /*label.label-fdb-src:hover:after {
+        content: attr(data-title);
+        background-color: orange;
+        color: #ffffff;
+    }*/
+
+</style>
+@if (Model != null)
+{
+    if (!Model.ShowSourceText)
+    {
+        <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText">@Model.LabelText</label>
+    }
+    else
+    {
+        @if (string.Compare(Model.SourceText, "FDB", true) == 0)
+        {
+            <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText"><i class="fas fa-info-circle fdb-src" title="@Model.SourceText"></i> @Model.LabelText</label>
+        }
+        else if (string.Compare(Model.SourceText, "DMD", true) == 0)
+        {
+            <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText"><i class="fas fa-info-circle dmd-src" title="@Model.SourceText"></i> @Model.LabelText</label>
+        }
+        else if (string.Compare(Model.SourceText, "RNOH", true) == 0)
+        {
+            <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText"><i class="fas fa-info-circle org1-src" title="@Model.SourceText"></i> @Model.LabelText</label>
+        }
+        else if (string.Compare(Model.SourceText, "System Generated", true) == 0)
+        {
+            <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText"><i class="fas fa-info-circle sg-src" title="@Model.SourceText"></i> @Model.LabelText</label>
+        }
+        else
+        {
+            <label for="@Model.LabelFor" class="col-sm-5 col-form-label" title="@Model.LabelText">@Model.LabelText</label>
+        }
+    }
+}

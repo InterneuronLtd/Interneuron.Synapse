@@ -1,8 +1,6 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
+﻿//Interneuron Synapse
 
-//Interneuron Synapse
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -18,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 
 using IdentityServer4.Services;
 using IdentityServer4.Stores;

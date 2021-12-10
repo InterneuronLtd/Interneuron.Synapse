@@ -1,0 +1,1764 @@
+﻿{
+  "form_id": "form1",
+  "formname": "Outpatient Registration Form",
+  "description": "(Please complete all items either by inserting the correct information or ticking the relevant item.)",
+  "destinationentities": [
+    {
+      "Entity": "entitystore.core_personidentifier",
+      "OperationType": "insert",
+      "associatedFieldId": "chkbl1",
+      "associatedFieldType": "chkbl",
+      "DestinationAttributes": [ "personidentifier_id", "assigningauthoritycode", "assigningauthoritytext", "person_id" ],
+      "DestinationValues": [ "@computable:guid", "@field:chkbl1", "@field:chkbl1", "@parameter:personId" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_personcontactinfo",
+      "OperationType": "insert",
+      "associatedFieldId": "tb14",
+      "associatedFieldType": "tb14",
+      "DestinationAttributes": [ "personcontactinfo_id", "person_id", "contacttypecode", "contacttypetext", "contactdetails", "contactnotes" ],
+      "DestinationValues": [ "@computable:guid", "@parameter:personId", "@constant:home", "@constant:home", "@field:tb14", "@constant:landline" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_personcontactinfo",
+      "OperationType": "insert",
+      "associatedFieldId": "tb15",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "personcontactinfo_id", "person_id", "contacttypecode", "contacttypetext", "contactdetails", "contactnotes" ],
+      "DestinationValues": [ "@computable:guid", "@parameter:personId", "@constant:work", "@constant:work", "@field:tb15", "@constant:landline" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_personcontactinfo",
+      "OperationType": "insert",
+      "associatedFieldId": "tb16",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "personcontactinfo_id", "person_id", "contacttypecode", "contacttypetext", "contactdetails", "contactnotes" ],
+      "DestinationValues": [ "@computable:guid", "@parameter:personId", "@constant:personal", "@constant:personal", "@field:tb16", "@constant:mobile" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_personcontactinfo",
+      "OperationType": "insert",
+      "associatedFieldId": "tb17",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "personcontactinfo_id", "person_id", "contacttypecode", "contacttypetext", "contactdetails", "contactnotes" ],
+      "DestinationValues": [ "@computable:guid", "@parameter:personId", "@constant:email", "@constant:email", "@field:tb17", "@constant:email" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_personaddress",
+      "OperationType": "update",
+      "associatedFieldId": "tb10",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "line3" ],
+      "DestinationValues": [ "@field:tb10" ],
+      "DestinationAttributeDatatypes": [ "string" ],
+      "Wherecols": [ "person_id" ],
+      "Wheredata": [ "@parameter:personId" ]
+    },
+    {
+      "Entity": "entitystore.core_encounter",
+      "OperationType": "update",
+      "associatedFieldId": "dttm1",
+      "associatedFieldType": "dttm",
+      "DestinationAttributes": [ "admitdatetime" ],
+      "DestinationValues": [ "@field:dttm1" ],
+      "DestinationAttributeDatatypes": [ "date" ],
+      "Wherecols": [ "encounter_id" ],
+      "Wheredata": [ "@parameter:encounterId" ]
+    },
+    {
+      "Entity": "entitystore.core_person",
+      "OperationType": "update",
+      "associatedFieldId": "dt1",
+      "associatedFieldType": "dt",
+      "DestinationAttributes": [ "dateofbirth" ],
+      "DestinationValues": [ "@field:dt1" ],
+      "DestinationAttributeDatatypes": [ "date" ],
+      "Wherecols": [ "person_id" ],
+      "Wheredata": [ "@parameter:personId" ]
+    },
+    {
+      "Entity": "entitystore.core_observationevent",
+      "OperationType": "insert",
+      "associatedFieldId": null,
+      "associatedFieldType": null,
+      "DestinationAttributes": [ "observationevent_id", "person_id", "datestarted", "datefinished", "addedby" ],
+      "DestinationValues": [ "@computable:guid", "@parameter:personId", "@computable:currentdatetime", "@computable:currentdatetime", "@constant:Gautam Bhatt" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "DateTime", "DateTime", "string" ],
+      "OutID": "@parameter:p1"
+    },
+    {
+      "Entity": "entitystore.core_observation",
+      "OperationType": "insert",
+      "associatedFieldId": "tb6",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "observation_id", "units", "symbol", "timerecorded", "observationevent_id", "observationtype_id", "value" ],
+      "DestinationValues": [ "@computable:guid", "@constant:mmHg", "@constant:mmHg", "@computable:currentdatetime", "@parameter:p1", "@constant:af5dc4a2-3e40-4e09-9d4f-3ddb137158de", "@field:tb6" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "DateTime", "string", "string", "string" ]
+    },
+    {
+      "Entity": "entitystore.core_observation",
+      "OperationType": "insert",
+      "associatedFieldId": "tbDiastolic",
+      "associatedFieldType": "tb",
+      "DestinationAttributes": [ "observation_id", "units", "symbol", "timerecorded", "observationevent_id", "observationtype_id", "value" ],
+      "DestinationValues": [ "@computable:guid", "@constant:mmHg", "@constant:mmHg", "@computable:currentdatetime", "@parameter:p1", "@constant:e2d6d5fa-2a38-448f-9e06-9a3e6b532bb5", "@field:tbDiastolic" ],
+      "DestinationAttributeDatatypes": [ "string", "string", "string", "DateTime", "string", "string", "string" ]
+    }
+  ],
+  "formsections": [
+    {
+      "formsection_id": "section1",
+      "title": "Personal Details",
+      "banner": null,
+      "desciption": "Our practice will need to collect your personal information to provide healthcare services to you. Our main purpose for collecting, using, holding and sharing your personal information is to manage your health.",
+      "displayorder": 1,
+      "sectionfields": [
+        {
+          "field_id": "rbl1",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Title",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Please select a Title",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "optionlist": [
+            {
+              "optionval": "Mr",
+              "optiontext": "Mr"
+            },
+            {
+              "optionval": "Mrs",
+              "optiontext": "Mrs"
+            },
+            {
+              "optionval": "Miss",
+              "optiontext": "Miss"
+            },
+            {
+              "optionval": "Ms",
+              "optiontext": "Ms"
+            },
+            {
+              "optionval": "Master",
+              "optiontext": "Master"
+            },
+            {
+              "optionval": "Dr",
+              "optiontext": "Dr"
+            }
+          ]
+        },
+        {
+          "field_id": "tb1",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Family name (Surname)",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Family name is required to complete this form",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "minlen",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Family name is should be at least 5 chars complete this form",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": 5,
+              "maxLength": null
+            },
+            {
+              "validationtype": "maxlen",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Family name is should be at max 10 chars complete this form",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": 10,
+              "maxLength": 10
+            }
+          ]
+        },
+        {
+          "field_id": "tb2",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Given name (First name)",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb3",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Middle name(s)",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb4",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Previous surname(s)",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 5,
+          "optionlist": null
+        },
+        {
+          "field_id": "dt1",
+          "fieldcontroltypename": "dt",
+          "fieldlabeltext": "Date of birth",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 6,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Date of birth is required",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Are you serious!",
+              "compareField": null,
+              "comparator": "between",
+              "compareDateValue": [ "1900-01-01T00:00:00", "days" ],
+              "compareValue": [ null, 0 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "You can't be that old!",
+              "compareField": null,
+              "comparator": "greaterthanorequalto",
+              "compareDateValue": [ "1900-01-01T00:00:00" ],
+              "compareValue": [],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "You can't be from future!",
+              "compareField": null,
+              "comparator": "lessthan",
+              "compareDateValue": [ "days" ],
+              "compareValue": [ 1 ],
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "optionlist": null
+        },
+        {
+          "field_id": "tbCityofBirth",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "City of birth",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 7,
+          "optionlist": null,
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "dt1",
+                    "comparetype": "state",
+                    "compareoperator": "filled",
+                    "comparevalue": null,
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "dt1",
+                    "comparetype": "state",
+                    "compareoperator": "between",
+                    "comparedatevalue": [ "1900-01-01T00:00:00", "days" ],
+                    "comparevalue": [ null, 0 ],
+                    "order": 2,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        },
+        {
+          "field_id": "tb5",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "NHS Number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 7,
+          "optionlist": null
+        },
+        {
+          "field_id": "rbl2",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Gender",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 8,
+          "optionlist": [
+            {
+              "optionval": "Male",
+              "optiontext": "Male"
+            },
+            {
+              "optionval": "Female",
+              "optiontext": "Female"
+            }
+          ],
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "tb5",
+                    "comparetype": "state",
+                    "compareoperator": "filled",
+                    "comparevalue": null,
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "rbl1",
+                    "comparetype": "state",
+                    "compareoperator": "notequalto",
+                    "comparevalue": [ "Dr" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        },
+        {
+          "field_id": "tb6",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "BP systolic",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 9,
+          "optionlist": null,
+          "fieldvalidations": [
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP systolic shoud be between 100 to 300",
+              "compareField": null,
+              "comparator": "between",
+              "compareValue": [ 100, 300 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP systolic should be at least 100",
+              "compareField": null,
+              "comparator": "greaterthanorequalto",
+              "compareValue": [ 100 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP systolic should be max 300",
+              "compareField": null,
+              "comparator": "lessthanorequalto",
+              "compareValue": [ 300 ],
+              "minLength": null,
+              "maxLength": null
+            }
+          ]
+        },
+        {
+          "field_id": "tbDiastolic",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "BP diastolic",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 9,
+          "optionlist": null,
+          "fieldvalidations": [
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP diastolic shoud be between 40 to 160",
+              "compareField": null,
+              "comparator": "between",
+              "compareValue": [ 40, 160 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP diastolic should be at least 40",
+              "compareField": null,
+              "comparator": "greaterthanorequalto",
+              "compareValue": [ 40 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "BP diastolic should be max 160",
+              "compareField": null,
+              "comparator": "lessthanoreequalto",
+              "compareValue": [ 160 ],
+              "minLength": null,
+              "maxLength": null
+            }
+          ]
+        },
+        {
+          "field_id": "rbl3",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Marital Status",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 11,
+          "optionlist": [
+            {
+              "optionval": "Married",
+              "optiontext": "Married"
+            },
+            {
+              "optionval": "Divorced",
+              "optiontext": "Divorced"
+            },
+            {
+              "optionval": "Single",
+              "optiontext": "Single"
+            }
+          ]
+        },
+        {
+          "field_id": "chkbl1",
+          "fieldcontroltypename": "chkbl",
+          "fieldlabeltext": "Ethnicity",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 12,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Please select an Ethnicity",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "optionlist": [
+            {
+              "optionval": "British or Mixed British",
+              "optiontext": "British or Mixed British"
+            },
+            {
+              "optionval": "White British",
+              "optiontext": "White British"
+            },
+            {
+              "optionval": "Irish",
+              "optiontext": "Irish"
+            },
+            {
+              "optionval": "White Irish",
+              "optiontext": "White Irish"
+            },
+            {
+              "optionval": "Other White",
+              "optiontext": "Other White"
+            },
+            {
+              "optionval": "White and Black Caribbean",
+              "optiontext": "White and Black Caribbean"
+            },
+            {
+              "optionval": "White and Black African",
+              "optiontext": "White and Black African"
+            },
+            {
+              "optionval": "White and Asian",
+              "optiontext": "White and Asian"
+            },
+            {
+              "optionval": "Other Mixed Background",
+              "optiontext": "Other Mixed Background"
+            },
+            {
+              "optionval": "Indian or British Indian",
+              "optiontext": "Indian or British Indian"
+            },
+            {
+              "optionval": "Pakistani or British Pakistani",
+              "optiontext": "Pakistani or British Pakistani"
+            },
+            {
+              "optionval": "Bangladeshi or British Bangladeshi",
+              "optiontext": "Bangladeshi or British Bangladeshi"
+            },
+            {
+              "optionval": "Other Asian Background",
+              "optiontext": "Other Asian Background"
+            },
+            {
+              "optionval": "Caribbean",
+              "optiontext": "Caribbean"
+            },
+            {
+              "optionval": "African",
+              "optiontext": "African"
+            },
+            {
+              "optionval": "Other Black Background",
+              "optiontext": "Other Black Background"
+            },
+            {
+              "optionval": "Chinese",
+              "optiontext": "Chinese"
+            },
+            {
+              "optionval": "Ethnic category not stated",
+              "optiontext": "Ethnic category not stated"
+            }
+          ]
+        },
+        {
+          "field_id": "tb7",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Country of birth",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 13,
+          "optionlist": null,
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "chkbl1",
+                    "comparetype": "state",
+                    "compareoperator": "filled",
+                    "comparevalue": null,
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "chkbl1",
+                    "comparetype": "state",
+                    "compareoperator": "contains",
+                    "comparevalue": [ "Chinese", "African" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "chkbl1",
+                    "comparetype": "state",
+                    "compareoperator": "doesnotcontain",
+                    "comparevalue": [ "Caribbean" ],
+                    "order": 1,
+                    "logicoperator": "or"
+                  },
+                  {
+                    "field_id": "rbl2",
+                    "comparetype": "state",
+                    "compareoperator": "equalsto",
+                    "comparevalue": [ "Female" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and/or//null"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        }
+      ]
+    },
+    {
+      "formsection_id": "section2",
+      "title": "Home Address Details",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 2,
+      "sectionfields": [
+        {
+          "field_id": "tb8",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "House name / flat number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb9",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Number and street",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb10",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Locality",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb11",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Town / City",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb12",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "County",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 5,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb13",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Postcode",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 6,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section3",
+      "title": "Current Contact Details",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 3,
+      "sectionfields": [
+        {
+          "field_id": "tb14",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Home telephone number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb15",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Work telephone number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb16",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Mobile telephone number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb17",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Email address",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null,
+          "fieldvalidations": [
+            {
+              "validationtype": "regex",
+              "fieldvalidationpattern": "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$",
+              "validationerrormsg": "This email Id doesnt seem right!",
+              "compareField": null,
+              "comparator": "between",
+              "compareValue": [ 0, 200 ],
+              "minLength": null,
+              "maxLength": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "formsection_id": "section4",
+      "title": "Previous Address & Doctor Details",
+      "banner": null,
+      "desciption": "Please help us trace your previous medical records by providing the following information.",
+      "displayorder": 4,
+      "sectionfields": [
+        {
+          "field_id": "ta1",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "Your previous address in the UK",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Your previous address in UK, mate! we need it.",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "minlen",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Your previous address in UK should be at least 5 chars.",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": 5,
+              "maxLength": null
+            },
+            {
+              "validationtype": "maxlen",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Your previous address in UK can be a max of 20 chars!",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": 20
+            }
+          ],
+          "optionlist": null
+        },
+        {
+          "field_id": "tb18",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Name of previous doctor while at that address",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "ta2",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "Address of previous doctor",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section5",
+      "title": "If you are from abroad",
+      "banner": null,
+      "desciption": "For information about how to access healthcare, including planned treatment, in Wales, Northern Ireland or Scotland, visit the relevant territory's website.",
+      "displayorder": 5,
+      "sectionfields": [
+        {
+          "field_id": "ta3",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "Your first UK address where registered with a GP",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": null
+        },
+        {
+          "field_id": "dt2",
+          "fieldcontroltypename": "dt",
+          "fieldlabeltext": "If previously resident in the UK, date of leaving",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "dt3",
+          "fieldcontroltypename": "dt",
+          "fieldlabeltext": "Date you first came to live in the UK",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section6",
+      "title": "If you are returning from the Armed Forces",
+      "banner": null,
+      "desciption": "If you are returning from the Armed Forces, we require a copy of your 'F Med133 Discharge Form' in order to process your registration. You cannot be registered permanently without this.",
+      "displayorder": 6,
+      "sectionfields": [
+        {
+          "field_id": "ta4",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "Address before enlisting",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": null
+        },
+        {
+          "field_id": "tb19",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Service or Personnel number",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "dt4",
+          "fieldcontroltypename": "dt",
+          "fieldlabeltext": "Enlistment date",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": null
+        },
+        {
+          "field_id": "dt5",
+          "fieldcontroltypename": "dt",
+          "fieldlabeltext": "Discharge date",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section7",
+      "title": "If you have a carer",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 7,
+      "sectionfields": [
+        {
+          "field_id": "rbl4",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Are you dependent on someone for some or all of the time?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "No",
+              "optiontext": "No"
+            }
+          ]
+        },
+        {
+          "field_id": "tb20",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "If 'Yes', name of person",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "ddl1",
+          "fieldcontroltypename": "ddl",
+          "fieldlabeltext": "Relationship to you",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": null,
+              "validationerrormsg": "Please select a relationship!",
+              "compareField": null,
+              "comparator": "between",
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "optionlist": [
+            {
+              "optionval": "Father",
+              "optiontext": "Father"
+            },
+            {
+              "optionval": "Mother",
+              "optiontext": "Mother"
+            },
+            {
+              "optionval": "Brother",
+              "optiontext": "Brother"
+            },
+            {
+              "optionval": "Sister",
+              "optiontext": "Sister"
+            },
+            {
+              "optionval": "Spouse",
+              "optiontext": "Spouse"
+            },
+            {
+              "optionval": "Son",
+              "optiontext": "Son"
+            },
+            {
+              "optionval": "Daughter",
+              "optiontext": "Daughter"
+            },
+            {
+              "optionval": "Cousin",
+              "optiontext": "Cousin"
+            },
+            {
+              "optionval": "Uncle",
+              "optiontext": "Uncle"
+            },
+            {
+              "optionval": "Aunt",
+              "optiontext": "Aunt"
+            },
+            {
+              "optionval": "Grandfather",
+              "optiontext": "Grandfather"
+            },
+            {
+              "optionval": "Grandmother",
+              "optiontext": "Grandmother"
+            },
+            {
+              "optionval": "Father in law",
+              "optiontext": "Father in law"
+            },
+            {
+              "optionval": "Mother in law",
+              "optiontext": "Mother in law"
+            },
+            {
+              "optionval": "Brother in law",
+              "optiontext": "Brother in law"
+            },
+            {
+              "optionval": "Sister in law",
+              "optiontext": "Sister in law"
+            },
+            {
+              "optionval": "Son in law",
+              "optiontext": "Son in law"
+            },
+            {
+              "optionval": "Daughter in law",
+              "optiontext": "Daughter in law"
+            },
+            {
+              "optionval": "Niece",
+              "optiontext": "Niece"
+            },
+            {
+              "optionval": "Nephew",
+              "optiontext": "Nephew"
+            },
+            {
+              "optionval": "Other",
+              "optiontext": "Other"
+            }
+          ]
+        },
+        {
+          "field_id": "tb21",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Contact telephone",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null,
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "ddl1",
+                    "comparetype": "state",
+                    "compareoperator": "notequalto",
+                    "comparevalue": [ "Father" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "rbl4",
+                    "comparetype": "state",
+                    "compareoperator": "notequalto",
+                    "comparevalue": [ "No" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        },
+        {
+          "field_id": "tb221",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Contact telephone 2",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null,
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "tb21",
+                    "comparetype": "state",
+                    "compareoperator": "notequalto",
+                    "comparevalue": [ "12" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        }
+      ]
+    },
+    {
+      "formsection_id": "section8",
+      "title": "If you are a carer",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 8,
+      "sectionfields": [
+        {
+          "field_id": "rbl5",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Do you look after someone who is dependent on you for some or all of the time?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "No",
+              "optiontext": "No"
+            }
+          ]
+        },
+        {
+          "field_id": "tb22",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "If 'Yes', name of person",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "ddl2",
+          "fieldcontroltypename": "ddl",
+          "fieldlabeltext": "Relationship to you",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": [
+            {
+              "optionval": "Father",
+              "optiontext": "Father"
+            },
+            {
+              "optionval": "Mother",
+              "optiontext": "Mother"
+            },
+            {
+              "optionval": "Brother",
+              "optiontext": "Brother"
+            },
+            {
+              "optionval": "Sister",
+              "optiontext": "Sister"
+            },
+            {
+              "optionval": "Spouse",
+              "optiontext": "Spouse"
+            },
+            {
+              "optionval": "Son",
+              "optiontext": "Son"
+            },
+            {
+              "optionval": "Daughter",
+              "optiontext": "Daughter"
+            },
+            {
+              "optionval": "Cousin",
+              "optiontext": "Cousin"
+            },
+            {
+              "optionval": "Uncle",
+              "optiontext": "Uncle"
+            },
+            {
+              "optionval": "Aunt",
+              "optiontext": "Aunt"
+            },
+            {
+              "optionval": "Grandfather",
+              "optiontext": "Grandfather"
+            },
+            {
+              "optionval": "Grandmother",
+              "optiontext": "Grandmother"
+            },
+            {
+              "optionval": "Father in law",
+              "optiontext": "Father in law"
+            },
+            {
+              "optionval": "Mother in law",
+              "optiontext": "Mother in law"
+            },
+            {
+              "optionval": "Brother in law",
+              "optiontext": "Brother in law"
+            },
+            {
+              "optionval": "Sister in law",
+              "optiontext": "Sister in law"
+            },
+            {
+              "optionval": "Son in law",
+              "optiontext": "Son in law"
+            },
+            {
+              "optionval": "Daughter in law",
+              "optiontext": "Daughter in law"
+            },
+            {
+              "optionval": "Niece",
+              "optiontext": "Niece"
+            },
+            {
+              "optionval": "Nephew",
+              "optiontext": "Nephew"
+            },
+            {
+              "optionval": "Other",
+              "optiontext": "Other"
+            }
+          ],
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "tb22",
+                    "comparetype": "state",
+                    "compareoperator": "filled",
+                    "comparevalue": [ "Father", "Mother" ],
+                    "order": 1,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        },
+        {
+          "field_id": "tb23",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Contact telephone",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section9",
+      "title": "Health Check Information",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 9,
+      "sectionfields": [
+        {
+          "field_id": "rbl6",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Do you smoke?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "Ex smoker",
+              "optiontext": "Ex smoker"
+            },
+            {
+              "optionval": "Never",
+              "optiontext": "Never"
+            }
+          ]
+        },
+        {
+          "field_id": "tb24",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "How much on a daily basis do you / did you smoke?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "ddl3",
+          "fieldcontroltypename": "ddl",
+          "fieldlabeltext": "How often do you have a drink containing alcohol?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": [
+            {
+              "optionval": "Never",
+              "optiontext": "Never"
+            },
+            {
+              "optionval": "Monthly or less",
+              "optiontext": "Monthly or less"
+            },
+            {
+              "optionval": "2-4 times per month",
+              "optiontext": "2-4 times per month"
+            },
+            {
+              "optionval": "2-3 times per week",
+              "optiontext": "2-3 times per week"
+            },
+            {
+              "optionval": "4+ times per week",
+              "optiontext": "4+ times per week"
+            }
+          ]
+        },
+        {
+          "field_id": "tb25",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "How many units of alcohol do you have per week on average?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 4,
+          "optionlist": null
+        },
+        {
+          "field_id": "rbl7",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "How many units of alcohol do you drink on a typical day when you are drinking?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 5,
+          "optionlist": [
+            {
+              "optionval": "1-2",
+              "optiontext": "1-2"
+            },
+            {
+              "optionval": "3-4",
+              "optiontext": "3-4"
+            },
+            {
+              "optionval": "5-6",
+              "optiontext": "5-6"
+            },
+            {
+              "optionval": "7-9",
+              "optiontext": "7-9"
+            },
+            {
+              "optionval": "10+",
+              "optiontext": "10+"
+            }
+          ]
+        },
+        {
+          "field_id": "ddl4",
+          "fieldcontroltypename": "ddl",
+          "fieldlabeltext": "How often have you had 6 or more units if female, or 8 or more units if male, on a single occasion in the last year?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 6,
+          "optionlist": [
+            {
+              "optionval": "Never",
+              "optiontext": "Never"
+            },
+            {
+              "optionval": "Less than monthly",
+              "optiontext": "Less than monthly"
+            },
+            {
+              "optionval": "Monthly",
+              "optiontext": "Monthly"
+            },
+            {
+              "optionval": "Weekly",
+              "optiontext": "Weekly"
+            },
+            {
+              "optionval": "Daily or almost daily",
+              "optiontext": "Daily or almost daily"
+            }
+          ]
+        },
+        {
+          "field_id": "chkbl2",
+          "fieldcontroltypename": "chkbl",
+          "fieldlabeltext": "Do you have any of the following condition?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 7,
+          "optionlist": [
+            {
+              "optionval": "Heart Disease",
+              "optiontext": "Heart Disease"
+            },
+            {
+              "optionval": "Stroke",
+              "optiontext": "Stroke"
+            },
+            {
+              "optionval": "High Blood Pressure",
+              "optiontext": "High Blood Pressure"
+            },
+            {
+              "optionval": "Diabetes",
+              "optiontext": "Diabetes"
+            },
+            {
+              "optionval": "Cancer",
+              "optiontext": "Cancer"
+            },
+            {
+              "optionval": "Asthma",
+              "optiontext": "Asthma"
+            },
+            {
+              "optionval": "COPD / Emphysema",
+              "optiontext": "COPD / Emphysema"
+            },
+            {
+              "optionval": "Epilepsy",
+              "optiontext": "Epilepsy"
+            },
+            {
+              "optionval": "Thyroid Disease",
+              "optiontext": "Thyroid Disease"
+            }
+          ],
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "ddl4",
+                    "comparetype": "state",
+                    "compareoperator": "equalsto",
+                    "comparevalue": [ "Monthly" ],
+                    "order": 1,
+                    "logicoperator": "or"
+                  }
+                ],
+                "logicoperator": "or"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        },
+        {
+          "field_id": "chkbl3",
+          "fieldcontroltypename": "chkbl",
+          "fieldlabeltext": "Do any of your family members have a history of, or problems with:",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 8,
+          "optionlist": [
+            {
+              "optionval": "Hypertension",
+              "optiontext": "Hypertension"
+            },
+            {
+              "optionval": "CVA / Stroke",
+              "optiontext": "CVA / Stroke"
+            },
+            {
+              "optionval": "Diabetes",
+              "optiontext": "Diabetes"
+            },
+            {
+              "optionval": "Asthma",
+              "optiontext": "Asthma"
+            },
+            {
+              "optionval": "Breast Cancer",
+              "optiontext": "Breast Cancer"
+            },
+            {
+              "optionval": "Cancer of Gastrointestinal Tract",
+              "optiontext": "Cancer of Gastrointestinal Tract"
+            },
+            {
+              "optionval": "Ischaemic Heart Disease (IHD)",
+              "optiontext": "Ischaemic Heart Disease (IHD)"
+            }
+          ]
+        },
+        {
+          "field_id": "ta5",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "If yes to any of the above, which family member(s)",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 9,
+          "optionlist": null
+        },
+        {
+          "field_id": "rbl8",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "If yes to IHD, was / is the family member",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 10,
+          "optionlist": [
+            {
+              "optionval": "Under 60 yrs?",
+              "optiontext": "Under 60 yrs?"
+            },
+            {
+              "optionval": "Over 60 yrs?",
+              "optiontext": "Over 60 yrs?"
+            }
+          ]
+        },
+        {
+          "field_id": "rbl9",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Do you have any allergies?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 11,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "No",
+              "optiontext": "No"
+            }
+          ]
+        },
+        {
+          "field_id": "ta6",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "If you have allergies, please provide details, i.e. reaction",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 12,
+          "optionlist": null
+        }
+      ]
+    },
+    {
+      "formsection_id": "section10",
+      "title": "Accessible Information",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 10,
+      "sectionfields": [
+        {
+          "field_id": "rbl10",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Do you have any communication or information needs that we should be aware of?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "No",
+              "optiontext": "No"
+            }
+          ]
+        },
+        {
+          "field_id": "ta7",
+          "fieldcontroltypename": "ta",
+          "fieldlabeltext": "If you answered 'Yes', please give details below.",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "rbl11",
+          "fieldcontroltypename": "rbl",
+          "fieldlabeltext": "Do you give consent for this information to be shared with other healthcare organisations as and when required?",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "optionlist": [
+            {
+              "optionval": "Yes",
+              "optiontext": "Yes"
+            },
+            {
+              "optionval": "No",
+              "optiontext": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "formsection_id": "section11",
+      "title": "Patient Declaration",
+      "banner": null,
+      "desciption": null,
+      "displayorder": 11,
+      "sectionfields": [
+        {
+          "field_id": "lbl1",
+          "fieldcontroltypename": "lbl",
+          "fieldlabeltext": "By signing below, you are declaring that the information contained within this patient registration form is accurate to the best of your knowledge.",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 1,
+          "optionlist": null
+        },
+        {
+          "field_id": "lbl2",
+          "fieldcontroltypename": "lbl",
+          "fieldlabeltext": "Any suspected fraudulent information will be reported to the relevant authorities.",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 2,
+          "optionlist": null
+        },
+        {
+          "field_id": "dttm1",
+          "fieldcontroltypename": "dttm",
+          "fieldlabeltext": "Today’s date and current time",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 3,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "This date is required",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "No! No! No! No!",
+              "compareField": null,
+              "comparator": "between",
+              "compareDateValue": [ "days", "seconds" ],
+              "compareValue": [ 0, 0 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "This should be today's date!",
+              "compareField": null,
+              "comparator": "greaterthanorequalto",
+              "compareDateValue": [ "days" ],
+              "compareValue": [ 0 ],
+              "minLength": null,
+              "maxLength": null
+            },
+            {
+              "validationtype": "valcmp",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "This date can't be from future!",
+              "compareField": null,
+              "comparator": "lessthanorequalto",
+              "compareDateValue": [ "seconds" ],
+              "compareValue": [ 0 ],
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "optionlist": null
+        },
+        {
+          "field_id": "tbYourName",
+          "fieldcontroltypename": "tb",
+          "fieldlabeltext": "Your Name",
+          "fieldvalue": null,
+          "defaultvalue": null,
+          "fielddisplayorder": 9,
+          "optionlist": null,
+          "fieldvalidations": [
+            {
+              "validationtype": "req",
+              "fieldvalidationpattern": "*",
+              "validationerrormsg": "Your name is required",
+              "compareField": null,
+              "comparator": null,
+              "compareValue": null,
+              "minLength": null,
+              "maxLength": null
+            }
+          ],
+          "displayrules": {
+            "conditiongroup": [
+              {
+                "condition": [
+                  {
+                    "field_id": "dttm1",
+                    "comparetype": "state",
+                    "compareoperator": "filled",
+                    "comparevalue": null,
+                    "order": 1,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "dttm1",
+                    "comparetype": "state",
+                    "compareoperator": "between",
+                    "comparedatevalue": [ "days", "seconds" ],
+                    "comparevalue": [ "0", "0" ],
+                    "order": 2,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "dttm1",
+                    "comparetype": "state",
+                    "compareoperator": "greaterthanorequalto",
+                    "comparedatevalue": [ "days" ],
+                    "comparevalue": [ "0" ],
+                    "order": 2,
+                    "logicoperator": "and"
+                  },
+                  {
+                    "field_id": "dttm1",
+                    "comparetype": "state",
+                    "compareoperator": "lessthanorequalto",
+                    "comparedatevalue": [ "seconds" ],
+                    "comparevalue": [ "0" ],
+                    "order": 3,
+                    "logicoperator": "and"
+                  }
+                ],
+                "logicoperator": "and"
+              }
+            ],
+            "iscascade": "bool",
+            "parentfield": "field_id"
+          }
+        }
+      ]
+    }
+  ]
+}

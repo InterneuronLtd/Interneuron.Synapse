@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -17,9 +17,12 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Interneuron.Infrastructure.CustomExceptions;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -138,6 +141,8 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewID = "";
             DataSet dsListDetails = new DataSet();
 
+            string defaultContext = string.Empty;
+            string defaultContextField = string.Empty;
             string matchedcontextfield = "";
             string rowcssfield = "";
             string snapshotTemplateLine1;
@@ -156,6 +161,18 @@ namespace SynapseDynamicAPI.Controllers
             try
             {
                 baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContext = dtListDetails.Rows[0]["defaultcontext"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContextField = dtListDetails.Rows[0]["defaultcontextfield"].ToString();
             }
             catch { }
 
@@ -337,6 +354,8 @@ namespace SynapseDynamicAPI.Controllers
 
             //Get List and Attribute Details
             string sqlAttributes = "SELECT *, " +
+                                   "@defaultcontext AS defaultcontext, " +
+                                   "@defaultcontextfield AS defaultcontextfield, " +
                                    "@matchedcontextfield AS matchedcontext, " +
                                    "@snapshottemplateline1 AS snapshottemplateline1, " +
                                    "@snapshottemplateline2 AS snapshottemplateline2, " +
@@ -350,6 +369,8 @@ namespace SynapseDynamicAPI.Controllers
                                    "ORDER BY ordinalposition;";
             var paramListAttributes = new List<KeyValuePair<string, object>>() {
                 new KeyValuePair<string, object>("list_id", listId),
+                new KeyValuePair<string, object>("defaultcontext", defaultContext),
+                new KeyValuePair<string, object>("defaultcontextfield", defaultContextField),
                 new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
                 new KeyValuePair<string, object>("snapshottemplateline1", snapshotTemplateLine1),
                 new KeyValuePair<string, object>("snapshottemplateline2", snapshotTemplateLine2),
@@ -379,6 +400,9 @@ namespace SynapseDynamicAPI.Controllers
                 sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
 
                 sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
+
+                sb.AppendLine("'defaultcontext', '" + row["defaultcontext"].ToString() + "', ");
+                sb.AppendLine("'defaultcontextfield', '" + row["defaultcontextfield"].ToString() + "', ");
 
                 sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
                 sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
@@ -597,6 +621,10 @@ namespace SynapseDynamicAPI.Controllers
 
             string baseViewID = "";
             DataSet dsListDetails = new DataSet();
+
+            string defaultContext = string.Empty;
+            string defaultContextField = string.Empty;
+
             string matchedcontextfield = "";
             string rowcssfield = "";
 
@@ -617,6 +645,18 @@ namespace SynapseDynamicAPI.Controllers
             try
             {
                 baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContext = dtListDetails.Rows[0]["defaultcontext"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContextField = dtListDetails.Rows[0]["defaultcontextfield"].ToString();
             }
             catch { }
 
@@ -806,6 +846,8 @@ namespace SynapseDynamicAPI.Controllers
 
             //Get List and Attribute Details
             string sqlAttributes = "SELECT *, " +
+                                   "@defaultcontext AS defaultcontext, " +
+                                   "@defaultcontextfield AS defaultcontextfield, " +
                                    "@matchedcontextfield AS matchedcontext, " +
                                    "@snapshottemplateline1 AS snapshottemplateline1, " +
                                    "@snapshottemplateline2 AS snapshottemplateline2, " +
@@ -816,6 +858,8 @@ namespace SynapseDynamicAPI.Controllers
 
             var paramListAttributes = new List<KeyValuePair<string, object>>() {
                 new KeyValuePair<string, object>("list_id", listId),
+                new KeyValuePair<string, object>("defaultcontext", defaultContext),
+                new KeyValuePair<string, object>("defaultcontextfield", defaultContextField),
                 new KeyValuePair<string, object>("matchedcontextfield", matchedcontextfield),
                 new KeyValuePair<string, object>("snapshottemplateline1", snapshotTemplateLine1),
                 new KeyValuePair<string, object>("snapshottemplateline2", snapshotTemplateLine2),
@@ -843,6 +887,9 @@ namespace SynapseDynamicAPI.Controllers
                 sb.AppendLine("'defaultcssclassname','" + row["defaultcssclassname"].ToString() + "',");
 
                 sb.AppendLine("'rowcssfield', " + rowcssfield + ",");
+
+                sb.AppendLine("'defaultcontext', '" + row["defaultcontext"].ToString() + "', ");
+                sb.AppendLine("'defaultcontextfield', '" + row["defaultcontextfield"].ToString() + "', ");
 
                 sb.AppendLine("'matchedcontext', " + row["matchedcontext"].ToString() + ", ");
                 sb.AppendLine("'snapshottemplateline1', " + (string.IsNullOrWhiteSpace(Convert.ToString(row["snapshottemplateline1"])) ? "''" : row["snapshottemplateline1"].ToString()) + ", ");
@@ -1280,6 +1327,9 @@ namespace SynapseDynamicAPI.Controllers
             string baseViewID = "";
             DataSet dsListDetails = new DataSet();
 
+            string defaultContext = string.Empty;
+            string defaultContextField = string.Empty;
+
             string matchedcontextfield = "";
             string snapshotTemplateLine1 = "";
             string snapshotTemplateLine2 = "";
@@ -1289,6 +1339,18 @@ namespace SynapseDynamicAPI.Controllers
             try
             {
                 baseViewID = dtListDetails.Rows[0]["baseview_id"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContext = dtListDetails.Rows[0]["defaultcontext"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                defaultContextField = dtListDetails.Rows[0]["defaultcontextfield"].ToString();
             }
             catch { }
 
@@ -1343,6 +1405,8 @@ namespace SynapseDynamicAPI.Controllers
             string colSnapshotTemplateBadge = string.IsNullOrWhiteSpace(snapshotTemplateBadge) ? "''" : snapshotTemplateBadge;
 
             sb.AppendLine("json_build_object (");
+            sb.AppendLine("'defaultcontext', '" + defaultContext + "',");
+            sb.AppendLine("'defaultcontextfield', '" + defaultContextField + "',");
             sb.AppendLine("'matchedcontext', " + matchedcontextfield + ",");
             sb.AppendLine("'snapshottemplateline1', " + colSnapshotTemplateLine1 + ",");
             sb.AppendLine("'snapshottemplateline2', " + colSnapshotTemplateLine2 + ",");
@@ -1370,7 +1434,135 @@ namespace SynapseDynamicAPI.Controllers
             return DataServices.ConvertDataTabletoJSONString(dtList);
             
         }
+
+        [HttpGet]
+        [Route("[action]/{defaultcontext?}/{defaultcontextfield?}/{value?}")]
+        public string GetContext(string defaultcontext, string defaultcontextfield, string value)
+        {
+            string entityDetailsSQL = "SELECT synapsenamespacename, entityname FROM entitysettings.entitymanager WHERE entityid = @entityid";
+
+            var parameters = new List<KeyValuePair<string, object>>() {
+                new KeyValuePair<string, object>("entityid", defaultcontext)
+            };
+
+            DataSet dsEntityDetails = new DataSet();
+            
+            dsEntityDetails = DataServices.DataSetFromSQL(entityDetailsSQL, parameters);
+            DataTable dtEntityDetail = dsEntityDetails.Tables[0];
+
+            string synapseNamespaceName = Convert.ToString(dtEntityDetail.Rows[0]["synapsenamespacename"]);
+            string entityName = Convert.ToString(dtEntityDetail.Rows[0]["entityname"]);
+
+
+            string cteSQL = "with recursive cte_relation as" +
+                            " ( " +
+                            " select synapsenamespacename, entityname, parentsynapsenamespacename, parententityname, parentattributename" +
+                            " from entitysettings.entityrelation " +
+                            " where entityname = @entityname" +
+                            " and synapsenamespacename = @synapseNamespaceName" +
+                            " and parentsynapsenamespacename not in ('meta')" +
+                            " union" +
+                            " select er.synapsenamespacename, er.entityname, er.parentsynapsenamespacename, er.parententityname, er.parentattributename" +
+                            " from entitysettings.entityrelation er" +
+                            " inner join cte_relation cte on er.synapsenamespacename = cte.parentsynapsenamespacename and er.entityname = cte.parententityname" +
+                            " where er.parententityname in ('person', 'encounter')" +
+                            " and er.entityname not in ('person', 'encounter')" +
+                            " )" +
+                            " select* from cte_relation";
+
+            var paras = new List<KeyValuePair<string, object>>() {
+                new KeyValuePair<string, object>("entityname", entityName),
+                new KeyValuePair<string, object>("synapseNamespaceName", synapseNamespaceName)
+            };
+
+            DataSet dsEntityRelation = new DataSet();
+
+            dsEntityRelation = DataServices.DataSetFromSQL(cteSQL, paras);
+            DataTable dtEntityRelation = dsEntityRelation.Tables[0];
+
+            int aliasA = 0, aliasB = 0;
+
+            Dictionary<string, string> entities = new Dictionary<string, string>();
+
+            foreach (DataRow row in dtEntityRelation.Rows)
+            {
+                string entityKey = Convert.ToString(row["synapsenamespacename"]) + "_" + Convert.ToString(row["entityname"]);
+                string entityValue = "a" + Convert.ToString(aliasA);
+
+                if (!entities.ContainsKey(entityKey))
+                {
+                    entities.Add(entityKey, entityValue);
+                }
+
+                aliasA++;
+
+                string parentEntityKey = Convert.ToString(row["parentsynapsenamespacename"]) + "_" + Convert.ToString(row["parententityname"]);
+                string parentEntityValue = "b" + Convert.ToString(aliasB);
+
+                if (!entities.ContainsKey(parentEntityKey))
+                {
+                    entities.Add(parentEntityKey, parentEntityValue);
+                }
+
+                aliasB++;
+            }
+
+            if (entities.Count == 0) return "[]";
+
+            StringBuilder contextQuery = new StringBuilder();
+
+            string initSelect = "select " + entities.First().Value + "." +  defaultcontextfield + ", ";
+
+            foreach (DataRow row in dtEntityRelation.Rows)
+            {
+                string parentEntity = Convert.ToString(row["parentsynapsenamespacename"]) + "_" + Convert.ToString(row["parententityname"]);
+                
+                contextQuery.Append(entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]) + ", ");
+            }
+
+            string selectParameters = contextQuery.ToString().TrimEnd(", ");
+
+            contextQuery.Clear();
+
+            contextQuery.Append(selectParameters);
+
+            contextQuery.Append(" from ");
+
+
+            foreach (DataRow row in dtEntityRelation.Rows)
+            {
+                string entity = Convert.ToString(row["synapsenamespacename"]) + "_" + Convert.ToString(row["entityname"]);
+
+                if(!contextQuery.ToString().Contains(entity))
+                {
+                    contextQuery.Append(" entitystorematerialised." + entity + " as " + entities.GetValueOrDefault(entity));
+                }
+
+
+                string parentEntity = Convert.ToString(row["parentsynapsenamespacename"]) + "_" + Convert.ToString(row["parententityname"]);
+
+                contextQuery.Append(" left join entitystorematerialised." + parentEntity + " as " + entities.GetValueOrDefault(parentEntity));
+
+                contextQuery.Append(" on " + entities.GetValueOrDefault(entity) + "." + Convert.ToString(row["parentattributename"]) + " = " + entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]));
+            }
+
+            contextQuery.Append(" where " + entities.First().Value + "." + defaultcontextfield + " = @defaultcontextfield");
+
+            string finalContextQuery = initSelect + contextQuery.ToString();
+
+            var pars = new List<KeyValuePair<string, object>>() {
+                new KeyValuePair<string, object>("defaultcontextfield", value)
+            };
+
+            DataSet dsContext = new DataSet();
+            dsContext = DataServices.DataSetFromSQL(finalContextQuery, pars);
+            DataTable dtContext = dsContext.Tables[0];
+            return DataServices.ConvertDataTabletoJSONString(dtContext);
+
+        }
+
     }
+    
 }
 
 public class ListAttribute

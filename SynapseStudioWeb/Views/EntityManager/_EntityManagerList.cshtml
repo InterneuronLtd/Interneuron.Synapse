@@ -1,0 +1,14 @@
+﻿@model List<SynapseStudioWeb.Models.CoreEntityModel>
+ <div class="row p-2">
+     <div class="col-md-12" style="text-transform:uppercase"><span id="entityname"></span> Entities (@Model.Count)</div>
+ </div>
+<div class="row p-2">
+    <div class="col-md-12">         
+        @foreach (var m in Model)
+        {
+            <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+
+        }
+    </div>              
+</div>
+

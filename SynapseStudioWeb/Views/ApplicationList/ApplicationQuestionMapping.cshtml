@@ -1,0 +1,268 @@
+﻿@{
+    ViewData["Title"] = "ApplicationQuestionMapping";
+}
+
+<script src="~/Scripts/knockout-2.2.0.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        loadQuestionList();        
+    });
+
+    function loadQuestionList() {
+
+        $.when(
+            getApplicationQuestions()
+        ).done(
+            function (availableQues) {
+                var availableList = jQuery.parseJSON(availableQues);
+                var html = "<ul id='availableList'>";
+                var selectedhtml = "<ul id='selectedList'>";
+                let selectedIndex = 1;
+
+                $.each(availableList, function (i, availableItem) {
+
+                    html += '<li id="avail' + availableItem.application_id + '"'
+
+                    if (availableItem.isselected) {
+                        html += ' class="itemSelected"';
+
+                        selectedhtml += "<li id='" + availableItem.questionid + "'>";
+                        selectedhtml += "<div class='row'><div class='col-md-9'>"
+                        selectedhtml += selectedIndex++;
+                        selectedhtml += '.&nbsp;';
+                        selectedhtml += availableItem.questionquickname;
+                        selectedhtml += "</div><div class='col-md-3'>"
+                        //selectedhtml += "<a href='#' onclick='showDetailModal(" + JSON.stringify(availableItem) + ")' class='pull-right'><small>Edit</small></a>";
+                        selectedhtml += "</div></div>"
+                        selectedhtml += '</li>';
+                    }
+
+                    html += '><input type="checkbox" name= "' + availableItem.questionid + '"    id="' + availableItem.questionid + '"';
+
+                    if (availableItem.isselected) {
+                        html += ' checked';
+                    }
+
+                    html += ' onclick="SelectUnselectQuestion(this);"/>&nbsp;&nbsp;' + availableItem.questionquickname + '</li>';
+
+                });
+
+                html += "</ul";
+                $('#availableQuestions').html(html);
+                selectedhtml += "</ul>"
+                $('#selectedQuestions').html(selectedhtml);
+            }
+        )
+    }
+
+    function getApplicationQuestions() {
+        var url = "LoadApplicationQuestion";
+        var id = $('#applicationId').text();
+        var data = "{'applicationId': '1'}";
+
+        return   $.ajax({
+                        url: '@Url.Action("LoadApplicationQuestion", "ApplicationList")',
+                        type: "Get",
+                        data: { applicationId:id },
+                        success: function (result) {}
+                        });
+    }
+
+    function SelectUnselectQuestion(cb, attributeID) {
+
+        var li = '#avail' + cb.id;
+
+        if (cb.checked) {
+            $.when(
+                addQuestionToList(cb)
+            ).done(
+                function () {
+                    loadQuestionList();
+                })
+
+            $(li).addClass('itemSelected');
+        }
+        else {
+            $.when(
+                removeQuestionFromList(cb)
+            ).done(
+                function () {
+                    loadQuestionList();
+                })
+
+            $(li).removeClass('itemSelected');
+        }
+
+        //loadQuestionList();
+    }
+
+    function addQuestionToList(question) {
+        //debugger;
+        console.log("Added: " + question);
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+
+        var id = $('#applicationId').text();
+        //var data = "{'listId': '" + id + "','questionid':'" + question.id + "','ordinalposition':'" + 1 + "'}";
+        return  $.ajax({
+                        url: '@Url.Action("MapQuestiontoApplication", "ApplicationList")',
+                        type: "Get",
+                        data: { applicationId: id, questionid: question.id ,ordinalposition:1},
+                        success: function (result) {}
+                        });
+    }
+
+    function removeQuestionFromList(question) {
+
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+        //var url = "ApplicationModuleMapping.aspx/UnMapModulefromApplication";
+        var id = $('#applicationId').text();
+        //var data = "{'listId': '" + id + "','attributename':'" + attributename.id + "'}";
+        return  $.ajax({
+                        url: '@Url.Action("UnMapQuestionfromApplication", "ApplicationList")',
+                        type: "Get",
+                        data: { applicationId: id, questionid: question.id},
+            success: function (result) {}
+         });
+
+    }
+</script>
+
+<style type="text/css">
+    .selectContainer {
+        border: 1px dashed white;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    #availableList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #availableList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+        }
+
+
+    .itemSelected {
+        border: 1px dashed green !important;
+        color: #101231 !important;
+    }
+
+    #selectedList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #selectedList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+            cursor: move; /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+        }
+
+            #selectedList li:active {
+                cursor: grabbing;
+                cursor: -moz-grabbing;
+                cursor: -webkit-grabbing;
+            }
+
+            #selectedList li span {
+                position: absolute;
+                margin-left: -1.3em;
+            }
+</style>
+
+<div id="page-wrapper">
+    <div class="modal" tabindex="-1" role="dialog" id="detail-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Attribute Properties</h3>
+                </div>
+                <div class="modal-body">
+                    <span id="attributeId" class="invisible"></span>
+                    <span class="lead" style="color: rgb(42, 159, 214);"><span class="invisible" id="attributeName"></span></span>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"> List Display Name</label>
+                            @Html.TextBox("txtDisplayName", null, new { @class = "form-control" })
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary" id="btnQuickSave">Save changes</button>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 7px;">
+        <div class="col-md-6">
+            <h4> @ViewBag.applicationname List Mapping</h4>
+        </div>
+        <div class="col-md-6">
+            <h4 style="color: lightgray;" class="pull-right">
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a href='@("/ApplicationList/ApplicationListMapping?id=" + ViewBag.applicationid + "&name=" + ViewBag.applicationname)' class="btn btn-primary btn-sm block">Select List</a>
+        </div>
+    </div>
+    <div class="invisible">
+        <h4>ListID: <span id="applicationId">@ViewBag.applicationid </span></h4>
+        <h4>Next Ordinal Position: <span id="lblNextOrdinalPosition"></span></h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-cog"></i>&nbsp;Selected Questions</h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="selectContainer">
+                                <p style="font-size: 1.8em; font-weight: bold">Available Questions for Application</p>
+                                <div id="availableQuestions"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="selectContainer">
+                                <p style="font-size: 1.8em; font-weight: bold">Selected Questions</p>
+                                <div id="selectedQuestions"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

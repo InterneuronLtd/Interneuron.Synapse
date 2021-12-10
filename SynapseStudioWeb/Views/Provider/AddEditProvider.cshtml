@@ -1,0 +1,155 @@
+﻿@using SynapseStudioWeb.Models;
+@model ProviderAddEditViewModel;
+
+@{
+    ViewData["Title"] = "AddEditProvider";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model is null)
+        {
+            <h4>New Provider</h4>
+        }
+        else
+        {
+            <h4>Edit Provider</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="SaveProvider" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.provider.provider_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="provider.prefix">
+                            Prefix <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.DropDownListFor(m => m.provider.prefix,
+                                new SelectList(Enum.GetValues(typeof(Honorific))), "Select Prefix", new
+                                {
+                                    @class = "form-control"
+                                })
+                            @Html.ValidationMessageFor(m => m.provider.prefix)
+                        </div>
+                    </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="firstname">
+                                First Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.firstname" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.provider.firstname)
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="middlename">
+                                Middle Name
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.middlename" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="lastname">
+                                Last Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.lastname" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.provider.lastname)
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="title">
+                                Title
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.title" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="emailid">
+                                Email
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.emailid" class="form-control" type="email" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="phonenumber">
+                                Phone Number
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.phonenumber" class="form-control" type="tel" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="suffix">
+                                Suffix
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.suffix" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="employer">
+                                Employer
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.employer" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="grade">
+                                Grade
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.grade" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="role">
+                                Role <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.DropDownListFor(m => m.provider.role,
+                                new SelectList(Model.providerroles), "Select Role", new
+                                {
+                                    @class = "form-control"
+                                })
+                                @Html.ValidationMessageFor(m => m.provider.role)
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="userid">
+                                User Id
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="provider.userid" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="notes">
+                                Notes
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <textarea asp-for="provider.notes" class="form-control" rows="5" cols="20"></textarea>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <div class="col-md-6 col-sm-6 offset-md-5">
+                                <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("ProviderList", "Provider")'">Cancel</button>
+                                <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

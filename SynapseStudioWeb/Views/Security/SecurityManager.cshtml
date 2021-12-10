@@ -1,0 +1,157 @@
+﻿
+@{
+    ViewData["Title"] = "Security Manager";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Security <small>Manager</small></h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-laptop"></i>Client Apps (@ViewBag.Clients.Rows.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="~/Client/NewClient">New Client</a>
+                    </div>
+                    @*<span style="font-size: 1.8em;">  &nbsp;Client Apps (@ViewBag.Clients.Rows.Count)</span>*@
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Client ID</th>
+                            <!--<th>Enabled</th>-->
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Clients.Rows)
+                        {
+                            <tr>
+                                <td><a href=@("../Client/NewClient?id=" + item["ClientId"])>@item["ClientId"]</a></td>
+                                @*<td>@item["enabled"]</td>*@
+                                <td>
+                                    @*<a href=@("../Client/NewClient") style="float:left">View</a>*@
+                                    <a href=@("../ClientManager/ClientGrantTypes?id=" + item["Id"]) style="float:right">View</a>
+                                </td>
+                            </tr>
+                            // <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("/EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-briefcase"></i>Identity Claims (@ViewBag.IdentityClaims.Rows.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="~/IdentityManager/IdentityClaimsManager">Manage Claims</a>
+                    </div>
+                    @*<span style="font-size: 1.8em;">  &nbsp;Identity Claims (@ViewBag.IdentityClaims.Rows.Count)</span>*@
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Claim</th>
+                            <!--<th>Resource</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.IdentityClaims.Rows)
+                        {
+                            <tr>
+
+                                <td>@item["claimname"]</td>
+                                @*<td>@item["resourcename"]</td>*@
+                            </tr>
+                            // <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("/EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-server"></i>API Scopes (@ViewBag.APIResources.Rows.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="~/ManageAPIs/ApIManager">Manage APIs</a>
+                    </div>
+                    @*<span style="font-size: 1.8em;">  &nbsp;API Scopes (@ViewBag.APIResources.Rows.Count)</span>*@
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Scope</th>
+                            <th>Description</th>
+                            <!--<th>API Resource</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.APIResources.Rows)
+                        {
+                            <tr>
+
+                                <td>@item["scopename"]</td>
+                                <td>@item["scopedescription"]</td>
+                                @*<td>@item["resourcename"]</td>*@
+                            </tr>
+                            // <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("/EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-user"></i>Roles (@ViewBag.Roles.Rows.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="~/RoleManager/NewRole">Add Role</a>
+                        <a class="btn btn-primary btn-sm" href="~/RoleManager/AddUser">Add Local User</a>
+                    </div>
+                    @*<span style="font-size: 1.8em;">  &nbsp;Roles (@ViewBag.Roles.Rows.Count)</span>*@
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Role</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.Roles.Rows)
+                        {
+                            <tr>
+                                <td>@item["rolename"]</td>
+
+                                <td>
+                                <td><a href=@("../RoleManager/ManageRole?id=" + item["id"]) style="float:left">View</a></td>
+                            </tr>
+                            // <div class="list-group-item"> <span>@m.EntityName</span> <a href=@("/EntityManager/EntityManagerAttribute?id=" + m.EntityId) style="float:right">View</a></div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,26 @@
+﻿@model SynapseStudioWeb.Models.APIModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>List APIs</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("ListManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectAttributes?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Columns</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectQuestions?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Questions</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListAPIs?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+
+</div> 
+<script src="~/js/listmanager.js"></script>

@@ -1,0 +1,416 @@
+﻿@{
+    ViewData["Title"] = "ApplicationListMapping";
+}
+
+<script src="~/Scripts/knockout-2.2.0.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+<script type="text/javascript">
+
+    function PostData(service, data) {
+
+        var service = service;
+        var uri = service;
+
+         jQuery.ajax({
+            data: data,
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+               url:uri,
+            type: 'POST',
+            success: function (result) {
+                // Do something with the result
+            }
+        });
+
+    }
+
+
+    function getAvailableAttributes() {
+        var url = "LoadModuleList";
+        var id = $('#listID').text();
+        var data = "{'listId': '1'}";
+
+        return   $.ajax({
+
+                        url: '@Url.Action("LoadModuleList", "ApplicationList")',
+                        type: "Get",
+                        data: { listId:id },
+            success: function (result) {
+
+
+            }
+                    });
+
+    }
+
+    function getSelectedAttributes() {
+
+
+        var url = "GetMappedModules";
+        var id = $('#listID').text();
+        var data = {listId: '1'};
+
+        return   $.ajax({
+                        url: '@Url.Action("GetMappedModules", "ApplicationList")',
+                        type: "Get",
+                        data: { listId:id },
+            success: function (result) {}
+         });
+
+    }
+
+    function addAttributeToList(attributename) {
+        //debugger;
+        console.log("Added: " + attributename);
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+        var url = "ApplicationModuleMapping.aspx/MapModuletoApplication";
+        var id = $('#listID').text();
+        var data = "{'listId': '" + id + "','attributename':'" + attributename.id + "','ordinalposition':'" + 1 + "'}";
+        return  $.ajax({
+                        url: '@Url.Action("MapModuletoApplication", "ApplicationList")',
+                        type: "Get",
+                        data: {listId: id ,attributename: attributename.id ,ordinalposition:1},
+            success: function (result) {}
+         });
+
+    }
+
+    function removeAttributeFromList(attributename) {
+
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+        var url = "ApplicationModuleMapping.aspx/UnMapModulefromApplication";
+        var id = $('#listID').text();
+        var data = "{'listId': '" + id + "','attributename':'" + attributename.id + "'}";
+        return  $.ajax({
+                        url: '@Url.Action("UnMapModulefromApplication", "ApplicationList")',
+                        type: "Get",
+                        data: {listId: attributename.name ,attributename: attributename.id},
+            success: function (result) {}
+         });
+
+    }
+
+    function SaveQuickAttributes(listId,attributeId, displayname, isdefaultmodule) {
+        var url = "ApplicationModuleMapping.aspx/SaveDisplayName";
+        var listId = $('#listID').text();
+        var data = "{'listId': '" + attributeId + "','displayname':'" + displayname + "','isdefaultmodule':'" + isdefaultmodule + "'}";
+        return  $.ajax({
+                        url: '@Url.Action("SaveDisplayName", "ApplicationList")',
+                        type: "Get",
+                      data: {listId:listId,Modelid: attributeId ,displayname:displayname,isdefaultmodule: isdefaultmodule},
+            success: function (result) {}
+         });
+
+    }
+
+    function SelectUnselectAttribute(cb, attributeID) {
+
+        console.log(cb.name);
+
+        var li = '#avail' + cb.id;
+        if (cb.checked) {
+            $.when(
+                addAttributeToList(cb)
+            ).done(
+                function (
+
+                ) {
+
+                    loadModulelist();
+                })
+
+            $(li).addClass('itemSelected');
+
+        }
+        else {
+            $.when(
+                removeAttributeFromList(cb)
+            ).done(
+                function (
+
+                ) {
+                    loadModulelist();
+
+                })
+
+            $(li).removeClass('itemSelected');
+        }
+    }
+
+    function getSelectedListModule() {
+
+        $.when(
+            getSelectedAttributes()
+        ).done(
+            function (
+                selectedListpar
+            ) {
+                //debugger;
+                var selectedList = jQuery.parseJSON(selectedListpar);
+                var html = "<ul id='selectedList'>";
+                $.each(selectedList, function (i, selectedItem) {
+
+
+
+                        var func = "'" + selectedItem.module_id + "'"; //, '" + selectedItem.attributename + "');";
+
+                        html += "<li id='" + selectedItem.applicationlist_id + "'>";
+                        html += "<div class='row'><div class='col-md-9'>"
+                        html += i + 1;
+                        html += '.&nbsp;';
+                        html += selectedItem.listname;
+                        html += "</div><div class='col-md-3'>"
+                        //html += "<a href='#' onclick='showDetailModal(\"" + selectedItem.listattribute_id + "\",\"" + selectedItem.attributename + "\")' class='pull-right'><small>Edit</small></a>";
+                        //html += "<a href='#' onclick='showDetailModal(" + JSON.stringify(selectedItem) + ")' class='pull-right'><small>Edit</small></a>";
+                        html += "</div></div>"
+                        html += '</li>';
+                });
+                html += "</ul>"
+                $('#selectedAttributes').html(html);
+
+
+                $("#selectedList").sortable({
+                    revert: true,
+                    stop: function (event, ui) {
+
+                        var sortOrder = $("#selectedList").sortable('toArray');
+
+                        console.log(sortOrder.length);
+                        //sortOrder = JSON.parse(sortOrder)
+
+                        var arrayLength = sortOrder.length;
+                        for (var i = 0; i < arrayLength; i++) {
+
+                            UpdateAttributeOrder(sortOrder[i], i + 1);
+                            getSelectedList();
+
+                        }
+
+                    }
+                });
+
+                getNextOrdinalPositionForLabel();
+
+
+            })
+
+    }
+
+    function loadModulelist() {
+
+        $.when(
+            getAvailableAttributes()
+        ).done(
+            function (
+                availableListpar
+            ) {
+
+                  var availableList = jQuery.parseJSON(availableListpar);
+                var html = "<ul id='availableList'>";
+                var selectedhtml = "<ul id='selectedList'>";
+                $.each(availableList, function (i, availableItem) {
+
+                    html += '<li id="avail' + availableItem.module_id + '"'
+                    if (availableItem.isselected) {
+                        html += ' class="itemSelected"';
+                    }
+                    html += '><input type="checkbox" name= "' + availableItem.applicationmodulemapping_id + '"    id="' + availableItem.module_id + '"';
+                    if (availableItem.isselected) {
+                        html += ' checked';
+                    }
+                    html += ' onclick="SelectUnselectAttribute(this);"/>&nbsp;&nbsp;' + availableItem.modulename + '</li>';
+
+                });
+                html += "</ul";
+                $('#availableAttributes').html(html);
+                selectedhtml += "</ul>"
+                $('#selectedAttributes').html(selectedhtml);
+                getSelectedListModule();
+
+            })
+    }
+
+    $(document).ready(function () {
+
+        loadModulelist();
+
+        $('#btnQuickSave').click(function () {
+            //alert('Saved');
+            //debugger;
+            var attributeId = $('#attributeId').text();
+            var displayname = $('#txtDisplayName').val();
+                   var listId = $('#listID').text();
+            var isdefaultmodule = $('#ContentPlaceHolder1_isdefaultmodule:checked').val();
+
+               SaveQuickAttributes(listId,attributeId, displayname, isdefaultmodule)
+
+            $('#detail-modal').modal('hide');//modal_1 is the id 1
+
+            loadModulelist();
+        });
+
+    });
+
+    function showDetailModal(item) {
+        //e.preventDefault();
+        console.log(item.applicationmodulemapping_id);
+
+        //debugger;
+        // Clear out current values from form
+        $('#attributeName').text("");
+        $('#attributeId').text("");
+        $('#ContentPlaceHolder1_txtDisplayName').val("");
+        var isdefaultmodule = item.isdefaultmodule;
+        if (isdefaultmodule === null) {
+            isdefaultmodule = false;
+            $('#ContentPlaceHolder1_isdefaultmodule').prop('checked', false).removeAttr('checked');
+        }
+
+
+        $('#attributeName').text(item.listname);
+        $('#attributeId').text(item.applicationlist_id);
+        $('#txtDisplayName').val(item.displayname);
+
+        $("#detail-modal").modal("show");
+    }
+
+</script>
+
+<style type="text/css">
+    .selectContainer {
+        border: 1px dashed white;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    #availableList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+    #availableList li {
+        margin: 5px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 1.2em;
+        width: 99%;
+        border: 1px dashed gray;
+    }
+
+
+    .itemSelected {
+        border: 1px dashed green !important;
+        color: #101231 !important;
+    }
+
+    #selectedList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+    #selectedList li {
+        margin: 5px;
+        padding-left: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-right: 5px;
+        font-size: 1.2em;
+        width: 99%;
+        border: 1px dashed gray;
+        cursor: move; /* fallback if grab cursor is unsupported */
+        cursor: grab;
+        cursor: -moz-grab;
+    }
+
+    #selectedList li:active {
+        cursor: grabbing;
+        cursor: -moz-grabbing;
+        cursor: -webkit-grabbing;
+    }
+
+    #selectedList li span {
+        position: absolute;
+        margin-left: -1.3em;
+    }
+</style>
+
+<div id="page-wrapper">
+    <div class="modal" tabindex="-1" role="dialog" id="detail-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Attribute Properties</h3>
+                </div>
+                <div class="modal-body">
+                    <span id="attributeId" class="invisible"></span>
+                    <span class="lead" style="color: rgb(42, 159, 214);"><span class="invisible" id="attributeName"></span></span>
+
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1"> List Display Name</label>
+                            @Html.TextBox("txtDisplayName", null, new { @class = "form-control" })
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-primary" id="btnQuickSave">Save changes</button>
+                    <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 7px;">
+        <div class="col-md-6">
+            <h4> @ViewBag.applicationname List Mapping</h4>
+        </div>
+        <div class="col-md-6">
+            <h4 style="color: lightgray;" class="pull-right">
+            </h4>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <a href='@("/ApplicationList/ApplicationQuestionMapping?id=" + ViewBag.applicationid + "&name=" + ViewBag.applicationname)' class="btn btn-primary btn-sm block">Select Questions</a>
+        </div>
+    </div>
+    <div class="invisible">
+        <h4>ListID: <span id="listID">@ViewBag.applicationid </span></h4>
+        <h4>Next Ordinal Position: <span id="lblNextOrdinalPosition"></span></h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fa fa-cog"></i>&nbsp;Selected Lists</h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="selectContainer">
+                                <p style="font-size: 1.8em; font-weight: bold">Available List for Application</p>
+                                <div id="availableAttributes">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="selectContainer">
+                                <p style="font-size: 1.8em; font-weight: bold">Selected Lists</p>
+                                <div id="selectedAttributes"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

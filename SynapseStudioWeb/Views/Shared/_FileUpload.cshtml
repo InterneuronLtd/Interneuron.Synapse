@@ -1,0 +1,77 @@
+﻿@model SynapseStudioWeb.Models.Common.FileUploadModel
+
+
+<form enctype="multipart/form-data"  asp-controller="@Model.ControllerName" asp-action="@Model.ActionName">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="file" id="fileupload" name="files" class="form-control" />
+            </div>
+            <div class="col-md-3">
+                <input type="button" name="Upload" value="Upload" id="btnupload" class="btn btn-primary" />
+            </div>
+            
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div id="divPrint"></div>
+        </div>
+    </div>
+
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var basePath = (typeof (AppPath) != 'undefined' && AppPath) || '';
+
+        var buildUrl = function (actionurl) {
+            return actionurl[0] != '/' ? basePath + "/" + actionurl : basePath + actionurl;
+        };
+
+        $('#btnupload').on('click', function () {
+            var fileExtension = ['xls', 'xlsx'];
+            var filename = $('#fileupload').val();
+            if (filename.length == 0) {
+                alert("Please select a file.");
+                return false;
+            }
+            else {
+                var extension = filename.replace(/^.*\./, '');
+                if ($.inArray(extension, fileExtension) == -1) {
+                    alert("Please select only excel files.");
+                    return false;
+                }
+            }
+            var fdata = new FormData();
+            var fileUpload = $("#fileupload").get(0);
+            var files = fileUpload.files;
+            fdata.append(files[0].name, files[0]);
+            $('#btnupload').hide();
+            $('#divPrint').html('Uploading. Please wait...');
+            $.ajax({
+                type: "POST",
+                url: buildUrl("/@Model.ControllerName/@Model.ActionName"),
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                data: fdata,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $('#btnupload').show();
+                    if (response.length == 0)
+                        alert('Some error occured while uploading');
+                    else {
+                        $('#divPrint').html(response);
+                    }
+                },
+                error: function (e) {
+                    $('#btnupload').show();
+                    $('#divPrint').html(e.responseText);
+                }
+            });
+        });
+        
+    });
+</script>

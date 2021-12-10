@@ -1,0 +1,54 @@
+﻿//Interneuron Synapse
+
+//Copyright(C) 2021  Interneuron CIC
+
+//This program is free software: you can redistribute it and/or modify
+//it under the terms of the GNU General Public License as published by
+//the Free Software Foundation, either version 3 of the License, or
+//(at your option) any later version.
+
+//This program is distributed in the hope that it will be useful,
+//but WITHOUT ANY WARRANTY; without even the implied warranty of
+//MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+//See the
+//GNU General Public License for more details.
+
+//You should have received a copy of the GNU General Public License
+//along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿using Newtonsoft.Json;
+
+namespace DCSWebAPI.Models.FormDefinition
+{
+    public class FieldValidations
+    {
+        [JsonProperty("validationtype")]
+        public string ValidationType { get; set; }
+
+        [JsonProperty("fieldvalidationpattern")]
+        public string FieldValidationPattern { get; set; }
+
+        [JsonProperty("validationerrormsg")]
+        public string ValidationErrorMessage { get; set; }
+
+        [JsonProperty("compareField")]
+        public string CompareField { get; set; }
+
+        [JsonProperty("comparator")]
+        public string Comparator { get; set; }
+
+        [JsonProperty("compareDateValue")]
+        public object[] CompareDateValue { get; set; }
+
+        [JsonProperty("compareValue")]
+        public object[] CompareValue { get; set; }
+
+        [JsonProperty("minLength")]
+        public int? MinLength { get; set; }
+
+        [JsonProperty("maxLength")]
+        public int? MaxLength { get; set; }
+    }
+}

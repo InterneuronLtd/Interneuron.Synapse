@@ -1,7 +1,6 @@
-﻿
-//Interneuron Synapse
+﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -18,6 +17,9 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +28,7 @@ using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Microsoft.AspNetCore.Identity;
 
 namespace SynapseStudio
 {
@@ -60,21 +63,29 @@ namespace SynapseStudio
 
                 string hashedPassword = string.Empty;
 
-                using (SHA256 shA256 = SHA256.Create())
-                {
-                    byte[] bytes = Encoding.UTF8.GetBytes(this.txtPassword.Text);
-                    hashedPassword = Convert.ToBase64String(((HashAlgorithm)shA256).ComputeHash(bytes));
-                }
+                PasswordHasher<IdentityUser> passwordHasher = new PasswordHasher<IdentityUser>();
+                IdentityUser user = new IdentityUser(this.txtUsername.Text);
+                hashedPassword = passwordHasher.HashPassword(user, this.txtPassword.Text);
 
-                string sql = "INSERT INTO \"AspNetUsers\" (\"Id\", \"UserName\", \"Email\", \"PasswordHash\", \"AccessFailedCount\", \"EmailConfirmed\", \"LockoutEnabled\", \"PhoneNumberConfirmed\", \"TwoFactorEnabled\") " +
-                             "VALUES(@Id, @Username, @Email, @PasswordHash, 0, true, false, false, false);";
+                //using (SHA256 shA256 = SHA256.Create())
+                //{
+                //    byte[] bytes = Encoding.UTF8.GetBytes(this.txtPassword.Text);
+                //    hashedPassword = Convert.ToBase64String(((HashAlgorithm)shA256).ComputeHash(bytes));
+                //}
+
+                string sql = "INSERT INTO \"AspNetUsers\"(\"Id\", \"UserName\", \"NormalizedUserName\", \"Email\", \"NormalizedEmail\", \"EmailConfirmed\", \"PasswordHash\", \"SecurityStamp\", \"ConcurrencyStamp\", \"PhoneNumberConfirmed\",                    \"TwoFactorEnabled\", \"LockoutEnabled\", \"AccessFailedCount\") "
+                               + " VALUES(@Id, @UserName, @NormalizedUserName, @Email, @NormalizedEmail, false, @PasswordHash, @SecurityStamp, @ConcurrencyStamp, false, false, false, 0)";
 
                 var paramList = new List<KeyValuePair<string, string>>()
                 {
                     new KeyValuePair<string, string>("Id", userId),
                     new KeyValuePair<string, string>("Username", this.txtUsername.Text),
+                    new KeyValuePair<string, string>("NormalizedUserName", this.txtUsername.Text.ToUpper()),
                     new KeyValuePair<string, string>("Email", this.txtEmail.Text),
-                    new KeyValuePair<string, string>("PasswordHash", hashedPassword)
+                    new KeyValuePair<string, string>("NormalizedEmail", this.txtEmail.Text.ToUpper()),
+                    new KeyValuePair<string, string>("PasswordHash", hashedPassword),
+                    new KeyValuePair<string, string>("SecurityStamp", Guid.NewGuid().ToString()),
+                    new KeyValuePair<string, string>("ConcurrencyStamp", Guid.NewGuid().ToString())
                 };
 
                 DataServices.ExcecuteNonQueryFromSQL(sql, paramList, dbConnection: SynapseHelpers.DBConnections.PGSQLConnectionSIS);

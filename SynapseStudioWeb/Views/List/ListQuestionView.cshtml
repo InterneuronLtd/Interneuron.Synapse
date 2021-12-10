@@ -1,0 +1,117 @@
+﻿@model SynapseStudioWeb.Models.ListQuestionNewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>List Question Manager</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-question"></i>&nbsp;Question</h5>
+            </div>
+            <div class="card-body p-2">
+                    
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="List" asp-action="ListQuestionViewSave"
+                              data-ajax-failure="onListQuestionFailed" data-ajax-success="onListQuestionSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            @Html.HiddenFor(m => m.QuestionID)
+                            <h3>Details</h3>
+                            <label for="QuickName">Enter a name for the question</label>
+                            @Html.TextBoxFor(m => m.QuickName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.QuickName)
+                            <h3>Context</h3>
+                            <label for="DefaultContextId">Select a the entity that defines the default context for this list</label>
+                            @Html.DropDownListFor(model => model.DefaultContextId, ViewBag.DefaultContext as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DefaultContextId)
+                            <h3>
+                                Question Type
+                            </h3>
+                            <label for="QuestionTypeId">Select a question type from the list below</label>
+                            @Html.DropDownListFor(model => model.QuestionTypeId, ViewBag.QuestionType as SelectList, new { @class = "form-control" })
+
+                            <br />
+                            <div id="fgLabelText">
+                                <label for="LabelText">* Enter the text for the label</label>
+                                @Html.TextBoxFor(model => model.LabelText, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.LabelText)
+
+                                <br />
+                            </div>
+
+                            <div id="fgCustomHTML">
+                                <label for="CustomHTML">* Enter the custom HTML that you wish to display</label>
+                                @Html.TextBoxFor(model => model.CustomHTML, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CustomHTML)
+                                <br />
+                            </div>
+
+                            <div id="fgCustomHTMLAlt">
+                                <label for="CustomHTMLAlt">*Enter the custom HTML that you wish to display for unselected option</label>
+                                @Html.TextBoxFor(model => model.CustomHTMLAlt, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.CustomHTMLAlt)
+                                <br />
+                            </div>
+
+                            <div id="fgDefaultValueText">
+                                <label for="DefaultValueText">Enter any default value you would like to set</label>
+                                @Html.TextBoxFor(model => model.DefaultValueText, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DefaultValueText)
+                                <br />
+                            </div>
+
+                            <div id="fgDefaultValueDate">
+                                <label for="DefaultValueDate">Enter any default value you would like to set</label>
+                                @Html.TextBoxFor(model => model.DefaultValueDate, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DefaultValueDate)
+                                <br />
+                            </div>
+
+                            <div id="pnlOptions">
+                                <h4>Options</h4>
+                                <label for="OptionTypeId">* Select the option type (Internal or SQL Query)</label>
+                                @Html.DropDownListFor(model => model.OptionTypeId, ViewBag.OptionType as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.OptionTypeId)
+                                <br />
+                                <div id="fgOptionCollection">
+                                    <label for="OptionCollectionId">* Select Internal Option Collection</label>
+                                    @Html.DropDownListFor(model => model.OptionCollectionId, ViewBag.OptionCollection as SelectList, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.OptionCollectionId)
+                                    <br />
+                                </div>
+
+                                <div id="fgOptionSQLStatement">
+                                    <label for="OptionSQLStatement">Enter the SQL Statement to retrieve your options</label>
+                                    <div class="alert alert-info">
+                                        <h4>SQL Requirements</h4>
+                                        SQL Statemust must return fields called displayfield, valuefield and flagfield
+                                    </div>
+
+                                    @Html.TextAreaFor(model => model.OptionSQLStatement, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.OptionSQLStatement)
+                                </div>
+                            </div>
+                            <br />
+                            <a href="../List/ListManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/listmanager.js"></script>
+

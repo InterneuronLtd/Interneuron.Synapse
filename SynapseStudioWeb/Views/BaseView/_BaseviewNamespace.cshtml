@@ -1,0 +1,25 @@
+﻿@model List<SynapseStudioWeb.Models.BaseviewNamespaceDto>
+@{
+    Layout = null;
+}
+
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>Baseview Namespace</th>                 
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.BaseviewNamespace</td>
+                    
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+

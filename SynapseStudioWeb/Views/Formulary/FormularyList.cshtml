@@ -1,0 +1,222 @@
+﻿@model SynapseStudioWeb.Models.MedicinalMgmt.FormularyListFilterModel;
+
+@{
+    ViewData["Title"] = "FormularyList";
+}
+<link href="~/css/ui.fancytree.css" rel="stylesheet" class="skinswitcher">
+<link href="~/css/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jqueryui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="~/css/studio.bootstrap4-toggle.min.css" rel="stylesheet" />
+<link href="~/lib/fontawesome-free-5.14.0/css/all.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/simplepagination/simplePagination.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/jquery-contextmenu/jquery.contextMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/fontawesome-free-5.14.0/css/all.min.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="~/lib/simplepagination/jquery.simplePagination.js"></script>
+
+<link href="~/css/studio.formulary-list.css" rel="stylesheet" type="text/css" />
+
+<div class="formulary-list">
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Medication Management</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <label class="h5"><i class="fa fa-list"></i>&nbsp;Formulary List</label>
+                    <label class="h5 float-right mr-2"><a href="#" class="action-icon" id="addMed" title="Import"><i class="fa fa-download"></i></a></label>
+                    <label class="h5 float-right mr-2"><a href="#" class="action-icon" id="customMed" title="Create New"><i class="fa fa-plus-square"></i></a></label>
+                    <label class="h5 float-right mr-2"><a href="#" class="action-icon" id="history" title="History"><i class="fa fa-history"></i></a></label>
+                    <label class="h5 float-right mr-2"><a href="#" class="action-icon" id="filter" title="Show\Hide Filter"><i class="fas fa-filter"></i></a></label>
+                </div>
+                <div class="card-body p-2">
+                    <div class="row" id="pnlFilterResults-row" style="display:none;">
+                        <div id="pnlFilterResults" class="mx-4 p-2 border rounded w-100" style="border-style:dashed;display:none;">
+                        </div>
+                    </div>
+                    <div class="container shadow border p-2" id="pnlFilterContainer" style="display:none;">
+                        <div class="form-group row m-0 p-1">
+                            <div class="col-3">
+                                <label>
+                                    Search Text
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <div class="col-10 m-0 p-0">
+                                    <input type="text" id="searchtext" name="search" placeholder="Search (Min 3 characters)">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row multi-select m-0 p-1">
+                            <div class="col-3">
+                                <label>
+                                    Multi Select Filter
+                                </label>
+                            </div>
+                            <div class="col-9">
+                                @Html.ListBoxFor(m => m.SelectedFilterStatuses, new SelectList(Model.FilterStatuses, "Value", "Text"), new { style = "color: #fff; background-color: #6c757d; border-color: #6c757d;", @id = "lstBoxFilterStatuses" })
+                            </div>
+                        </div>
+                        <div class=" form-group row m-0 p-1">
+                            <div class="col-3">
+                                <label class="form-check-label" for="chkSearchArchive" style="font-size:0.8rem;">
+                                    Hide Archived
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <input type="checkbox" class="form-check-input chk-switch" checked value="" name="chkSearchArchive" id="chkSearchArchive">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row m-0 p-1">
+                            <div class="col-12 text-right m-0">
+                                <input type="button" id="btnApplyFilter" class="btn btn-success" value="Apply Settings">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="frmlist-spinner" class="spinner-grow text-info" role="status" style="display:none;">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="row" id="frmlist-tree" style="display:none">
+                        <div class="col-md-12">
+                            <div class="col-md-12" style="text-align:end;margin-right:2px;margin-top:10px;">
+                                <a href="#" title="Bulk Edit" id="iBulkEdit" class="action-icon disabled">
+                                    <i class="fas fa-file-signature">
+                                        <span class="bulkedit-number">
+                                            <label id="lblBulkEditNumber">0</label>
+                                        </span>
+                                    </i>
+                                </a>
+                            </div>
+                            <div class="col-md-12">
+                                <table id="treetable" class="table table-condensed table-hover table-striped fancytree-fade-expander table-bordered">
+                                    <colgroup>
+                                        <col width="7%">
+                                        <col width="*">
+                                        <col width="10%">
+                                        <col width="5%">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:end;color:white;">
+                                                <i class="fas fa-window-close table-header-icons" title="De-select All" id="lnkDeSelectAll"></i>
+                                                <i class="fas fa-caret-right table-header-icons" title="Collapse All" name="nodes_collapse" id="lnkCollapseAll"></i>
+                                            </th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="alignCenter">
+                                                <i class="fa fa-edit" style="font-size:1rem;cursor:pointer;padding:5px;" title="Edit" name="result_node_edit"></i>
+                                                @*<i class="fas fa-history" style=" font-size: 1rem;cursor: pointer;padding: 5px;" title="View History"></i>*@
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-12 text-center">
+                                <a href="#" title="Bulk Edit" id="iBulkEditFloat" role="button" class="disabled btn btn-light btn-lg back-to-top bg-primary text-white">
+                                    <i class="fas fa-file-signature">
+                                        <span class="bulkedit-number">
+                                            <label id="lblBulkEditNumberFloat">0</label>
+                                        </span>
+                                    </i>
+                                </a>
+                                <a id="back-to-top" href="#" class="btn btn-light btn-lg back-to-top bg-warning" role="button" title="Back to Top">
+                                    <i class="fas fa-chevron-up"></i>
+                                </a>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <div id="pnlFormulariesPagination" data-total-records="0" data-page-size="0" style="margin-left:40% !important; width:100% !important;">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @await Html.PartialAsync("_FormularyEditContainer")
+
+    @await Html.PartialAsync("_FormularyImportMedication")
+
+    @await Html.PartialAsync("_FormularyDeleteStatus")
+
+    @await Html.PartialAsync("_FormularyChangeStatus")
+
+    @await Html.PartialAsync("_FormularyHistoryContainer")
+
+    <div id="pnlBulkEditSelectorContainer" style="display:none"></div>
+
+    <div id="pnlCreateCustomMedContainer" style="display:none"></div>
+
+    <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="historyModalLabel">History</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @*<input type="text" id="historySearch" placeholder="search" />
+                    <br />
+                    <br />*@
+                    <table id="tblHistory" class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Date/Time</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Product Name & Code</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Updated</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyOutput"></tbody>
+                    </table>
+                    <div id="historyPagination" class="pagination-page"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<script src="~/lib/jquery-3.5.1/jquery.min.js"></script>*@
+<script src="~/lib/jqueryui-1.12.1/jquery-ui.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="~/lib/jquery-contextmenu/jquery.contextMenu.min.js"></script>
+<script src="~/Scripts/jquery.fancytree.js"></script>
+<script src="~/Scripts/jquery.fancytree.dnd5.js"></script>
+<script src="~/Scripts/jquery.fancytree.edit.js"></script>
+<script src="~/Scripts/jquery.fancytree.glyph.js"></script>
+<script src="~/Scripts/jquery.fancytree.table.js"></script>
+<script src="~/Scripts/jquery.fancytree.wide.js"></script>
+@*<script src="~/Scripts/jquery.fancytree.grid.js"></script>*@
+<script src="~/Scripts/jquery.fancytree.contextmenu.js"></script>
+<script src="~/Scripts/fancyTable.js"></script>
+
+<script type="text/javascript" src="~/js/formulary.list.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script type="text/javascript" src="~/js/formulary.list.contextmenubuilder.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script type="text/javascript" src="~/js/formulary.save.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script type="text/javascript" src="~/js/formulary.medication.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script type="text/javascript" src="~/js/formulary.medication.contextmenubuilder.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script type="text/javascript" src="~/Scripts/bootstrap-multiselect.js"></script>
+<script src="~/js/studio.bootstrap4-toggle.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>

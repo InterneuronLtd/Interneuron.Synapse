@@ -1,0 +1,98 @@
+﻿@model SynapseStudioWeb.Models.AddEditWardBayViewModel
+
+@{
+    ViewData["Title"] = "AddEditWardBay";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.WardBay is null)
+        {
+            <h4>New Ward Bay</h4>
+        }
+        else
+        {
+            <h4>Edit Ward Bay</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="SaveWardBay" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.WardBay.wardbay_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardCode">
+                            Ward Code <span class="required">*</span>
+                        </label>
+                        @if (Model.WardBay is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.DropDownListFor(m => m.WardBay.wardcode, new SelectList(Model.Wards, "wardcode", "warddisplay"), "Please select ward", new
+                                {
+                                    @class = "form-control"
+                                })
+                                @Html.ValidationMessageFor(m => m.WardBay.wardcode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBay.wardcode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    @if (Model.WardBay != null)
+                    {
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="warddisplay">
+                                Ward Display <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBay.warddisplay" class="form-control" readonly />
+                            </div>
+                        </div>
+                    }
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="baycode">
+                            Bay Code <span class="required">*</span>
+                        </label>
+                        @if (Model.WardBay is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBay.baycode" class="form-control" />
+                                @Html.ValidationMessageFor(m => m.WardBay.baycode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBay.baycode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="baydisplay">
+                            Bay Display <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBay.baydisplay" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.WardBay.baydisplay)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-5">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("WardBayList", "WardBay")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

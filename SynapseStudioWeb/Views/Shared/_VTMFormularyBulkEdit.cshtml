@@ -1,0 +1,208 @@
+﻿@model SynapseStudioWeb.Models.MedicationMgmt.BulkFormularyEditModel;
+
+<style type="text/css">
+    div.token-input-dropdown-facebook {
+        /*z-index: 1051 !important;*/
+        height: 200px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+    }
+
+    .accordion-menu > button {
+        display: block;
+        position: relative;
+    }
+
+        .accordion-menu > button:after {
+            content: "\f078"; /* fa-chevron-down */
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 12px;
+        }
+
+        .accordion-menu > button[aria-expanded="true"]:after {
+            content: "\f077"; /* fa-chevron-up */
+        }
+
+    .validation-summary-valid .header-msg {
+        display: none;
+    }
+</style>
+<link href="~/lib/candlestick/candlestick.min.css" rel="stylesheet" type="text/css" />
+<link href="~/lib/token-input-1.6.0/styles/token-input-facebook.css" rel="stylesheet" type="text/css" />
+<div asp-validation-summary="All" class="text-danger" id="pnlMedicationValidationSmry">
+    <div class="header-msg m-1 p-1">Please correct the following errors</div>
+</div>
+<script type="text/javascript" src="~/lib/candlestick/candlestick.min.js"></script>
+<script type="text/javascript" src="~/lib/candlestick/hammer.min.js"></script>
+<script type="text/javascript" src="~/lib/candlestick/jquery.hammer.js"></script>
+<script type="text/javascript">
+    var rootCustomMedicationId = "@Model.ControlIdentifier";
+    var rootCustomMedicationIdSelector = "#@Model.ControlIdentifier";
+</script>
+@{
+    var DeriveId = new Func<string, string>((id) => $"{Model.ControlIdentifier}_{id}");
+
+    var baseURLPath = string.IsNullOrEmpty(Context.Request.PathBase) ? $"{ Context.Request.Scheme }://{Context.Request.Host}" : $"{ Context.Request.Scheme }://{Context.Request.Host}{Context.Request.PathBase}";
+
+    var DeriveAbsUrl = new Func<string, string>((actionPath) => string.IsNullOrEmpty(actionPath) ? "" : $"{ baseURLPath}/{actionPath.TrimStart('/')}");
+}
+<div class="vtm-edit-medication root-vtm-edit-medication" id="@Model.ControlIdentifier">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #productDetails" aria-expanded="true" aria-controls="productDetails">
+                        <i class="fas fa-tablets"></i> Product Details
+                    </button>
+                </h5>
+            </div>
+            @Html.HiddenFor(m => m.IsImported)
+            @Html.HiddenFor(m => m.IsBulkEdit)
+            @Html.HiddenFor(m => m.SerializedOriginalObj)
+            @Html.HiddenFor(m => m.ControlIdentifier)
+            @for (var fvidIndex = 0; fvidIndex < Model.FormularyVersionIds.Count; fvidIndex++)
+            {
+                @Html.HiddenFor(m => m.FormularyVersionIds[fvidIndex])
+            }
+            <div id="productDetails" class="collapse show" aria-labelledby="headingOne" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="producttype" class="col-sm-5 col-form-label">Product Type</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.ProductType, ViewBag.ProductTypes as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                            @Html.HiddenFor(m => m.ProductType, new { @id = DeriveId("hdnProductType") })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #flagsClassification" aria-expanded="false" aria-controls="flagsClassification">
+                        <i class="fas fa-flag"></i> Flags / Classification
+                    </button>
+                </h5>
+            </div>
+            <div id="flagsClassification" class="collapse" aria-labelledby="headingFour" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="NullablePrescribable" class="col-sm-5 col-form-label">Prescribable</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBox("NullablePrescribable", Model.NullablePrescribable, new { @value = Model.NullablePrescribable })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="NullableWitnessingRequired" class="col-sm-5 col-form-label">Witnessing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBox("NullableWitnessingRequired", Model.NullableWitnessingRequired, new { @value = Model.NullableWitnessingRequired })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #status" aria-expanded="false" aria-controls="status">
+                        <i class="fas fa-history"></i> Status
+                    </button>
+                </h5>
+            </div>
+            <div id="status" class="collapse" aria-labelledby="headingFive" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-5 col-form-label">Status</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.Status, ViewBag.RecordStatuses as SelectList, new { @class = "form-control", @id = DeriveId("ddlRecordStatus") })
+                            @Html.HiddenFor(m => m.OriginalStatus)
+                        </div>
+                    </div>
+                    <div id="@DeriveId("pnlReason")" data-initialstatus="@Model.Status" class="form-group row">
+                        <label class="col-sm-5 col-form-label">Reason</label>
+                        <div class="col-sm-7">
+                            @Html.TextAreaFor(m => m.RecStatuschangeMsg, new { @class = "form-control" })
+                            <br />
+                            <label id="lblstatuschgerr" style="color:red; display:none">
+                                Please Enter Reason
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/lib/token-input-1.6.0/src/jquery.tokeninput.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        setTimeout(() => {
+            let inputs = $(".vtm-edit-medication :input");
+            if (inputs && inputs.length > 0) {
+                inputs.each(function (indx, el) {
+                    let isReadOnly = $(this).data('isreadonly');
+                    if (isReadOnly == true) $(this).attr('readonly', true);
+                });
+            }
+        }, 100);
+
+        let rootCntrl = '#@Model.ControlIdentifier';
+
+        let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+        onRecordStatusChange(recStatusCntrolId, $(recStatusCntrolId).data('initialstatus'));
+
+        $(`${rootCntrl}_ddlRecordStatus`).on('change', function () {
+            let rootCntrl = '#@Model.ControlIdentifier';
+            let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+            onRecordStatusChange(recStatusCntrolId, $(this).val());
+        });
+
+        function onRecordStatusChange(reasonControlId, val) {
+            if (!reasonControlId) return;
+            if (val && val === "004")
+                $(reasonControlId).show();
+            else
+                $(reasonControlId).hide();
+        }
+
+        //$(`${rootCntrl} :checkbox`).bootstrapToggle('destroy');
+
+        setTimeout(() => {
+            //$(`${rootCntrl} :checkbox`).bootstrapToggle({
+            //    on: 'Yes',
+            //    off: 'No',
+            //    onstyle: 'success',
+            //    offstyle: 'danger',
+            //    width: 70,
+            //    size: 'sm'
+            //});
+            $(`${rootCntrl} :checkbox`).candlestick({
+                'mode': 'options', // "contents" is the other mode
+                'contents': { // Options for "contents" mode
+                    'left': 'Left', // The left content
+                    'middle': 'Middle', // The middle content
+                    'right': 'Right', // The right content
+                    'swipe': true // enable the global swipe mode
+                },
+                'on': 'True', // for on value
+                'off': 'False', // for off value
+                'nc': null, // for none/default value
+                'swipe': true, // for swipe
+                'size': 'md', // Sizes (lg, md (default), sm, xs)
+                'debug': false, // Display some log message. used with Candlestick.log()
+                'allowManualDefault': true
+            });
+        }, 100);
+
+    });
+</script>
+<script type="text/javascript" src="~/js/studio.autocomplete.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>

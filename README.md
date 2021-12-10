@@ -1,4 +1,4 @@
-# Interneuron Synapse v1.1.1
+# Interneuron Synapse v1.1.0
 
 Our flagship product, Interneuron Synapse is the foundation of all our applications. Interneuron Synapse provides
 

@@ -1,0 +1,85 @@
+﻿@model SynapseStudioWeb.Models.WardModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model is null)
+        {
+            <h4>New Ward</h4>
+        }
+        else
+        {
+            <h4>Edit Ward</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="AddEditWard" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.ward_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardCode">
+                            Ward Code <span class="required">*</span>
+                        </label>
+                        @if (Model is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="wardcode" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.wardcode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="wardcode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardDisplay">
+                            Ward Display <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="warddisplay" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.warddisplay)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardDisplayShort">
+                            Ward Display Short <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="warddisplayshort" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.warddisplayshort)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardDisplayShort">
+                            Ward Status <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Active: @Html.RadioButtonFor(model => model.wardstatus, 1)&nbsp;&nbsp;
+                            Inactive: @Html.RadioButtonFor(model => model.wardstatus, 0)
+                            <br />
+                            @Html.ValidationMessageFor(model => model.wardstatus)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-5">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("WardList", "Ward")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

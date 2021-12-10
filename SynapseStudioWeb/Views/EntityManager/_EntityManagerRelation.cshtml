@@ -1,0 +1,30 @@
+﻿@model List<SynapseStudioWeb.Models.RelationDto>
+@{
+    Layout = null;
+}
+
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>Parent Namespace</th>
+                <th>Parent Entity</th>
+                <th>Parent Attribute</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var m in Model)
+            {
+            <tr>
+                <td>@m.ParentSynapseNamespaceName</td>
+                <td>@m.ParentEntityName</td>
+                <td>@m.ParentAttributeName</td>
+                <td><a href=@("RelationView?id=" + m.AttributeId)>View</a></td>
+            </tr>
+            }
+
+
+        </tbody>
+    </table>
+

@@ -1,0 +1,25 @@
+﻿@model List<SynapseStudioWeb.Models.ListNamespaceDto>
+@{
+    Layout = null;
+}
+
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>List Namespace</th>                 
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.listnamespace</td>
+                    
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+

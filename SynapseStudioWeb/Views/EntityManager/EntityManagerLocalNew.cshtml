@@ -1,0 +1,38 @@
+﻿@model SynapseStudioWeb.Models.LocalEntityModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_content">
+            <form asp-controller="EntityManager" asp-action="EntityManagerLocalNewSave"
+                  data-ajax-failure="onFailed" data-ajax-success="onSuccess"
+                  data-ajax="true" data-ajax-method="POST">
+                <div asp-validation-summary="ModelOnly"></div>
+
+                <span class="section">New Local Entity</span>
+
+                <a href="~/EntityManager/EntityManagerLocalNamespace" class="btn btn-sm btn-primary pull-right">Manage LocalNamespce</a>
+                <br />
+                <label for="EntityDescription">Select the local namespace that you want to create the entity in</label>
+                @Html.DropDownListFor(model => model.LocalNamespaceId, ViewBag.SynapseNamespaceList as SelectList, new { @class = "form-control" })
+                <br />
+                <label for="EntityName">*Please enter a name for the new entity</label>
+                <span class="text-warning float-right">(All non-alphanumeric characters willl be stripped out during validation)</span>
+                @Html.TextBoxFor(m => m.EntityName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EntityName)
+                <br />
+                <label for="EntityDescription">Enter a description for the new entity</label>
+                @Html.TextBoxFor(m => m.EntityDescription, new { @class = "form-control" })
+                <br />
+                <a href="../EntityManager/EntityManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/entitymanager.js"></script>

@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "moment.js@2.24.0",
+      "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "bootstrap-datetimepicker@4.17.47",
+      "destination": "wwwroot/lib/bootstrap-datetimepicker/"
+    },
+    {
+      "provider": "cdnjs",
+      "library": "jquery@3.3.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "require.js@2.3.6",
+      "destination": "wwwroot/lib/require.js/"
+    },
+    {
+      "provider": "unpkg",
+      "library": "bootstrap@3.4.0",
+      "destination": "wwwroot/lib/bootstrap"
+    }
+  ]
+}

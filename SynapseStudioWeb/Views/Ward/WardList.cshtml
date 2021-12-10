@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SynapseStudioWeb.Models.WardModel>
+
+@{
+    ViewData["Title"] = "WardList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Wards</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Wards</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-sm btn-primary float-right" href="~/Ward/NewWard">New Ward</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ward Code</th>
+                            <th>Ward Display</th>
+                            <th>Ward Display Short</th>
+                            <th>Ward Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ward in Model)
+                        {
+                        <tr>
+                            <td>@ward.wardcode</td>
+                            <td>@ward.warddisplay</td>
+                            <td>@ward.warddisplayshort</td>
+                            @if (ward.wardstatus == 1)
+                            {
+                                <td>Active</td>
+                            }
+                            else
+                            {
+                                <td>Inactive</td>
+                            }
+                            <td>                                
+                                <a class="btn btn-sm btn-warning" href=@("Edit?id="+ ward.ward_id)>Edit</a>
+                                <a class="btn btn-sm btn-danger" href=@("Delete?id=" + ward.ward_id) onclick="return confirm('Are you sure to remove this record?');">Delete</a>
+                            </td>
+                        </tr>
+                        }
+                     </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

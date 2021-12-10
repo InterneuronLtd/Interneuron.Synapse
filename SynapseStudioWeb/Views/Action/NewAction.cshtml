@@ -1,0 +1,92 @@
+﻿@model SynapseStudioWeb.Models.ActionModel
+
+@{
+    ViewData["Title"] = "NewAction";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model is null)
+        {
+            <h4>New Action</h4>
+        }
+        else
+        {
+            <h4>Edit Action</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            @*<div class="x_title">
+                @if (Model is null)
+                {
+                    <h5>Add New Action</h5>
+                }
+                else
+                {
+                    <h5>Edit Action</h5>
+                }
+                <ul class="nav navbar-right panel_toolbox">
+            <li>
+                <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+
+            <li>
+                <a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
+            </div>*@
+            <div class="x_content">
+                <br>
+                <form asp-action="saveNewAction" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.action_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Action Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="ActionName" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.ActionName)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">
+                            Description <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <textarea asp-for="ActionDescription" rows="3" class="form-control"></textarea>
+                            @Html.ValidationMessageFor(model => model.ActionDescription)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label for="middle-name" class="col-form-label col-md-3 col-sm-3 label-align">IsEndpoint</label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="isEndpoint" />
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("ActionList", "Action")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<div>
+    <a asp-action="ActionList">Back to List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -17,9 +17,17 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using PuppeteerSharp;
 using PuppeteerSharp.Media;
 using SynapseDocumentsAPI.Model;
@@ -37,39 +45,79 @@ namespace SynapseDocumentsAPI.Controllers
             _configuration = configuration;
         }
 
+        [HttpGet]
+        [Route("[Action]")]
+        public string GetData()
+        {
+            return "Hello";
+        }
+
         [HttpPost]
         [Route("[Action]")]
         public async Task<IActionResult> GeneratePdfDocument([FromBody] DocumentData documentData)
         {
             string path = _configuration.GetSection("AppSettings:ChromeExecutablePath").Value;
-            //await new BrowserFetcher().DownloadAsync(BrowserFetcher.DefaultRevision);
-            using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
+
+            try
             {
-                Headless = true,
-                ExecutablePath = path,
-                IgnoreHTTPSErrors = true
-            }))
-            {
-                using (var page = await browser.NewPageAsync())
+                using (var browser = await Puppeteer.LaunchAsync(new LaunchOptions
                 {
-                    //await page.SetContentAsync(documentData.PdfBodyHTML);
-                    await page.GoToAsync("data:text/html," + documentData.PdfBodyHTML, WaitUntilNavigation.Networkidle0);
-                    await page.AddStyleTagAsync(new AddTagOptions { Url = documentData.PdfCssUrl });
+                    Headless = true,
+                    ExecutablePath = path,
+                    IgnoreHTTPSErrors = true
+                }))
+                {
+                    using (var page = await browser.NewPageAsync())
+                    {
+                        //await page.SetContentAsync(documentData.PdfBodyHTML);
 
-                    await page.EvaluateExpressionAsync("window.scrollBy(0, window.innerHeight);");
+                        Dictionary<string, string> headers = new Dictionary<string, string>();
+                        headers.Add("Accept-Charset", "utf-8");
+                        headers.Add("Content-Type", "text/html; charset=utf-8");
 
-                    byte[] pdfFile = await page.PdfDataAsync(new PdfOptions {
-                        MarginOptions = new MarginOptions {
-                            Top = "2.54cm",
-                            Left = "2.54cm",
-                            Bottom = "2.54cm",
-                            Right = "2.54cm"
-                        },
-                        PrintBackground = true
-                    });
+                        var response = await page.GoToAsync("data:text/html," + documentData.PdfBodyHTML, WaitUntilNavigation.Networkidle0);
 
-                    return File(pdfFile, "application/pdf");
+                        await page.SetContentAsync(Encoding.UTF8.GetString(await response.BufferAsync()));
+
+                        await page.AddStyleTagAsync(new AddTagOptions { Url = documentData.PdfCssUrl });
+                        
+                        await page.SetExtraHttpHeadersAsync(headers);
+
+                        await page.EvaluateExpressionAsync("window.scrollBy(0, window.innerHeight);");
+
+                        MarginOptions marginOption;
+                        if (documentData.DocumentMargin == null)
+                        {
+                            marginOption = new MarginOptions
+                            {
+                                Top = _configuration.GetSection("AppSettings:Margin:Top").Value,
+                                Bottom = _configuration.GetSection("AppSettings:Margin:Bottom").Value,
+                                Left = _configuration.GetSection("AppSettings:Margin:Left").Value,
+                                Right = _configuration.GetSection("AppSettings:Margin:Right").Value
+                            };
+                        }
+                        else
+                        {
+                            marginOption = documentData.DocumentMargin;
+                        }
+
+
+                        byte[] pdfFile = await page.PdfDataAsync(new PdfOptions
+                        {
+                            MarginOptions = marginOption,
+                            PrintBackground = true,
+                            DisplayHeaderFooter = true,
+                            HeaderTemplate = documentData.PdfHeaderHTML,
+                            FooterTemplate = documentData.PdfFooterHTML
+                        });
+
+                        return File(pdfFile, "application/pdf");
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                return null;
             }
         }
     }

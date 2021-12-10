@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewData["Title"] = "FormularyExcelImport";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/lib/fontawesome-free-5.14.0/css/all.min.css" rel="stylesheet" type="text/css" />
+
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Data Import</h1>
+        </div>
+    </div>
+
+    <div id="impAccordian">
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#pnlDMDSync" aria-expanded="false" aria-controls="pnlDMDSync">
+                        Sync DM+D to Formulary
+                    </button>
+                </h5>
+            </div>
+            <div id="pnlDMDSync" class="collapse show" aria-labelledby="headingTwo" data-parent="#impAccordian">
+                <div class="card-body">
+                    <div class="row m-2 p-3 border border-secondary rounded" style="border-style:dashed !important;">
+                        <h3 class="col-12 text-center">Sync DM+D to Formulary</h3>
+                        <b class="form-text font-weight-bold text-primary">Note: Please make sure no other instance of sync is in progress before initiating.</b>
+                        <div class="col-12">
+                            <div class="form-row m-1">
+                                <div class="col-6">
+                                    <input type="file" name="file" id="fileDMDUpload" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-row m-2">
+                                <div class="form-check">
+                                    <input type="radio" id="rdAutoMode" value="auto" name="syncmode" class="form-check-input" checked />
+                                    <label class="form-check-label" for="rdAutoMode"> Automatically sync changes to formulary</label>
+                                </div>
+                            </div>
+                            <div class="form-row m-2">
+                                <div class="form-check">
+                                    <input type="radio" id="rdManualMode" value="manual" name="syncmode" class="form-check-input" />
+                                    <label class="form-check-label" for="rdManualMode">Manually sync changes to formulary later (Using 'Import' interface)</label>
+                                </div>
+                            </div>
+                            <div class="form-row m-2">
+                                <label class="col-sm-1 col-form-label text-primary" for="lblSyncStatusResult">Status:</label>
+                                <label class="col-sm-11 col-form-label" id="lblSyncStatusResult"></label>
+                            </div>
+                            <div class="col m-2 text-right">
+                                <button id="btnUploadDMDZipFile" class="btn btn-primary">Upload and initiate Sync</button>
+                                <button id="btnUploadDMDZipFileDisabled" class="btn btn-primary" disabled style="display:none;">Syncing data...</button>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-link" id="hlShowErrorLog">Error Log <i class="fas fa-caret-down"></i>:</button>
+                                <textarea class="form-control" id="txtSyncErrorLog" rows="6" readonly style="display:none;"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-link" id="hlShowMessageLog">Message Log <i class="fas fa-caret-down"></i>:</button>
+                                <textarea class="form-control" id="txtSyncMsgLog" rows="5" readonly style="display:none;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#pnlFormularyImport" aria-expanded="true" aria-controls="pnlFormularyImport">
+                        Formulary Import
+                    </button>
+                </h5>
+            </div>
+            <div id="pnlFormularyImport" class="collapse" aria-labelledby="headingOne" data-parent="#impAccordian">
+                <div class="card-body">
+                    <div class="row m-2 p-3 border border-info rounded" style="border-style: dashed !important;">
+                        <h3 class="col-12 text-center">Formulary Import</h3>
+                        <div class="col-12">
+                            <div>
+                                <h2>Option 1: Import using ePF File</h2>
+                                <div>
+                                    @await Html.PartialAsync("_FileUpload", new SynapseStudioWeb.Models.Common.FileUploadModel { ControllerName = "Formulary", ActionName = "ExcelImport" })
+                                </div>
+                                <b class="form-text font-weight-bold text-primary">Note: Please make sure all the database tables of formulary are truncated before importing.</b>
+                            </div>
+                            <hr />
+                            <div>
+                                <h2>Option 2: Import All From DM+D</h2>
+                                <div>
+                                    <button id="btnUploadAll" class="btn btn-primary">Import All DMD To Formulary</button>
+                                    <button id="btnUploadAllDisabled" class="btn btn-primary" disabled style="display:none;">Uploading...Please do not refresh or close the browser.</button>
+                                </div>
+                                <b class="form-text font-weight-bold text-primary">Note: Please make sure all the database tables of formulary are truncated before importing.</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#btnUploadAll').click(function () {
+            uploadAllDMDToFormulary();
+        });
+
+        $('#btnUploadDMDZipFile').on('click', function () {
+            uploadDMDZipFile();
+        });
+
+        $('#hlShowErrorLog').on('click', function () {
+            $('#txtSyncErrorLog').toggle();
+        });
+
+        $('#hlShowMessageLog').on('click', function () {
+            $('#txtSyncMsgLog').toggle();
+        });
+    });
+
+    function uploadAllDMDToFormulary() {
+        $('#pnlUpdateProgress').show();
+        $('#btnUploadAll').hide();
+        $('#btnUploadAllDisabled').show();
+
+
+        let fullUrl = buildUrl('Formulary/UploadAllDMDToFormulary');
+        $.ajax({
+            url: fullUrl,
+            method: 'POST',
+            dataType: 'json',
+            data: null,
+            timeout: 0,
+            success: function (data, status, xhr) {
+                if (data == '1')
+                    toastr.success('Successfully uploaded DMD data to MMC system');
+                else
+                    toastr.error('Error uploading DMD data to MMC system');
+
+                $('#pnlUpdateProgress').hide();
+                $('#btnUploadAll').show();
+                $('#btnUploadAllDisabled').hide();
+            },
+            error: function (xhr, status, err) {
+                console.log(err);
+                toastr.error('Error uploading DMD data to MMC system');
+                $('#pnlUpdateProgress').hide();
+                $('#btnUploadAll').show();
+                $('#btnUploadAllDisabled').hide();
+            }
+        });
+
+        //ajaxPost('Formulary/UploadAllDMDToFormulary', null,
+        //    (data) => {
+        //        toastr.success('Successfully uploaded DMD data to MMC system');
+        //        $('#pnlUpdateProgress').hide();
+        //        $('#btnUploadAll').show();
+        //        $('#btnUploadAllDisabled').hide();
+        //    },
+        //    (err) => {
+        //        console.log(err);
+        //        toastr.error('Error uploading DMD data to MMC system');
+        //        $('#pnlUpdateProgress').hide();
+        //        $('#btnUploadAll').show();
+        //        $('#btnUploadAllDisabled').hide();
+        //    }
+        //);
+    }
+
+    function uploadDMDZipFile() {
+        var fileExtension = ['zip'];
+        var filename = $('#fileDMDUpload').val();
+        if (filename.length == 0) {
+            toastr.error("Please select a file.");
+            return false;
+        }
+        else {
+            var extension = filename.replace(/^.*\./, '');
+            if ($.inArray(extension, fileExtension) == -1) {
+                toastr.error("Please select only DMD zip files.");
+                return false;
+            }
+        }
+
+        let syncMode = $('input[name=syncmode]:checked').val();
+
+        var fdata = new FormData();
+        var fileUpload = $("#fileDMDUpload").get(0);
+        var files = fileUpload.files;
+        fdata.append(files[0].name, files[0]);
+        fdata.append('syncMode', syncMode);
+
+        $('#btnUploadDMDZipFile').hide();
+        $('#btnUploadDMDZipFileDisabled').show();
+        $('#lblSyncStatusResult').show();
+        $('#lblSyncStatusResult').text('Uploading file and processing data sync...Please do not refresh or close the browser');
+        $('#pnlUpdateProgress').show();
+        $.ajax({
+            type: "POST",
+            url: buildUrl("Formulary/SyncDMDUsingFile"),
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            data: fdata,
+            contentType: false,
+            processData: false,
+            timeout: 0,
+            success: function (response) {
+                if (response) {
+                    if (response.statusCd == '1') {
+                        $('#lblSyncStatusResult').text(`Completed Sync successfully.`);
+                        $('#txtSyncMsgLog').val(response.processText);
+                        $('#txtSyncErrorLog').val(response.processError);
+                        $('#txtSyncMsgLog').show();
+                        toastr.success(`Completed Sync successfully.`);
+                    } else {
+                        $('#lblSyncStatusResult').text(`Error completing the process.`);
+                        $('#txtSyncMsgLog').val(response.processText);
+                        $('#txtSyncErrorLog').val(response.processError);
+                        $('#txtSyncErrorLog').show();
+                        toastr.error(`Error completing the process.`);
+                    }
+                } else {
+                    $('#lblSyncStatusResult').text('Unknown status.');
+                    toastr.warning('Unknown status.');
+                }
+
+                $('#btnUploadDMDZipFile').show();
+                $('#btnUploadDMDZipFileDisabled').hide();
+                $('#pnlUpdateProgress').hide();
+            },
+            error: function (e) {
+                $('#btnUploadDMDZipFile').show();
+                $('#btnUploadDMDZipFileDisabled').hide();
+                $('#pnlUpdateProgress').hide();
+                $('#lblSyncStatusResult').text(`Error completing the process.`);
+                $('#txtSyncErrorLog').val(e);
+                $('#txtSyncErrorLog').show();
+                toastr.error(`Error completing the process. ${e}`);
+            }
+        });
+    }
+
+</script>
+

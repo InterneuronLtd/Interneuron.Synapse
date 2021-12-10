@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Common\Interneuron.Common.csproj">
+      <Private>true</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Interneuron.CareRecord.Infrastructure.csproj" />
+    <ProjectReference Include="..\Model\Interneuron.CareRecord.Model.csproj" />
+    <ProjectReference Include="..\Repository\Interneuron.CareRecord.Repository.csproj" />
+  </ItemGroup>
+
+</Project>

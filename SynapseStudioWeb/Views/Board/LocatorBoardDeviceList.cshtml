@@ -1,0 +1,60 @@
+﻿@model List<SynapseStudioWeb.Models.LocatorBoardDeviceDto>
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Synapse Studio - Locator Board Devices</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-desktop"></i>&nbsp;Locator Board Devices (@Model.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-sm btn-primary float-left" href="LocatorBoardDeviceNew">New Locator Board Device</a>
+                    </div>
+                </div>
+                <hr />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>IP Address</th>
+                            <th>Locator Board</th>
+                            <th>Location Code</th>
+                            
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+
+                            <tr>
+                                <td>@m.LocatorboardDeviceName</td>
+                                <td>@m.DeviceipAddress</td>
+                                <td>@m.LocatorboardName</td>
+                                <td>@m.LocationId</td>                                                                 
+                                <td><a href=@("LocatorBoardDeviceView?id=" + m.LocatorboardDevice_Id) style="float:right">View</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

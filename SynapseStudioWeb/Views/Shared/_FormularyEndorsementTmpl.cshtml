@@ -1,0 +1,26 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("endorsementTmpl")" style="display:none;">
+    <!--Add Endorsement Controls -->
+    <div class="endorsement">
+        <div class="form-group row">
+            <div class="card col-sm-11 ml-2 mb-2 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-header text-right bg-light p-0 m-0 border-0">
+                    <a class="fas fa-times-circle text-danger" style="font-size: 1.2rem;" href="#" onclick="removeEndorsementItem(this)"></a>
+                </div>
+                <div class="card-body col-sm-11 mt-n3">
+                    <textarea name="Endorsement" class="form-control" id="@DeriveId("txtEndorsement-{0}")" maxlength="255"></textarea>
+                    @Html.ValidationMessage("Endorsement", new { @id = DeriveId("txtEndorsement-{0}") })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function removeEndorsementItem(item) {
+        $(item).closest('.endorsement').remove();
+    }
+</script>

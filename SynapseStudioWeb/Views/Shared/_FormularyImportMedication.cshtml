@@ -1,0 +1,66 @@
+﻿<div class="modal fade" id="medModal" tabindex="-1" role="dialog" aria-labelledby="medModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content" style="min-height:600px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addMedication">Add Medication (DMD Version : <label id="dmdVersion"></label>)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <input id="txtSearchDMDMed" class="form-control" placeholder="Search Medication (Min 3 characters)" />
+                    </div>
+                    <div class="col-8">
+                        <input type="button" id="btnSearchDMDMedication" class="col-md-4 btn btn-primary" value="Search" />
+                        <p class="col-md-1 py-2 font-weight-bolder font-italic">
+                            OR
+                        </p>
+                        <input type="button" id="btnSyncPendingDMDs" class="col-md-5 btn btn-info" value="Get DMD Pending for Sync" />
+                        <div class="text-right">
+                            <a class="fas fa-file-upload" asp-controller="Formulary" asp-action="importfile" id="lnkFileUploadRedirect" style="cursor:pointer; font-size:1.5rem;" title="Initial Sync">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin: 15px 0 20px 10px">
+                    <!--<div class="row d-flex justify-content-start" style="margin:0 !important;margin-bottom:-30px !important;">
+                        <input type="checkbox" id="chkImportAutoSelect" name="chkImportAutoSelect" />
+                        <label style="margin-left:5px;margin-top:-2px;" for="chkImportAutoSelect">Auto-Select child Records</label>
+                    </div>-->
+                    <div class="row d-flex justify-content-end user-instruction" style="margin:0 !important;margin-right:1rem !important;margin-bottom:-30px !important;">Select record(s) to move back*</div>
+                </div>
+                @*<div class="row d-flex justify-content-end user-instruction" style="margin:0 !important;margin-right:1rem !important;margin-bottom:-15px !important;">Select record(s) to remove from the bucket*</div>*@
+                <div class="row align-items-center p-3">
+                    <div class="col-5" style="height: 350px; overflow-y: auto; border: 1px solid black">
+                        <div id="modal-spinner" class="spinner-grow spinner-grow-sm" role="status" style="display:none;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <div id="tree2" style="display:none;">
+                        </div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <button type="button" class="btn btn-secondary btn-lg" id="btnAddMed">>></button>
+                        <br />
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-secondary btn-lg" id="btnRemoveMed"><<</button>
+                    </div>
+                    <div class="col-5" style="height: 350px; overflow-y: auto; border: 1px solid black">
+                        <div id="dvSelectedNodes" class="form-check">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnImport">Import</button>
+                <button id="btnImportDisabled" class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Importing...
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -17,6 +17,10 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
+
+using Interneuron.Common.Extensions;
 using Newtonsoft.Json;
 using Npgsql;
 using System;
@@ -30,6 +34,51 @@ namespace SynapseDynamicAPI.Services
 {
     public class DataServices
     {
+        /// <summary>
+        /// This will open the connection to the database and starts the transaction
+        /// Use this connection and the transaction objects to perform the db operation in the same transaction
+        /// </summary>
+        /// <returns></returns>
+        public static Tuple<NpgsqlConnection, NpgsqlTransaction> BeginDbTransaction()
+        {
+            string databaseName = "connectionString_SynapseDataStore";
+
+            NpgsqlConnection conn = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
+            conn.Open();
+
+            NpgsqlTransaction tran = conn.BeginTransaction();
+
+            return new Tuple<NpgsqlConnection, NpgsqlTransaction>(conn, tran);
+        }
+
+        /// <summary>
+        /// This function will commit and dispose the connection and transaction objects
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="transaction"></param>
+        public static void CommitDbTransaction(NpgsqlConnection connection, NpgsqlTransaction transaction)
+        {
+            transaction.Commit();
+            connection.Close();
+
+            transaction.Dispose();
+            connection.Dispose();
+        }
+
+        /// <summary>
+        /// This function will commit and dispose the connection and transaction objects
+        /// </summary>
+        /// <param name="connection"></param>
+        /// <param name="transaction"></param>
+        public static void RollbackDbTransaction(NpgsqlConnection connection, NpgsqlTransaction transaction)
+        {
+            transaction.Rollback();
+            connection.Close();
+
+            transaction.Dispose();
+            connection.Dispose();
+        }
+
         public static string ConvertDataTabletoJSONString(DataTable dt)
         {
             List<Dictionary<string, object>> rows = new List<Dictionary<string, object>>();
@@ -43,7 +92,7 @@ namespace SynapseDynamicAPI.Services
                 }
                 rows.Add(row);
             }
-             
+
             return JsonConvert.SerializeObject(rows);
         }
 
@@ -59,71 +108,83 @@ namespace SynapseDynamicAPI.Services
                     row.Add(col.ColumnName, dr[col]);
                 }
             }
-             
+
             return JsonConvert.SerializeObject(row);
         }
 
-        public static void executeSQLStatement(string sql, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
+        public static void executeSQLStatement(string sql, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore", NpgsqlConnection existingCon = null)
         {
+            NpgsqlConnection con = existingCon ?? new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
 
-            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
-
-            using (con)
-            {
+            //using (con)
+            //{
+            if (existingCon == null)
                 con.Open();
 
-                // Insert some data
-                using (var cmd = new NpgsqlCommand())
-                {
-                    cmd.Connection = con;
-                    cmd.CommandText = sql;
-                    try
-                    {
-                        foreach (var param in parameters)
-                        {
-                            cmd.Parameters.AddWithValue(param.Key, param.Value);
-                        }
-                    }
-                    catch { }
-                    cmd.ExecuteNonQuery();
-                     
-
-
-                }
-
-
-            }
-
-
-        }
-
-        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
-        {
-            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
-            DataSet ds = new DataSet();
-
-            using (con)
+            // Insert some data
+            using (var cmd = new NpgsqlCommand())
             {
-                NpgsqlCommand cmd = new NpgsqlCommand();
-                NpgsqlDataAdapter da = new NpgsqlDataAdapter();
-                da.SelectCommand = cmd;
-                cmd.CommandText = sqlQueryString;
-                try
+                cmd.Connection = con;
+                cmd.CommandText = sql;
+
+                if (parameters.IsCollectionValid())
                 {
                     foreach (var param in parameters)
                     {
                         cmd.Parameters.AddWithValue(param.Key, param.Value);
                     }
                 }
-                catch { }
-                da.SelectCommand.Connection = con;
-                da.Fill(ds);
-                 
+                cmd.ExecuteNonQuery();
+            }
+            //}
+
+            if (existingCon == null)
+            {
+                con.Close();
+                con.Dispose();
+            }
+        }
+
+        public static DataSet DataSetFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore", NpgsqlConnection existingCon = null)
+        {
+            NpgsqlConnection con = existingCon ?? new NpgsqlConnection(Environment.GetEnvironmentVariable(databaseName));
+            DataSet ds = new DataSet();
+
+            //using (con)
+            //{
+
+            if (existingCon == null)
+                con.Open();
+
+            NpgsqlCommand cmd = new NpgsqlCommand();
+
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter();
+
+            da.SelectCommand = cmd;
+            cmd.CommandText = sqlQueryString;
+
+            if (parameters.IsCollectionValid())
+            {
+                foreach (var param in parameters)
+                {
+                    cmd.Parameters.AddWithValue(param.Key, param.Value);
+                }
             }
 
+
+            da.SelectCommand.Connection = con;
+            da.Fill(ds);
+
+            if (existingCon == null)
+            {
+                con.Close();
+                if (cmd != null) cmd.Dispose();
+                con.Dispose();
+            }
+
+            //}
+
             return ds;
-
-
         }
 
         public static String ExcecuteNonQueryFromSQL(string sqlQueryString, List<KeyValuePair<string, object>> parameters = null, string databaseName = "connectionString_SynapseDataStore")
@@ -135,18 +196,18 @@ namespace SynapseDynamicAPI.Services
             using (con)
             {
                 NpgsqlCommand cmd = new NpgsqlCommand(sqlQueryString, con);
-                try
+
+                if (parameters.IsCollectionValid())
                 {
                     foreach (var param in parameters)
                     {
                         cmd.Parameters.AddWithValue(param.Key, param.Value);
                     }
                 }
-                catch { }
 
                 con.Open();
                 cmd.ExecuteNonQuery();
-                 
+
 
             }
 
@@ -233,7 +294,7 @@ namespace SynapseDynamicAPI.Services
                     }
 
                     con.Close();
-                    
+
                 }
             }
             return retVal;

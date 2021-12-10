@@ -1,0 +1,66 @@
+﻿@model SynapseStudioWeb.Models.ListOptionNewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Question Option Collections</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;New List Option Collection</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="List" asp-action="ListOptionViewSave"
+                              data-ajax-failure="onListOptionFailed" data-ajax-success="onListOptionSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            @Html.HiddenFor(m => m.OptionID)
+                            @Html.HiddenFor(m => m.OptionCollectionID)
+                            @Html.HiddenFor(m => m.OptionCollectionText)
+                            <label for="OptionValueText">* Please enter the value that you want to assocaite with the option</label>
+                            @Html.TextBoxFor(m => m.OptionValueText, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OptionValueText)
+
+                            <br />
+                            <label for="OptionDisplayText">* Please enter the value that you want to display for the option</label>
+                            @Html.TextAreaFor(m => m.OptionDisplayText, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OptionDisplayText)
+
+                            <br />
+                            <label for="OptionFlag">Enter the HTML snippet for the flag if selected</label>
+                            @Html.TextAreaFor(m => m.OptionFlag, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OptionFlag)
+
+                            <br />
+                            <label for="OptionFlagAlt">Enter the HTML snippet for the flag if not selected</label>
+                            @Html.TextAreaFor(m => m.OptionFlagAlt, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.OptionFlagAlt)
+                            <br />
+                            <div class="row">
+                                <div class="col-4"> <a href=@("List/ListOptionCollectionView?id=" + Model.OptionCollectionID) class="btn btn-sm btn-info block">Back</a></div>
+                                <div class="col-4">  <input type="button" class="btn btn-sm btn-danger block" id="btn-delete" value="Delete" /></div>
+                                <div class="col-4">  <input type="submit" class="btnbtn-sm  btn-primary block" id="btn-submit" value="Submit" /></div>
+                            </div>
+                          
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/listmanager.js"></script>
+

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SynapseStudioWeb.Models.ProviderModel>
+@{
+    ViewData["Title"] = "ProviderList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Provider</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Provider</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-sm btn-primary float-right" href="~/Provider/NewProvider">New Provider</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone No.</th>
+                            <th>Role</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var prov in Model)
+                        {
+                            <tr>
+                                <td>@prov.firstname</td>
+                                <td>@prov.lastname</td>
+                                <td>@prov.emailid</td>
+                                <td>@prov.phonenumber</td>
+                                <td>@prov.role</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href=@("Edit?id="+ prov.provider_id)>Edit</a>
+                                    <a class="btn btn-sm btn-danger" href=@("Delete?id=" + prov.provider_id) onclick="return confirm('Are you sure to remove this record?');">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

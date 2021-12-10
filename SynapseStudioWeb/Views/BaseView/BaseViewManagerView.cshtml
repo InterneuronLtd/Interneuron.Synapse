@@ -1,0 +1,95 @@
+﻿@model SynapseStudioWeb.Models.BaseViewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Baseview Details</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("BaseViewManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerSQL?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">SQL</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    
+</div>
+<input type="hidden" value="@ViewBag.Id" id="baseviewid" />
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;Details</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@Model.BaseviewNamespaceName</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+
+                            <tbody>
+
+                                @foreach (var m in Model.BaseViewDetailDto)
+                                {
+                                    <tr>
+                                        <td>@m.BaseViewdetail</td>
+                                        <td>@m.BaseViewDescription</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="button" class="btn btn-primary btn-sm" id="btn-enable-baseview" value="Enable Delete" />
+                        <a href="~/Baseview/BaseViewManagerDelete?baseViewName=@Model.BaseviewNamespaceName" style="display:none" class="btn btn-sm btn-danger" id="btn-delete-baseview">Delete Baseview</a>
+                    </div>
+                </div>
+                 
+                 
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5></h5>
+            </div>
+            <div class="card-body p-2">                
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            <input type="button" class="btn btn-sm  btn-info" id="btn-re-create-baseview" value="Recreate Baseview" />
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/basview.js"></script>

@@ -1,0 +1,96 @@
+﻿@model SynapseStudioWeb.Models.ListModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>List Manager</h4>
+        </div>
+    </div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;List</h5>
+            </div>
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="SynapseNamespaceId">Select a namespace from the list below</label>
+                        @Html.DropDownListFor(model => model.EntityId, ViewBag.ListNamespace as SelectList, new { @class = "form-control" })                        
+                    </div>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-12">                        
+                        <a id="btn-add-list" class="btn btn-sm btn-primary float-right" href="">New List</a>
+                    </div>
+                </div>
+                <div id="managerlist"></div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-question"></i>&nbsp;Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-sm tn-primary float-right" href="~/List/ListQuestionNew">New Questions</a>
+                    </div>
+                </div>
+                <h3>QUESTIONS(@Model.QuestionDto.Count)</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Context</th>
+                            <th>Question</th>
+                             <th></th>
+                        </tr>                        
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model.QuestionDto)
+                        {
+                            <tr>
+                                <td>@m.DefaultContextFieldName</td>
+                                <td>@m.QuestionQuickName</td>
+                                <td><a href=@("List/ListQuestionView?id=" + m.Question_Id) style="float:right">View</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-ellipsis-v"></i>&nbsp;Question Option Collections</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-sm btn-primary float-right" href="~/List/ListOptionCollectionNew">New Collection</a>
+                    </div>
+                </div>
+                <h3>COLLECTIONS (@Model.QuestionCollectioDto.Count)</h3>
+                @foreach (var m in Model.QuestionCollectioDto)
+                {
+                    <div class="list-group-item"> <span>@m.QuestionOptionCollectionName</span>
+                <a href=@("List/ListOptionCollectionView?id=" + m.QuestionOptionCollection_Id) style="float:right">View</a></div>
+
+                }
+            </div>
+        </div>
+    </div>
+     
+
+
+</div>
+<script src="~/js/listmanager.js"></script>

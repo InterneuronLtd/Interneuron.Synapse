@@ -1,0 +1,27 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("reminderDisabledTmpl")" disabled style="display:none;">
+    <!--Add Reminder Controls -->
+    <div class="reminder">
+        <div class="form-group row">
+            <div class="card col-sm-11 ml-2 mb-2 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-body">
+                    <div class="col-sm-6">
+                        <textarea name="Reminder" class="form-control" id="@DeriveId("txtReminder-{0}")" readonly></textarea>
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Duration" class="col-sm-7 col-form-label text-right">Duration (hrs)</label>
+                        <input type="text" name="Duration" class="col-sm-5 form-control duration" id="@DeriveId("txtDuration-{0}")" readonly />
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="Active" class="col-sm-8 col-form-label text-right">Need Response</label>
+                        <input type="checkbox" name="Active" class="col-sm-1 form-control rem-active" id="@DeriveId("chkActive-{0}")" disabled />
+                        <input type="hidden" name="Active" class="col-sm-1 form-control rem-active" id="@DeriveId("hdnActive-{0}")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+
+<div id="@DeriveId("customWarningTmpl")" style="display:none;">
+    <!--Add Custom Warning Controls -->
+    <div class="custom-warning">
+        <div class="form-group row">
+            <div class="card col-sm-9 ml-2 mb-0 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-header text-right bg-light p-0 m-0 border-0">
+                    <a class="fas fa-times-circle text-danger" style="font-size: 1.2rem;" href="#" onclick="removeCustomWarningItem(this)"></a>
+                </div>
+                <div class="card-body mt-n2">
+                    <div class="col-sm-8">
+                        <textarea name="Warning" class="form-control" id="@DeriveId("txtCustomWarning-{0}")" maxlength="255"></textarea>
+                        @Html.ValidationMessage("Warning", new { @id = DeriveId("txtCustomWarning-{0}") })
+                    </div>
+                    <div class="col-sm-4">
+                        <label for="NeedResponse" class="col-sm-8 col-form-label text-right">Need Response</label>
+                        <input type="checkbox" name="NeedResponse" class="col-sm-2 form-control" id="@DeriveId("chkNeedResponse-{0}")">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function removeCustomWarningItem(item) {
+        $(item).closest('.custom-warning').remove();
+    }
+</script>

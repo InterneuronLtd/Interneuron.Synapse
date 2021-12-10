@@ -1,0 +1,91 @@
+﻿@using SynapseStudioWeb.Models;
+@model WardBayBedIndexViewModel;
+
+@{
+    ViewData["Title"] = "WardBayBedList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Ward Bay Bed</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Ward Bay Beds</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                @using (Html.BeginForm("SearchWardBayBeds", "WardBayBed", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-md-12 p-2">
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(m => m.selectedWardCode, new SelectList(Model.Wards, "wardcode", "warddisplay"), "Please select ward", new
+                                   {
+                                       @class = "form-control",
+                                       onchange = "this.form.submit();",
+                                   })
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-sm btn-primary float-right" href="~/WardBayBed/AddWardBayBed">New Ward Bay Bed</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 p-2">
+                            <div class="col-md-8">
+                                    @Html.DropDownListFor(m => m.selectedBayCode, new SelectList(Model.WardBays, "baycode", "baydisplay"), "Please select bay", new
+                                       {
+                                           @class = "form-control",
+                                           onchange = "this.form.submit();",
+                                       })
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                    </div>
+                }
+                <p></p>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ward Code</th>
+                            <th>Bay Code</th>
+                            <th>Bed Code</th>
+                            <th>Bed Status</th>
+                            <th>Accept Male?</th>
+                            <th>Accept Female?</th>
+                            <th>Min. Age</th>
+                            <th>Max. Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var wardBayBed in Model.WardBayBeds)
+                        {
+                            <tr>
+                                <td>@wardBayBed.wardcode</td>
+                                <td>@wardBayBed.baycode</td>
+                                <td>@wardBayBed.bedcode</td>
+                                <td>@(wardBayBed.bedstatus == 1? "Active": "Inactive")</td>
+                                <td>@(wardBayBed.acceptmale == 1? "Yes": "No")</td>
+                                <td>@(wardBayBed.acceptfemale == 1? "Yes": "No")</td>
+                                <td>@wardBayBed.acceptminimumage</td>
+                                <td>@wardBayBed.acceptmaximumage</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href=@("Edit?id="+ wardBayBed.wardbaybed_id)>Edit</a>
+                                    <a class="btn btn-sm btn-danger" href=@("Delete?id=" + wardBayBed.wardbaybed_id) onclick="return confirm('Are you sure to remove this record?');">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

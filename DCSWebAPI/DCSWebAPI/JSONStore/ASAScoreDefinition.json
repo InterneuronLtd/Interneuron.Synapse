@@ -1,0 +1,977 @@
+﻿{
+
+  "asa": [
+    {
+      "field_id": "rbl1",
+      "fieldlabeltext": "Do you have high blood pressure or take medications to control your blood pressure?",
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl2",
+      "fieldlabeltext": "Have you had a heart attack?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl3",
+      "fieldlabeltext": "Was it in the past 12 months?",
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl4",
+      "fieldlabeltext": "Do you suffer from chest pains or chest tightness?",
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl5",
+      "fieldlabeltext": "Does it occur when you are resting?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl6",
+      "fieldlabeltext": "Does it occur when you are exerting yourself?",
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl7",
+
+      "fieldlabeltext": "Have you been told you have angina?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+
+    },
+    {
+      "field_id": "rbl8",
+
+      "fieldlabeltext": "Do you feel short of breath when you are resting or with light activity?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl9",
+
+      "fieldlabeltext": "Do you get short of breath after one flight of stairs?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl10",
+
+      "fieldlabeltext": "Have you had cardiac bypass surgery or had heart stents inserted?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl11",
+
+      "fieldlabeltext": "Was it in the past 12 months?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl12",
+
+      "fieldlabeltext": "Have you ever been treated for or been told you have heart failure?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl13",
+
+      "fieldlabeltext": "Have you ever been treated for or been told you have pulmonary hypertension?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl14",
+
+      "fieldlabeltext": "Do you ever wake at night gasping for breath for no reason?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl15",
+
+      "fieldlabeltext": "Are you known to have a heart murmur, a problem with the valves in your heart, or had a valve replacement?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl16",
+
+      "fieldlabeltext": "Do you suffer from palpitations or been told you have an irregular heartbeat?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl17",
+
+      "fieldlabeltext": "Do you have a pacemaker?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl18",
+
+      "fieldlabeltext": "Do you have an implantable defibrillator (a more complex form of pacemaker which can deliver shocks)?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl19",
+
+      "fieldlabeltext": "Do you suffer from dizziness or blackouts?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rbl20",
+
+      "fieldlabeltext": "Do you have asthma or chronic obstructive pulmonary disease (COPD)?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl21",
+
+      "fieldlabeltext": "If you have asthma, do you have more than one attack per month?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl22",
+
+      "fieldlabeltext": "If you have COPD, have you needed antibiotics +/- steroid tablets more than 3 times in the last year?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl23",
+
+      "fieldlabeltext": "Do you use home nebulisers?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl24",
+
+      "fieldlabeltext": "Do you use home oxygen?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl25",
+
+      "fieldlabeltext": "Have you been admitted to hospital because of your breathing in the past year?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl26",
+
+      "fieldlabeltext": "Have you been admitted to an intensive care unit because of your breathing in the past?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl27",
+
+      "fieldlabeltext": "Do you have any other breathing/lung conditions (eg lung fibrosis or asbestos lung disease)?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rbl28",
+
+      "fieldlabeltext": "Have you been told you snore heavily at night?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl29",
+      "fieldlabeltext": "Have you been told you seem to stop breathing during the night?",
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl30",
+      "fieldlabeltext": "Do you drop off to sleep frequently during the day or get regular headaches?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl31",
+
+      "fieldlabeltext": "Have you been told you have obstructive sleep apnoea (OSA)?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rbl32",
+
+      "fieldlabeltext": "Do you use a CPAP mask at night?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblDiabeticMedication",
+
+      "fieldlabeltext": "Are you diabetic requiring medication?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblDiabetesWellControlled",
+
+      "fieldlabeltext": "Is your diabetes well controlled?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblDiabeticKetoacidosis",
+
+      "fieldlabeltext": "Do you have a history of diabetic ketoacidosis (very high blood sugar needing hospital admission) or frequent hypoglycaemic (low blood sugar) episodes?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblKidneyOrUrinary",
+
+      "fieldlabeltext": "Do you have any kidney or urinary problems?",
+
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblKidneyDialysis",
+
+      "fieldlabeltext": "Are you on kidney dialysis?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblThyroid",
+
+      "fieldlabeltext": "Do you have an overactive or underactive thyroid gland in your neck",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblLiverProblems",
+
+      "fieldlabeltext": "Do you have any liver problems requiring treatment?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblBloodDisorder",
+
+      "fieldlabeltext": "Do you have a blood disorder or a condition that makes you prone to bleeding/bruising easily?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblAnaemic",
+
+      "fieldlabeltext": "Are you known to be anaemic?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+
+    },
+    {
+      "field_id": "rblBloodClot",
+
+      "fieldlabeltext": "Have you had a blood clot in your lung or legs?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblBloodTransfusion",
+
+      "fieldlabeltext": "Would you accept a transfusion of blood if your surgeon thinks it would be in your best interest?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "G"
+        },
+        {
+          "optionval": "No",
+          "score": "R"
+        }
+      ]
+    },
+
+
+
+    {
+      "field_id": "rblStroke",
+
+      "fieldlabeltext": "Have you ever had a stroke or mini stroke?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+
+    },
+    {
+      "field_id": "rblStrokeSixMonths",
+
+      "fieldlabeltext": "Was it within the past 6 months",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblEpilepsy",
+
+      "fieldlabeltext": "Do you have epilepsy?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblFitPerMonth",
+
+      "fieldlabeltext": "Is it difficult to control e.g. more than 1 fit per month?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+
+    },
+    {
+      "field_id": "rblBNM",
+
+      "fieldlabeltext": "Do you have any other brain/nerve/muscle disease?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+
+    {
+      "field_id": "rblDementia",
+
+      "fieldlabeltext": "Have you been diagnosed with dementia?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblMHC",
+
+      "fieldlabeltext": "Are you currently being treated for any mental health condition?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblArthritis",
+
+      "fieldlabeltext": "Have you been told you have rheumatoid arthritis (different to osteoarthritis)?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblNJMovements",
+
+      "fieldlabeltext": "Do you have any restrictions of your neck or jaw movement?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "A"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblProbWithGenAnae",
+
+      "fieldlabeltext": "Have you or a family member had any problems with or allergic or anaphylactic reactions to general anaesthetics",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+
+    },
+    {
+      "field_id": "rblBreathingTube",
+
+      "fieldlabeltext": "Has an anaesthetist told you that your airway was difficult to manage or it was difficult to pass a breathing tube?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblChronicPainClinic",
+
+      "fieldlabeltext": "Are you seen in a chronic pain clinic?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblMorphine",
+
+      "fieldlabeltext": "Do you take regular morphine or oxycodone or similar?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblPostOperativePain",
+
+      "fieldlabeltext": "Have had problems with pain postoperatively in the past?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+    {
+      "field_id": "rblOtherHosp",
+
+      "fieldlabeltext": "Are you receiving treatment from another hospital or have any other significant medical conditions not already mentioned?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "Y"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "rblCongenital",
+
+      "fieldlabeltext": "Do you have a syndromic / congenital condition (eg achondroplasia, mucopolysaccharidosis, Down’s syndrome) not already mentioned?",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": "R"
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    },
+
+    {
+      "field_id": "chkblAnyMeds",
+
+      "fieldlabeltext": "Are you taking any of the following? ",
+
+      "scores": [
+        {
+          "optionval": "Yes",
+          "score": null
+        },
+        {
+          "optionval": "No",
+          "score": "G"
+        }
+      ]
+    }
+  ]
+}

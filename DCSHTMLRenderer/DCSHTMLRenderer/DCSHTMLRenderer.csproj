@@ -1,0 +1,191 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Scripts\Enumerations\Comparator.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\CompareDateValues.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\CssClassNames.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\ElementType.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\LogicOperator.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\ScoringMethod.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\Types.ts" />
+    <Content Remove="wwwroot\Scripts\Enumerations\ValidationTypes.ts" />
+    <Content Remove="wwwroot\Scripts\formmodel.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\Calendar.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\CheckBox.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\DateTime.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\DropDownList.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\Label.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\OptionListStatement.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\Radio.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\SectionElement.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\TextArea.ts" />
+    <Content Remove="wwwroot\Scripts\HTMLControls\TextBox.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\Condition.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\ConditionGroup.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\DestinationEntity.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\DisplayRules.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FieldCssStyle.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FieldScore.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FieldValidation.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FieldValue.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\Form.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FormParameter.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\FormScores.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\Params.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\ScoringModel.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\Section.ts" />
+    <Content Remove="wwwroot\Scripts\JSONMap\ValidationResult.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\favicon.ico" />
+    <None Include="wwwroot\Scripts\Enumerations\Comparator.js" />
+    <None Include="wwwroot\Scripts\Enumerations\Comparator.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\Comparator.ts" />
+    <None Include="wwwroot\Scripts\Enumerations\CssClassNames.js" />
+    <None Include="wwwroot\Scripts\Enumerations\CssClassNames.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\CssClassNames.ts" />
+    <None Include="wwwroot\Scripts\Enumerations\ElementType.js" />
+    <None Include="wwwroot\Scripts\Enumerations\ElementType.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\ElementType.ts" />
+    <None Include="wwwroot\Scripts\Enumerations\LogicOperator.js" />
+    <None Include="wwwroot\Scripts\Enumerations\LogicOperator.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\LogicOperator.ts" />
+    <None Include="wwwroot\Scripts\Enumerations\ScoringMethod.js" />
+    <None Include="wwwroot\Scripts\Enumerations\ScoringMethod.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\ScoringMethod.ts" />
+    <None Include="wwwroot\Scripts\Enumerations\Types.js" />
+    <None Include="wwwroot\Scripts\Enumerations\Types.js.map" />
+    <None Include="wwwroot\Scripts\Enumerations\Types.ts" />
+    <None Include="wwwroot\Scripts\formmodel.js" />
+    <None Include="wwwroot\Scripts\formmodel.js.map" />
+    <None Include="wwwroot\Scripts\formmodel.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\Calendar.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\Calendar.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\Calendar.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\CheckBox.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\CheckBox.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\CheckBox.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\DateTime.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\DateTime.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\DateTime.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\DropDownList.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\DropDownList.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\DropDownList.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\Label.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\Label.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\Label.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\OptionListStatement.js" />
+    <None Include="wwwroot\Scripts\JSONMap\OptionListStatement.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\OptionListStatement.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\Radio.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\Radio.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\Radio.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\SectionElement.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\SectionElement.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\SectionElement.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextArea.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextArea.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextArea.ts" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextBox.js" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextBox.js.map" />
+    <None Include="wwwroot\Scripts\HTMLControls\TextBox.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\Condition.js" />
+    <None Include="wwwroot\Scripts\JSONMap\Condition.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\Condition.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\ConditionGroup.js" />
+    <None Include="wwwroot\Scripts\JSONMap\ConditionGroup.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\ConditionGroup.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\DisplayRules.js" />
+    <None Include="wwwroot\Scripts\JSONMap\DisplayRules.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\DisplayRules.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldCssStyle.js" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldCssStyle.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldCssStyle.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldScore.js" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldScore.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldScore.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldValidation.js" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldValidation.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\FieldValidation.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\Form.js" />
+    <None Include="wwwroot\Scripts\JSONMap\Form.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\Form.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\FormParameter.js" />
+    <None Include="wwwroot\Scripts\JSONMap\FormParameter.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\FormParameter.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\FormScores.js" />
+    <None Include="wwwroot\Scripts\JSONMap\FormScores.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\FormScores.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\ScoringModel.js" />
+    <None Include="wwwroot\Scripts\JSONMap\ScoringModel.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\ScoringModel.ts" />
+    <None Include="wwwroot\Scripts\JSONMap\Section.js" />
+    <None Include="wwwroot\Scripts\JSONMap\Section.js.map" />
+    <None Include="wwwroot\Scripts\JSONMap\Section.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\Comparator.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\CompareDateValues.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\CssClassNames.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\ElementType.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\LogicOperator.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\ScoringMethod.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\Types.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\Enumerations\ValidationTypes.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\formmodel.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\Calendar.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\CheckBox.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\DateTime.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\DropDownList.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\Label.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\DestinationEntity.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\OptionListStatement.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\Radio.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\SectionElement.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\TextArea.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\HTMLControls\TextBox.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\Condition.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\ConditionGroup.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\DisplayRules.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FieldCssStyle.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FieldScore.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FieldValidation.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FieldValue.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\Form.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FormParameter.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\FormScores.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\Params.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\ScoringModel.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\Section.ts" />
+    <TypeScriptCompile Include="wwwroot\Scripts\JSONMap\ValidationResult.ts" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile></TypeScriptOutFile>
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+  </PropertyGroup>
+
+</Project>

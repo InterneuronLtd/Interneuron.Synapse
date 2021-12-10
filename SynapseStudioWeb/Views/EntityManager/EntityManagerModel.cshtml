@@ -1,0 +1,61 @@
+﻿@model SynapseStudioWeb.Models.ClassDataModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Entity Models</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Relations</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("EntityManagerModel?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Models</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-tasks"></i>&nbsp;Models</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>
+                            @ViewBag.Summary
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><img src="/img/csharp.png" alt="C Sharp" style="height: 45px;" />&nbsp;C# Model</h3>
+                        <textarea class="form-control" rows="20">@Model.CSharp</textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><img src="/img/swift.png" alt="C Sharp" style="height: 45px;" />&nbsp;Swift Model</h3>
+                        <textarea class="form-control" rows="20">@Model.Swift</textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/entitymanager.js"></script>

@@ -1,0 +1,9 @@
+﻿@model List<SynapseStudioWeb.Models.ListDto>
+    <h3 style="text-transform:uppercase"><span id="listname" ></span> List (@Model.Count)</h3>
+ 
+@foreach (var m in Model)
+{
+    <div class="list-group-item"> <span>@m.ListName</span>
+    <a href=@("ListSelectAttributes?id=" + m.List_Id) style="float:right">View</a></div>
+
+}

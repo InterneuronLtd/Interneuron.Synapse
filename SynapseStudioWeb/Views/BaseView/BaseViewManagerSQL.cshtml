@@ -1,0 +1,79 @@
+﻿@model SynapseStudioWeb.Models.BaseViewSQLModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Baseview SQL Statement</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("BaseViewManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerSQL?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">SQL</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("BaseviewManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;SQL</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>
+                            @Model.Summary
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="BaseView" asp-action="BaseViewManagerSQLValidate"
+                              data-ajax-failure="onBaseviewSQLFailed" data-ajax-success="onBaseviewSQLSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            @Html.HiddenFor(m => m.NamespaceName)
+                            @Html.HiddenFor(m => m.ViewName)
+                            @Html.HiddenFor(m => m.BaseViewComments)
+                            @Html.HiddenFor(m => m.NamespaceId)
+                            @Html.HiddenFor(m => m.Summary)
+                            @Html.HiddenFor(m => m.NextOrdinalPosition)
+                            <h5> Namespace: @Model.NamespaceName </h5>
+                            <h5> BaseView: @Model.ViewName </h5>
+                            <h5> @Model.BaseViewComments </h5>
+                            @Html.TextAreaFor(m => m.SQL, new { @class = "form-control", @rows = "20" })
+
+                            <div class="well">
+                                <h3>Re-Create BaseView</h3>
+                                <p>If you would like to re-create the baseview please edit your SQL Statement above and when you are ready click on the 'Re-validate BaseView' button below.</p>
+                                <br />
+                                <p>Please note that the system does not currently support any consistency checking to make sure that all previously defined columns are available in the new SQL statement. This could affect any front-end clients that are using the APIs used by this BaseView.</p>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="submit" name="command" class="btn btn-primary btn-sm pull-right" id="btn-sql-validate" value="Re-Validate" />
+                                        <input style="display:none" type="submit" name="command" class="btn btn-primary btn-sm pull-right" id="btn-sql-create" value="Recreate Baseview" />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/basview.js"></script>
+

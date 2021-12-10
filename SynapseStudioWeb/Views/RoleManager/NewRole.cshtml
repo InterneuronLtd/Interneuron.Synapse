@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewData["Title"] = "New Role";
+}
+
+<h2>New Role</h2>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>New <small>Role</small></h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                @using (Html.BeginForm("CreatRole", "RoleManager", FormMethod.Post))
+                {
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Please enter a name for the new Role <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBox("RoleName", null, new { @class = "form-control", required = "required" })
+                        </div>
+                    </div>
+                  
+
+
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+
+                            <button type="submit" class="btn btn-sm btn-success">Create</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

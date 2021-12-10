@@ -1,0 +1,394 @@
+﻿@model SynapseStudioWeb.Models.BaseViewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+<style type="text/css">
+    .selectContainer {
+        border: 1px dashed white;
+        padding: 20px;
+        margin: 20px;
+    }
+
+
+
+    #availableList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #availableList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+        }
+
+
+    .itemSelected {
+        border: 1px dashed green !important;
+        text-decoration: line-through;
+    }
+
+    #selectedList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #selectedList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+            cursor: move; /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+        }
+
+            #selectedList li:active {
+                cursor: grabbing;
+                cursor: -moz-grabbing;
+                cursor: -webkit-grabbing;
+            }
+
+            #selectedList li span {
+                position: absolute;
+                margin-left: -1.3em;
+            }
+</style>
+<div class="row">
+    <div class="col-md-8">
+        <h4>List Manager - Select Attributes</h4>
+    </div>
+    <div class="col-md-4">
+        <h5 class="float-right">@ViewBag.Summary</h5>
+        <input type="hidden" id="listID" value="@ViewBag.Id" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("ListManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectAttributes?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Columns</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectQuestions?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Questions</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListAPIs?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+
+</div>
+<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <a class="btn btn-sm btn-info" href="@ViewBag.PreviewURL" target="_blank"> Preview List</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;Selected Column</h5>
+            </div>
+            <div class="card-body p-2">
+
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="selectContainer">
+                            <p style="font-size: 1.8em; font-weight: bold">Available Attributes from Baseview</p>
+                            <div id="availableAttributes">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="selectContainer">
+                            <p style="font-size: 1.8em; font-weight: bold">Selected Attributes</p>
+                            <div id="selectedAttributes"></div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="well" style="margin-top: 15px;">
+                    <div class="row">
+                        <div class="col-lg-12 text-center ">
+                            <a class="btn btn-sm btn-info" href="@ViewBag.PreviewURL" target="_blank"> Preview List</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="detail-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3 class="modal-title">Attribute Properties</h3>
+            </div>
+            <div class="modal-body">
+                <span id="attributeId" class="hidden" style="display:none"></span>
+                <span class="lead" style="color: rgb(42, 159, 214);"><span class="text-uppercase" id="attributeName"></span></span>
+                <br />
+                <br />
+                <label>Column Heading Display Name</label>
+                <input type="text" id="txtDisplayName" class="form-control" />
+
+                <label>Default CSS Class</label>
+                <input type="text" id="txtDefaultCSSClass" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm" id="btnQuickSave">Save changes</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/listmanager.js"></script>
+<script type="text/javascript">
+
+
+    function getAvailableAttributes() {
+        var url = "../List/GetAvailableAttributes";
+        var id = $('#listID').val();
+        var data = "{'listId': '" + id + "'}";
+
+        return $.getJSON(url + "?listId=" + id)
+
+    }
+
+    function getSelectedAttributes() {
+
+
+        var url = "../List/GetSelectedAttributes";
+        var id = $('#listID').val();
+        var data = "{'listId': '" + id + "'}";
+        return $.getJSON(url + "?listId=" + id)
+
+    }
+
+
+    function addAttributeToList(attributename) {
+        console.log("Added: " + attributename);
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+        var url = "../List/AddAttributeToList";
+        var id = $('#listID').val();
+        //var data = "{'listId': '" + id + "','attributename':'" + attributename + "','ordinalposition':'" + ordinalposition + "'}";
+        $.get(url + "?listId=" + id + "&attributename=" + attributename + "&ordinalposition=" + ordinalposition, function () {
+            getSelectedList();
+        });
+
+    }
+
+
+    function removeAttributeFromList(attributename) {
+
+        var ordinalposition = $('#lblNextOrdinalPosition').text();
+        var url = "../List/RemoveAttributeFromList";
+        var id = $('#listID').val();
+        //var data = "{'listId': '" + id + "','attributename':'" + attributename + "'}";
+        $.get(url + "?listId=" + id + "&attributename=" + attributename + "&ordinalposition=" + ordinalposition, function () {
+            getSelectedList();
+        });
+    }
+
+    function GetNextOrdinalPosition() {
+        var url = "../List/GetNextOrdinalPosition";
+        var id = $('#listID').val();
+        var data = "{'listId': '" + id + "'}";
+        return $.getJSON(url + "?listId=" + id);
+    }
+
+    function UpdateAttributeOrder(attributeId, order) {
+        var url = "../List/UpdateOrdinalPosition";
+        var id = $('#listID').val();
+        //var data = "{'listId': '" + id + "','listattribute_id':'" + attributeId + "','ordinalposition':" + order + "}";
+        return $.getJSON(url + "?listId=" + id + "&listattribute_id=" + attributeId + "&ordinalposition=" + order);
+    }
+
+
+    function SaveQuickAttributes(attributeId, displayname, defaultcssclass) {
+        var url = "../List/SaveQuickAttributes";
+        var listId = $('#listID').val();
+        //var data = "{'listId': '" + listId + "','listattribute_id':'" + attributeId + "','displayname':'" + displayname + "','defaultcssclassname':'" + defaultcssclass + "'}";
+        //return PostData(url, data)
+        return $.getJSON(url + "?listId=" + listId + "&listattribute_id=" + attributeId + "&displayname=" + displayname + "&defaultcssclassname=" + defaultcssclass);
+    }
+
+    function SelectUnselectAttribute(cb, attributeID) {
+        console.log(cb.id);
+        var li = '#avail' + cb.id;
+        if (cb.checked) {
+            addAttributeToList(cb.id)
+            $(li).addClass('itemSelected');
+
+        }
+        else {
+            removeAttributeFromList(cb.id)
+            $(li).removeClass('itemSelected');
+        }
+    }
+
+    function getNextOrdinalPositionForLabel() {
+
+        $.when(
+            GetNextOrdinalPosition()
+        ).done(
+            function (
+                nextOrdinalPosition
+            ) {
+
+                var nop = nextOrdinalPosition.d + "";
+
+                $('#lblNextOrdinalPosition').text(nop);
+
+
+
+            })
+
+    }
+
+    function getSelectedList() {
+        $.when(getSelectedAttributes()).done(function (selectedList) {
+            var html = "<ul id='selectedList'>";
+            console.log(selectedList);
+            $.each(selectedList, function (i, selectedItem) {
+                var func = "'" + selectedItem.listattribute_id + "'"; //, '" + selectedItem.attributename + "');";
+
+                html += "<li id='" + selectedItem.listattribute_id + "'>";
+                html += "<div class='row'><div class='col-md-9'>"
+                html += i + 1;
+                html += '.&nbsp;';
+                html += selectedItem.attributename;
+                html += "</div><div class='col-md-3'>"
+                //html += "<a href='#' onclick='showDetailModal(\"" + selectedItem.listattribute_id + "\",\"" + selectedItem.attributename + "\")' class='pull-right'><small>Edit</small></a>";
+                html += "<a href='#' onclick='showDetailModal(" + JSON.stringify(selectedItem) + ")' class='pull-right'><small>Edit</small></a>";
+                html += "</div></div>"
+                html += '</li>';
+            });
+            html += "</ul>"
+            $('#selectedAttributes').html(html);
+
+
+            $("#selectedList").sortable({
+                revert: true,
+                stop: function (event, ui) {
+
+                    var sortOrder = $("#selectedList").sortable('toArray');
+
+                    console.log(sortOrder.length);
+                    //sortOrder = JSON.parse(sortOrder)
+
+                    var arrayLength = sortOrder.length;
+                    for (var i = 0; i < arrayLength; i++) {
+
+                        UpdateAttributeOrder(sortOrder[i], i + 1);
+                        getSelectedList();
+
+                    }
+
+                }
+            });
+
+            getNextOrdinalPositionForLabel();
+
+
+        })
+
+    }
+
+    $(document).ready(function () {
+
+
+        var listID = getParameterByName('id');
+        //console.log(listID);
+        $('#listID').val(listID);
+
+        getNextOrdinalPositionForLabel();
+
+        $.when(getAvailableAttributes()).done(
+            function (availableList) {
+                var html = "<ul id='availableList'>";
+                $.each(availableList, function (i, availableItem) {
+                    html += '<li id="avail' + availableItem.attributename + '"'
+                    if (availableItem.isselected) {
+                        html += ' class="itemSelected"';
+                    }
+                    html += '><input type="checkbox" id="' + availableItem.attributename + '"';
+                    if (availableItem.isselected) {
+                        html += ' checked';
+                    }
+                    html += ' onclick="SelectUnselectAttribute(this);"/>&nbsp;&nbsp;' + availableItem.attributename + '</li>';
+
+                });
+                html += "</ul";
+                $('#availableAttributes').html(html);
+
+                getSelectedList();
+
+            })
+
+
+        $('#btnQuickSave').click(function () {
+            //alert('Saved');
+
+            var attributeId = $('#attributeId').text();
+            var displayname = $('#txtDisplayName').val();
+            var defaultcssclass = $('#txtDefaultCSSClass').val();
+
+
+            console.log(attributeId + "," + displayname + "," + defaultcssclass);
+
+            SaveQuickAttributes(attributeId, displayname, defaultcssclass)
+
+            $('#detail-modal').modal('hide');//modal_1 is the id 1
+
+            getSelectedList();
+        });
+
+    });
+
+    function showDetailModal(item) {
+        //e.preventDefault();
+        console.log(item);
+
+
+        // Clear out current values from form
+        $('#attributeName').text("");
+        $('#attributeId').text("");
+        $('#txtDisplayName').val("");
+        $('#txtDefaultCSSClass').val("");
+
+        $('#attributeName').text(item.attributename);
+        $('#attributeId').text(item.listattribute_id);
+        $('#txtDisplayName').val(item.displayname);
+        $('#txtDefaultCSSClass').val(item.defaultcssclassname);
+
+
+        $("#detail-modal").modal("show");
+    }
+
+</script>

@@ -1,0 +1,44 @@
+﻿@model SynapseStudioWeb.Models.LocalUser
+@{
+    ViewData["Title"] = "New Role";
+}
+
+  
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>New User</h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                @using (Html.BeginForm("CreateUser", "RoleManager", FormMethod.Post))
+                {
+
+                    <label for="FirstName">Firstname</label>
+                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+
+                    <br />
+                    <label for="LastName">Lastname</label>
+                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    <br />
+                    <label for="Email">Email</label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    <br />
+                    <label for="UserName">*Username</label>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                    <br />
+                    <label for="Password">*Password</label>
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                    <br />
+                    <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

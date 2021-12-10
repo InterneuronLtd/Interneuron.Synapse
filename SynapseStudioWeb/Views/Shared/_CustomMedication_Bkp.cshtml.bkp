@@ -1,0 +1,1173 @@
+﻿@model SynapseStudioWeb.Models.MedicinalMgmt.CustomMedicationModel;
+
+<style type="text/css">
+    div.token-input-dropdown-facebook {
+        /*z-index: 1051 !important;*/
+        height: 200px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+    }
+
+    .accordion-menu > button {
+        display: block;
+        position: relative;
+    }
+
+        .accordion-menu > button:after {
+            content: "\f078"; /* fa-chevron-down */
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 12px;
+        }
+
+        .accordion-menu > button[aria-expanded="true"]:after {
+            content: "\f077"; /* fa-chevron-up */
+        }
+
+    .validation-summary-valid span {
+        display: none;
+    }
+</style>
+<link href="~/lib/token-input-1.6.0/styles/token-input-facebook.css" rel="stylesheet" type="text/css" />
+@*@if (!@ViewContext.ViewData.ModelState.IsValid)
+    {
+      @Html.ValidationSummary(false, "Please provide the below details.", new { @id="pnlMedicationValidationSmry", @class = "text-danger" })
+    }*@
+<div asp-validation-summary="All" class="text-danger" id="pnlMedicationValidationSmry">
+    <span>Please correct the following errors</span>
+</div>
+<script type="text/javascript">
+    var rootCustomMedicationId = "@Model.ControlIdentifier";
+    var rootCustomMedicationIdSelector = "#@Model.ControlIdentifier";
+</script>
+@{
+    var DeriveId = new Func<string, string>((id) => $"{Model.ControlIdentifier}_{id}");
+
+    var baseURLPath = string.IsNullOrEmpty(Context.Request.PathBase) ? $"{ Context.Request.Scheme }://{Context.Request.Host}" : $"{ Context.Request.Scheme }://{Context.Request.Host}{Context.Request.PathBase}";
+
+    var DeriveAbsUrl = new Func<string, string>((actionPath) => string.IsNullOrEmpty(actionPath) ? "" : $"{ baseURLPath}/{actionPath.TrimStart('/')}");
+}
+<div class="custom-medication root-custom-medication" id="@Model.ControlIdentifier">
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #productDetails" aria-expanded="true" aria-controls="productDetails">
+                        <i class="fas fa-tablets"></i> Product Details
+                    </button>
+                </h5>
+            </div>
+
+            <div id="productDetails" class="collapse show" aria-labelledby="headingOne" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="name" class="col-sm-5 col-form-label">Name</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", data_isreadonly = Model.IsImported == true ? "true" : "false" })
+                            @Html.ValidationMessageFor(m => m.Name)
+                            @Html.HiddenFor(m => m.IsReadOnly)
+                            @Html.HiddenFor(m => m.IsImported)
+                            @Html.HiddenFor(m => m.RecSource)
+                            @Html.HiddenFor(m => m.ControlIdentifier)
+                            @Html.HiddenFor(m => m.IsDuplicate)
+                            @Html.HiddenFor(m => m.DuplicateOfFormularyId)
+                            @Html.HiddenFor(m => m.ParentCode)
+                            @Html.HiddenFor(m => m.ParentName)
+                            @Html.HiddenFor(m => m.ParentProductType)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="producttype" class="col-sm-5 col-form-label">Product Type</label>
+                        <div class="col-sm-7">
+                            @if (Model.IsImported == true)
+                            {
+                                @Html.DropDownListFor(m => m.ProductType, ViewBag.ProductTypes as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.HiddenFor(m => m.ProductType, new { @id = DeriveId("hdnProductType") })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.ProductType, ViewBag.ProductTypes as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ProductType)
+                            }
+                        </div>
+                    </div>
+                    @*<div class="form-group row">
+            <label for="medicationtype" class="col-sm-5 col-form-label">Medication Type</label>
+            <div class="col-sm-7">
+                @Html.DropDownListFor(m => m.MedicationType, ViewBag.MedicationTypeList as SelectList, new { @class = "form-control" })
+            </div>
+        </div>*@
+                    @*<div class="form-group row">
+            <label for="fluid" class="col-sm-5 col-form-label">Fluid</label>
+            <div class="col-sm-7">
+                @Html.CheckBoxFor(m => m.Fluid)
+            </div>
+        </div>*@
+                    <div class="form-group row">
+                        <label for="code" class="col-sm-5 col-form-label">Code</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Code, new { @class = "form-control", data_isreadonly = Model.IsImported == true ? "true" : "false" })
+                            @Html.ValidationMessageFor(m => m.Code)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="codesystem" class="col-sm-5 col-form-label">Code System</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.CodeSystem, new { @class = "form-control", data_isreadonly = Model.IsImported == true ? "true" : "false" })
+                            @Html.ValidationMessageFor(m => m.CodeSystem)
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Additional Code
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-additional-code" id="@DeriveId("btnAdditionalCode")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="AdditionalCodeContainer" data-existingadditionalcode="@SynapseStudioWeb.Helpers.Extensions.SerializeAdditionalCodeToJsonArray(Model.FormularyAdditionalCodes)" data-isreadonly="@Model.IsImported">
+                                <!--Add Additional Code Controls -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="basisofpreferredname" class="col-sm-5 col-form-label">Basis of preferred name</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.BasisOfPreferredName, ViewBag.BasisOfPreferredNameList as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="licenseduse" class="col-sm-5 col-form-label">Licensed Indications</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.LicensedUse)" data-isdisabled="@Model.IsReadOnly" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicenseduse" class="col-sm-5 col-form-label">Unlicensed Indications</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.UnlicensedUse)" data-isdisabled="@Model.IsReadOnly" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="currentlicensingauthority" class="col-sm-5 col-form-label">Current licensing authority</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.CurrentLicensingAuthority, ViewBag.LicensingAuthorities as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Supplier" class="col-sm-5 col-form-label">Supplier</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Supplier, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Supplier")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Supplier), data_singleselect = "true", data_isdisabled = Model.IsImported })
+                            @*<input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Supplier)" data-isdisabled="@Model.IsImported" data-singleselect="true" id="supplier" name="supplier" type="text" />*@
+                            @Html.ValidationMessageFor(m => m.Supplier)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tradefamily" class="col-sm-5 col-form-label">Trade Family</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control form-control-sm studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.TradeFamily)" data-isdisabled="@Model.IsImported" data-singleselect="true" name="tradefamily" id="@DeriveId("tradefamily")" data-query-url="@DeriveAbsUrl("/Formulary/SearchTradeFamily")">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="virtualtherapeuticmoiety" class="col-sm-5 col-form-label">Virtual Therapeutic Moiety</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.VirtualTherapeuticMoiety, new { @class = "form-control", data_isreadonly = Model.IsImported == true ? "true" : "false" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="virtualMedicinalProduct" class="col-sm-5 col-form-label">Virtual Medicinal Product</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.VirtualMedicinalProduct, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="atccode" class="col-sm-5 col-form-label">ATC Code</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.ATCCode, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #posology" aria-expanded="false" aria-controls="posology">
+                        <i class="fas fa-flask"></i> Posology
+                    </button>
+                </h5>
+            </div>
+
+            <div id="posology" class="collapse" aria-labelledby="headingTwo" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="doseform" class="col-sm-5 col-form-label">Dose Form</label>
+                        <div class="col-sm-7">
+                            @if (Model.IsImported == true)
+                            {
+                                @Html.DropDownListFor(m => m.DoseForm, ViewBag.DoseForms as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.HiddenFor(m => m.DoseForm, new { @id = DeriveId("hdnDoseForm") })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.DoseForm, ViewBag.DoseForms as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.DoseForm)
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="FormNRoute" class="col-sm-5 col-form-label">Form & Route</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FormNRoute, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("FormNRoute")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.FormNRoute), data_singleselect = "false", data_isdisabled = Model.IsImported })
+                            @*<input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.FormNRoute)" data-isdisabled="@Model.IsImported" data-singleselect="false" id="formNRoute" name="formNRoute" type="text" />*@
+                            @Html.ValidationMessageFor(m => m.FormNRoute)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="maximumdosenumerator" class="col-sm-5 col-form-label">Maximum Dose Numerator</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.MaximumDoseNumerator, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="maximumdoseunit" class="col-sm-5 col-form-label">Maximum Dose Unit</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.MaximumDoseUnit)" data-singleselect="true" id="@DeriveId("MaximumDoseUnit")" name="MaximumDoseUnit" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="roundingfactor" class="col-sm-5 col-form-label">Rounding Factor</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.RoundingFactor, ViewBag.RoundingFactors as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="Route" class="col-sm-5 col-form-label">Route</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.Route, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Route")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Route), data_singleselect = "false", data_isdisabled = Model.IsImported })
+
+                            @*<input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Route)" data-singleselect="false" data-isdisabled="@Model.IsImported" id="Route" name="Route" type="text" />*@
+                            @Html.ValidationMessageFor(m => m.Route)
+                        </div>
+                    </div>
+                    @*<div class="form-group row">
+                        <label for="additionalroute" class="col-sm-5 col-form-label">Additional Route</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.AdditionalRoute)" data-singleselect="false" id="@DeriveId("additionalRoute")" name="additionalRoute" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="discretionaryroutes" class="col-sm-5 col-form-label">Discretionary Routes</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.DiscretionaryRoutes)" data-singleselect="false" id="@DeriveId("discretionaryRoutes")" name="discretionaryRoutes" type="text" />
+                        </div>
+                    </div>*@
+                    <div class="form-group row">
+                        <label for="unlicensedroute" class="col-sm-5 col-form-label">Unlicensed Route</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.UnlicensedRoute)" data-singleselect="false" id="@DeriveId("unlicensedRoute")" name="unlicensedRoute" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="FormCd" class="col-sm-5 col-form-label">Form</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FormCd, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("FormCd")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.FormCd), data_singleselect = "true", data_isdisabled = Model.IsImported })
+
+                            @*<input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.FormCd)" data-singleselect="true" id="formcd" name="formcd" type="text" />*@
+                            @Html.ValidationMessageFor(m => m.FormCd)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unitdoseformsize" class="col-sm-5 col-form-label">Unit dose form size</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.UnitDoseFormSize, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UnitDoseFormSize)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unitdoseformunits" class="col-sm-5 col-form-label">Unit dose form units</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.UnitDoseFormUnits)" data-isdisabled="@Model.IsImported" data-singleselect="true" id="@DeriveId("unitDoseFormUnits")" name="unitDoseFormUnits" type="text" />
+                            @Html.ValidationMessageFor(m => m.UnitDoseFormUnits)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="UnitDoseUnitOfMeasure" class="col-sm-5 col-form-label">Unit dose unit of measure</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.UnitDoseUnitOfMeasure, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("UnitDoseUnitOfMeasure")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.UnitDoseUnitOfMeasure), data_singleselect = "true", data_isdisabled = Model.IsImported })
+
+                            @*<input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.UnitDoseUnitOfMeasure)" data-isdisabled="@Model.IsImported" data-singleselect="true" id="UnitDoseUnitOfMeasure" name="UnitDoseUnitOfMeasure" type="text" />*@
+                            @Html.ValidationMessageFor(m => m.UnitDoseUnitOfMeasure)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="orderformtype" class="col-sm-5 col-form-label">Order Form Type</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.OrderFormType, ViewBag.OrderFormTypes as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <div class="h6">
+                                Ingredient
+                                <div class="float-right">
+                                    <label class="mr-2"><a href="#" class="add-ingredient" id="@DeriveId("btnAddIngredient")"><i class="fa fa-plus"></i></a></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="IngredientContainer" data-existingingredient="@SynapseStudioWeb.Helpers.Extensions.SerializeIngredientsToJsonArray(Model.Ingredients)" data-isreadonly="@Model.IsImported">
+                                <!--Add Ingredient Controls -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #guidance" aria-expanded="false" aria-controls="guidance">
+                        <i class="fas fa-book-reader"></i> Guidance
+                    </button>
+                </h5>
+            </div>
+
+            <div id="guidance" class="collapse" aria-labelledby="headingThree" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="contraindications" class="col-sm-5 col-form-label">Contraindications</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.ContraIndications)" data-isdisabled="@Model.IsReadOnly" data-singleselect="false" id="@DeriveId("contraindications")" name="contraindications" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="customWarning" class="col-sm-5 col-form-label">Custom Warning</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.CustomWarning)" data-singleselect="false" id="@DeriveId("customWarning")" name="customWarning" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="endorsements" class="col-sm-5 col-form-label">Endorsements</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Endorsements)" data-singleselect="false" id="@DeriveId("endorsements")" name="endorsements" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="safetyMessages" class="col-sm-5 col-form-label">Important Safety Information</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-singleselect="false" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.SafetyMessages)" id="@DeriveId("safetyMessages")" name="safetyMessages" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="indication" class="col-sm-5 col-form-label">Indication</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control form-control-sm studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Indication)" data-singleselect="false" id="@DeriveId("indication")" name="indication" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="medusapreparationinstructions" class="col-sm-5 col-form-label">Medusa Preparation Instructions</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.MedusaPreparationInstructions, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="niceta" class="col-sm-5 col-form-label">NICE TA</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.NICETA, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="notesforrestriction" class="col-sm-5 col-form-label">Notes for Restriction</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.NotesForRestriction, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sideeffects" class="col-sm-5 col-form-label">Side Effects</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.SideEffects)" data-singleselect="false" id="@DeriveId("sideEffects")" name="sideEffects" type="text" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFour">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #flagsClassification" aria-expanded="false" aria-controls="flagsClassification">
+                        <i class="fas fa-flag"></i> Flags / Classification
+                    </button>
+                </h5>
+            </div>
+
+            <div id="flagsClassification" class="collapse" aria-labelledby="headingFour" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="antibiotic" class="col-sm-5 col-form-label">Antibiotic</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Antibiotic)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="anticoagulant" class="col-sm-5 col-form-label">Anticoagulant</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Anticoagulant)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="antipsychotic" class="col-sm-5 col-form-label">Antipsychotic</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Antipsychotic)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="antimicrobial" class="col-sm-5 col-form-label">Antimicrobial</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Antimicrobial)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="blacktriangle" class="col-sm-5 col-form-label">Black Triangle</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.BlackTriangle)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cautions" class="col-sm-5 col-form-label">Cautions</label>
+                        <div class="col-sm-7">
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeToJsonArray(Model.Cautions)" data-singleselect="false" id="@DeriveId("cautions")" name="cautions" type="text" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cfcfree" class="col-sm-5 col-form-label">CFC Free</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.CFCFree)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="class" class="col-sm-5 col-form-label">Class</label>
+                        <div class="col-sm-7">
+                            @*<select class="form-control" id="class" name="class">
+                                    <option value="">Please Select</option>
+                                    <option value="Generic">Generic</option>
+                                    <option value="Brand">Brand</option>
+                                </select>*@
+                            @Html.DropDownListFor(m => m.Class, ViewBag.DrugClasses as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="clinicaltrialmedication" class="col-sm-5 col-form-label">Clinical Trial Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ClinicalTrialMedication)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="controlleddrugcategory" class="col-sm-5 col-form-label">Controlled Drug Category</label>
+                        <div class="col-sm-7">
+                            @if (Model.IsImported == true)
+                            {
+                                @Html.DropDownListFor(m => m.ControlledDrugCategory, ViewBag.ControlledDrugCategories as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.HiddenFor(m => m.ControlledDrugCategory, new { @id = DeriveId("hdnControlledDrugCategory") })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.ControlledDrugCategory, ViewBag.ControlledDrugCategories as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.ControlledDrugCategory)
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="criticaldrug" class="col-sm-5 col-form-label">Critical Drug</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.CriticalDrug)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="cytotoxic" class="col-sm-5 col-form-label">Cytotoxic</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Cytotoxic)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emaadditionalmonitoring" class="col-sm-5 col-form-label">EMA additional monitoring</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.EMAAdditionalMonitoring)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="emaadditionalmonitoring" class="col-sm-5 col-form-label">Expensive Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ExpensiveMedication)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="glutenfree" class="col-sm-5 col-form-label">Gluten Free</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.GlutenFree)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="highalertmedication" class="col-sm-5 col-form-label">High Alert Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.HighAlertMedication)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="insulins" class="col-sm-5 col-form-label">Insulins</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.Insulins)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ivtooral" class="col-sm-5 col-form-label">IV to Oral</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IVToOral)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="markedmodifier" class="col-sm-5 col-form-label">Marked Modifier</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.MarkedModifier, ViewBag.MarkedModifiers as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="mentalhealthdrug" class="col-sm-5 col-form-label">Mental Health Drug</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.MentalHealthDrug)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="modifiedrelease" class="col-sm-5 col-form-label">Modified Release</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.ModifiedRelease, ViewBag.ModifiedReleases as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="notforprn" class="col-sm-5 col-form-label">Not for PRN</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.NotForPRN)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="orderable" class="col-sm-5 col-form-label">Orderable</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.Orderable, ViewBag.OrderableStatuses as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Orderable)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="outpatientmedication" class="col-sm-5 col-form-label">Outpatient Medication</label>
+                        <div class="col-sm-7">
+                            @Html.RadioButton("OutpatientMedication", true, null, new { @id = "outpatientYes" }) Yes
+                            @Html.RadioButton("OutpatientMedication", false, null, new { @id = "outpatientNo" }) No
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="prescribingstatus" class="col-sm-5 col-form-label">Prescribing Status</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.PrescribingStatus, ViewBag.PrescribingStatuses as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="preservativefree" class="col-sm-5 col-form-label">Preservative Free</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.PreservativeFree)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="restrictedprescribing" class="col-sm-5 col-form-label">Restricted Prescribing</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.RestrictedPrescribing)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="restrictionsonavailability" class="col-sm-5 col-form-label">Restrictions on availability</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.RestrictionsOnAvailability, ViewBag.RestrictionsOnAvailabilities as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="reviewreminder" class="col-sm-5 col-form-label">Review Reminder</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ReviewReminder)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="sugarfree" class="col-sm-5 col-form-label">Sugar Free</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.SugarFree)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="titrationtype" class="col-sm-5 col-form-label">Titration Type</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.TitrationType, ViewBag.TitrationTypes as SelectList, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="unlicensedmedication" class="col-sm-5 col-form-label">Unlicensed Medication</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.UnlicensedMedication)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="parallelimport" class="col-sm-5 col-form-label">Parallel import</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.ParallelImport)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingFive">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #history" aria-expanded="false" aria-controls="history">
+                        <i class="fas fa-history"></i> History
+                    </button>
+                </h5>
+            </div>
+
+            <div id="history" class="collapse" aria-labelledby="headingFive" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    @*<div class="form-group row">
+                        <label for="history" class="col-sm-5 col-form-label">History</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.History, new { @class = "form-control" })
+                        </div>
+                        </div>*@
+                    <div class="form-group row">
+                        <label for="id" class="col-sm-5 col-form-label">ID</label>
+                        <div class="col-sm-7">
+                            @Html.TextBoxFor(m => m.FormularyVersionId, new { @class = "form-control", data_isreadonly = "true" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-5 col-form-label">Status</label>
+                        <div class="col-sm-7">
+                            @if (Model.IsRecordStatusReadOnly == true)
+                            {
+                                @Html.DropDownListFor(m => m.Status, ViewBag.RecordStatuses as SelectList, new { @class = "form-control", @disabled = "disabled" })
+                                @Html.HiddenFor(m => m.Status, new { @id = DeriveId("hdnStatus") })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.Status, ViewBag.RecordStatuses as SelectList, new { @onchange = "callstatuschangefunc(this.value)", @class = "form-control" })
+                                @Html.HiddenFor(m => m.OriginalStatus)
+
+                            }
+                        </div>
+
+                    </div>
+                    @if (Model.Status == "004")
+                    {
+                        <div class="form-group row">
+
+                            <label class="col-sm-5 col-form-label">Reason</label>
+                            <div class="col-sm-7">
+                                @*<textarea class="form-control" id="ArchivestatusReason" rows="4"></textarea>*@
+                                @Html.TextAreaFor(m => m.RecStatuschangeMsg, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.RecStatuschangeMsg)
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="ArchiveReasonshow" style="display:none;" class="form-group row">
+
+                            <label class="col-sm-5 col-form-label">Reason</label>
+                            <div class="col-sm-7">
+                                @*<textarea class="form-control" id="ArchivestatusReason" rows="4"></textarea>*@
+                                @Html.TextAreaFor(m => m.RecStatuschangeMsg, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.RecStatuschangeMsg)
+                            </div>
+                        </div>
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingSix">
+                <h5 class="mb-0 accordion-menu">
+                    <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#@Model.ControlIdentifier #preferences" aria-expanded="false" aria-controls="preferences">
+                        <i class="fas fa-cogs"></i> Preferences
+                    </button>
+                </h5>
+            </div>
+
+            <div id="preferences" class="collapse" aria-labelledby="headingSix" data-parent="#@Model.ControlIdentifier #accordion">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="formularystatus" class="col-sm-5 col-form-label">Formulary Status</label>
+                        <div class="col-sm-7">
+                            @Html.DropDownListFor(m => m.FormularyStatus, ViewBag.FormularyStatuses as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FormularyStatus)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="ignoreduplicatewarnings" class="col-sm-5 col-form-label">Ignore Duplicate Warnings</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IgnoreDuplicateWarnings)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inpatientmedication" class="col-sm-5 col-form-label">Inpatient Medication</label>
+                        <div class="col-sm-7">
+                            @Html.RadioButton("InpatientMedication", true, null, new { @id = "inpatientYes" }) Yes
+                            @Html.RadioButton("InpatientMedication", false, null, new { @id = "inpatientNo" }) No
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="witnessingrequired" class="col-sm-5 col-form-label">Witnessing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.WitnessingRequired)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="@DeriveId("additionalCodeTmpl")" disabled style="display:none;">
+    <!--Add Additional Code Controls -->
+    <div class="additionalCode">
+        <div class="form-group row">
+            <label for="AdditionalCode" class="col-sm-3 col-form-label">Additional Code</label>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="AdditionalCode" class="form-control" id="@DeriveId("AdditionalCode-{0}")" readonly>
+                }
+                else
+                {
+                    <input type="text" name="AdditionalCode" class="form-control" id="@DeriveId("AdditionalCode-{0}")">
+                    @Html.ValidationMessage("AdditionalCode", new { @id = DeriveId("AdditionalCode-{0}") })
+                }
+            </div>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    @Html.DropDownList("AdditionalCodeSystem", ViewBag.CodeSystems as SelectList, new { @class = "form-control", @name = "AdditionalCodeSystem", @id = DeriveId("AdditionalCodeSystem-{0}"), @disabled = "disabled" })
+                }
+                else
+                {
+                    @Html.DropDownList("AdditionalCodeSystem", ViewBag.CodeSystems as SelectList, new { @class = "form-control", @name = "AdditionalCodeSystem", @id = DeriveId("AdditionalCodeSystem-{0}") })
+                    @Html.ValidationMessage("AdditionalCodeSystem", new { @id = DeriveId("AdditionalCodeSystem-{0}") })
+                }
+            </div>
+            <div class="col-sm-1">
+                @if (Model.IsImported != true)
+                {
+                    <button id="@DeriveId("btnRemoveAdditionalCode-{0}")" class="btn btn-sm btn-danger remove-additional-code" onclick="RemoveAddCode(this)"><span>×</span></button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<div id="@DeriveId("ingredientTmpl")" disabled style="display:none;">
+    <!--Add Ingredient Controls -->
+    <div class="ingredient">
+        <div class="form-group row">
+            <label for="Ingredient" class="col-sm-3 col-form-label">Ingredient</label>
+            <div class="col-sm-8">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="Ingredient" class="form-control studio-autocomplete" data-singleselect="true" id="@DeriveId("Ingredient-{0}")" readonly>
+                }
+                else
+                {
+                    <input type="text" name="Ingredient" class="form-control studio-autocomplete" data-singleselect="true" id="@DeriveId("Ingredient-{0}")" data-query-url="@DeriveAbsUrl("/Formulary/SearchIngredients")">
+                    @Html.ValidationMessage("Ingredient", new { @id = DeriveId("Ingredient-{0}") })
+                }
+            </div>
+            <div class="col-sm-1">
+                @if (Model.IsImported != true)
+                {
+                    <button class="btn btn-sm btn-danger" onclick="RemoveIngredient(this)">
+                        <span>×</span>
+                    </button>
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="StrengthValNumerator" class="col-sm-3 col-form-label">Strength Value Numerator</label>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="StrengthValNumerator" class="form-control" id="@DeriveId("StrengthValNumerator-{0}")" readonly>
+                }
+                else
+                {
+                    <input type="text" name="StrengthValNumerator" class="form-control" id="@DeriveId("StrengthValNumerator-{0}")">
+                    @Html.ValidationMessage("StrengthValNumerator", new { @id = DeriveId("StrengthValNumerator-{0}") })
+                }
+            </div>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="StrengthValueNumeratorUnit" class="form-control studio-autocomplete" id="@DeriveId("StrengthValueNumeratorUnit-{0}")" data-singleselect="true" readonly>
+                }
+                else
+                {
+                    <input type="text" name="StrengthValueNumeratorUnit" class="form-control studio-autocomplete" id="@DeriveId("StrengthValueNumeratorUnit-{0}")" data-singleselect="true" data-query-url="@DeriveAbsUrl("/Formulary/SearchUOMs")">
+                    @Html.ValidationMessage("StrengthValueNumeratorUnit", new { @id = DeriveId("StrengthValueNumeratorUnit-{0}") })
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="StrengthValDenominator" class="col-sm-3 col-form-label">Strength Value Denominator</label>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="StrengthValDenominator" class="form-control" id="@DeriveId("StrengthValDenominator-{0}")" readonly>
+                }
+                else
+                {
+                    <input type="text" name="StrengthValDenominator" class="form-control" id="@DeriveId("StrengthValDenominator-{0}")">
+                    @Html.ValidationMessage("StrengthValDenominator", new { @id = DeriveId("StrengthValDenominator-{0}") })
+                }
+            </div>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    <input type="text" name="StrengthValueDenominatorUnit" class="form-control studio-autocomplete" id="@DeriveId("StrengthValueDenominatorUnit-{0}")" data-singleselect="true" readonly>
+                }
+                else
+                {
+                    <input type="text" name="StrengthValueDenominatorUnit" class="form-control studio-autocomplete" id="@DeriveId("StrengthValueDenominatorUnit-{0}")" data-singleselect="true" data-query-url="@DeriveAbsUrl("/Formulary/SearchUOMs")">
+                    @Html.ValidationMessage("StrengthValueDenominatorUnit", new { @id = DeriveId("StrengthValueDenominatorUnit-{0}") })
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="BasisOfPharmaceuticalStrength" class="col-sm-3 col-form-label">Basis of pharmaceutical strength</label>
+            <div class="col-sm-4">
+                @if (Model.IsImported == true)
+                {
+                    @Html.DropDownList("BasisOfPharmaceuticalStrength", ViewBag.BasisOfPharmaStrengths as SelectList, new { @class = "form-control", @name = "BasisOfPharmaceuticalStrength", @id = DeriveId("BasisOfPharmaceuticalStrength-{0}"), @disabled = "disabled" })
+                    @Html.Hidden("BasisOfPharmaceuticalStrength", null, new { @id = DeriveId("hdnBasisOfPharmaceuticalStrength-{0}") })
+                }
+                else
+                {
+                    @Html.DropDownList("BasisOfPharmaceuticalStrength", ViewBag.BasisOfPharmaStrengths as SelectList, new { @class = "form-control", @name = "BasisOfPharmaceuticalStrength", @id = DeriveId("BasisOfPharmaceuticalStrength-{0}") })
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/lib/token-input-1.6.0/src/jquery.tokeninput.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        setTimeout(() => {
+            let inputs = $(".custom-medication :input");
+            if (inputs && inputs.length > 0) {
+                inputs.each(function(indx, el) {
+                    let isReadOnly = $(this).data('isreadonly');
+                    if (isReadOnly == true) $(this).attr('readonly', true);
+                });
+            }
+        }, 100);
+
+        initAdditionalCodes('#@Model.ControlIdentifier');
+
+        initIngredients('#@Model.ControlIdentifier');
+
+        //var availableIngredients = [];
+
+        //var availableBasisOfPharmaStrength = [];
+
+        //var availableAdditionalCodeSystems = [];
+
+        //var ingredientCounter = 0;
+
+        //var additionalCodeCounter = 0;
+
+        let rootCntrl = '#@Model.ControlIdentifier';
+
+        var cautions = new studio.AutoComplete(`${rootCntrl}_cautions`, null, null, null, { allowFreeTagging: true });
+        cautions.init();
+
+        var contraindications = new studio.AutoComplete(`${rootCntrl}_contraindications`, null, null, null, { disabled: true });
+        contraindications.init();
+
+        var sideEffects = new studio.AutoComplete(`${ rootCntrl }_sideEffects`, null, null, null, { allowFreeTagging: true });
+        sideEffects.init();
+
+        var impSafetyInfo = new studio.AutoComplete(`${rootCntrl}_safetyMessages`, null, null, null, { allowFreeTagging: true });
+        impSafetyInfo.init();
+
+        var endorsements = new studio.AutoComplete(`${ rootCntrl }_endorsements`, null, null, null, { allowFreeTagging: true });
+        endorsements.init();
+
+        var licensedUse = new studio.AutoComplete(`${rootCntrl}_licensedUse`, null, null, null, { disabled: true });
+        licensedUse.init();
+
+        var unlicensedUse = new studio.AutoComplete(`${ rootCntrl }_unlicensedUse`, null, null, null, { disabled: true });
+        unlicensedUse.init();
+
+        var customWarning = new studio.AutoComplete(`${rootCntrl}_customWarning`, null, null, null, { allowFreeTagging: true });
+        customWarning.init();
+
+        var indicationAutoComplete = new studio.AutoComplete(`${ rootCntrl }_indication`, null, null, null);
+        indicationAutoComplete.init();
+
+        var tradeFamilyAutoComplete = new studio.AutoComplete(`${rootCntrl}_tradefamily`, null, null, null, { tokenLimit: 1});
+        tradeFamilyAutoComplete.init();
+
+        ajaxGetJson('/Formulary/GetRoutes', null,
+            (response) => {
+
+                let availableRoutes = [];
+
+                $.each(response, function (key, item) {
+                    availableRoutes.push({ "id": item.cd, "name": item.desc });
+                });
+
+                let rootCntrl = '#@Model.ControlIdentifier';
+                let routeAutoComplete = new studio.AutoComplete(`${rootCntrl}_Route`, availableRoutes);
+                routeAutoComplete.init();
+
+                //let addlRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_additionalRoute`, availableRoutes);
+                //addlRouteAutoComplete.init();
+
+                //let discRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_discretionaryRoutes`, availableRoutes);
+                //discRouteAutoComplete.init();
+
+                let unlicensedRouteAutoComplete = new studio.AutoComplete(`${rootCntrl}_unlicensedRoute`, availableRoutes);
+                unlicensedRouteAutoComplete.init();
+            });
+
+        ajaxGetJson('/Formulary/GetFormAndRoutes', null,
+            (response) => {
+                let availableFormNRoutes = [];
+
+                $.each(response, function (key, item) {
+                    availableFormNRoutes.push({ "id": item.cd, "name": item.desc });
+                });
+                let rootCntrl = '#@Model.ControlIdentifier';
+                let formNAutoComplete = new studio.AutoComplete(`${rootCntrl}_FormNRoute`, availableFormNRoutes);
+                formNAutoComplete.init();
+            });
+
+        ajaxGetJson('/Formulary/GetUOMs', null,
+            (response) => {
+                let availableUOMs = [];
+
+                $.each(response, function (key, item) {
+                    availableUOMs.push({ "id": item.cd, "name": item.desc });
+                });
+
+                let rootCntrl = '#@Model.ControlIdentifier';
+
+                let maxDoseUnit = new studio.AutoComplete(`${rootCntrl}_MaximumDoseUnit`, availableUOMs, null, null, { tokenLimit: 1 });
+                maxDoseUnit.init();
+
+                let unitDoseFormUnit = new studio.AutoComplete(`${rootCntrl}_unitDoseFormUnits`, availableUOMs, null, null, { tokenLimit: 1 });
+                unitDoseFormUnit.init();
+
+                let unitDoseUOM = new studio.AutoComplete(`${rootCntrl}_UnitDoseUnitOfMeasure`, availableUOMs, null, null, { tokenLimit: 1 });
+                unitDoseUOM.init();
+
+                //let ingredientContainerElSel = `${rootCntrl} #IngredientContainer`;
+
+                //$(ingredientContainerElSel).data('availableuoms', availableUOMs);
+            });
+
+        ajaxGetJson('/Formulary/GetSuppliers', null,
+            (response) => {
+                let availableSuppliers = [];
+
+                $.each(response, function (key, item) {
+                    availableSuppliers.push({ "id": item.cd, "name": item.desc });
+                });
+
+                let rootCntrl = '#@Model.ControlIdentifier';
+
+                let suppliers = new studio.AutoComplete(`${rootCntrl}_Supplier`, availableSuppliers, null, null, { tokenLimit: 1 });
+                suppliers.init();
+            });
+
+        ajaxGetJson('/Formulary/GetFormCodes', null,
+            (response) => {
+                let availableFormCodes = [];
+
+                $.each(response, function (key, item) {
+                    availableFormCodes.push({ "id": item.cd, "name": item.desc });
+                });
+
+                let rootCntrl = '#@Model.ControlIdentifier';
+
+                let form = new studio.AutoComplete(`${rootCntrl}_FormCd`, availableFormCodes, null, null, { tokenLimit: 1 });
+                form.init();
+            });
+
+
+        $('.add-additional-code').click(function () {
+            let isReadOnly = false;
+            let rootEl = $(this).closest('.root-custom-medication');
+            let roolElId = $(rootEl).attr('id');
+            let addlContainerElSel = `#${roolElId} #AdditionalCodeContainer`;
+
+            let isReadOnlyVal = $(addlContainerElSel).data('isreadonly');
+            let currIndex = $(addlContainerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            isReadOnly = (isReadOnlyVal && (isReadOnlyVal == true || isReadOnlyVal == 'True' || isReadOnlyVal == 'true'));
+
+            if (!isReadOnly) {
+                console.log(currIndex);
+                var addlCodeTemplate = $.validator.format($.trim($(`#${roolElId}_additionalCodeTmpl`).html()));
+                $(addlCodeTemplate(currIndex)).appendTo(addlContainerElSel);
+                $(addlContainerElSel).data('currindex', currIndex);
+            }
+        });
+
+        $('.add-ingredient').click(function () {
+            let isReadOnly = false;
+            let rootEl = $(this).closest('.root-custom-medication');
+            let roolElId = $(rootEl).attr('id');
+            let ingredientContainerElSel = `#${roolElId} #IngredientContainer`;
+
+            let isReadOnlyVal = $(ingredientContainerElSel).data('isreadonly');
+            let currIndex = $(ingredientContainerElSel).data('currindex');
+            if (currIndex === undefined || currIndex === null) currIndex = 0;
+            else currIndex = currIndex + 1;
+
+            isReadOnly = (isReadOnlyVal && (isReadOnlyVal == true || isReadOnlyVal == 'True' || isReadOnlyVal == 'true'));
+
+            if (!isReadOnly) {
+                var ingredientCodeTemplate = $.validator.format($.trim($(`#${roolElId}_ingredientTmpl`).html()));
+                $(ingredientCodeTemplate(currIndex)).appendTo(ingredientContainerElSel);
+                $(ingredientContainerElSel).data('currindex', currIndex);
+
+                let rootCntrl = '#@Model.ControlIdentifier';
+
+                let ingredientAutoComplete = new studio.AutoComplete(`${rootCntrl}_Ingredient-${currIndex}`, null, null, null, { tokenLimit: 1 });
+                ingredientAutoComplete.init();
+
+                let strengthValNumUnit = new studio.AutoComplete(`${rootCntrl}_StrengthValueNumeratorUnit-${currIndex}`, null, null, null, { tokenLimit: 1 });
+                strengthValNumUnit.init();
+
+                let strengthValDenUnit = new studio.AutoComplete(`${rootCntrl}_StrengthValueDenominatorUnit-${currIndex}`, null, null, null, { tokenLimit: 1 });
+                strengthValDenUnit.init();
+            }
+        });
+    });
+
+    function RemoveAddCode(button) {
+        $(button).parent().parent().parent().remove();
+    }
+
+    function initAdditionalCodes(rootCntrlSel) {
+
+        let addlContainerElSel = `${rootCntrlSel} #AdditionalCodeContainer`;
+        let addlCodeTmplSel = `${rootCntrlSel}_additionalCodeTmpl`;
+
+        let existingAddnCode = $(addlContainerElSel).data('existingadditionalcode');
+
+        if (existingAddnCode && existingAddnCode.length > 0) {
+
+            $(addlContainerElSel).html("");
+
+            existingAddnCode.forEach(function (item, index) {
+                var addlCodeTemplate = $.validator.format($.trim($(addlCodeTmplSel).html()));
+                $(addlCodeTemplate(index)).appendTo(addlContainerElSel);
+
+                $(`${rootCntrlSel}_AdditionalCode-${index}`).val(item.AdditionalCode);
+                $(`${rootCntrlSel}_AdditionalCodeSystem-${index}`).val(item.AdditionalCodeSystem);
+                $(addlContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initIngredients(rootCntrlSel) {
+        let isReadOnly = false;
+
+        let ingredientContainerElSel = `${rootCntrlSel} #IngredientContainer`;
+
+        let ingredientTmplSel = `${rootCntrlSel}_ingredientTmpl`;
+
+        let isReadOnlyVal = $(ingredientContainerElSel).data('isreadonly');
+
+        isReadOnly = (isReadOnlyVal && (isReadOnlyVal == true || isReadOnlyVal == 'True' || isReadOnlyVal == 'true'));
+
+        let existingIngredient = $(ingredientContainerElSel).data('existingingredient');
+
+        if (existingIngredient && existingIngredient.length > 0) {
+
+            $(ingredientContainerElSel).html("");
+
+            existingIngredient.forEach(function (item, index) {
+                var ingredientTemplate = $.validator.format($.trim($(ingredientTmplSel).html()));
+                $(ingredientTemplate(index)).appendTo(ingredientContainerElSel);
+
+                let ing = item.Ingredient != null ? [item.Ingredient] : null;
+
+                let strnValNumUnit = item.StrengthValueNumeratorUnit != null ? [item.StrengthValueNumeratorUnit] : null;
+
+                let strnValDenUnit = item.StrengthValueDenominatorUnit != null ? [item.StrengthValueDenominatorUnit] : null;
+
+                if (!isReadOnly) {
+                    let ingredientAutoComplete = new studio.AutoComplete(`${rootCntrlSel}_Ingredient-${index}`, null, null, ing, { tokenLimit: 1 });
+                    ingredientAutoComplete.init();
+
+                    let strengthValNumUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueNumeratorUnit-${index}`, null, null, strnValNumUnit, { tokenLimit: 1 });
+                    strengthValNumUnit.init();
+
+                    let strengthValDenUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueDenominatorUnit-${index}`, null, null, strnValDenUnit, { tokenLimit: 1 });
+                    strengthValDenUnit.init();
+                }
+                else {
+                    let ingredientAutoComplete = new studio.AutoComplete(`${rootCntrlSel}_Ingredient-${index}`, null, null, ing, { tokenLimit: 1, disabled: true });
+                    ingredientAutoComplete.init();
+
+                    let strengthValNumUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueNumeratorUnit-${index}`, null, null, strnValNumUnit, { tokenLimit: 1, disabled: true });
+                    strengthValNumUnit.init();
+
+                    let strengthValDenUnit = new studio.AutoComplete(`${rootCntrlSel}_StrengthValueDenominatorUnit-${index}`, null, null, strnValDenUnit, { tokenLimit: 1, disabled: true });
+                    strengthValDenUnit.init();
+
+                    $(`${rootCntrlSel}_hdnBasisOfPharmaceuticalStrength-${index}`).val(item.BasisOfPharmaceuticalStrength);
+                }
+
+                $(`${rootCntrlSel}_StrengthValNumerator-${index}`).val(item.StrengthValNumerator);
+                $(`${rootCntrlSel}_StrengthValDenominator-${index}`).val(item.StrengthValDenominator);
+                $(`${rootCntrlSel}_BasisOfPharmaceuticalStrength-${index}`).val(item.BasisOfPharmaceuticalStrength);
+
+                $(ingredientContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function RemoveIngredient(button) {
+        $(button).parent().parent().parent().remove();
+    }
+
+    function RemoveAddCode(button) {
+        $(button).parent().parent().parent().remove();
+    }
+
+    function callstatuschangefunc(val) {
+
+    if (val === "004") {
+
+        $("#ArchiveReasonshow").show();
+    }
+    else {
+        $("#ArchiveReasonshow").hide();
+    }
+};
+</script>
+<script type="text/javascript" src="~/js/studio.autocomplete.js"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.unobtrusive-ajax.js"></script>

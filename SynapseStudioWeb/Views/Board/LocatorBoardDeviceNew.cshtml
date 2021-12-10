@@ -1,0 +1,60 @@
+﻿@model SynapseStudioWeb.Models.LocatorDeviceModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>New Locator board Device</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bed"></i>&nbsp;New Locator board Device</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="Board" asp-action="LocatorBoardDeviceNewSave"
+                              data-ajax-failure="onLocatorDeviceFailed" data-ajax-success="onLocatorDeviceSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+
+
+                            <label for="DeviceName">* Please enter a name for the device</label>
+                            @Html.TextBoxFor(m => m.DeviceName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DeviceName)
+                            <br />
+                            <label for="IPAddress">Enter the static IP Address for the device</label>
+                            @Html.TextBoxFor(m => m.IPAddress, new { @class = "form-control" })
+                            <br />
+                            <h4>Locator Board</h4>
+                            <label for="LocatorBoardId">Select Locator Board</label>
+                            @Html.DropDownListFor(model => model.LocatorBoardId, ViewBag.LocatorBoard as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocatorBoardId)
+                            <br />
+                            <h4>Location Details</h4>
+                            <label for="LocationCode">* Please enter the location code</label>
+                            @Html.TextBoxFor(m => m.LocationCode, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocationCode)
+
+                            <br />
+                            <a href="~/Board/LocatorBoardDeviceList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/board.js"></script>
+
+
+
+

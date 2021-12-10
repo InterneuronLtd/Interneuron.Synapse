@@ -1,0 +1,14 @@
+﻿@model List<SynapseStudioWeb.Models.BaseViewListDto>
+ <div class="row p-2">
+     <div class="col-md-12" style="text-transform:uppercase"><span id="baseviewname"></span> Baseview (@Model.Count)</div>
+ </div>
+<div class="row p-2">
+    <div class="col-md-12">         
+        @foreach (var m in Model)
+        {
+            <div class="list-group-item"> <span>@m.BaseviewName</span> <a href=@("BaseViewManagerView?id=" + m.Baseview_id) style="float:right">View</a></div>
+
+        }
+    </div>              
+</div>
+

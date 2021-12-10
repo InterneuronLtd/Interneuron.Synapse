@@ -1,9 +1,6 @@
-﻿<%--
-Interneuron Synapse
+﻿<%--Interneuron Synapse
 
-Copyright (C) 2019  Interneuron CIC
-
-
+Copyright(C) 2021  Interneuron CIC
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -12,15 +9,15 @@ the Free Software Foundation, either version 3 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
---%>
+along with this program.If not, see<http://www.gnu.org/licenses/>. --%>
 
+﻿
 <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListManagerView.aspx.cs" Inherits="SynapseStudio.ListManagerView" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -129,6 +126,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 <asp:Label ID="errListComments" runat="server"></asp:Label>
                                 <asp:TextBox ID="txtListComments" runat="server" CssClass="form-control input-lg" TextMode="MultiLine"></asp:TextBox>
                             </asp:Panel>
+
+                            <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:Panel ID="fgDefaultContext" runat="server" class="form-group">
+                                            <asp:Label ID="lblDefaultContext" runat="server" CssClass="control-label" for="ddlDefaultContext" Text="Select a the entity that defines the default context for this list" Font-Bold="true"></asp:Label>
+                                            <asp:Label ID="errDefaultContext" runat="server"></asp:Label>
+                                            <asp:DropDownList ID="ddlDefaultContext" runat="server" CssClass="form-control input-lg" AutoPostBack="true" OnSelectedIndexChanged="ddlDefaultContext_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                        </asp:Panel>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h3>
+                                            <asp:Label ID="lblDefaultContextField" runat="server"></asp:Label>
+                                        </h3>
+                                    </div>
+                                </div>
 
                             <div class="row">
                                 <div class="col-md-12">

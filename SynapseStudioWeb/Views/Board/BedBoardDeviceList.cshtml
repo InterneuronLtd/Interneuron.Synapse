@@ -1,0 +1,63 @@
+﻿@model List<SynapseStudioWeb.Models.BedBoardDeviceDto>
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Synapse Studio - Bed Board Devices</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-desktop"></i>&nbsp;Bed Board Devices (@Model.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-sm  btn-primary float-left" href="~/Board/BedBoardDeviceNew">New Bed Board Device</a>
+                    </div>
+                </div>
+                <hr />
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Device</th>
+                            <th>IP Address</th>
+                            <th>Bed Board</th>
+                            <th>Ward</th>
+                            <th>bay/Room</th>
+                            <th>Bed</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var m in Model)
+                        {
+
+                            <tr>
+                                <td>@m.BedboardDeviceName</td>
+                                <td>@m.DeviceipAddress</td>
+                                <td>@m.BedboardName</td>
+                                <td>@m.WardLocationDisplayName</td>
+                                <td>@m.BayRoomLocationDisplayName</td>
+                                <td>@m.BedLocationDisplayName</td>
+                                <td><a href=@("BedBoardDeviceView?id=" + m.BedboardDevice_Id) style="float:right">View</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

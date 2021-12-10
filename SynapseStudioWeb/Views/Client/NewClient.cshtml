@@ -1,0 +1,165 @@
+﻿@model SynapseStudioWeb.Models.ClientModel
+
+@{
+    ViewData["Title"] = "NewClient";
+}
+
+<h2>NewClient</h2>
+
+<h4>ClientModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateNewClient">
+            @Html.HiddenFor(m => m.posttype)
+            <div class="text-danger">@Html.DisplayFor(m => m.ErrorMessage)</div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Enabled" /> @Html.DisplayNameFor(model => model.Enabled)
+                    </label>
+                </div>
+            </div>
+            @if (Model.posttype == "add")
+            {
+                <div class="form-group">
+                    <label asp-for="ClientId" class="control-label"></label>
+                    <input asp-for="ClientId" class="form-control" />
+                    <span asp-validation-for="ClientId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+        <div class="form-group">
+            Update Client ID
+            @Html.TextBoxFor(model => model.ClientId, new { @class = "form-control", @readonly = true })
+
+        </div>
+            }
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="ClientSecret" /> @Html.DisplayNameFor(model => model.ClientSecret)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientName" class="control-label"></label>
+                <input asp-for="ClientName" class="form-control" />
+                <span asp-validation-for="ClientName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Requireconsent" /> @Html.DisplayNameFor(model => model.Requireconsent)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="accesstokensbrowser" /> @Html.DisplayNameFor(model => model.accesstokensbrowser)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="OfflineAccess" /> @Html.DisplayNameFor(model => model.OfflineAccess)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityToken" class="control-label"></label>
+                <input asp-for="IdentityToken" class="form-control" />
+                <span asp-validation-for="IdentityToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AccessToken" class="control-label"></label>
+                <input asp-for="AccessToken" class="form-control" />
+                <span asp-validation-for="AccessToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorizationCode" class="control-label"></label>
+                <input asp-for="AuthorizationCode" class="form-control" />
+                <span asp-validation-for="AuthorizationCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsentLifetime" class="control-label"></label>
+                <input asp-for="ConsentLifetime" class="form-control" />
+                <span asp-validation-for="ConsentLifetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AbsoluteRefreshToken" class="control-label"></label>
+                <input asp-for="AbsoluteRefreshToken" class="form-control" />
+                <span asp-validation-for="AbsoluteRefreshToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SlidingRefreshToken" class="control-label"></label>
+                <input asp-for="SlidingRefreshToken" class="form-control" />
+                <span asp-validation-for="SlidingRefreshToken" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RefreshTokenUsage" /> @Html.DisplayNameFor(model => model.RefreshTokenUsage)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="UpdateAccessToken" /> @Html.DisplayNameFor(model => model.UpdateAccessToken)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="RefreshTokenExpiration" /> @Html.DisplayNameFor(model => model.RefreshTokenExpiration)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="EnableLocalLogin" /> @Html.DisplayNameFor(model => model.EnableLocalLogin)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="AlwaysSendClientClaims" /> @Html.DisplayNameFor(model => model.AlwaysSendClientClaims)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ClientClaimsPrefix" class="control-label"></label>
+                <input asp-for="ClientClaimsPrefix" class="form-control" />
+                <span asp-validation-for="ClientClaimsPrefix" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="button" value="Cancel" class="btn btn-sm  btn-primary pull-left" onclick="location.href='@Url.Action("SecurityManager", "Security")'" />
+                @if (Model.posttype == "add")
+                {
+                    <input type="submit" value="Add New Client" class="btn btn-sm btn-primary pull-right" />
+                }
+                else
+                {
+                    <input type="submit" value="Update Client" class="btn btn-sm btn-primary pull-right" />
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--<div>
+    <a asp-action="Index">Back to List</a>
+</div>-->
+

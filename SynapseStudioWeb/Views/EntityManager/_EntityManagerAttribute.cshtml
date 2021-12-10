@@ -1,0 +1,28 @@
+﻿@model List<SynapseStudioWeb.Models.AttributeDto>
+@{
+    Layout = null;
+}
+
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>Attribue</th>
+                <th>Data Type</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.AttributeName</td>
+                    <td>@m.DataTypeDetails</td>
+                    <td><a href="@("~/EntityManager/EntityManagerAttributeView?id=" + m.AttributeId)">View </a></td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+

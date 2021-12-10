@@ -1,0 +1,31 @@
+﻿@model SynapseStudioWeb.Models.ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="text-danger">Application Error!</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-danger"><i class="fa fa-list"></i>&nbsp;Application Error!</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span>Sorry, an error occurred while processing your request. Please contact administrator with the error id: @Model.ErrorId</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

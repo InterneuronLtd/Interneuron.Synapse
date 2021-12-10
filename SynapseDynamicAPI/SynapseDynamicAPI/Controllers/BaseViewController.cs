@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -196,7 +199,18 @@ namespace SynapseDynamicAPI.Controllers
             JArray objParams = Newtonsoft.Json.JsonConvert.DeserializeObject<JArray>(filterparams);
             foreach (var paramApplied in objParams)
             {
-                paramListFromPost.Insert(0, new KeyValuePair<string, object>((string)paramApplied["paramName"], (string)paramApplied["paramValue"]));
+                if (paramApplied["paramValue"].Type == JTokenType.Date)
+                {
+                    var temp = (DateTime)paramApplied["paramValue"];
+
+                    var value = temp.ToString("yyyy-MM-ddTHH:mm:ss");
+
+                    paramListFromPost.Insert(0, new KeyValuePair<string, object>((string)paramApplied["paramName"], value));
+                }
+                else
+                {
+                    paramListFromPost.Insert(0, new KeyValuePair<string, object>((string)paramApplied["paramName"], (string)paramApplied["paramValue"]));
+                }
             }
 
             string selectstatement = results[2].selectstatement.ToString();

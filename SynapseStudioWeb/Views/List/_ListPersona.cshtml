@@ -1,0 +1,10 @@
+﻿@model List<SynapseStudioWeb.Models.PersonaListFilter>
+ 
+@foreach (var m in Model)
+{
+    <tr>
+        <td>@m.displayname</td>
+        <td>@m.field</td>
+        <td><a href="javascript:void(0)" data-id="@m.persona_id" onclick="removePersona(@m.persona_id)" class="remove-persona"><i class="fa fa-remove"></i></a></td>
+    </tr>
+}

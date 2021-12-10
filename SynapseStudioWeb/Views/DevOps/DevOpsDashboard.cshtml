@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4>DevOps<small> Dashboard</small></h4>
+        <div class="alert alert-dismissable alert-info">
+            <button data-dismiss="alert" class="close" type="button">&times;</button>
+            Note: You must manually refresh this dashboard. The data provided for this dashboard comes from a second connection to the PostgresSQL system database which is only initialised when you use the Refresh button below.
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <input id="refresh-activity" type="button" class="btn btn-sm btn-primary pull-right" value="Refresh Dashboard" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bar-chart-o"></i>&nbsp;Synapse Database Activity</h5>
+            </div>
+            <div class="card-body">
+                <div class="row" id="dashboard-activity">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="margin-top:10px;">
+        <input id="refresh-replicate" type="button" class="btn btn-sm btn-primary pull-right" value="Refresh Dashboard" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bar-chart-o"></i>&nbsp;PostgreSQL HA Status</h5>
+            </div>
+            <div class="card-body">
+                <div class="row" id="repl-status">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $("#dashboard-activity").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+        $("#repl-status").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+        $("#dashboard-activity").load("DevOpsActivity");
+        $("#repl-status").load("DevOpsReplStatus");
+        $("#refresh-activity").click(function () {
+            $("#dashboard-activity").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+            $("#dashboard-activity").load("DevOpsActivity");
+        });
+        $("#refresh-replicate").click(function () {
+            $("#repl-status").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+            $("#repl-status").load("DevOpsReplStatus");
+        });
+
+    });
+</script>

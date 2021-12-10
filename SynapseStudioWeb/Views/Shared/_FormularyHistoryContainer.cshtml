@@ -1,0 +1,28 @@
+﻿<div id="historyMedModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="historyMedModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">History Medication</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="float-left" id="previous" style="width: 50%; padding-right: 10px; word-wrap: break-word; overflow: auto;"></div>
+                    <div class="float-left" id="current" style="width: 50%; border-left: 5px solid black; padding-left: 10px; word-wrap: break-word; overflow: auto;"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#historyMedModal').on('hidden.bs.modal', function (e) {
+        $('#previous').html('');
+        $('#current').html('');
+    })
+</script>

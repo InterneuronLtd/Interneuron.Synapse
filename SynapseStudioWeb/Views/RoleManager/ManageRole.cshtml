@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewData["Title"] = "ManageRole";
+}
+
+<h2>Manage Role</h2>
+<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block"href=@("ManageExternalusers?id=" +ViewBag.roleid) >External Users</a>
+            </div>
+            <div class="col-lg-3">
+                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRoleScope?id=" +ViewBag.roleid) >Scopes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>New <small>Role</small></h2>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                @using (Html.BeginForm("SearchLogin", "RoleManager", FormMethod.Post))
+                {
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                            Please enter a name for the new Role <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBox("Logintext", null, new { @class = "form-control", required = "required" })
+                        </div>
+                        @Html.Hidden("roleid", (object)ViewBag.roleid)
+                    </div>
+
+
+
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+
+                            <button type="submit" class="btn btn-sm btn-success">Search Local Login</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.SearchLogin.Rows.Count > 0)
+{
+    <div>
+        <br />
+        <div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+
+                            <div class="card-body p-2">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>User Id</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.SearchLogin.Rows)
+                                        {
+                                            <tr>
+                                                <td>@item["UserName"]</td>
+                                                <td>@item["Id"]</td>
+                                                <td>
+                                                    <a href=@("AddRole?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">ADD</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div>
+    <br />
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h2>Users in Roles( @ViewBag.Userroles.Rows.Count)</h2>
+                        <div class="card-body p-2">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>User Id</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.Userroles.Rows)
+                                    {
+                                        <tr>
+                                            <td>@item["UserName"]</td>
+                                            <td>@item["Id"]</td>
+                                            <td>
+                                                <a href=@("RemoveRole?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

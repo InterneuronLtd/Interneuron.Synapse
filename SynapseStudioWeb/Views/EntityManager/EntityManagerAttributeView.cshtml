@@ -1,0 +1,128 @@
+﻿@model SynapseStudioWeb.Models.DetailModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Attribute Detail</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Relations</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("EntityManagerModel?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Models</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;@ViewBag.Summary</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@ViewBag.Heading</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+
+                            <tbody>
+
+                                @foreach (var m in Model.DetailDto)
+                                {
+                                    <tr>
+                                        <td>@m.EntityDetail</td>
+                                        <td>@m.EntityDescription</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (!string.IsNullOrWhiteSpace(ViewBag.Error))
+                        {
+                            <h4 class="red p-4">
+                                Drop Attribute button not available as it is not possible to delete a system attribute
+                            </h4>
+                        }
+                        else
+                        {                            
+                            <a href="~/EntityManager/EntityManagerAttributeDelete?id=@ViewBag.AttributeId" class="btn btn-danger" id="btn-delete-attribute">Delete Attribute</a>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model.BaseViewDto.Count > 0)
+                        {
+                            <h4 class="bg-red text-white p-4">
+                                <span>This entity has @Model.BaseViewDto.Count baseviews that are dependant on it.</span>
+                                <br />
+                                <br />
+                                <strong>Deleting attributes is not recomended</strong> as it may result in Baseviews not being able to be recreated leaving the system in an unstable state.
+                            </h4>
+                        }
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            Baseviews that are dependant on this entity (@Model.BaseViewDto.Count)
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+                            <thead>
+                                <tr><th>Baseview<th></tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var m in Model.BaseViewDto)
+                                {
+                                    <tr>
+                                        <td>@m.dependent_view</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/entitymanager.js"></script>

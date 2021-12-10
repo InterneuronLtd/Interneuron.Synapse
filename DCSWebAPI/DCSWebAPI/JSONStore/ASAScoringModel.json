@@ -1,0 +1,71 @@
+﻿{
+  "scoringmodel": [
+    {
+      "reviewtype": "Anaesthetist review",
+      "asascore": "ASA4",
+      "description": "",
+      "order": 1,
+      "rule": [
+        {
+          "score": "R",
+          "opr": ">=",
+          "value": 1
+        },
+        {
+          "score": "A",
+          "opr": ">=",
+          "value": 2
+        },
+        {
+          "score": "Y",
+          "opr": ">=",
+          "value": 3
+        }
+      ]
+    },
+    {
+      "reviewtype": "Nurse review",
+      "asascore": "ASA3",
+      "description": "requires discussion with anaesthetist",
+      "order": 2,
+      "rule": [
+        {
+          "score": "A",
+          "opr": "=",
+          "value": 1
+        },
+        {
+          "score": "Y",
+          "opr": "=",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "reviewtype": "Nurse review",
+      "asascore": "ASA2",
+      "description": "does not require discussion with anaesthetist",
+      "order": 3,
+      "rule": [
+        {
+          "score": "Y",
+          "opr": "=",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "reviewtype": "Telephone review",
+      "asascore": "ASA1",
+      "description": "",
+      "order": 4,
+      "rule": [
+        {
+          "score": "G",
+          "opr": ">",
+          "value": 1
+        }
+      ]
+    }
+  ]
+}

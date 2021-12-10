@@ -1,0 +1,91 @@
+﻿@model SynapseStudioWeb.Models.LocatorBoardModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Board Manager</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-map"></i>&nbsp;New Locator Board</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="Board" asp-action="LocatorBoardManagerNewSave"
+                              data-ajax-failure="onBoardManagerFailed" data-ajax-success="onBoardManagerSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+
+                            <h4>General Details</h4>
+                            <label for="BedBoardName">Enter a name for the bed board</label>
+                            @Html.TextBoxFor(m => m.LocatorBoardName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocatorBoardName)
+                            <br />
+                            <label for="LocatorBoardDescription">Enter a description for the bed board</label>
+                            @Html.TextAreaFor(m => m.LocatorBoardDescription, new { @class = "form-control" })
+                            <br />
+                            <h4>Underlying List</h4>
+
+                            <label for="ListId">Select Underlying List</label>
+                            @Html.DropDownListFor(model => model.ListId, ViewBag.List as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ListId)
+
+                            <br />
+                            <label for="ListLocationField">Select Location field from the underlying list</label>
+                            @Html.DropDownListFor(model => model.ListLocationField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ListLocationField)
+                            <br />
+                            <h4>Underlying Baseview for Ward Information</h4>
+
+                            <label for="BaseViewNamespaceId">Select Baseview Namespace</label>
+                            @Html.DropDownListFor(model => model.BaseViewNamespaceId, ViewBag.BaseviewNamespace as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewNamespaceId)
+                            <br />
+                            <label for="BaseViewId">Select Baseview</label>
+                            @Html.DropDownListFor(model => model.BaseViewId, ViewBag.AttributeList as SelectList, new { id = "locatorBaseView", @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewId)
+
+                            <br />
+                            <label for="LocationIDField">Select Location ID field from Baseview</label>
+                            @Html.DropDownListFor(model => model.LocationIDField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocationIDField)
+                            <br />
+                            <h4>Location Display Fields</h4>
+
+                            <label for="Heading">Select Heading Field</label>
+                            @Html.DropDownListFor(model => model.Heading, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Heading)
+                            <br />
+
+                            <label for="TopLeftField">Select Top Left Field from Baseview</label>
+                            @Html.DropDownListFor(model => model.TopLeftField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.TopLeftField)
+
+                            <br />
+                            <label for="TopRightField">Select Top Right Field from Baseview</label>
+                            @Html.DropDownListFor(model => model.TopRightField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.TopRightField)
+
+                            <br />
+                            <a href="../Board/BoardManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/board.js"></script>
+
+

@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Mapping";
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h4><i class="fa fa-bar-chart-o"></i>&nbsp;Entities</h4>
+    </div>
+</div>
+<div class="well" style="margin-top: 15px;min-height: 934px;;">
+    <div class="row">
+        <div class="col-md-12">
+            @{
+                var list = new SelectList(new[]
+                    {
+                new {ID="1", Name="Read"},
+                new {ID="2", Name="ReadWrite"},
+                new {ID="3", Name="Delete"},
+
+                },
+
+
+                "ID", "Name", 1);
+            }
+
+            <div id="jstree" class="treeview w-20 border">
+            </div>
+            <hr />
+            @using (Html.BeginForm("Index", "Action", FormMethod.Post))
+            {
+                //  @Html.DropDownListFor(model => model, ViewBag.permition as SelectList, new { @class = "form-control" })
+                @Html.DropDownList("list", list, new { @class = "form-control" });
+                <input type="hidden" name="selectedItems" id="selectedItems" />
+                @Html.Hidden("actionid", (object)ViewBag.actionid)
+                <br />
+                <input type="button" class="btn btn-sm btn-primary" onclick="history.go(-1)" value="Cancel" />
+                <input type="submit" class="btn btn-sm btn-primary" value="Submit" />
+            }
+        </div>
+    </div>
+</div>
+<hr />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+       
+
+            $('#jstree').on('changed.jstree', function (e, data) {
+                var i, j;
+                var selectedItems = [];
+                for(i = 0, j = data.selected.length; i < j; i++) {
+
+                    //Fetch the Id.
+                    var id = data.selected[i];
+
+                    //Remove the ParentId.
+                    if(id.indexOf('&') != -1){
+                        id = id.split("&")[1];
+                    }
+
+                    //Add the Node to the JSON Array.
+                    selectedItems.push({
+                        text: data.instance.get_node(data.selected[i]).text,
+                        id: id,
+                        parent: data.node.parents[0]
+                    });
+                }
+
+                //Serialize the JSON Array and save in HiddenField.
+                $('#selectedItems').val(JSON.stringify(selectedItems));
+            }).jstree({
+                "core": {
+                    "themes": {
+                        "variant": "large"
+                    },
+                    "data": @Html.Raw(ViewBag.Json)
+                    },
+                "checkbox": {
+                    "keep_selected_style": false
+                },
+                "plugins": ["wholerow", "checkbox"],
+            });
+        });
+</script>
+

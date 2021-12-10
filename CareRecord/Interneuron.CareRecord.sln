@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.Infrastructure", "Infrastructure\Interneuron.CareRecord.Infrastructure.csproj", "{1B9F2E3B-9C6E-4A83-B434-23318A92B0CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.Model", "Model\Interneuron.CareRecord.Model.csproj", "{3326E784-355A-42A6-A177-55574C9E65CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.Repository", "Repository\Interneuron.CareRecord.Repository.csproj", "{8BB5E61B-ED16-4A15-B2A1-2A95BC9C8BCF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.API", "WebAPI\Interneuron.CareRecord.API.csproj", "{2F45633D-3A37-49F6-8A23-EE2BC38D9532}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.HL7SynapseHandler.Service", "HL7SynapseMapper\Interneuron.CareRecord.HL7SynapseHandler.Service.csproj", "{4072A61A-2382-45F4-BA7B-45ECB95F06F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interneuron.CareRecord.API.Gateway", "Gateway\Interneuron.CareRecord.API.Gateway.csproj", "{7B2541EB-17C0-46A5-A45E-13AEAA58E44C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CareRecordDeployment", "CareRecordDeployment", "{C59ABD9B-8C1F-4005-AD7C-F931F2D16C3D}"
+	ProjectSection(SolutionItems) = preProject
+		CareRecordDeployment\.DS_Store = CareRecordDeployment\.DS_Store
+		CareRecordDeployment\Deployment.md = CareRecordDeployment\Deployment.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C664A11C-A67F-419D-AC22-0D5AE7229683}"
+	ProjectSection(SolutionItems) = preProject
+		CareRecordDeployment\Images\Synapse_Studio_API_Config1.png = CareRecordDeployment\Images\Synapse_Studio_API_Config1.png
+		CareRecordDeployment\Images\Synapse_Studio_API_Config2png.png = CareRecordDeployment\Images\Synapse_Studio_API_Config2png.png
+		CareRecordDeployment\Images\Synapse_Studio_Client_AddRedirectUris.png = CareRecordDeployment\Images\Synapse_Studio_Client_AddRedirectUris.png
+		CareRecordDeployment\Images\Synapse_Studio_Client_AddScopes1.png = CareRecordDeployment\Images\Synapse_Studio_Client_AddScopes1.png
+		CareRecordDeployment\Images\Synapse_Studio_Client_AddScopes2.png = CareRecordDeployment\Images\Synapse_Studio_Client_AddScopes2.png
+		CareRecordDeployment\Images\Synapse_Studio_ClientApp.png = CareRecordDeployment\Images\Synapse_Studio_ClientApp.png
+		CareRecordDeployment\Images\Synapse_Studio_ClientApp_GrantType.png = CareRecordDeployment\Images\Synapse_Studio_ClientApp_GrantType.png
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B9F2E3B-9C6E-4A83-B434-23318A92B0CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B9F2E3B-9C6E-4A83-B434-23318A92B0CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B9F2E3B-9C6E-4A83-B434-23318A92B0CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B9F2E3B-9C6E-4A83-B434-23318A92B0CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3326E784-355A-42A6-A177-55574C9E65CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3326E784-355A-42A6-A177-55574C9E65CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3326E784-355A-42A6-A177-55574C9E65CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3326E784-355A-42A6-A177-55574C9E65CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB5E61B-ED16-4A15-B2A1-2A95BC9C8BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB5E61B-ED16-4A15-B2A1-2A95BC9C8BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB5E61B-ED16-4A15-B2A1-2A95BC9C8BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB5E61B-ED16-4A15-B2A1-2A95BC9C8BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F45633D-3A37-49F6-8A23-EE2BC38D9532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F45633D-3A37-49F6-8A23-EE2BC38D9532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F45633D-3A37-49F6-8A23-EE2BC38D9532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F45633D-3A37-49F6-8A23-EE2BC38D9532}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4072A61A-2382-45F4-BA7B-45ECB95F06F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4072A61A-2382-45F4-BA7B-45ECB95F06F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4072A61A-2382-45F4-BA7B-45ECB95F06F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4072A61A-2382-45F4-BA7B-45ECB95F06F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2541EB-17C0-46A5-A45E-13AEAA58E44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2541EB-17C0-46A5-A45E-13AEAA58E44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2541EB-17C0-46A5-A45E-13AEAA58E44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2541EB-17C0-46A5-A45E-13AEAA58E44C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C664A11C-A67F-419D-AC22-0D5AE7229683} = {C59ABD9B-8C1F-4005-AD7C-F931F2D16C3D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {046B0AED-F454-4C43-9644-76997A383F14}
+	EndGlobalSection
+EndGlobal

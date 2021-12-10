@@ -1,0 +1,57 @@
+﻿@model SynapseStudioWeb.Models.ApplicationModule
+@{
+    ViewData["Title"] = "Add New Application";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1> <small> Application</small></h1>
+
+    </div>
+</div>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Add New Application <small>list</small></h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br>
+                <form asp-action="saveNewApplication" class="form-horizontal form-label-left" method="post" novalidate="">
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">
+                           Application Name<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.TextBoxFor(m => m.applicationname, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.applicationname)
+                            <span class="text-danger">@ViewBag.errormessage</span>
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+                            <a class="btn btn-sm btn-info" href="~/ApplicationManager/ApplicationManager">Back</a>
+                           
+                            <button type="submit" class="btn btn-sm btn-success">Add new Application</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@model List<SynapseStudioWeb.Models.LocalNamespaceDto>
+@{
+    Layout = null;
+}
+
+    <table class="table" width="100%">
+        <thead>
+            <tr>
+                <th>Local Namespace</th>                 
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.LocalNamespaceName</td>
+                    
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+

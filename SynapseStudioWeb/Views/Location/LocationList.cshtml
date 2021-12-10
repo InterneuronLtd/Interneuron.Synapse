@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SynapseStudioWeb.Models.LocationModel>
+
+@{
+    ViewData["Title"] = "LocationList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Location</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Location</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-sm btn-primary float-right" href="~/Location/NewSpecialty">New Location</a>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Location Code</th>
+                            <th>Location</th>
+                            <th>Institution</th>
+                            <th>Building</th>
+                            <th>Location Type</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var loc in Model)
+                        {
+                            <tr>
+                                <td>@loc.locationcode</td>
+                                <td>@loc.locationtext</td>
+                                <td>@loc.institution</td>
+                                <td>@loc.building</td>
+                                <td>@loc.locationtypetext</td>
+                                <td>@loc.statuscode</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href=@("Edit?id="+ loc.location_id)>Edit</a>
+                                    <a class="btn btn-sm btn-danger" href=@("Delete?id=" + loc.location_id) onclick="return confirm('Are you sure to remove this record?');">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

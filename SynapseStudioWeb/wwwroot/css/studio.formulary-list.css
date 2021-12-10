@@ -1,0 +1,262 @@
+﻿.formulary-list {
+}
+
+    .formulary-list .multi-select {
+    }
+
+        .formulary-list .multi-select .btn-group {
+            border: 1px solid rgb(206, 212, 218);
+        }
+
+    .formulary-list span.fancytree-custom-icon {
+        color: #212529 !important;
+        font-size: 1rem !important;
+    }
+
+    .formulary-list ul.token-input-list-facebook {
+        overflow-x: auto;
+        min-height: 2.5rem !important;
+    }
+
+    .formulary-list ul.token-input-disabled-facebook,
+    .formulary-list ul.token-input-disabled-facebook input {
+        cursor: not-allowed !important;
+        background-color: #adafae !important;
+        opacity: 1 !important
+    }
+
+    .formulary-list .user-instruction {
+        color: #17a2b8;
+        font-size: 0.9rem;
+        margin: 0.7rem;
+    }
+
+.ui-contextmenu-custom {
+    font-size: 0.9rem !important;
+}
+
+    .ui-contextmenu-custom li {
+        margin: 0.2rem !important;
+    }
+/* Allow Font Awesome Icons in lieu of jQuery UI and only apply when using a FA icon */
+/* Allow Font Awesome Icons in lieu of jQuery UI and only apply when using a FA icon */
+.ui-icon[class*=" fa-"] {
+    /* Remove the jQuery UI Icon */
+    background: none repeat scroll 0 0 transparent;
+    /* Remove the jQuery UI Text Indent */
+    text-indent: 0;
+    /* Bump it up - jQuery UI is -8px */
+    /* margin-top: -0.5em; */
+}
+
+/* Allow use of icon-large to be properly aligned */
+.ui-icon.icon-large {
+    margin-top: -0.75em;
+}
+
+.ui-button-icon-only .ui-icon[class*=" fa-"] {
+    /* Bump it - jQuery UI is -8px */
+    margin-left: -7px;
+}
+/* Define custom width and alignment of table columns */
+#treetable {
+    table-layout: fixed;
+}
+
+    #treetable tr td:nth-of-type(1) {
+        text-align: right;
+    }
+
+    #treetable tr td:nth-of-type(2) {
+        text-align: left;
+    }
+
+    #treetable tr td:nth-of-type(3) {
+        min-width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+ul.fancytree-container {
+    border: none !important;
+}
+
+#treetable thead th {
+    position: sticky;
+    top: -5px;
+    z-index: 2;
+    background: #23282c;
+    text-transform: uppercase !important;
+    color: #fff;
+}
+
+#searchtext {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 12px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    #searchtext:focus {
+        width: 100%;
+    }
+
+.formulary-list .multiselect-container > li > a > label {
+    padding: 3px 20px 3px 10px !important;
+}
+
+.formulary-list #Edit_Formulary .x_panel {
+    padding: 0px !important;
+    /*border: 0px !important;*/
+}
+
+#tree2 ul.fancytree-container li span.dmdMedBackground span.fancytree-title {
+    /*min-width: 100% !important;*/
+    background-color: rgb(152,251,152) !important;
+    padding-bottom: 2px !important;
+}
+
+.validation-summary-valid ul {
+    display: none;
+}
+
+img.fancytree-icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.formulary-list th i.table-header-icons {
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 3px;
+}
+
+#treetable a.record-status-link {
+    text-decoration: underline;
+    color: #333333;
+    font-size: 1rem;
+}
+
+.formulary-list span.bulkedit-number {
+    height: 15px;
+    width: 15px;
+    background-color: orange;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.formulary-list #iBulkEdit {
+    color: #212529;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 3px;
+    position: relative;
+}
+
+.formulary-list #iBulkEdit.disabled {
+    color: lightgray !important;
+    cursor: pointer;
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.formulary-list #iBulkEdit.enabled {
+    color: #212529 !important;
+}
+
+.formulary-list #lnkCollapseAll.expanded {
+    transform: rotateZ(90deg);
+    transition: all 0.6s ease;
+}
+.formulary-list #lnkCollapseAll.collapsed {
+    transform: rotateZ(0deg);
+    transition: all 0.6s ease;
+}
+
+.formulary-list a.action-icon {
+    color: #212529 !important;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 3px;
+    position: relative;
+}
+
+.formulary-list a.action-icon:hover {
+    color: orange !important;
+}
+
+.formulary-list ul li.ui-chips-token {
+    padding: .10725em 0;
+    margin: .10725em .286em .10725em 0;
+    background: #007ad9;
+    color: #fff;
+    cursor: default;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+}
+
+.formulary-list ul li.ui-chips-token {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.formulary-list ul li span.ui-chips-token-label {
+    padding: 0 2em 0 .5em;
+}
+
+.formulary-list .chip {
+    display: inline-block;
+    padding: 0 15px;
+    height: 30px;
+    font-size: 0.8rem;
+    line-height: 30px;
+    border-radius: 15px;
+    background-color: #007ad9;
+    color: #fff;
+}
+
+.formulary-list .multiselect-native-select button.multiselect {
+    min-width: 15vw !important;
+}
+
+.formulary-list #back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: none;
+}
+
+.formulary-list #iBulkEditFloat {
+    position: fixed;
+    bottom: 25px;
+    right: 75px;
+    display: none;
+}
+
+.dmdMedBackground {
+    background-color: rgb(152,251,152);
+}
+
+.dmdDraftMedColor {
+    color: #800000 !important;
+}
+
+.fancytree-plain.fancytree-container span.fancytree-node.fancytree-active span.fancytree-title {
+    color: black !important;
+}

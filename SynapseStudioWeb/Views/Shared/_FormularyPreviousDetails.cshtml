@@ -1,0 +1,1792 @@
+﻿@model SynapseStudioWeb.Models.MedicationMgmt.FormularyEditModel;
+
+<style>
+    div.indent {
+        text-indent: 10%;
+    }
+
+    .table thead th {
+        border-bottom: 4px double black !important;
+    }
+
+    .table th {
+        border-top: 4px double black !important;
+    }
+</style>
+
+<div class="h5 font-weight-bold">Previous Version</div>
+@if (Model.IsDiff)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center">Product Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>@Html.Label("", Model.Name)</td>
+            </tr>
+            <tr>
+                <td>Product Type</td>
+                <td>
+                    @foreach (var productType in ViewBag.ProductTypes)
+                    {
+                        if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)productType).Value == Model.ProductType)
+                        {
+                            @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)productType).Text)
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Primary Code</td>
+                <td>@Html.Label("", Model.Code)</td>
+            </tr>
+            <tr>
+                <td>Primary Code System</td>
+                <td>@Html.Label("", Model.CodeSystem)</td>
+            </tr>
+            @if (Model.RnohFormularyStatuscd != null)
+            {
+                <tr>
+                    <td>Formulary Status</td>
+                    <td>
+                        @foreach (var formularyStatus in ViewBag.FormularyStatuses)
+                        {
+                            if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)formularyStatus).Value == Model.RnohFormularyStatuscd)
+                            {
+                                @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)formularyStatus).Text)
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.RnohFormularyStatuscd == null && Model.Differences.Exists(x => x.Property == "RnohFormularyStatuscd"))
+            {
+                <tr>
+                    <td>Formulary Status</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.FormularyIdentificationCodes != null)
+            {
+                <tr>
+                    <td colspan="2">Other Identification Codes</td>
+                </tr>
+                @foreach (var identificationCodeType in ViewBag.IndentificationCodeTypes)
+                {
+                    if (Model.FormularyIdentificationCodes != null)
+                    {
+                        foreach (var formularyIdentificationCode in Model.FormularyIdentificationCodes)
+                        {
+                            if (formularyIdentificationCode != null)
+                            {
+                                if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)identificationCodeType).Value == ((SynapseStudioWeb.Models.MedicinalMgmt.FormularyAdditionalCodeModel)formularyIdentificationCode).AdditionalCodeSystem)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="indent">Code System</div>
+                                        </td>
+                                        <td>
+                                            @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)identificationCodeType).Text)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="indent">Code</div>
+                                        </td>
+                                        <td>
+                                            @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.FormularyAdditionalCodeModel)formularyIdentificationCode).AdditionalCode)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="indent">Code System</div>
+                                    </td>
+                                    <td>
+                                        @Html.Label("")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="indent">Code</div>
+                                    </td>
+                                    <td>
+                                        @Html.Label("")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+
+                }
+
+            }
+            @if (Model.FormularyClassificationCodes != null)
+            {
+                <tr>
+                    <td colspan="2">Classification Codes</td>
+                </tr>
+                @foreach (var classificationCodeType in ViewBag.ClassificationCodeTypes)
+                {
+                    if (Model.FormularyClassificationCodes != null)
+                    {
+                        foreach (var formularyClassificationCode in Model.FormularyClassificationCodes)
+                        {
+                            if (formularyClassificationCode != null)
+                            {
+                                if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)classificationCodeType).Value == ((SynapseStudioWeb.Models.MedicinalMgmt.FormularyAdditionalCodeModel)formularyClassificationCode).AdditionalCodeSystem)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="indent">Code System</div>
+                                        </td>
+                                        <td>
+                                            @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)classificationCodeType).Text)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="indent">Code</div>
+                                        </td>
+                                        <td>
+                                            @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.FormularyAdditionalCodeModel)formularyClassificationCode).AdditionalCode)
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="indent">Code System</div>
+                                    </td>
+                                    <td>
+                                        @Html.Label("")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="indent">Code</div>
+                                    </td>
+                                    <td>
+                                        @Html.Label("")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                }
+
+            }
+            @if (Model.BasisOfPreferredNameCd != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+            {
+                <tr>
+                    <td>Basis of Preferred Name</td>
+                    <td>
+                        @foreach (var basisOfPreferredName in ViewBag.BasisOfPreferredNameList)
+                        {
+                            if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)basisOfPreferredName).Value == Model.BasisOfPreferredNameCd)
+                            {
+                                @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)basisOfPreferredName).Text)
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.BasisOfPreferredNameCd == null && Model.Differences.Exists(x => x.Property == "BasisOfPreferredNameCd") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+            {
+                <tr>
+                    <td>Basis of Preferred Name</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.LocalLicensedUse != null)
+            {
+                <tr>
+                    <td>Local Licensed Indications</td>
+                    <td>
+                        @foreach (var localLicensedUse in Model.LocalLicensedUse)
+                        {
+                            @if (localLicensedUse != null)
+                            {
+                                @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)localLicensedUse).Name)
+                                <br />
+                            }
+                            else
+                            {
+                                @Html.Label("")
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.LocalUnlicensedUse != null)
+            {
+                <tr>
+                    <td>Local Unlicensed Indications</td>
+                    <td>
+                        @foreach (var localUnlicensedUse in Model.LocalUnlicensedUse)
+                        {
+                            @if (localUnlicensedUse != null)
+                            {
+                                @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)localUnlicensedUse).Name)
+                                <br />
+                            }
+                            else
+                            {
+                                @Html.Label("")
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.LicensedUse != null)
+            {
+                <tr>
+                    <td>Licensed Indications</td>
+                    <td>
+                        @foreach (var licensedUse in Model.LicensedUse)
+                        {
+                            @if (licensedUse != null)
+                            {
+                                @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)licensedUse).Name)
+                                <br />
+                            }
+                            else
+                            {
+                                @Html.Label("")
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.UnlicensedUse != null)
+            {
+                <tr>
+                    <td>Unlicensed Indications</td>
+                    <td>
+                        @foreach (var unlicensedUse in Model.UnlicensedUse)
+                        {
+                            @if (unlicensedUse != null)
+                            {
+                                @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)unlicensedUse).Name)
+                                <br />
+                            }
+                            else
+                            {
+                                @Html.Label("")
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.CurrentLicensingAuthorityCd != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Current licensing authority</td>
+                    <td>
+                        @foreach (var licensingAuthority in ViewBag.LicensingAuthorities)
+                        {
+                            if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)licensingAuthority).Value == Model.CurrentLicensingAuthorityCd)
+                            {
+                                @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)licensingAuthority).Text)
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.CurrentLicensingAuthorityCd == null && Model.Differences.Exists(x => x.Property == "CurrentLicensingAuthorityCd") && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Current licensing authority</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.Supplier != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Supplier</td>
+                    <td>
+                        @Html.Label("", Model.Supplier.Name)
+                    </td>
+                </tr>
+            }
+            @if (Model.Supplier == null && Model.Differences.Exists(x => x.Property == "Supplier") && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Supplier</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.TradeFamily != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Trade Family</td>
+                    <td>
+                        @Html.Label("", Model.TradeFamily.Name)
+                    </td>
+                </tr>
+            }
+            @if (Model.TradeFamily == null && Model.Differences.Exists(x => x.Property == "TradeFamily") && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Trade Family</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.VirtualTherapeuticMoiety != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+            {
+                <tr>
+                    <td>Virtual Therapeutic Moiety</td>
+                    <td>
+                        @Html.Label("", Model.VirtualTherapeuticMoiety)
+                    </td>
+                </tr>
+            }
+            @if (Model.VirtualTherapeuticMoiety == null && Model.Differences.Exists(x => x.Property == "VirtualTherapeuticMoiety") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+            {
+                <tr>
+                    <td>Virtual Therapeutic Moiety</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+            @if (Model.VirtualMedicinalProduct != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Virtual Medicinal Product</td>
+                    <td>
+                        @Html.Label("", Model.VirtualMedicinalProduct)
+                    </td>
+                </tr>
+            }
+            @if (Model.VirtualMedicinalProduct == null && Model.Differences.Exists(x => x.Property == "VirtualMedicinalProduct") && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+            {
+                <tr>
+                    <td>Virtual Medicinal Product</td>
+                    <td>
+                        @Html.Label("")
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @if (Model.DoseFormCd != null || Model.RoundingFactorCd != null || Model.LocalLicensedRoute != null || Model.LocalUnlicensedRoute != null || Model.Route != null || Model.UnlicensedRoute != null || Model.FormCd != null
+|| Model.UnitDoseFormSize != null || Model.UnitDoseFormSize != null || Model.UnitDoseFormUnits != null || Model.UnitDoseUnitOfMeasure != null || Model.Ingredients != null || Model.Excipients != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Posology</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.DoseFormCd != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Dose Form</td>
+                        <td>
+                            @foreach (var doseForm in ViewBag.DoseForms)
+                            {
+                                if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)doseForm).Value == Model.DoseFormCd)
+                                {
+                                    @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)doseForm).Text)
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.DoseFormCd == null && Model.Differences.Exists(x => x.Property == "DoseFormCd") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Dose Form</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.RoundingFactorCd != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Rounding Factor</td>
+                        <td>
+                            @foreach (var roundingFactor in ViewBag.RoundingFactors)
+                            {
+                                if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)roundingFactor).Value == Model.RoundingFactorCd)
+                                {
+                                    @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)roundingFactor).Text)
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.RoundingFactorCd == null && Model.Differences.Exists(x => x.Property == "RoundingFactorCd") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Rounding Factor</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.LocalLicensedRoute != null)
+                {
+                    <tr>
+                        <td>Local Licensed Route</td>
+                        <td>
+                            @foreach (var localLicensedRoute in Model.LocalLicensedRoute)
+                            {
+                                @if (localLicensedRoute != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)localLicensedRoute).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.LocalUnlicensedRoute != null)
+                {
+                    <tr>
+                        <td>Local Unlicensed Route</td>
+                        <td>
+                            @foreach (var localUnlicensedRoute in Model.LocalUnlicensedRoute)
+                            {
+                                @if (localUnlicensedRoute != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)localUnlicensedRoute).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.Route != null)
+                {
+                    <tr>
+                        <td>Licensed Route</td>
+                        <td>
+                            @foreach (var route in Model.Route)
+                            {
+                                @if (route != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)route).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnlicensedRoute != null)
+                {
+                    <tr>
+                        <td>Unlicensed Route</td>
+                        <td>
+                            @foreach (var unlicensedRoute in Model.UnlicensedRoute)
+                            {
+                                @if (unlicensedRoute != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)unlicensedRoute).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.FormCd != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Formulation</td>
+                        <td>
+                            @Html.Label(Model.FormCd.Name)
+                        </td>
+                    </tr>
+                }
+                @if (Model.FormCd == null && Model.Differences.Exists(x => x.Property == "FormCd") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Formulation</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseFormSize != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose form size</td>
+                        <td>
+                            @Html.Label("", Convert.ToString(Model.UnitDoseFormSize))
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseFormSize == null && Model.Differences.Exists(x => x.Property == "UnitsDoseFormSize") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose form size</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseFormUnits != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose form units</td>
+                        <td>
+                            @Html.Label("", Model.UnitDoseFormUnits.Name)
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseFormUnits == null && Model.Differences.Exists(x => x.Property == "UnitDoseFormUnits") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose form units</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseUnitOfMeasure != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose unit of measure</td>
+                        <td>
+                            @Html.Label("", Model.UnitDoseUnitOfMeasure.Name)
+                        </td>
+                    </tr>
+                }
+                @if (Model.UnitDoseUnitOfMeasure == null && Model.Differences.Exists(x => x.Property == "UnitDoseUnitOfMeasure") && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>Unit dose unit of measure</td>
+                        <td>
+                            @Html.Label("")
+                        </td>
+                    </tr>
+                }
+                @if (Model.Ingredients != null && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td colspan="2">
+                            Ingredients
+                        </td>
+                    </tr>
+                    @foreach (var ingredient in Model.Ingredients)
+                    {
+                        <tr>
+                            <td>
+                                <div class="indent">Ingredient</div>
+                            </td>
+                            <td>
+                                @if (ingredient != null)
+                                {
+                                    @Html.Label("", ingredient.Ingredient.Name)
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">Strength Value Numerator</div>
+                            </td>
+                            <td>
+                                @if (ingredient != null)
+                                {
+                                    @Html.Label("", ingredient.StrengthValNumerator)
+                                    @:&nbsp; &nbsp; &nbsp;
+                                    @if (ingredient.StrengthValueNumeratorUnit != null)
+                                    {
+                                        @Html.Label("", ingredient.StrengthValueNumeratorUnit.Name)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">Strength Value Denominator</div>
+                            </td>
+                            <td>
+                                @if (ingredient != null)
+                                {
+                                    @Html.Label("", ingredient.StrengthValDenominator)
+                                    @:&nbsp; &nbsp; &nbsp;
+                                    @if (ingredient.StrengthValueDenominatorUnit != null)
+                                    {
+                                        @Html.Label("", ingredient.StrengthValueDenominatorUnit.Name)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">Basis of pharmaceutical strength</div>
+                            </td>
+                            <td>
+                                @foreach (var basisOfPharmaStrength in ViewBag.BasisOfPharmaStrengths)
+                                {
+                                    @if (ingredient != null)
+                                    {
+                                        if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)basisOfPharmaStrength).Value == ingredient.BasisOfPharmaceuticalStrength)
+                                        {
+                                            @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)basisOfPharmaStrength).Text)
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("")
+                                    }
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if (Model.Excipients != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+                {
+                    <tr>
+                        <td colspan="2">
+                            Excipients
+                        </td>
+                    </tr>
+                    @foreach (var excipient in Model.Excipients)
+                    {
+                        <tr>
+                            <td>
+                                <div class="indent">Ingredient</div>
+                            </td>
+                            <td>
+                                @if (excipient != null)
+                                {
+                                    @Html.Label("", excipient.Ingredient.Name)
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">Strength</div>
+                            </td>
+                            <td>
+                                @if (excipient != null)
+                                {
+                                    @Html.Label("", excipient.Strength)
+                                    @:&nbsp; &nbsp; &nbsp;
+                                    @if (excipient.StrengthUnit != null)
+                                    {
+                                        @Html.Label("", excipient.StrengthUnit.Name)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+    @if (Model.ContraIndications != null || Model.CustomWarnings != null || Model.Reminders != null || Model.Endorsements != null || Model.MedusaPreparationInstructions != null || Model.SideEffects != null || Model.Cautions != null
+|| Model.ControlledDrugCategoriesEditableId != null || Model.RestrictionsOnAvailabilityCd != null || Model.PrescribingStatusCd != null || Model.TitrationTypesEditableId != null || Model.Diluents != null)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Guidance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.ContraIndications != null)
+                {
+                    <tr>
+                        <td>Contraindications</td>
+                        <td>
+                            @foreach (var contraindication in Model.ContraIndications)
+                            {
+                                @if (contraindication != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)contraindication).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.CustomWarnings != null)
+                {
+                    <tr>
+                        <td colspan="2">Custom Warnings</td>
+                    </tr>
+                    @foreach (var customWarning in Model.CustomWarnings)
+                    {
+                        <tr>
+                            <td>
+                                <div class="indent">Warning</div>
+                            </td>
+                            <td>
+                                @if (customWarning != null)
+                                {
+                                    @Html.Label("", customWarning.Warning)
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">Need Response</div>
+                            </td>
+                            <td>
+                                @if (customWarning != null)
+                                {
+                                    @if (customWarning.NeedResponse)
+                                    {
+                                        @Html.Label("Yes")
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("No")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if (Model.Reminders != null)
+                {
+                    <tr>
+                        <td colspan="2">Reminders</td>
+                    </tr>
+                    @foreach (var reminder in Model.Reminders)
+                    {
+                        <tr>
+                            <td>
+                                <div class="indent">
+                                    Reminder
+                                </div>
+                            </td>
+                            <td>
+                                @if (reminder != null)
+                                {
+                                    @Html.Label("", reminder.Reminder)
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">
+                                    Duration (hrs)
+                                </div>
+                            </td>
+                            <td>
+                                @if (reminder != null)
+                                {
+                                    @Html.Label("", Convert.ToString(reminder.Duration))
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="indent">
+                                    Need Response
+                                </div>
+                            </td>
+                            <td>
+                                @if (reminder != null)
+                                {
+                                    @if (reminder.Active)
+                                    {
+                                        @Html.Label("Yes")
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("No")
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if (Model.Endorsements != null)
+                {
+                    <tr>
+                        <td colspan="2">Endorsements</td>
+                    </tr>
+                    @foreach (var endorsement in Model.Endorsements)
+                    {
+                        <tr>
+                            <td>
+                                <div class="indent">
+                                    Endorsement
+                                </div>
+                            </td>
+                            <td>
+                                @if (endorsement != null)
+                                {
+                                    @Html.Label("", endorsement)
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+                @if (Model.SafetyMessages != null && Model.ProductType != null && Model.ProductType.ToLower() == "vtm")
+                {
+                    <tr>
+                        <td>Important Safety Information</td>
+                        <td>
+                            @foreach (var safetyMessage in Model.SafetyMessages)
+                            {
+                                @if (safetyMessage != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)safetyMessage).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.MedusaPreparationInstructions != null)
+                {
+                    <tr>
+                        <td>Medusa Preparation Instructions</td>
+                        <td>
+                            @foreach (var medusaPreparationInstruction in Model.MedusaPreparationInstructions)
+                            {
+                                @if (medusaPreparationInstruction != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)medusaPreparationInstruction).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.SideEffects != null)
+                {
+                    <tr>
+                        <td>Side Effects</td>
+                        <td>
+                            @foreach (var sideEffect in Model.SideEffects)
+                            {
+                                @if (sideEffect != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)sideEffect).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.Cautions != null)
+                {
+                    <tr>
+                        <td>Warnings</td>
+                        <td>
+                            @foreach (var caution in Model.Cautions)
+                            {
+                                @if (caution != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)caution).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.ControlledDrugCategoriesEditableId != null)
+                {
+                    <tr>
+                        <td>Controlled Drug Category</td>
+                        <td>
+                            @foreach (var controlDrugCategory in ViewBag.ControlledDrugCategories)
+                            {
+                                @if (controlDrugCategory != null)
+                                {
+                                    @if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)controlDrugCategory).Value == Model.ControlledDrugCategoriesEditableId)
+                                    {
+                                        @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)controlDrugCategory).Text)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.RestrictionsOnAvailabilityCd != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+                {
+                    <tr>
+                        <td>Restrictions on availability</td>
+                        <td>
+                            @foreach (var restrictionOnAvailability in ViewBag.RestrictionsOnAvailabilities)
+                            {
+                                @if (restrictionOnAvailability != null)
+                                {
+                                    @if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)restrictionOnAvailability).Value == Model.RestrictionsOnAvailabilityCd)
+                                    {
+                                        @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)restrictionOnAvailability).Text)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.PrescribingStatusCd != null)
+                {
+                    <tr>
+                        <td>Prescribing Status</td>
+                        <td>
+                            @foreach (var prescribingStatus in ViewBag.PrescribingStatuses)
+                            {
+                                @if (prescribingStatus != null)
+                                {
+                                    @if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)prescribingStatus).Value == Model.PrescribingStatusCd)
+                                    {
+                                        @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)prescribingStatus).Text)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.TitrationTypesEditableId != null)
+                {
+                    <tr>
+                        <td>Titration Type</td>
+                        <td>
+                            @foreach (var titrationType in ViewBag.TitrationTypes)
+                            {
+                                @if (titrationType != null)
+                                {
+                                    @if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)titrationType).Value == Model.TitrationTypesEditableId)
+                                    {
+                                        @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)titrationType).Text)
+                                    }
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.Diluents != null)
+                {
+                    <tr>
+                        <td>Compatible Diluents</td>
+                        <td>
+                            @foreach (var diluent in Model.Diluents)
+                            {
+                                @if (diluent != null)
+                                {
+                                    @Html.Label("", ((SynapseStudioWeb.Models.MedicinalMgmt.CodeNameSelectorModel)diluent).Name)
+                                    <br />
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (Model.IsDiffBlackTriangle || Model.IsDiffClinicalTrialMedication || Model.IsDiffCriticalDrug || Model.IsDiffEMAAddMontorng || Model.IsDiffGastroResistant || Model.IsDiffModifiedRelease || Model.IsDiffExpensiveMedication || Model.IsDiffHighAlertMedication
+|| Model.IsDiffIVtoOral || Model.IsDiffNotforPRN || Model.IsDiffBloodProduct || Model.IsDiffDiluent || Model.IsDiffPrescribable || Model.IsDiffOutpatientMedication || Model.IsDiffSugarFree || Model.IsDiffGlutenFree || Model.IsDiffPreservativeFree
+|| Model.IsDiffCFCFree || Model.IsDiffUnlicensedMedication || Model.IsDiffParallelImport || Model.IsDiffIgnoreDuplicateWarnings || Model.IsDiffControlledDrug || Model.IsDiffIndicationIsMandatory || Model.IsDiffWitnessingRequired)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Flags / Classification</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.IsDiffBlackTriangle)
+                {
+                    <tr>
+                        <td>
+                            Black Triangle
+                        </td>
+                        @if (Model.IsDiffBlackTriangle)
+                        {
+                            <td>
+                                @if (Model.BlackTriangle)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffClinicalTrialMedication)
+                {
+                    <tr>
+                        <td>
+                            Clinical Trial Medication
+                        </td>
+                        @if (Model.IsDiffClinicalTrialMedication)
+                        {
+                            <td>
+                                @if (Model.ClinicalTrialMedication)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffCriticalDrug)
+                {
+                    <tr>
+                        <td>
+                            Critical Drug
+                        </td>
+                        @if (Model.IsDiffCriticalDrug)
+                        {
+                            <td>
+                                @if (Model.CriticalDrug)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffEMAAddMontorng)
+                {
+                    <tr>
+                        <td>
+                            EMA Additional Monitoring
+                        </td>
+                        @if (Model.IsDiffEMAAddMontorng)
+                        {
+                            <td>
+                                @if (Model.EmaAdditionalMonitoring)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffGastroResistant)
+                {
+                    <tr>
+                        <td>
+                            Gastro Resistant
+                        </td>
+                        @if (Model.IsDiffGastroResistant)
+                        {
+                            <td>
+                                @if (Model.IsGastroResistant)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffModifiedRelease)
+                {
+                    <tr>
+                        <td>
+                            Modified Release
+                        </td>
+                        @if (Model.IsDiffModifiedRelease)
+                        {
+                            <td>
+                                @if (Model.IsModifiedRelease)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffExpensiveMedication)
+                {
+                    <tr>
+                        <td>
+                            Expensive Medication
+                        </td>
+                        @if (Model.IsDiffExpensiveMedication)
+                        {
+                            <td>
+                                @if (Model.ExpensiveMedication)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffHighAlertMedication)
+                {
+                    <tr>
+                        <td>
+                            High Alert Medication
+                        </td>
+                        @if (Model.IsDiffHighAlertMedication)
+                        {
+                            <td>
+                                @if (Model.HighAlertMedication)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffIVtoOral)
+                {
+                    <tr>
+                        <td>
+                            IV to Oral
+                        </td>
+                        @if (Model.IsDiffIVtoOral)
+                        {
+                            <td>
+                                @if (Model.IVToOral)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffNotforPRN)
+                {
+                    <tr>
+                        <td>
+                            Not for PRN
+                        </td>
+                        @if (Model.IsDiffNotforPRN)
+                        {
+                            <td>
+                                @if (Model.NotForPrn)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffBloodProduct)
+                {
+                    <tr>
+                        <td>
+                            Blood Product
+                        </td>
+                        @if (Model.IsDiffBloodProduct)
+                        {
+                            <td>
+                                @if (Model.IsBloodProduct)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffDiluent)
+                {
+                    <tr>
+                        <td>
+                            Diluent
+                        </td>
+                        @if (Model.IsDiffDiluent)
+                        {
+                            <td>
+                                @if (Model.IsDiluent)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffPrescribable)
+                {
+                    <tr>
+                        <td>
+                            Prescribable
+                        </td>
+                        @if (Model.IsDiffPrescribable)
+                        {
+                            <td>
+                                @if (Model.Prescribable)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffOutpatientMedication && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>
+                            Outpatient Medication
+                        </td>
+                        @if (Model.IsDiffOutpatientMedication)
+                        {
+                            <td>
+                                @if (Model.OutpatientMedication)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffSugarFree && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>
+                            Sugar Free
+                        </td>
+                        @if (Model.IsDiffSugarFree)
+                        {
+                            <td>
+                                @if (Model.SugarFree)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffGlutenFree && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>
+                            Gluten Free
+                        </td>
+                        @if (Model.IsDiffGlutenFree)
+                        {
+                            <td>
+                                @if (Model.GlutenFree)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffPreservativeFree && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>
+                            Preservative Free
+                        </td>
+                        @if (Model.IsDiffPreservativeFree)
+                        {
+                            <td>
+                                @if (Model.PreservativeFree)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffCFCFree && Model.ProductType != null && (Model.ProductType.ToLower() == "amp" || Model.ProductType.ToLower() == "vmp"))
+                {
+                    <tr>
+                        <td>
+                            CFC Free
+                        </td>
+                        @if (Model.IsDiffCFCFree)
+                        {
+                            <td>
+                                @if (Model.CFCFree)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffUnlicensedMedication && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+                {
+                    <tr>
+                        <td>
+                            Unlicensed Medication
+                        </td>
+                        @if (Model.IsDiffUnlicensedMedication)
+                        {
+                            <td>
+                                @if (Model.UnlicensedMedication)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffParallelImport && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+                {
+                    <tr>
+                        <td>
+                            Parallel Import
+                        </td>
+                        @if (Model.IsDiffParallelImport)
+                        {
+                            <td>
+                                @if (Model.ParallelImport)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffIgnoreDuplicateWarnings)
+                {
+                    <tr>
+                        <td>
+                            Ignore Duplicate Warnings
+                        </td>
+                        @if (Model.IsDiffIgnoreDuplicateWarnings)
+                        {
+                            <td>
+                                @if (Model.IgnoreDuplicateWarnings)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffControlledDrug)
+                {
+                    <tr>
+                        <td>
+                            Controlled Drug
+                        </td>
+                        @if (Model.IsDiffControlledDrug)
+                        {
+                            <td>
+                                @if (Model.IsCustomControlledDrug)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffIndicationIsMandatory)
+                {
+                    <tr>
+                        <td>
+                            Indication Is Mandatory
+                        </td>
+                        @if (Model.IsDiffIndicationIsMandatory)
+                        {
+                            <td>
+                                @if (Model.IsIndicationMandatory)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+                @if (Model.IsDiffWitnessingRequired)
+                {
+                    <tr>
+                        <td>
+                            Witnessing Required
+                        </td>
+                        @if (Model.IsDiffWitnessingRequired)
+                        {
+                            <td>
+                                @if (Model.WitnessingRequired)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    @if (Model.Status != null && Model.ProductType != null && Model.ProductType.ToLower() == "amp")
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th colspan="2" class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Status != null)
+                {
+                    <tr>
+                        <td>
+                            Status
+                        </td>
+                        <td>
+                            @foreach (var status in ViewBag.RecordStatuses)
+                            {
+                                @if (status != null)
+                                {
+                                    @if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)status).Value == Model.Status)
+                                    {
+                                        @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)status).Text)
+                                    }
+
+                                }
+                                else
+                                {
+                                    @Html.Label("")
+                                }
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2" class="text-center">Product Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Name</td>
+                <td>@Html.Label(Model.Name)</td>
+            </tr>
+            <tr>
+                <td>Product Type</td>
+                <td>
+                    @foreach (var productType in ViewBag.ProductTypes)
+                    {
+                        if (((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)productType).Value == Model.ProductType)
+                        {
+                            @Html.Label("", ((Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)productType).Text)
+                        }
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td>Primary Code</td>
+                <td>@Html.Label("", Model.Code)</td>
+            </tr>
+            <tr>
+                <td>Primary Code System</td>
+                <td>@Html.Label("", Model.CodeSystem)</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                    No data change
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}

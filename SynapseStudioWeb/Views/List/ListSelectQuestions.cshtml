@@ -1,0 +1,402 @@
+﻿@model SynapseStudioWeb.Models.BaseViewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<style type="text/css">
+    .selectContainer {
+        border: 1px dashed white;
+        padding: 20px;
+        margin: 20px;
+    }
+
+
+
+    #availableList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #availableList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+            
+        }
+
+
+    .itemSelected {
+        border: 1px dashed green !important;
+       text-decoration: line-through!important;
+    }
+
+    #selectedList {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 99%;
+    }
+
+        #selectedList li {
+            margin: 5px;
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            padding-right: 5px;
+            font-size: 1.2em;
+            width: 99%;
+            border: 1px dashed gray;
+             
+            cursor: move; /* fallback if grab cursor is unsupported */
+            cursor: grab;
+            cursor: -moz-grab;
+        }
+
+            #selectedList li:active {
+                cursor: grabbing;
+                cursor: -moz-grabbing;
+                cursor: -webkit-grabbing;
+            }
+
+            #selectedList li span {
+                position: absolute;
+                margin-left: -1.3em;
+            }
+</style>
+
+<div class="row">
+    <div class="col-md-8">
+        <h4>List Manager - Select Questions</h4>
+    </div>
+    <div class="col-md-4">
+        <h5 class="float-right">@ViewBag.Summary</h5>
+        <input type="hidden" id="listID" value="@ViewBag.Id" />
+        <span style="display:none" id="defaultContextId">@ViewBag.DefaultContext</span>
+        <span style="display:none" id="nextOrdinalPosition"></span>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("ListManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectAttributes?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Columns</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListSelectQuestions?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Select Questions</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("ListAPIs?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+
+</div>
+<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-lg-12 text-center ">
+            <a class="btn btn-sm btn-info" href="@ViewBag.PreviewURL" target="_blank"> Preview List</a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;Selected Questions</h5>
+            </div>
+            <div class="card-body p-2">
+
+
+                
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="selectContainer">
+                            <p style="font-size: 1.8em; font-weight: bold">Available Questions with Context set to : @ViewBag.ContextField</p>
+                            <div id="availableQuestions">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="selectContainer">
+                            <p style="font-size: 1.8em; font-weight: bold">Selected Questions</p>
+                            <div id="selectedQuestions"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="well" style="margin-top: 15px;">
+                    <div class="row">
+                        <div class="col-lg-12 text-center ">
+                            <a class="btn btn-sm btn-info" href="@ViewBag.PreviewURL" target="_blank"> Preview List</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="detail-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h3 class="modal-title">Attribute Properties</h3>
+            </div>
+            <div class="modal-body">
+                <span id="attributeId" class="hidden" style="display:none"></span>
+                <span class="lead" style="color: rgb(42, 159, 214);"><span class="text-uppercase" id="attributeName"></span></span>
+                <br />
+                <br />
+                <label>Column Heading Display Name</label>
+                <input type="text" id="txtDisplayName" class="form-control" />
+
+                <label>Default CSS Class</label>
+                <input type="text" id="txtDefaultCSSClass" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-sm" id="btnQuickSave">Save changes</button>
+                <button type="button" class="btn btn-sm  btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/js/listmanager.js"></script>
+<script type="text/javascript">
+
+        function getAvailableQuestions() {
+            //console.log($("#ContentPlaceHolder1_lblDefaultContext").html());
+             var url = "/List/GetAvailableQuestions";
+             var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "','defaultContext':'" + $("#ContentPlaceHolder1_lblDefaultContext").html() + "'}";
+            //console.log(data);
+            return $.getJSON(url + "?listId=" + id + "&defaultContext=" + $("#defaultContextId").html());
+
+        }
+
+        function getSelectedQuestions() {
+
+
+            var url = "/List/GetSelectedQuestions";
+            var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "'}";
+            return $.getJSON(url + "?listId=" + id)
+
+        }
+
+
+        function addQuestionToList(QuestionId) {
+            console.log("Added: " + QuestionId);
+            var ordinalposition = $('#nextOrdinalPosition').text();
+            var url = "/List/AddQuestionToList";
+            var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "','question_id':'" + QuestionId + "','ordinalposition':'" + ordinalposition + "'}";
+            return $.get(url + "?listId=" + id + "&question_id=" + QuestionId + "&ordinalposition=" + ordinalposition);
+
+        }
+
+
+        function removeQuestionFromList(QuestionId) {
+
+            var ordinalposition = $('#nextOrdinalPosition').text();
+            var url = "/List/RemoveQuestionFromList";
+            var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "','question_id':'" + QuestionId + "'}";
+            return $.get(url + "?listId=" + id + "&question_id=" + QuestionId );
+
+        }
+
+        function GetNextOrdinalPosition() {
+            var url = "/List/GetNextOrdinalPositionQuestion";
+            var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "'}";
+            return $.getJSON(url + "?listId=" + id)
+        }
+
+        function UpdateQuestionOrder(listquestion_id, order) {
+            var url = "/List/UpdateOrdinalPositionQuestion";
+            var id = $('#listID').val();
+            //var data = "{'listId': '" + id + "','listquestion_id':'" + listquestion_id + "','ordinalposition':" + order + "}";
+            return $.getJSON(url + "?listId=" + id + "&listquestion_id=" + listquestion_id + "&ordinalposition=" + order);
+        }
+
+
+        function SaveQuickQuestions(QuestionId, displayname, defaultcssclass) {
+            var url = "/List/SaveQuickQuestions";
+            var listId = $('#listID').val();
+            //var data = "{'listId': '" + listId + "','listQuestion_id':'" + QuestionId + "','displayname':'" + displayname + "','defaultcssclassname':'" + defaultcssclass + "'}";
+            return $.getJSON(url + "?listId=" + id + "&listquestion_id=" + QuestionId + "&displayname=" + displayname + "&defaultcssclassname=" + defaultcssclass);
+        }
+
+        function SelectUnselectQuestion(cb, QuestionID) {
+
+            //console.log(cb.id);
+
+
+            var li = '#avail' + cb.id;
+            if (cb.checked) {
+                $.when(
+                    addQuestionToList(cb.id)
+                ).done(
+                    function (
+
+                    ) {
+
+                        getSelectedList();
+                    });
+
+                $(li).addClass('itemSelected');
+
+            }
+            else {
+                $.when(
+                    removeQuestionFromList(cb.id)
+                ).done(
+                    function (
+
+                    ) {
+                        getSelectedList();
+
+                    });
+
+                $(li).removeClass('itemSelected');
+            }
+
+
+
+
+
+
+        }
+
+        function getNextOrdinalPositionForLabel() {
+
+            $.when(
+                GetNextOrdinalPosition()
+            ).done(
+                function (
+                    nextOrdinalPosition
+                ) {
+
+                    var nop = nextOrdinalPosition.d + "";
+
+                    $('#nextOrdinalPosition').text(nop);
+
+
+
+                });
+
+        }
+
+        function getSelectedList() {
+
+            $.when(
+                getSelectedQuestions()
+            ).done(
+                function (
+                    selectedList
+                ) {
+
+                    console.log("Selected List: " + JSON.stringify(selectedList));
+                    var html = "<ul id='selectedList'>";
+                    $.each(selectedList, function (i, selectedItem) {
+
+
+                        var func = "'" + selectedItem.listquestion_id + "'"; //, '" + selectedItem.Questionname + "');";
+
+                        html += "<li id='" + selectedItem.listquestion_id + "'>";
+                        html += "<div class='row'><div class='col-md-1'>";
+                        html += i + 1;
+                        html += '.&nbsp;</div><div class="col-md-11">';
+                        html += selectedItem.questiondisplay;
+                        html += "</div></div>";
+                        html += '</li>';
+                    });
+                    html += "</ul>";
+                    $('#selectedQuestions').html(html);
+
+
+                    $("#selectedList").sortable({
+                        revert: true,
+                        stop: function (event, ui) {
+
+                            var sortOrder = $("#selectedList").sortable('toArray');
+
+                            //console.log(sortOrder.length);
+                            //sortOrder = JSON.parse(sortOrder)
+
+                            var arrayLength = sortOrder.length;
+                            for (var i = 0; i < arrayLength; i++) {
+
+                                UpdateQuestionOrder(sortOrder[i], i + 1);
+                                getSelectedList();
+
+                            }
+
+                        }
+                    });
+
+                    getNextOrdinalPositionForLabel();
+
+
+                });
+
+        }
+
+        $(document).ready(function () {
+
+
+            var listID = getParameterByName('id');
+            //console.log(listID);
+            $('#listID').val(listID);
+
+            getNextOrdinalPositionForLabel();
+
+            $.when(
+                getAvailableQuestions()
+            ).done(
+                function (
+                    availableList
+                ) {
+
+                    //console.log(availableList);
+                    var html = "<ul id='availableList'>";
+                    $.each(availableList, function (i, availableItem) {
+
+                        html += '<li id="avail' + availableItem.question_id + '"';
+                        if (availableItem.isselected) {
+                            html += ' class="itemSelected"';
+                        }
+                        html += '><div class="row"><div class="col-md-1"><input type="checkbox" id="' + availableItem.question_id + '"';
+                        if (availableItem.isselected) {
+                            html += ' checked';
+                        }
+                        html += ' onclick="SelectUnselectQuestion(this);"/></div><div class="col-md-11">' + availableItem.questiondisplay + '</div></div></li>';
+
+                    });
+                    html += "</ul";
+                    $('#availableQuestions').html(html);
+
+                    getSelectedList();
+
+                });
+
+
+
+
+        });
+
+
+
+</script>

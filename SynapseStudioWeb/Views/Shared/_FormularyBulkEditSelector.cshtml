@@ -1,0 +1,247 @@
+﻿<style>
+    .bulk-edit-item-panel {
+    }
+
+        .bulk-edit-item-panel .bulk-edit-item-label {
+            font-size: 0.9rem !important;
+        }
+
+    .select-all {
+        font-size: 0.9rem !important;
+    }
+
+    #pleaseWaitModal {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 20em;
+        height: 10em;
+        margin-top: -5em; /*set to a negative number 1/2 of your height*/
+        margin-left: -10em; /*set to a negative number 1/2 of your width*/
+        border: 1px solid #ccc;
+        background-color: #f3f3f3;
+        z-index: 1052 !important;
+        display: none;
+        line-height: 10em;
+        text-align: center;
+    }
+
+</style>
+<!-- Modal -->
+<div class="modal fade" id="bulkEditSelectorModal" tabindex="-1" role="dialog" aria-labelledby="bulkEditModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Formularies to Edit</h5>
+                <button type="button" class="close" id="btnCloseIconBulkEdit" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row align-items-center p-1">
+                    <div class="d-flex flex-row" style="width:100%;">
+                        <div style="margin: 0.2rem; padding: 0.2rem; font-size: 1rem;">
+                            <input type="checkbox" checked="checked" id="chkBulkEditSelectorSelectAll">
+                            <label class="form-check-label select-all" title="Select \ Un-Select All">
+                                Select \ Un-Select All
+                            </label>
+                        </div>
+                        <div class="ml-auto p-2" style="font-size:1rem; cursor:pointer;">
+                            <i class="fa fa-trash text-danger" title="Clear All" id="iBulkEditSelectorDelAll"></i>
+                        </div>
+                    </div>
+                    <div id="bulkEditSelectorItemContainer" class="col-12 p-2" style="height: 350px; overflow-y: auto; border: 1px solid black;">
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="btnCloseBulkEdit">Close</button>
+                <button type="button" class="btn btn-primary" id="btnApproveBulkEdit">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bulkEditSelectorItemTmpl" disabled style="display:none;">
+    <div style="margin: 0.2rem; padding: 0.2rem; font-size: 1rem;" class="bulk-edit-item-panel" id="pnlBulkEditItem-{0}">
+        <span class="fa fa-times" style="cursor:pointer;font-size:0.8rem;margin-right:10px;" title="Remove" onclick="removeFromBulkEdit(this)"></span>
+        <span>
+            <input type="checkbox" checked="checked" class="bulk-edit-item-check" id="chkBulkEditItemChecked-{0}">
+            <label class="form-check-label bulk-edit-item-label" id="lblBulkEditItemCodeName-{0}">
+            </label>
+        </span>
+    </div>
+</div>
+
+
+<div id='pleaseWaitModal'>
+   Please Wait...
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#bulkEditSelectorModal').data('show_bulk_edit', false);
+        $('#bulkEditSelectorModal').modal('show');
+
+        renderItems();
+
+        $("#chkBulkEditSelectorSelectAll").change(function () {
+            if (this.checked) {
+                $(".bulk-edit-item-check").each(function () {
+                    this.checked = true;
+                    selectionCheckChanged(this);
+                });
+            } else {
+                $(".bulk-edit-item-check").each(function () {
+                    this.checked = false;
+                    selectionCheckChanged(this);
+                });
+            }
+        });
+
+        $('#iBulkEditSelectorDelAll').click(function () {
+            $.confirm('Are you sure you want to remove all?', (action) => {
+                if (action === 'yes') {
+                    $('#pleaseWaitModal').show();
+                    setTimeout(function () {
+                        sessionStorage.clear(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs);
+                        sessionStorage.clear(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP);
+
+                        $('#bulkEditSelectorModal').modal('hide');
+                        if (bulkEditSelectorClose)
+                            bulkEditSelectorClose();//Callback handler in the component callee
+
+                        $('#pleaseWaitModal').hide();
+                    }, 1000);
+                }
+            });
+        });
+
+        $('.bulk-edit-item-check').change(function () {
+            selectionCheckChanged(this);
+        });
+
+        $('#btnApproveBulkEdit').click(function () {
+            reAssignFromTemp();
+            //$('#bulkEditSelectorModal').data('show_bulk_edit', true);
+            $('#bulkEditSelectorModal').modal('hide');
+
+            if (bulkEditSelectorClose)
+                bulkEditSelectorClose(true);//Callback handler in the component callee
+        });
+
+        $('#btnCloseBulkEdit').click(function () {
+            reAssignFromTemp();
+            $('#bulkEditSelectorModal').modal('hide');
+
+            if (bulkEditSelectorClose)
+                bulkEditSelectorClose();
+        });
+        $('#btnCloseIconBulkEdit').click(function () {
+            reAssignFromTemp();
+            $('#bulkEditSelectorModal').modal('hide');
+
+            if (bulkEditSelectorClose)
+                bulkEditSelectorClose();
+        });
+    });
+
+    function reAssignFromTemp() {
+        let selectedItems = {};
+
+        let selectedRecordsAsString = sessionStorage.getItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP);
+        if (selectedRecordsAsString) {
+            let selectedRecords = JSON.parse(selectedRecordsAsString);
+            if (selectedRecords && Object.keys(selectedRecords).length > 0) {
+                selectedItems = selectedRecords;
+            }
+        }
+
+        if (selectedItems && Object.keys(selectedItems).length > 0) {
+            sessionStorage.setItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs, JSON.stringify(selectedItems));
+        } else {
+            sessionStorage.clear(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs);
+        }
+    }
+
+    function selectionCheckChanged(chkEl) {
+        let selectedItems = {};
+        let parentPanel = $(chkEl).closest('.bulk-edit-item-panel');
+        let selectedRecordsAsString = sessionStorage.getItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP);
+        if (selectedRecordsAsString) {
+            let selectedRecords = JSON.parse(selectedRecordsAsString);
+            if (selectedRecords && Object.keys(selectedRecords).length > 0) {
+                selectedItems = selectedRecords;
+            }
+        }
+        let codeVal = parentPanel.data('code');
+        let titleVal = parentPanel.data('title');
+        let formularyVersionIdVal = parentPanel.data('formularyVersionId');
+
+        if (chkEl.checked) {
+            selectedItems[codeVal] = { code: codeVal, title: titleVal, formularyVersionId: formularyVersionIdVal };
+        } else if (selectedItems && Object.keys(selectedItems).length > 0 && selectedItems[codeVal]) {
+            delete selectedItems[codeVal];
+        }
+        sessionStorage.setItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP, JSON.stringify(selectedItems));
+
+        if (selectedItems && Object.keys(selectedItems).length > 0) {
+            $('#btnApproveBulkEdit').attr('disabled', false);
+        } else {
+            $('#btnApproveBulkEdit').attr('disabled', true);
+            $("#chkBulkEditSelectorSelectAll").attr('checked', false);
+        }
+    }
+
+    function renderItems() {
+        let selectedRecordsAsString = sessionStorage.getItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs);
+        if (!selectedRecordsAsString) return;
+
+        let selectedRecords = JSON.parse(selectedRecordsAsString);
+
+        sessionStorage.setItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP, selectedRecordsAsString);
+
+        if (!selectedRecords || Object.keys(selectedRecords).length == 0) return;
+
+        let containerSel = $(`#bulkEditSelectorItemContainer`);
+        let templateSel = $("#bulkEditSelectorItemTmpl");
+
+        $(containerSel).html('');
+
+        Object.keys(selectedRecords).forEach(function (itemKey, index) {
+            let item = selectedRecords[itemKey];
+            var template = $.validator.format($.trim($(templateSel).html()));
+
+            $(template(index)).appendTo(containerSel);
+            $(`#lblBulkEditItemCodeName-${index}`).text(`(${item.code}) ${item.title}`);
+            $(`#pnlBulkEditItem-${index}`).data('code', item.code);
+            $(`#pnlBulkEditItem-${index}`).data('title', item.title);
+            $(`#pnlBulkEditItem-${index}`).data('formularyVersionId', item.formularyVersionId);
+
+            $(containerSel).data('currindex', index);
+        });
+    }
+
+    function removeFromBulkEdit(item) {
+        let parentPanel = $(item).closest('.bulk-edit-item-panel');
+        let codeToBeRemoved = $(parentPanel).data('code');
+        if (!codeToBeRemoved) return;
+        let selectedRecordsAsString = sessionStorage.getItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs);
+        if (!selectedRecordsAsString) return;
+
+        let selectedRecords = JSON.parse(selectedRecordsAsString);
+        if (!selectedRecords || Object.keys(selectedRecords).length == 0 || !selectedRecords[codeToBeRemoved]) return;
+        delete selectedRecords[codeToBeRemoved];
+        sessionStorage.setItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs, JSON.stringify(selectedRecords));
+        sessionStorage.setItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs_TEMP, JSON.stringify(selectedRecords));
+
+        $(parentPanel).remove();
+
+        if (!selectedRecords || Object.keys(selectedRecords).length == 0) {
+            $('#bulkEditSelectorModal').modal('hide');
+            if (bulkEditSelectorClose)
+                bulkEditSelectorClose();//Callback handler in the component callee
+        }
+    }
+</script>

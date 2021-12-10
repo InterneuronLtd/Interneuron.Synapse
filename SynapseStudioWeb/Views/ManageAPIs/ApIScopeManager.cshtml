@@ -1,0 +1,86 @@
+﻿@model SynapseStudioWeb.Models.APIscopeModel
+
+@{
+    ViewData["Title"] = "ApIScopeManager";
+}
+
+<h2>@Model.Apiname</h2>
+
+<h4>New API Scope</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="CreateApIScope">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="APIScopeName" class="control-label"></label>
+                <input asp-for="APIScopeName" required class="form-control" />
+                <span asp-validation-for="APIScopeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayName" class="control-label"></label>
+                <input asp-for="DisplayName" required class="form-control" />
+                <span asp-validation-for="DisplayName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Apiid" class="form-control" />
+            <input type="hidden" asp-for="Apiname" class="form-control" />
+            <div class="form-group">
+                <input type="submit" value="Validate and Create" style="float:right" class="btn btn-sm btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <br />
+    <div>
+        <div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fa fa-list"></i> API Resources (@ViewBag.APIScoperesource.Rows.Count)</h5>
+                        </div>
+                        <div class="card-body p-2">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Resource Name</th>
+                                        <th>Display Name</th>
+                                        <th>Description</th>
+                                      
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.APIScoperesource.Rows)
+                                    {
+                                        <tr>
+                                            <td>@item["Name"]</td>
+                                            <td>@item["DisplayName"]</td>
+                                            <td>@item["Description"]</td>
+                                         
+                                            <td>
+                                                <a href=@("ManageAPIs/RemoveAPIScope?id=" + item["Id"]+"&name=" + item["Name"]) onclick="return confirm('Are you sure?')" style="float:left;color:#2a9fd6">Remove</a>
+
+                                              
+                                            </td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

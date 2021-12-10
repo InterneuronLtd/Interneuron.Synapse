@@ -1,0 +1,106 @@
+﻿@using SynapseStudioWeb.Models;
+@model LocationAddEditViewModel;
+
+@{
+    ViewData["Title"] = "AddEditLocation";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.location is null)
+        {
+            <h4>New Location</h4>
+        }
+        else
+        {
+            <h4>Edit Location</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="SaveLocation" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.location.location_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="locationcode">
+                            Location Code <span class="required">*</span>
+                        </label>
+                        @if (Model.location is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="location.locationcode" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.location.locationcode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="location.locationcode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="locationtext">
+                            Location Text <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="location.locationtext" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.location.locationtext)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="locationtypecode">
+                            Location Type <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @Html.DropDownListFor(m => m.location.locationtypecode, new SelectList(Model.locationTypes, "locationtypecode", "locationtypetext"), "Please select location type", new
+                            {
+                                @class = "form-control"
+                            })
+                            @Html.ValidationMessageFor(m => m.location.locationtypecode)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="institution">
+                            Institution <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="location.institution" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.location.institution)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="building">
+                            Building <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="location.building" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.location.building)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="statuscode">
+                            Status <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Active: @Html.RadioButtonFor(m => m.location.statuscode, "ACTIVE")&nbsp;&nbsp;
+                            Inactive: @Html.RadioButtonFor(m => m.location.statuscode, "INACTIVE")<br />
+                            @Html.ValidationMessageFor(m => m.location.statuscode)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-5">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("LocationList", "Location")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

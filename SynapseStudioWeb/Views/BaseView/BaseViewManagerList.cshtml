@@ -1,0 +1,49 @@
+﻿@model SynapseStudioWeb.Models.BaseViewModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+ 
+<div class="row">
+    <div class="col-lg-12">
+        <h4>Baseview Manager</h4>        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-anchor"></i>&nbsp; Baseview Manager</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                        <a  href="~/Baseview/BaseviewNamespace" class="btn btn-sm btn-success float-right">Manage Baseview Namespace</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Select a namespace from the list below</label>
+                        @Html.DropDownListFor(model => model.Baseview_id, ViewBag.BaseViewNamespaceList as SelectList, new { @class = "form-control" })
+                    </div>
+                    
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-md-8">
+                    </div>
+                    <div class="col-md-4">
+                        <a id="btn-add-baseview" href="#" class="btn btn-sm btn-primary float-right"></a>
+                    </div>
+                </div>
+                <div id="baseViewlist">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/basview.js"></script>

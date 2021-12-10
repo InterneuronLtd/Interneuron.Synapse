@@ -1,0 +1,110 @@
+﻿@model SynapseStudioWeb.Models.BedBoardDeviceModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>New Bedboard Device</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bed"></i>&nbsp;New Bedboard Device</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="Board" asp-action="BedBoardDeviceNewSave"
+                              data-ajax-failure="onBoardDeviceFailed" data-ajax-success="onBoardDeviceSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+
+                            @Html.HiddenFor(m => m.DeviceId)
+                            <label for="DeviceName">* Please enter a name for the device</label>
+                            @Html.TextBoxFor(m => m.DeviceName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.DeviceName)
+                            <br />
+                            <label for="IPAddress">Enter the static IP Address for the device</label>
+                            @Html.TextBoxFor(m => m.IPAddress, new { @class = "form-control" })
+                            <br />
+                            <h4>Bed Board</h4>
+                            <label for="BedBoardId">Select Bed Board</label>
+                            @Html.DropDownListFor(model => model.BedBoardId, ViewBag.BedBoard as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BedBoardId)
+                            <br />
+                            <h4>Location Details</h4>
+                            <label for="WardId">Select Ward</label>
+                            @Html.DropDownListFor(model => model.WardId, ViewBag.Ward as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.WardId)
+                            <br />
+                            <label for="BayRoomId">Select bay / room</label>
+                            @Html.DropDownListFor(model => model.BayRoomId, ViewBag.Ward as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BayRoomId)
+
+                            <br />
+                            <label for="BedId">Select bed</label>
+                            @Html.DropDownListFor(model => model.BedId, ViewBag.Ward as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BedId)
+
+                            <br />
+                            <a href="~/Board/BedBoardDeviceList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var onBoardDeviceSuccess = function (context) {
+        window.location = "../Board/BedBoardDeviceList";
+    };
+
+    var onBoardDeviceFailed = function (context) {
+        alert(context);
+    };
+
+    $(document).ready(function () {
+
+        BayRoomJsonList($("#WardId").val());
+
+        $("#WardId").change(function () {
+            BayRoomJsonList($(this).val());             
+        });
+
+        $("#BayRoomId").change(function () {
+            //BayRoomJsonList($(this).val());
+            BedJsonList($("#WardId").val(), $(this).val())
+        });
+
+        function BayRoomJsonList(wardId) {
+            $.getJSON("../Board/BayRoomJsonList?wardId=" + wardId, function (data) {
+                $("#BayRoomId").html("");
+                $.each(data, function (i, entity) {
+                    $("#BayRoomId").append('<option value="' + entity.baycode + '">' + entity.baydisplay + '</option>');
+                }); 
+                //BedJsonList(wardId, $("#BayRoomId").val());
+            });
+        }
+
+        function BedJsonList(wardId, bayRoomId) {
+            $.getJSON("../Board/BedJsonList?wardId=" + wardId + "&bayRoomId=" + bayRoomId, function (data) {
+                    $("#BedId").html("");
+                    $.each(data, function (i, entity) {
+                        $("#BedId").append('<option value="' + entity.wardbaybed_id + '">' + entity.beddisplay + '</option>');
+                    })
+                });
+        }
+    });
+</script>
+
+
+
+

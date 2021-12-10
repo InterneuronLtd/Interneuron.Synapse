@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -219,7 +222,7 @@ namespace SynapseStudio
             }
 
             this.fgDefaultContext.CssClass = noerr;
-            if (this.ddlBaseView.SelectedIndex == 0)
+            if (this.ddlDefaultContext.SelectedIndex == 0)
             {
                 this.lblError.Text = "Please select the entity that defines the default context";
                 this.ddlDefaultContext.Focus();
@@ -360,7 +363,7 @@ namespace SynapseStudio
                 new KeyValuePair<string, string>("listnamespaceid", this.hdnNamespaceID.Value),
                 new KeyValuePair<string, string>("listnamespace", SynapseHelpers.GetListNamespaceNameFromID(this.hdnNamespaceID.Value)),
                 new KeyValuePair<string, string>("defaultcontext", this.ddlDefaultContext.SelectedValue),
-                new KeyValuePair<string, string>("defaultcontextfield", this.lblMatchedContextField.Text),
+                new KeyValuePair<string, string>("defaultcontextfield", this.lblDefaultContextField.Text),
                 new KeyValuePair<string, string>("matchedcontextfield", this.ddlMatchedContextField.SelectedValue),
                 new KeyValuePair<string, string>("patientbannerfield", this.ddlPatientBannerField.SelectedValue),
                 new KeyValuePair<string, string>("rowcssfield", this.ddlRowCSSField.SelectedValue),

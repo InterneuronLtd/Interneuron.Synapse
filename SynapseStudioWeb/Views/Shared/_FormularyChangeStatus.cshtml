@@ -1,0 +1,45 @@
+﻿<div class="modal fade" id="changestatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Change Record Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <label for="formularydelete">Change To Status : </label>
+                        @Html.Hidden("statuschangeformularyVersionId")
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="ddlstatus"></select>
+                    </div>
+                </div>
+                <br />
+                <div id="showstatusChangeReason" class="row">
+                    <div class="col-4">
+
+                        <label for="formularydelete">Reason</label>
+                    </div>
+                    <div class="col-8">
+                        <textarea class="form-control" id="statusChangeReason" rows="4"></textarea>
+                        <br />
+                        <label id="lblstatuschangeerror" style="color:red">
+                            Please Enter Reason
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnstatuschange" class="btn btn-primary">Update</button>
+                <button id="btnStatusChangeDisabled" class="btn btn-primary" style="display:none;" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Updating...
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

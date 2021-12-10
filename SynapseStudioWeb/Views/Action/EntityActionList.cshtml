@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewData["Title"] = "EntityActionList";
+}
+
+@model List<SynapseStudioWeb.Models.ActionentityAssociations>
+
+@{
+    ViewData["Title"] = "ActionList";
+}
+@{
+    string actionid = @ViewBag.Actionid.ToString();
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h4>@ViewBag.actionName Entity Mapping</h4>
+    </div>
+</div>
+@*<div class="well" style="margin-top: 15px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-lg-3">
+                <a class="btn btn-success btn-block" href=@("Mapping?id="+actionid)>Map Entity</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Entity Mapping</h5>
+            </div>
+            <div class="card-body p-2" style=" height: 600px; overflow-y: scroll;">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <div class="col-md-8">
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-sm btn-primary float-right" href=@("Mapping?id="+actionid)>Map Entity</a>
+                        </div>
+                    </div>
+                </div>
+                <table id="dtBasicExample" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Entity</th>
+                            <th>permission</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var m in Model)
+                        {
+                            <tr>
+                                <td>@m.entityname</td>
+                                <td>@m.permission_type</td>
+                                <td>
+
+                                    <a class="btn btn-sm btn-danger" href=@("DeleteEntitymapping?id=" + m.actionentityassociations_id+"&actionid="+actionid)>Delete</a>
+                                </td>
+                            </tr>
+                        }
+
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

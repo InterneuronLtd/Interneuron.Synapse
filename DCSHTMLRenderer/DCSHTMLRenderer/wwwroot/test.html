@@ -1,0 +1,159 @@
+<!--BEGIN LICENSE BLOCK--> 
+<!--Interneuron Synapse
+
+Copyright(C) 2021  Interneuron CIC
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.If not, see<http://www.gnu.org/licenses/>. -->
+<!--END LICENSE BLOCK--> 
+<html>
+<head>
+    <script src="lib/jquery/jquery.min.js"></script>
+
+    <link href="https://bootswatch.com/4/lumen/bootstrap.css" rel="stylesheet" />
+
+    <!--<link href="https://bootswatch.com/_assets/css/custom.min.css" rel="stylesheet" />-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.js"></script>
+
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <form>
+        <fieldset>
+            <div class="d-none">
+                testdd
+            </div>
+            <div class="border border-danger" >
+                test111
+            </div>
+            <div id="form">
+                <!-- Below div is the container for From name and description  -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <label id="forms" class="glyphicon glyphicon-refresh glyphicon-refresh-animate">Form Namehan</label>
+                    </div>
+                </div>
+                <div class="container">
+                    <h3>Animated button</h3>
+                    <button class="btn btn-lg btn-warning"><span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</button>
+                </div>
+
+                <!-- Below div is the container for all sections col lg 6 is to restrict all forms horizontal size  -->
+                <div id="sections" class="col-lg-6">
+
+
+
+
+                    <!-- Below div is the container for one section class row is define a new row  -->
+                    <!-- Below div is the container for section header  -->
+                    <div id="section1" class="list-group-item flex-column align-items-start form-group">
+
+
+                        <div id="headerDiv" data-toggle="collapse" data-target="#divCollapsable">
+                            <div id="section1-Header" class="d-flex w-100 justify-content-between">
+                                <label id="divHeader" class="h3">Conditions</label>
+                            </div>
+                            <div id="section1-Description">
+                                <label class="text-secondary">
+                                    If patient has any of the following conditions, check the box and apply Fall Risk interventions as indicated.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div id="divCollapsable" class="collapse align-items-start">
+                            <div class="form-group">
+                                <label>Please select your country of residence</label>
+                                <select id="ddl1" class="form-control">
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                    <option value="4">Four</option>
+                                    <option value="5">Five</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Please select an option</label>
+                                <div>
+                                    <div id="rbl1" class="form-check">
+                                        <input type="radio" name="rbl1" value="1" class="form-check-input">
+                                        <label class="form-check-label">One</label>
+                                    </div>
+                                    <div id="rbl1" class="form-check">
+                                        <input type="radio" name="rbl1" value="2" class="form-check-input">
+                                        <label class="form-check-label">Two</label>
+                                    </div>
+                                    <div id="rbl1" class="form-check">
+                                        <input type="radio" name="rbl1" value="3" class="form-check-input">
+                                        <label class="form-check-label">Three</label>
+                                    </div>
+                                    <div id="rbl1" class="form-check">
+                                        <input type="radio" name="rbl1" value="4" class="form-check-input">
+                                        <label class="form-check-label">Four</label>
+                                    </div>
+                                    <div id="rbl1" class="form-check">
+                                        <input type="radio" name="rbl1" value="5" class="form-check-input">
+                                        <label class="form-check-label">Five</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </fieldset>
+    </form>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿@model List<SynapseStudioWeb.Models.DatabaseReplStatusDto>
+@{
+    Layout = null;
+}
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>PID</th>
+                <th>User</th>
+                <th>Client Addr.</th>
+                <th>Client Port</th>
+                <th>Backend Start</th>
+                <th>Sent Location</th>
+                <th>Flush Location</th>
+                <th>Replay Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var m in Model)
+            {
+                <tr>
+                    <td>@m.pid</td>
+                    <td>@m.usename</td>
+                    <td>@m.client_addr</td>
+                    <td>@m.client_port</td>
+                    <td>@m.backend_start</td>
+                    <td>@m.sent_location</td>
+                    <td>@m.flush_location</td>
+                    <td>@m.replay_location</td>
+                </tr>
+            }
+            @if (Model.Count == 0)
+            {
+                <tr>
+                    <td colspan="5">
+                        No record found
+                    <td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

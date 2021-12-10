@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
 
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
+
+
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -124,6 +127,7 @@ namespace SynapseStudio
             catch {}
 
             BindBaseViewContextFields();
+            BindDropDownList(this.ddlDefaultContext, "SELECT entityid, synapsenamespacename || '.' || entityname as entitydisplayname, keycolumn FROM entitysettings.entitymanager order by 2", "entityid", "entitydisplayname", 1, null);
 
             try
             {
@@ -152,6 +156,18 @@ namespace SynapseStudio
             try
             {
                 this.txtTableHeaderClass.Text = dt.Rows[0]["tableheadercssstyle"].ToString();
+            }
+            catch { }
+
+            try
+            {
+                SetDDLSource(this.ddlDefaultContext, dt.Rows[0]["defaultcontext"].ToString());
+            }
+            catch { }
+
+            try
+            {
+                this.lblDefaultContextField.Text = dt.Rows[0]["defaultcontextfield"].ToString();
             }
             catch { }
 
@@ -530,6 +546,16 @@ namespace SynapseStudio
             }
 
 
+            this.fgDefaultContext.CssClass = noerr;
+            if (this.ddlDefaultContext.SelectedIndex == 0)
+            {
+                this.lblError.Text = "Please select the entity that defines the default context";
+                this.ddlDefaultContext.Focus();
+                this.lblError.Visible = true;
+                this.fgDefaultContext.CssClass = haserr;
+                return;
+            }
+
             this.fgMatchedContextField.CssClass = noerr;
             if (this.ddlMatchedContextField.SelectedIndex == 0)
             {
@@ -545,6 +571,8 @@ namespace SynapseStudio
             string sql = "UPDATE listsettings.listmanager SET " +
                          "listname = @listname, " +
                          "listdescription = @listdescription, " +
+                         "defaultcontext = @defaultcontext, " +
+                         "defaultcontextfield = @defaultcontextfield, " +
                          "matchedcontextfield = @matchedcontextfield, " +
                          "tablecssstyle = @tablecssstyle, " +
                          "tableheadercssstyle = @tableheadercssstyle, " +
@@ -566,7 +594,9 @@ namespace SynapseStudio
             var paramList = new List<KeyValuePair<string, string>>() {
                 new KeyValuePair<string, string>("list_id", newId),
                 new KeyValuePair<string, string>("listname", this.txtListName.Text),
-                new KeyValuePair<string, string>("listdescription", this.txtListComments.Text),                                                
+                new KeyValuePair<string, string>("listdescription", this.txtListComments.Text),
+                new KeyValuePair<string, string>("defaultcontext", this.ddlDefaultContext.SelectedValue),
+                new KeyValuePair<string, string>("defaultcontextfield", this.lblDefaultContextField.Text),
                 new KeyValuePair<string, string>("matchedcontextfield", this.ddlMatchedContextField.SelectedValue),
                 new KeyValuePair<string, string>("patientbannerfield", this.ddlPatientBannerField.SelectedValue),
                 new KeyValuePair<string, string>("rowcssfield", this.ddlRowCSSField.SelectedValue),
@@ -701,6 +731,12 @@ namespace SynapseStudio
             this.DDlbaseviewfield.Items.Add(new ListItem(e.Item.Cells[2].Text, e.Item.Cells[2].Text));
             this.dgpersonafilter.DataSource = dt;
             this.dgpersonafilter.DataBind();
+        }
+
+        protected void ddlDefaultContext_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.lblDefaultContextField.Text = SynapseHelpers.GetKeyColumnForEntity(this.ddlDefaultContext.SelectedValue);
+            //BindBaseViewContextFields();
         }
     }
 }

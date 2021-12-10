@@ -1,5 +1,6 @@
 ﻿//Interneuron Synapse
-//Copyright(C) 2019  Interneuron CIC
+
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -16,6 +17,8 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
 using IdentityServer4.Models;
 using IdentityServer4.Services;
 using IdentityServer4.Stores;
@@ -57,8 +60,6 @@ namespace Synapse.STS
                     context.IssuedClaims.AddRange(context.Subject.Claims.Where(x => context.RequestedClaimTypes.Contains<string>(x.Type)));
                     // context.IssuedClaims.AddRange(context.Subject.Claims);
 
-                    AddRequetedClaimsFromDB(context);
-
 
                     //force add winAccName from ADFS subject claim 
                     if (context.Subject.HasClaim("Idp", _configuration["Settings:ADFSSchemeName"]))
@@ -77,6 +78,10 @@ namespace Synapse.STS
                         context.IssuedClaims.Add(new Claim("IPUId", email));
                     }
                     else context.IssuedClaims.Add(new Claim("IPUId", sub));
+
+
+                    AddRequetedClaimsFromDB(context);
+
 
                 }
             }
@@ -104,7 +109,7 @@ namespace Synapse.STS
                     context.IssuedClaims.Add(new Claim(_configuration["Settings:SynapseRolesClaimType"], item));
                 }
             }
-            
+
 
             //if idp = ADFS
             //access winAccName from ADFS subject claim then map the value to external providers user roles table to get role names
@@ -131,6 +136,32 @@ namespace Synapse.STS
 
 
             }
+            else if (context.IssuedClaims.Find(x => x.Type == "IPUId") != null)
+            {
+                //Add synapse role claims for other IDPs
+                //access IPUid claim then map the value to external providers user roles table to get role names
+
+                var winAccName = context.IssuedClaims.Find(x => x.Type == "IPUId").Value.ToLower();
+
+
+                List<string> rolesExternalIdp = _claimsContext.AspNetRoles.
+                                                Where(x => (_claimsContext.UserRolesExternalProviders.
+                                                    Where(u => u.ExternalSubjectId.ToLower() == winAccName.ToLower()).
+                                                        Select(r => r.RoleId)).Contains(x.Id)).Select(rn => rn.Name).ToList<string>();
+
+                if (rolesExternalIdp != null)
+                {
+                    foreach (var item in rolesExternalIdp)
+                    {
+                        Claim c = new Claim(_configuration["Settings:SynapseRolesClaimType"], item);
+                        if (context.IssuedClaims.Find(x => x.Type == _configuration["Settings:SynapseRolesClaimType"] && x.Value == item) == null)
+                            context.IssuedClaims.Add(c);
+                    }
+                }
+
+
+            }
+
         }
 
 

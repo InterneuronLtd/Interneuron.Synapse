@@ -1,0 +1,33 @@
+﻿@model SynapseStudioWeb.Models.CoreEntityModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="x_content">
+            <form asp-controller="EntityManager" asp-action="EntityManagerNewSave"
+                  data-ajax-failure="onFailed" data-ajax-success="onSuccess"
+                  data-ajax="true" data-ajax-method="POST">
+
+                <span class="section">New @ViewBag.Name Entity</span>
+
+                <label for="EntityName">*Please enter a name for the new entity</label>
+                <span class="text-warning float-right">(All non-alphanumeric characters willl be stripped out during validation)</span>
+                @Html.TextBoxFor(m => m.EntityName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EntityName)
+                <br />
+                <label for="EntityDescription">Enter a description for the new entity</label>
+                @Html.TextBoxFor(m => m.EntityDescription, new { @class = "form-control" })
+                <br />
+                <a href="../EntityManager/EntityManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/entitymanager.js"></script>
+
+

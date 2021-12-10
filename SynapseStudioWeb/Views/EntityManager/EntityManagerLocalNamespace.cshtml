@@ -1,0 +1,72 @@
+﻿@model SynapseStudioWeb.Models.LocalNamespaceModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Local Namespace</h4>
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;Local Namespace</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>New Namespace</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="EntityManager" asp-action="EntityManagerLocalNamespaceSave"
+                              data-ajax-failure="onLocalNamespaceFailed" data-ajax-success="onLocalNamespaceSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            <label for="LocalNamespaceName">*Please enter a name for the new local namespace</label>
+                            <span class="text-warning float-right">(All non-alphanumeric characters willl be stripped out during validation)</span>
+                            @Html.TextBoxFor(m => m.LocalNamespaceName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocalNamespaceName)
+                            <br />
+                            <label for="EntityDescription">Enter a description for the new local namespace</label>
+                            @Html.TextBoxFor(m => m.LocalNamespaceDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LocalNamespaceDescription)
+                            <br />
+                            <a href="../EntityManager/EntityManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="localNamespaceList">
+                        <table class="table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Local Namespace</th>
+                                     
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var m in Model.LocalNamespaceDto)
+                                {
+                                    <tr>
+                                        <td>@m.LocalNamespaceName</td>
+                                         
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/entitymanager.js"></script>

@@ -1,0 +1,79 @@
+﻿@model SynapseStudioWeb.Models.BoardModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Synapse Studio - Board</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bed"></i> Bed Boards (@Model.BedBoardDto.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-sm float-left" href="BedBoardDeviceList">Manage Device</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-sm float-right" href="BedBoardManagerNew">New Bed Board</a> 
+                    </div>
+                </div>
+                @*<hr />
+                    <h5>Bed Boards</h5>*@
+                @foreach (var m in Model.BedBoardDto)
+                {
+                    <div class="list-group-item">
+                        <span>@m.BedboardName</span>
+                        <a href=@("BedBoardManagerView?id=" + m.Bedboard_Id) style="float:right">View</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-map"></i> Locator Boards (@Model.LocatorBoardDto.Count)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-sm float-left" href="LocatorBoardDeviceList">Manage Device</a>
+                    </div>
+                    <div class="col-md-6">
+                        <a class="btn btn-primary btn-sm float-right" href="LocatorBoardManagerNew">New Locator Board</a>
+                    </div>
+                </div>
+                @*<hr />
+                    <h5>Locator Boards</h5>*@
+                @foreach (var m in Model.LocatorBoardDto)
+                {
+                    <div class="list-group-item">
+                        <span>@m.LocatorboardName</span>
+                        <a href=@("LocatorBoardManagerView?id=" + m.Locatorboard_Id) style="float:right">View</a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-street-view"></i> Inpatient Management Apps (0)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <a class="btn btn-primary btn-sm" href="#">New Inpatient Management App</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

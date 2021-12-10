@@ -1,0 +1,75 @@
+﻿@using SynapseStudioWeb.Models;
+
+@model WardBayViewModel
+
+@{
+    ViewData["Title"] = "WardBayList";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Ward Bay</h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-list"></i>&nbsp;Ward Bays</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        <span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 p-2">
+                        @using (Html.BeginForm("GetWardBaysForWard", "WardBay", FormMethod.Post))
+                        {
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.SelectedWardCode, new SelectList(Model.Wards, "wardcode", "warddisplay"), "Please select ward", new
+                               {
+                                   @class = "form-control",
+                                   onchange = "this.form.submit();",
+                               })
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn btn-sm btn-primary float-right" href="~/WardBay/AddWardBay">New Ward Bay</a>
+                        </div>
+                        }
+                    </div>
+                </div>
+                <p></p>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ward Code</th>
+                            <th>Ward Display</th>
+                            <th>Bay Code</th>
+                            <th>Bay Display</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var wardBay in Model.WardBays)
+                        {
+                            <tr>
+                                <td>@wardBay.wardcode</td>
+                                <td>@wardBay.warddisplay</td>
+                                <td>@wardBay.baycode</td>
+                                <td>@wardBay.baydisplay</td>
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href=@("Edit?id="+ wardBay.wardbay_id)>Edit</a>
+                                    <a class="btn btn-sm btn-danger" href=@("Delete?id=" + wardBay.wardbay_id) onclick="return confirm('Are you sure to remove this record?');">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,100 @@
+﻿@using SynapseStudioWeb.Models;
+@model SpecialtyModel;
+
+@{
+    ViewData["Title"] = "AddEditSpecialty";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model is null)
+        {
+            <h4>New Specialty</h4>
+        }
+        else
+        {
+            <h4>Edit Specialty</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="SaveSpecialty" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.specialty_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="specialtycode">
+                            Specialty Code <span class="required">*</span>
+                        </label>
+                        @if (Model is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="specialtycode" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.specialtycode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="specialtycode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="specialtytext">
+                            Specialty Text <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="specialtytext" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.specialtytext)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="statuscode">
+                            Status <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Active: @Html.RadioButtonFor(m => m.statuscode, "Active")&nbsp;&nbsp;
+                            Inactive: @Html.RadioButtonFor(m => m.statuscode, "Inactive")<br />
+                            @Html.ValidationMessageFor(m => m.statuscode)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="parentid">
+                            Parentid
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="parentid" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="localspecialtycode">
+                            Local Specialty Code
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="localspecialtycode" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="localspecialtytext">
+                            Local Specialty Text
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="localspecialtytext" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-5">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("SpecialtyList", "Specialty")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

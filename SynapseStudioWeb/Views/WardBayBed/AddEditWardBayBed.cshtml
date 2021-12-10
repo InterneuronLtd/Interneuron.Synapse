@@ -1,0 +1,227 @@
+﻿@using SynapseStudioWeb.Models;
+@model WardBayBedAddEditViewModel;
+
+@{
+    ViewData["Title"] = "AddEditWardBayBed";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        @if (Model.WardBayBed is null)
+        {
+            <h4>New Ward Bay Bed</h4>
+        }
+        else
+        {
+            <h4>Edit Ward Bay Bed</h4>
+        }
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_content">
+                <br />
+                <form asp-action="SaveWardBayBed" class="form-horizontal form-label-left" method="post">
+                    @Html.HiddenFor(m => m.WardBayBed.wardbaybed_id)
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="WardCode">
+                            Ward Code <span class="required">*</span>
+                        </label>
+                        @if (Model.WardBayBed is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.DropDownListFor(m => m.WardBayBed.wardcode, new SelectList(Model.Wards, "wardcode", "warddisplay"), "Please select ward code", new
+                               {
+                                   @class = "form-control"
+                               })
+                                @Html.ValidationMessageFor(m => m.WardBayBed.wardcode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBayBed.wardcode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    @if (Model.WardBayBed != null)
+                    {
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="warddisplay">
+                                Ward Display <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBayBed.warddisplay" class="form-control" readonly />
+                            </div>
+                        </div>
+                    }
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="baycode">
+                            Bay Code <span class="required">*</span>
+                        </label>
+                        @if (Model.WardBayBed is null)
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                @Html.DropDownListFor(m => m.WardBayBed.baycode, new SelectList(Model.WardBays, "baycode", "baydisplay"), "Please select bay code", new
+                                {
+                                    @class = "form-control"
+                                })
+                                @Html.ValidationMessageFor(m => m.WardBayBed.baycode)
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBayBed.baycode" class="form-control" readonly />
+                            </div>
+                        }
+                    </div>
+                    @if (Model.WardBayBed != null)
+                    {
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="warddisplay">
+                                Bay Display <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input asp-for="WardBayBed.baydisplay" class="form-control" readonly />
+                            </div>
+                        </div>
+                    }
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="bedcode">
+                            Bed Code <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            @if (Model.WardBayBed is null)
+                            {
+                                <input asp-for="WardBayBed.bedcode" class="form-control" />
+                                @Html.ValidationMessageFor(m => m.WardBayBed.bedcode)
+                            }
+                            else
+                            {
+                                <input asp-for="WardBayBed.bedcode" class="form-control" readonly />
+                            }
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="beddisplay">
+                            Bed Display <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.beddisplay" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.beddisplay)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="bedbaydisplay">
+                            Bed Bay Display <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.bedbaydisplay" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.bedbaydisplay)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="bedstatus">
+                            Bed Status <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Active: @Html.RadioButtonFor(m => m.WardBayBed.bedstatus, 1)&nbsp;&nbsp;
+                            Inactive: @Html.RadioButtonFor(m => m.WardBayBed.bedstatus, 0)<br />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.bedstatus)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="acceptmale">
+                            Accept Male <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Yes: @Html.RadioButtonFor(m => m.WardBayBed.acceptmale, 1)&nbsp;&nbsp;
+                            No: @Html.RadioButtonFor(m => m.WardBayBed.acceptmale, 0)<br />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.acceptmale)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="acceptfemale">
+                            Accept Female <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            Yes: @Html.RadioButtonFor(m => m.WardBayBed.acceptfemale, 1)&nbsp;&nbsp;
+                            No: @Html.RadioButtonFor(m => m.WardBayBed.acceptfemale, 0)<br />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.acceptfemale)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="acceptminimumage">
+                            Accept Min. Age <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.acceptminimumage" class="form-control" min="0" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.acceptminimumage)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="acceptmaximumage">
+                            Accept Max. Age <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.acceptmaximumage" class="form-control" min="0" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.acceptmaximumage)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="bedtype">
+                            Bed Type <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.bedtype" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.bedtype)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="bedsortstring">
+                            Bed Sort String <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 ">
+                            <input asp-for="WardBayBed.bedsortstring" class="form-control" />
+                            @Html.ValidationMessageFor(m => m.WardBayBed.bedsortstring)
+                        </div>
+                    </div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-5">
+                            <button class="btn btn-sm btn-primary" type="button" onclick="location.href='@Url.Action("WardBayBedList", "WardBayBed")'">Cancel</button>
+                            <button class="btn btn-sm btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#WardBayBed_wardcode").change(function () {
+
+        var url = '@Url.Content("~/")' + "WardBayBed/LoadWardBays";
+        var ddlsource = "#WardBayBed_wardcode";
+            
+        $.getJSON(url, { wardCode: $(ddlsource).val() }, function (data) {
+            var items = '';
+
+            $("#WardBayBed_baycode").empty();
+
+            items = '<option selected="selected" value="">Please select bay code</option>';
+
+            $.each(data, function (i, volume) {
+                items += "<option value='" + volume.baycode + "'>" + volume.baydisplay + "</option>";
+            });
+
+            $("#WardBayBed_baycode").html(items);
+        });
+        })
+    })
+</script>
+

@@ -1,0 +1,38 @@
+﻿@{
+    var DeriveId = (Func<string, string>)ViewData["DeriveId"];
+}
+<div id="@DeriveId("identificationCodeTmpl")" disabled style="display:none;">
+    <!--Add Identification Code Controls -->
+    <div class="identificationCode">
+        @Html.Hidden("AdditionalCodeDesc", null, new { @id = DeriveId("IdentificationCodeDesc-{0}"), @class = "form-control additional-code-desc" })
+        @Html.Hidden("Attr1", null, new { @id = DeriveId("IdentificationAttr1-{0}"), @class = "form-control attr1" })
+        @Html.Hidden("MetaJson", null, new { @id = DeriveId("IdentificationMetaJson-{0}"), @class = "form-control mata-json" })
+        @Html.Hidden("Source", null, new { @id = DeriveId("IdentificationSource-{0}"), @class = "form-control source" })
+        @Html.Hidden("CodeType", null, new { @id = DeriveId("IdentificationCodeType-{0}"), @class = "form-control code-type" })
+        <div class="form-group row">
+            <div class="card col-sm-9 ml-2 mb-0 p-0 bg-light" style="border: 1px dotted;">
+                <div class="card-header text-right bg-light p-0 m-0 border-0">
+                    <a class="fas fa-times-circle text-danger" style="font-size: 1.2rem;" href="#" onclick="removeIdentificationCode(this)"></a>
+                </div>
+                <div class="card-body mt-n2">
+                    <div class="col-sm-5">
+                        @Html.DropDownList("AdditionalCodeSystem", ViewBag.IndentificationCodeTypes as SelectList, new { @class = "form-control additional-code-system", @name = "IdentificationCodeSystem", @id = DeriveId("IdentificationCodeSystem-{0}") })
+                        @Html.ValidationMessage("AdditionalCodeSystem", new { @id = DeriveId("IdentificationCodeSystem-{0}") })
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="text" name="IdentificationCode" class="form-control additional-code-text" id="@DeriveId("IdentificationCode-{0}")" maxlength="50">
+                        @Html.ValidationMessage("IdentificationCode", new { @id = DeriveId("IdentificationCode-{0}") })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function removeIdentificationCode(item) {
+        let pnlItem = $(item).closest('.identificationCode');
+        $(pnlItem).remove();
+    }
+
+</script>

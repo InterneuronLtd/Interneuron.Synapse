@@ -1,0 +1,212 @@
+﻿@model SynapseStudioWeb.Models.BoardModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Board Manager</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-bed"></i>&nbsp;New Bed Board</h5>
+            </div>
+            <div class="card-body p-2">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="Board" asp-action="BedBoardManagerNewSave"
+                              data-ajax-failure="onBoardManagerFailed" data-ajax-success="onBoardManagerSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+
+                            <h4>General Details</h4>
+                            <label for="BedBoardName">* Enter a name for the bed board</label>
+                            @Html.TextBoxFor(m => m.BedBoardName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BedBoardName)
+                            <br />
+                            <label for="BedBoardDescription">Enter a description for the bed board</label>
+                            @Html.TextAreaFor(m => m.BedBoardDescription, new { @class = "form-control" })
+                            <br />
+                            <h4>Underlying Baseview</h4>
+                            <label for="BaseViewNamespaceId">Select Baseview Namespace</label>
+                            @Html.DropDownListFor(model => model.BaseViewNamespaceId, ViewBag.BaseviewNamespace as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewNamespaceId)
+                            <br />
+                            <label for="BaseViewId">Select Baseview</label>
+                            @Html.DropDownListFor(model => model.BaseViewId, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseViewId)
+                            <br />
+                            <label for="PersonIDField">Select PersonID field from Baseview</label>
+                            @Html.DropDownListFor(model => model.PersonIDField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.PersonIDField)
+
+                            <br />
+                            <label for="EncounterIDField">Select EncounterID field from Baseview</label>
+                            @Html.DropDownListFor(model => model.EncounterIDField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.EncounterIDField)
+
+                            <br />
+                            <label for="WardField">Select Ward Code field from Baseview</label>
+                            @Html.DropDownListFor(model => model.WardField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.WardField)
+
+                            <br />
+                            <label for="BedField">Select Bed Code field from Baseview</label>
+                            @Html.DropDownListFor(model => model.BedField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BedField)
+                            <br />
+                            <h4>Top Section</h4>
+                            <label for="TopSetting">Select Top Area Setting</label>
+                            @Html.DropDownListFor(model => model.TopSetting, ViewBag.AreaSetting as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.TopSetting)
+
+                            <br />
+                            <div id="fgTopField">
+                                <label for="TopField">Select Top Field</label>
+                                @Html.DropDownListFor(model => model.TopField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.TopField)
+                                <br />
+                            </div>
+
+
+                            <div id="fgTopLeftField">
+                                <label for="TopLeftField">Select Top Left Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.TopLeftField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.TopLeftField)
+                                <br />
+                            </div>
+
+
+                            <div id="fgTopRightField">
+                                <label for="TopRightField">Select Top Right Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.TopRightField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.TopRightField)
+                                <br />
+                            </div>
+
+                            <h4>Middle Settings</h4>
+                            <label for="MiddleSetting">Select Middle Area Setting</label>
+                            @Html.DropDownListFor(model => model.MiddleSetting, ViewBag.AreaSetting as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.MiddleSetting)
+                            <br />
+                            <div id="fgMiddleField">
+                                <label for="MiddleField">Middle Field</label>
+                                @Html.DropDownListFor(model => model.MiddleField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.MiddleField)
+
+                                <br />
+                            </div>
+
+                            <div id="fgMiddleLeftField">
+                                <label for="MiddleLeftField">Select Middle Left Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.MiddleLeftField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.MiddleLeftField)
+
+                                <br />
+                            </div>
+
+                            <div id="fgMiddleRightField">
+                                <label for="MiddleRightField">Select Middle Right Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.MiddleRightField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.MiddleRightField)
+
+                                <br />
+                            </div>
+
+                            <h4>Bottom Settings</h4>
+                            <label for="BottomSetting">Select Bottom Area Setting</label>
+                            @Html.DropDownListFor(model => model.BottomSetting, ViewBag.AreaSetting as SelectList, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BottomSetting)
+
+                            <br />
+                            <div id="fgBottomField">
+                                <label for="BottomField">Bottom Field</label>
+                                @Html.DropDownListFor(model => model.BottomField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.BottomField)
+
+                                <br />
+                            </div>
+
+                            <div id="fgBottomLeftField">
+                                <label for="BottomLeftField">Select Bottom Left Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.BottomLeftField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.BottomLeftField)
+
+                                <br />
+                            </div>
+
+                            <div id="fgBottomRightField">
+                                <label for="BottomRightField">Select Bottom Right Field from Baseview</label>
+                                @Html.DropDownListFor(model => model.BottomRightField, ViewBag.AttributeList as SelectList, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.BottomRightField)
+
+
+                                <br />
+                            </div>
+
+                            <a href="../Board/BoardManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/board.js"></script>
+<script>
+ 
+    $(document).ready(function () {
+        $("#fgTopField,#fgTopLeftField,#fgTopRightField,#fgMiddleField,#fgMiddleLeftField,#fgMiddleRightField,#fgBottomField,#fgBottomLeftField,#fgBottomRightField").hide();
+        // $("#TopField,#TopLeftField,#TopRightField,#MiddleField,MiddleLeftField,#MiddleRightField,#BottomField,#BottomLeftField,#BottomRightField")
+        $("#TopSetting").change(function () {
+            if ($(this).val() == "0") {
+                $("#fgTopField,#fgTopLeftField,#fgTopRightField").hide();
+            }
+            else if ($(this).val() == "1") {
+                $("#fgTopField").show();
+                $("#fgTopLeftField,#fgTopRightField").hide();
+            }
+            else if ($(this).val() == "2") {
+                $("#fgTopField").hide();
+                $("#fgTopLeftField,#fgTopRightField").show();
+            }
+        });
+        $("#MiddleSetting").change(function () {
+            if ($(this).val() == "0") {
+                $("#fgMiddleField,#fgMiddleLeftField,#fgMiddleRightField").hide();
+            }
+            else if ($(this).val() == "1") {
+                $("#fgMiddleField").show();
+                $("#fgMiddleLeftField,#fgMiddleRightField").hide();
+            }
+            else if ($(this).val() == "2") {
+                $("#fgMiddleField").hide();
+                $("#fgMiddleLeftField,#fgMiddleRightField").show();
+            }
+        });
+        $("#BottomSetting").change(function () {
+            if ($(this).val() == "0") {
+                $("#fgBottomField,#fgBottomLeftField,#fgBottomRightField").hide();
+            }
+            else if ($(this).val() == "1") {
+                $("#fgBottomField").show();
+                $("#fgBottomLeftField,#fgBottomRightField").hide();
+            }
+            else if ($(this).val() == "2") {
+                $("#fgBottomField").hide();
+                $("#fgBottomLeftField,#fgBottomRightField").show();
+            }
+        });
+    });
+</script>
+
+
+
+

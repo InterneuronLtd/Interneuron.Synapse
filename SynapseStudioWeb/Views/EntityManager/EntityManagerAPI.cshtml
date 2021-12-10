@@ -1,0 +1,730 @@
+﻿@model SynapseStudioWeb.Models.APIModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Entity APIs</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Relations</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("EntityManagerModel?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Models</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;APIs</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h4>
+                            @ViewBag.Summary
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white"><i class="fa fa-address-card"></i>&nbsp;Get Object By ID</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    GetObject
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    GET
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Returns a single JSON object by filtering the Key Attribute of entity with the supplied ID parameter.<br />
+                                    Response can be formatted using optional parameters
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.GetObject">@Model.GetObject</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">id</td>
+                                            <td style="width: 40%;">&id=00000000-0000-0000-0000-000000000000</td>
+                                            <td style="width: 40%;">Key Attribute for the entity (@Model.KeyAttribute)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm table-bordered  table-striped">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">returnsystemattributes</td>
+                                            <td style="width: 40%;">&returnsystemattributes=1</td>
+                                            <td style="width: 40%;">
+                                                Return System Attributes along with response.<br />
+                                                returnsystemattributes = 1 returns all system atributes
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white"><i class="fa fa-list"></i>&nbsp;Get List</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    GetList
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    GET
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Returns a JSON list of the entity.<br />
+                                    Can be filtered and the response formatted using optional parameters.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.GetList">@Model.GetList</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance </td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm table-bordered  table-striped">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">returnsystemattributes</td>
+                                            <td style="width: 40%;">&returnsystemattributes=1</td>
+                                            <td style="width: 40%;">
+                                                Return System Attributes along with response.<br />
+                                                returnsystemattributes = 1 returns all system atributes
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">orderby</td>
+                                            <td style="width: 40%;">&orderby=_sequenceid ASC</td>
+                                            <td style="width: 40%;">Order by clause</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">limit</td>
+                                            <td style="width: 40%;">&limit=100</td>
+                                            <td style="width: 40%;">Limit the returned resultset to the number of rows specified</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">offset</td>
+                                            <td style="width: 40%;">?offset=10</td>
+                                            <td style="width: 40%;">
+                                                Exclude the first number of rows specified from the result set<br />
+                                                * Only useful when order by specified<br />
+                                                ** Useful for paging
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white"><i class="fa fa-list-ol"></i>&nbsp;Get List by Attribute Value</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    GetListByAttribute
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    GET
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Returns a JSON list of the entity using the value of a supplied attribute.<br />
+                                    Can be filtered and the response formatted using optional parameters.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.GetListByAttribute">@Model.GetListByAttribute</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseattributename</td>
+                                            <td style="width: 40%;">&synapseattributename=person_id</td>
+                                            <td style="width: 40%;">Attribute name that you want to filter the list on</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">attributevalue</td>
+                                            <td style="width: 40%;">&attributevalue=123</td>
+                                            <td style="width: 40%;">Value that you want to filter the supplied attribute against</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm table-bordered  table-striped">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">returnsystemattributes</td>
+                                            <td style="width: 40%;">&returnsystemattributes=1</td>
+                                            <td style="width: 40%;">
+                                                Return System Attributes along with response.<br />
+                                                returnsystemattributes = 1 returns all system atributes
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">orderby</td>
+                                            <td style="width: 40%;">&orderby=_sequenceid ASC</td>
+                                            <td style="width: 40%;">Order by clause</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">limit</td>
+                                            <td style="width: 40%;">&limit=100</td>
+                                            <td style="width: 40%;">Limit the returned resultset to the number of rows specified</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">offset</td>
+                                            <td style="width: 40%;">?offset=10</td>
+                                            <td style="width: 40%;">
+                                                Exclude the first number of rows specified from the result set<br />
+                                                * Only useful when order by specified<br />
+                                                ** Useful for paging
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-warning">
+                <h5 class="text-white"><i class="fa fa-plus"></i>&nbsp;Post Object</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    PostObject
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    POST
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Post an object to insert a new record or update an existing record. <br />
+                                    To update an existing record, ensure that the Key Attribute value (@Model.KeyAttribute) matches a key attribute value in the entity store. <br />
+                                    To insert a new record pass a new value for the Key Attribute value (@Model.KeyAttribute).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.PostObject">@Model.PostObject</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    * There are no optional parameters for this method
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Example Value</td>
+                                <td style="width: 80%;">
+                                    <div id="divPostSample">@Model.SamplePostJson</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-danger">
+                <h5 class="text-white"><i class="fa fa-trash"></i>&nbsp;Delete Object</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    DeleteObject
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    DELETE
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Soft Deletes the record based on the supplied Key Attribute value (@Model.KeyAttribute)<br />
+                                    All previous versions of the record in the entity store will be marked with _recordstatus = 2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.DeleteObject">@Model.DeleteObject</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">id</td>
+                                            <td style="width: 40%;">&id=00000000-0000-0000-0000-000000000000</td>
+                                            <td style="width: 40%;">Key Attribute for the entity (@Model.KeyAttribute)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    * There are no optional parameters for this method
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-danger">
+                <h5 class="text-white"><i class="fa fa-trash"></i>&nbsp;Delete Objects By Attribute</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    DeleteObjectByAttribute
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    DELETE
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Soft Deletes the record based on the supplied Attribute and Attribute value <br />
+                                    All previous versions of the record in the entity store will be marked with _recordstatus = 2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                    <a href="@Model.DeleteObjectByAttribute">@Model.DeleteObjectByAttribute</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseattributename</td>
+                                            <td style="width: 40%;">&synapseattributename=person_id</td>
+                                            <td style="width: 40%;">Attribute name that you want to filter the list on</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">attributevalue</td>
+                                            <td style="width: 40%;">&attributevalue=123</td>
+                                            <td style="width: 40%;">Value that you want to filter the supplied attribute against</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    * There are no optional parameters for this method
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-success">
+                <h5 class="text-white"><i class="fa fa-history"></i>&nbsp;Get Object History</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table-sm">
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method
+                                </td>
+                                <td style="width: 80%;">
+                                    GetObjectHistory
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    HTTP Verb
+                                </td>
+                                <td style="width: 80%;">
+                                    GET
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    Method Description
+                                </td>
+                                <td style="width: 80%;">
+                                    Gets a JSON list of objects based on the supplied Key Attribute value (@Model.KeyAttribute)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">
+                                    URL
+                                </td>
+                                <td style="width: 80%;">
+                                   <a href="@Model.GetObjectHistory">@Model.GetObjectHistory</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Required Parameters</td>
+                                <td style="width: 80%;">
+                                    <table class="table-sm">
+                                        <tr>
+                                            <td style="width: 20%;"><strong>Parameter</strong></td>
+                                            <td style="width: 40%;"><strong>Example Usuage</strong></td>
+                                            <td style="width: 40%;"><strong>Description</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapsenamespace</td>
+                                            <td style="width: 40%;">?synapsenamespace=@Model.Namespance</td>
+                                            <td style="width: 40%;">Namespace of the entity</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">synapseentityname</td>
+                                            <td style="width: 40%;">&synapseentityname=@Model.EntityName</td>
+                                            <td style="width: 40%;">Entity Name</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20%;">id</td>
+                                            <td style="width: 40%;">&id=00000000-0000-0000-0000-000000000000</td>
+                                            <td style="width: 40%;">Key Attribute for the entity ()</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 20%;">Optional Parameters</td>
+                                <td style="width: 80%;">
+                                    * There are no optional parameters for this method
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,114 @@
+﻿@model SynapseStudioWeb.Models.DetailModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Entity Detail</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <a href='@("EntityManagerView?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Details</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAttribute?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Attributes</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerRelation?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Relations</a>
+    </div>
+    <div class="col-md-2">
+        <a href='@("EntityManagerAPI?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">APIs</a>
+    </div>
+    <div class="col-md-3">
+        <a href='@("EntityManagerModel?id=" + ViewBag.Id)' class="btn btn-primary btn-sm block">Models</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-cog"></i>&nbsp;Details</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>@ViewBag.Summary</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+
+                            <tbody>
+
+                                @foreach (var m in Model.DetailDto)
+                                {
+                                    <tr>
+                                        <td>@m.EntityDetail</td>
+                                        <td>@m.EntityDescription</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model.BaseViewDto.Count > 0)
+                        {
+                            <h4 class="bg-red text-white p-4">
+                                You are unable to delete this entity as it has @Model.BaseViewDto.Count baseviews that are dependant on it.
+                            </h4>
+                        }
+                        else
+                        {
+                            <input type="button"   class="btn btn-primary btn-sm" id="btn-enable-drop" value="Enable Delete" />
+                            <a href="~/EntityManager/EntityManagerDelete" style="display:none" class="btn btn-sm btn-danger" id="btn-delete-entity">Delete Entity</a>
+                        }
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>
+                            Baseviews that are dependant on this entity (@Model.BaseViewDto.Count)
+                        </h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table" width="100%">
+                            <thead>
+                                <tr><th>Baseview<th></tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var m in Model.BaseViewDto)
+                                {
+                                    <tr>
+                                        <td>@m.dependent_view</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/entitymanager.js"></script>

@@ -1,0 +1,70 @@
+﻿@model SynapseStudioWeb.Models.BaseviewNamespaceModel
+@{
+    ViewData["Title"] = "Synapse Studio";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Baseview Namespaces</h4>
+    </div>
+</div> 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="fa fa-database"></i>&nbsp;Baseview Namespaces</h5>
+            </div>
+            <div class="card-body p-2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>New Namespace</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form asp-controller="Baseview" asp-action="BaseviewNamespaceSave"
+                              data-ajax-failure="onBaseviewNamespaceFailed" data-ajax-success="onBaseviewNamespaceSuccess"
+                              data-ajax="true" data-ajax-method="POST">
+                            <label for="BaseviewNamespace">*Please enter a name for the new baseview namespace</label>
+                            @Html.TextBoxFor(m => m.BaseviewNamespace, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseviewNamespace)
+                            <br />
+                            <label for="BaseviewNamespaceDescription">Enter a description for the new baseview namespace</label>
+                            @Html.TextBoxFor(m => m.BaseviewNamespaceDescription, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.BaseviewNamespaceDescription)
+                            <br />
+                            <a href="../BaseView/BaseViewManagerList" class="btn btn-sm btn-success pull-left">Back</a>
+                            <input type="submit" class="btn btn-sm btn-primary pull-right" id="btn-submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12" id="BaseviewNamespaceList">
+                        <table class="table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Baseview Namespace</th>
+                                     
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var m in Model.BaseviewNamespaceDto)
+                                {
+                                    <tr>
+                                        <td>@m.BaseviewNamespace</td>
+                                         
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/basview.js"></script>

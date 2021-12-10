@@ -1,6 +1,6 @@
 ﻿//Interneuron Synapse
 
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2021  Interneuron CIC
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -17,7 +17,11 @@
 //You should have received a copy of the GNU General Public License
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
+
+﻿
+
 using Newtonsoft.Json;
+using PuppeteerSharp.Media;
 
 namespace SynapseDocumentsAPI.Model
 {
@@ -34,5 +38,11 @@ namespace SynapseDocumentsAPI.Model
 
         [JsonProperty("pdfCssUrl")]
         public string PdfCssUrl { get; set; }
+
+        [JsonProperty("pdfFooterHTML")]
+        public string PdfFooterHTML { get; set; }
+
+        [JsonProperty("documentMargin")]
+        public MarginOptions DocumentMargin { get; set; }
     }
 }

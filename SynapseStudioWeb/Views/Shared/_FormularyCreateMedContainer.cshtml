@@ -1,0 +1,132 @@
+﻿@{
+    var DeriveId = new Func<string, string>((id) => $"{Model.ControlIdentifier}_{id}");
+
+    var baseURLPath = string.IsNullOrEmpty(Context.Request.PathBase) ? $"{ Context.Request.Scheme }://{Context.Request.Host}" : $"{ Context.Request.Scheme }://{Context.Request.Host}{Context.Request.PathBase}";
+
+    var DeriveAbsUrl = new Func<string, string>((actionPath) => string.IsNullOrEmpty(actionPath) ? "" : $"{ baseURLPath}/{actionPath.TrimStart('/')}");
+}
+<div id="customMedModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="customMedModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="col-12" style="display:flex;flex-direction:column; margin-bottom:-10px;">
+                    <div style="display:flex;flex-direction:row;">
+                        <h5 class="modal-title" id="customMedication">Custom Medication</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div style="display:flex;flex-direction:row;" class="justify-content-end">
+                        <div class="col-6">
+                            <input type="text" class="form-control form-control-sm studio-autocomplete" data-existingdata="[]" data-isdisabled="false" data-singleselect="true" name="cloneexisting" id="acCloneExisting" data-query-url="@DeriveAbsUrl("/Formulary/SearchAMPByName")">
+                        </div>
+                        <div>
+                            <button class="btn btn-primary text-left" id="btnCloneExisting" type="button">
+                                <i class="fas fa-copy"></i> Clone AMP
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body">
+                <form id="customMedForm">
+                    <div id="pnlCustomMedContainer">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSaveCreateMed" disabled>Save</button>
+                <button id="btnSaveCreateMedDisabled" class="btn btn-primary" style="display:none;" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Saving...
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="~/lib/token-input-1.6.0/src/jquery.tokeninput.js"></script>
+<script type="text/javascript" src="~/js/studio.autocomplete.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>
+
+<script type="text/javascript">
+
+    function loadTemplate(args) {
+
+        let $container = $('#pnlCustomMedContainer');
+        $container.show();
+        $container.html('');
+        $('#pnlUpdateProgress').show();
+        ajaxLoad('/Formulary/GetCustomMedTemplatePartial', args, $container, () => { $('#pnlUpdateProgress').hide(); }, () => { $('#pnlUpdateProgress').hide(); });
+    }
+
+    function canSaveCallbackFn(canSave) {
+        $('#btnSaveCreateMed').attr('disabled', !canSave);
+    }
+
+    $(document).ready(function () {
+
+        $('#customMedModal').modal('show');
+
+        let cloneAutoCompleteCntrl = new studio.AutoComplete(`#acCloneExisting`);
+        cloneAutoCompleteCntrl.init();
+
+        //cloneAutoCompleteCntrl.onAdd = (addedItem) => {
+        //    console.log(addedItem);
+        //    loadTemplate({ 'formularyVersionId': addedItem.id });
+        //};
+
+        loadTemplate(null);
+
+
+        $('#btnCloneExisting').click(function () {
+            let selectedData = $(`#acCloneExisting`).data('selected');
+            if (selectedData && selectedData.length > 0)
+                loadTemplate({ 'formularyVersionId': selectedData[0].id });
+        });
+
+        $('#btnSaveCreateMed').click(function () {
+
+            let formularySaveObj = new studio.FormularySave('#customMedForm', '#Create_New_Custom_Medication');
+            formularySaveObj.create(
+                () => {
+                    $('#btnSaveCreateMed').hide();
+                    $('#btnSaveCreateMedDisabled').show();
+                    $('#pnlUpdateProgress').show();
+                },
+                (data) => {
+                    if (data != null) {
+                        $('#pnlCustomMedContainer').html(data);
+                        $('#btnSaveCreateMed').show();
+                        $('#btnSaveCreateMedDisabled').hide();
+                        $('#pnlUpdateProgress').hide();
+                    }
+                    else {
+                        $('#pnlCustomMedContainer').html('');
+                        $('#btnSaveCreateMed').show();
+                        $('#btnUpdateCustomMedDisabled').hide();
+                        $('#pnlUpdateProgress').hide();
+                        $('#customMedModal').modal('hide');
+
+                        callSearchFormularies();
+                    }
+                },
+                (err) => {
+                    console.error(err);
+                    $('#pnlCustomMedContainer').html('');
+                    $('#btnSaveCreateMed').show();
+                    $('#btnSaveCreateMedDisabled').hide();
+                    $('#pnlUpdateProgress').hide();
+                });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $('#customMedModal').keypress((event) => {
+        if (event.keyCode == 13) {
+            $('#btnCloneExisting').click();
+        }
+    });
+    $('#customMedModal').on('hidden.bs.modal', function (e) {
+        $('#pnlCustomMedContainer').html('');
+    })
+</script>
