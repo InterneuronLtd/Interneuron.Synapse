@@ -1,0 +1,167 @@
+update local_formulary.lookup_common
+set "desc" = 'Ready for Review'
+--select * from local_formulary.lookup_common
+where cd = '002' and "type" = 'RecordStatus'
+
+update local_formulary.lookup_common
+set "desc" = 'Percentage Oxygen Saturation'
+--select * from local_formulary.lookup_common
+where cd = 'o2' and "type" = 'TitrationType'
+
+
+update local_formulary.formulary_header
+set rec_status_code = '004'
+where formulary_version_id in (
+select formulary_version_id from local_formulary.formulary_detail
+where current_licensing_authority_cd = '2'
+)
+
+
+select parent_code into table parentvmpcodes from local_formulary.formulary_header
+where code in (
+	select code from local_formulary.excelimport where "level" = 'AMP'
+) and is_latest = true and product_type = 'AMP'
+
+
+update local_formulary.formulary_detail
+set prescribable = false 
+where formulary_version_id in (
+select formulary_version_id from local_formulary.formulary_header 
+where code in (
+select distinct parent_code from parentvmpcodes
+where parent_code not in (
+	select code from local_formulary.excelimport
+	where code in (
+		select distinct parent_code from parentvmpcodes
+	) and level = 'VMP'
+)
+) and is_latest = true and product_type = 'VMP'
+)
+
+
+drop table parentvmpcodes
+
+
+update local_formulary.formulary_detail
+set is_modified_release = true
+where formulary_version_id in (
+	select formulary_version_id from local_formulary.formulary_header fh 
+	where parent_code in (
+		SELECT code
+		FROM local_formulary.formulary_header
+		where product_type = 'VMP' and is_latest = true
+		and name ilike '%modified-release%'
+	) and is_latest = true and product_type = 'AMP'
+)
+
+
+update local_formulary.formulary_detail
+set is_gastro_resistant = true
+where formulary_version_id in (
+	select formulary_version_id from local_formulary.formulary_header fh 
+	where parent_code in (
+		SELECT code
+		FROM local_formulary.formulary_header
+		where product_type = 'VMP' and is_latest = true
+		and name ilike '%gastro-resistant%'
+	) and is_latest = true and product_type = 'AMP'
+)
+
+
+update local_formulary.formulary_detail 
+set rounding_factor_cd = '001'
+where formulary_version_id in (
+select formulary_version_id from local_formulary.formulary_header fh 
+where product_type = 'AMP' and is_latest = true
+) and dose_form_cd = '1' and form_cd = '385055001' and unit_dose_form_units = '428673006'
+
+
+
+update local_formulary.formulary_detail fd
+set is_custom_controlled_drug = case when controlled_drug_category_cd = '0' or controlled_drug_category_cd is null or controlled_drug_category_cd = '' then false else true end
+from local_formulary.formulary_header as fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.product_type = 'AMP' and fh.is_latest = true
+
+
+update local_formulary.formulary_detail fd
+set critical_drug = '1'
+from local_formulary.formulary_header fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.parent_code in (
+select code from local_formulary.formulary_header
+where parent_code in (select code from local_formulary.excelimport
+where "level" = 'VTM' and critical_drug = 'Yes') and product_type = 'VMP' and is_latest = true
+) and fh.product_type = 'AMP' and fh.is_latest = true
+
+
+update local_formulary.formulary_detail fd
+set is_indication_mandatory = true
+from local_formulary.formulary_header fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.parent_code in (
+select code from local_formulary.formulary_header
+where parent_code in (select code from local_formulary.excelimport
+where "level" = 'VTM' and indication_mandatory = 'Yes') and product_type = 'VMP' and is_latest = true
+) and fh.product_type = 'AMP' and fh.is_latest = true
+
+
+CREATE TEMPORARY TABLE temp_vtms_for_critical_drug(vtmcode varchar UNIQUE);
+CREATE TEMPORARY TABLE temp_vtms_for_indication_mandatory(vtmcode varchar UNIQUE);
+
+insert into temp_vtms_for_critical_drug (vtmcode)
+select distinct parent_code from local_formulary.formulary_header
+--Start VMP
+where code in (select distinct parent_code from local_formulary.formulary_header
+--Start AMP
+where code in (select Code from local_formulary.excelimport where critical_drug = 'Yes' and "level" = 'AMP') and is_latest = true and product_type = 'AMP' and parent_code is not null)
+--End AMP
+and is_latest = true and product_type = 'VMP' and parent_code is not null
+--End VMP
+union 
+select distinct parent_code from local_formulary.formulary_header
+--Start VMP
+where code in (select Code from local_formulary.excelimport where critical_drug = 'Yes' and "level" = 'VMP') and is_latest = true and product_type = 'VMP' and parent_code is not null
+--End VMP
+
+
+insert into temp_vtms_for_indication_mandatory (vtmcode)
+select distinct parent_code from local_formulary.formulary_header
+--Start VMP
+where code in (select distinct parent_code from local_formulary.formulary_header
+--Start AMP
+where code in (select Code from local_formulary.excelimport where indication_mandatory = 'Yes' and "level" = 'AMP') and is_latest = true and product_type = 'AMP' and parent_code is not null)
+--End AMP
+and is_latest = true and product_type = 'VMP' and parent_code is not null
+--End VMP
+union 
+select distinct parent_code from local_formulary.formulary_header
+--Start VMP
+where code in (select Code from local_formulary.excelimport where indication_mandatory = 'Yes' and "level" = 'VMP') and is_latest = true and product_type = 'VMP' and parent_code is not null
+--End VMP
+
+
+update local_formulary.formulary_detail fd
+set critical_drug = '1'
+from local_formulary.formulary_header fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.parent_code in (
+select code from local_formulary.formulary_header
+where parent_code in (select vtmcode from temp_vtms_for_critical_drug) and product_type = 'VMP' and is_latest = true
+) and fh.product_type = 'AMP' and fh.is_latest = true
+
+
+
+update local_formulary.formulary_detail fd
+set is_indication_mandatory = true
+from local_formulary.formulary_header fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.parent_code in (
+select code from local_formulary.formulary_header
+where parent_code in (select vtmcode from temp_vtms_for_indication_mandatory) and product_type = 'VMP' and is_latest = true
+) and fh.product_type = 'AMP' and fh.is_latest = true
+
+
+DROP TABLE temp_vtms_for_critical_drug;
+DROP TABLE temp_vtms_for_indication_mandatory;
+
+
+update local_formulary.formulary_detail fd
+set is_indication_mandatory = case when controlled_drug_category_cd = '0' or controlled_drug_category_cd is null or controlled_drug_category_cd = '' then false else true end
+from local_formulary.formulary_header as fh
+where fd.formulary_version_id = fh.formulary_version_id and fh.product_type = 'AMP' and fh.is_latest = true

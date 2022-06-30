@@ -1,0 +1,180 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using Interneuron.Terminology.Model.Search;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Queries
+//{
+//    public class RuleBoundVMPFormularyBuilder : RuleBoundBaseFormularyBuilder
+//    {
+//        private List<FormularyHeader> _childFormularies;
+
+//        public RuleBoundVMPFormularyBuilder(IServiceProvider serviceProvider) : base(serviceProvider)
+//        {
+//        }
+//        public override async Task CreateBase(FormularyHeader formularyDAO)
+//        {
+//            await base.CreateBase(formularyDAO);
+
+//            var repo = this._provider.GetService(typeof(IFormularyRepository<FormularyBasicSearchResultModel>)) as IFormularyRepository<FormularyBasicSearchResultModel>;
+
+//            var nodes = await repo.GetFormularyDescendentForCodes(new string[] { _formularyDAO.Code });
+
+//            if (nodes.IsCollectionValid())
+//            {
+//                var childIds = nodes.Where(rec => string.Compare(rec.ProductType, "AMP", true) == 0)?.Select(rec => rec.FormularyVersionId)?.ToList();
+
+//                if (childIds.IsCollectionValid())
+//                {
+//                    var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//                    _childFormularies = formularyRepo.GetFormularyListForIds(childIds)?.ToList();
+//                }
+//            }
+//        }
+
+//        public override void CreateAdditionalCodes()
+//        {
+//            const string INCONSISTENT_CLASSIFICATION_CODES = "Classification codes of following child AMPs are not same as VMP";
+//            base.CreateAdditionalCodes();
+
+//            var invalidAdditionalCodes = ValidateAdditionalCodes();
+
+//            if (invalidAdditionalCodes.IsCollectionValid())
+//            {
+//                _formularyDTO.ValidationResult = new Validators.FormularyRuleboundQueryValidator();
+//                _formularyDTO.ValidationResult.StatusCode = 4;// TerminologyConstants.STATUS_FAIL;
+
+//                var classificationTypeError = INCONSISTENT_CLASSIFICATION_CODES;
+
+//                invalidAdditionalCodes.Each(rec =>
+//                {
+//                    classificationTypeError = $"{classificationTypeError} {rec} ";
+//                });
+//            }
+//        }
+
+//        public override void CreateRouteDetails()
+//        {
+//            //Convert routes of current record from DAO to DTO
+
+//            //No Need to consider the routes at VMP level - and hence commented below line
+//            //base.CreateRouteDetails();
+
+//            //Routes associated to the child AMPs are only aggregated and considered
+//            if (_childFormularies.IsCollectionValid())
+//            {
+//                _formularyDTO.FormularyRouteDetails = _formularyDTO.FormularyRouteDetails ?? new List<FormularyRouteDetailDTO>();
+
+//                foreach (FormularyHeader childFormulary in _childFormularies)
+//                {
+//                    if (childFormulary.FormularyRouteDetail.IsCollectionValid())
+//                    {
+//                        _formularyDTO.FormularyRouteDetails.AddRange(_mapper.Map<List<FormularyRouteDetailDTO>>(childFormulary.FormularyRouteDetail));
+//                    }
+//                }
+
+//                _formularyDTO.FormularyRouteDetails = _formularyDTO.FormularyRouteDetails?.Distinct(rec => rec.RouteCd).ToList();
+//            }
+//        }
+
+//        private List<string> ValidateAdditionalCodes()
+//        {
+//            var invalidAdditionalCodes = new List<string>();
+
+//            if (!_childFormularies.IsCollectionValid() || !_formularyDAO.FormularyAdditionalCode.IsCollectionValid()) return invalidAdditionalCodes;
+
+//            //validate whether all AMPs have same classification codes as the parent VMP
+
+//            var groupedAdditionalCodesInAMPs = GetClassificationGroupedAdditionalCodeInAMPs();
+
+//            var groupedAdditionalCodes = GetClassificationGroupedAdditionalCode();
+
+//            if (!groupedAdditionalCodesInAMPs.IsCollectionValid() || !groupedAdditionalCodes.IsCollectionValid()) return invalidAdditionalCodes;
+
+//            //The codes in child should be there in current VMP also
+//            groupedAdditionalCodesInAMPs.Each(ampRec =>
+//            {
+//                if (!groupedAdditionalCodes.ContainsKey(ampRec.Key))
+//                {
+//                    var codes = ampRec.Value.Select(rec => $"{ampRec.Key}: {rec.Key}").ToList();
+//                    if (codes.IsCollectionValid()) invalidAdditionalCodes.AddRange(codes);
+//                }
+//                else
+//                {
+//                    var vmpCodes = groupedAdditionalCodes[ampRec.Key];
+//                    var codes = ampRec.Value.Where(rec => !vmpCodes.ContainsKey(rec.Key))?.Select(rec => $"{ampRec.Key}: {rec.Key}").ToList();
+//                    if (codes.IsCollectionValid()) invalidAdditionalCodes.AddRange(codes);
+//                }
+//            });
+//            return invalidAdditionalCodes;
+//        }
+
+//        private Dictionary<string, Dictionary<string, FormularyAdditionalCode>> GetClassificationGroupedAdditionalCode()
+//        {
+//            if (!_formularyDAO.FormularyAdditionalCode.IsCollectionValid()) return null;
+
+//            var codeSystemLkp = new Dictionary<string, Dictionary<string, FormularyAdditionalCode>>();
+
+//            var classificatonCodes = _formularyDAO.FormularyAdditionalCode.Where(rec => string.Compare(rec.CodeType, TerminologyConstants.CODE_SYSTEM_CLASSIFICATION_TYPE, true) == 0).ToList();
+
+//            if (!classificatonCodes.IsCollectionValid()) return null;
+
+//            classificatonCodes.Each(rec =>
+//            {
+//                if (codeSystemLkp.ContainsKey(rec.AdditionalCodeSystem))
+//                {
+//                    if (!codeSystemLkp[rec.AdditionalCodeSystem].ContainsKey(rec.AdditionalCode))
+//                    {
+//                        codeSystemLkp[rec.AdditionalCodeSystem].Add(rec.AdditionalCode, rec);
+//                    }
+//                }
+//                else
+//                {
+//                    codeSystemLkp[rec.AdditionalCodeSystem] = new Dictionary<string, FormularyAdditionalCode> { { rec.AdditionalCode, rec } };
+//                }
+//            });
+
+//            return codeSystemLkp;
+//        }
+
+//        private Dictionary<string, Dictionary<string, FormularyAdditionalCode>> GetClassificationGroupedAdditionalCodeInAMPs()
+//        {
+//            var codeSystemLkp = new Dictionary<string, Dictionary<string, FormularyAdditionalCode>>();
+
+//            foreach (var childFormulary in _childFormularies)
+//            {
+//                if (!childFormulary.FormularyAdditionalCode.IsCollectionValid()) continue;
+
+//                var classificationTypeCodes = childFormulary.FormularyAdditionalCode
+//                    .Where(rec => string.Compare(rec.CodeType, TerminologyConstants.CODE_SYSTEM_CLASSIFICATION_TYPE, true) == 0)?
+//                    .Distinct()?.ToList();
+
+//                //Check whether each type has only one record
+//                if (!classificationTypeCodes.IsCollectionValid()) continue;
+
+//                classificationTypeCodes.Each(rec =>
+//                {
+//                    if (codeSystemLkp.ContainsKey(rec.AdditionalCodeSystem))
+//                    {
+//                        if (!codeSystemLkp[rec.AdditionalCodeSystem].ContainsKey(rec.AdditionalCode))
+//                        {
+//                            codeSystemLkp[rec.AdditionalCodeSystem].Add(rec.AdditionalCode, rec);
+//                        }
+//                    }
+//                    else
+//                    {
+//                        codeSystemLkp[rec.AdditionalCodeSystem] = new Dictionary<string, FormularyAdditionalCode> { { rec.AdditionalCode, rec } };
+//                    }
+//                });
+//            }
+
+//            return codeSystemLkp;
+//        }
+//    }
+//}

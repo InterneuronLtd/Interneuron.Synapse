@@ -37,37 +37,37 @@
         "show" : true,
         "field" : "CHECK",
         "name" : "ON_STATCATCHER_FLAG",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
         "field" : "CHECK",
         "name" : "ON_LOGCATCHER_FLAG",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
         "field" : "CHECK",
         "name" : "ON_METERCATCHER_FLAG",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
         "field" : "CHECK",
         "name" : "ON_CONSOLE_FLAG",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
         "field" : "CHECK",
         "name" : "ON_FILES_FLAG",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
         "field" : "DIRECTORY",
         "name" : "FILE_PATH",
-        "value" : "\"C:/MMCJobsLogs\"",
+        "value" : "\"C:/TalendStudio/workspace/.metadata\"",
         "contextMode" : false
       }, {
         "show" : true,
@@ -180,7 +180,7 @@
         "show" : true,
         "field" : "PASSWORD",
         "name" : "PASS",
-        "value" : "enc:system.encryption.key.v1:EL1kloEC4un0jMk4qLcEwiu0wdjF8+bLRzyy1gMG",
+        "value" : "enc:system.encryption.key.v1:nh2GWLCxB8ktE1SYANHFbeVZW4dgEUc3JQFVAdZl",
         "contextMode" : false
       }, {
         "show" : true,
@@ -228,7 +228,7 @@
         "show" : true,
         "field" : "CHECK",
         "name" : "CATCH_REALTIME_STATS",
-        "value" : "true",
+        "value" : "false",
         "contextMode" : false
       }, {
         "show" : true,
@@ -388,7 +388,7 @@
         "show" : true,
         "field" : "PASSWORD",
         "name" : "PASS_IMPLICIT_CONTEXT",
-        "value" : "enc:system.encryption.key.v1:r7djbwvo+ICSSmCqCxFujo8zI0TA6tJpDwqOBD/a",
+        "value" : "enc:system.encryption.key.v1:b+heIrZZCCwfpGy2SWxBAxZEwLaxaX1fQjTgMxmW",
         "contextMode" : false
       }, {
         "show" : true,

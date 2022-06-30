@@ -9,9 +9,15 @@
 
 <div class="page-header logged-out">
     <h1>
-        Logout
-        <small>You are now logged out</small>
+        <img class="icon" src="~/InterneuronIcon.png" height="35">
+        Synapse Identity Server
+        @*<small>(build {version})</small>*@
     </h1>
+
+    <br />
+    <br />
+
+    <h2>You are now logged out</h2>
 
     @if (Model.PostLogoutRedirectUri != null)
     {

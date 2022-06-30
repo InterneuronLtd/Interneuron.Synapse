@@ -21,22 +21,31 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using SynapseDynamicAPI.Models;
 using SynapseDynamicAPI.Services;
+using System;
 using System.Net;
 
 namespace SynapseDynamicAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("Authenticator/")]
     public class AuthenticatorController : ControllerBase
     {
-        private IConfiguration _configuration { get; }
+        private readonly IConfiguration _configuration;
+
+        public AuthenticatorController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         [HttpPost]
         [Route("[action]")]
-        public void SaveSmartCardToken([FromForm] SmartCardUserModel smartCardUser)
+        public void SaveSmartCardToken([FromBody] SmartCardUserModel smartCardUser)
         {
+            System.IO.File.AppendAllLines(@".\logs\log.txt", new string[] { DateTime.Now.ToString() + ":" + JsonConvert.SerializeObject(smartCardUser) });
+
             AuthenticatorServices.SaveSmartCardToken(smartCardUser);
 
             Response.StatusCode = (int)HttpStatusCode.Created;
@@ -46,36 +55,51 @@ namespace SynapseDynamicAPI.Controllers
         [Route("[action]/{userId?}")]
         public void RemoveSmartCardToken(string userId)
         {
+            System.IO.File.AppendAllLines(@".\logs\log.txt", new string[] { DateTime.Now.ToString() + ":" + JsonConvert.SerializeObject(userId) });
+
             AuthenticatorServices.RemoveSmartCardToken(userId);
 
             Response.StatusCode = (int)HttpStatusCode.NoContent;
         }
 
+        //[Authorize]
         [HttpGet]
         [Route("[action]/{userId?}")]
         public string GetSmartCardToken(string userId)
         {
+            System.IO.File.AppendAllLines(@".\logs\log.txt", new string[] { DateTime.Now.ToString() + ":" + JsonConvert.SerializeObject(userId) });
+
             var useridClaim = User.FindFirst(_configuration["SynapseCore:Settings:TokenUserIdClaimType"]);
 
-            if (useridClaim != null && useridClaim.Value == userId)
+            if (useridClaim != null)
             {
-                string token = AuthenticatorServices.GetSmartCardToken(userId);
+                string[] loggenInUserId = useridClaim.Value.Split('\\', StringSplitOptions.RemoveEmptyEntries);
 
-                if (string.IsNullOrEmpty(token))
+                if (loggenInUserId.Length == 2 && loggenInUserId[1].Equals(userId, StringComparison.OrdinalIgnoreCase))
                 {
-                    Response.StatusCode = (int)HttpStatusCode.NotFound;
+                    string token = AuthenticatorServices.GetSmartCardToken(userId);
+
+                    if (string.IsNullOrEmpty(token))
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.NoContent;
+                    }
+                    else
+                    {
+                        Response.StatusCode = (int)HttpStatusCode.OK;
+                    }
+
+                    return token;
                 }
                 else
                 {
-                    Response.StatusCode = (int)HttpStatusCode.OK;
+                    Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                    return "Not authorised to access token for the requested User";
                 }
-
-                return token;
             }
             else
             {
-                Response.StatusCode = (int)HttpStatusCode.Unauthorized;
-                return "Not authorised to access token for the requested User";
+                Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                return "Could not extract user from access token";
             }
         }
     }

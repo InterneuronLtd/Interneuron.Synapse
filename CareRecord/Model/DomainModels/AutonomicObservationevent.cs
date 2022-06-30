@@ -45,5 +45,8 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Tempunits { get; set; }
         public string Scaletype { get; set; }
         public string ScoreId { get; set; }
+        public double? Hr { get; set; }
+        public string Concern { get; set; }
+        public string Respdistress { get; set; }
     }
 }

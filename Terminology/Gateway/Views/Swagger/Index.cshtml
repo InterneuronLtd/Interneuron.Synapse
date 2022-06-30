@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Swagger";
+}
+
+
+
+<style>
+    body {
+        margin: 0;
+        padding: 0
+    }
+
+    /*iframe {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        z-index: 999999;
+    }*/
+</style>
+
+<div class="container">
+    <h2>EPMA APIs</h2>
+    @{
+        var urls = (ViewData["SwaggerUrls"] as IList<string>);
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Terminology API</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <iframe style="width:100%;height:700px" src="@urls[0]"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">FDB API</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <iframe style="width:100%;height:700px" src="@urls[1]"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            @*@for (var urlIndex = 0; urlIndex < urls.Count; urlIndex++)
+                {
+                    <div style="margin-bottom:1rem;width:100%;overflow-y:auto;overflow-x:hidden;min-height:710px;">
+                        <iframe style="width:100%;height:700px" src="@urls[urlIndex]" id="@urlIndex"></iframe>
+                    </div>
+                }*@
+        </div>
+    }
+</div>
+

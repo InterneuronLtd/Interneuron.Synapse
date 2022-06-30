@@ -79,5 +79,29 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Accountstatuscodetext { get; set; }
         public string Episodestatuscode { get; set; }
         public string Episodestatustext { get; set; }
+        public string Admissiontypecode { get; set; }
+        public string Admissiontypetext { get; set; }
+        public string Priorpatientlocationcode { get; set; }
+        public string Priorpatientlocationtext { get; set; }
+        public string Priorpatientlocationfacility { get; set; }
+        public string Referringdoctorfamilyname { get; set; }
+        public string Referringdoctorgivenname { get; set; }
+        public string Referringdoctorprefix { get; set; }
+        public string Consultingdoctorfamilyname { get; set; }
+        public string Consultingdoctorgivemname { get; set; }
+        public string Consultingdoctorprefix { get; set; }
+        public string Hospitalservicecode { get; set; }
+        public string Hospitalservicetext { get; set; }
+        public string Ambulatorystatuscode { get; set; }
+        public string Ambulatorystatustext { get; set; }
+        public string Interpreterrequired { get; set; }
+        public string Alternatevisitnumber { get; set; }
+        public string Transferreasoncode { get; set; }
+        public string Transferreasontext { get; set; }
+        public string Admitfromcode { get; set; }
+        public string Admitfromtext { get; set; }
+        public string Dischargedispositiontext { get; set; }
+        public string Dischargelocationcode { get; set; }
+        public string Dischargelocationtext { get; set; }
     }
 }

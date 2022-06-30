@@ -78,21 +78,45 @@
                     </div>
                     <div class="form-group row">
                         <label for="formularystatus" class="col-sm-5 col-form-label">Formulary Status</label>
+                        @*<label for="delforstatus" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelFormularyStatus", Model.DelFormularyStatus, new { @class = "delete", @value = Model.DelFormularyStatus })
+                        </div>*@
                         <div class="col-sm-7">
                             @Html.DropDownListFor(m => m.RnohFormularyStatuscd, ViewBag.FormularyStatuses as SelectList, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.RnohFormularyStatuscd)
+                            @if (Model.DisplayFormularyStatusLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="localLicensedUse" class="col-sm-5 col-form-label">Local Licensed Indications</label>
+                        <label for="localLicensedUse" class="col-sm-2 col-form-label">Local Licensed Indications</label>
+                        <label for="dellcllicind" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelLocalLicensedIndication", Model.DelLocalLicensedIndication, new { @class="delete", @value = Model.DelLocalLicensedIndication })
+                        </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
+                            @if (Model.DisplayLocalLicensedIndicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="localUnlicensedUse" class="col-sm-5 col-form-label">Local Unlicensed Indications</label>
+                        <label for="localUnlicensedUse" class="col-sm-2 col-form-label">Local Unlicensed Indications</label>
+                        <label for="dellclunlicind" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelLocalUnlicensedIndication", Model.DelLocalUnlicensedIndication, new { @class = "delete", @value = Model.DelLocalUnlicensedIndication })
+                        </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
+                            @if (Model.DisplayLocalUnlicensedIndicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                 </div>
@@ -110,21 +134,45 @@
             <div id="posology" class="collapse" aria-labelledby="headingTwo" data-parent="#@Model.ControlIdentifier #accordion">
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="roundingfactor" class="col-sm-5 col-form-label">Rounding Factor</label>
+                        <label for="roundingfactor" class="col-sm-2 col-form-label">Rounding Factor</label>
+                        <label for="delrndfac" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelRoundingFactor", Model.DelRoundingFactor, new { @class = "delete", @value = Model.DelRoundingFactor })
+                        </div>
                         <div class="col-sm-7">
                             @Html.DropDownListFor(m => m.RoundingFactorCd, ViewBag.RoundingFactors as SelectList, new { @id = DeriveId("txtRoundingFactor"), @class = "form-control" })
+                            @if (Model.DisplayRoundingFactorLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="Route" class="col-sm-5 col-form-label">Local Licensed Route</label>
+                        <label for="Route" class="col-sm-2 col-form-label">Local Licensed Route</label>
+                        <label for="dellcllicroute" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelLocalLicensedRoute", Model.DelLocalLicensedRoute, new { @class = "delete", @value = Model.DelLocalLicensedRoute })
+                        </div>
                         <div class="col-sm-7">
                             @Html.TextBoxFor(m => m.LocalLicensedRoute, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("localLicensedRoute")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedRoute), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchRoutes") })
+                            @if (Model.DisplayLocalLicensedRouteLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="unlicensedroute" class="col-sm-5 col-form-label">Local Unlicensed Route</label>
+                        <label for="unlicensedroute" class="col-sm-2 col-form-label">Local Unlicensed Route</label>
+                        <label for="dellclunlicroute" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelLocalUnlicensedRoute", Model.DelLocalUnlicensedRoute, new { @class = "delete", @value = Model.DelLocalUnlicensedRoute })
+                        </div>
                         <div class="col-sm-7">
                             <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchRoutes") data-isdisabled="false" id="@DeriveId("localUnlicensedRoute")" type="text" name="LocalUnlicensedRoute" />
+                            @if (Model.DisplayLocalUnlicensedRouteLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                 </div>
@@ -146,6 +194,8 @@
                             <div class="h6">
                                 Custom Warnings
                                 <div class="float-right">
+                                    <label for="delcustomwarning">Delete All Data</label>
+                                    @Html.CheckBox("DelCustomWarning", Model.DelCustomWarning, new { @class = "delete", @value = Model.DelCustomWarning })
                                     <label class="mr-2"><a href="#" class="add-custom-warning" id="@DeriveId("btnAddCustomWarning")"><i class="fa fa-plus"></i></a></label>
                                 </div>
                             </div>
@@ -156,11 +206,17 @@
                             </div>
                         </div>
                     </div>
+                    @if (Model.DisplayCustomWarningsLbl)
+                    {
+                        <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                    }
                     <div class="card mb-2">
                         <div class="card-header">
                             <div class="h6">
                                 Reminders
                                 <div class="float-right">
+                                    <label for="delreminder">Delete All Data</label>
+                                    @Html.CheckBox("DelReminder", Model.DelReminder, new { @class = "delete", @value = Model.DelReminder })
                                     <label class="mr-2"><a href="#" class="add-reminder" id="@DeriveId("btnAddReminder")"><i class="fa fa-plus"></i></a></label>
                                 </div>
                             </div>
@@ -171,11 +227,17 @@
                             </div>
                         </div>
                     </div>
+                    @if (Model.DisplayRemindersLbl)
+                    {
+                        <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                    }
                     <div class="card mb-2">
                         <div class="card-header">
                             <div class="h6">
                                 Endorsements
                                 <div class="float-right">
+                                    <label for="delendorsement">Delete All Data</label>
+                                    @Html.CheckBox("DelEndorsement", Model.DelEndorsement, new { @class = "delete", @value = Model.DelEndorsement })
                                     <label class="mr-2"><a href="#" class="add-endorsement" id="@DeriveId("btnAddEndorsement")"><i class="fa fa-plus"></i></a></label>
                                 </div>
                             </div>
@@ -186,41 +248,69 @@
                             </div>
                         </div>
                     </div>
+                    @if (Model.DisplayEndorsementsLbl)
+                    {
+                        <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                    }
                     <div class="form-group row">
-                        <label for="medusapreparationinstructions" class="col-sm-5 col-form-label">Medusa Preparation Instructions</label>
+                        <label for="medusapreparationinstructions" class="col-sm-2 col-form-label">Medusa Preparation Instructions</label>
+                        <label for="dellclunlicroute" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelMedusaPrepIns", Model.DelMedusaPrepIns, new { @class = "delete", @value = Model.DelMedusaPrepIns })
+                        </div>
                         <div class="col-sm-7">
                             @*@Html.TextBoxFor(m => m.MedusaPreparationInstructionsEditable, new { @class = "form-control" })*@
                             @Html.TextAreaFor(m => m.MedusaPreparationInstructionsEditable, new { @class = "form-control" })
+                            @if (Model.DisplayMedusaPreparationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     @*<div class="form-group row">
-                        <label for="niceta" class="col-sm-5 col-form-label">NICE TA</label>
-                        <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.NICETA, new { @class = "form-control" })
-                        </div>
-                    </div>*@
-                    <div class="form-group row">
-                        <label for="sideeffects" class="col-sm-5 col-form-label">Side Effects</label>
-                        <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.SideEffects)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("sideEffects")" name="sideEffects" type="text" />
-                        </div>
+            <label for="niceta" class="col-sm-5 col-form-label">NICE TA</label>
+            <div class="col-sm-7">
+                @Html.TextBoxFor(m => m.NICETA, new { @class = "form-control" })
+            </div>
+        </div>*@
+                    @*<div class="form-group row">
+            <label for="sideeffects" class="col-sm-5 col-form-label">Side Effects</label>
+            <div class="col-sm-7">
+                <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.SideEffects)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("sideEffects")" name="sideEffects" type="text" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="cautions" class="col-sm-5 col-form-label">Warnings</label>
+            <div class="col-sm-7">
+                <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Cautions)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("cautions")" name="cautions" type="text" />
+            </div>
+        </div>*@
+                <div class="form-group row">
+                    <label for="titrationtype" class="col-sm-2 col-form-label">Titration Type</label>
+                    <label for="deltittype" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                    <div class="col-sm-1">
+                        @Html.CheckBox("DelTitrationType", Model.DelTitrationType, new { @class = "delete", @value = Model.DelTitrationType })
                     </div>
-                    <div class="form-group row">
-                        <label for="cautions" class="col-sm-5 col-form-label">Warnings</label>
-                        <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Cautions)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("cautions")" name="cautions" type="text" />
-                        </div>
+                    <div class="col-sm-7">
+                        @Html.DropDownListFor(m => m.TitrationTypesEditableId, ViewBag.TitrationTypes as SelectList, new { @class = "form-control" })
+                        @if (Model.DisplayTitrationTypeLbl)
+                        {
+                            <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                        }
                     </div>
+                </div>
                     <div class="form-group row">
-                        <label for="titrationtype" class="col-sm-5 col-form-label">Titration Type</label>
-                        <div class="col-sm-7">
-                            @Html.DropDownListFor(m => m.TitrationTypesEditableId, ViewBag.TitrationTypes as SelectList, new { @class = "form-control" })
+                        <label for="Diluents" class="col-sm-2 col-form-label">Compatible Diluents</label>
+                        <label for="dellclunlicroute" class="col-sm-2 col-form-label text-right">Delete All Data</label>
+                        <div class="col-sm-1">
+                            @Html.CheckBox("DelCompatibleDiluents", Model.DelCompatibleDiluents, new { @class = "delete", @value = Model.DelCompatibleDiluents })
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="Diluents" class="col-sm-5 col-form-label">Compatible Diluents</label>
                         <div class="col-sm-7">
                             <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Diluents)" data-query-url="@DeriveAbsUrl("/Formulary/SearchDiluentsByName")" data-isdisabled="false" data-singleselect="false" id="@DeriveId("Diluents")" name="Diluents" type="text" />
+                            @if (Model.DisplayCompatibleDiluentLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                 </div>
@@ -241,96 +331,170 @@
                         <label for="NullableClinicalTrialMedication" class="col-sm-5 col-form-label">Clinical Trial Medication</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableClinicalTrialMedication", Model.NullableClinicalTrialMedication, new { @value = Model.NullableClinicalTrialMedication })
+                            @if (Model.DisplayClinicalTrialMedicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableCriticalDrug" class="col-sm-5 col-form-label">Critical Drug</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableCriticalDrug", Model.NullableCriticalDrug, new { @value = Model.NullableCriticalDrug })
+                            @if (Model.DisplayCriticalDrugLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsGastroResistant" class="col-sm-5 col-form-label">Gastro Resistant</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsGastroResistant", Model.NullableIsGastroResistant, new { @value = Model.NullableIsGastroResistant })
+                            @if (Model.DisplayGastroResistantLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsModifiedRelease" class="col-sm-5 col-form-label">Modified Release</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsModifiedRelease", Model.NullableIsModifiedRelease, new { @value = Model.NullableIsModifiedRelease })
+                            @if (Model.DisplayModifiedReleaseLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableExpensiveMedication" class="col-sm-5 col-form-label">Expensive Medication</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableExpensiveMedication", Model.NullableExpensiveMedication, new { @value = Model.NullableExpensiveMedication })
+                            @if (Model.DisplayExpensiveMedicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableHighAlertMedication" class="col-sm-5 col-form-label">High Alert Medication</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableHighAlertMedication", Model.NullableHighAlertMedication, new { @value = Model.NullableHighAlertMedication })
+                            @if (Model.DisplayHighAlertMedicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIVToOral" class="col-sm-5 col-form-label">IV to Oral</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIVToOral", Model.NullableIVToOral, new { @value = Model.NullableIVToOral })
+                            @if (Model.DisplayIVToOralLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableNotForPrn" class="col-sm-5 col-form-label">Not for PRN</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableNotForPrn", Model.NullableNotForPrn, new { @value = Model.NullableNotForPrn })
+                            @if (Model.DisplayNotForPRNLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsBloodProduct" class="col-sm-5 col-form-label">Blood Product</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsBloodProduct", Model.NullableIsBloodProduct, new { @value = Model.NullableIsBloodProduct })
+                            @if (Model.DisplayBloodProductLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsDiluent" class="col-sm-5 col-form-label">Diluent</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsDiluent", Model.NullableIsDiluent, new { @value = Model.NullableIsDiluent })
+                            @if (Model.DisplayDiluentLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullablePrescribable" class="col-sm-5 col-form-label">Prescribable</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullablePrescribable", Model.NullablePrescribable, new { @value = Model.NullablePrescribable })
+                            @if (Model.DisplayPrescribableLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableOutpatientMedication" class="col-sm-5 col-form-label">Outpatient Medication</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableOutpatientMedication", Model.NullableOutpatientMedication, new { @value = Model.NullableOutpatientMedication })
+                            @if (Model.DisplayOutpatientMedicationLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIgnoreDuplicateWarnings" class="col-sm-5 col-form-label">Ignore Duplicate Warnings</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIgnoreDuplicateWarnings", Model.NullableIgnoreDuplicateWarnings, new { @value = Model.NullableIgnoreDuplicateWarnings })
+                            @if (Model.DisplayIgnoreDuplicateWarningLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsCustomControlledDrug" class="col-sm-5 col-form-label">Controlled Drug</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsCustomControlledDrug", Model.NullableIsCustomControlledDrug, new { @value = Model.NullableIsCustomControlledDrug })
+                            @if (Model.DisplayControlledDrugLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="NullableIsPrescriptionPrintingRequired" class="col-sm-5 col-form-label">Prescription Printing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBox("NullableIsPrescriptionPrintingRequired", Model.NullableIsPrescriptionPrintingRequired, new { @value = Model.NullableIsPrescriptionPrintingRequired })
+                            @if (Model.DisplayPrescriptionPrintingRequiredLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableIsIndicationMandatory" class="col-sm-5 col-form-label">Indication Is Mandatory</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableIsIndicationMandatory", Model.NullableIsIndicationMandatory, new { @value = Model.NullableIsIndicationMandatory })
+                            @if (Model.DisplayIndicationMandatoryLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="NullableWitnessingRequired" class="col-sm-5 col-form-label">Witnessing Required</label>
                         <div class="col-sm-7">
                             @Html.CheckBox("NullableWitnessingRequired", Model.NullableWitnessingRequired, new { @value = Model.NullableWitnessingRequired })
+                            @if (Model.DisplayWitnessingRequiredLbl)
+                            {
+                                <label>Items that have been selected have data that is different. Editing this field will overwrite this data</label>
+                            }
                         </div>
                     </div>
                 </div>
@@ -347,7 +511,34 @@
             <div id="status" class="collapse" aria-labelledby="headingFive" data-parent="#@Model.ControlIdentifier #accordion">
                 <div class="card-body">
                     <div class="form-group row">
-                        <label for="status" class="col-sm-5 col-form-label">Status</label>
+                        <label for="status" class="col-sm-5 col-form-label">
+                            Status:
+                            @{
+                                switch (Model.Status)
+                                {
+                                    case "001":
+                                        <span>Draft</span>
+                                        break;
+                                    case "002":
+                                        <span>Ready For Review</span>
+                                        break;
+                                    case "003":
+                                        <span>Active</span>
+                                        break;
+                                    case "004":
+                                        <span>Archived</span>
+                                        break;
+                                    case "005":
+                                        <span>Inactive</span>
+                                        break;
+                                    case "006":
+                                        <span>Deleted</span>
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+                        </label>
                         <div class="col-sm-7">
                             @Html.DropDownListFor(m => m.Status, ViewBag.RecordStatuses as SelectList, new { @class = "form-control", @id = DeriveId("ddlRecordStatus") })
                             @Html.HiddenFor(m => m.OriginalStatus)
@@ -381,30 +572,36 @@
 
     $(document).ready(function () {
 
-        setTimeout(() => {
-            let inputs = $(".vtm-edit-medication :input");
-            if (inputs && inputs.length > 0) {
-                inputs.each(function(indx, el) {
-                    let isReadOnly = $(this).data('isreadonly');
-                    if (isReadOnly == true) $(this).attr('readonly', true);
-                });
-            }
+                                    setTimeout(() => {
+                                    let inputs = $(".vtm-edit-medication :input");
+                                    if (inputs && inputs.length > 0) {
+                                        inputs.each(function(indx, el) {
+                                            let isReadOnly = $(this).data('isreadonly');
+                                            if (isReadOnly == true) $(this).attr('readonly', true);
+                                        });
+                                }
         }, 100);
 
-        let rootCntrl = '#@Model.ControlIdentifier';
+                                let rootCntrl = '#@Model.ControlIdentifier';
 
-        let recStatusCntrolId = `${rootCntrl}_pnlReason`;
-        onRecordStatusChange(recStatusCntrolId, $(recStatusCntrolId).data('initialstatus'));
+                                let rootId = '@Model.ControlIdentifier';
+
+                                initCustomWarnings('#@Model.ControlIdentifier');
+
+                                initReminders('#@Model.ControlIdentifier');
+
+                                initEndorsements('#@Model.ControlIdentifier');
+
+                                let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+                                onRecordStatusChange(recStatusCntrolId, $(recStatusCntrolId).data('initialstatus'));
 
         $(`${rootCntrl}_ddlRecordStatus`).on('change', function () {
-            let rootCntrl = '#@Model.ControlIdentifier';
-            let recStatusCntrolId = `${rootCntrl}_pnlReason`;
-            onRecordStatusChange(recStatusCntrolId, $(this).val());
-        });
+                                    let rootCntrl = '#@Model.ControlIdentifier';
+                                    let recStatusCntrolId = `${rootCntrl}_pnlReason`;
+                                    onRecordStatusChange(recStatusCntrolId, $(this).val());
+                                });
 
-        //$(`${rootCntrl} :checkbox`).bootstrapToggle('destroy');
-
-        setTimeout(() => {
+                                setTimeout(() => {
             //$(`${rootCntrl} :checkbox`).bootstrapToggle({
             //    on: 'Yes',
             //    off: 'No',
@@ -413,11 +610,10 @@
             //    width: 70,
             //    size: 'sm'
             //});
-
-            $(`${rootCntrl} :checkbox`).candlestick({
-                'mode': 'options', // "contents" is the other mode
+            $(`${rootCntrl} :checkbox`).not('.delete, .org-checkbox').candlestick({
+                                    'mode': 'options', // "contents" is the other mode
                 'contents': { // Options for "contents" mode
-                    'left': 'Left', // The left content
+                                        'left': 'Left', // The left content
                     'middle': 'Middle', // The middle content
                     'right': 'Right', // The right content
                     'swipe': true // enable the global swipe mode
@@ -433,11 +629,11 @@
 
         }, 100);
 
-        var cautions = new studio.AutoComplete(`${rootCntrl}_cautions`, null, null, null, { allowFreeTagging: true });
-        cautions.init();
+        //var cautions = new studio.AutoComplete(`${rootCntrl}_cautions`, null, null, null, { allowFreeTagging: true });
+        //cautions.init();
 
-        var sideEffects = new studio.AutoComplete(`${ rootCntrl }_sideEffects`, null, null, null, { allowFreeTagging: true });
-        sideEffects.init();
+        //var sideEffects = new studio.AutoComplete(`${ rootCntrl }_sideEffects`, null, null, null, { allowFreeTagging: true });
+        //sideEffects.init();
 
         var localLicensedUse = new studio.AutoComplete(`${rootCntrl}_localLicensedUse`, null, null, null, {});
         localLicensedUse.init();
@@ -454,50 +650,233 @@
         var diluents = new studio.AutoComplete(`${rootCntrl}_Diluents`);
         diluents.init();
 
-        $(`${rootCntrl}_btnAddEndorsement`).click(function () {
+        $(`${rootCntrl}_btnAddEndorsement`).click(function (e) {
+            if ($("div[data-candlestick-id='DelEndorsement'] > input.delete").val() == "True") {
+                e.preventDefault();
+            }
+            else {
+                let rootEl = $(this).closest('.root-vtm-edit-medication');
+                let roolElId = $(rootEl).attr('id');
+                let endorsementElSel = `#${roolElId} #EndorsementContainer`;
 
-            let rootEl = $(this).closest('.root-vtm-edit-medication');
-            let roolElId = $(rootEl).attr('id');
-            let endorsementElSel = `#${roolElId} #EndorsementContainer`;
+                let currIndex = $(endorsementElSel).data('currindex');
+                if (currIndex === undefined || currIndex === null) currIndex = 0;
+                else currIndex = currIndex + 1;
 
-            let currIndex = $(endorsementElSel).data('currindex');
-            if (currIndex === undefined || currIndex === null) currIndex = 0;
-            else currIndex = currIndex + 1;
-
-            var template = $.validator.format($.trim($(`#${roolElId}_endorsementTmpl`).html()));
-            $(template(currIndex)).appendTo(endorsementElSel);
-            $(endorsementElSel).data('currindex', currIndex);
+                var template = $.validator.format($.trim($(`#${roolElId}_endorsementTmpl`).html()));
+                $(template(currIndex)).appendTo(endorsementElSel);
+                $(endorsementElSel).data('currindex', currIndex);
+            }
         });
 
-        $(`${rootCntrl}_btnAddCustomWarning`).click(function () {
+        $(`${rootCntrl}_btnAddCustomWarning`).click(function (e) {
+            if ($("div[data-candlestick-id='DelCustomWarning'] > input.delete").val() == "True") {
+                e.preventDefault();
+            }
+            else {
+                let rootEl = $(this).closest('.root-vtm-edit-medication');
+                let roolElId = $(rootEl).attr('id');
+                let customWarningContainerElSel = `#${roolElId} #CustomWarningContainer`;
 
-            let rootEl = $(this).closest('.root-vtm-edit-medication');
-            let roolElId = $(rootEl).attr('id');
-            let customWarningContainerElSel = `#${roolElId} #CustomWarningContainer`;
+                let currIndex = $(customWarningContainerElSel).data('currindex');
+                if (currIndex === undefined || currIndex === null) currIndex = 0;
+                else currIndex = currIndex + 1;
 
-            let currIndex = $(customWarningContainerElSel).data('currindex');
-            if (currIndex === undefined || currIndex === null) currIndex = 0;
-            else currIndex = currIndex + 1;
-
-            var cwTemplate = $.validator.format($.trim($(`#${roolElId}_customWarningTmpl`).html()));
-            $(cwTemplate(currIndex)).appendTo(customWarningContainerElSel);
-            $(customWarningContainerElSel).data('currindex', currIndex);
+                var cwTemplate = $.validator.format($.trim($(`#${roolElId}_customWarningTmpl`).html()));
+                $(cwTemplate(currIndex)).appendTo(customWarningContainerElSel);
+                $(customWarningContainerElSel).data('currindex', currIndex);
+            }
         });
 
-        $(`${rootCntrl}_btnAddReminder`).click(function () {
+        $(`${rootCntrl}_btnAddReminder`).click(function (e) {
+            if ($("div[data-candlestick-id='DelReminder'] > input.delete").val() == "True") {
+                e.preventDefault();
+            }
+            else {
+                let rootEl = $(this).closest('.root-vtm-edit-medication');
+                let roolElId = $(rootEl).attr('id');
+                let reminderContainerElSel = `#${roolElId} #ReminderContainer`;
 
-            let rootEl = $(this).closest('.root-vtm-edit-medication');
-            let roolElId = $(rootEl).attr('id');
-            let reminderContainerElSel = `#${roolElId} #ReminderContainer`;
+                let currIndex = $(reminderContainerElSel).data('currindex');
+                if (currIndex === undefined || currIndex === null) currIndex = 0;
+                else currIndex = currIndex + 1;
 
-            let currIndex = $(reminderContainerElSel).data('currindex');
-            if (currIndex === undefined || currIndex === null) currIndex = 0;
-            else currIndex = currIndex + 1;
-
-            var remTemplate = $.validator.format($.trim($(`#${roolElId}_reminderTmpl`).html()));
-            $(remTemplate(currIndex)).appendTo(reminderContainerElSel);
-            $(reminderContainerElSel).data('currindex', currIndex);
+                var remTemplate = $.validator.format($.trim($(`#${roolElId}_reminderTmpl`).html()));
+                $(remTemplate(currIndex)).appendTo(reminderContainerElSel);
+                $(reminderContainerElSel).data('currindex', currIndex);
+            }
         });
+
+        setTimeout(() => {
+            $(`${rootCntrl} .delete:checkbox`).candlestick({
+                'mode': 'options', // "contents" is the other mode
+                'contents': { // Options for "contents" mode
+                    'left': 'Left', // The left content
+                    'right': 'Right', // The right content
+                    'swipe': true // enable the global swipe mode
+                },
+                'on': 'True', // for on value
+                'off': 'False', // for off value
+                'swipe': true, // for swipe
+                'size': 'md', // Sizes (lg, md (default), sm, xs)
+                'allowManualDefault': false
+            });
+        }, 100);
+
+        setTimeout(() => {
+            $("div[data-candlestick-id='DelLocalLicensedIndication']").click(function () {
+                if ($("div[data-candlestick-id='DelLocalLicensedIndication'] > input.delete").val() == "True") {
+                    $(`${rootCntrl}_localLicensedUse`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localLicensedUse`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localLicensedUse`).parent().parent().addClass("token-input-disabled-facebook");
+                    $(`#token-input-${rootId}_localLicensedUse`).parent().parent().find('li:not(:last-child)').remove();
+                } else {
+                    $(`${rootCntrl}_localLicensedUse`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localLicensedUse`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localLicensedUse`).parent().parent().removeClass("token-input-disabled-facebook");
+                }
+            });
+
+            $("div[data-candlestick-id='DelLocalUnlicensedIndication']").click(function () {
+                if ($("div[data-candlestick-id='DelLocalUnlicensedIndication'] > input.delete").val() == "True") {
+                    $(`${rootCntrl}_localUnLicensedUse`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localUnlicensedUse`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localUnlicensedUse`).parent().parent().addClass("token-input-disabled-facebook");
+                    $(`#token-input-${rootId}_localUnlicensedUse`).parent().parent().find('li:not(:last-child)').remove();
+                } else {
+                    $(`${rootCntrl}_localUnLicensedUse`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localUnlicensedUse`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localUnlicensedUse`).parent().parent().removeClass("token-input-disabled-facebook");
+                }
+            });
+
+            $("div[data-candlestick-id='DelLocalLicensedRoute']").click(function () {
+                if ($("div[data-candlestick-id='DelLocalLicensedRoute'] > input.delete").val() == "True") {
+                    $(`${rootCntrl}_localLicensedRoute`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localLicensedRoute`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localLicensedRoute`).parent().parent().addClass("token-input-disabled-facebook");
+                    $(`#token-input-${rootId}_localLicensedRoute`).parent().parent().find('li:not(:last-child)').remove();
+                } else {
+                    $(`${rootCntrl}_localLicensedRoute`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localLicensedRoute`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localLicensedRoute`).parent().parent().removeClass("token-input-disabled-facebook");
+                }
+            });
+
+            $("div[data-candlestick-id='DelLocalUnlicensedRoute']").click(function () {
+                if ($("div[data-candlestick-id='DelLocalUnlicensedRoute'] > input.delete").val() == "True") {
+                    $(`${rootCntrl}_localUnlicensedRoute`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localUnlicensedRoute`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_localUnlicensedRoute`).parent().parent().addClass("token-input-disabled-facebook");
+                    $(`#token-input-${rootId}_localUnlicensedRoute`).parent().parent().find('li:not(:last-child)').remove();
+                } else {
+                    $(`${rootCntrl}_localUnlicensedRoute`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localUnlicensedRoute`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_localUnlicensedRoute`).parent().parent().removeClass("token-input-disabled-facebook");
+                }
+            });
+
+            $("div[data-candlestick-id='DelMedusaPrepIns']").click(function () {
+                if ($("div[data-candlestick-id='DelMedusaPrepIns'] > input.delete").val() == "True") {
+                    $("#MedusaPreparationInstructionsEditable").attr("disabled", "disabled");
+                    $("#MedusaPreparationInstructionsEditable").val("");
+                } else {
+                    $("#MedusaPreparationInstructionsEditable").removeAttr("disabled");
+                }
+            });
+
+            $("div[data-candlestick-id='DelCompatibleDiluents']").click(function () {
+                if ($("div[data-candlestick-id='DelCompatibleDiluents'] > input.delete").val() == "True") {
+                    $(`${rootCntrl}_Diluents`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_Diluents`).attr("disabled", "disabled");
+                    $(`#token-input-${rootId}_Diluents`).parent().parent().addClass("token-input-disabled-facebook");
+                    $(`#token-input-${rootId}_Diluents`).parent().parent().find('li:not(:last-child)').remove();
+                } else {
+                    $(`${rootCntrl}_Diluents`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_Diluents`).removeAttr("disabled");
+                    $(`#token-input-${rootId}_Diluents`).parent().parent().removeClass("token-input-disabled-facebook");
+                }
+            });
+
+            $("div[data-candlestick-id='DelCustomWarning']").click(function () {
+                if ($("div[data-candlestick-id='DelCustomWarning'] > input.delete").val() == "True") {
+                    let customWarningContainerElSel = `#${rootId} #CustomWarningContainer`;
+                    $(`${customWarningContainerElSel} > div.custom-warning`).remove();
+                    $(customWarningContainerElSel).removeData('currindex');
+                }
+            });
+
+            $("div[data-candlestick-id='DelReminder']").click(function () {
+                if ($("div[data-candlestick-id='DelReminder'] > input.delete").val() == "True") {
+                    let reminderContainerElSel = `#${rootId} #ReminderContainer`;
+                    $(`${reminderContainerElSel} > div.reminder`).remove();
+                    $(reminderContainerElSel).removeData('currindex');
+                }
+            });
+
+            $("div[data-candlestick-id='DelEndorsement']").click(function () {
+                if ($("div[data-candlestick-id='DelEndorsement'] > input.delete").val() == "True") {
+                    let endorsementElSel = `#${rootId} #EndorsementContainer`;
+                    $(`${endorsementElSel} > div.endorsement`).remove();
+                    $(endorsementElSel).removeData('currindex');
+                }
+            });
+
+            $("div[data-candlestick-id='DelRoundingFactor']").click(function () {
+                if ($("div[data-candlestick-id='DelRoundingFactor'] > input.delete").val() == "True") {
+
+                    var selectObj = document.getElementById(`${rootId}_txtRoundingFactor`);
+
+                    for (var i = 0; i < selectObj.options.length; i++) {
+                        if (selectObj.options[i].text == "Please Select") {
+                            selectObj.options[i].selected = true;
+                            $(`${rootCntrl}_txtRoundingFactor`).attr("disabled", "disabled");
+                            return;
+                        }
+                    }
+                } else {
+                    $(`${rootCntrl}_txtRoundingFactor`).removeAttr("disabled");
+                }
+            });
+
+            
+            //$("div[data-candlestick-id='DelFormularyStatus']").click(function () {
+            //    if ($("div[data-candlestick-id='DelFormularyStatus'] > input.delete").val() == "True") {
+
+            //        var selectObj = document.getElementById('RnohFormularyStatuscd');
+
+            //        for (var i = 0; i < selectObj.options.length; i++) {
+            //            if (selectObj.options[i].text == "Please Select") {
+            //                selectObj.options[i].selected = true;
+            //                $('#RnohFormularyStatuscd').attr("disabled", "disabled");
+            //                return;
+            //            }
+            //        }
+            //    } else {
+            //        $('#RnohFormularyStatuscd').removeAttr("disabled");
+            //    }
+            //});
+
+
+            $("div[data-candlestick-id='DelTitrationType']").click(function () {
+                if ($("div[data-candlestick-id='DelTitrationType'] > input.delete").val() == "True") {
+
+                    var selectObj = document.getElementById('TitrationTypesEditableId');
+
+                    for (var i = 0; i < selectObj.options.length; i++) {
+                        if (selectObj.options[i].text == "Please Select") {
+                            selectObj.options[i].selected = true;
+                            $('#TitrationTypesEditableId').attr("disabled", "disabled");
+                            return;
+                        }
+                    }
+                } else {
+                    $('#TitrationTypesEditableId').removeAttr("disabled");
+                }
+            });
+
+        }, 100);
+
     });
 
     function onRecordStatusChange(reasonControlId, val) {
@@ -506,6 +885,81 @@
             $(reasonControlId).show();
         else
             $(reasonControlId).hide();
+    }
+
+    function initCustomWarnings(rootCntrlSel) {
+
+        let cwContainerElSel = `${rootCntrlSel} #CustomWarningContainer`;
+
+        let cwTmplSel = `${rootCntrlSel}_customWarningTmpl`;
+
+        let existingCW = $(cwContainerElSel).data('existingcustomwarning');
+
+        if (existingCW && existingCW.length > 0) {
+
+            $(cwContainerElSel).html("");
+
+            existingCW.forEach(function (item, index) {
+                let cwTemplate = $.validator.format($.trim($(cwTmplSel).html()));
+
+                $(cwTemplate(index)).appendTo(cwContainerElSel);
+
+                $(`${rootCntrlSel}_txtCustomWarning-${index}`).val(item.Warning);
+                $(`${rootCntrlSel}_chkNeedResponse-${index}`).prop('checked', (item.NeedResponse === true) ? true : false);
+
+                $(cwContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initReminders(rootCntrlSel) {
+
+        let remContainerElSel = `${rootCntrlSel} #ReminderContainer`;
+
+        let remTmplSel = `${rootCntrlSel}_reminderTmpl`;
+
+        let existingRem = $(remContainerElSel).data('existingreminder');
+
+        if (existingRem && existingRem.length > 0) {
+
+            $(remContainerElSel).html("");
+
+            existingRem.forEach(function (item, index) {
+                let remTemplate = $.validator.format($.trim($(remTmplSel).html()));
+
+                $(remTemplate(index)).appendTo(remContainerElSel);
+
+                $(`${rootCntrlSel}_txtReminder-${index}`).val(item.Reminder);
+                $(`${rootCntrlSel}_txtDuration-${index}`).val(item.Duration);
+                $(`${rootCntrlSel}_chkActive-${index}`).prop('checked', (item.Active === true) ? true : false);
+
+                $(remContainerElSel).data('currindex', index);
+            });
+        }
+    }
+
+    function initEndorsements(rootCntrlSel) {
+
+        let containerElSel = `${rootCntrlSel} #EndorsementContainer`;
+
+        let tmplSel = `${rootCntrlSel}_endorsementTmpl`;
+
+        let existingData = $(containerElSel).data('existingendorsements');
+
+        if (existingData && existingData.length > 0) {
+
+            $(containerElSel).html("");
+
+            existingData.forEach(function (item, index) {
+                let template = $.validator.format($.trim($(tmplSel).html()));
+
+                $(template(index)).appendTo(containerElSel);
+
+                $(`${rootCntrlSel}_txtEndorsement-${index}`).val(item);
+
+                $(containerElSel).data('currindex', index);
+            });
+        }
     }
 </script>
 <script type="text/javascript" src="~/js/studio.autocomplete.js?v=@string.Format("{0}", DateTime.Now.Ticks)"></script>

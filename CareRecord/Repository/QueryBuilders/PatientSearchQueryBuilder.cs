@@ -33,21 +33,21 @@ namespace Interneuron.CareRecord.Repository.QueryBuilders
         public override List<dynamic> Execute(List<SynapseSearchTerm> synapseSearchTerms)
         {
             var baseQuery = (from person in this.dbContext.entitystorematerialised_CorePerson
-                             join personId in this.dbContext.entitystorematerialised_CorePersonidentifier on
-                             person.PersonId equals personId.PersonId
-                             join personAddress in this.dbContext.entitystorematerialised_CorePersonaddress1 on
+                             join personIdnetifier in this.dbContext.entitystorematerialised_CorePersonidentifier on
+                             person.PersonId equals personIdnetifier.PersonId
+                             join personAddress in this.dbContext.entitystorematerialised_CorePersonaddress on
                              person.PersonId equals personAddress.PersonId into pa
                              from address in pa.DefaultIfEmpty()
-                             join personContact in this.dbContext.entitystorematerialised_CorePersoncontactinfo1 on
+                             join personContact in this.dbContext.entitystorematerialised_CorePersoncontactinfo on
                              person.PersonId equals personContact.PersonId into pc
                              from contact in pc.DefaultIfEmpty()
-                             join personNextOfKin in this.dbContext.entitystorematerialised_CoreNextofkin1 on
+                             join personNextOfKin in this.dbContext.entitystorematerialised_CoreNextofkin on
                              person.PersonId equals personNextOfKin.PersonId into pn
                              from nextOfKin in pn.DefaultIfEmpty()
                              select new
                              {
                                  personData = person,
-                                 personIdData = personId,
+                                 personIdData = personIdnetifier,
                                  personAddressData = address,
                                  personContactData = contact,
                                  personNextOfKinData = nextOfKin
@@ -74,11 +74,11 @@ namespace Interneuron.CareRecord.Repository.QueryBuilders
 
             if (matPersons.IsCollectionValid())
             {
-                var persons = matPersons.Select(m => m.person).ToList();
-                var patientIdentifiers = matPersons.Select(m => m.patientIdentifer).ToList();
-                var personAddresses = matPersons.Select(m => m.personAddress).ToList();
-                var personContacts = matPersons.Select(m => m.personContact).ToList();
-                var personNextOfKins = matPersons.Select(m => m.personNextOfKin).ToList();
+                var persons = matPersons.Select(m => m.person).Distinct().ToList();
+                var patientIdentifiers = matPersons.Select(m => m.patientIdentifer).Distinct().ToList();
+                var personAddresses = matPersons.Select(m => m.personAddress).Distinct().ToList();
+                var personContacts = matPersons.Select(m => m.personContact).Distinct().ToList();
+                var personNextOfKins = matPersons.Select(m => m.personNextOfKin).Distinct().ToList();
 
                 return new List<dynamic> { persons, patientIdentifiers, personAddresses, personContacts, personNextOfKins };
             }

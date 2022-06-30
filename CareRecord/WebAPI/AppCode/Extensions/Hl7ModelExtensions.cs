@@ -43,9 +43,24 @@ namespace Interneuron.CareRecord.API.AppCode.Extensions
                 return typeof(Observation);
             }
 
+            if (type.IsNotEmpty() && type.EqualsIgnoreCase("procedure"))
+            {
+                return typeof(Procedure);
+            }
+
+            if (type.IsNotEmpty() && type.EqualsIgnoreCase("report"))
+            {
+                return typeof(DiagnosticReport);
+            }
+
             if (type.IsNotEmpty() && type.EqualsIgnoreCase("result"))
             {
-                return typeof(Observation);
+                return typeof(DiagnosticReport);
+            }
+
+            if (type.IsNotEmpty() && type.EqualsIgnoreCase("diagnosticreport"))
+            {
+                return typeof(DiagnosticReport);
             }
 
 

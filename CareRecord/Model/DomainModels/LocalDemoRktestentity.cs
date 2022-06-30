@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_LocalDemoRktestentity : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_LocalDemoRktestentity : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string DemoRktestentityId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -39,7 +39,8 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public int? Timezoneoffset { get; set; }
         public string Tenant { get; set; }
         public string T1 { get; set; }
-        public string EncounterIdT1 { get; set; }
-        public string EncounterIdContextkey { get; set; }
+        public string EncounterId { get; set; }
+        public string Test { get; set; }
+        public string Terminologysystem { get; set; }
     }
 }

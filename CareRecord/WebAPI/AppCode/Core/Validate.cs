@@ -42,7 +42,7 @@ namespace Interneuron.CareRecord.API.AppCode.Core
             }
             if (!string.IsNullOrEmpty(key.TypeName))
             {
-                Validate.TypeName(key.TypeName);
+                //Validate.TypeName(key.TypeName);
             }
         }
 
@@ -62,23 +62,23 @@ namespace Interneuron.CareRecord.API.AppCode.Core
             }
         }
 
-        public static void TypeName(string name)
-        {
-            if (ModelInfo.SupportedResources.Contains(name))
-                return;
+        //public static void TypeName(string name)
+        //{
+        //    if (ModelInfo.SupportedResources.Contains(name))
+        //        return;
 
-            //  Test for the most common mistake first: wrong casing of the resource name
-            var correct = ModelInfo.SupportedResources.FirstOrDefault(s => s.ToUpperInvariant() == name.ToUpperInvariant());
+        //    //  Test for the most common mistake first: wrong casing of the resource name
+        //    var correct = ModelInfo.SupportedResources.FirstOrDefault(s => s.ToUpperInvariant() == name.ToUpperInvariant());
 
-            if (correct != null)
-            {
-                throw new InterneuronBusinessException(StatusCodes.Status404NotFound,"Wrong casing of collection name, try '{0}' instead", correct);
-            }
-            else
-            {
-                throw new InterneuronBusinessException(StatusCodes.Status404NotFound, "Unknown resource collection '{0}'", name);
-            }
-        }
+        //    if (correct != null)
+        //    {
+        //        throw new InterneuronBusinessException(StatusCodes.Status404NotFound,"Wrong casing of collection name, try '{0}' instead", correct);
+        //    }
+        //    else
+        //    {
+        //        throw new InterneuronBusinessException(StatusCodes.Status404NotFound, "Unknown resource collection '{0}'", name);
+        //    }
+        //}
 
         public static void HasTypeName(IKey key)
         {
@@ -134,6 +134,11 @@ namespace Interneuron.CareRecord.API.AppCode.Core
             {
                 throw new InterneuronBusinessException(StatusCodes.Status400BadRequest, $"The Id in the request '{key.ResourceId}' is not the same is the Id in the resource '{resource.Id}'.");
             }
+        }
+
+        internal static void FhirParameterExists(Parameters parameters, string v)
+        {
+            
         }
 
         public static void ResourceType(IKey key, Resource resource)

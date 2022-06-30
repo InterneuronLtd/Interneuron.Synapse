@@ -20,6 +20,7 @@
 
 ﻿using System;
 using System.Collections.Generic;
+using Hl7.Fhir.Model;
 using Interneuron.CareRecord.API.AppCode.Core;
 using Interneuron.CareRecord.API.AppCode.Extensions;
 using Interneuron.CareRecord.HL7SynapseHandler.Service.Models;
@@ -51,7 +52,7 @@ namespace Interneuron.CareRecord.API.AppCode
 
             var modelFactory = this._provider.GetService(typeof(ResourceQueryHandlerFactory)) as ResourceQueryHandlerFactory;
             
-            IResourceQueryHandler synapseModelHandler = modelFactory.GetHandler(hl7Type);
+            IResourceQueryHandler synapseModelHandler = modelFactory.GetHandler(key.TypeName);
 
             var fhirParam = FHIRParam.Create(key.TypeName, key.ResourceId, key.VersionId);
 
@@ -60,6 +61,71 @@ namespace Interneuron.CareRecord.API.AppCode
             var fhirResponseFactory = this._provider.GetService(typeof(IFhirResponseFactory)) as IFhirResponseFactory;
 
             return fhirResponseFactory.GetFhirResponse(resourceData, key);
+        }
+
+        public FhirResponse Handle(List<IKey> keys)
+        {
+            Dictionary<string, FhirResponse> fhirResponse = new Dictionary<string, FhirResponse>();
+
+            foreach (var key in keys)
+            {
+                Validate.HasTypeName(key);
+                Validate.HasResourceId(key);
+                Validate.HasNoVersion(key);
+                Validate.Key(key);
+
+                var hl7Type = key.TypeName.GetHl7ModelType();
+
+                var modelFactory = this._provider.GetService(typeof(ResourceQueryHandlerFactory)) as ResourceQueryHandlerFactory;
+
+                IResourceQueryHandler synapseModelHandler = modelFactory.GetHandler(key.TypeName);
+
+                var fhirParam = FHIRParam.Create(key.TypeName, key.ResourceId, key.VersionId);
+
+                var resourceData = synapseModelHandler.Handle(fhirParam);
+
+                var fhirResponseFactory = this._provider.GetService(typeof(IFhirResponseFactory)) as IFhirResponseFactory;
+
+                fhirResponse[key.TypeName] = fhirResponseFactory.GetFhirResponse(resourceData, key);
+            }
+
+            return ProcessFhirResponses(fhirResponse);
+        }
+
+        private FhirResponse ProcessFhirResponses(Dictionary<string, FhirResponse> fhirResponse)
+        {            
+            if (fhirResponse.ContainsKey("Patient"))
+            {
+                if (fhirResponse["Patient"].Resource.TypeName == nameof(OperationOutcome))
+                {
+                    return fhirResponse["Patient"];
+                }
+            }
+
+            Bundle bundle = new Bundle();
+            bundle.Entry = new List<Bundle.EntryComponent>();
+
+            foreach (var item in fhirResponse)
+            {
+                if (item.Value.Resource.TypeName == nameof(OperationOutcome))
+                    continue;
+
+                if (item.Value.Resource.TypeName == nameof(Bundle))
+                {
+                    foreach (var entry in (item.Value.Resource as Bundle).Entry)
+                    {
+                        bundle.Entry.Add(entry);
+                    }
+                }
+                else 
+                {
+                    Bundle.EntryComponent bundleEntry = new Bundle.EntryComponent();
+                    bundleEntry.Resource = item.Value.Resource;
+                    bundle.Entry.Add(bundleEntry);
+                }
+            }
+
+            return new FhirResponse(System.Net.HttpStatusCode.OK, bundle);
         }
 
         public FhirResponse Handle(IKey key, params object[] parameters)

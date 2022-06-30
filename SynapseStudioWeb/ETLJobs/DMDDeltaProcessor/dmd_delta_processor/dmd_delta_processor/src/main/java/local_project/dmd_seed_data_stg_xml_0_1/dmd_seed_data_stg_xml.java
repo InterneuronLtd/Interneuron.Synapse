@@ -46,6 +46,9 @@ import java.util.Comparator;
 
 
 
+	//the import part of tJava_1
+	//import java.util.List;
+
 
 @SuppressWarnings("unused")
 
@@ -360,9 +363,6 @@ private RunStat runStat = new RunStat();
 	}
 
 	LogCatcherUtils tLogCatcher_1 = new LogCatcherUtils();
-	LogCatcherUtils talendLogs_LOGS = new LogCatcherUtils();
-	StatCatcherUtils talendStats_STATS = new StatCatcherUtils("_TOg9UD-JEeuPubMxNiErVQ", "0.1");
-	MetterCatcherUtils talendMeter_METTER = new MetterCatcherUtils("_TOg9UD-JEeuPubMxNiErVQ", "0.1");
 
 private final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 private final java.io.PrintStream errorMessagePS = new java.io.PrintStream(new java.io.BufferedOutputStream(baos));
@@ -459,12 +459,7 @@ private class TalendException extends Exception {
 
 			if(!(e instanceof TDieException)){
 				tLogCatcher_1.addMessage("Java Exception", currentComponent, 6, e.getClass().getName() + ":" + e.getMessage(), 1);
-				talendLogs_LOGS.addMessage("Java Exception", currentComponent, 6, e.getClass().getName() + ":" + e.getMessage(), 1);
-			try{
 				tLogCatcher_1Process(globalMap);
-			}finally{
-				talendLogs_LOGSProcess(globalMap);
-			}
 			}
 			} catch (TalendException e) {
 				// do nothing
@@ -1092,6 +1087,31 @@ private class TalendException extends Exception {
 					tLogCatcher_1_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tJava_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+					tJava_1_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDie_13_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDie_13_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBRow_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBRow_1_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tXMLMap_1_TXMLMAP_OUT_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 							tXMLMap_1_TXMLMAP_IN_error(exception, errorComponent, globalMap);
@@ -1246,69 +1266,6 @@ private class TalendException extends Exception {
 				end_Hash.put(errorComponent, System.currentTimeMillis());
 				
 					tFileList_2_onSubJobError(exception, errorComponent, globalMap);
-			}
-			
-			public void talendStats_STATS_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendStats_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendStats_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendStats_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendStats_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-				end_Hash.put(errorComponent, System.currentTimeMillis());
-				
-				status = "failure";
-				
-					talendStats_STATS_onSubJobError(exception, errorComponent, globalMap);
-			}
-			
-			public void talendLogs_LOGS_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendLogs_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendLogs_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendLogs_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendLogs_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-				end_Hash.put(errorComponent, System.currentTimeMillis());
-				
-				status = "failure";
-				
-					talendLogs_LOGS_onSubJobError(exception, errorComponent, globalMap);
-			}
-			
-			public void talendMeter_METTER_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendMeter_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendMeter_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendMeter_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendMeter_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-				end_Hash.put(errorComponent, System.currentTimeMillis());
-				
-				status = "failure";
-				
-					talendMeter_METTER_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
 			public void tFileList_1_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
@@ -1604,17 +1561,31 @@ resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThrea
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
 			}
-			public void talendStats_STATS_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tJava_1_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "ERROR", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+				try {
+					
+						if(this.execStat){
+							runStat.updateStatOnConnection("OnSubjobError19", 0, "error");
+						}
+					
+					errorCode = null;
+					tDie_13Process(globalMap);
+					if (!"failure".equals(status)) {
+						status = "end";
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			public void tDie_13_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
 			}
-			public void talendLogs_LOGS_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-
-resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
-
-			}
-			public void talendMeter_METTER_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tDBRow_1_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
@@ -2220,11 +2191,11 @@ row2Struct row2 = new row2Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("drug_route_row", 3, 0);
+	       				runStat.updateStatOnConnection("row2", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row2", 3, 0);
+	       				runStat.updateStatOnConnection("row1", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -2232,7 +2203,7 @@ row2Struct row2 = new row2Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row1", 3, 0);
+	       				runStat.updateStatOnConnection("drug_route_row", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -3958,9 +3929,6 @@ public void tDie_5Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_5", 5, "the end is near", 1);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_5", 5, "the end is near", 1);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_5_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -4753,19 +4721,19 @@ row35Struct row35 = new row35Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("excipient_row", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row35", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("excipient_row", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("row34", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row35", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -6530,9 +6498,6 @@ public void tDie_6Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_6", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_6", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_6_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -7911,11 +7876,11 @@ row33Struct row33 = new row33Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row24", 3, 0);
+	       				runStat.updateStatOnConnection("amp_row", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row33", 3, 0);
+	       				runStat.updateStatOnConnection("row24", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -7923,7 +7888,7 @@ row33Struct row33 = new row33Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("amp_row", 3, 0);
+	       				runStat.updateStatOnConnection("row33", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -10063,9 +10028,6 @@ public void tDie_7Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_7", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_7", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_7_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -11600,19 +11562,19 @@ row19Struct row19 = new row19Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row18", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("row19", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("vmp", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row18", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -13905,9 +13867,6 @@ public void tDie_9Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_9", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_9", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_9_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -14668,7 +14627,7 @@ row32Struct row32 = new row32Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("copyOfont_drug_form_3", 3, 0);
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -14680,7 +14639,7 @@ row32Struct row32 = new row32Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+	       				runStat.updateStatOnConnection("copyOfont_drug_form_3", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -16401,9 +16360,6 @@ public void tDie_11Process(final java.util.Map<String, Object> globalMap) throws
 				tLogCatcher_1.addMessage("tDie", "tDie_11", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_11", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_11_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -17148,7 +17104,7 @@ row31Struct row31 = new row31Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row31", 3, 0);
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -17156,7 +17112,7 @@ row31Struct row31 = new row31Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+	       				runStat.updateStatOnConnection("row31", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -18877,9 +18833,6 @@ public void tDie_1Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_1", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_1", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_1_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -19786,11 +19739,11 @@ row26Struct row26 = new row26Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row26", 3, 0);
+	       				runStat.updateStatOnConnection("vtm", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row25", 3, 0);
+	       				runStat.updateStatOnConnection("row26", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -19798,7 +19751,7 @@ row26Struct row26 = new row26Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("vtm", 3, 0);
+	       				runStat.updateStatOnConnection("row25", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -21614,9 +21567,6 @@ public void tDie_4Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_4", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_4", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_4_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -22537,15 +22487,15 @@ row30Struct row30 = new row30Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row21", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("copyOfdrug_ingredient_1", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("row30", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row21", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -24416,9 +24366,6 @@ public void tDie_3Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_3", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_3", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_3_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -25163,15 +25110,15 @@ row29Struct row29 = new row29Struct();
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("row29", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("copyOfdrug_route_0", 3, 0);
 					}           			
 				
 					if(execStat){				
 	       				runStat.updateStatOnConnection("row20", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row29", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -26891,9 +26838,6 @@ public void tDie_2Process(final java.util.Map<String, Object> globalMap) throws 
 	try {
 				tLogCatcher_1.addMessage("tDie", "tDie_2", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
-				
-				talendLogs_LOGS.addMessage("tDie", "tDie_2", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
 				
 	globalMap.put("tDie_2_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
@@ -29555,9 +29499,6 @@ public void tDie_12Process(final java.util.Map<String, Object> globalMap) throws
 				tLogCatcher_1.addMessage("tDie", "tDie_12", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_12", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_12_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -30406,11 +30347,11 @@ row17Struct row17 = new row17Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+	       				runStat.updateStatOnConnection("row16", 3, 0);
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("ingredient", 3, 0);
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -30418,7 +30359,7 @@ row17Struct row17 = new row17Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("row16", 3, 0);
+	       				runStat.updateStatOnConnection("ingredient", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -32184,9 +32125,6 @@ public void tDie_10Process(final java.util.Map<String, Object> globalMap) throws
 	try {
 				tLogCatcher_1.addMessage("tDie", "tDie_10", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
-				
-				talendLogs_LOGS.addMessage("tDie", "tDie_10", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
 				
 	globalMap.put("tDie_10_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
@@ -36646,35 +36584,7 @@ row13Struct row13 = new row13Struct();
 	
 	
 					if(execStat){				
-	       				runStat.updateStatOnConnection("controldrugcategory", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("prescribingstatus", 3, 0);
-					}           			
-				
-					if(execStat){				
 	       				runStat.updateStatOnConnection("row4", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("uom", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row15", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row8", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row7", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("ontology", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -36682,59 +36592,7 @@ row13Struct row13 = new row13Struct();
 					}           			
 				
 					if(execStat){				
-	       				runStat.updateStatOnConnection("supplier", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("drugformind", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("route", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row3", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row9", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row11", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row12", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("basisofname", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row6", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row14", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("lic_auth", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row5", 3, 0);
-					}           			
-				
-					if(execStat){				
-	       				runStat.updateStatOnConnection("row13", 3, 0);
+	       				runStat.updateStatOnConnection("row15", 3, 0);
 					}           			
 				
 					if(execStat){				
@@ -36746,7 +36604,87 @@ row13Struct row13 = new row13Struct();
 					}           			
 				
 					if(execStat){				
+	       				runStat.updateStatOnConnection("row6", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row8", 3, 0);
+					}           			
+				
+					if(execStat){				
 	       				runStat.updateStatOnConnection("availrestrict", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row14", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("OnRowsEnd", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("route", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("uom", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row9", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("drugformind", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row5", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("prescribingstatus", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("supplier", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("basisofname", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row13", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row11", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("controldrugcategory", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row7", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("lic_auth", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row12", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("row3", 3, 0);
+					}           			
+				
+					if(execStat){				
+	       				runStat.updateStatOnConnection("ontology", 3, 0);
 					}           			
 				
 				if(execStat){
@@ -48092,9 +48030,6 @@ public void tDie_8Process(final java.util.Map<String, Object> globalMap) throws 
 				tLogCatcher_1.addMessage("tDie", "tDie_8", 5, "the end is near", 4);
 				tLogCatcher_1Process(globalMap);
 				
-				talendLogs_LOGS.addMessage("tDie", "tDie_8", 5, "the end is near", 4);
-				talendLogs_LOGSProcess(globalMap);
-				
 	globalMap.put("tDie_8_DIE_PRIORITY", 5);
 	System.err.println("the end is near");
 	
@@ -49161,691 +49096,10 @@ end_Hash.put("tLogRow_24", System.currentTimeMillis());
 	}
 	
 
-
-public static class row_talendStats_FILEStruct implements routines.system.IPersistableRow<row_talendStats_FILEStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message_type;
-
-				public String getMessage_type () {
-					return this.message_type;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Long duration;
-
-				public Long getDuration () {
-					return this.duration;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message_type = readString(dis);
-					
-					this.message = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.duration = null;
-           				} else {
-           			    	this.duration = dis.readLong();
-           				}
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message_type,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Long
-				
-						if(this.duration == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.duration);
-		            	}
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",message_type="+message_type);
-		sb.append(",message="+message);
-		sb.append(",duration="+String.valueOf(duration));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendStats_FILEStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-
-public static class row_talendStats_STATSStruct implements routines.system.IPersistableRow<row_talendStats_STATSStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message_type;
-
-				public String getMessage_type () {
-					return this.message_type;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Long duration;
-
-				public Long getDuration () {
-					return this.duration;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message_type = readString(dis);
-					
-					this.message = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.duration = null;
-           				} else {
-           			    	this.duration = dis.readLong();
-           				}
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message_type,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Long
-				
-						if(this.duration == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.duration);
-		            	}
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",message_type="+message_type);
-		sb.append(",message="+message);
-		sb.append(",duration="+String.valueOf(duration));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendStats_STATSStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-public void talendStats_STATSProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendStats_STATS_SUBPROCESS_STATE", 0);
+public void tJava_1Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tJava_1_SUBPROCESS_STATE", 0);
 
  final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
 	
 		String iterateId = "";
 	
@@ -49865,229 +49119,74 @@ public void talendStats_STATSProcess(final java.util.Map<String, Object> globalM
 
 
 
-		row_talendStats_STATSStruct row_talendStats_STATS = new row_talendStats_STATSStruct();
-row_talendStats_STATSStruct row_talendStats_FILE = row_talendStats_STATS;
-
-
-
+		
 
 
 	
 	/**
-	 * [talendStats_CONSOLE begin ] start
+	 * [tJava_1 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendStats_CONSOLE", false);
-		start_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
+		ok_Hash.put("tJava_1", false);
+		start_Hash.put("tJava_1", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
+	currentComponent="tJava_1";
 
 	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
-				
-		int tos_count_talendStats_CONSOLE = 0;
+		int tos_count_tJava_1 = 0;
 		
 
-	///////////////////////
-	
-		final String OUTPUT_FIELD_SEPARATOR_talendStats_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendStats_CONSOLE = null;	
 
- 		StringBuilder strBuffer_talendStats_CONSOLE = null;
-		int nb_line_talendStats_CONSOLE = 0;
-///////////////////////    			
+int dmdIndex = context.dmd_file_path.indexOf("nhsbsa_dmd_");
 
+String dmdVer = context.dmd_file_path.substring(dmdIndex, context.dmd_file_path.length());
 
+System.out.println(dmdVer);
 
+context.dmd_version = dmdVer;
  
 
 
 
 /**
- * [talendStats_CONSOLE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_FILE begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendStats_FILE", false);
-		start_Hash.put("talendStats_FILE", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
-				
-		int tos_count_talendStats_FILE = 0;
-		
-
-String fileName_talendStats_FILE = "";
-    fileName_talendStats_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"stats_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendStats_FILE = null;
-    String extension_talendStats_FILE = null;
-    String directory_talendStats_FILE = null;
-    if((fileName_talendStats_FILE.indexOf("/") != -1)) {
-        if(fileName_talendStats_FILE.lastIndexOf(".") < fileName_talendStats_FILE.lastIndexOf("/")) {
-            fullName_talendStats_FILE = fileName_talendStats_FILE;
-            extension_talendStats_FILE = "";
-        } else {
-            fullName_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("."));
-            extension_talendStats_FILE = fileName_talendStats_FILE.substring(fileName_talendStats_FILE.lastIndexOf("."));
-        }
-        directory_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendStats_FILE.lastIndexOf(".") != -1) {
-            fullName_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("."));
-            extension_talendStats_FILE = fileName_talendStats_FILE.substring(fileName_talendStats_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendStats_FILE = fileName_talendStats_FILE;
-            extension_talendStats_FILE = "";
-        }
-        directory_talendStats_FILE = "";
-    }
-    boolean isFileGenerated_talendStats_FILE = true;
-    java.io.File filetalendStats_FILE = new java.io.File(fileName_talendStats_FILE);
-    globalMap.put("talendStats_FILE_FILE_NAME",fileName_talendStats_FILE);
-        if(filetalendStats_FILE.exists()){
-            isFileGenerated_talendStats_FILE = false;
-        }
-            int nb_line_talendStats_FILE = 0;
-            int splitedFileNo_talendStats_FILE = 0;
-            int currentRow_talendStats_FILE = 0;
-
-            final String OUT_DELIM_talendStats_FILE = /** Start field talendStats_FILE:FIELDSEPARATOR */";"/** End field talendStats_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendStats_FILE = /** Start field talendStats_FILE:ROWSEPARATOR */"\n"/** End field talendStats_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendStats_FILE != null && directory_talendStats_FILE.trim().length() != 0) {
-                        java.io.File dir_talendStats_FILE = new java.io.File(directory_talendStats_FILE);
-                        if(!dir_talendStats_FILE.exists()) {
-                            dir_talendStats_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendStats_FILE = null;
-
-                        outtalendStats_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendStats_FILE, true),"ISO-8859-15"));
-
-
-        resourceMap.put("out_talendStats_FILE", outtalendStats_FILE);
-resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
-
- 
-
-
-
-/**
- * [talendStats_FILE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_STATS begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendStats_STATS", false);
-		start_Hash.put("talendStats_STATS", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-		int tos_count_talendStats_STATS = 0;
-		
-
-	for (StatCatcherUtils.StatCatcherMessage scm : talendStats_STATS.getMessages()) {
-		row_talendStats_STATS.pid = pid;
-		row_talendStats_STATS.root_pid = rootPid;
-		row_talendStats_STATS.father_pid = fatherPid;	
-    	row_talendStats_STATS.project = projectName;
-    	row_talendStats_STATS.job = jobName;
-    	row_talendStats_STATS.context = contextStr;
-		row_talendStats_STATS.origin = (scm.getOrigin()==null || scm.getOrigin().length()<1 ? null : scm.getOrigin());
-		row_talendStats_STATS.message = scm.getMessage();
-		row_talendStats_STATS.duration = scm.getDuration();
-		row_talendStats_STATS.moment = scm.getMoment();
-		row_talendStats_STATS.message_type = scm.getMessageType();
-		row_talendStats_STATS.job_version = scm.getJobVersion();
-		row_talendStats_STATS.job_repository_id = scm.getJobId();
-		row_talendStats_STATS.system_pid = scm.getSystemPid();
-
- 
-
-
-
-/**
- * [talendStats_STATS begin ] stop
+ * [tJava_1 begin ] stop
  */
 	
 	/**
-	 * [talendStats_STATS main ] start
+	 * [tJava_1 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
+	currentComponent="tJava_1";
 
 	
 
  
 
 
-	tos_count_talendStats_STATS++;
+	tos_count_tJava_1++;
 
 /**
- * [talendStats_STATS main ] stop
+ * [tJava_1 main ] stop
  */
 	
 	/**
-	 * [talendStats_STATS process_data_begin ] start
+	 * [tJava_1 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
+	currentComponent="tJava_1";
 
 	
 
@@ -50096,649 +49195,65 @@ resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
 
 
 /**
- * [talendStats_STATS process_data_begin ] stop
+ * [tJava_1 process_data_begin ] stop
  */
-
 	
 	/**
-	 * [talendStats_FILE main ] start
+	 * [tJava_1 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
+	currentComponent="tJava_1";
 
 	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-
-
-                    StringBuilder sb_talendStats_FILE = new StringBuilder();
-                            if(row_talendStats_STATS.moment != null) {
-                        sb_talendStats_FILE.append(
-                            FormatterUtils.format_Date(row_talendStats_STATS.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.father_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.father_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.root_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.root_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.system_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.system_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.project != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.project
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job_repository_id != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job_repository_id
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job_version != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job_version
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.context != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.context
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.origin != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.origin
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.message_type != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.message_type
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.message != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.message
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.duration != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.duration
-                        );
-                            }
-                    sb_talendStats_FILE.append(OUT_DELIM_ROWSEP_talendStats_FILE);
-
-
-                    nb_line_talendStats_FILE++;
-                    resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
-
-                        outtalendStats_FILE.write(sb_talendStats_FILE.toString());
-
-
-
 
  
-     row_talendStats_FILE = row_talendStats_STATS;
 
 
-	tos_count_talendStats_FILE++;
 
 /**
- * [talendStats_FILE main ] stop
+ * [tJava_1 process_data_end ] stop
  */
 	
 	/**
-	 * [talendStats_FILE process_data_begin ] start
+	 * [tJava_1 end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
+	currentComponent="tJava_1";
 
 	
 
  
 
-
-
-/**
- * [talendStats_FILE process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendStats_CONSOLE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-///////////////////////		
-						
-
-
-
-				strBuffer_talendStats_CONSOLE = new StringBuilder();
-
-
-
-
-   				
-	    		if(row_talendStats_FILE.moment != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendStats_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.father_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.father_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.root_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.root_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.system_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.system_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.project)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.job_repository_id != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job_repository_id)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.job_version != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job_version)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.context)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.origin)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.message_type != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.message_type)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.message != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.message)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.duration != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.duration)							
-				);
-
-
-							
-	    		} //  			
- 
-
-                    if (globalMap.get("tLogRow_CONSOLE")!=null)
-                    {
-                    	consoleOut_talendStats_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
-                    }
-                    else
-                    {
-                    	consoleOut_talendStats_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendStats_CONSOLE);
-                    }
-                    consoleOut_talendStats_CONSOLE.println(strBuffer_talendStats_CONSOLE.toString());
-                    consoleOut_talendStats_CONSOLE.flush();
-                    nb_line_talendStats_CONSOLE++;
-//////
-
-//////                    
-                    
-///////////////////////    			
-
- 
-
-
-	tos_count_talendStats_CONSOLE++;
-
-/**
- * [talendStats_CONSOLE main ] stop
- */
-	
-	/**
-	 * [talendStats_CONSOLE process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_CONSOLE process_data_begin ] stop
- */
-	
-	/**
-	 * [talendStats_CONSOLE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_CONSOLE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_FILE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_FILE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_STATS process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_STATS process_data_end ] stop
- */
-	
-	/**
-	 * [talendStats_STATS end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
-	}
-
-
- 
-
-ok_Hash.put("talendStats_STATS", true);
-end_Hash.put("talendStats_STATS", System.currentTimeMillis());
+ok_Hash.put("tJava_1", true);
+end_Hash.put("tJava_1", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendStats_STATS end ] stop
+ * [tJava_1 end ] stop
  */
-
-	
-	/**
-	 * [talendStats_FILE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-
-
-
-		
-			
-					if(outtalendStats_FILE!=null) {
-						outtalendStats_FILE.flush();
-						outtalendStats_FILE.close();
-					}
-				
-				globalMap.put("talendStats_FILE_NB_LINE",nb_line_talendStats_FILE);
-				globalMap.put("talendStats_FILE_FILE_NAME",fileName_talendStats_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendStats_FILE", true);
-	
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendStats_FILE", true);
-end_Hash.put("talendStats_FILE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendStats_FILE end ] stop
- */
-
-	
-	/**
-	 * [talendStats_CONSOLE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
-
-//////
-//////
-globalMap.put("talendStats_CONSOLE_NB_LINE",nb_line_talendStats_CONSOLE);
-
-///////////////////////    			
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendStats_CONSOLE", true);
-end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendStats_CONSOLE end ] stop
- */
-
-
-
-
-
-
 				}//end the resume
 
 				
+				    			if(resumeEntryMethodName == null || globalResumeTicket){
+				    				resumeUtil.addLog("CHECKPOINT", "CONNECTION:SUBJOB_OK:tJava_1:OnSubjobOk", "", Thread.currentThread().getId() + "", "", "", "", "", "");
+								}	    				    			
+					    	
+								if(execStat){    	
+									runStat.updateStatOnConnection("OnSubjobOk16", 0, "ok");
+								} 
+							
+							tDBRow_1Process(globalMap); 
+						
 
 
 
@@ -50746,8 +49261,6 @@ end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
 			}catch(java.lang.Exception e){	
 				
 				TalendException te = new TalendException(e, currentComponent, globalMap);
-				
-					te.setVirtualComponentName(currentVirtualComponent);
 				
 				throw te;
 			}catch(java.lang.Error error){	
@@ -50761,16 +49274,14 @@ end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
 					
 	
 	/**
-	 * [talendStats_STATS finally ] start
+	 * [tJava_1 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
+	currentComponent="tJava_1";
 
 	
 
@@ -50779,75 +49290,8 @@ end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendStats_STATS finally ] stop
+ * [tJava_1 finally ] stop
  */
-
-	
-	/**
-	 * [talendStats_FILE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-
-
-		if(resourceMap.get("finish_talendStats_FILE") == null){ 
-			
-				
-						java.io.Writer outtalendStats_FILE = (java.io.Writer)resourceMap.get("out_talendStats_FILE");
-						if(outtalendStats_FILE!=null) {
-							outtalendStats_FILE.flush();
-							outtalendStats_FILE.close();
-						}
-					
-				
-			
-		}
-	
-
- 
-
-
-
-/**
- * [talendStats_FILE finally ] stop
- */
-
-	
-	/**
-	 * [talendStats_CONSOLE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_CONSOLE finally ] stop
- */
-
-
-
-
-
-
 				}catch(java.lang.Exception e){	
 					//ignore
 				}catch(java.lang.Error error){
@@ -50857,643 +49301,14 @@ end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
 			}
 		
 
-		globalMap.put("talendStats_STATS_SUBPROCESS_STATE", 1);
+		globalMap.put("tJava_1_SUBPROCESS_STATE", 1);
 	}
 	
 
-
-public static class row_talendLogs_FILEStruct implements routines.system.IPersistableRow<row_talendLogs_FILEStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public Integer priority;
-
-				public Integer getPriority () {
-					return this.priority;
-				}
-				
-			    public String type;
-
-				public String getType () {
-					return this.type;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Integer code;
-
-				public Integer getCode () {
-					return this.code;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.context = readString(dis);
-					
-						this.priority = readInteger(dis);
-					
-					this.type = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message = readString(dis);
-					
-						this.code = readInteger(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// Integer
-				
-						writeInteger(this.priority,dos);
-					
-					// String
-				
-						writeString(this.type,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Integer
-				
-						writeInteger(this.code,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",context="+context);
-		sb.append(",priority="+String.valueOf(priority));
-		sb.append(",type="+type);
-		sb.append(",origin="+origin);
-		sb.append(",message="+message);
-		sb.append(",code="+String.valueOf(code));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendLogs_FILEStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-
-public static class row_talendLogs_LOGSStruct implements routines.system.IPersistableRow<row_talendLogs_LOGSStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public Integer priority;
-
-				public Integer getPriority () {
-					return this.priority;
-				}
-				
-			    public String type;
-
-				public String getType () {
-					return this.type;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Integer code;
-
-				public Integer getCode () {
-					return this.code;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.context = readString(dis);
-					
-						this.priority = readInteger(dis);
-					
-					this.type = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message = readString(dis);
-					
-						this.code = readInteger(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// Integer
-				
-						writeInteger(this.priority,dos);
-					
-					// String
-				
-						writeString(this.type,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Integer
-				
-						writeInteger(this.code,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",context="+context);
-		sb.append(",priority="+String.valueOf(priority));
-		sb.append(",type="+type);
-		sb.append(",origin="+origin);
-		sb.append(",message="+message);
-		sb.append(",code="+String.valueOf(code));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendLogs_LOGSStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-public void talendLogs_LOGSProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendLogs_LOGS_SUBPROCESS_STATE", 0);
+public void tDie_13Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDie_13_SUBPROCESS_STATE", 0);
 
  final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
 	
 		String iterateId = "";
 	
@@ -51513,8 +49328,216 @@ public void talendLogs_LOGSProcess(final java.util.Map<String, Object> globalMap
 
 
 
-		row_talendLogs_LOGSStruct row_talendLogs_LOGS = new row_talendLogs_LOGSStruct();
-row_talendLogs_LOGSStruct row_talendLogs_FILE = row_talendLogs_LOGS;
+
+
+	
+	/**
+	 * [tDie_13 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDie_13", false);
+		start_Hash.put("tDie_13", System.currentTimeMillis());
+		
+	
+	currentComponent="tDie_13";
+
+	
+		int tos_count_tDie_13 = 0;
+		
+
+ 
+
+
+
+/**
+ * [tDie_13 begin ] stop
+ */
+	
+	/**
+	 * [tDie_13 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDie_13";
+
+	
+
+	try {
+				tLogCatcher_1.addMessage("tDie", "tDie_13", 5, "the end is near", 4);
+				tLogCatcher_1Process(globalMap);
+				
+	globalMap.put("tDie_13_DIE_PRIORITY", 5);
+	System.err.println("the end is near");
+	
+	globalMap.put("tDie_13_DIE_MESSAGE", "the end is near");
+	globalMap.put("tDie_13_DIE_MESSAGES", "the end is near");
+	
+	} catch (Exception | Error e_tDie_13) {
+		logIgnoredError(String.format("tDie_13 - tDie failed to log message due to internal error: %s", e_tDie_13), e_tDie_13);
+	}
+	
+	currentComponent = "tDie_13";
+	status = "failure";
+        errorCode = new Integer(4);
+        globalMap.put("tDie_13_DIE_CODE", errorCode);        
+    
+	if(true){	
+	    throw new TDieException();
+	}
+
+ 
+
+
+	tos_count_tDie_13++;
+
+/**
+ * [tDie_13 main ] stop
+ */
+	
+	/**
+	 * [tDie_13 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDie_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tDie_13 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tDie_13 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDie_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tDie_13 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDie_13 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDie_13";
+
+	
+
+ 
+
+ok_Hash.put("tDie_13", true);
+end_Hash.put("tDie_13", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDie_13 end ] stop
+ */
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDie_13 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDie_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tDie_13 finally ] stop
+ */
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDie_13_SUBPROCESS_STATE", 1);
+	}
+	
+
+public void tDBRow_1Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBRow_1_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
 
 
 
@@ -51522,38 +49545,54 @@ row_talendLogs_LOGSStruct row_talendLogs_FILE = row_talendLogs_LOGS;
 
 	
 	/**
-	 * [talendLogs_CONSOLE begin ] start
+	 * [tDBRow_1 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendLogs_CONSOLE", false);
-		start_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
+		ok_Hash.put("tDBRow_1", false);
+		start_Hash.put("tDBRow_1", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
+	currentComponent="tDBRow_1";
 
 	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
+		int tos_count_tDBRow_1 = 0;
+		
+
+	java.sql.Connection conn_tDBRow_1 = null;
+	String query_tDBRow_1 = "";
+	boolean whetherReject_tDBRow_1 = false;
+			String driverClass_tDBRow_1 = "org.postgresql.Driver";
+		    java.lang.Class jdbcclazz_tDBRow_1 = java.lang.Class.forName(driverClass_tDBRow_1);
+		
+				String url_tDBRow_1 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+		
+					String dbUser_tDBRow_1 = context.dmd_db_user;
+	        
+            		
+            		
+            		
+	final String decryptedPassword_tDBRow_1 = context.dmd_db_password; 
+        		   	
+        	        String dbPwd_tDBRow_1 = decryptedPassword_tDBRow_1;
+	        
+					
+			conn_tDBRow_1 = java.sql.DriverManager.getConnection(url_tDBRow_1,dbUser_tDBRow_1,dbPwd_tDBRow_1);
+		
+    resourceMap.put("conn_tDBRow_1", conn_tDBRow_1);
+					if(conn_tDBRow_1.getAutoCommit()) {
+						
+				conn_tDBRow_1.setAutoCommit(false);
+			
+					}        
+					int commitEvery_tDBRow_1 = 10000;
+					int commitCounter_tDBRow_1 = 0;
 				
-		int tos_count_talendLogs_CONSOLE = 0;
-		
-
-	///////////////////////
-	
-		final String OUTPUT_FIELD_SEPARATOR_talendLogs_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendLogs_CONSOLE = null;	
-
- 		StringBuilder strBuffer_talendLogs_CONSOLE = null;
-		int nb_line_talendLogs_CONSOLE = 0;
-///////////////////////    			
-
+        java.sql.Statement stmt_tDBRow_1 = conn_tDBRow_1.createStatement();
+        resourceMap.put("stmt_tDBRow_1", stmt_tDBRow_1);
 
 
  
@@ -51561,900 +49600,198 @@ row_talendLogs_LOGSStruct row_talendLogs_FILE = row_talendLogs_LOGS;
 
 
 /**
- * [talendLogs_CONSOLE begin ] stop
+ * [tDBRow_1 begin ] stop
  */
-
-
-
 	
 	/**
-	 * [talendLogs_FILE begin ] start
+	 * [tDBRow_1 main ] start
 	 */
 
 	
 
 	
-		
-		ok_Hash.put("talendLogs_FILE", false);
-		start_Hash.put("talendLogs_FILE", System.currentTimeMillis());
-		
 	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
+	currentComponent="tDBRow_1";
 
 	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
+
+query_tDBRow_1 = "DO\n$do$\nBEGIN\n	update terminology.dmd_snomed_version set dmdversion = '"+ context.dmd_version +"';\nEND\n$do$";
+whetherReject_tDBRow_1 = false;
+globalMap.put("tDBRow_1_QUERY",query_tDBRow_1);
+try {
+		stmt_tDBRow_1.execute(query_tDBRow_1);
+		
+	} catch (java.lang.Exception e) {
+		whetherReject_tDBRow_1 = true;
+		
+				System.err.print(e.getMessage());
 				
-		int tos_count_talendLogs_FILE = 0;
+	}
+	
+		commitCounter_tDBRow_1++;
+		if(commitEvery_tDBRow_1 <= commitCounter_tDBRow_1) {
+			
+			conn_tDBRow_1.commit();
+			
+			commitCounter_tDBRow_1=0;
+		}
 		
 
-String fileName_talendLogs_FILE = "";
-    fileName_talendLogs_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"logs_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendLogs_FILE = null;
-    String extension_talendLogs_FILE = null;
-    String directory_talendLogs_FILE = null;
-    if((fileName_talendLogs_FILE.indexOf("/") != -1)) {
-        if(fileName_talendLogs_FILE.lastIndexOf(".") < fileName_talendLogs_FILE.lastIndexOf("/")) {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE;
-            extension_talendLogs_FILE = "";
-        } else {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("."));
-            extension_talendLogs_FILE = fileName_talendLogs_FILE.substring(fileName_talendLogs_FILE.lastIndexOf("."));
-        }
-        directory_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendLogs_FILE.lastIndexOf(".") != -1) {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("."));
-            extension_talendLogs_FILE = fileName_talendLogs_FILE.substring(fileName_talendLogs_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE;
-            extension_talendLogs_FILE = "";
-        }
-        directory_talendLogs_FILE = "";
-    }
-    boolean isFileGenerated_talendLogs_FILE = true;
-    java.io.File filetalendLogs_FILE = new java.io.File(fileName_talendLogs_FILE);
-    globalMap.put("talendLogs_FILE_FILE_NAME",fileName_talendLogs_FILE);
-        if(filetalendLogs_FILE.exists()){
-            isFileGenerated_talendLogs_FILE = false;
-        }
-            int nb_line_talendLogs_FILE = 0;
-            int splitedFileNo_talendLogs_FILE = 0;
-            int currentRow_talendLogs_FILE = 0;
-
-            final String OUT_DELIM_talendLogs_FILE = /** Start field talendLogs_FILE:FIELDSEPARATOR */";"/** End field talendLogs_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendLogs_FILE = /** Start field talendLogs_FILE:ROWSEPARATOR */"\n"/** End field talendLogs_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendLogs_FILE != null && directory_talendLogs_FILE.trim().length() != 0) {
-                        java.io.File dir_talendLogs_FILE = new java.io.File(directory_talendLogs_FILE);
-                        if(!dir_talendLogs_FILE.exists()) {
-                            dir_talendLogs_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendLogs_FILE = null;
-
-                        outtalendLogs_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendLogs_FILE, true),"ISO-8859-15"));
+ 
 
 
-        resourceMap.put("out_talendLogs_FILE", outtalendLogs_FILE);
-resourceMap.put("nb_line_talendLogs_FILE", nb_line_talendLogs_FILE);
+	tos_count_tDBRow_1++;
+
+/**
+ * [tDBRow_1 main ] stop
+ */
+	
+	/**
+	 * [tDBRow_1 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBRow_1";
+
+	
 
  
 
 
 
 /**
- * [talendLogs_FILE begin ] stop
+ * [tDBRow_1 process_data_begin ] stop
  */
-
-
-
 	
 	/**
-	 * [talendLogs_LOGS begin ] start
+	 * [tDBRow_1 process_data_end ] start
 	 */
 
 	
 
 	
-		
-		ok_Hash.put("talendLogs_LOGS", false);
-		start_Hash.put("talendLogs_LOGS", System.currentTimeMillis());
-		
 	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
+	currentComponent="tDBRow_1";
 
 	
-		int tos_count_talendLogs_LOGS = 0;
-		
+
+ 
+
+
+
+/**
+ * [tDBRow_1 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBRow_1 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBRow_1";
+
+	
+
+	
+        stmt_tDBRow_1.close();
+        resourceMap.remove("stmt_tDBRow_1");
+    resourceMap.put("statementClosed_tDBRow_1", true);
+		if(commitEvery_tDBRow_1>commitCounter_tDBRow_1){
+
+			
+			conn_tDBRow_1.commit();
+			
+	
+			commitCounter_tDBRow_1=0;
+	
+		}
+			conn_tDBRow_1.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+    resourceMap.put("finish_tDBRow_1", true);
+ 
+
+ok_Hash.put("tDBRow_1", true);
+end_Hash.put("tDBRow_1", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBRow_1 end ] stop
+ */
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBRow_1 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBRow_1";
+
+	
 
 try {
-	for (LogCatcherUtils.LogCatcherMessage lcm : talendLogs_LOGS.getMessages()) {
-		row_talendLogs_LOGS.type = lcm.getType();
-		row_talendLogs_LOGS.origin = (lcm.getOrigin()==null || lcm.getOrigin().length()<1 ? null : lcm.getOrigin());
-		row_talendLogs_LOGS.priority = lcm.getPriority();
-		row_talendLogs_LOGS.message = lcm.getMessage();
-		row_talendLogs_LOGS.code = lcm.getCode();
-		
-		row_talendLogs_LOGS.moment = java.util.Calendar.getInstance().getTime();
-	
-    	row_talendLogs_LOGS.pid = pid;
-		row_talendLogs_LOGS.root_pid = rootPid;
-		row_talendLogs_LOGS.father_pid = fatherPid;
-	
-    	row_talendLogs_LOGS.project = projectName;
-    	row_talendLogs_LOGS.job = jobName;
-    	row_talendLogs_LOGS.context = contextStr;
-    		
+    if (resourceMap.get("statementClosed_tDBRow_1") == null) {
+            java.sql.Statement stmtToClose_tDBRow_1 = null;
+            if ((stmtToClose_tDBRow_1 = (java.sql.Statement) resourceMap.remove("stmt_tDBRow_1")) != null) {
+                stmtToClose_tDBRow_1.close();
+            }
+    }
+} finally {
+        if(resourceMap.get("finish_tDBRow_1") == null){
+            java.sql.Connection ctn_tDBRow_1 = null;
+            if((ctn_tDBRow_1 = (java.sql.Connection)resourceMap.get("conn_tDBRow_1")) != null){
+                try {
+                    ctn_tDBRow_1.close();
+                } catch (java.sql.SQLException sqlEx_tDBRow_1) {
+                    String errorMessage_tDBRow_1 = "failed to close the connection in tDBRow_1 :" + sqlEx_tDBRow_1.getMessage();
+                    System.err.println(errorMessage_tDBRow_1);
+                }
+            }
+        }
+    }
  
 
 
 
 /**
- * [talendLogs_LOGS begin ] stop
+ * [tDBRow_1 finally ] stop
  */
-	
-	/**
-	 * [talendLogs_LOGS main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-	tos_count_talendLogs_LOGS++;
-
-/**
- * [talendLogs_LOGS main ] stop
- */
-	
-	/**
-	 * [talendLogs_LOGS process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_LOGS process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendLogs_FILE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-
-
-                    StringBuilder sb_talendLogs_FILE = new StringBuilder();
-                            if(row_talendLogs_LOGS.moment != null) {
-                        sb_talendLogs_FILE.append(
-                            FormatterUtils.format_Date(row_talendLogs_LOGS.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.root_pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.root_pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.father_pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.father_pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.project != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.project
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.job != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.job
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.context != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.context
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.priority != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.priority
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.type != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.type
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.origin != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.origin
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.message != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.message
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.code != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.code
-                        );
-                            }
-                    sb_talendLogs_FILE.append(OUT_DELIM_ROWSEP_talendLogs_FILE);
-
-
-                    nb_line_talendLogs_FILE++;
-                    resourceMap.put("nb_line_talendLogs_FILE", nb_line_talendLogs_FILE);
-
-                        outtalendLogs_FILE.write(sb_talendLogs_FILE.toString());
-
-
-
-
- 
-     row_talendLogs_FILE = row_talendLogs_LOGS;
-
-
-	tos_count_talendLogs_FILE++;
-
-/**
- * [talendLogs_FILE main ] stop
- */
-	
-	/**
-	 * [talendLogs_FILE process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_FILE process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendLogs_CONSOLE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-///////////////////////		
-						
-
-
-
-				strBuffer_talendLogs_CONSOLE = new StringBuilder();
-
-
-
-
-   				
-	    		if(row_talendLogs_FILE.moment != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendLogs_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.pid != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.root_pid != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.root_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.father_pid != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.father_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.project)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.job)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.context)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.priority != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.priority)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.type != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.type)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.origin)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.message != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.message)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.code != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.code)							
-				);
-
-
-							
-	    		} //  			
- 
-
-                    if (globalMap.get("tLogRow_CONSOLE")!=null)
-                    {
-                    	consoleOut_talendLogs_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
-                    }
-                    else
-                    {
-                    	consoleOut_talendLogs_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendLogs_CONSOLE);
-                    }
-                    consoleOut_talendLogs_CONSOLE.println(strBuffer_talendLogs_CONSOLE.toString());
-                    consoleOut_talendLogs_CONSOLE.flush();
-                    nb_line_talendLogs_CONSOLE++;
-//////
-
-//////                    
-                    
-///////////////////////    			
-
- 
-
-
-	tos_count_talendLogs_CONSOLE++;
-
-/**
- * [talendLogs_CONSOLE main ] stop
- */
-	
-	/**
-	 * [talendLogs_CONSOLE process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_CONSOLE process_data_begin ] stop
- */
-	
-	/**
-	 * [talendLogs_CONSOLE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_CONSOLE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendLogs_FILE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_FILE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendLogs_LOGS process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_LOGS process_data_end ] stop
- */
-	
-	/**
-	 * [talendLogs_LOGS end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-	}
-} catch (Exception e_talendLogs_LOGS) {
-	logIgnoredError(String.format("talendLogs_LOGS - tLogCatcher failed to process log message(s) due to internal error: %s", e_talendLogs_LOGS), e_talendLogs_LOGS);
-}
-
- 
-
-ok_Hash.put("talendLogs_LOGS", true);
-end_Hash.put("talendLogs_LOGS", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendLogs_LOGS end ] stop
- */
-
-	
-	/**
-	 * [talendLogs_FILE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-
-
-
-		
-			
-					if(outtalendLogs_FILE!=null) {
-						outtalendLogs_FILE.flush();
-						outtalendLogs_FILE.close();
-					}
-				
-				globalMap.put("talendLogs_FILE_NB_LINE",nb_line_talendLogs_FILE);
-				globalMap.put("talendLogs_FILE_FILE_NAME",fileName_talendLogs_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendLogs_FILE", true);
-	
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendLogs_FILE", true);
-end_Hash.put("talendLogs_FILE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendLogs_FILE end ] stop
- */
-
-	
-	/**
-	 * [talendLogs_CONSOLE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-
-
-//////
-//////
-globalMap.put("talendLogs_CONSOLE_NB_LINE",nb_line_talendLogs_CONSOLE);
-
-///////////////////////    			
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendLogs_CONSOLE", true);
-end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendLogs_CONSOLE end ] stop
- */
-
-
-
-
-
-
-				}//end the resume
-
-				
-
-
-
-	
-			}catch(java.lang.Exception e){	
-				
-				TalendException te = new TalendException(e, currentComponent, globalMap);
-				
-					te.setVirtualComponentName(currentVirtualComponent);
-				
-				throw te;
-			}catch(java.lang.Error error){	
-				
-					runStat.stopThreadStat();
-				
-				throw error;
-			}finally{
-				
-				try{
-					
-	
-	/**
-	 * [talendLogs_LOGS finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_LOGS finally ] stop
- */
-
-	
-	/**
-	 * [talendLogs_FILE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-
-
-		if(resourceMap.get("finish_talendLogs_FILE") == null){ 
-			
-				
-						java.io.Writer outtalendLogs_FILE = (java.io.Writer)resourceMap.get("out_talendLogs_FILE");
-						if(outtalendLogs_FILE!=null) {
-							outtalendLogs_FILE.flush();
-							outtalendLogs_FILE.close();
-						}
-					
-				
-			
-		}
-	
-
- 
-
-
-
-/**
- * [talendLogs_FILE finally ] stop
- */
-
-	
-	/**
-	 * [talendLogs_CONSOLE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_CONSOLE finally ] stop
- */
-
-
-
-
-
-
 				}catch(java.lang.Exception e){	
 					//ignore
 				}catch(java.lang.Error error){
@@ -52464,1777 +49801,7 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 			}
 		
 
-		globalMap.put("talendLogs_LOGS_SUBPROCESS_STATE", 1);
-	}
-	
-
-
-public static class row_talendMeter_FILEStruct implements routines.system.IPersistableRow<row_talendMeter_FILEStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String label;
-
-				public String getLabel () {
-					return this.label;
-				}
-				
-			    public Integer count;
-
-				public Integer getCount () {
-					return this.count;
-				}
-				
-			    public Integer reference;
-
-				public Integer getReference () {
-					return this.reference;
-				}
-				
-			    public String thresholds;
-
-				public String getThresholds () {
-					return this.thresholds;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.label = readString(dis);
-					
-						this.count = readInteger(dis);
-					
-						this.reference = readInteger(dis);
-					
-					this.thresholds = readString(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.label,dos);
-					
-					// Integer
-				
-						writeInteger(this.count,dos);
-					
-					// Integer
-				
-						writeInteger(this.reference,dos);
-					
-					// String
-				
-						writeString(this.thresholds,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",label="+label);
-		sb.append(",count="+String.valueOf(count));
-		sb.append(",reference="+String.valueOf(reference));
-		sb.append(",thresholds="+thresholds);
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendMeter_FILEStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-
-public static class row_talendMeter_METTERStruct implements routines.system.IPersistableRow<row_talendMeter_METTERStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String label;
-
-				public String getLabel () {
-					return this.label;
-				}
-				
-			    public Integer count;
-
-				public Integer getCount () {
-					return this.count;
-				}
-				
-			    public Integer reference;
-
-				public Integer getReference () {
-					return this.reference;
-				}
-				
-			    public String thresholds;
-
-				public String getThresholds () {
-					return this.thresholds;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_seed_data_stg_xml, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_seed_data_stg_xml) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.label = readString(dis);
-					
-						this.count = readInteger(dis);
-					
-						this.reference = readInteger(dis);
-					
-					this.thresholds = readString(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.label,dos);
-					
-					// Integer
-				
-						writeInteger(this.count,dos);
-					
-					// Integer
-				
-						writeInteger(this.reference,dos);
-					
-					// String
-				
-						writeString(this.thresholds,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",label="+label);
-		sb.append(",count="+String.valueOf(count));
-		sb.append(",reference="+String.valueOf(reference));
-		sb.append(",thresholds="+thresholds);
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendMeter_METTERStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-public void talendMeter_METTERProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendMeter_METTER_SUBPROCESS_STATE", 0);
-
- final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
-	
-		String iterateId = "";
-	
-	
-	String currentComponent = "";
-	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
-
-	try {
-			// TDI-39566 avoid throwing an useless Exception
-			boolean resumeIt = true;
-			if (globalResumeTicket == false && resumeEntryMethodName != null) {
-				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
-				resumeIt = resumeEntryMethodName.equals(currentMethodName);
-			}
-			if (resumeIt || globalResumeTicket) { //start the resume
-				globalResumeTicket = true;
-
-
-
-		row_talendMeter_METTERStruct row_talendMeter_METTER = new row_talendMeter_METTERStruct();
-row_talendMeter_METTERStruct row_talendMeter_FILE = row_talendMeter_METTER;
-
-
-
-
-
-	
-	/**
-	 * [talendMeter_CONSOLE begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendMeter_CONSOLE", false);
-		start_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
-				
-		int tos_count_talendMeter_CONSOLE = 0;
-		
-
-	///////////////////////
-	
-		final String OUTPUT_FIELD_SEPARATOR_talendMeter_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendMeter_CONSOLE = null;	
-
- 		StringBuilder strBuffer_talendMeter_CONSOLE = null;
-		int nb_line_talendMeter_CONSOLE = 0;
-///////////////////////    			
-
-
-
- 
-
-
-
-/**
- * [talendMeter_CONSOLE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendMeter_FILE begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendMeter_FILE", false);
-		start_Hash.put("talendMeter_FILE", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
-				
-		int tos_count_talendMeter_FILE = 0;
-		
-
-String fileName_talendMeter_FILE = "";
-    fileName_talendMeter_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"meter_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendMeter_FILE = null;
-    String extension_talendMeter_FILE = null;
-    String directory_talendMeter_FILE = null;
-    if((fileName_talendMeter_FILE.indexOf("/") != -1)) {
-        if(fileName_talendMeter_FILE.lastIndexOf(".") < fileName_talendMeter_FILE.lastIndexOf("/")) {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE;
-            extension_talendMeter_FILE = "";
-        } else {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("."));
-            extension_talendMeter_FILE = fileName_talendMeter_FILE.substring(fileName_talendMeter_FILE.lastIndexOf("."));
-        }
-        directory_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendMeter_FILE.lastIndexOf(".") != -1) {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("."));
-            extension_talendMeter_FILE = fileName_talendMeter_FILE.substring(fileName_talendMeter_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE;
-            extension_talendMeter_FILE = "";
-        }
-        directory_talendMeter_FILE = "";
-    }
-    boolean isFileGenerated_talendMeter_FILE = true;
-    java.io.File filetalendMeter_FILE = new java.io.File(fileName_talendMeter_FILE);
-    globalMap.put("talendMeter_FILE_FILE_NAME",fileName_talendMeter_FILE);
-        if(filetalendMeter_FILE.exists()){
-            isFileGenerated_talendMeter_FILE = false;
-        }
-            int nb_line_talendMeter_FILE = 0;
-            int splitedFileNo_talendMeter_FILE = 0;
-            int currentRow_talendMeter_FILE = 0;
-
-            final String OUT_DELIM_talendMeter_FILE = /** Start field talendMeter_FILE:FIELDSEPARATOR */";"/** End field talendMeter_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendMeter_FILE = /** Start field talendMeter_FILE:ROWSEPARATOR */"\n"/** End field talendMeter_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendMeter_FILE != null && directory_talendMeter_FILE.trim().length() != 0) {
-                        java.io.File dir_talendMeter_FILE = new java.io.File(directory_talendMeter_FILE);
-                        if(!dir_talendMeter_FILE.exists()) {
-                            dir_talendMeter_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendMeter_FILE = null;
-
-                        outtalendMeter_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendMeter_FILE, true),"ISO-8859-15"));
-
-
-        resourceMap.put("out_talendMeter_FILE", outtalendMeter_FILE);
-resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
-
- 
-
-
-
-/**
- * [talendMeter_FILE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendMeter_METTER begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendMeter_METTER", false);
-		start_Hash.put("talendMeter_METTER", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-		int tos_count_talendMeter_METTER = 0;
-		
-
-	for (MetterCatcherUtils.MetterCatcherMessage mcm : talendMeter_METTER.getMessages()) {
-		row_talendMeter_METTER.pid = pid;
-		row_talendMeter_METTER.root_pid = rootPid;
-		row_talendMeter_METTER.father_pid = fatherPid;	
-        row_talendMeter_METTER.project = projectName;
-        row_talendMeter_METTER.job = jobName;
-        row_talendMeter_METTER.context = contextStr;
-		row_talendMeter_METTER.origin = (mcm.getOrigin()==null || mcm.getOrigin().length()<1 ? null : mcm.getOrigin());
-		row_talendMeter_METTER.moment = mcm.getMoment();
-		row_talendMeter_METTER.job_version = mcm.getJobVersion();
-		row_talendMeter_METTER.job_repository_id = mcm.getJobId();
-		row_talendMeter_METTER.system_pid = mcm.getSystemPid();
-		row_talendMeter_METTER.label = mcm.getLabel();
-		row_talendMeter_METTER.count = mcm.getCount();
-		row_talendMeter_METTER.reference = talendMeter_METTER.getConnLinesCount(mcm.getReferense()+"_count");
-		row_talendMeter_METTER.thresholds = mcm.getThresholds();
-		
-
- 
-
-
-
-/**
- * [talendMeter_METTER begin ] stop
- */
-	
-	/**
-	 * [talendMeter_METTER main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-
- 
-
-
-	tos_count_talendMeter_METTER++;
-
-/**
- * [talendMeter_METTER main ] stop
- */
-	
-	/**
-	 * [talendMeter_METTER process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_METTER process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendMeter_FILE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-
-
-                    StringBuilder sb_talendMeter_FILE = new StringBuilder();
-                            if(row_talendMeter_METTER.moment != null) {
-                        sb_talendMeter_FILE.append(
-                            FormatterUtils.format_Date(row_talendMeter_METTER.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.father_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.father_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.root_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.root_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.system_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.system_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.project != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.project
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job_repository_id != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job_repository_id
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job_version != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job_version
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.context != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.context
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.origin != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.origin
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.label != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.label
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.count != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.count
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.reference != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.reference
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.thresholds != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.thresholds
-                        );
-                            }
-                    sb_talendMeter_FILE.append(OUT_DELIM_ROWSEP_talendMeter_FILE);
-
-
-                    nb_line_talendMeter_FILE++;
-                    resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
-
-                        outtalendMeter_FILE.write(sb_talendMeter_FILE.toString());
-
-
-
-
- 
-     row_talendMeter_FILE = row_talendMeter_METTER;
-
-
-	tos_count_talendMeter_FILE++;
-
-/**
- * [talendMeter_FILE main ] stop
- */
-	
-	/**
-	 * [talendMeter_FILE process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_FILE process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendMeter_CONSOLE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
-					}
-					
-///////////////////////		
-						
-
-
-
-				strBuffer_talendMeter_CONSOLE = new StringBuilder();
-
-
-
-
-   				
-	    		if(row_talendMeter_FILE.moment != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendMeter_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.pid != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.father_pid != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.father_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.root_pid != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.root_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.system_pid != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.system_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.project)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job_repository_id != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job_repository_id)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job_version != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job_version)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.context)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.origin)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.label != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.label)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.count != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.count)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.reference != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.reference)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.thresholds != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.thresholds)							
-				);
-
-
-							
-	    		} //  			
- 
-
-                    if (globalMap.get("tLogRow_CONSOLE")!=null)
-                    {
-                    	consoleOut_talendMeter_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
-                    }
-                    else
-                    {
-                    	consoleOut_talendMeter_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendMeter_CONSOLE);
-                    }
-                    consoleOut_talendMeter_CONSOLE.println(strBuffer_talendMeter_CONSOLE.toString());
-                    consoleOut_talendMeter_CONSOLE.flush();
-                    nb_line_talendMeter_CONSOLE++;
-//////
-
-//////                    
-                    
-///////////////////////    			
-
- 
-
-
-	tos_count_talendMeter_CONSOLE++;
-
-/**
- * [talendMeter_CONSOLE main ] stop
- */
-	
-	/**
-	 * [talendMeter_CONSOLE process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_CONSOLE process_data_begin ] stop
- */
-	
-	/**
-	 * [talendMeter_CONSOLE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_CONSOLE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendMeter_FILE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_FILE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendMeter_METTER process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_METTER process_data_end ] stop
- */
-	
-	/**
-	 * [talendMeter_METTER end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-
-	}
-
-
- 
-
-ok_Hash.put("talendMeter_METTER", true);
-end_Hash.put("talendMeter_METTER", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendMeter_METTER end ] stop
- */
-
-	
-	/**
-	 * [talendMeter_FILE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-
-
-
-		
-			
-					if(outtalendMeter_FILE!=null) {
-						outtalendMeter_FILE.flush();
-						outtalendMeter_FILE.close();
-					}
-				
-				globalMap.put("talendMeter_FILE_NB_LINE",nb_line_talendMeter_FILE);
-				globalMap.put("talendMeter_FILE_FILE_NAME",fileName_talendMeter_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendMeter_FILE", true);
-	
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendMeter_FILE", true);
-end_Hash.put("talendMeter_FILE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendMeter_FILE end ] stop
- */
-
-	
-	/**
-	 * [talendMeter_CONSOLE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-
-
-//////
-//////
-globalMap.put("talendMeter_CONSOLE_NB_LINE",nb_line_talendMeter_CONSOLE);
-
-///////////////////////    			
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendMeter_CONSOLE", true);
-end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendMeter_CONSOLE end ] stop
- */
-
-
-
-
-
-
-				}//end the resume
-
-				
-
-
-
-	
-			}catch(java.lang.Exception e){	
-				
-				TalendException te = new TalendException(e, currentComponent, globalMap);
-				
-					te.setVirtualComponentName(currentVirtualComponent);
-				
-				throw te;
-			}catch(java.lang.Error error){	
-				
-					runStat.stopThreadStat();
-				
-				throw error;
-			}finally{
-				
-				try{
-					
-	
-	/**
-	 * [talendMeter_METTER finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_METTER finally ] stop
- */
-
-	
-	/**
-	 * [talendMeter_FILE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
-
-	
-
-
-		if(resourceMap.get("finish_talendMeter_FILE") == null){ 
-			
-				
-						java.io.Writer outtalendMeter_FILE = (java.io.Writer)resourceMap.get("out_talendMeter_FILE");
-						if(outtalendMeter_FILE!=null) {
-							outtalendMeter_FILE.flush();
-							outtalendMeter_FILE.close();
-						}
-					
-				
-			
-		}
-	
-
- 
-
-
-
-/**
- * [talendMeter_FILE finally ] stop
- */
-
-	
-	/**
-	 * [talendMeter_CONSOLE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendMeter_CONSOLE finally ] stop
- */
-
-
-
-
-
-
-				}catch(java.lang.Exception e){	
-					//ignore
-				}catch(java.lang.Error error){
-					//ignore
-				}
-				resourceMap = null;
-			}
-		
-
-		globalMap.put("talendMeter_METTER_SUBPROCESS_STATE", 1);
+		globalMap.put("tDBRow_1_SUBPROCESS_STATE", 1);
 	}
 	
     public String resuming_logs_dir_path = null;
@@ -54547,7 +50114,6 @@ if(execStat) {
     long end = 0;
 
     startTime = System.currentTimeMillis();
-        talendStats_STATS.addMessage("begin");
 
 
 
@@ -54556,11 +50122,6 @@ this.globalResumeTicket = true;//to run tPreJob
 
 
 
-        try {
-            talendStats_STATSProcess(globalMap);
-        } catch (java.lang.Exception e) {
-            e.printStackTrace();
-        }
 
 this.globalResumeTicket = false;//to run others jobs
 
@@ -54571,6 +50132,15 @@ if(!"failure".equals(status)) { status = "end"; }
 globalMap.put("tFileList_1_SUBPROCESS_STATE", -1);
 
 e_tFileList_1.printStackTrace();
+
+}
+try {
+errorCode = null;tJava_1Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tJava_1) {
+globalMap.put("tJava_1_SUBPROCESS_STATE", -1);
+
+e_tJava_1.printStackTrace();
 
 }
 
@@ -54588,12 +50158,6 @@ this.globalResumeTicket = true;//to run tPostJob
         endUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         if (false) {
             System.out.println((endUsedMemory - startUsedMemory) + " bytes memory increase when running : dmd_seed_data_stg_xml");
-        }
-        talendStats_STATS.addMessage(status==""?"end":status, (end-startTime));
-        try {
-            talendStats_STATSProcess(globalMap);
-        } catch (java.lang.Exception e) {
-            e.printStackTrace();
         }
 
 
@@ -54753,6 +50317,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     1409450 characters generated by Talend Open Studio for Data Integration 
- *     on the 13 January, 2021 3:11:36 PM IST
+ *     1302111 characters generated by Talend Open Studio for Data Integration 
+ *     on the 9 December, 2021 7:22:59 PM IST
  ************************************************************************************************/

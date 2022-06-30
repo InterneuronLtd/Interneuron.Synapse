@@ -372,9 +372,6 @@ private RunStat runStat = new RunStat();
 		globalMap.put(KEY_DB_DATASOURCES_RAW, new java.util.HashMap<String, javax.sql.DataSource>(dataSources));
 	}
 
-	LogCatcherUtils talendLogs_LOGS = new LogCatcherUtils();
-	StatCatcherUtils talendStats_STATS = new StatCatcherUtils("_UhLp0D-vEeuPubMxNiErVQ", "0.1");
-	MetterCatcherUtils talendMeter_METTER = new MetterCatcherUtils("_UhLp0D-vEeuPubMxNiErVQ", "0.1");
 
 private final java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 private final java.io.PrintStream errorMessagePS = new java.io.PrintStream(new java.io.BufferedOutputStream(baos));
@@ -470,12 +467,7 @@ private class TalendException extends Exception {
 			}
 
 			if(!(e instanceof TDieException)){
-				talendLogs_LOGS.addMessage("Java Exception", currentComponent, 6, e.getClass().getName() + ":" + e.getMessage(), 1);
-				talendLogs_LOGSProcess(globalMap);
 			}
-			} catch (TalendException e) {
-				// do nothing
-			
 		} catch (Exception e) {
 			this.e.printStackTrace();
 		}
@@ -1347,6 +1339,456 @@ private class TalendException extends Exception {
 					tRowGenerator_1_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
+			public void tDBInput_37_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_19_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_5_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_1_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_38_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_39_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_20_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_7_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_4_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_40_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_41_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_21_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_10_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_11_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_42_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_43_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_22_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_14_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_13_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_44_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_45_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_23_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_17_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_8_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_46_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_47_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_24_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_20_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_14_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_48_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_49_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_25_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_23_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_16_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_50_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_51_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_26_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_26_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_18_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_52_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_53_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_27_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_28_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_20_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_54_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_55_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tMap_28_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBOutput_29_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tLogRow_23_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tDBInput_56_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
 			public void tAdvancedHash_row2_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
@@ -1509,67 +1951,94 @@ private class TalendException extends Exception {
 					tDBInput_36_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
-			public void talendStats_STATS_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendStats_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendStats_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendStats_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendStats_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tAdvancedHash_row20_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
 				
 				status = "failure";
 				
-					talendStats_STATS_onSubJobError(exception, errorComponent, globalMap);
+					tDBInput_37_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
-			public void talendLogs_LOGS_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendLogs_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendLogs_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendLogs_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendLogs_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tAdvancedHash_row39_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
 				
 				status = "failure";
 				
-					talendLogs_LOGS_onSubJobError(exception, errorComponent, globalMap);
+					tDBInput_39_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
-			public void talendMeter_METTER_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendMeter_FILE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendMeter_FILE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
-				
-							talendMeter_CONSOLE_error(exception, errorComponent, globalMap);
-						
-						}
-					
-			public void talendMeter_CONSOLE_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tAdvancedHash_row60_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 				
 				end_Hash.put(errorComponent, System.currentTimeMillis());
 				
 				status = "failure";
 				
-					talendMeter_METTER_onSubJobError(exception, errorComponent, globalMap);
+					tDBInput_41_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row66_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_43_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row69_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_45_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row73_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_47_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row76_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_49_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row79_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_51_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row82_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_53_onSubJobError(exception, errorComponent, globalMap);
+			}
+			
+			public void tAdvancedHash_row85_error(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+				
+				end_Hash.put(errorComponent, System.currentTimeMillis());
+				
+				status = "failure";
+				
+					tDBInput_55_onSubJobError(exception, errorComponent, globalMap);
 			}
 			
 			public void tDBInput_2_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
@@ -1687,17 +2156,52 @@ resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThrea
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
 			}
-			public void talendStats_STATS_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tDBInput_37_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
 			}
-			public void talendLogs_LOGS_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tDBInput_39_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
 			}
-			public void talendMeter_METTER_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+			public void tDBInput_41_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_43_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_45_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_47_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_49_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_51_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_53_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
+
+resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
+
+			}
+			public void tDBInput_55_onSubJobError(Exception exception, String errorComponent, final java.util.Map<String, Object> globalMap) throws TalendException {
 
 resumeUtil.addLog("SYSTEM_LOG", "NODE:"+ errorComponent, "", Thread.currentThread().getId()+ "", "FATAL", "", exception.getMessage(), ResumeUtil.getExceptionStackTrace(exception),"");
 
@@ -60954,118 +61458,37 @@ end_Hash.put("tDBOutput_3", System.currentTimeMillis());
 	
 
 
-public static class row_talendStats_FILEStruct implements routines.system.IPersistableRow<row_talendStats_FILEStruct> {
+public static class row30Struct implements routines.system.IPersistableRow<row30Struct> {
     final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
     static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
 
 	
-			    public java.util.Date moment;
+			    public String dmd_id;
 
-				public java.util.Date getMoment () {
-					return this.moment;
+				public String getDmd_id () {
+					return this.dmd_id;
 				}
 				
-			    public String pid;
+			    public String sync_process_id;
 
-				public String getPid () {
-					return this.pid;
+				public String getSync_process_id () {
+					return this.sync_process_id;
 				}
 				
-			    public String father_pid;
+			    public String dmd_entity_name;
 
-				public String getFather_pid () {
-					return this.father_pid;
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
 				}
 				
-			    public String root_pid;
+			    public String row_action;
 
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message_type;
-
-				public String getMessage_type () {
-					return this.message_type;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Long duration;
-
-				public Long getDuration () {
-					return this.duration;
+				public String getRow_action () {
+					return this.row_action;
 				}
 				
 
 
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
 
 	private String readString(ObjectInputStream dis) throws IOException{
 		String strReturn = null;
@@ -61105,43 +61528,13 @@ public static class row_talendStats_FILEStruct implements routines.system.IPersi
 
         		int length = 0;
 		
-					this.moment = readDate(dis);
+					this.dmd_id = readString(dis);
 					
-					this.pid = readString(dis);
+					this.sync_process_id = readString(dis);
 					
-					this.father_pid = readString(dis);
+					this.dmd_entity_name = readString(dis);
 					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message_type = readString(dis);
-					
-					this.message = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.duration = null;
-           				} else {
-           			    	this.duration = dis.readLong();
-           				}
+					this.row_action = readString(dis);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -61161,71 +61554,21 @@ public static class row_talendStats_FILEStruct implements routines.system.IPersi
         try {
 
 		
-					// java.util.Date
+					// String
 				
-						writeDate(this.moment,dos);
+						writeString(this.dmd_id,dos);
 					
 					// String
 				
-						writeString(this.pid,dos);
+						writeString(this.sync_process_id,dos);
 					
 					// String
 				
-						writeString(this.father_pid,dos);
+						writeString(this.dmd_entity_name,dos);
 					
 					// String
 				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message_type,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Long
-				
-						if(this.duration == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.duration);
-		            	}
+						writeString(this.row_action,dos);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -61240,20 +61583,10 @@ public static class row_talendStats_FILEStruct implements routines.system.IPersi
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",message_type="+message_type);
-		sb.append(",message="+message);
-		sb.append(",duration="+String.valueOf(duration));
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
 	    sb.append("]");
 
 	    return sb.toString();
@@ -61262,7 +61595,7 @@ public static class row_talendStats_FILEStruct implements routines.system.IPersi
     /**
      * Compare keys
      */
-    public int compareTo(row_talendStats_FILEStruct other) {
+    public int compareTo(row30Struct other) {
 
 		int returnValue = -1;
 		
@@ -61294,118 +61627,37 @@ public static class row_talendStats_FILEStruct implements routines.system.IPersi
 
 }
 
-public static class row_talendStats_STATSStruct implements routines.system.IPersistableRow<row_talendStats_STATSStruct> {
+public static class lookup_form_insStruct implements routines.system.IPersistableRow<lookup_form_insStruct> {
     final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
     static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
 
 	
-			    public java.util.Date moment;
+			    public String dmd_id;
 
-				public java.util.Date getMoment () {
-					return this.moment;
+				public String getDmd_id () {
+					return this.dmd_id;
 				}
 				
-			    public String pid;
+			    public String sync_process_id;
 
-				public String getPid () {
-					return this.pid;
+				public String getSync_process_id () {
+					return this.sync_process_id;
 				}
 				
-			    public String father_pid;
+			    public String dmd_entity_name;
 
-				public String getFather_pid () {
-					return this.father_pid;
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
 				}
 				
-			    public String root_pid;
+			    public String row_action;
 
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message_type;
-
-				public String getMessage_type () {
-					return this.message_type;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Long duration;
-
-				public Long getDuration () {
-					return this.duration;
+				public String getRow_action () {
+					return this.row_action;
 				}
 				
 
 
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
 
 	private String readString(ObjectInputStream dis) throws IOException{
 		String strReturn = null;
@@ -61445,43 +61697,13 @@ public static class row_talendStats_STATSStruct implements routines.system.IPers
 
         		int length = 0;
 		
-					this.moment = readDate(dis);
+					this.dmd_id = readString(dis);
 					
-					this.pid = readString(dis);
+					this.sync_process_id = readString(dis);
 					
-					this.father_pid = readString(dis);
+					this.dmd_entity_name = readString(dis);
 					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message_type = readString(dis);
-					
-					this.message = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.duration = null;
-           				} else {
-           			    	this.duration = dis.readLong();
-           				}
+					this.row_action = readString(dis);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -61501,71 +61723,21 @@ public static class row_talendStats_STATSStruct implements routines.system.IPers
         try {
 
 		
-					// java.util.Date
+					// String
 				
-						writeDate(this.moment,dos);
+						writeString(this.dmd_id,dos);
 					
 					// String
 				
-						writeString(this.pid,dos);
+						writeString(this.sync_process_id,dos);
 					
 					// String
 				
-						writeString(this.father_pid,dos);
+						writeString(this.dmd_entity_name,dos);
 					
 					// String
 				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message_type,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Long
-				
-						if(this.duration == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.duration);
-		            	}
+						writeString(this.row_action,dos);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -61580,20 +61752,10 @@ public static class row_talendStats_STATSStruct implements routines.system.IPers
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",message_type="+message_type);
-		sb.append(",message="+message);
-		sb.append(",duration="+String.valueOf(duration));
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
 	    sb.append("]");
 
 	    return sb.toString();
@@ -61602,7 +61764,7 @@ public static class row_talendStats_STATSStruct implements routines.system.IPers
     /**
      * Compare keys
      */
-    public int compareTo(row_talendStats_STATSStruct other) {
+    public int compareTo(lookup_form_insStruct other) {
 
 		int returnValue = -1;
 		
@@ -61633,11 +61795,390 @@ public static class row_talendStats_STATSStruct implements routines.system.IPers
 
 
 }
-public void talendStats_STATSProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendStats_STATS_SUBPROCESS_STATE", 0);
+
+public static class row18Struct implements routines.system.IPersistableRow<row18Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row18Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_37Struct implements routines.system.IPersistableRow<after_tDBInput_37Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_37Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_37Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_37_SUBPROCESS_STATE", 0);
 
  final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
 	
 		String iterateId = "";
 	
@@ -61656,9 +62197,12 @@ public void talendStats_STATSProcess(final java.util.Map<String, Object> globalM
 				globalResumeTicket = true;
 
 
+		tDBInput_38Process(globalMap);
 
-		row_talendStats_STATSStruct row_talendStats_STATS = new row_talendStats_STATSStruct();
-row_talendStats_STATSStruct row_talendStats_FILE = row_talendStats_STATS;
+		row18Struct row18 = new row18Struct();
+lookup_form_insStruct lookup_form_ins = new lookup_form_insStruct();
+row30Struct row30 = new row30Struct();
+
 
 
 
@@ -61666,36 +62210,34 @@ row_talendStats_STATSStruct row_talendStats_FILE = row_talendStats_STATS;
 
 	
 	/**
-	 * [talendStats_CONSOLE begin ] start
+	 * [tLogRow_1 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendStats_CONSOLE", false);
-		start_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
+		ok_Hash.put("tLogRow_1", false);
+		start_Hash.put("tLogRow_1", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
+	currentComponent="tLogRow_1";
 
 	
 					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row30");
 					}
 				
-		int tos_count_talendStats_CONSOLE = 0;
+		int tos_count_tLogRow_1 = 0;
 		
 
 	///////////////////////
 	
-		final String OUTPUT_FIELD_SEPARATOR_talendStats_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendStats_CONSOLE = null;	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_1 = "|";
+		java.io.PrintStream consoleOut_tLogRow_1 = null;	
 
- 		StringBuilder strBuffer_talendStats_CONSOLE = null;
-		int nb_line_talendStats_CONSOLE = 0;
+ 		StringBuilder strBuffer_tLogRow_1 = null;
+		int nb_line_tLogRow_1 = 0;
 ///////////////////////    			
 
 
@@ -61705,328 +62247,303 @@ row_talendStats_STATSStruct row_talendStats_FILE = row_talendStats_STATS;
 
 
 /**
- * [talendStats_CONSOLE begin ] stop
+ * [tLogRow_1 begin ] stop
  */
 
 
 
 	
 	/**
-	 * [talendStats_FILE begin ] start
+	 * [tDBOutput_5 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendStats_FILE", false);
-		start_Hash.put("talendStats_FILE", System.currentTimeMillis());
+		ok_Hash.put("tDBOutput_5", false);
+		start_Hash.put("tDBOutput_5", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
+	currentComponent="tDBOutput_5";
 
 	
 					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"lookup_form_ins");
 					}
 				
-		int tos_count_talendStats_FILE = 0;
+		int tos_count_tDBOutput_5 = 0;
 		
 
-String fileName_talendStats_FILE = "";
-    fileName_talendStats_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"stats_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendStats_FILE = null;
-    String extension_talendStats_FILE = null;
-    String directory_talendStats_FILE = null;
-    if((fileName_talendStats_FILE.indexOf("/") != -1)) {
-        if(fileName_talendStats_FILE.lastIndexOf(".") < fileName_talendStats_FILE.lastIndexOf("/")) {
-            fullName_talendStats_FILE = fileName_talendStats_FILE;
-            extension_talendStats_FILE = "";
-        } else {
-            fullName_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("."));
-            extension_talendStats_FILE = fileName_talendStats_FILE.substring(fileName_talendStats_FILE.lastIndexOf("."));
-        }
-        directory_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendStats_FILE.lastIndexOf(".") != -1) {
-            fullName_talendStats_FILE = fileName_talendStats_FILE.substring(0, fileName_talendStats_FILE.lastIndexOf("."));
-            extension_talendStats_FILE = fileName_talendStats_FILE.substring(fileName_talendStats_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendStats_FILE = fileName_talendStats_FILE;
-            extension_talendStats_FILE = "";
-        }
-        directory_talendStats_FILE = "";
-    }
-    boolean isFileGenerated_talendStats_FILE = true;
-    java.io.File filetalendStats_FILE = new java.io.File(fileName_talendStats_FILE);
-    globalMap.put("talendStats_FILE_FILE_NAME",fileName_talendStats_FILE);
-        if(filetalendStats_FILE.exists()){
-            isFileGenerated_talendStats_FILE = false;
-        }
-            int nb_line_talendStats_FILE = 0;
-            int splitedFileNo_talendStats_FILE = 0;
-            int currentRow_talendStats_FILE = 0;
-
-            final String OUT_DELIM_talendStats_FILE = /** Start field talendStats_FILE:FIELDSEPARATOR */";"/** End field talendStats_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendStats_FILE = /** Start field talendStats_FILE:ROWSEPARATOR */"\n"/** End field talendStats_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendStats_FILE != null && directory_talendStats_FILE.trim().length() != 0) {
-                        java.io.File dir_talendStats_FILE = new java.io.File(directory_talendStats_FILE);
-                        if(!dir_talendStats_FILE.exists()) {
-                            dir_talendStats_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendStats_FILE = null;
-
-                        outtalendStats_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendStats_FILE, true),"ISO-8859-15"));
 
 
-        resourceMap.put("out_talendStats_FILE", outtalendStats_FILE);
-resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
+
+
+String dbschema_tDBOutput_5 = null;
+	dbschema_tDBOutput_5 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_5 = null;
+if(dbschema_tDBOutput_5 == null || dbschema_tDBOutput_5.trim().length() == 0) {
+	tableName_tDBOutput_5 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_5 = dbschema_tDBOutput_5 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_5 = 0;
+int nb_line_update_tDBOutput_5 = 0;
+int nb_line_inserted_tDBOutput_5 = 0;
+int nb_line_deleted_tDBOutput_5 = 0;
+int nb_line_rejected_tDBOutput_5 = 0;
+
+int deletedCount_tDBOutput_5=0;
+int updatedCount_tDBOutput_5=0;
+int insertedCount_tDBOutput_5=0;
+int rejectedCount_tDBOutput_5=0;
+
+boolean whetherReject_tDBOutput_5 = false;
+
+java.sql.Connection conn_tDBOutput_5 = null;
+String dbUser_tDBOutput_5 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_5 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_5 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_5 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_5 = decryptedPassword_tDBOutput_5;
+
+    conn_tDBOutput_5 = java.sql.DriverManager.getConnection(url_tDBOutput_5,dbUser_tDBOutput_5,dbPwd_tDBOutput_5);
+	
+	resourceMap.put("conn_tDBOutput_5", conn_tDBOutput_5);
+        conn_tDBOutput_5.setAutoCommit(false);
+        int commitEvery_tDBOutput_5 = 10000;
+        int commitCounter_tDBOutput_5 = 0;
+
+
+   int batchSize_tDBOutput_5 = 10000;
+   int batchSizeCounter_tDBOutput_5=0;
+
+int count_tDBOutput_5=0;
+	    String insert_tDBOutput_5 = "INSERT INTO \"" + tableName_tDBOutput_5 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_5 = conn_tDBOutput_5.prepareStatement(insert_tDBOutput_5);
+	    resourceMap.put("pstmt_tDBOutput_5", pstmt_tDBOutput_5);
+	    
 
  
 
 
 
 /**
- * [talendStats_FILE begin ] stop
+ * [tDBOutput_5 begin ] stop
  */
 
 
 
 	
 	/**
-	 * [talendStats_STATS begin ] start
+	 * [tMap_19 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendStats_STATS", false);
-		start_Hash.put("talendStats_STATS", System.currentTimeMillis());
+		ok_Hash.put("tMap_19", false);
+		start_Hash.put("tMap_19", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
+	currentComponent="tMap_19";
 
 	
-		int tos_count_talendStats_STATS = 0;
-		
-
-	for (StatCatcherUtils.StatCatcherMessage scm : talendStats_STATS.getMessages()) {
-		row_talendStats_STATS.pid = pid;
-		row_talendStats_STATS.root_pid = rootPid;
-		row_talendStats_STATS.father_pid = fatherPid;	
-    	row_talendStats_STATS.project = projectName;
-    	row_talendStats_STATS.job = jobName;
-    	row_talendStats_STATS.context = contextStr;
-		row_talendStats_STATS.origin = (scm.getOrigin()==null || scm.getOrigin().length()<1 ? null : scm.getOrigin());
-		row_talendStats_STATS.message = scm.getMessage();
-		row_talendStats_STATS.duration = scm.getDuration();
-		row_talendStats_STATS.moment = scm.getMoment();
-		row_talendStats_STATS.message_type = scm.getMessageType();
-		row_talendStats_STATS.job_version = scm.getJobVersion();
-		row_talendStats_STATS.job_repository_id = scm.getJobId();
-		row_talendStats_STATS.system_pid = scm.getSystemPid();
-
- 
-
-
-
-/**
- * [talendStats_STATS begin ] stop
- */
-	
-	/**
-	 * [talendStats_STATS main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
- 
-
-
-	tos_count_talendStats_STATS++;
-
-/**
- * [talendStats_STATS main ] stop
- */
-	
-	/**
-	 * [talendStats_STATS process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_STATS process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendStats_FILE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row18");
 					}
+				
+		int tos_count_tMap_19 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row20Struct> tHash_Lookup_row20 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row20Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row20Struct>) 
+					globalMap.get( "tHash_Lookup_row20" ))
+					;					
+					
+	
+
+row20Struct row20HashKey = new row20Struct();
+row20Struct row20Default = new row20Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_19__Struct  {
+}
+Var__tMap_19__Struct Var__tMap_19 = new Var__tMap_19__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+lookup_form_insStruct lookup_form_ins_tmp = new lookup_form_insStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_19 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_37 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_37", false);
+		start_Hash.put("tDBInput_37", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_37";
+
+	
+		int tos_count_tDBInput_37 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_37 = 0;
+		    java.sql.Connection conn_tDBInput_37 = null;
+				String driverClass_tDBInput_37 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_37 = java.lang.Class.forName(driverClass_tDBInput_37);
+				String dbUser_tDBInput_37 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_37 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_37 = decryptedPassword_tDBInput_37;
+				
+				String url_tDBInput_37 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_37 = java.sql.DriverManager.getConnection(url_tDBInput_37,dbUser_tDBInput_37,dbPwd_tDBInput_37);
+		        
+				conn_tDBInput_37.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_37 = conn_tDBInput_37.createStatement();
+
+		    String dbquery_tDBInput_37 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\"";
+			
+
+            	globalMap.put("tDBInput_37_QUERY",dbquery_tDBInput_37);
+		    java.sql.ResultSet rs_tDBInput_37 = null;
+
+		    try {
+		    	rs_tDBInput_37 = stmt_tDBInput_37.executeQuery(dbquery_tDBInput_37);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_37 = rs_tDBInput_37.getMetaData();
+		    	int colQtyInRs_tDBInput_37 = rsmd_tDBInput_37.getColumnCount();
+
+		    String tmpContent_tDBInput_37 = null;
+		    
+		    
+		    while (rs_tDBInput_37.next()) {
+		        nb_line_tDBInput_37++;
+		        
+							if(colQtyInRs_tDBInput_37 < 1) {
+								row18.cd = null;
+							} else {
+	                         		
+        	row18.cd = routines.system.JDBCUtil.getString(rs_tDBInput_37, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_37 < 2) {
+								row18.cddt = null;
+							} else {
+										
+			row18.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_37, 2);
+		                    }
+							if(colQtyInRs_tDBInput_37 < 3) {
+								row18.cdprev = null;
+							} else {
+	                         		
+        	row18.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_37, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_37 < 4) {
+								row18.desc = null;
+							} else {
+	                         		
+        	row18.desc = routines.system.JDBCUtil.getString(rs_tDBInput_37, 4, false);
+		                    }
 					
 
 
-                    StringBuilder sb_talendStats_FILE = new StringBuilder();
-                            if(row_talendStats_STATS.moment != null) {
-                        sb_talendStats_FILE.append(
-                            FormatterUtils.format_Date(row_talendStats_STATS.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.father_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.father_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.root_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.root_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.system_pid != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.system_pid
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.project != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.project
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job_repository_id != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job_repository_id
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.job_version != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.job_version
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.context != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.context
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.origin != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.origin
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.message_type != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.message_type
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.message != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.message
-                        );
-                            }
-                            sb_talendStats_FILE.append(OUT_DELIM_talendStats_FILE);
-                            if(row_talendStats_STATS.duration != null) {
-                        sb_talendStats_FILE.append(
-                            row_talendStats_STATS.duration
-                        );
-                            }
-                    sb_talendStats_FILE.append(OUT_DELIM_ROWSEP_talendStats_FILE);
-
-
-                    nb_line_talendStats_FILE++;
-                    resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
-
-                        outtalendStats_FILE.write(sb_talendStats_FILE.toString());
-
-
-
-
  
-     row_talendStats_FILE = row_talendStats_STATS;
 
 
-	tos_count_talendStats_FILE++;
 
 /**
- * [talendStats_FILE main ] stop
+ * [tDBInput_37 begin ] stop
  */
 	
 	/**
-	 * [talendStats_FILE process_data_begin ] start
+	 * [tDBInput_37 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_FILE";
+	currentComponent="tDBInput_37";
+
 	
-	currentComponent="talendStats_FILE";
+
+ 
+
+
+	tos_count_tDBInput_37++;
+
+/**
+ * [tDBInput_37 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_37 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_37";
 
 	
 
@@ -62035,296 +62552,196 @@ resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
 
 
 /**
- * [talendStats_FILE process_data_begin ] stop
+ * [tDBInput_37 process_data_begin ] stop
  */
 
 	
 	/**
-	 * [talendStats_CONSOLE main ] start
+	 * [tMap_19 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
+	currentComponent="tMap_19";
 
 	
 					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+						runStat.updateStatOnConnection(iterateId,1,1,"row18");
 					}
 					
-///////////////////////		
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_19 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_19 = false;
+		  boolean mainRowRejected_tMap_19 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row20" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow20 = false;
+       		  	    	
+       		  	    	
+ 							row20Struct row20ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_19) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_19 = false;
+								
+                        		    		    row20HashKey.cd = row18.cd ;
+                        		    		
+
+								
+		                        	row20HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row20.lookup( row20HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row20.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_19 = true;
+	  								
 						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
 
 
 
-				strBuffer_talendStats_CONSOLE = new StringBuilder();
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row20 != null && tHash_Lookup_row20.getCount(row20HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row20' and it contains more one result from keys :  row20.cd = '" + row20HashKey.cd + "'");
+								} // G 071
+							
 
-
-
-
-   				
-	    		if(row_talendStats_FILE.moment != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendStats_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
-				);
-
+							row20Struct row20 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row20Struct fromLookup_row20 = null;
+							row20 = row20Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row20 !=null && tHash_Lookup_row20.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row20 = tHash_Lookup_row20.next();
 
 							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.pid)							
-				);
-
-
 							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.father_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.father_pid)							
-				);
-
-
+								} // G 099
 							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.root_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.root_pid)							
-				);
-
-
 							
-	    		} //  			
 
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.system_pid != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.system_pid)							
-				);
-
-
+							if(fromLookup_row20 != null) {
+								row20 = fromLookup_row20;
+							}
 							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.project)							
-				);
-
-
 							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job)							
-				);
-
-
 							
-	    		} //  			
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_19__Struct Var = Var__tMap_19;// ###############################
+        // ###############################
+        // # Output tables
 
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
+lookup_form_ins = null;
 
+if(!rejectedInnerJoin_tMap_19 ) {
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
 
-   				
-	    		if(row_talendStats_FILE.job_repository_id != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job_repository_id)							
-				);
+// # Output reject table : 'lookup_form_ins'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_19 ) {
+lookup_form_ins_tmp.dmd_id = row18.cd ;
+lookup_form_ins_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+lookup_form_ins_tmp.dmd_entity_name = "dmd_lookup_form";
+lookup_form_ins_tmp.row_action = "i";
+lookup_form_ins = lookup_form_ins_tmp;
+} // closing filter/reject
+// ###############################
 
+} // end of Var scope
 
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.job_version != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.job_version)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.context)							
-				);
+rejectedInnerJoin_tMap_19 = false;
 
 
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
 
 
-   				
-	    		if(row_talendStats_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.origin)							
-				);
 
 
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
 
 
-   				
-	    		if(row_talendStats_FILE.message_type != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.message_type)							
-				);
 
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.message != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.message)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendStats_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendStats_FILE.duration != null) { //              
-                    							
-       
-				strBuffer_talendStats_CONSOLE.append(
-				                String.valueOf(row_talendStats_FILE.duration)							
-				);
-
-
-							
-	    		} //  			
- 
-
-                    if (globalMap.get("tLogRow_CONSOLE")!=null)
-                    {
-                    	consoleOut_talendStats_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
-                    }
-                    else
-                    {
-                    	consoleOut_talendStats_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendStats_CONSOLE);
-                    }
-                    consoleOut_talendStats_CONSOLE.println(strBuffer_talendStats_CONSOLE.toString());
-                    consoleOut_talendStats_CONSOLE.flush();
-                    nb_line_talendStats_CONSOLE++;
-//////
-
-//////                    
-                    
-///////////////////////    			
 
  
 
 
-	tos_count_talendStats_CONSOLE++;
+	tos_count_tMap_19++;
 
 /**
- * [talendStats_CONSOLE main ] stop
+ * [tMap_19 main ] stop
  */
 	
 	/**
-	 * [talendStats_CONSOLE process_data_begin ] start
+	 * [tMap_19 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
+	currentComponent="tMap_19";
 
 	
 
@@ -62333,1338 +62750,160 @@ resourceMap.put("nb_line_talendStats_FILE", nb_line_talendStats_FILE);
 
 
 /**
- * [talendStats_CONSOLE process_data_begin ] stop
+ * [tMap_19 process_data_begin ] stop
  */
+// Start of branch "lookup_form_ins"
+if(lookup_form_ins != null) { 
+
+
+
 	
 	/**
-	 * [talendStats_CONSOLE process_data_end ] start
+	 * [tDBOutput_5 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
+	currentComponent="tDBOutput_5";
 
 	
-
- 
-
-
-
-/**
- * [talendStats_CONSOLE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_FILE process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_FILE process_data_end ] stop
- */
-
-
-
-	
-	/**
-	 * [talendStats_STATS process_data_end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_STATS process_data_end ] stop
- */
-	
-	/**
-	 * [talendStats_STATS end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
-	}
-
-
- 
-
-ok_Hash.put("talendStats_STATS", true);
-end_Hash.put("talendStats_STATS", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendStats_STATS end ] stop
- */
-
-	
-	/**
-	 * [talendStats_FILE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
-
-	
-
-
-
-		
-			
-					if(outtalendStats_FILE!=null) {
-						outtalendStats_FILE.flush();
-						outtalendStats_FILE.close();
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"lookup_form_ins");
 					}
-				
-				globalMap.put("talendStats_FILE_NB_LINE",nb_line_talendStats_FILE);
-				globalMap.put("talendStats_FILE_FILE_NAME",fileName_talendStats_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendStats_FILE", true);
-	
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendStats_FILE", true);
-end_Hash.put("talendStats_FILE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendStats_FILE end ] stop
- */
-
-	
-	/**
-	 * [talendStats_CONSOLE end ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
-
-//////
-//////
-globalMap.put("talendStats_CONSOLE_NB_LINE",nb_line_talendStats_CONSOLE);
-
-///////////////////////    			
-
-				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
-			  	}
-			  	
- 
-
-ok_Hash.put("talendStats_CONSOLE", true);
-end_Hash.put("talendStats_CONSOLE", System.currentTimeMillis());
-
-
-
-
-/**
- * [talendStats_CONSOLE end ] stop
- */
-
-
-
-
-
-
-				}//end the resume
-
-				
-
-
-
-	
-			}catch(java.lang.Exception e){	
-				
-				TalendException te = new TalendException(e, currentComponent, globalMap);
-				
-					te.setVirtualComponentName(currentVirtualComponent);
-				
-				throw te;
-			}catch(java.lang.Error error){	
-				
-					runStat.stopThreadStat();
-				
-				throw error;
-			}finally{
-				
-				try{
 					
-	
-	/**
-	 * [talendStats_STATS finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_STATS";
-	
-	currentComponent="talendStats_STATS";
-
-	
-
- 
 
 
 
-/**
- * [talendStats_STATS finally ] stop
- */
+            row30 = null;
+        whetherReject_tDBOutput_5 = false;
+                    if(lookup_form_ins.dmd_id == null) {
+pstmt_tDBOutput_5.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_5.setString(1, lookup_form_ins.dmd_id);
+}
 
-	
-	/**
-	 * [talendStats_FILE finally ] start
-	 */
+                    if(lookup_form_ins.sync_process_id == null) {
+pstmt_tDBOutput_5.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_5.setString(2, lookup_form_ins.sync_process_id);
+}
 
-	
+                    if(lookup_form_ins.dmd_entity_name == null) {
+pstmt_tDBOutput_5.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_5.setString(3, lookup_form_ins.dmd_entity_name);
+}
 
-	
-	
-		currentVirtualComponent = "talendStats_FILE";
-	
-	currentComponent="talendStats_FILE";
+                    if(lookup_form_ins.row_action == null) {
+pstmt_tDBOutput_5.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_5.setString(4, lookup_form_ins.row_action);
+}
 
-	
-
-
-		if(resourceMap.get("finish_talendStats_FILE") == null){ 
 			
-				
-						java.io.Writer outtalendStats_FILE = (java.io.Writer)resourceMap.get("out_talendStats_FILE");
-						if(outtalendStats_FILE!=null) {
-							outtalendStats_FILE.flush();
-							outtalendStats_FILE.close();
+    		pstmt_tDBOutput_5.addBatch();
+    		nb_line_tDBOutput_5++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_5++;
+    		  
+            if(!whetherReject_tDBOutput_5) {
+                            row30 = new row30Struct();
+                                row30.dmd_id = lookup_form_ins.dmd_id;
+                                row30.sync_process_id = lookup_form_ins.sync_process_id;
+                                row30.dmd_entity_name = lookup_form_ins.dmd_entity_name;
+                                row30.row_action = lookup_form_ins.row_action;
+            }
+    			if ((batchSize_tDBOutput_5 > 0) && (batchSize_tDBOutput_5 <= batchSizeCounter_tDBOutput_5)) {
+                try {
+						int countSum_tDBOutput_5 = 0;
+						    
+						for(int countEach_tDBOutput_5: pstmt_tDBOutput_5.executeBatch()) {
+							countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
 						}
-					
-				
-			
-		}
-	
-
- 
-
-
-
-/**
- * [talendStats_FILE finally ] stop
- */
-
-	
-	/**
-	 * [talendStats_CONSOLE finally ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendStats_CONSOLE";
-	
-	currentComponent="talendStats_CONSOLE";
-
-	
-
- 
-
-
-
-/**
- * [talendStats_CONSOLE finally ] stop
- */
-
-
-
-
-
-
-				}catch(java.lang.Exception e){	
-					//ignore
-				}catch(java.lang.Error error){
-					//ignore
-				}
-				resourceMap = null;
-			}
-		
-
-		globalMap.put("talendStats_STATS_SUBPROCESS_STATE", 1);
-	}
-	
-
-
-public static class row_talendLogs_FILEStruct implements routines.system.IPersistableRow<row_talendLogs_FILEStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public Integer priority;
-
-				public Integer getPriority () {
-					return this.priority;
-				}
-				
-			    public String type;
-
-				public String getType () {
-					return this.type;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Integer code;
-
-				public Integer getCode () {
-					return this.code;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.context = readString(dis);
-					
-						this.priority = readInteger(dis);
-					
-					this.type = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message = readString(dis);
-					
-						this.code = readInteger(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// Integer
-				
-						writeInteger(this.priority,dos);
-					
-					// String
-				
-						writeString(this.type,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Integer
-				
-						writeInteger(this.code,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",context="+context);
-		sb.append(",priority="+String.valueOf(priority));
-		sb.append(",type="+type);
-		sb.append(",origin="+origin);
-		sb.append(",message="+message);
-		sb.append(",code="+String.valueOf(code));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendLogs_FILEStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-
-public static class row_talendLogs_LOGSStruct implements routines.system.IPersistableRow<row_talendLogs_LOGSStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public Integer priority;
-
-				public Integer getPriority () {
-					return this.priority;
-				}
-				
-			    public String type;
-
-				public String getType () {
-					return this.type;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String message;
-
-				public String getMessage () {
-					return this.message;
-				}
-				
-			    public Integer code;
-
-				public Integer getCode () {
-					return this.code;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
-		}
-		return dateReturn;
-	}
-
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
-    }
-
-	private String readString(ObjectInputStream dis) throws IOException{
-		String strReturn = null;
-		int length = 0;
-        length = dis.readInt();
-		if (length == -1) {
-			strReturn = null;
-		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
-		}
-		return strReturn;
-	}
-
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
-		if(str == null) {
-            dos.writeInt(-1);
-		} else {
-            byte[] byteArray = str.getBytes(utf8Charset);
-	    	dos.writeInt(byteArray.length);
-			dos.write(byteArray);
-    	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
-
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.context = readString(dis);
-					
-						this.priority = readInteger(dis);
-					
-					this.type = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.message = readString(dis);
-					
-						this.code = readInteger(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// Integer
-				
-						writeInteger(this.priority,dos);
-					
-					// String
-				
-						writeString(this.type,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.message,dos);
-					
-					// Integer
-				
-						writeInteger(this.code,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",context="+context);
-		sb.append(",priority="+String.valueOf(priority));
-		sb.append(",type="+type);
-		sb.append(",origin="+origin);
-		sb.append(",message="+message);
-		sb.append(",code="+String.valueOf(code));
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendLogs_LOGSStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-public void talendLogs_LOGSProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendLogs_LOGS_SUBPROCESS_STATE", 0);
-
- final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
-	
-		String iterateId = "";
-	
-	
-	String currentComponent = "";
-	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
-
-	try {
-			// TDI-39566 avoid throwing an useless Exception
-			boolean resumeIt = true;
-			if (globalResumeTicket == false && resumeEntryMethodName != null) {
-				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
-				resumeIt = resumeEntryMethodName.equals(currentMethodName);
-			}
-			if (resumeIt || globalResumeTicket) { //start the resume
-				globalResumeTicket = true;
-
-
-
-		row_talendLogs_LOGSStruct row_talendLogs_LOGS = new row_talendLogs_LOGSStruct();
-row_talendLogs_LOGSStruct row_talendLogs_FILE = row_talendLogs_LOGS;
-
-
-
-
-
-	
-	/**
-	 * [talendLogs_CONSOLE begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendLogs_CONSOLE", false);
-		start_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
-
-	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
+				    	
+				    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+				    	
+            	    	batchSizeCounter_tDBOutput_5 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_5){
+				    	java.sql.SQLException ne_tDBOutput_5 = e_tDBOutput_5.getNextException(),sqle_tDBOutput_5=null;
+				    	String errormessage_tDBOutput_5;
+						if (ne_tDBOutput_5 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_5 = new java.sql.SQLException(e_tDBOutput_5.getMessage() + "\ncaused by: " + ne_tDBOutput_5.getMessage(), ne_tDBOutput_5.getSQLState(), ne_tDBOutput_5.getErrorCode(), ne_tDBOutput_5);
+							errormessage_tDBOutput_5 = sqle_tDBOutput_5.getMessage();
+						}else{
+							errormessage_tDBOutput_5 = e_tDBOutput_5.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_5 = 0;
+						for(int countEach_tDBOutput_5: e_tDBOutput_5.getUpdateCounts()) {
+							countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
+						}
+						
+				    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+				    	
+				    	System.err.println(errormessage_tDBOutput_5);
+				    	
 					}
-				
-		int tos_count_talendLogs_CONSOLE = 0;
-		
-
-	///////////////////////
-	
-		final String OUTPUT_FIELD_SEPARATOR_talendLogs_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendLogs_CONSOLE = null;	
-
- 		StringBuilder strBuffer_talendLogs_CONSOLE = null;
-		int nb_line_talendLogs_CONSOLE = 0;
-///////////////////////    			
-
-
-
- 
-
-
-
-/**
- * [talendLogs_CONSOLE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendLogs_FILE begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendLogs_FILE", false);
-		start_Hash.put("talendLogs_FILE", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
-					}
-				
-		int tos_count_talendLogs_FILE = 0;
-		
-
-String fileName_talendLogs_FILE = "";
-    fileName_talendLogs_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"logs_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendLogs_FILE = null;
-    String extension_talendLogs_FILE = null;
-    String directory_talendLogs_FILE = null;
-    if((fileName_talendLogs_FILE.indexOf("/") != -1)) {
-        if(fileName_talendLogs_FILE.lastIndexOf(".") < fileName_talendLogs_FILE.lastIndexOf("/")) {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE;
-            extension_talendLogs_FILE = "";
-        } else {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("."));
-            extension_talendLogs_FILE = fileName_talendLogs_FILE.substring(fileName_talendLogs_FILE.lastIndexOf("."));
-        }
-        directory_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendLogs_FILE.lastIndexOf(".") != -1) {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE.substring(0, fileName_talendLogs_FILE.lastIndexOf("."));
-            extension_talendLogs_FILE = fileName_talendLogs_FILE.substring(fileName_talendLogs_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendLogs_FILE = fileName_talendLogs_FILE;
-            extension_talendLogs_FILE = "";
-        }
-        directory_talendLogs_FILE = "";
-    }
-    boolean isFileGenerated_talendLogs_FILE = true;
-    java.io.File filetalendLogs_FILE = new java.io.File(fileName_talendLogs_FILE);
-    globalMap.put("talendLogs_FILE_FILE_NAME",fileName_talendLogs_FILE);
-        if(filetalendLogs_FILE.exists()){
-            isFileGenerated_talendLogs_FILE = false;
-        }
-            int nb_line_talendLogs_FILE = 0;
-            int splitedFileNo_talendLogs_FILE = 0;
-            int currentRow_talendLogs_FILE = 0;
-
-            final String OUT_DELIM_talendLogs_FILE = /** Start field talendLogs_FILE:FIELDSEPARATOR */";"/** End field talendLogs_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendLogs_FILE = /** Start field talendLogs_FILE:ROWSEPARATOR */"\n"/** End field talendLogs_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendLogs_FILE != null && directory_talendLogs_FILE.trim().length() != 0) {
-                        java.io.File dir_talendLogs_FILE = new java.io.File(directory_talendLogs_FILE);
-                        if(!dir_talendLogs_FILE.exists()) {
-                            dir_talendLogs_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendLogs_FILE = null;
-
-                        outtalendLogs_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendLogs_FILE, true),"ISO-8859-15"));
-
-
-        resourceMap.put("out_talendLogs_FILE", outtalendLogs_FILE);
-resourceMap.put("nb_line_talendLogs_FILE", nb_line_talendLogs_FILE);
-
- 
-
-
-
-/**
- * [talendLogs_FILE begin ] stop
- */
-
-
-
-	
-	/**
-	 * [talendLogs_LOGS begin ] start
-	 */
-
-	
-
-	
-		
-		ok_Hash.put("talendLogs_LOGS", false);
-		start_Hash.put("talendLogs_LOGS", System.currentTimeMillis());
-		
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-		int tos_count_talendLogs_LOGS = 0;
-		
-
-try {
-	for (LogCatcherUtils.LogCatcherMessage lcm : talendLogs_LOGS.getMessages()) {
-		row_talendLogs_LOGS.type = lcm.getType();
-		row_talendLogs_LOGS.origin = (lcm.getOrigin()==null || lcm.getOrigin().length()<1 ? null : lcm.getOrigin());
-		row_talendLogs_LOGS.priority = lcm.getPriority();
-		row_talendLogs_LOGS.message = lcm.getMessage();
-		row_talendLogs_LOGS.code = lcm.getCode();
-		
-		row_talendLogs_LOGS.moment = java.util.Calendar.getInstance().getTime();
-	
-    	row_talendLogs_LOGS.pid = pid;
-		row_talendLogs_LOGS.root_pid = rootPid;
-		row_talendLogs_LOGS.father_pid = fatherPid;
-	
-    	row_talendLogs_LOGS.project = projectName;
-    	row_talendLogs_LOGS.job = jobName;
-    	row_talendLogs_LOGS.context = contextStr;
+    			}
     		
- 
-
-
-
-/**
- * [talendLogs_LOGS begin ] stop
- */
-	
-	/**
-	 * [talendLogs_LOGS main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-	tos_count_talendLogs_LOGS++;
-
-/**
- * [talendLogs_LOGS main ] stop
- */
-	
-	/**
-	 * [talendLogs_LOGS process_data_begin ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
-
-	
-
- 
-
-
-
-/**
- * [talendLogs_LOGS process_data_begin ] stop
- */
-
-	
-	/**
-	 * [talendLogs_FILE main ] start
-	 */
-
-	
-
-	
-	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
-
-	
-					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+    		    commitCounter_tDBOutput_5++;
+                if(commitEvery_tDBOutput_5 <= commitCounter_tDBOutput_5) {
+                if ((batchSize_tDBOutput_5 > 0) && (batchSizeCounter_tDBOutput_5 > 0)) {
+                try {
+                		int countSum_tDBOutput_5 = 0;
+                		    
+						for(int countEach_tDBOutput_5: pstmt_tDBOutput_5.executeBatch()) {
+							countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+            	    	
+                batchSizeCounter_tDBOutput_5 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_5){
+			    	java.sql.SQLException ne_tDBOutput_5 = e_tDBOutput_5.getNextException(),sqle_tDBOutput_5=null;
+			    	String errormessage_tDBOutput_5;
+					if (ne_tDBOutput_5 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_5 = new java.sql.SQLException(e_tDBOutput_5.getMessage() + "\ncaused by: " + ne_tDBOutput_5.getMessage(), ne_tDBOutput_5.getSQLState(), ne_tDBOutput_5.getErrorCode(), ne_tDBOutput_5);
+						errormessage_tDBOutput_5 = sqle_tDBOutput_5.getMessage();
+					}else{
+						errormessage_tDBOutput_5 = e_tDBOutput_5.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_5 = 0;
+					for(int countEach_tDBOutput_5: e_tDBOutput_5.getUpdateCounts()) {
+						countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
 					}
 					
-
-
-                    StringBuilder sb_talendLogs_FILE = new StringBuilder();
-                            if(row_talendLogs_LOGS.moment != null) {
-                        sb_talendLogs_FILE.append(
-                            FormatterUtils.format_Date(row_talendLogs_LOGS.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.root_pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.root_pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.father_pid != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.father_pid
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.project != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.project
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.job != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.job
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.context != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.context
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.priority != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.priority
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.type != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.type
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.origin != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.origin
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.message != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.message
-                        );
-                            }
-                            sb_talendLogs_FILE.append(OUT_DELIM_talendLogs_FILE);
-                            if(row_talendLogs_LOGS.code != null) {
-                        sb_talendLogs_FILE.append(
-                            row_talendLogs_LOGS.code
-                        );
-                            }
-                    sb_talendLogs_FILE.append(OUT_DELIM_ROWSEP_talendLogs_FILE);
-
-
-                    nb_line_talendLogs_FILE++;
-                    resourceMap.put("nb_line_talendLogs_FILE", nb_line_talendLogs_FILE);
-
-                        outtalendLogs_FILE.write(sb_talendLogs_FILE.toString());
-
-
-
+			    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+			    	
+			    	System.err.println(errormessage_tDBOutput_5);
+			    	
+				}
+            }
+                	conn_tDBOutput_5.commit();
+                	
+                	commitCounter_tDBOutput_5=0;
+                }
 
  
-     row_talendLogs_FILE = row_talendLogs_LOGS;
 
 
-	tos_count_talendLogs_FILE++;
+	tos_count_tDBOutput_5++;
 
 /**
- * [talendLogs_FILE main ] stop
+ * [tDBOutput_5 main ] stop
  */
 	
 	/**
-	 * [talendLogs_FILE process_data_begin ] start
+	 * [tDBOutput_5 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
+	currentComponent="tDBOutput_5";
 
 	
 
@@ -63673,25 +62912,27 @@ try {
 
 
 /**
- * [talendLogs_FILE process_data_begin ] stop
+ * [tDBOutput_5 process_data_begin ] stop
  */
+// Start of branch "row30"
+if(row30 != null) { 
+
+
 
 	
 	/**
-	 * [talendLogs_CONSOLE main ] start
+	 * [tLogRow_1 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
+	currentComponent="tLogRow_1";
 
 	
 					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+						runStat.updateStatOnConnection(iterateId,1,1,"row30");
 					}
 					
 ///////////////////////		
@@ -63699,193 +62940,65 @@ try {
 
 
 
-				strBuffer_talendLogs_CONSOLE = new StringBuilder();
+				strBuffer_tLogRow_1 = new StringBuilder();
 
 
 
 
    				
-	    		if(row_talendLogs_FILE.moment != null) { //              
+	    		if(row30.dmd_id != null) { //              
                     							
        
-				strBuffer_talendLogs_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendLogs_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
+				strBuffer_tLogRow_1.append(
+				                String.valueOf(row30.dmd_id)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendLogs_CONSOLE.append("|");
+    			strBuffer_tLogRow_1.append("|");
     			
 
 
    				
-	    		if(row_talendLogs_FILE.pid != null) { //              
+	    		if(row30.sync_process_id != null) { //              
                     							
        
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.pid)							
+				strBuffer_tLogRow_1.append(
+				                String.valueOf(row30.sync_process_id)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendLogs_CONSOLE.append("|");
+    			strBuffer_tLogRow_1.append("|");
     			
 
 
    				
-	    		if(row_talendLogs_FILE.root_pid != null) { //              
+	    		if(row30.dmd_entity_name != null) { //              
                     							
        
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.root_pid)							
+				strBuffer_tLogRow_1.append(
+				                String.valueOf(row30.dmd_entity_name)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendLogs_CONSOLE.append("|");
+    			strBuffer_tLogRow_1.append("|");
     			
 
 
    				
-	    		if(row_talendLogs_FILE.father_pid != null) { //              
+	    		if(row30.row_action != null) { //              
                     							
        
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.father_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.project)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.job)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.context)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.priority != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.priority)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.type != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.type)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.origin)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.message != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.message)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendLogs_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendLogs_FILE.code != null) { //              
-                    							
-       
-				strBuffer_talendLogs_CONSOLE.append(
-				                String.valueOf(row_talendLogs_FILE.code)							
+				strBuffer_tLogRow_1.append(
+				                String.valueOf(row30.row_action)							
 				);
 
 
@@ -63895,16 +63008,16 @@ try {
 
                     if (globalMap.get("tLogRow_CONSOLE")!=null)
                     {
-                    	consoleOut_talendLogs_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    	consoleOut_tLogRow_1 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
                     }
                     else
                     {
-                    	consoleOut_talendLogs_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendLogs_CONSOLE);
+                    	consoleOut_tLogRow_1 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_1);
                     }
-                    consoleOut_talendLogs_CONSOLE.println(strBuffer_talendLogs_CONSOLE.toString());
-                    consoleOut_talendLogs_CONSOLE.flush();
-                    nb_line_talendLogs_CONSOLE++;
+                    consoleOut_tLogRow_1.println(strBuffer_tLogRow_1.toString());
+                    consoleOut_tLogRow_1.flush();
+                    nb_line_tLogRow_1++;
 //////
 
 //////                    
@@ -63914,23 +63027,21 @@ try {
  
 
 
-	tos_count_talendLogs_CONSOLE++;
+	tos_count_tLogRow_1++;
 
 /**
- * [talendLogs_CONSOLE main ] stop
+ * [tLogRow_1 main ] stop
  */
 	
 	/**
-	 * [talendLogs_CONSOLE process_data_begin ] start
+	 * [tLogRow_1 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
+	currentComponent="tLogRow_1";
 
 	
 
@@ -63939,20 +63050,18 @@ try {
 
 
 /**
- * [talendLogs_CONSOLE process_data_begin ] stop
+ * [tLogRow_1 process_data_begin ] stop
  */
 	
 	/**
-	 * [talendLogs_CONSOLE process_data_end ] start
+	 * [tLogRow_1 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
-	
-	currentComponent="talendLogs_CONSOLE";
+	currentComponent="tLogRow_1";
 
 	
 
@@ -63961,23 +63070,24 @@ try {
 
 
 /**
- * [talendLogs_CONSOLE process_data_end ] stop
+ * [tLogRow_1 process_data_end ] stop
  */
+
+} // End of branch "row30"
+
 
 
 
 	
 	/**
-	 * [talendLogs_FILE process_data_end ] start
+	 * [tDBOutput_5 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
+	currentComponent="tDBOutput_5";
 
 	
 
@@ -63986,23 +63096,24 @@ try {
 
 
 /**
- * [talendLogs_FILE process_data_end ] stop
+ * [tDBOutput_5 process_data_end ] stop
  */
+
+} // End of branch "lookup_form_ins"
+
 
 
 
 	
 	/**
-	 * [talendLogs_LOGS process_data_end ] start
+	 * [tMap_19 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
+	currentComponent="tMap_19";
 
 	
 
@@ -64011,124 +63122,259 @@ try {
 
 
 /**
- * [talendLogs_LOGS process_data_end ] stop
+ * [tMap_19 process_data_end ] stop
  */
+
+
+
 	
 	/**
-	 * [talendLogs_LOGS end ] start
+	 * [tDBInput_37 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
+	currentComponent="tDBInput_37";
 
 	
+
+ 
+
+
+
+/**
+ * [tDBInput_37 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_37 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_37";
+
+	
+
 	}
-} catch (Exception e_talendLogs_LOGS) {
-	logIgnoredError(String.format("talendLogs_LOGS - tLogCatcher failed to process log message(s) due to internal error: %s", e_talendLogs_LOGS), e_talendLogs_LOGS);
+}finally{
+	if (rs_tDBInput_37 != null) {
+		rs_tDBInput_37.close();
+	}
+	if (stmt_tDBInput_37 != null) {
+		stmt_tDBInput_37.close();
+	}
+	if(conn_tDBInput_37 != null && !conn_tDBInput_37.isClosed()) {
+		
+			conn_tDBInput_37.commit();
+			
+		
+			conn_tDBInput_37.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
 }
-
+globalMap.put("tDBInput_37_NB_LINE",nb_line_tDBInput_37);
  
 
-ok_Hash.put("talendLogs_LOGS", true);
-end_Hash.put("talendLogs_LOGS", System.currentTimeMillis());
+ok_Hash.put("tDBInput_37", true);
+end_Hash.put("tDBInput_37", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendLogs_LOGS end ] stop
+ * [tDBInput_37 end ] stop
  */
 
 	
 	/**
-	 * [talendLogs_FILE end ] start
+	 * [tMap_19 end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
+	currentComponent="tMap_19";
 
 	
 
 
-
-		
-			
-					if(outtalendLogs_FILE!=null) {
-						outtalendLogs_FILE.flush();
-						outtalendLogs_FILE.close();
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row20 != null) {
+						tHash_Lookup_row20.endGet();
 					}
+					globalMap.remove( "tHash_Lookup_row20" );
+
+					
+					
 				
-				globalMap.put("talendLogs_FILE_NB_LINE",nb_line_talendLogs_FILE);
-				globalMap.put("talendLogs_FILE_FILE_NAME",fileName_talendLogs_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendLogs_FILE", true);
-	
+// ###############################      
+
+
+
+
 
 				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row18");
 			  	}
 			  	
  
 
-ok_Hash.put("talendLogs_FILE", true);
-end_Hash.put("talendLogs_FILE", System.currentTimeMillis());
+ok_Hash.put("tMap_19", true);
+end_Hash.put("tMap_19", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendLogs_FILE end ] stop
+ * [tMap_19 end ] stop
  */
 
 	
 	/**
-	 * [talendLogs_CONSOLE end ] start
+	 * [tDBOutput_5 end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
+	currentComponent="tDBOutput_5";
+
 	
-	currentComponent="talendLogs_CONSOLE";
+
+
+
+	    try {
+				int countSum_tDBOutput_5 = 0;
+				if (pstmt_tDBOutput_5 != null && batchSizeCounter_tDBOutput_5 > 0) {
+						
+					for(int countEach_tDBOutput_5: pstmt_tDBOutput_5.executeBatch()) {
+						countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_5){
+	    	java.sql.SQLException ne_tDBOutput_5 = e_tDBOutput_5.getNextException(),sqle_tDBOutput_5=null;
+	    	String errormessage_tDBOutput_5;
+			if (ne_tDBOutput_5 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_5 = new java.sql.SQLException(e_tDBOutput_5.getMessage() + "\ncaused by: " + ne_tDBOutput_5.getMessage(), ne_tDBOutput_5.getSQLState(), ne_tDBOutput_5.getErrorCode(), ne_tDBOutput_5);
+				errormessage_tDBOutput_5 = sqle_tDBOutput_5.getMessage();
+			}else{
+				errormessage_tDBOutput_5 = e_tDBOutput_5.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_5 = 0;
+			for(int countEach_tDBOutput_5: e_tDBOutput_5.getUpdateCounts()) {
+				countSum_tDBOutput_5 += (countEach_tDBOutput_5 < 0 ? 0 : countEach_tDBOutput_5);
+			}
+			
+	    		insertedCount_tDBOutput_5 += countSum_tDBOutput_5;
+	    	
+	    	System.err.println(errormessage_tDBOutput_5);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_5 != null) {
+        		
+            pstmt_tDBOutput_5.close();
+            resourceMap.remove("pstmt_tDBOutput_5");
+        }
+    resourceMap.put("statementClosed_tDBOutput_5", true);
+			
+			conn_tDBOutput_5.commit();
+			
+		
+    	conn_tDBOutput_5 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_5", true);
+    	
+
+	nb_line_deleted_tDBOutput_5=nb_line_deleted_tDBOutput_5+ deletedCount_tDBOutput_5;
+	nb_line_update_tDBOutput_5=nb_line_update_tDBOutput_5 + updatedCount_tDBOutput_5;
+	nb_line_inserted_tDBOutput_5=nb_line_inserted_tDBOutput_5 + insertedCount_tDBOutput_5;
+	nb_line_rejected_tDBOutput_5=nb_line_rejected_tDBOutput_5 + rejectedCount_tDBOutput_5;
+	
+        globalMap.put("tDBOutput_5_NB_LINE",nb_line_tDBOutput_5);
+        globalMap.put("tDBOutput_5_NB_LINE_UPDATED",nb_line_update_tDBOutput_5);
+        globalMap.put("tDBOutput_5_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_5);
+        globalMap.put("tDBOutput_5_NB_LINE_DELETED",nb_line_deleted_tDBOutput_5);
+        globalMap.put("tDBOutput_5_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_5);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"lookup_form_ins");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_5", true);
+end_Hash.put("tDBOutput_5", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_5 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_1 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_1";
 
 	
 
 
 //////
 //////
-globalMap.put("talendLogs_CONSOLE_NB_LINE",nb_line_talendLogs_CONSOLE);
+globalMap.put("tLogRow_1_NB_LINE",nb_line_tLogRow_1);
 
 ///////////////////////    			
 
 				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row30");
 			  	}
 			  	
  
 
-ok_Hash.put("talendLogs_CONSOLE", true);
-end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
+ok_Hash.put("tLogRow_1", true);
+end_Hash.put("tLogRow_1", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendLogs_CONSOLE end ] stop
+ * [tLogRow_1 end ] stop
  */
+
+
+
 
 
 
@@ -64146,8 +63392,6 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 				
 				TalendException te = new TalendException(e, currentComponent, globalMap);
 				
-					te.setVirtualComponentName(currentVirtualComponent);
-				
 				throw te;
 			}catch(java.lang.Error error){	
 				
@@ -64156,20 +63400,21 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 				throw error;
 			}finally{
 				
+					     			//free memory for "tMap_19"
+					     			globalMap.remove("tHash_Lookup_row20"); 
+				     			
 				try{
 					
 	
 	/**
-	 * [talendLogs_LOGS finally ] start
+	 * [tDBInput_37 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_LOGS";
-	
-	currentComponent="talendLogs_LOGS";
+	currentComponent="tDBInput_37";
 
 	
 
@@ -64178,37 +63423,20 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendLogs_LOGS finally ] stop
+ * [tDBInput_37 finally ] stop
  */
 
 	
 	/**
-	 * [talendLogs_FILE finally ] start
+	 * [tMap_19 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_FILE";
-	
-	currentComponent="talendLogs_FILE";
+	currentComponent="tMap_19";
 
-	
-
-
-		if(resourceMap.get("finish_talendLogs_FILE") == null){ 
-			
-				
-						java.io.Writer outtalendLogs_FILE = (java.io.Writer)resourceMap.get("out_talendLogs_FILE");
-						if(outtalendLogs_FILE!=null) {
-							outtalendLogs_FILE.flush();
-							outtalendLogs_FILE.close();
-						}
-					
-				
-			
-		}
 	
 
  
@@ -64216,21 +63444,62 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendLogs_FILE finally ] stop
+ * [tMap_19 finally ] stop
  */
 
 	
 	/**
-	 * [talendLogs_CONSOLE finally ] start
+	 * [tDBOutput_5 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendLogs_CONSOLE";
+	currentComponent="tDBOutput_5";
+
 	
-	currentComponent="talendLogs_CONSOLE";
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_5") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_5 = null;
+                if ((pstmtToClose_tDBOutput_5 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_5")) != null) {
+                    pstmtToClose_tDBOutput_5.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_5") == null){
+            java.sql.Connection ctn_tDBOutput_5 = null;
+            if((ctn_tDBOutput_5 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_5")) != null){
+                try {
+                    ctn_tDBOutput_5.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_5) {
+                    String errorMessage_tDBOutput_5 = "failed to close the connection in tDBOutput_5 :" + sqlEx_tDBOutput_5.getMessage();
+                    System.err.println(errorMessage_tDBOutput_5);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_5 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_1 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_1";
 
 	
 
@@ -64239,8 +63508,11 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendLogs_CONSOLE finally ] stop
+ * [tLogRow_1 finally ] stop
  */
+
+
+
 
 
 
@@ -64256,129 +63528,107 @@ end_Hash.put("talendLogs_CONSOLE", System.currentTimeMillis());
 			}
 		
 
-		globalMap.put("talendLogs_LOGS_SUBPROCESS_STATE", 1);
+		globalMap.put("tDBInput_37_SUBPROCESS_STATE", 1);
 	}
 	
 
 
-public static class row_talendMeter_FILEStruct implements routines.system.IPersistableRow<row_talendMeter_FILEStruct> {
+public static class row20Struct implements routines.system.IPersistableComparableLookupRow<row20Struct> {
     final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
     static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
 
 	
-			    public java.util.Date moment;
+			    public String cd;
 
-				public java.util.Date getMoment () {
-					return this.moment;
+				public String getCd () {
+					return this.cd;
 				}
 				
-			    public String pid;
+			    public java.util.Date cddt;
 
-				public String getPid () {
-					return this.pid;
+				public java.util.Date getCddt () {
+					return this.cddt;
 				}
 				
-			    public String father_pid;
+			    public String cdprev;
 
-				public String getFather_pid () {
-					return this.father_pid;
+				public String getCdprev () {
+					return this.cdprev;
 				}
 				
-			    public String root_pid;
+			    public String desc;
 
-				public String getRoot_pid () {
-					return this.root_pid;
+				public String getDesc () {
+					return this.desc;
 				}
 				
-			    public Long system_pid;
+			    public Boolean is_latest;
 
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String label;
-
-				public String getLabel () {
-					return this.label;
-				}
-				
-			    public Integer count;
-
-				public Integer getCount () {
-					return this.count;
-				}
-				
-			    public Integer reference;
-
-				public Integer getReference () {
-					return this.reference;
-				}
-				
-			    public String thresholds;
-
-				public String getThresholds () {
-					return this.thresholds;
+				public Boolean getIs_latest () {
+					return this.is_latest;
 				}
 				
 
 
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
-		java.util.Date dateReturn = null;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			dateReturn = null;
-		} else {
-	    	dateReturn = new Date(dis.readLong());
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cd == null) ? 0 : this.cd.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
 		}
-		return dateReturn;
+		return this.hashCode;
 	}
 
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
-		if(date1 == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeLong(date1.getTime());
-    	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row20Struct other = (row20Struct) obj;
+		
+						if (this.cd == null) {
+							if (other.cd != null)
+								return false;
+						
+						} else if (!this.cd.equals(other.cd))
+						
+							return false;
+					
+
+		return true;
     }
+
+	public void copyDataTo(row20Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            other.is_latest = this.is_latest;
+	            
+	}
+
+	public void copyKeysDataTo(row20Struct other) {
+
+		other.cd = this.cd;
+	            	
+	}
+
+
+
 
 	private String readString(ObjectInputStream dis) throws IOException{
 		String strReturn = null;
@@ -64409,322 +63659,10 @@ public static class row_talendMeter_FILEStruct implements routines.system.IPersi
 			dos.write(byteArray);
     	}
     }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
-	}
 
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
-
-		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
-
-        	try {
-
-        		int length = 0;
-		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.label = readString(dis);
-					
-						this.count = readInteger(dis);
-					
-						this.reference = readInteger(dis);
-					
-					this.thresholds = readString(dis);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-
-		
-
-        }
-
-		
-
-      }
-
-
-    }
-
-    public void writeData(ObjectOutputStream dos) {
-        try {
-
-		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
-					// String
-				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.label,dos);
-					
-					// Integer
-				
-						writeInteger(this.count,dos);
-					
-					// Integer
-				
-						writeInteger(this.reference,dos);
-					
-					// String
-				
-						writeString(this.thresholds,dos);
-					
-        	} catch (IOException e) {
-	            throw new RuntimeException(e);
-        }
-
-
-    }
-
-
-    public String toString() {
-
-		StringBuilder sb = new StringBuilder();
-		sb.append(super.toString());
-		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",label="+label);
-		sb.append(",count="+String.valueOf(count));
-		sb.append(",reference="+String.valueOf(reference));
-		sb.append(",thresholds="+thresholds);
-	    sb.append("]");
-
-	    return sb.toString();
-    }
-
-    /**
-     * Compare keys
-     */
-    public int compareTo(row_talendMeter_FILEStruct other) {
-
-		int returnValue = -1;
-		
-	    return returnValue;
-    }
-
-
-    private int checkNullsAndCompare(Object object1, Object object2) {
-        int returnValue = 0;
-		if (object1 instanceof Comparable && object2 instanceof Comparable) {
-            returnValue = ((Comparable) object1).compareTo(object2);
-        } else if (object1 != null && object2 != null) {
-            returnValue = compareStrings(object1.toString(), object2.toString());
-        } else if (object1 == null && object2 != null) {
-            returnValue = 1;
-        } else if (object1 != null && object2 == null) {
-            returnValue = -1;
-        } else {
-            returnValue = 0;
-        }
-
-        return returnValue;
-    }
-
-    private int compareStrings(String string1, String string2) {
-        return string1.compareTo(string2);
-    }
-
-
-}
-
-public static class row_talendMeter_METTERStruct implements routines.system.IPersistableRow<row_talendMeter_METTERStruct> {
-    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
-
-	
-			    public java.util.Date moment;
-
-				public java.util.Date getMoment () {
-					return this.moment;
-				}
-				
-			    public String pid;
-
-				public String getPid () {
-					return this.pid;
-				}
-				
-			    public String father_pid;
-
-				public String getFather_pid () {
-					return this.father_pid;
-				}
-				
-			    public String root_pid;
-
-				public String getRoot_pid () {
-					return this.root_pid;
-				}
-				
-			    public Long system_pid;
-
-				public Long getSystem_pid () {
-					return this.system_pid;
-				}
-				
-			    public String project;
-
-				public String getProject () {
-					return this.project;
-				}
-				
-			    public String job;
-
-				public String getJob () {
-					return this.job;
-				}
-				
-			    public String job_repository_id;
-
-				public String getJob_repository_id () {
-					return this.job_repository_id;
-				}
-				
-			    public String job_version;
-
-				public String getJob_version () {
-					return this.job_version;
-				}
-				
-			    public String context;
-
-				public String getContext () {
-					return this.context;
-				}
-				
-			    public String origin;
-
-				public String getOrigin () {
-					return this.origin;
-				}
-				
-			    public String label;
-
-				public String getLabel () {
-					return this.label;
-				}
-				
-			    public Integer count;
-
-				public Integer getCount () {
-					return this.count;
-				}
-				
-			    public Integer reference;
-
-				public Integer getReference () {
-					return this.reference;
-				}
-				
-			    public String thresholds;
-
-				public String getThresholds () {
-					return this.thresholds;
-				}
-				
-
-
-
-	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
 		java.util.Date dateReturn = null;
-        int length = 0;
+		int length = 0;
         length = dis.readByte();
 		if (length == -1) {
 			dateReturn = null;
@@ -64734,36 +63672,30 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
 		return dateReturn;
 	}
 
-    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
 		if(date1 == null) {
             dos.writeByte(-1);
 		} else {
 			dos.writeByte(0);
 	    	dos.writeLong(date1.getTime());
     	}
-    }
+	}
 
-	private String readString(ObjectInputStream dis) throws IOException{
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
 		String strReturn = null;
 		int length = 0;
         length = dis.readInt();
 		if (length == -1) {
 			strReturn = null;
 		} else {
-			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
-				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
-				} else {
-   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
-   				}
-			}
-			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
-			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
 		}
 		return strReturn;
 	}
 
-    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
 		if(str == null) {
             dos.writeInt(-1);
 		} else {
@@ -64771,29 +63703,9 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
 	    	dos.writeInt(byteArray.length);
 			dos.write(byteArray);
     	}
-    }
-	private Integer readInteger(ObjectInputStream dis) throws IOException{
-		Integer intReturn;
-        int length = 0;
-        length = dis.readByte();
-		if (length == -1) {
-			intReturn = null;
-		} else {
-	    	intReturn = dis.readInt();
-		}
-		return intReturn;
 	}
 
-	private void writeInteger(Integer intNum, ObjectOutputStream dos) throws IOException{
-		if(intNum == null) {
-            dos.writeByte(-1);
-		} else {
-			dos.writeByte(0);
-	    	dos.writeInt(intNum);
-    	}
-	}
-
-    public void readData(ObjectInputStream dis) {
+    public void readKeysData(ObjectInputStream dis) {
 
 		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
 
@@ -64801,40 +63713,7 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
 
         		int length = 0;
 		
-					this.moment = readDate(dis);
-					
-					this.pid = readString(dis);
-					
-					this.father_pid = readString(dis);
-					
-					this.root_pid = readString(dis);
-					
-			            length = dis.readByte();
-           				if (length == -1) {
-           	    			this.system_pid = null;
-           				} else {
-           			    	this.system_pid = dis.readLong();
-           				}
-					
-					this.project = readString(dis);
-					
-					this.job = readString(dis);
-					
-					this.job_repository_id = readString(dis);
-					
-					this.job_version = readString(dis);
-					
-					this.context = readString(dis);
-					
-					this.origin = readString(dis);
-					
-					this.label = readString(dis);
-					
-						this.count = readInteger(dis);
-					
-						this.reference = readInteger(dis);
-					
-					this.thresholds = readString(dis);
+					this.cd = readString(dis);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -64850,74 +63729,13 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
 
     }
 
-    public void writeData(ObjectOutputStream dos) {
+    public void writeKeysData(ObjectOutputStream dos) {
         try {
 
 		
-					// java.util.Date
-				
-						writeDate(this.moment,dos);
-					
 					// String
 				
-						writeString(this.pid,dos);
-					
-					// String
-				
-						writeString(this.father_pid,dos);
-					
-					// String
-				
-						writeString(this.root_pid,dos);
-					
-					// Long
-				
-						if(this.system_pid == null) {
-			                dos.writeByte(-1);
-						} else {
-               				dos.writeByte(0);
-           			    	dos.writeLong(this.system_pid);
-		            	}
-					
-					// String
-				
-						writeString(this.project,dos);
-					
-					// String
-				
-						writeString(this.job,dos);
-					
-					// String
-				
-						writeString(this.job_repository_id,dos);
-					
-					// String
-				
-						writeString(this.job_version,dos);
-					
-					// String
-				
-						writeString(this.context,dos);
-					
-					// String
-				
-						writeString(this.origin,dos);
-					
-					// String
-				
-						writeString(this.label,dos);
-					
-					// Integer
-				
-						writeInteger(this.count,dos);
-					
-					// Integer
-				
-						writeInteger(this.reference,dos);
-					
-					// String
-				
-						writeString(this.thresholds,dos);
+						writeString(this.cd,dos);
 					
         	} catch (IOException e) {
 	            throw new RuntimeException(e);
@@ -64927,26 +63745,76 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
     }
 
 
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cddt = readDate(dis,ois);
+					
+						this.cdprev = readString(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.cdprev, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
     public String toString() {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString());
 		sb.append("[");
-		sb.append("moment="+String.valueOf(moment));
-		sb.append(",pid="+pid);
-		sb.append(",father_pid="+father_pid);
-		sb.append(",root_pid="+root_pid);
-		sb.append(",system_pid="+String.valueOf(system_pid));
-		sb.append(",project="+project);
-		sb.append(",job="+job);
-		sb.append(",job_repository_id="+job_repository_id);
-		sb.append(",job_version="+job_version);
-		sb.append(",context="+context);
-		sb.append(",origin="+origin);
-		sb.append(",label="+label);
-		sb.append(",count="+String.valueOf(count));
-		sb.append(",reference="+String.valueOf(reference));
-		sb.append(",thresholds="+thresholds);
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
 	    sb.append("]");
 
 	    return sb.toString();
@@ -64955,10 +63823,16 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
     /**
      * Compare keys
      */
-    public int compareTo(row_talendMeter_METTERStruct other) {
+    public int compareTo(row20Struct other) {
 
 		int returnValue = -1;
 		
+						returnValue = checkNullsAndCompare(this.cd, other.cd);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
 	    return returnValue;
     }
 
@@ -64986,11 +63860,10 @@ public static class row_talendMeter_METTERStruct implements routines.system.IPer
 
 
 }
-public void talendMeter_METTERProcess(final java.util.Map<String, Object> globalMap) throws TalendException {
-	globalMap.put("talendMeter_METTER_SUBPROCESS_STATE", 0);
+public void tDBInput_38Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_38_SUBPROCESS_STATE", 0);
 
  final boolean execStat = this.execStat;
-		String currentVirtualComponent = null;
 	
 		String iterateId = "";
 	
@@ -65010,8 +63883,1268 @@ public void talendMeter_METTERProcess(final java.util.Map<String, Object> global
 
 
 
-		row_talendMeter_METTERStruct row_talendMeter_METTER = new row_talendMeter_METTERStruct();
-row_talendMeter_METTERStruct row_talendMeter_FILE = row_talendMeter_METTER;
+		row20Struct row20 = new row20Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row20 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row20", false);
+		start_Hash.put("tAdvancedHash_row20", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row20");
+					}
+				
+		int tos_count_tAdvancedHash_row20 = 0;
+		
+
+			   		// connection name:row20
+			   		// source node:tDBInput_38 - inputs:(after_tDBInput_37) outputs:(row20,row20) | target node:tAdvancedHash_row20 - inputs:(row20) outputs:()
+			   		// linked node: tMap_19 - inputs:(row18,row20) outputs:(lookup_form_ins)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row20 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row20Struct> tHash_Lookup_row20 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row20Struct>getLookup(matchingModeEnum_row20);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row20", tHash_Lookup_row20);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row20 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_38 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_38", false);
+		start_Hash.put("tDBInput_38", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_38";
+
+	
+		int tos_count_tDBInput_38 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_38 = 0;
+		    java.sql.Connection conn_tDBInput_38 = null;
+				String driverClass_tDBInput_38 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_38 = java.lang.Class.forName(driverClass_tDBInput_38);
+				String dbUser_tDBInput_38 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_38 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_38 = decryptedPassword_tDBInput_38;
+				
+				String url_tDBInput_38 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_38 = java.sql.DriverManager.getConnection(url_tDBInput_38,dbUser_tDBInput_38,dbPwd_tDBInput_38);
+		        
+				conn_tDBInput_38.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_38 = conn_tDBInput_38.createStatement();
+
+		    String dbquery_tDBInput_38 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"desc\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\"";
+			
+
+            	globalMap.put("tDBInput_38_QUERY",dbquery_tDBInput_38);
+		    java.sql.ResultSet rs_tDBInput_38 = null;
+
+		    try {
+		    	rs_tDBInput_38 = stmt_tDBInput_38.executeQuery(dbquery_tDBInput_38);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_38 = rs_tDBInput_38.getMetaData();
+		    	int colQtyInRs_tDBInput_38 = rsmd_tDBInput_38.getColumnCount();
+
+		    String tmpContent_tDBInput_38 = null;
+		    
+		    
+		    while (rs_tDBInput_38.next()) {
+		        nb_line_tDBInput_38++;
+		        
+							if(colQtyInRs_tDBInput_38 < 1) {
+								row20.cd = null;
+							} else {
+	                         		
+        	row20.cd = routines.system.JDBCUtil.getString(rs_tDBInput_38, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_38 < 2) {
+								row20.cddt = null;
+							} else {
+										
+			row20.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_38, 2);
+		                    }
+							if(colQtyInRs_tDBInput_38 < 3) {
+								row20.cdprev = null;
+							} else {
+	                         		
+        	row20.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_38, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_38 < 4) {
+								row20.desc = null;
+							} else {
+	                         		
+        	row20.desc = routines.system.JDBCUtil.getString(rs_tDBInput_38, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_38 < 5) {
+								row20.is_latest = null;
+							} else {
+	                         		
+            row20.is_latest = rs_tDBInput_38.getBoolean(5);
+            if(rs_tDBInput_38.wasNull()){
+                    row20.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_38 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_38 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_38";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_38++;
+
+/**
+ * [tDBInput_38 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_38 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_38";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_38 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row20 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row20");
+					}
+					
+
+
+			   
+			   
+
+					row20Struct row20_HashRow = new row20Struct();
+		   	   	   
+				
+				row20_HashRow.cd = row20.cd;
+				
+				row20_HashRow.cddt = row20.cddt;
+				
+				row20_HashRow.cdprev = row20.cdprev;
+				
+				row20_HashRow.desc = row20.desc;
+				
+				row20_HashRow.is_latest = row20.is_latest;
+				
+			tHash_Lookup_row20.put(row20_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row20++;
+
+/**
+ * [tAdvancedHash_row20 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row20 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row20 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row20 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row20 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_38 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_38";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_38 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_38 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_38";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_38 != null) {
+		rs_tDBInput_38.close();
+	}
+	if (stmt_tDBInput_38 != null) {
+		stmt_tDBInput_38.close();
+	}
+	if(conn_tDBInput_38 != null && !conn_tDBInput_38.isClosed()) {
+		
+			conn_tDBInput_38.commit();
+			
+		
+			conn_tDBInput_38.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_38_NB_LINE",nb_line_tDBInput_38);
+ 
+
+ok_Hash.put("tDBInput_38", true);
+end_Hash.put("tDBInput_38", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_38 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row20 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+
+tHash_Lookup_row20.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row20");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row20", true);
+end_Hash.put("tAdvancedHash_row20", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row20 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_38 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_38";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_38 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row20 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row20";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row20 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_38_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row46Struct implements routines.system.IPersistableRow<row46Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row46Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class lookup_form_updStruct implements routines.system.IPersistableRow<lookup_form_updStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(lookup_form_updStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row32Struct implements routines.system.IPersistableRow<row32Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row32Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_39Struct implements routines.system.IPersistableRow<after_tDBInput_39Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_39Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_39Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_39_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_40Process(globalMap);
+
+		row32Struct row32 = new row32Struct();
+lookup_form_updStruct lookup_form_upd = new lookup_form_updStruct();
+row46Struct row46 = new row46Struct();
+
 
 
 
@@ -65019,36 +65152,34 @@ row_talendMeter_METTERStruct row_talendMeter_FILE = row_talendMeter_METTER;
 
 	
 	/**
-	 * [talendMeter_CONSOLE begin ] start
+	 * [tLogRow_4 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendMeter_CONSOLE", false);
-		start_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
+		ok_Hash.put("tLogRow_4", false);
+		start_Hash.put("tLogRow_4", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
+	currentComponent="tLogRow_4";
 
 	
 					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row46");
 					}
 				
-		int tos_count_talendMeter_CONSOLE = 0;
+		int tos_count_tLogRow_4 = 0;
 		
 
 	///////////////////////
 	
-		final String OUTPUT_FIELD_SEPARATOR_talendMeter_CONSOLE = "|";
-		java.io.PrintStream consoleOut_talendMeter_CONSOLE = null;	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_4 = "|";
+		java.io.PrintStream consoleOut_tLogRow_4 = null;	
 
- 		StringBuilder strBuffer_talendMeter_CONSOLE = null;
-		int nb_line_talendMeter_CONSOLE = 0;
+ 		StringBuilder strBuffer_tLogRow_4 = null;
+		int nb_line_tLogRow_4 = 0;
 ///////////////////////    			
 
 
@@ -65058,183 +65189,312 @@ row_talendMeter_METTERStruct row_talendMeter_FILE = row_talendMeter_METTER;
 
 
 /**
- * [talendMeter_CONSOLE begin ] stop
+ * [tLogRow_4 begin ] stop
  */
 
 
 
 	
 	/**
-	 * [talendMeter_FILE begin ] start
+	 * [tDBOutput_7 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendMeter_FILE", false);
-		start_Hash.put("talendMeter_FILE", System.currentTimeMillis());
+		ok_Hash.put("tDBOutput_7", false);
+		start_Hash.put("tDBOutput_7", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tDBOutput_7";
 
 	
 					if(execStat) {
-						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"Main");
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"lookup_form_upd");
 					}
 				
-		int tos_count_talendMeter_FILE = 0;
+		int tos_count_tDBOutput_7 = 0;
 		
 
-String fileName_talendMeter_FILE = "";
-    fileName_talendMeter_FILE = (new java.io.File("C:/MMCJobsLogs"+ "/" +"meter_file.txt")).getAbsolutePath().replace("\\","/");
-    String fullName_talendMeter_FILE = null;
-    String extension_talendMeter_FILE = null;
-    String directory_talendMeter_FILE = null;
-    if((fileName_talendMeter_FILE.indexOf("/") != -1)) {
-        if(fileName_talendMeter_FILE.lastIndexOf(".") < fileName_talendMeter_FILE.lastIndexOf("/")) {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE;
-            extension_talendMeter_FILE = "";
-        } else {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("."));
-            extension_talendMeter_FILE = fileName_talendMeter_FILE.substring(fileName_talendMeter_FILE.lastIndexOf("."));
-        }
-        directory_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("/"));
-    } else {
-        if(fileName_talendMeter_FILE.lastIndexOf(".") != -1) {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE.substring(0, fileName_talendMeter_FILE.lastIndexOf("."));
-            extension_talendMeter_FILE = fileName_talendMeter_FILE.substring(fileName_talendMeter_FILE.lastIndexOf("."));
-        } else {
-            fullName_talendMeter_FILE = fileName_talendMeter_FILE;
-            extension_talendMeter_FILE = "";
-        }
-        directory_talendMeter_FILE = "";
-    }
-    boolean isFileGenerated_talendMeter_FILE = true;
-    java.io.File filetalendMeter_FILE = new java.io.File(fileName_talendMeter_FILE);
-    globalMap.put("talendMeter_FILE_FILE_NAME",fileName_talendMeter_FILE);
-        if(filetalendMeter_FILE.exists()){
-            isFileGenerated_talendMeter_FILE = false;
-        }
-            int nb_line_talendMeter_FILE = 0;
-            int splitedFileNo_talendMeter_FILE = 0;
-            int currentRow_talendMeter_FILE = 0;
-
-            final String OUT_DELIM_talendMeter_FILE = /** Start field talendMeter_FILE:FIELDSEPARATOR */";"/** End field talendMeter_FILE:FIELDSEPARATOR */;
-
-            final String OUT_DELIM_ROWSEP_talendMeter_FILE = /** Start field talendMeter_FILE:ROWSEPARATOR */"\n"/** End field talendMeter_FILE:ROWSEPARATOR */;
-
-                    //create directory only if not exists
-                    if(directory_talendMeter_FILE != null && directory_talendMeter_FILE.trim().length() != 0) {
-                        java.io.File dir_talendMeter_FILE = new java.io.File(directory_talendMeter_FILE);
-                        if(!dir_talendMeter_FILE.exists()) {
-                            dir_talendMeter_FILE.mkdirs();
-                        }
-                    }
-
-                        //routines.system.Row
-                        java.io.Writer outtalendMeter_FILE = null;
-
-                        outtalendMeter_FILE = new java.io.BufferedWriter(new java.io.OutputStreamWriter(
-                        new java.io.FileOutputStream(fileName_talendMeter_FILE, true),"ISO-8859-15"));
 
 
-        resourceMap.put("out_talendMeter_FILE", outtalendMeter_FILE);
-resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
+
+
+String dbschema_tDBOutput_7 = null;
+	dbschema_tDBOutput_7 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_7 = null;
+if(dbschema_tDBOutput_7 == null || dbschema_tDBOutput_7.trim().length() == 0) {
+	tableName_tDBOutput_7 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_7 = dbschema_tDBOutput_7 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_7 = 0;
+int nb_line_update_tDBOutput_7 = 0;
+int nb_line_inserted_tDBOutput_7 = 0;
+int nb_line_deleted_tDBOutput_7 = 0;
+int nb_line_rejected_tDBOutput_7 = 0;
+
+int deletedCount_tDBOutput_7=0;
+int updatedCount_tDBOutput_7=0;
+int insertedCount_tDBOutput_7=0;
+int rejectedCount_tDBOutput_7=0;
+
+boolean whetherReject_tDBOutput_7 = false;
+
+java.sql.Connection conn_tDBOutput_7 = null;
+String dbUser_tDBOutput_7 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_7 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_7 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_7 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_7 = decryptedPassword_tDBOutput_7;
+
+    conn_tDBOutput_7 = java.sql.DriverManager.getConnection(url_tDBOutput_7,dbUser_tDBOutput_7,dbPwd_tDBOutput_7);
+	
+	resourceMap.put("conn_tDBOutput_7", conn_tDBOutput_7);
+        conn_tDBOutput_7.setAutoCommit(false);
+        int commitEvery_tDBOutput_7 = 10000;
+        int commitCounter_tDBOutput_7 = 0;
+
+
+   int batchSize_tDBOutput_7 = 10000;
+   int batchSizeCounter_tDBOutput_7=0;
+
+int count_tDBOutput_7=0;
+	    String insert_tDBOutput_7 = "INSERT INTO \"" + tableName_tDBOutput_7 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_7 = conn_tDBOutput_7.prepareStatement(insert_tDBOutput_7);
+	    resourceMap.put("pstmt_tDBOutput_7", pstmt_tDBOutput_7);
+	    
 
  
 
 
 
 /**
- * [talendMeter_FILE begin ] stop
+ * [tDBOutput_7 begin ] stop
  */
 
 
 
 	
 	/**
-	 * [talendMeter_METTER begin ] start
+	 * [tMap_20 begin ] start
 	 */
 
 	
 
 	
 		
-		ok_Hash.put("talendMeter_METTER", false);
-		start_Hash.put("talendMeter_METTER", System.currentTimeMillis());
+		ok_Hash.put("tMap_20", false);
+		start_Hash.put("tMap_20", System.currentTimeMillis());
 		
 	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
+	currentComponent="tMap_20";
 
 	
-		int tos_count_talendMeter_METTER = 0;
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row32");
+					}
+				
+		int tos_count_tMap_20 = 0;
 		
 
-	for (MetterCatcherUtils.MetterCatcherMessage mcm : talendMeter_METTER.getMessages()) {
-		row_talendMeter_METTER.pid = pid;
-		row_talendMeter_METTER.root_pid = rootPid;
-		row_talendMeter_METTER.father_pid = fatherPid;	
-        row_talendMeter_METTER.project = projectName;
-        row_talendMeter_METTER.job = jobName;
-        row_talendMeter_METTER.context = contextStr;
-		row_talendMeter_METTER.origin = (mcm.getOrigin()==null || mcm.getOrigin().length()<1 ? null : mcm.getOrigin());
-		row_talendMeter_METTER.moment = mcm.getMoment();
-		row_talendMeter_METTER.job_version = mcm.getJobVersion();
-		row_talendMeter_METTER.job_repository_id = mcm.getJobId();
-		row_talendMeter_METTER.system_pid = mcm.getSystemPid();
-		row_talendMeter_METTER.label = mcm.getLabel();
-		row_talendMeter_METTER.count = mcm.getCount();
-		row_talendMeter_METTER.reference = talendMeter_METTER.getConnLinesCount(mcm.getReferense()+"_count");
-		row_talendMeter_METTER.thresholds = mcm.getThresholds();
-		
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row39Struct> tHash_Lookup_row39 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row39Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row39Struct>) 
+					globalMap.get( "tHash_Lookup_row39" ))
+					;					
+					
+	
+
+row39Struct row39HashKey = new row39Struct();
+row39Struct row39Default = new row39Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_20__Struct  {
+}
+Var__tMap_20__Struct Var__tMap_20 = new Var__tMap_20__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+lookup_form_updStruct lookup_form_upd_tmp = new lookup_form_updStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
 
  
 
 
 
 /**
- * [talendMeter_METTER begin ] stop
+ * [tMap_20 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_39 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_39", false);
+		start_Hash.put("tDBInput_39", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_39";
+
+	
+		int tos_count_tDBInput_39 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_39 = 0;
+		    java.sql.Connection conn_tDBInput_39 = null;
+				String driverClass_tDBInput_39 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_39 = java.lang.Class.forName(driverClass_tDBInput_39);
+				String dbUser_tDBInput_39 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_39 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_39 = decryptedPassword_tDBInput_39;
+				
+				String url_tDBInput_39 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_39 = java.sql.DriverManager.getConnection(url_tDBInput_39,dbUser_tDBInput_39,dbPwd_tDBInput_39);
+		        
+				conn_tDBInput_39.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_39 = conn_tDBInput_39.createStatement();
+
+		    String dbquery_tDBInput_39 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\".\"desc\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_form\"";
+			
+
+            	globalMap.put("tDBInput_39_QUERY",dbquery_tDBInput_39);
+		    java.sql.ResultSet rs_tDBInput_39 = null;
+
+		    try {
+		    	rs_tDBInput_39 = stmt_tDBInput_39.executeQuery(dbquery_tDBInput_39);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_39 = rs_tDBInput_39.getMetaData();
+		    	int colQtyInRs_tDBInput_39 = rsmd_tDBInput_39.getColumnCount();
+
+		    String tmpContent_tDBInput_39 = null;
+		    
+		    
+		    while (rs_tDBInput_39.next()) {
+		        nb_line_tDBInput_39++;
+		        
+							if(colQtyInRs_tDBInput_39 < 1) {
+								row32.cd = null;
+							} else {
+	                         		
+        	row32.cd = routines.system.JDBCUtil.getString(rs_tDBInput_39, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_39 < 2) {
+								row32.cddt = null;
+							} else {
+										
+			row32.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_39, 2);
+		                    }
+							if(colQtyInRs_tDBInput_39 < 3) {
+								row32.cdprev = null;
+							} else {
+	                         		
+        	row32.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_39, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_39 < 4) {
+								row32.desc = null;
+							} else {
+	                         		
+        	row32.desc = routines.system.JDBCUtil.getString(rs_tDBInput_39, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_39 < 5) {
+								row32.is_latest = null;
+							} else {
+	                         		
+            row32.is_latest = rs_tDBInput_39.getBoolean(5);
+            if(rs_tDBInput_39.wasNull()){
+                    row32.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_39 begin ] stop
  */
 	
 	/**
-	 * [talendMeter_METTER main ] start
+	 * [tDBInput_39 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
+	currentComponent="tDBInput_39";
 
 	
 
  
 
 
-	tos_count_talendMeter_METTER++;
+	tos_count_tDBInput_39++;
 
 /**
- * [talendMeter_METTER main ] stop
+ * [tDBInput_39 main ] stop
  */
 	
 	/**
-	 * [talendMeter_METTER process_data_begin ] start
+	 * [tDBInput_39 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
+	currentComponent="tDBInput_39";
 
 	
 
@@ -65243,151 +65503,354 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_METTER process_data_begin ] stop
+ * [tDBInput_39 process_data_begin ] stop
  */
 
 	
 	/**
-	 * [talendMeter_FILE main ] start
+	 * [tMap_20 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tMap_20";
 
 	
 					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+						runStat.updateStatOnConnection(iterateId,1,1,"row32");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_20 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_20 = false;
+		  boolean mainRowRejected_tMap_20 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row39" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow39 = false;
+       		  	    	
+       		  	    	
+ 							row39Struct row39ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_20) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_20 = false;
+								
+                        		    		    row39HashKey.cdprev = row32.cd ;
+                        		    		
+
+								
+		                        	row39HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row39.lookup( row39HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row39.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_20 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row39 != null && tHash_Lookup_row39.getCount(row39HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row39' and it contains more one result from keys :  row39.cdprev = '" + row39HashKey.cdprev + "'");
+								} // G 071
+							
+
+							row39Struct row39 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row39Struct fromLookup_row39 = null;
+							row39 = row39Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row39 !=null && tHash_Lookup_row39.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row39 = tHash_Lookup_row39.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row39 != null) {
+								row39 = fromLookup_row39;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_20__Struct Var = Var__tMap_20;// ###############################
+        // ###############################
+        // # Output tables
+
+lookup_form_upd = null;
+
+if(!rejectedInnerJoin_tMap_20 ) {
+
+// # Output table : 'lookup_form_upd'
+lookup_form_upd_tmp.dmd_id = row32.cd ;
+lookup_form_upd_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+lookup_form_upd_tmp.dmd_entity_name = "dmd_lookup_form";
+lookup_form_upd_tmp.row_action = "u";
+lookup_form_upd = lookup_form_upd_tmp;
+}  // closing inner join bracket (2)
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_20 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_20++;
+
+/**
+ * [tMap_20 main ] stop
+ */
+	
+	/**
+	 * [tMap_20 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_20 process_data_begin ] stop
+ */
+// Start of branch "lookup_form_upd"
+if(lookup_form_upd != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_7 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_7";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"lookup_form_upd");
 					}
 					
 
 
-                    StringBuilder sb_talendMeter_FILE = new StringBuilder();
-                            if(row_talendMeter_METTER.moment != null) {
-                        sb_talendMeter_FILE.append(
-                            FormatterUtils.format_Date(row_talendMeter_METTER.moment, "yyyy-MM-dd HH:mm:ss")
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.father_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.father_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.root_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.root_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.system_pid != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.system_pid
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.project != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.project
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job_repository_id != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job_repository_id
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.job_version != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.job_version
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.context != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.context
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.origin != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.origin
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.label != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.label
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.count != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.count
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.reference != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.reference
-                        );
-                            }
-                            sb_talendMeter_FILE.append(OUT_DELIM_talendMeter_FILE);
-                            if(row_talendMeter_METTER.thresholds != null) {
-                        sb_talendMeter_FILE.append(
-                            row_talendMeter_METTER.thresholds
-                        );
-                            }
-                    sb_talendMeter_FILE.append(OUT_DELIM_ROWSEP_talendMeter_FILE);
 
+            row46 = null;
+        whetherReject_tDBOutput_7 = false;
+                    if(lookup_form_upd.dmd_id == null) {
+pstmt_tDBOutput_7.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_7.setString(1, lookup_form_upd.dmd_id);
+}
 
-                    nb_line_talendMeter_FILE++;
-                    resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
+                    if(lookup_form_upd.sync_process_id == null) {
+pstmt_tDBOutput_7.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_7.setString(2, lookup_form_upd.sync_process_id);
+}
 
-                        outtalendMeter_FILE.write(sb_talendMeter_FILE.toString());
+                    if(lookup_form_upd.dmd_entity_name == null) {
+pstmt_tDBOutput_7.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_7.setString(3, lookup_form_upd.dmd_entity_name);
+}
 
+                    if(lookup_form_upd.row_action == null) {
+pstmt_tDBOutput_7.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_7.setString(4, lookup_form_upd.row_action);
+}
 
-
+			
+    		pstmt_tDBOutput_7.addBatch();
+    		nb_line_tDBOutput_7++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_7++;
+    		  
+            if(!whetherReject_tDBOutput_7) {
+                            row46 = new row46Struct();
+                                row46.dmd_id = lookup_form_upd.dmd_id;
+                                row46.sync_process_id = lookup_form_upd.sync_process_id;
+                                row46.dmd_entity_name = lookup_form_upd.dmd_entity_name;
+                                row46.row_action = lookup_form_upd.row_action;
+            }
+    			if ((batchSize_tDBOutput_7 > 0) && (batchSize_tDBOutput_7 <= batchSizeCounter_tDBOutput_7)) {
+                try {
+						int countSum_tDBOutput_7 = 0;
+						    
+						for(int countEach_tDBOutput_7: pstmt_tDBOutput_7.executeBatch()) {
+							countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+						}
+				    	
+				    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+				    	
+            	    	batchSizeCounter_tDBOutput_7 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_7){
+				    	java.sql.SQLException ne_tDBOutput_7 = e_tDBOutput_7.getNextException(),sqle_tDBOutput_7=null;
+				    	String errormessage_tDBOutput_7;
+						if (ne_tDBOutput_7 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_7 = new java.sql.SQLException(e_tDBOutput_7.getMessage() + "\ncaused by: " + ne_tDBOutput_7.getMessage(), ne_tDBOutput_7.getSQLState(), ne_tDBOutput_7.getErrorCode(), ne_tDBOutput_7);
+							errormessage_tDBOutput_7 = sqle_tDBOutput_7.getMessage();
+						}else{
+							errormessage_tDBOutput_7 = e_tDBOutput_7.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_7 = 0;
+						for(int countEach_tDBOutput_7: e_tDBOutput_7.getUpdateCounts()) {
+							countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+						}
+						
+				    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+				    	
+				    	System.err.println(errormessage_tDBOutput_7);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_7++;
+                if(commitEvery_tDBOutput_7 <= commitCounter_tDBOutput_7) {
+                if ((batchSize_tDBOutput_7 > 0) && (batchSizeCounter_tDBOutput_7 > 0)) {
+                try {
+                		int countSum_tDBOutput_7 = 0;
+                		    
+						for(int countEach_tDBOutput_7: pstmt_tDBOutput_7.executeBatch()) {
+							countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+            	    	
+                batchSizeCounter_tDBOutput_7 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_7){
+			    	java.sql.SQLException ne_tDBOutput_7 = e_tDBOutput_7.getNextException(),sqle_tDBOutput_7=null;
+			    	String errormessage_tDBOutput_7;
+					if (ne_tDBOutput_7 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_7 = new java.sql.SQLException(e_tDBOutput_7.getMessage() + "\ncaused by: " + ne_tDBOutput_7.getMessage(), ne_tDBOutput_7.getSQLState(), ne_tDBOutput_7.getErrorCode(), ne_tDBOutput_7);
+						errormessage_tDBOutput_7 = sqle_tDBOutput_7.getMessage();
+					}else{
+						errormessage_tDBOutput_7 = e_tDBOutput_7.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_7 = 0;
+					for(int countEach_tDBOutput_7: e_tDBOutput_7.getUpdateCounts()) {
+						countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+					}
+					
+			    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+			    	
+			    	System.err.println(errormessage_tDBOutput_7);
+			    	
+				}
+            }
+                	conn_tDBOutput_7.commit();
+                	
+                	commitCounter_tDBOutput_7=0;
+                }
 
  
-     row_talendMeter_FILE = row_talendMeter_METTER;
 
 
-	tos_count_talendMeter_FILE++;
+	tos_count_tDBOutput_7++;
 
 /**
- * [talendMeter_FILE main ] stop
+ * [tDBOutput_7 main ] stop
  */
 	
 	/**
-	 * [talendMeter_FILE process_data_begin ] start
+	 * [tDBOutput_7 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tDBOutput_7";
 
 	
 
@@ -65396,25 +65859,27 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_FILE process_data_begin ] stop
+ * [tDBOutput_7 process_data_begin ] stop
  */
+// Start of branch "row46"
+if(row46 != null) { 
+
+
 
 	
 	/**
-	 * [talendMeter_CONSOLE main ] start
+	 * [tLogRow_4 main ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
+	currentComponent="tLogRow_4";
 
 	
 					if(execStat){
-						runStat.updateStatOnConnection(iterateId,1,1,"Main");
+						runStat.updateStatOnConnection(iterateId,1,1,"row46");
 					}
 					
 ///////////////////////		
@@ -65422,241 +65887,65 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 
-				strBuffer_talendMeter_CONSOLE = new StringBuilder();
+				strBuffer_tLogRow_4 = new StringBuilder();
 
 
 
 
    				
-	    		if(row_talendMeter_FILE.moment != null) { //              
+	    		if(row46.dmd_id != null) { //              
                     							
        
-				strBuffer_talendMeter_CONSOLE.append(
-								FormatterUtils.format_Date(row_talendMeter_FILE.moment, "yyyy-MM-dd HH:mm:ss")				
+				strBuffer_tLogRow_4.append(
+				                String.valueOf(row46.dmd_id)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendMeter_CONSOLE.append("|");
+    			strBuffer_tLogRow_4.append("|");
     			
 
 
    				
-	    		if(row_talendMeter_FILE.pid != null) { //              
+	    		if(row46.sync_process_id != null) { //              
                     							
        
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.pid)							
+				strBuffer_tLogRow_4.append(
+				                String.valueOf(row46.sync_process_id)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendMeter_CONSOLE.append("|");
+    			strBuffer_tLogRow_4.append("|");
     			
 
 
    				
-	    		if(row_talendMeter_FILE.father_pid != null) { //              
+	    		if(row46.dmd_entity_name != null) { //              
                     							
        
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.father_pid)							
+				strBuffer_tLogRow_4.append(
+				                String.valueOf(row46.dmd_entity_name)							
 				);
 
 
 							
 	    		} //  			
 
-    			strBuffer_talendMeter_CONSOLE.append("|");
+    			strBuffer_tLogRow_4.append("|");
     			
 
 
    				
-	    		if(row_talendMeter_FILE.root_pid != null) { //              
+	    		if(row46.row_action != null) { //              
                     							
        
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.root_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.system_pid != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.system_pid)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.project != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.project)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job_repository_id != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job_repository_id)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.job_version != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.job_version)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.context != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.context)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.origin != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.origin)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.label != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.label)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.count != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.count)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.reference != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.reference)							
-				);
-
-
-							
-	    		} //  			
-
-    			strBuffer_talendMeter_CONSOLE.append("|");
-    			
-
-
-   				
-	    		if(row_talendMeter_FILE.thresholds != null) { //              
-                    							
-       
-				strBuffer_talendMeter_CONSOLE.append(
-				                String.valueOf(row_talendMeter_FILE.thresholds)							
+				strBuffer_tLogRow_4.append(
+				                String.valueOf(row46.row_action)							
 				);
 
 
@@ -65666,16 +65955,16 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
                     if (globalMap.get("tLogRow_CONSOLE")!=null)
                     {
-                    	consoleOut_talendMeter_CONSOLE = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    	consoleOut_tLogRow_4 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
                     }
                     else
                     {
-                    	consoleOut_talendMeter_CONSOLE = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
-                    	globalMap.put("tLogRow_CONSOLE",consoleOut_talendMeter_CONSOLE);
+                    	consoleOut_tLogRow_4 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_4);
                     }
-                    consoleOut_talendMeter_CONSOLE.println(strBuffer_talendMeter_CONSOLE.toString());
-                    consoleOut_talendMeter_CONSOLE.flush();
-                    nb_line_talendMeter_CONSOLE++;
+                    consoleOut_tLogRow_4.println(strBuffer_tLogRow_4.toString());
+                    consoleOut_tLogRow_4.flush();
+                    nb_line_tLogRow_4++;
 //////
 
 //////                    
@@ -65685,23 +65974,21 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
  
 
 
-	tos_count_talendMeter_CONSOLE++;
+	tos_count_tLogRow_4++;
 
 /**
- * [talendMeter_CONSOLE main ] stop
+ * [tLogRow_4 main ] stop
  */
 	
 	/**
-	 * [talendMeter_CONSOLE process_data_begin ] start
+	 * [tLogRow_4 process_data_begin ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
+	currentComponent="tLogRow_4";
 
 	
 
@@ -65710,20 +65997,18 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_CONSOLE process_data_begin ] stop
+ * [tLogRow_4 process_data_begin ] stop
  */
 	
 	/**
-	 * [talendMeter_CONSOLE process_data_end ] start
+	 * [tLogRow_4 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
-	
-	currentComponent="talendMeter_CONSOLE";
+	currentComponent="tLogRow_4";
 
 	
 
@@ -65732,23 +66017,24 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_CONSOLE process_data_end ] stop
+ * [tLogRow_4 process_data_end ] stop
  */
+
+} // End of branch "row46"
+
 
 
 
 	
 	/**
-	 * [talendMeter_FILE process_data_end ] start
+	 * [tDBOutput_7 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tDBOutput_7";
 
 	
 
@@ -65757,23 +66043,24 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_FILE process_data_end ] stop
+ * [tDBOutput_7 process_data_end ] stop
  */
+
+} // End of branch "lookup_form_upd"
+
 
 
 
 	
 	/**
-	 * [talendMeter_METTER process_data_end ] start
+	 * [tMap_20 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
+	currentComponent="tMap_20";
 
 	
 
@@ -65782,123 +66069,259 @@ resourceMap.put("nb_line_talendMeter_FILE", nb_line_talendMeter_FILE);
 
 
 /**
- * [talendMeter_METTER process_data_end ] stop
+ * [tMap_20 process_data_end ] stop
  */
+
+
+
 	
 	/**
-	 * [talendMeter_METTER end ] start
+	 * [tDBInput_39 process_data_end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_METTER";
+	currentComponent="tDBInput_39";
+
 	
-	currentComponent="talendMeter_METTER";
+
+ 
+
+
+
+/**
+ * [tDBInput_39 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_39 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_39";
 
 	
 
 	}
-
-
+}finally{
+	if (rs_tDBInput_39 != null) {
+		rs_tDBInput_39.close();
+	}
+	if (stmt_tDBInput_39 != null) {
+		stmt_tDBInput_39.close();
+	}
+	if(conn_tDBInput_39 != null && !conn_tDBInput_39.isClosed()) {
+		
+			conn_tDBInput_39.commit();
+			
+		
+			conn_tDBInput_39.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_39_NB_LINE",nb_line_tDBInput_39);
  
 
-ok_Hash.put("talendMeter_METTER", true);
-end_Hash.put("talendMeter_METTER", System.currentTimeMillis());
+ok_Hash.put("tDBInput_39", true);
+end_Hash.put("tDBInput_39", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendMeter_METTER end ] stop
+ * [tDBInput_39 end ] stop
  */
 
 	
 	/**
-	 * [talendMeter_FILE end ] start
+	 * [tMap_20 end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tMap_20";
 
 	
 
 
-
-		
-			
-					if(outtalendMeter_FILE!=null) {
-						outtalendMeter_FILE.flush();
-						outtalendMeter_FILE.close();
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row39 != null) {
+						tHash_Lookup_row39.endGet();
 					}
+					globalMap.remove( "tHash_Lookup_row39" );
+
+					
+					
 				
-				globalMap.put("talendMeter_FILE_NB_LINE",nb_line_talendMeter_FILE);
-				globalMap.put("talendMeter_FILE_FILE_NAME",fileName_talendMeter_FILE);
-			
-		
-		
-		resourceMap.put("finish_talendMeter_FILE", true);
-	
+// ###############################      
+
+
+
+
 
 				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row32");
 			  	}
 			  	
  
 
-ok_Hash.put("talendMeter_FILE", true);
-end_Hash.put("talendMeter_FILE", System.currentTimeMillis());
+ok_Hash.put("tMap_20", true);
+end_Hash.put("tMap_20", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendMeter_FILE end ] stop
+ * [tMap_20 end ] stop
  */
 
 	
 	/**
-	 * [talendMeter_CONSOLE end ] start
+	 * [tDBOutput_7 end ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
+	currentComponent="tDBOutput_7";
+
 	
-	currentComponent="talendMeter_CONSOLE";
+
+
+
+	    try {
+				int countSum_tDBOutput_7 = 0;
+				if (pstmt_tDBOutput_7 != null && batchSizeCounter_tDBOutput_7 > 0) {
+						
+					for(int countEach_tDBOutput_7: pstmt_tDBOutput_7.executeBatch()) {
+						countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_7){
+	    	java.sql.SQLException ne_tDBOutput_7 = e_tDBOutput_7.getNextException(),sqle_tDBOutput_7=null;
+	    	String errormessage_tDBOutput_7;
+			if (ne_tDBOutput_7 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_7 = new java.sql.SQLException(e_tDBOutput_7.getMessage() + "\ncaused by: " + ne_tDBOutput_7.getMessage(), ne_tDBOutput_7.getSQLState(), ne_tDBOutput_7.getErrorCode(), ne_tDBOutput_7);
+				errormessage_tDBOutput_7 = sqle_tDBOutput_7.getMessage();
+			}else{
+				errormessage_tDBOutput_7 = e_tDBOutput_7.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_7 = 0;
+			for(int countEach_tDBOutput_7: e_tDBOutput_7.getUpdateCounts()) {
+				countSum_tDBOutput_7 += (countEach_tDBOutput_7 < 0 ? 0 : countEach_tDBOutput_7);
+			}
+			
+	    		insertedCount_tDBOutput_7 += countSum_tDBOutput_7;
+	    	
+	    	System.err.println(errormessage_tDBOutput_7);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_7 != null) {
+        		
+            pstmt_tDBOutput_7.close();
+            resourceMap.remove("pstmt_tDBOutput_7");
+        }
+    resourceMap.put("statementClosed_tDBOutput_7", true);
+			
+			conn_tDBOutput_7.commit();
+			
+		
+    	conn_tDBOutput_7 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_7", true);
+    	
+
+	nb_line_deleted_tDBOutput_7=nb_line_deleted_tDBOutput_7+ deletedCount_tDBOutput_7;
+	nb_line_update_tDBOutput_7=nb_line_update_tDBOutput_7 + updatedCount_tDBOutput_7;
+	nb_line_inserted_tDBOutput_7=nb_line_inserted_tDBOutput_7 + insertedCount_tDBOutput_7;
+	nb_line_rejected_tDBOutput_7=nb_line_rejected_tDBOutput_7 + rejectedCount_tDBOutput_7;
+	
+        globalMap.put("tDBOutput_7_NB_LINE",nb_line_tDBOutput_7);
+        globalMap.put("tDBOutput_7_NB_LINE_UPDATED",nb_line_update_tDBOutput_7);
+        globalMap.put("tDBOutput_7_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_7);
+        globalMap.put("tDBOutput_7_NB_LINE_DELETED",nb_line_deleted_tDBOutput_7);
+        globalMap.put("tDBOutput_7_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_7);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"lookup_form_upd");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_7", true);
+end_Hash.put("tDBOutput_7", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_7 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_4 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_4";
 
 	
 
 
 //////
 //////
-globalMap.put("talendMeter_CONSOLE_NB_LINE",nb_line_talendMeter_CONSOLE);
+globalMap.put("tLogRow_4_NB_LINE",nb_line_tLogRow_4);
 
 ///////////////////////    			
 
 				if(execStat){
-			  		runStat.updateStat(resourceMap,iterateId,2,0,"Main");
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row46");
 			  	}
 			  	
  
 
-ok_Hash.put("talendMeter_CONSOLE", true);
-end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
+ok_Hash.put("tLogRow_4", true);
+end_Hash.put("tLogRow_4", System.currentTimeMillis());
 
 
 
 
 /**
- * [talendMeter_CONSOLE end ] stop
+ * [tLogRow_4 end ] stop
  */
+
+
+
 
 
 
@@ -65916,8 +66339,6 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 				
 				TalendException te = new TalendException(e, currentComponent, globalMap);
 				
-					te.setVirtualComponentName(currentVirtualComponent);
-				
 				throw te;
 			}catch(java.lang.Error error){	
 				
@@ -65926,20 +66347,21 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 				throw error;
 			}finally{
 				
+					     			//free memory for "tMap_20"
+					     			globalMap.remove("tHash_Lookup_row39"); 
+				     			
 				try{
 					
 	
 	/**
-	 * [talendMeter_METTER finally ] start
+	 * [tDBInput_39 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_METTER";
-	
-	currentComponent="talendMeter_METTER";
+	currentComponent="tDBInput_39";
 
 	
 
@@ -65948,37 +66370,20 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendMeter_METTER finally ] stop
+ * [tDBInput_39 finally ] stop
  */
 
 	
 	/**
-	 * [talendMeter_FILE finally ] start
+	 * [tMap_20 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_FILE";
-	
-	currentComponent="talendMeter_FILE";
+	currentComponent="tMap_20";
 
-	
-
-
-		if(resourceMap.get("finish_talendMeter_FILE") == null){ 
-			
-				
-						java.io.Writer outtalendMeter_FILE = (java.io.Writer)resourceMap.get("out_talendMeter_FILE");
-						if(outtalendMeter_FILE!=null) {
-							outtalendMeter_FILE.flush();
-							outtalendMeter_FILE.close();
-						}
-					
-				
-			
-		}
 	
 
  
@@ -65986,21 +66391,62 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendMeter_FILE finally ] stop
+ * [tMap_20 finally ] stop
  */
 
 	
 	/**
-	 * [talendMeter_CONSOLE finally ] start
+	 * [tDBOutput_7 finally ] start
 	 */
 
 	
 
 	
 	
-		currentVirtualComponent = "talendMeter_CONSOLE";
+	currentComponent="tDBOutput_7";
+
 	
-	currentComponent="talendMeter_CONSOLE";
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_7") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_7 = null;
+                if ((pstmtToClose_tDBOutput_7 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_7")) != null) {
+                    pstmtToClose_tDBOutput_7.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_7") == null){
+            java.sql.Connection ctn_tDBOutput_7 = null;
+            if((ctn_tDBOutput_7 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_7")) != null){
+                try {
+                    ctn_tDBOutput_7.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_7) {
+                    String errorMessage_tDBOutput_7 = "failed to close the connection in tDBOutput_7 :" + sqlEx_tDBOutput_7.getMessage();
+                    System.err.println(errorMessage_tDBOutput_7);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_7 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_4 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_4";
 
 	
 
@@ -66009,8 +66455,11 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 
 
 /**
- * [talendMeter_CONSOLE finally ] stop
+ * [tLogRow_4 finally ] stop
  */
+
+
+
 
 
 
@@ -66026,7 +66475,24439 @@ end_Hash.put("talendMeter_CONSOLE", System.currentTimeMillis());
 			}
 		
 
-		globalMap.put("talendMeter_METTER_SUBPROCESS_STATE", 1);
+		globalMap.put("tDBInput_39_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row39Struct implements routines.system.IPersistableComparableLookupRow<row39Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cdprev == null) ? 0 : this.cdprev.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row39Struct other = (row39Struct) obj;
+		
+						if (this.cdprev == null) {
+							if (other.cdprev != null)
+								return false;
+						
+						} else if (!this.cdprev.equals(other.cdprev))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row39Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            
+	}
+
+	public void copyKeysDataTo(row39Struct other) {
+
+		other.cdprev = this.cdprev;
+	            	
+	}
+
+
+
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cdprev = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cd = readString(dis,ois);
+					
+						this.cddt = readDate(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeString(this.cd, dos, oos);
+					
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row39Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cdprev, other.cdprev);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_40Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_40_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row39Struct row39 = new row39Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row39 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row39", false);
+		start_Hash.put("tAdvancedHash_row39", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row39");
+					}
+				
+		int tos_count_tAdvancedHash_row39 = 0;
+		
+
+			   		// connection name:row39
+			   		// source node:tDBInput_40 - inputs:(after_tDBInput_39) outputs:(row39,row39) | target node:tAdvancedHash_row39 - inputs:(row39) outputs:()
+			   		// linked node: tMap_20 - inputs:(row32,row39) outputs:(lookup_form_upd)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row39 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row39Struct> tHash_Lookup_row39 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row39Struct>getLookup(matchingModeEnum_row39);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row39", tHash_Lookup_row39);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row39 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_40 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_40", false);
+		start_Hash.put("tDBInput_40", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_40";
+
+	
+		int tos_count_tDBInput_40 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_40 = 0;
+		    java.sql.Connection conn_tDBInput_40 = null;
+				String driverClass_tDBInput_40 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_40 = java.lang.Class.forName(driverClass_tDBInput_40);
+				String dbUser_tDBInput_40 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_40 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_40 = decryptedPassword_tDBInput_40;
+				
+				String url_tDBInput_40 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_40 = java.sql.DriverManager.getConnection(url_tDBInput_40,dbUser_tDBInput_40,dbPwd_tDBInput_40);
+		        
+				conn_tDBInput_40.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_40 = conn_tDBInput_40.createStatement();
+
+		    String dbquery_tDBInput_40 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_form\"";
+			
+
+            	globalMap.put("tDBInput_40_QUERY",dbquery_tDBInput_40);
+		    java.sql.ResultSet rs_tDBInput_40 = null;
+
+		    try {
+		    	rs_tDBInput_40 = stmt_tDBInput_40.executeQuery(dbquery_tDBInput_40);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_40 = rs_tDBInput_40.getMetaData();
+		    	int colQtyInRs_tDBInput_40 = rsmd_tDBInput_40.getColumnCount();
+
+		    String tmpContent_tDBInput_40 = null;
+		    
+		    
+		    while (rs_tDBInput_40.next()) {
+		        nb_line_tDBInput_40++;
+		        
+							if(colQtyInRs_tDBInput_40 < 1) {
+								row39.cd = null;
+							} else {
+	                         		
+        	row39.cd = routines.system.JDBCUtil.getString(rs_tDBInput_40, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_40 < 2) {
+								row39.cddt = null;
+							} else {
+										
+			row39.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_40, 2);
+		                    }
+							if(colQtyInRs_tDBInput_40 < 3) {
+								row39.cdprev = null;
+							} else {
+	                         		
+        	row39.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_40, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_40 < 4) {
+								row39.desc = null;
+							} else {
+	                         		
+        	row39.desc = routines.system.JDBCUtil.getString(rs_tDBInput_40, 4, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_40 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_40 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_40";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_40++;
+
+/**
+ * [tDBInput_40 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_40 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_40";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_40 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row39 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row39");
+					}
+					
+
+
+			   
+			   
+
+					row39Struct row39_HashRow = new row39Struct();
+		   	   	   
+				
+				row39_HashRow.cd = row39.cd;
+				
+				row39_HashRow.cddt = row39.cddt;
+				
+				row39_HashRow.cdprev = row39.cdprev;
+				
+				row39_HashRow.desc = row39.desc;
+				
+			tHash_Lookup_row39.put(row39_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row39++;
+
+/**
+ * [tAdvancedHash_row39 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row39 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row39 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row39 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row39 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_40 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_40";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_40 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_40 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_40";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_40 != null) {
+		rs_tDBInput_40.close();
+	}
+	if (stmt_tDBInput_40 != null) {
+		stmt_tDBInput_40.close();
+	}
+	if(conn_tDBInput_40 != null && !conn_tDBInput_40.isClosed()) {
+		
+			conn_tDBInput_40.commit();
+			
+		
+			conn_tDBInput_40.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_40_NB_LINE",nb_line_tDBInput_40);
+ 
+
+ok_Hash.put("tDBInput_40", true);
+end_Hash.put("tDBInput_40", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_40 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row39 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+
+tHash_Lookup_row39.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row39");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row39", true);
+end_Hash.put("tAdvancedHash_row39", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row39 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_40 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_40";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_40 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row39 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row39";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row39 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_40_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row64Struct implements routines.system.IPersistableRow<row64Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row64Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class lookup_ingredient_insStruct implements routines.system.IPersistableRow<lookup_ingredient_insStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(lookup_ingredient_insStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row53Struct implements routines.system.IPersistableRow<row53Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isid = readString(dis);
+					
+					this.isiddt = readDate(dis);
+					
+					this.isidprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.nm = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isid,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.isiddt,dos);
+					
+					// String
+				
+						writeString(this.isidprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.nm,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row53Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_41Struct implements routines.system.IPersistableRow<after_tDBInput_41Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isid = readString(dis);
+					
+					this.isiddt = readDate(dis);
+					
+					this.isidprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.nm = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isid,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.isiddt,dos);
+					
+					// String
+				
+						writeString(this.isidprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.nm,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_41Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_41Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_41_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_42Process(globalMap);
+
+		row53Struct row53 = new row53Struct();
+lookup_ingredient_insStruct lookup_ingredient_ins = new lookup_ingredient_insStruct();
+row64Struct row64 = new row64Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_11 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_11", false);
+		start_Hash.put("tLogRow_11", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_11";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row64");
+					}
+				
+		int tos_count_tLogRow_11 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_11 = "|";
+		java.io.PrintStream consoleOut_tLogRow_11 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_11 = null;
+		int nb_line_tLogRow_11 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_11 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_10 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_10", false);
+		start_Hash.put("tDBOutput_10", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_10";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"lookup_ingredient_ins");
+					}
+				
+		int tos_count_tDBOutput_10 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_10 = null;
+	dbschema_tDBOutput_10 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_10 = null;
+if(dbschema_tDBOutput_10 == null || dbschema_tDBOutput_10.trim().length() == 0) {
+	tableName_tDBOutput_10 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_10 = dbschema_tDBOutput_10 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_10 = 0;
+int nb_line_update_tDBOutput_10 = 0;
+int nb_line_inserted_tDBOutput_10 = 0;
+int nb_line_deleted_tDBOutput_10 = 0;
+int nb_line_rejected_tDBOutput_10 = 0;
+
+int deletedCount_tDBOutput_10=0;
+int updatedCount_tDBOutput_10=0;
+int insertedCount_tDBOutput_10=0;
+int rejectedCount_tDBOutput_10=0;
+
+boolean whetherReject_tDBOutput_10 = false;
+
+java.sql.Connection conn_tDBOutput_10 = null;
+String dbUser_tDBOutput_10 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_10 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_10 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_10 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_10 = decryptedPassword_tDBOutput_10;
+
+    conn_tDBOutput_10 = java.sql.DriverManager.getConnection(url_tDBOutput_10,dbUser_tDBOutput_10,dbPwd_tDBOutput_10);
+	
+	resourceMap.put("conn_tDBOutput_10", conn_tDBOutput_10);
+        conn_tDBOutput_10.setAutoCommit(false);
+        int commitEvery_tDBOutput_10 = 10000;
+        int commitCounter_tDBOutput_10 = 0;
+
+
+   int batchSize_tDBOutput_10 = 10000;
+   int batchSizeCounter_tDBOutput_10=0;
+
+int count_tDBOutput_10=0;
+	    String insert_tDBOutput_10 = "INSERT INTO \"" + tableName_tDBOutput_10 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_10 = conn_tDBOutput_10.prepareStatement(insert_tDBOutput_10);
+	    resourceMap.put("pstmt_tDBOutput_10", pstmt_tDBOutput_10);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_10 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_21 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_21", false);
+		start_Hash.put("tMap_21", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_21";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row53");
+					}
+				
+		int tos_count_tMap_21 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row60Struct> tHash_Lookup_row60 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row60Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row60Struct>) 
+					globalMap.get( "tHash_Lookup_row60" ))
+					;					
+					
+	
+
+row60Struct row60HashKey = new row60Struct();
+row60Struct row60Default = new row60Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_21__Struct  {
+}
+Var__tMap_21__Struct Var__tMap_21 = new Var__tMap_21__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+lookup_ingredient_insStruct lookup_ingredient_ins_tmp = new lookup_ingredient_insStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_21 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_41 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_41", false);
+		start_Hash.put("tDBInput_41", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_41";
+
+	
+		int tos_count_tDBInput_41 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_41 = 0;
+		    java.sql.Connection conn_tDBInput_41 = null;
+				String driverClass_tDBInput_41 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_41 = java.lang.Class.forName(driverClass_tDBInput_41);
+				String dbUser_tDBInput_41 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_41 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_41 = decryptedPassword_tDBInput_41;
+				
+				String url_tDBInput_41 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_41 = java.sql.DriverManager.getConnection(url_tDBInput_41,dbUser_tDBInput_41,dbPwd_tDBInput_41);
+		        
+				conn_tDBInput_41.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_41 = conn_tDBInput_41.createStatement();
+
+		    String dbquery_tDBInput_41 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isiddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isidprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"invalid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"nm\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\"";
+			
+
+            	globalMap.put("tDBInput_41_QUERY",dbquery_tDBInput_41);
+		    java.sql.ResultSet rs_tDBInput_41 = null;
+
+		    try {
+		    	rs_tDBInput_41 = stmt_tDBInput_41.executeQuery(dbquery_tDBInput_41);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_41 = rs_tDBInput_41.getMetaData();
+		    	int colQtyInRs_tDBInput_41 = rsmd_tDBInput_41.getColumnCount();
+
+		    String tmpContent_tDBInput_41 = null;
+		    
+		    
+		    while (rs_tDBInput_41.next()) {
+		        nb_line_tDBInput_41++;
+		        
+							if(colQtyInRs_tDBInput_41 < 1) {
+								row53.isid = null;
+							} else {
+	                         		
+        	row53.isid = routines.system.JDBCUtil.getString(rs_tDBInput_41, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_41 < 2) {
+								row53.isiddt = null;
+							} else {
+										
+			row53.isiddt = routines.system.JDBCUtil.getDate(rs_tDBInput_41, 2);
+		                    }
+							if(colQtyInRs_tDBInput_41 < 3) {
+								row53.isidprev = null;
+							} else {
+	                         		
+        	row53.isidprev = routines.system.JDBCUtil.getString(rs_tDBInput_41, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_41 < 4) {
+								row53.invalid = null;
+							} else {
+		                          
+            row53.invalid = rs_tDBInput_41.getShort(4);
+            if(rs_tDBInput_41.wasNull()){
+                    row53.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_41 < 5) {
+								row53.nm = null;
+							} else {
+	                         		
+        	row53.nm = routines.system.JDBCUtil.getString(rs_tDBInput_41, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_41 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_41 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_41";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_41++;
+
+/**
+ * [tDBInput_41 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_41 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_41";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_41 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_21 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_21";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row53");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_21 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_21 = false;
+		  boolean mainRowRejected_tMap_21 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row60" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow60 = false;
+       		  	    	
+       		  	    	
+ 							row60Struct row60ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_21) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_21 = false;
+								
+                        		    		    row60HashKey.isid = row53.isid ;
+                        		    		
+
+								
+		                        	row60HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row60.lookup( row60HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row60.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_21 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row60 != null && tHash_Lookup_row60.getCount(row60HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row60' and it contains more one result from keys :  row60.isid = '" + row60HashKey.isid + "'");
+								} // G 071
+							
+
+							row60Struct row60 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row60Struct fromLookup_row60 = null;
+							row60 = row60Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row60 !=null && tHash_Lookup_row60.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row60 = tHash_Lookup_row60.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row60 != null) {
+								row60 = fromLookup_row60;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_21__Struct Var = Var__tMap_21;// ###############################
+        // ###############################
+        // # Output tables
+
+lookup_ingredient_ins = null;
+
+if(!rejectedInnerJoin_tMap_21 ) {
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
+
+// # Output reject table : 'lookup_ingredient_ins'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_21 ) {
+lookup_ingredient_ins_tmp.dmd_id = row53.isid ;
+lookup_ingredient_ins_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+lookup_ingredient_ins_tmp.dmd_entity_name = "dmd_lookup_ingredient";
+lookup_ingredient_ins_tmp.row_action = "i";
+lookup_ingredient_ins = lookup_ingredient_ins_tmp;
+} // closing filter/reject
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_21 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_21++;
+
+/**
+ * [tMap_21 main ] stop
+ */
+	
+	/**
+	 * [tMap_21 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_21";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_21 process_data_begin ] stop
+ */
+// Start of branch "lookup_ingredient_ins"
+if(lookup_ingredient_ins != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_10 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_10";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"lookup_ingredient_ins");
+					}
+					
+
+
+
+            row64 = null;
+        whetherReject_tDBOutput_10 = false;
+                    if(lookup_ingredient_ins.dmd_id == null) {
+pstmt_tDBOutput_10.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_10.setString(1, lookup_ingredient_ins.dmd_id);
+}
+
+                    if(lookup_ingredient_ins.sync_process_id == null) {
+pstmt_tDBOutput_10.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_10.setString(2, lookup_ingredient_ins.sync_process_id);
+}
+
+                    if(lookup_ingredient_ins.dmd_entity_name == null) {
+pstmt_tDBOutput_10.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_10.setString(3, lookup_ingredient_ins.dmd_entity_name);
+}
+
+                    if(lookup_ingredient_ins.row_action == null) {
+pstmt_tDBOutput_10.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_10.setString(4, lookup_ingredient_ins.row_action);
+}
+
+			
+    		pstmt_tDBOutput_10.addBatch();
+    		nb_line_tDBOutput_10++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_10++;
+    		  
+            if(!whetherReject_tDBOutput_10) {
+                            row64 = new row64Struct();
+                                row64.dmd_id = lookup_ingredient_ins.dmd_id;
+                                row64.sync_process_id = lookup_ingredient_ins.sync_process_id;
+                                row64.dmd_entity_name = lookup_ingredient_ins.dmd_entity_name;
+                                row64.row_action = lookup_ingredient_ins.row_action;
+            }
+    			if ((batchSize_tDBOutput_10 > 0) && (batchSize_tDBOutput_10 <= batchSizeCounter_tDBOutput_10)) {
+                try {
+						int countSum_tDBOutput_10 = 0;
+						    
+						for(int countEach_tDBOutput_10: pstmt_tDBOutput_10.executeBatch()) {
+							countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+						}
+				    	
+				    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+				    	
+            	    	batchSizeCounter_tDBOutput_10 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_10){
+				    	java.sql.SQLException ne_tDBOutput_10 = e_tDBOutput_10.getNextException(),sqle_tDBOutput_10=null;
+				    	String errormessage_tDBOutput_10;
+						if (ne_tDBOutput_10 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_10 = new java.sql.SQLException(e_tDBOutput_10.getMessage() + "\ncaused by: " + ne_tDBOutput_10.getMessage(), ne_tDBOutput_10.getSQLState(), ne_tDBOutput_10.getErrorCode(), ne_tDBOutput_10);
+							errormessage_tDBOutput_10 = sqle_tDBOutput_10.getMessage();
+						}else{
+							errormessage_tDBOutput_10 = e_tDBOutput_10.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_10 = 0;
+						for(int countEach_tDBOutput_10: e_tDBOutput_10.getUpdateCounts()) {
+							countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+						}
+						
+				    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+				    	
+				    	System.err.println(errormessage_tDBOutput_10);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_10++;
+                if(commitEvery_tDBOutput_10 <= commitCounter_tDBOutput_10) {
+                if ((batchSize_tDBOutput_10 > 0) && (batchSizeCounter_tDBOutput_10 > 0)) {
+                try {
+                		int countSum_tDBOutput_10 = 0;
+                		    
+						for(int countEach_tDBOutput_10: pstmt_tDBOutput_10.executeBatch()) {
+							countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+            	    	
+                batchSizeCounter_tDBOutput_10 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_10){
+			    	java.sql.SQLException ne_tDBOutput_10 = e_tDBOutput_10.getNextException(),sqle_tDBOutput_10=null;
+			    	String errormessage_tDBOutput_10;
+					if (ne_tDBOutput_10 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_10 = new java.sql.SQLException(e_tDBOutput_10.getMessage() + "\ncaused by: " + ne_tDBOutput_10.getMessage(), ne_tDBOutput_10.getSQLState(), ne_tDBOutput_10.getErrorCode(), ne_tDBOutput_10);
+						errormessage_tDBOutput_10 = sqle_tDBOutput_10.getMessage();
+					}else{
+						errormessage_tDBOutput_10 = e_tDBOutput_10.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_10 = 0;
+					for(int countEach_tDBOutput_10: e_tDBOutput_10.getUpdateCounts()) {
+						countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+					}
+					
+			    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+			    	
+			    	System.err.println(errormessage_tDBOutput_10);
+			    	
+				}
+            }
+                	conn_tDBOutput_10.commit();
+                	
+                	commitCounter_tDBOutput_10=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_10++;
+
+/**
+ * [tDBOutput_10 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_10 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_10";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_10 process_data_begin ] stop
+ */
+// Start of branch "row64"
+if(row64 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_11 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_11";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row64");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_11 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row64.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_11.append(
+				                String.valueOf(row64.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_11.append("|");
+    			
+
+
+   				
+	    		if(row64.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_11.append(
+				                String.valueOf(row64.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_11.append("|");
+    			
+
+
+   				
+	    		if(row64.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_11.append(
+				                String.valueOf(row64.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_11.append("|");
+    			
+
+
+   				
+	    		if(row64.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_11.append(
+				                String.valueOf(row64.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_11 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_11 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_11);
+                    }
+                    consoleOut_tLogRow_11.println(strBuffer_tLogRow_11.toString());
+                    consoleOut_tLogRow_11.flush();
+                    nb_line_tLogRow_11++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_11++;
+
+/**
+ * [tLogRow_11 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_11 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_11";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_11 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_11 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_11";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_11 process_data_end ] stop
+ */
+
+} // End of branch "row64"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_10 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_10";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_10 process_data_end ] stop
+ */
+
+} // End of branch "lookup_ingredient_ins"
+
+
+
+
+	
+	/**
+	 * [tMap_21 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_21";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_21 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_41 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_41";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_41 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_41 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_41";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_41 != null) {
+		rs_tDBInput_41.close();
+	}
+	if (stmt_tDBInput_41 != null) {
+		stmt_tDBInput_41.close();
+	}
+	if(conn_tDBInput_41 != null && !conn_tDBInput_41.isClosed()) {
+		
+			conn_tDBInput_41.commit();
+			
+		
+			conn_tDBInput_41.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_41_NB_LINE",nb_line_tDBInput_41);
+ 
+
+ok_Hash.put("tDBInput_41", true);
+end_Hash.put("tDBInput_41", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_41 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_21 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_21";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row60 != null) {
+						tHash_Lookup_row60.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row60" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row53");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_21", true);
+end_Hash.put("tMap_21", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_21 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_10 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_10";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_10 = 0;
+				if (pstmt_tDBOutput_10 != null && batchSizeCounter_tDBOutput_10 > 0) {
+						
+					for(int countEach_tDBOutput_10: pstmt_tDBOutput_10.executeBatch()) {
+						countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_10){
+	    	java.sql.SQLException ne_tDBOutput_10 = e_tDBOutput_10.getNextException(),sqle_tDBOutput_10=null;
+	    	String errormessage_tDBOutput_10;
+			if (ne_tDBOutput_10 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_10 = new java.sql.SQLException(e_tDBOutput_10.getMessage() + "\ncaused by: " + ne_tDBOutput_10.getMessage(), ne_tDBOutput_10.getSQLState(), ne_tDBOutput_10.getErrorCode(), ne_tDBOutput_10);
+				errormessage_tDBOutput_10 = sqle_tDBOutput_10.getMessage();
+			}else{
+				errormessage_tDBOutput_10 = e_tDBOutput_10.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_10 = 0;
+			for(int countEach_tDBOutput_10: e_tDBOutput_10.getUpdateCounts()) {
+				countSum_tDBOutput_10 += (countEach_tDBOutput_10 < 0 ? 0 : countEach_tDBOutput_10);
+			}
+			
+	    		insertedCount_tDBOutput_10 += countSum_tDBOutput_10;
+	    	
+	    	System.err.println(errormessage_tDBOutput_10);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_10 != null) {
+        		
+            pstmt_tDBOutput_10.close();
+            resourceMap.remove("pstmt_tDBOutput_10");
+        }
+    resourceMap.put("statementClosed_tDBOutput_10", true);
+			
+			conn_tDBOutput_10.commit();
+			
+		
+    	conn_tDBOutput_10 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_10", true);
+    	
+
+	nb_line_deleted_tDBOutput_10=nb_line_deleted_tDBOutput_10+ deletedCount_tDBOutput_10;
+	nb_line_update_tDBOutput_10=nb_line_update_tDBOutput_10 + updatedCount_tDBOutput_10;
+	nb_line_inserted_tDBOutput_10=nb_line_inserted_tDBOutput_10 + insertedCount_tDBOutput_10;
+	nb_line_rejected_tDBOutput_10=nb_line_rejected_tDBOutput_10 + rejectedCount_tDBOutput_10;
+	
+        globalMap.put("tDBOutput_10_NB_LINE",nb_line_tDBOutput_10);
+        globalMap.put("tDBOutput_10_NB_LINE_UPDATED",nb_line_update_tDBOutput_10);
+        globalMap.put("tDBOutput_10_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_10);
+        globalMap.put("tDBOutput_10_NB_LINE_DELETED",nb_line_deleted_tDBOutput_10);
+        globalMap.put("tDBOutput_10_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_10);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"lookup_ingredient_ins");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_10", true);
+end_Hash.put("tDBOutput_10", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_10 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_11 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_11";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_11_NB_LINE",nb_line_tLogRow_11);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row64");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_11", true);
+end_Hash.put("tLogRow_11", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_11 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_21"
+					     			globalMap.remove("tHash_Lookup_row60"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_41 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_41";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_41 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_21 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_21";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_21 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_10 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_10";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_10") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_10 = null;
+                if ((pstmtToClose_tDBOutput_10 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_10")) != null) {
+                    pstmtToClose_tDBOutput_10.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_10") == null){
+            java.sql.Connection ctn_tDBOutput_10 = null;
+            if((ctn_tDBOutput_10 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_10")) != null){
+                try {
+                    ctn_tDBOutput_10.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_10) {
+                    String errorMessage_tDBOutput_10 = "failed to close the connection in tDBOutput_10 :" + sqlEx_tDBOutput_10.getMessage();
+                    System.err.println(errorMessage_tDBOutput_10);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_10 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_11 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_11";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_11 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_41_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row60Struct implements routines.system.IPersistableComparableLookupRow<row60Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.isid == null) ? 0 : this.isid.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row60Struct other = (row60Struct) obj;
+		
+						if (this.isid == null) {
+							if (other.isid != null)
+								return false;
+						
+						} else if (!this.isid.equals(other.isid))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row60Struct other) {
+
+		other.isid = this.isid;
+	            other.isiddt = this.isiddt;
+	            other.isidprev = this.isidprev;
+	            other.invalid = this.invalid;
+	            other.nm = this.nm;
+	            other.is_latest = this.is_latest;
+	            
+	}
+
+	public void copyKeysDataTo(row60Struct other) {
+
+		other.isid = this.isid;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isid = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isid,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.isiddt = readDate(dis,ois);
+					
+						this.isidprev = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+						this.nm = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeDate(this.isiddt, dos, oos);
+					
+						writeString(this.isidprev, dos, oos);
+					
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+						writeString(this.nm, dos, oos);
+					
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row60Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.isid, other.isid);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_42Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_42_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row60Struct row60 = new row60Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row60 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row60", false);
+		start_Hash.put("tAdvancedHash_row60", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row60");
+					}
+				
+		int tos_count_tAdvancedHash_row60 = 0;
+		
+
+			   		// connection name:row60
+			   		// source node:tDBInput_42 - inputs:(after_tDBInput_41) outputs:(row60,row60) | target node:tAdvancedHash_row60 - inputs:(row60) outputs:()
+			   		// linked node: tMap_21 - inputs:(row53,row60) outputs:(lookup_ingredient_ins)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row60 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row60Struct> tHash_Lookup_row60 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row60Struct>getLookup(matchingModeEnum_row60);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row60", tHash_Lookup_row60);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row60 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_42 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_42", false);
+		start_Hash.put("tDBInput_42", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_42";
+
+	
+		int tos_count_tDBInput_42 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_42 = 0;
+		    java.sql.Connection conn_tDBInput_42 = null;
+				String driverClass_tDBInput_42 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_42 = java.lang.Class.forName(driverClass_tDBInput_42);
+				String dbUser_tDBInput_42 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_42 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_42 = decryptedPassword_tDBInput_42;
+				
+				String url_tDBInput_42 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_42 = java.sql.DriverManager.getConnection(url_tDBInput_42,dbUser_tDBInput_42,dbPwd_tDBInput_42);
+		        
+				conn_tDBInput_42.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_42 = conn_tDBInput_42.createStatement();
+
+		    String dbquery_tDBInput_42 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isiddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isidprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"invalid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"nm\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\"";
+			
+
+            	globalMap.put("tDBInput_42_QUERY",dbquery_tDBInput_42);
+		    java.sql.ResultSet rs_tDBInput_42 = null;
+
+		    try {
+		    	rs_tDBInput_42 = stmt_tDBInput_42.executeQuery(dbquery_tDBInput_42);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_42 = rs_tDBInput_42.getMetaData();
+		    	int colQtyInRs_tDBInput_42 = rsmd_tDBInput_42.getColumnCount();
+
+		    String tmpContent_tDBInput_42 = null;
+		    
+		    
+		    while (rs_tDBInput_42.next()) {
+		        nb_line_tDBInput_42++;
+		        
+							if(colQtyInRs_tDBInput_42 < 1) {
+								row60.isid = null;
+							} else {
+	                         		
+        	row60.isid = routines.system.JDBCUtil.getString(rs_tDBInput_42, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_42 < 2) {
+								row60.isiddt = null;
+							} else {
+										
+			row60.isiddt = routines.system.JDBCUtil.getDate(rs_tDBInput_42, 2);
+		                    }
+							if(colQtyInRs_tDBInput_42 < 3) {
+								row60.isidprev = null;
+							} else {
+	                         		
+        	row60.isidprev = routines.system.JDBCUtil.getString(rs_tDBInput_42, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_42 < 4) {
+								row60.invalid = null;
+							} else {
+		                          
+            row60.invalid = rs_tDBInput_42.getShort(4);
+            if(rs_tDBInput_42.wasNull()){
+                    row60.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_42 < 5) {
+								row60.nm = null;
+							} else {
+	                         		
+        	row60.nm = routines.system.JDBCUtil.getString(rs_tDBInput_42, 5, false);
+		                    }
+							if(colQtyInRs_tDBInput_42 < 6) {
+								row60.is_latest = null;
+							} else {
+	                         		
+            row60.is_latest = rs_tDBInput_42.getBoolean(6);
+            if(rs_tDBInput_42.wasNull()){
+                    row60.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_42 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_42 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_42";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_42++;
+
+/**
+ * [tDBInput_42 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_42 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_42";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_42 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row60 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row60");
+					}
+					
+
+
+			   
+			   
+
+					row60Struct row60_HashRow = new row60Struct();
+		   	   	   
+				
+				row60_HashRow.isid = row60.isid;
+				
+				row60_HashRow.isiddt = row60.isiddt;
+				
+				row60_HashRow.isidprev = row60.isidprev;
+				
+				row60_HashRow.invalid = row60.invalid;
+				
+				row60_HashRow.nm = row60.nm;
+				
+				row60_HashRow.is_latest = row60.is_latest;
+				
+			tHash_Lookup_row60.put(row60_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row60++;
+
+/**
+ * [tAdvancedHash_row60 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row60 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row60 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row60 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row60 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_42 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_42";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_42 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_42 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_42";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_42 != null) {
+		rs_tDBInput_42.close();
+	}
+	if (stmt_tDBInput_42 != null) {
+		stmt_tDBInput_42.close();
+	}
+	if(conn_tDBInput_42 != null && !conn_tDBInput_42.isClosed()) {
+		
+			conn_tDBInput_42.commit();
+			
+		
+			conn_tDBInput_42.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_42_NB_LINE",nb_line_tDBInput_42);
+ 
+
+ok_Hash.put("tDBInput_42", true);
+end_Hash.put("tDBInput_42", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_42 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row60 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+
+tHash_Lookup_row60.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row60");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row60", true);
+end_Hash.put("tAdvancedHash_row60", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row60 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_42 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_42";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_42 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row60 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row60";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row60 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_42_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row67Struct implements routines.system.IPersistableRow<row67Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row67Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class lookup_ingredient_updStruct implements routines.system.IPersistableRow<lookup_ingredient_updStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(lookup_ingredient_updStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row65Struct implements routines.system.IPersistableRow<row65Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isid = readString(dis);
+					
+					this.isiddt = readDate(dis);
+					
+					this.isidprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.nm = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isid,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.isiddt,dos);
+					
+					// String
+				
+						writeString(this.isidprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.nm,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row65Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_43Struct implements routines.system.IPersistableRow<after_tDBInput_43Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isid = readString(dis);
+					
+					this.isiddt = readDate(dis);
+					
+					this.isidprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.nm = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isid,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.isiddt,dos);
+					
+					// String
+				
+						writeString(this.isidprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.nm,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_43Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_43Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_43_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_44Process(globalMap);
+
+		row65Struct row65 = new row65Struct();
+lookup_ingredient_updStruct lookup_ingredient_upd = new lookup_ingredient_updStruct();
+row67Struct row67 = new row67Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_13 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_13", false);
+		start_Hash.put("tLogRow_13", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_13";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row67");
+					}
+				
+		int tos_count_tLogRow_13 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_13 = "|";
+		java.io.PrintStream consoleOut_tLogRow_13 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_13 = null;
+		int nb_line_tLogRow_13 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_13 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_14 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_14", false);
+		start_Hash.put("tDBOutput_14", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_14";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"lookup_ingredient_upd");
+					}
+				
+		int tos_count_tDBOutput_14 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_14 = null;
+	dbschema_tDBOutput_14 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_14 = null;
+if(dbschema_tDBOutput_14 == null || dbschema_tDBOutput_14.trim().length() == 0) {
+	tableName_tDBOutput_14 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_14 = dbschema_tDBOutput_14 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_14 = 0;
+int nb_line_update_tDBOutput_14 = 0;
+int nb_line_inserted_tDBOutput_14 = 0;
+int nb_line_deleted_tDBOutput_14 = 0;
+int nb_line_rejected_tDBOutput_14 = 0;
+
+int deletedCount_tDBOutput_14=0;
+int updatedCount_tDBOutput_14=0;
+int insertedCount_tDBOutput_14=0;
+int rejectedCount_tDBOutput_14=0;
+
+boolean whetherReject_tDBOutput_14 = false;
+
+java.sql.Connection conn_tDBOutput_14 = null;
+String dbUser_tDBOutput_14 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_14 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_14 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_14 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_14 = decryptedPassword_tDBOutput_14;
+
+    conn_tDBOutput_14 = java.sql.DriverManager.getConnection(url_tDBOutput_14,dbUser_tDBOutput_14,dbPwd_tDBOutput_14);
+	
+	resourceMap.put("conn_tDBOutput_14", conn_tDBOutput_14);
+        conn_tDBOutput_14.setAutoCommit(false);
+        int commitEvery_tDBOutput_14 = 10000;
+        int commitCounter_tDBOutput_14 = 0;
+
+
+   int batchSize_tDBOutput_14 = 10000;
+   int batchSizeCounter_tDBOutput_14=0;
+
+int count_tDBOutput_14=0;
+	    String insert_tDBOutput_14 = "INSERT INTO \"" + tableName_tDBOutput_14 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_14 = conn_tDBOutput_14.prepareStatement(insert_tDBOutput_14);
+	    resourceMap.put("pstmt_tDBOutput_14", pstmt_tDBOutput_14);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_14 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_22 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_22", false);
+		start_Hash.put("tMap_22", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_22";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row65");
+					}
+				
+		int tos_count_tMap_22 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row66Struct> tHash_Lookup_row66 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row66Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row66Struct>) 
+					globalMap.get( "tHash_Lookup_row66" ))
+					;					
+					
+	
+
+row66Struct row66HashKey = new row66Struct();
+row66Struct row66Default = new row66Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_22__Struct  {
+}
+Var__tMap_22__Struct Var__tMap_22 = new Var__tMap_22__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+lookup_ingredient_updStruct lookup_ingredient_upd_tmp = new lookup_ingredient_updStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_22 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_43 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_43", false);
+		start_Hash.put("tDBInput_43", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_43";
+
+	
+		int tos_count_tDBInput_43 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_43 = 0;
+		    java.sql.Connection conn_tDBInput_43 = null;
+				String driverClass_tDBInput_43 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_43 = java.lang.Class.forName(driverClass_tDBInput_43);
+				String dbUser_tDBInput_43 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_43 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_43 = decryptedPassword_tDBInput_43;
+				
+				String url_tDBInput_43 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_43 = java.sql.DriverManager.getConnection(url_tDBInput_43,dbUser_tDBInput_43,dbPwd_tDBInput_43);
+		        
+				conn_tDBInput_43.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_43 = conn_tDBInput_43.createStatement();
+
+		    String dbquery_tDBInput_43 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isiddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"isidprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"invalid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"nm\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_ingredient\"";
+			
+
+            	globalMap.put("tDBInput_43_QUERY",dbquery_tDBInput_43);
+		    java.sql.ResultSet rs_tDBInput_43 = null;
+
+		    try {
+		    	rs_tDBInput_43 = stmt_tDBInput_43.executeQuery(dbquery_tDBInput_43);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_43 = rs_tDBInput_43.getMetaData();
+		    	int colQtyInRs_tDBInput_43 = rsmd_tDBInput_43.getColumnCount();
+
+		    String tmpContent_tDBInput_43 = null;
+		    
+		    
+		    while (rs_tDBInput_43.next()) {
+		        nb_line_tDBInput_43++;
+		        
+							if(colQtyInRs_tDBInput_43 < 1) {
+								row65.isid = null;
+							} else {
+	                         		
+        	row65.isid = routines.system.JDBCUtil.getString(rs_tDBInput_43, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_43 < 2) {
+								row65.isiddt = null;
+							} else {
+										
+			row65.isiddt = routines.system.JDBCUtil.getDate(rs_tDBInput_43, 2);
+		                    }
+							if(colQtyInRs_tDBInput_43 < 3) {
+								row65.isidprev = null;
+							} else {
+	                         		
+        	row65.isidprev = routines.system.JDBCUtil.getString(rs_tDBInput_43, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_43 < 4) {
+								row65.invalid = null;
+							} else {
+		                          
+            row65.invalid = rs_tDBInput_43.getShort(4);
+            if(rs_tDBInput_43.wasNull()){
+                    row65.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_43 < 5) {
+								row65.nm = null;
+							} else {
+	                         		
+        	row65.nm = routines.system.JDBCUtil.getString(rs_tDBInput_43, 5, false);
+		                    }
+							if(colQtyInRs_tDBInput_43 < 6) {
+								row65.is_latest = null;
+							} else {
+	                         		
+            row65.is_latest = rs_tDBInput_43.getBoolean(6);
+            if(rs_tDBInput_43.wasNull()){
+                    row65.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_43 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_43 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_43";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_43++;
+
+/**
+ * [tDBInput_43 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_43 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_43";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_43 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_22 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_22";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row65");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_22 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_22 = false;
+		  boolean mainRowRejected_tMap_22 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row66" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow66 = false;
+       		  	    	
+       		  	    	
+ 							row66Struct row66ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_22) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_22 = false;
+								
+                        		    		    row66HashKey.isidprev = row65.isid ;
+                        		    		
+
+								
+		                        	row66HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row66.lookup( row66HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row66.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_22 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row66 != null && tHash_Lookup_row66.getCount(row66HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row66' and it contains more one result from keys :  row66.isidprev = '" + row66HashKey.isidprev + "'");
+								} // G 071
+							
+
+							row66Struct row66 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row66Struct fromLookup_row66 = null;
+							row66 = row66Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row66 !=null && tHash_Lookup_row66.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row66 = tHash_Lookup_row66.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row66 != null) {
+								row66 = fromLookup_row66;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_22__Struct Var = Var__tMap_22;// ###############################
+        // ###############################
+        // # Output tables
+
+lookup_ingredient_upd = null;
+
+if(!rejectedInnerJoin_tMap_22 ) {
+
+// # Output table : 'lookup_ingredient_upd'
+lookup_ingredient_upd_tmp.dmd_id = row65.isid ;
+lookup_ingredient_upd_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+lookup_ingredient_upd_tmp.dmd_entity_name = "dmd_lookup_ingredient";
+lookup_ingredient_upd_tmp.row_action = "u";
+lookup_ingredient_upd = lookup_ingredient_upd_tmp;
+}  // closing inner join bracket (2)
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_22 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_22++;
+
+/**
+ * [tMap_22 main ] stop
+ */
+	
+	/**
+	 * [tMap_22 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_22";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_22 process_data_begin ] stop
+ */
+// Start of branch "lookup_ingredient_upd"
+if(lookup_ingredient_upd != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_14 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_14";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"lookup_ingredient_upd");
+					}
+					
+
+
+
+            row67 = null;
+        whetherReject_tDBOutput_14 = false;
+                    if(lookup_ingredient_upd.dmd_id == null) {
+pstmt_tDBOutput_14.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_14.setString(1, lookup_ingredient_upd.dmd_id);
+}
+
+                    if(lookup_ingredient_upd.sync_process_id == null) {
+pstmt_tDBOutput_14.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_14.setString(2, lookup_ingredient_upd.sync_process_id);
+}
+
+                    if(lookup_ingredient_upd.dmd_entity_name == null) {
+pstmt_tDBOutput_14.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_14.setString(3, lookup_ingredient_upd.dmd_entity_name);
+}
+
+                    if(lookup_ingredient_upd.row_action == null) {
+pstmt_tDBOutput_14.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_14.setString(4, lookup_ingredient_upd.row_action);
+}
+
+			
+    		pstmt_tDBOutput_14.addBatch();
+    		nb_line_tDBOutput_14++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_14++;
+    		  
+            if(!whetherReject_tDBOutput_14) {
+                            row67 = new row67Struct();
+                                row67.dmd_id = lookup_ingredient_upd.dmd_id;
+                                row67.sync_process_id = lookup_ingredient_upd.sync_process_id;
+                                row67.dmd_entity_name = lookup_ingredient_upd.dmd_entity_name;
+                                row67.row_action = lookup_ingredient_upd.row_action;
+            }
+    			if ((batchSize_tDBOutput_14 > 0) && (batchSize_tDBOutput_14 <= batchSizeCounter_tDBOutput_14)) {
+                try {
+						int countSum_tDBOutput_14 = 0;
+						    
+						for(int countEach_tDBOutput_14: pstmt_tDBOutput_14.executeBatch()) {
+							countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+						}
+				    	
+				    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+				    	
+            	    	batchSizeCounter_tDBOutput_14 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_14){
+				    	java.sql.SQLException ne_tDBOutput_14 = e_tDBOutput_14.getNextException(),sqle_tDBOutput_14=null;
+				    	String errormessage_tDBOutput_14;
+						if (ne_tDBOutput_14 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_14 = new java.sql.SQLException(e_tDBOutput_14.getMessage() + "\ncaused by: " + ne_tDBOutput_14.getMessage(), ne_tDBOutput_14.getSQLState(), ne_tDBOutput_14.getErrorCode(), ne_tDBOutput_14);
+							errormessage_tDBOutput_14 = sqle_tDBOutput_14.getMessage();
+						}else{
+							errormessage_tDBOutput_14 = e_tDBOutput_14.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_14 = 0;
+						for(int countEach_tDBOutput_14: e_tDBOutput_14.getUpdateCounts()) {
+							countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+						}
+						
+				    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+				    	
+				    	System.err.println(errormessage_tDBOutput_14);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_14++;
+                if(commitEvery_tDBOutput_14 <= commitCounter_tDBOutput_14) {
+                if ((batchSize_tDBOutput_14 > 0) && (batchSizeCounter_tDBOutput_14 > 0)) {
+                try {
+                		int countSum_tDBOutput_14 = 0;
+                		    
+						for(int countEach_tDBOutput_14: pstmt_tDBOutput_14.executeBatch()) {
+							countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+            	    	
+                batchSizeCounter_tDBOutput_14 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_14){
+			    	java.sql.SQLException ne_tDBOutput_14 = e_tDBOutput_14.getNextException(),sqle_tDBOutput_14=null;
+			    	String errormessage_tDBOutput_14;
+					if (ne_tDBOutput_14 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_14 = new java.sql.SQLException(e_tDBOutput_14.getMessage() + "\ncaused by: " + ne_tDBOutput_14.getMessage(), ne_tDBOutput_14.getSQLState(), ne_tDBOutput_14.getErrorCode(), ne_tDBOutput_14);
+						errormessage_tDBOutput_14 = sqle_tDBOutput_14.getMessage();
+					}else{
+						errormessage_tDBOutput_14 = e_tDBOutput_14.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_14 = 0;
+					for(int countEach_tDBOutput_14: e_tDBOutput_14.getUpdateCounts()) {
+						countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+					}
+					
+			    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+			    	
+			    	System.err.println(errormessage_tDBOutput_14);
+			    	
+				}
+            }
+                	conn_tDBOutput_14.commit();
+                	
+                	commitCounter_tDBOutput_14=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_14++;
+
+/**
+ * [tDBOutput_14 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_14 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_14";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_14 process_data_begin ] stop
+ */
+// Start of branch "row67"
+if(row67 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_13 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_13";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row67");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_13 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row67.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_13.append(
+				                String.valueOf(row67.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_13.append("|");
+    			
+
+
+   				
+	    		if(row67.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_13.append(
+				                String.valueOf(row67.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_13.append("|");
+    			
+
+
+   				
+	    		if(row67.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_13.append(
+				                String.valueOf(row67.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_13.append("|");
+    			
+
+
+   				
+	    		if(row67.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_13.append(
+				                String.valueOf(row67.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_13 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_13 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_13);
+                    }
+                    consoleOut_tLogRow_13.println(strBuffer_tLogRow_13.toString());
+                    consoleOut_tLogRow_13.flush();
+                    nb_line_tLogRow_13++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_13++;
+
+/**
+ * [tLogRow_13 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_13 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_13 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_13 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_13 process_data_end ] stop
+ */
+
+} // End of branch "row67"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_14 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_14";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_14 process_data_end ] stop
+ */
+
+} // End of branch "lookup_ingredient_upd"
+
+
+
+
+	
+	/**
+	 * [tMap_22 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_22";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_22 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_43 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_43";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_43 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_43 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_43";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_43 != null) {
+		rs_tDBInput_43.close();
+	}
+	if (stmt_tDBInput_43 != null) {
+		stmt_tDBInput_43.close();
+	}
+	if(conn_tDBInput_43 != null && !conn_tDBInput_43.isClosed()) {
+		
+			conn_tDBInput_43.commit();
+			
+		
+			conn_tDBInput_43.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_43_NB_LINE",nb_line_tDBInput_43);
+ 
+
+ok_Hash.put("tDBInput_43", true);
+end_Hash.put("tDBInput_43", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_43 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_22 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_22";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row66 != null) {
+						tHash_Lookup_row66.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row66" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row65");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_22", true);
+end_Hash.put("tMap_22", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_22 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_14 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_14";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_14 = 0;
+				if (pstmt_tDBOutput_14 != null && batchSizeCounter_tDBOutput_14 > 0) {
+						
+					for(int countEach_tDBOutput_14: pstmt_tDBOutput_14.executeBatch()) {
+						countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_14){
+	    	java.sql.SQLException ne_tDBOutput_14 = e_tDBOutput_14.getNextException(),sqle_tDBOutput_14=null;
+	    	String errormessage_tDBOutput_14;
+			if (ne_tDBOutput_14 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_14 = new java.sql.SQLException(e_tDBOutput_14.getMessage() + "\ncaused by: " + ne_tDBOutput_14.getMessage(), ne_tDBOutput_14.getSQLState(), ne_tDBOutput_14.getErrorCode(), ne_tDBOutput_14);
+				errormessage_tDBOutput_14 = sqle_tDBOutput_14.getMessage();
+			}else{
+				errormessage_tDBOutput_14 = e_tDBOutput_14.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_14 = 0;
+			for(int countEach_tDBOutput_14: e_tDBOutput_14.getUpdateCounts()) {
+				countSum_tDBOutput_14 += (countEach_tDBOutput_14 < 0 ? 0 : countEach_tDBOutput_14);
+			}
+			
+	    		insertedCount_tDBOutput_14 += countSum_tDBOutput_14;
+	    	
+	    	System.err.println(errormessage_tDBOutput_14);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_14 != null) {
+        		
+            pstmt_tDBOutput_14.close();
+            resourceMap.remove("pstmt_tDBOutput_14");
+        }
+    resourceMap.put("statementClosed_tDBOutput_14", true);
+			
+			conn_tDBOutput_14.commit();
+			
+		
+    	conn_tDBOutput_14 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_14", true);
+    	
+
+	nb_line_deleted_tDBOutput_14=nb_line_deleted_tDBOutput_14+ deletedCount_tDBOutput_14;
+	nb_line_update_tDBOutput_14=nb_line_update_tDBOutput_14 + updatedCount_tDBOutput_14;
+	nb_line_inserted_tDBOutput_14=nb_line_inserted_tDBOutput_14 + insertedCount_tDBOutput_14;
+	nb_line_rejected_tDBOutput_14=nb_line_rejected_tDBOutput_14 + rejectedCount_tDBOutput_14;
+	
+        globalMap.put("tDBOutput_14_NB_LINE",nb_line_tDBOutput_14);
+        globalMap.put("tDBOutput_14_NB_LINE_UPDATED",nb_line_update_tDBOutput_14);
+        globalMap.put("tDBOutput_14_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_14);
+        globalMap.put("tDBOutput_14_NB_LINE_DELETED",nb_line_deleted_tDBOutput_14);
+        globalMap.put("tDBOutput_14_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_14);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"lookup_ingredient_upd");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_14", true);
+end_Hash.put("tDBOutput_14", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_14 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_13 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_13";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_13_NB_LINE",nb_line_tLogRow_13);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row67");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_13", true);
+end_Hash.put("tLogRow_13", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_13 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_22"
+					     			globalMap.remove("tHash_Lookup_row66"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_43 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_43";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_43 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_22 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_22";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_22 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_14 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_14";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_14") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_14 = null;
+                if ((pstmtToClose_tDBOutput_14 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_14")) != null) {
+                    pstmtToClose_tDBOutput_14.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_14") == null){
+            java.sql.Connection ctn_tDBOutput_14 = null;
+            if((ctn_tDBOutput_14 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_14")) != null){
+                try {
+                    ctn_tDBOutput_14.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_14) {
+                    String errorMessage_tDBOutput_14 = "failed to close the connection in tDBOutput_14 :" + sqlEx_tDBOutput_14.getMessage();
+                    System.err.println(errorMessage_tDBOutput_14);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_14 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_13 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_13";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_13 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_43_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row66Struct implements routines.system.IPersistableComparableLookupRow<row66Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String isid;
+
+				public String getIsid () {
+					return this.isid;
+				}
+				
+			    public java.util.Date isiddt;
+
+				public java.util.Date getIsiddt () {
+					return this.isiddt;
+				}
+				
+			    public String isidprev;
+
+				public String getIsidprev () {
+					return this.isidprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String nm;
+
+				public String getNm () {
+					return this.nm;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.isidprev == null) ? 0 : this.isidprev.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row66Struct other = (row66Struct) obj;
+		
+						if (this.isidprev == null) {
+							if (other.isidprev != null)
+								return false;
+						
+						} else if (!this.isidprev.equals(other.isidprev))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row66Struct other) {
+
+		other.isid = this.isid;
+	            other.isiddt = this.isiddt;
+	            other.isidprev = this.isidprev;
+	            other.invalid = this.invalid;
+	            other.nm = this.nm;
+	            
+	}
+
+	public void copyKeysDataTo(row66Struct other) {
+
+		other.isidprev = this.isidprev;
+	            	
+	}
+
+
+
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.isidprev = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.isidprev,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.isid = readString(dis,ois);
+					
+						this.isiddt = readDate(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+						this.nm = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeString(this.isid, dos, oos);
+					
+						writeDate(this.isiddt, dos, oos);
+					
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+						writeString(this.nm, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("isid="+isid);
+		sb.append(",isiddt="+String.valueOf(isiddt));
+		sb.append(",isidprev="+isidprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",nm="+nm);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row66Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.isidprev, other.isidprev);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_44Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_44_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row66Struct row66 = new row66Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row66 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row66", false);
+		start_Hash.put("tAdvancedHash_row66", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row66");
+					}
+				
+		int tos_count_tAdvancedHash_row66 = 0;
+		
+
+			   		// connection name:row66
+			   		// source node:tDBInput_44 - inputs:(after_tDBInput_43) outputs:(row66,row66) | target node:tAdvancedHash_row66 - inputs:(row66) outputs:()
+			   		// linked node: tMap_22 - inputs:(row65,row66) outputs:(lookup_ingredient_upd)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row66 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row66Struct> tHash_Lookup_row66 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row66Struct>getLookup(matchingModeEnum_row66);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row66", tHash_Lookup_row66);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row66 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_44 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_44", false);
+		start_Hash.put("tDBInput_44", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_44";
+
+	
+		int tos_count_tDBInput_44 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_44 = 0;
+		    java.sql.Connection conn_tDBInput_44 = null;
+				String driverClass_tDBInput_44 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_44 = java.lang.Class.forName(driverClass_tDBInput_44);
+				String dbUser_tDBInput_44 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_44 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_44 = decryptedPassword_tDBInput_44;
+				
+				String url_tDBInput_44 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_44 = java.sql.DriverManager.getConnection(url_tDBInput_44,dbUser_tDBInput_44,dbPwd_tDBInput_44);
+		        
+				conn_tDBInput_44.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_44 = conn_tDBInput_44.createStatement();
+
+		    String dbquery_tDBInput_44 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isiddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"isidprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"invalid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\".\"nm\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_ingredient\"";
+			
+
+            	globalMap.put("tDBInput_44_QUERY",dbquery_tDBInput_44);
+		    java.sql.ResultSet rs_tDBInput_44 = null;
+
+		    try {
+		    	rs_tDBInput_44 = stmt_tDBInput_44.executeQuery(dbquery_tDBInput_44);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_44 = rs_tDBInput_44.getMetaData();
+		    	int colQtyInRs_tDBInput_44 = rsmd_tDBInput_44.getColumnCount();
+
+		    String tmpContent_tDBInput_44 = null;
+		    
+		    
+		    while (rs_tDBInput_44.next()) {
+		        nb_line_tDBInput_44++;
+		        
+							if(colQtyInRs_tDBInput_44 < 1) {
+								row66.isid = null;
+							} else {
+	                         		
+        	row66.isid = routines.system.JDBCUtil.getString(rs_tDBInput_44, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_44 < 2) {
+								row66.isiddt = null;
+							} else {
+										
+			row66.isiddt = routines.system.JDBCUtil.getDate(rs_tDBInput_44, 2);
+		                    }
+							if(colQtyInRs_tDBInput_44 < 3) {
+								row66.isidprev = null;
+							} else {
+	                         		
+        	row66.isidprev = routines.system.JDBCUtil.getString(rs_tDBInput_44, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_44 < 4) {
+								row66.invalid = null;
+							} else {
+		                          
+            row66.invalid = rs_tDBInput_44.getShort(4);
+            if(rs_tDBInput_44.wasNull()){
+                    row66.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_44 < 5) {
+								row66.nm = null;
+							} else {
+	                         		
+        	row66.nm = routines.system.JDBCUtil.getString(rs_tDBInput_44, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_44 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_44 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_44";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_44++;
+
+/**
+ * [tDBInput_44 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_44 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_44";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_44 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row66 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row66");
+					}
+					
+
+
+			   
+			   
+
+					row66Struct row66_HashRow = new row66Struct();
+		   	   	   
+				
+				row66_HashRow.isid = row66.isid;
+				
+				row66_HashRow.isiddt = row66.isiddt;
+				
+				row66_HashRow.isidprev = row66.isidprev;
+				
+				row66_HashRow.invalid = row66.invalid;
+				
+				row66_HashRow.nm = row66.nm;
+				
+			tHash_Lookup_row66.put(row66_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row66++;
+
+/**
+ * [tAdvancedHash_row66 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row66 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row66 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row66 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row66 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_44 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_44";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_44 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_44 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_44";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_44 != null) {
+		rs_tDBInput_44.close();
+	}
+	if (stmt_tDBInput_44 != null) {
+		stmt_tDBInput_44.close();
+	}
+	if(conn_tDBInput_44 != null && !conn_tDBInput_44.isClosed()) {
+		
+			conn_tDBInput_44.commit();
+			
+		
+			conn_tDBInput_44.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_44_NB_LINE",nb_line_tDBInput_44);
+ 
+
+ok_Hash.put("tDBInput_44", true);
+end_Hash.put("tDBInput_44", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_44 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row66 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+
+tHash_Lookup_row66.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row66");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row66", true);
+end_Hash.put("tAdvancedHash_row66", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row66 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_44 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_44";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_44 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row66 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row66";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row66 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_44_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row70Struct implements routines.system.IPersistableRow<row70Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row70Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_route_insStruct implements routines.system.IPersistableRow<dmd_lookup_route_insStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_route_insStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row68Struct implements routines.system.IPersistableRow<row68Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public String source;
+
+				public String getSource () {
+					return this.source;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+					this.source = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// String
+				
+						writeString(this.source,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",source="+source);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row68Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_45Struct implements routines.system.IPersistableRow<after_tDBInput_45Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public String source;
+
+				public String getSource () {
+					return this.source;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+					this.source = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// String
+				
+						writeString(this.source,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",source="+source);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_45Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_45Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_45_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_46Process(globalMap);
+
+		row68Struct row68 = new row68Struct();
+dmd_lookup_route_insStruct dmd_lookup_route_ins = new dmd_lookup_route_insStruct();
+row70Struct row70 = new row70Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_8 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_8", false);
+		start_Hash.put("tLogRow_8", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_8";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row70");
+					}
+				
+		int tos_count_tLogRow_8 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_8 = "|";
+		java.io.PrintStream consoleOut_tLogRow_8 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_8 = null;
+		int nb_line_tLogRow_8 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_8 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_17 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_17", false);
+		start_Hash.put("tDBOutput_17", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_17";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_route_ins");
+					}
+				
+		int tos_count_tDBOutput_17 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_17 = null;
+	dbschema_tDBOutput_17 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_17 = null;
+if(dbschema_tDBOutput_17 == null || dbschema_tDBOutput_17.trim().length() == 0) {
+	tableName_tDBOutput_17 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_17 = dbschema_tDBOutput_17 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_17 = 0;
+int nb_line_update_tDBOutput_17 = 0;
+int nb_line_inserted_tDBOutput_17 = 0;
+int nb_line_deleted_tDBOutput_17 = 0;
+int nb_line_rejected_tDBOutput_17 = 0;
+
+int deletedCount_tDBOutput_17=0;
+int updatedCount_tDBOutput_17=0;
+int insertedCount_tDBOutput_17=0;
+int rejectedCount_tDBOutput_17=0;
+
+boolean whetherReject_tDBOutput_17 = false;
+
+java.sql.Connection conn_tDBOutput_17 = null;
+String dbUser_tDBOutput_17 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_17 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_17 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_17 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_17 = decryptedPassword_tDBOutput_17;
+
+    conn_tDBOutput_17 = java.sql.DriverManager.getConnection(url_tDBOutput_17,dbUser_tDBOutput_17,dbPwd_tDBOutput_17);
+	
+	resourceMap.put("conn_tDBOutput_17", conn_tDBOutput_17);
+        conn_tDBOutput_17.setAutoCommit(false);
+        int commitEvery_tDBOutput_17 = 10000;
+        int commitCounter_tDBOutput_17 = 0;
+
+
+   int batchSize_tDBOutput_17 = 10000;
+   int batchSizeCounter_tDBOutput_17=0;
+
+int count_tDBOutput_17=0;
+	    String insert_tDBOutput_17 = "INSERT INTO \"" + tableName_tDBOutput_17 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_17 = conn_tDBOutput_17.prepareStatement(insert_tDBOutput_17);
+	    resourceMap.put("pstmt_tDBOutput_17", pstmt_tDBOutput_17);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_17 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_23 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_23", false);
+		start_Hash.put("tMap_23", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_23";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row68");
+					}
+				
+		int tos_count_tMap_23 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row69Struct> tHash_Lookup_row69 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row69Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row69Struct>) 
+					globalMap.get( "tHash_Lookup_row69" ))
+					;					
+					
+	
+
+row69Struct row69HashKey = new row69Struct();
+row69Struct row69Default = new row69Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_23__Struct  {
+}
+Var__tMap_23__Struct Var__tMap_23 = new Var__tMap_23__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_route_insStruct dmd_lookup_route_ins_tmp = new dmd_lookup_route_insStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_23 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_45 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_45", false);
+		start_Hash.put("tDBInput_45", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_45";
+
+	
+		int tos_count_tDBInput_45 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_45 = 0;
+		    java.sql.Connection conn_tDBInput_45 = null;
+				String driverClass_tDBInput_45 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_45 = java.lang.Class.forName(driverClass_tDBInput_45);
+				String dbUser_tDBInput_45 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_45 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_45 = decryptedPassword_tDBInput_45;
+				
+				String url_tDBInput_45 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_45 = java.sql.DriverManager.getConnection(url_tDBInput_45,dbUser_tDBInput_45,dbPwd_tDBInput_45);
+		        
+				conn_tDBInput_45.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_45 = conn_tDBInput_45.createStatement();
+
+		    String dbquery_tDBInput_45 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"desc\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"source\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\"";
+			
+
+            	globalMap.put("tDBInput_45_QUERY",dbquery_tDBInput_45);
+		    java.sql.ResultSet rs_tDBInput_45 = null;
+
+		    try {
+		    	rs_tDBInput_45 = stmt_tDBInput_45.executeQuery(dbquery_tDBInput_45);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_45 = rs_tDBInput_45.getMetaData();
+		    	int colQtyInRs_tDBInput_45 = rsmd_tDBInput_45.getColumnCount();
+
+		    String tmpContent_tDBInput_45 = null;
+		    
+		    
+		    while (rs_tDBInput_45.next()) {
+		        nb_line_tDBInput_45++;
+		        
+							if(colQtyInRs_tDBInput_45 < 1) {
+								row68.cd = null;
+							} else {
+	                         		
+        	row68.cd = routines.system.JDBCUtil.getString(rs_tDBInput_45, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_45 < 2) {
+								row68.cddt = null;
+							} else {
+										
+			row68.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_45, 2);
+		                    }
+							if(colQtyInRs_tDBInput_45 < 3) {
+								row68.cdprev = null;
+							} else {
+	                         		
+        	row68.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_45, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_45 < 4) {
+								row68.desc = null;
+							} else {
+	                         		
+        	row68.desc = routines.system.JDBCUtil.getString(rs_tDBInput_45, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_45 < 5) {
+								row68.source = null;
+							} else {
+	                         		
+        	row68.source = routines.system.JDBCUtil.getString(rs_tDBInput_45, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_45 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_45 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_45";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_45++;
+
+/**
+ * [tDBInput_45 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_45 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_45";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_45 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_23 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_23";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row68");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_23 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_23 = false;
+		  boolean mainRowRejected_tMap_23 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row69" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow69 = false;
+       		  	    	
+       		  	    	
+ 							row69Struct row69ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_23) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_23 = false;
+								
+                        		    		    row69HashKey.cd = row68.cd ;
+                        		    		
+
+								
+		                        	row69HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row69.lookup( row69HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row69.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_23 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row69 != null && tHash_Lookup_row69.getCount(row69HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row69' and it contains more one result from keys :  row69.cd = '" + row69HashKey.cd + "'");
+								} // G 071
+							
+
+							row69Struct row69 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row69Struct fromLookup_row69 = null;
+							row69 = row69Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row69 !=null && tHash_Lookup_row69.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row69 = tHash_Lookup_row69.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row69 != null) {
+								row69 = fromLookup_row69;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_23__Struct Var = Var__tMap_23;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_route_ins = null;
+
+if(!rejectedInnerJoin_tMap_23 ) {
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
+
+// # Output reject table : 'dmd_lookup_route_ins'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_23 ) {
+dmd_lookup_route_ins_tmp.dmd_id = row68.cd ;
+dmd_lookup_route_ins_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_route_ins_tmp.dmd_entity_name = "dmd_lookup_route";
+dmd_lookup_route_ins_tmp.row_action = "i";
+dmd_lookup_route_ins = dmd_lookup_route_ins_tmp;
+} // closing filter/reject
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_23 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_23++;
+
+/**
+ * [tMap_23 main ] stop
+ */
+	
+	/**
+	 * [tMap_23 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_23 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_route_ins"
+if(dmd_lookup_route_ins != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_17 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_17";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_route_ins");
+					}
+					
+
+
+
+            row70 = null;
+        whetherReject_tDBOutput_17 = false;
+                    if(dmd_lookup_route_ins.dmd_id == null) {
+pstmt_tDBOutput_17.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_17.setString(1, dmd_lookup_route_ins.dmd_id);
+}
+
+                    if(dmd_lookup_route_ins.sync_process_id == null) {
+pstmt_tDBOutput_17.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_17.setString(2, dmd_lookup_route_ins.sync_process_id);
+}
+
+                    if(dmd_lookup_route_ins.dmd_entity_name == null) {
+pstmt_tDBOutput_17.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_17.setString(3, dmd_lookup_route_ins.dmd_entity_name);
+}
+
+                    if(dmd_lookup_route_ins.row_action == null) {
+pstmt_tDBOutput_17.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_17.setString(4, dmd_lookup_route_ins.row_action);
+}
+
+			
+    		pstmt_tDBOutput_17.addBatch();
+    		nb_line_tDBOutput_17++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_17++;
+    		  
+            if(!whetherReject_tDBOutput_17) {
+                            row70 = new row70Struct();
+                                row70.dmd_id = dmd_lookup_route_ins.dmd_id;
+                                row70.sync_process_id = dmd_lookup_route_ins.sync_process_id;
+                                row70.dmd_entity_name = dmd_lookup_route_ins.dmd_entity_name;
+                                row70.row_action = dmd_lookup_route_ins.row_action;
+            }
+    			if ((batchSize_tDBOutput_17 > 0) && (batchSize_tDBOutput_17 <= batchSizeCounter_tDBOutput_17)) {
+                try {
+						int countSum_tDBOutput_17 = 0;
+						    
+						for(int countEach_tDBOutput_17: pstmt_tDBOutput_17.executeBatch()) {
+							countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+						}
+				    	
+				    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+				    	
+            	    	batchSizeCounter_tDBOutput_17 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_17){
+				    	java.sql.SQLException ne_tDBOutput_17 = e_tDBOutput_17.getNextException(),sqle_tDBOutput_17=null;
+				    	String errormessage_tDBOutput_17;
+						if (ne_tDBOutput_17 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_17 = new java.sql.SQLException(e_tDBOutput_17.getMessage() + "\ncaused by: " + ne_tDBOutput_17.getMessage(), ne_tDBOutput_17.getSQLState(), ne_tDBOutput_17.getErrorCode(), ne_tDBOutput_17);
+							errormessage_tDBOutput_17 = sqle_tDBOutput_17.getMessage();
+						}else{
+							errormessage_tDBOutput_17 = e_tDBOutput_17.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_17 = 0;
+						for(int countEach_tDBOutput_17: e_tDBOutput_17.getUpdateCounts()) {
+							countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+						}
+						
+				    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+				    	
+				    	System.err.println(errormessage_tDBOutput_17);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_17++;
+                if(commitEvery_tDBOutput_17 <= commitCounter_tDBOutput_17) {
+                if ((batchSize_tDBOutput_17 > 0) && (batchSizeCounter_tDBOutput_17 > 0)) {
+                try {
+                		int countSum_tDBOutput_17 = 0;
+                		    
+						for(int countEach_tDBOutput_17: pstmt_tDBOutput_17.executeBatch()) {
+							countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+            	    	
+                batchSizeCounter_tDBOutput_17 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_17){
+			    	java.sql.SQLException ne_tDBOutput_17 = e_tDBOutput_17.getNextException(),sqle_tDBOutput_17=null;
+			    	String errormessage_tDBOutput_17;
+					if (ne_tDBOutput_17 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_17 = new java.sql.SQLException(e_tDBOutput_17.getMessage() + "\ncaused by: " + ne_tDBOutput_17.getMessage(), ne_tDBOutput_17.getSQLState(), ne_tDBOutput_17.getErrorCode(), ne_tDBOutput_17);
+						errormessage_tDBOutput_17 = sqle_tDBOutput_17.getMessage();
+					}else{
+						errormessage_tDBOutput_17 = e_tDBOutput_17.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_17 = 0;
+					for(int countEach_tDBOutput_17: e_tDBOutput_17.getUpdateCounts()) {
+						countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+					}
+					
+			    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+			    	
+			    	System.err.println(errormessage_tDBOutput_17);
+			    	
+				}
+            }
+                	conn_tDBOutput_17.commit();
+                	
+                	commitCounter_tDBOutput_17=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_17++;
+
+/**
+ * [tDBOutput_17 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_17 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_17";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_17 process_data_begin ] stop
+ */
+// Start of branch "row70"
+if(row70 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_8 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_8";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row70");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_8 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row70.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_8.append(
+				                String.valueOf(row70.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_8.append("|");
+    			
+
+
+   				
+	    		if(row70.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_8.append(
+				                String.valueOf(row70.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_8.append("|");
+    			
+
+
+   				
+	    		if(row70.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_8.append(
+				                String.valueOf(row70.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_8.append("|");
+    			
+
+
+   				
+	    		if(row70.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_8.append(
+				                String.valueOf(row70.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_8 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_8 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_8);
+                    }
+                    consoleOut_tLogRow_8.println(strBuffer_tLogRow_8.toString());
+                    consoleOut_tLogRow_8.flush();
+                    nb_line_tLogRow_8++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_8++;
+
+/**
+ * [tLogRow_8 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_8 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_8";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_8 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_8 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_8";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_8 process_data_end ] stop
+ */
+
+} // End of branch "row70"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_17 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_17";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_17 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_route_ins"
+
+
+
+
+	
+	/**
+	 * [tMap_23 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_23 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_45 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_45";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_45 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_45 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_45";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_45 != null) {
+		rs_tDBInput_45.close();
+	}
+	if (stmt_tDBInput_45 != null) {
+		stmt_tDBInput_45.close();
+	}
+	if(conn_tDBInput_45 != null && !conn_tDBInput_45.isClosed()) {
+		
+			conn_tDBInput_45.commit();
+			
+		
+			conn_tDBInput_45.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_45_NB_LINE",nb_line_tDBInput_45);
+ 
+
+ok_Hash.put("tDBInput_45", true);
+end_Hash.put("tDBInput_45", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_45 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_23 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_23";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row69 != null) {
+						tHash_Lookup_row69.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row69" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row68");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_23", true);
+end_Hash.put("tMap_23", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_23 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_17 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_17";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_17 = 0;
+				if (pstmt_tDBOutput_17 != null && batchSizeCounter_tDBOutput_17 > 0) {
+						
+					for(int countEach_tDBOutput_17: pstmt_tDBOutput_17.executeBatch()) {
+						countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_17){
+	    	java.sql.SQLException ne_tDBOutput_17 = e_tDBOutput_17.getNextException(),sqle_tDBOutput_17=null;
+	    	String errormessage_tDBOutput_17;
+			if (ne_tDBOutput_17 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_17 = new java.sql.SQLException(e_tDBOutput_17.getMessage() + "\ncaused by: " + ne_tDBOutput_17.getMessage(), ne_tDBOutput_17.getSQLState(), ne_tDBOutput_17.getErrorCode(), ne_tDBOutput_17);
+				errormessage_tDBOutput_17 = sqle_tDBOutput_17.getMessage();
+			}else{
+				errormessage_tDBOutput_17 = e_tDBOutput_17.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_17 = 0;
+			for(int countEach_tDBOutput_17: e_tDBOutput_17.getUpdateCounts()) {
+				countSum_tDBOutput_17 += (countEach_tDBOutput_17 < 0 ? 0 : countEach_tDBOutput_17);
+			}
+			
+	    		insertedCount_tDBOutput_17 += countSum_tDBOutput_17;
+	    	
+	    	System.err.println(errormessage_tDBOutput_17);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_17 != null) {
+        		
+            pstmt_tDBOutput_17.close();
+            resourceMap.remove("pstmt_tDBOutput_17");
+        }
+    resourceMap.put("statementClosed_tDBOutput_17", true);
+			
+			conn_tDBOutput_17.commit();
+			
+		
+    	conn_tDBOutput_17 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_17", true);
+    	
+
+	nb_line_deleted_tDBOutput_17=nb_line_deleted_tDBOutput_17+ deletedCount_tDBOutput_17;
+	nb_line_update_tDBOutput_17=nb_line_update_tDBOutput_17 + updatedCount_tDBOutput_17;
+	nb_line_inserted_tDBOutput_17=nb_line_inserted_tDBOutput_17 + insertedCount_tDBOutput_17;
+	nb_line_rejected_tDBOutput_17=nb_line_rejected_tDBOutput_17 + rejectedCount_tDBOutput_17;
+	
+        globalMap.put("tDBOutput_17_NB_LINE",nb_line_tDBOutput_17);
+        globalMap.put("tDBOutput_17_NB_LINE_UPDATED",nb_line_update_tDBOutput_17);
+        globalMap.put("tDBOutput_17_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_17);
+        globalMap.put("tDBOutput_17_NB_LINE_DELETED",nb_line_deleted_tDBOutput_17);
+        globalMap.put("tDBOutput_17_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_17);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_route_ins");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_17", true);
+end_Hash.put("tDBOutput_17", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_17 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_8 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_8";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_8_NB_LINE",nb_line_tLogRow_8);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row70");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_8", true);
+end_Hash.put("tLogRow_8", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_8 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_23"
+					     			globalMap.remove("tHash_Lookup_row69"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_45 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_45";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_45 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_23 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_23 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_17 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_17";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_17") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_17 = null;
+                if ((pstmtToClose_tDBOutput_17 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_17")) != null) {
+                    pstmtToClose_tDBOutput_17.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_17") == null){
+            java.sql.Connection ctn_tDBOutput_17 = null;
+            if((ctn_tDBOutput_17 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_17")) != null){
+                try {
+                    ctn_tDBOutput_17.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_17) {
+                    String errorMessage_tDBOutput_17 = "failed to close the connection in tDBOutput_17 :" + sqlEx_tDBOutput_17.getMessage();
+                    System.err.println(errorMessage_tDBOutput_17);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_17 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_8 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_8";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_8 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_45_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row69Struct implements routines.system.IPersistableComparableLookupRow<row69Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cd == null) ? 0 : this.cd.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row69Struct other = (row69Struct) obj;
+		
+						if (this.cd == null) {
+							if (other.cd != null)
+								return false;
+						
+						} else if (!this.cd.equals(other.cd))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row69Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            other.is_latest = this.is_latest;
+	            
+	}
+
+	public void copyKeysDataTo(row69Struct other) {
+
+		other.cd = this.cd;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cddt = readDate(dis,ois);
+					
+						this.cdprev = readString(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.cdprev, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row69Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cd, other.cd);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_46Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_46_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row69Struct row69 = new row69Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row69 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row69", false);
+		start_Hash.put("tAdvancedHash_row69", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row69");
+					}
+				
+		int tos_count_tAdvancedHash_row69 = 0;
+		
+
+			   		// connection name:row69
+			   		// source node:tDBInput_46 - inputs:(after_tDBInput_45) outputs:(row69,row69) | target node:tAdvancedHash_row69 - inputs:(row69) outputs:()
+			   		// linked node: tMap_23 - inputs:(row68,row69) outputs:(dmd_lookup_route_ins)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row69 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row69Struct> tHash_Lookup_row69 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row69Struct>getLookup(matchingModeEnum_row69);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row69", tHash_Lookup_row69);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row69 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_46 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_46", false);
+		start_Hash.put("tDBInput_46", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_46";
+
+	
+		int tos_count_tDBInput_46 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_46 = 0;
+		    java.sql.Connection conn_tDBInput_46 = null;
+				String driverClass_tDBInput_46 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_46 = java.lang.Class.forName(driverClass_tDBInput_46);
+				String dbUser_tDBInput_46 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_46 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_46 = decryptedPassword_tDBInput_46;
+				
+				String url_tDBInput_46 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_46 = java.sql.DriverManager.getConnection(url_tDBInput_46,dbUser_tDBInput_46,dbPwd_tDBInput_46);
+		        
+				conn_tDBInput_46.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_46 = conn_tDBInput_46.createStatement();
+
+		    String dbquery_tDBInput_46 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\"";
+			
+
+            	globalMap.put("tDBInput_46_QUERY",dbquery_tDBInput_46);
+		    java.sql.ResultSet rs_tDBInput_46 = null;
+
+		    try {
+		    	rs_tDBInput_46 = stmt_tDBInput_46.executeQuery(dbquery_tDBInput_46);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_46 = rs_tDBInput_46.getMetaData();
+		    	int colQtyInRs_tDBInput_46 = rsmd_tDBInput_46.getColumnCount();
+
+		    String tmpContent_tDBInput_46 = null;
+		    
+		    
+		    while (rs_tDBInput_46.next()) {
+		        nb_line_tDBInput_46++;
+		        
+							if(colQtyInRs_tDBInput_46 < 1) {
+								row69.cd = null;
+							} else {
+	                         		
+        	row69.cd = routines.system.JDBCUtil.getString(rs_tDBInput_46, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_46 < 2) {
+								row69.cddt = null;
+							} else {
+										
+			row69.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_46, 2);
+		                    }
+							if(colQtyInRs_tDBInput_46 < 3) {
+								row69.cdprev = null;
+							} else {
+	                         		
+        	row69.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_46, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_46 < 4) {
+								row69.desc = null;
+							} else {
+	                         		
+        	row69.desc = routines.system.JDBCUtil.getString(rs_tDBInput_46, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_46 < 5) {
+								row69.is_latest = null;
+							} else {
+	                         		
+            row69.is_latest = rs_tDBInput_46.getBoolean(5);
+            if(rs_tDBInput_46.wasNull()){
+                    row69.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_46 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_46 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_46";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_46++;
+
+/**
+ * [tDBInput_46 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_46 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_46";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_46 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row69 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row69");
+					}
+					
+
+
+			   
+			   
+
+					row69Struct row69_HashRow = new row69Struct();
+		   	   	   
+				
+				row69_HashRow.cd = row69.cd;
+				
+				row69_HashRow.cddt = row69.cddt;
+				
+				row69_HashRow.cdprev = row69.cdprev;
+				
+				row69_HashRow.desc = row69.desc;
+				
+				row69_HashRow.is_latest = row69.is_latest;
+				
+			tHash_Lookup_row69.put(row69_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row69++;
+
+/**
+ * [tAdvancedHash_row69 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row69 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row69 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row69 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row69 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_46 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_46";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_46 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_46 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_46";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_46 != null) {
+		rs_tDBInput_46.close();
+	}
+	if (stmt_tDBInput_46 != null) {
+		stmt_tDBInput_46.close();
+	}
+	if(conn_tDBInput_46 != null && !conn_tDBInput_46.isClosed()) {
+		
+			conn_tDBInput_46.commit();
+			
+		
+			conn_tDBInput_46.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_46_NB_LINE",nb_line_tDBInput_46);
+ 
+
+ok_Hash.put("tDBInput_46", true);
+end_Hash.put("tDBInput_46", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_46 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row69 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+
+tHash_Lookup_row69.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row69");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row69", true);
+end_Hash.put("tAdvancedHash_row69", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row69 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_46 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_46";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_46 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row69 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row69";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row69 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_46_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row71Struct implements routines.system.IPersistableRow<row71Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row71Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_route_updStruct implements routines.system.IPersistableRow<dmd_lookup_route_updStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_route_updStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row72Struct implements routines.system.IPersistableRow<row72Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row72Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_47Struct implements routines.system.IPersistableRow<after_tDBInput_47Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_47Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_47Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_47_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_48Process(globalMap);
+
+		row72Struct row72 = new row72Struct();
+dmd_lookup_route_updStruct dmd_lookup_route_upd = new dmd_lookup_route_updStruct();
+row71Struct row71 = new row71Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_14 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_14", false);
+		start_Hash.put("tLogRow_14", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_14";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row71");
+					}
+				
+		int tos_count_tLogRow_14 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_14 = "|";
+		java.io.PrintStream consoleOut_tLogRow_14 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_14 = null;
+		int nb_line_tLogRow_14 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_14 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_20 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_20", false);
+		start_Hash.put("tDBOutput_20", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_20";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_route_upd");
+					}
+				
+		int tos_count_tDBOutput_20 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_20 = null;
+	dbschema_tDBOutput_20 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_20 = null;
+if(dbschema_tDBOutput_20 == null || dbschema_tDBOutput_20.trim().length() == 0) {
+	tableName_tDBOutput_20 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_20 = dbschema_tDBOutput_20 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_20 = 0;
+int nb_line_update_tDBOutput_20 = 0;
+int nb_line_inserted_tDBOutput_20 = 0;
+int nb_line_deleted_tDBOutput_20 = 0;
+int nb_line_rejected_tDBOutput_20 = 0;
+
+int deletedCount_tDBOutput_20=0;
+int updatedCount_tDBOutput_20=0;
+int insertedCount_tDBOutput_20=0;
+int rejectedCount_tDBOutput_20=0;
+
+boolean whetherReject_tDBOutput_20 = false;
+
+java.sql.Connection conn_tDBOutput_20 = null;
+String dbUser_tDBOutput_20 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_20 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_20 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_20 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_20 = decryptedPassword_tDBOutput_20;
+
+    conn_tDBOutput_20 = java.sql.DriverManager.getConnection(url_tDBOutput_20,dbUser_tDBOutput_20,dbPwd_tDBOutput_20);
+	
+	resourceMap.put("conn_tDBOutput_20", conn_tDBOutput_20);
+        conn_tDBOutput_20.setAutoCommit(false);
+        int commitEvery_tDBOutput_20 = 10000;
+        int commitCounter_tDBOutput_20 = 0;
+
+
+   int batchSize_tDBOutput_20 = 10000;
+   int batchSizeCounter_tDBOutput_20=0;
+
+int count_tDBOutput_20=0;
+	    String insert_tDBOutput_20 = "INSERT INTO \"" + tableName_tDBOutput_20 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_20 = conn_tDBOutput_20.prepareStatement(insert_tDBOutput_20);
+	    resourceMap.put("pstmt_tDBOutput_20", pstmt_tDBOutput_20);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_20 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_24 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_24", false);
+		start_Hash.put("tMap_24", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_24";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row72");
+					}
+				
+		int tos_count_tMap_24 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row73Struct> tHash_Lookup_row73 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row73Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row73Struct>) 
+					globalMap.get( "tHash_Lookup_row73" ))
+					;					
+					
+	
+
+row73Struct row73HashKey = new row73Struct();
+row73Struct row73Default = new row73Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_24__Struct  {
+}
+Var__tMap_24__Struct Var__tMap_24 = new Var__tMap_24__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_route_updStruct dmd_lookup_route_upd_tmp = new dmd_lookup_route_updStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_24 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_47 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_47", false);
+		start_Hash.put("tDBInput_47", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_47";
+
+	
+		int tos_count_tDBInput_47 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_47 = 0;
+		    java.sql.Connection conn_tDBInput_47 = null;
+				String driverClass_tDBInput_47 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_47 = java.lang.Class.forName(driverClass_tDBInput_47);
+				String dbUser_tDBInput_47 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_47 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_47 = decryptedPassword_tDBInput_47;
+				
+				String url_tDBInput_47 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_47 = java.sql.DriverManager.getConnection(url_tDBInput_47,dbUser_tDBInput_47,dbPwd_tDBInput_47);
+		        
+				conn_tDBInput_47.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_47 = conn_tDBInput_47.createStatement();
+
+		    String dbquery_tDBInput_47 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_route\"";
+			
+
+            	globalMap.put("tDBInput_47_QUERY",dbquery_tDBInput_47);
+		    java.sql.ResultSet rs_tDBInput_47 = null;
+
+		    try {
+		    	rs_tDBInput_47 = stmt_tDBInput_47.executeQuery(dbquery_tDBInput_47);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_47 = rs_tDBInput_47.getMetaData();
+		    	int colQtyInRs_tDBInput_47 = rsmd_tDBInput_47.getColumnCount();
+
+		    String tmpContent_tDBInput_47 = null;
+		    
+		    
+		    while (rs_tDBInput_47.next()) {
+		        nb_line_tDBInput_47++;
+		        
+							if(colQtyInRs_tDBInput_47 < 1) {
+								row72.cd = null;
+							} else {
+	                         		
+        	row72.cd = routines.system.JDBCUtil.getString(rs_tDBInput_47, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_47 < 2) {
+								row72.cddt = null;
+							} else {
+										
+			row72.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_47, 2);
+		                    }
+							if(colQtyInRs_tDBInput_47 < 3) {
+								row72.cdprev = null;
+							} else {
+	                         		
+        	row72.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_47, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_47 < 4) {
+								row72.desc = null;
+							} else {
+	                         		
+        	row72.desc = routines.system.JDBCUtil.getString(rs_tDBInput_47, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_47 < 5) {
+								row72.is_latest = null;
+							} else {
+	                         		
+            row72.is_latest = rs_tDBInput_47.getBoolean(5);
+            if(rs_tDBInput_47.wasNull()){
+                    row72.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_47 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_47 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_47";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_47++;
+
+/**
+ * [tDBInput_47 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_47 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_47";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_47 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_24 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_24";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row72");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_24 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_24 = false;
+		  boolean mainRowRejected_tMap_24 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row73" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow73 = false;
+       		  	    	
+       		  	    	
+ 							row73Struct row73ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_24) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_24 = false;
+								
+                        		    		    row73HashKey.cdprev = row72.cd ;
+                        		    		
+
+								
+		                        	row73HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row73.lookup( row73HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row73.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_24 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row73 != null && tHash_Lookup_row73.getCount(row73HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row73' and it contains more one result from keys :  row73.cdprev = '" + row73HashKey.cdprev + "'");
+								} // G 071
+							
+
+							row73Struct row73 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row73Struct fromLookup_row73 = null;
+							row73 = row73Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row73 !=null && tHash_Lookup_row73.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row73 = tHash_Lookup_row73.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row73 != null) {
+								row73 = fromLookup_row73;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_24__Struct Var = Var__tMap_24;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_route_upd = null;
+
+if(!rejectedInnerJoin_tMap_24 ) {
+
+// # Output table : 'dmd_lookup_route_upd'
+dmd_lookup_route_upd_tmp.dmd_id = row72.cd ;
+dmd_lookup_route_upd_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_route_upd_tmp.dmd_entity_name = "dmd_lookup_route";
+dmd_lookup_route_upd_tmp.row_action = "u";
+dmd_lookup_route_upd = dmd_lookup_route_upd_tmp;
+}  // closing inner join bracket (2)
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_24 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_24++;
+
+/**
+ * [tMap_24 main ] stop
+ */
+	
+	/**
+	 * [tMap_24 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_24";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_24 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_route_upd"
+if(dmd_lookup_route_upd != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_20 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_20";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_route_upd");
+					}
+					
+
+
+
+            row71 = null;
+        whetherReject_tDBOutput_20 = false;
+                    if(dmd_lookup_route_upd.dmd_id == null) {
+pstmt_tDBOutput_20.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_20.setString(1, dmd_lookup_route_upd.dmd_id);
+}
+
+                    if(dmd_lookup_route_upd.sync_process_id == null) {
+pstmt_tDBOutput_20.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_20.setString(2, dmd_lookup_route_upd.sync_process_id);
+}
+
+                    if(dmd_lookup_route_upd.dmd_entity_name == null) {
+pstmt_tDBOutput_20.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_20.setString(3, dmd_lookup_route_upd.dmd_entity_name);
+}
+
+                    if(dmd_lookup_route_upd.row_action == null) {
+pstmt_tDBOutput_20.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_20.setString(4, dmd_lookup_route_upd.row_action);
+}
+
+			
+    		pstmt_tDBOutput_20.addBatch();
+    		nb_line_tDBOutput_20++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_20++;
+    		  
+            if(!whetherReject_tDBOutput_20) {
+                            row71 = new row71Struct();
+                                row71.dmd_id = dmd_lookup_route_upd.dmd_id;
+                                row71.sync_process_id = dmd_lookup_route_upd.sync_process_id;
+                                row71.dmd_entity_name = dmd_lookup_route_upd.dmd_entity_name;
+                                row71.row_action = dmd_lookup_route_upd.row_action;
+            }
+    			if ((batchSize_tDBOutput_20 > 0) && (batchSize_tDBOutput_20 <= batchSizeCounter_tDBOutput_20)) {
+                try {
+						int countSum_tDBOutput_20 = 0;
+						    
+						for(int countEach_tDBOutput_20: pstmt_tDBOutput_20.executeBatch()) {
+							countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+						}
+				    	
+				    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+				    	
+            	    	batchSizeCounter_tDBOutput_20 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_20){
+				    	java.sql.SQLException ne_tDBOutput_20 = e_tDBOutput_20.getNextException(),sqle_tDBOutput_20=null;
+				    	String errormessage_tDBOutput_20;
+						if (ne_tDBOutput_20 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_20 = new java.sql.SQLException(e_tDBOutput_20.getMessage() + "\ncaused by: " + ne_tDBOutput_20.getMessage(), ne_tDBOutput_20.getSQLState(), ne_tDBOutput_20.getErrorCode(), ne_tDBOutput_20);
+							errormessage_tDBOutput_20 = sqle_tDBOutput_20.getMessage();
+						}else{
+							errormessage_tDBOutput_20 = e_tDBOutput_20.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_20 = 0;
+						for(int countEach_tDBOutput_20: e_tDBOutput_20.getUpdateCounts()) {
+							countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+						}
+						
+				    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+				    	
+				    	System.err.println(errormessage_tDBOutput_20);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_20++;
+                if(commitEvery_tDBOutput_20 <= commitCounter_tDBOutput_20) {
+                if ((batchSize_tDBOutput_20 > 0) && (batchSizeCounter_tDBOutput_20 > 0)) {
+                try {
+                		int countSum_tDBOutput_20 = 0;
+                		    
+						for(int countEach_tDBOutput_20: pstmt_tDBOutput_20.executeBatch()) {
+							countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+            	    	
+                batchSizeCounter_tDBOutput_20 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_20){
+			    	java.sql.SQLException ne_tDBOutput_20 = e_tDBOutput_20.getNextException(),sqle_tDBOutput_20=null;
+			    	String errormessage_tDBOutput_20;
+					if (ne_tDBOutput_20 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_20 = new java.sql.SQLException(e_tDBOutput_20.getMessage() + "\ncaused by: " + ne_tDBOutput_20.getMessage(), ne_tDBOutput_20.getSQLState(), ne_tDBOutput_20.getErrorCode(), ne_tDBOutput_20);
+						errormessage_tDBOutput_20 = sqle_tDBOutput_20.getMessage();
+					}else{
+						errormessage_tDBOutput_20 = e_tDBOutput_20.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_20 = 0;
+					for(int countEach_tDBOutput_20: e_tDBOutput_20.getUpdateCounts()) {
+						countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+					}
+					
+			    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+			    	
+			    	System.err.println(errormessage_tDBOutput_20);
+			    	
+				}
+            }
+                	conn_tDBOutput_20.commit();
+                	
+                	commitCounter_tDBOutput_20=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_20++;
+
+/**
+ * [tDBOutput_20 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_20 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_20 process_data_begin ] stop
+ */
+// Start of branch "row71"
+if(row71 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_14 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_14";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row71");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_14 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row71.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_14.append(
+				                String.valueOf(row71.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_14.append("|");
+    			
+
+
+   				
+	    		if(row71.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_14.append(
+				                String.valueOf(row71.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_14.append("|");
+    			
+
+
+   				
+	    		if(row71.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_14.append(
+				                String.valueOf(row71.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_14.append("|");
+    			
+
+
+   				
+	    		if(row71.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_14.append(
+				                String.valueOf(row71.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_14 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_14 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_14);
+                    }
+                    consoleOut_tLogRow_14.println(strBuffer_tLogRow_14.toString());
+                    consoleOut_tLogRow_14.flush();
+                    nb_line_tLogRow_14++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_14++;
+
+/**
+ * [tLogRow_14 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_14 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_14";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_14 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_14 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_14";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_14 process_data_end ] stop
+ */
+
+} // End of branch "row71"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_20 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_20 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_route_upd"
+
+
+
+
+	
+	/**
+	 * [tMap_24 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_24";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_24 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_47 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_47";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_47 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_47 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_47";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_47 != null) {
+		rs_tDBInput_47.close();
+	}
+	if (stmt_tDBInput_47 != null) {
+		stmt_tDBInput_47.close();
+	}
+	if(conn_tDBInput_47 != null && !conn_tDBInput_47.isClosed()) {
+		
+			conn_tDBInput_47.commit();
+			
+		
+			conn_tDBInput_47.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_47_NB_LINE",nb_line_tDBInput_47);
+ 
+
+ok_Hash.put("tDBInput_47", true);
+end_Hash.put("tDBInput_47", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_47 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_24 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_24";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row73 != null) {
+						tHash_Lookup_row73.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row73" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row72");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_24", true);
+end_Hash.put("tMap_24", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_24 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_20 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_20";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_20 = 0;
+				if (pstmt_tDBOutput_20 != null && batchSizeCounter_tDBOutput_20 > 0) {
+						
+					for(int countEach_tDBOutput_20: pstmt_tDBOutput_20.executeBatch()) {
+						countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_20){
+	    	java.sql.SQLException ne_tDBOutput_20 = e_tDBOutput_20.getNextException(),sqle_tDBOutput_20=null;
+	    	String errormessage_tDBOutput_20;
+			if (ne_tDBOutput_20 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_20 = new java.sql.SQLException(e_tDBOutput_20.getMessage() + "\ncaused by: " + ne_tDBOutput_20.getMessage(), ne_tDBOutput_20.getSQLState(), ne_tDBOutput_20.getErrorCode(), ne_tDBOutput_20);
+				errormessage_tDBOutput_20 = sqle_tDBOutput_20.getMessage();
+			}else{
+				errormessage_tDBOutput_20 = e_tDBOutput_20.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_20 = 0;
+			for(int countEach_tDBOutput_20: e_tDBOutput_20.getUpdateCounts()) {
+				countSum_tDBOutput_20 += (countEach_tDBOutput_20 < 0 ? 0 : countEach_tDBOutput_20);
+			}
+			
+	    		insertedCount_tDBOutput_20 += countSum_tDBOutput_20;
+	    	
+	    	System.err.println(errormessage_tDBOutput_20);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_20 != null) {
+        		
+            pstmt_tDBOutput_20.close();
+            resourceMap.remove("pstmt_tDBOutput_20");
+        }
+    resourceMap.put("statementClosed_tDBOutput_20", true);
+			
+			conn_tDBOutput_20.commit();
+			
+		
+    	conn_tDBOutput_20 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_20", true);
+    	
+
+	nb_line_deleted_tDBOutput_20=nb_line_deleted_tDBOutput_20+ deletedCount_tDBOutput_20;
+	nb_line_update_tDBOutput_20=nb_line_update_tDBOutput_20 + updatedCount_tDBOutput_20;
+	nb_line_inserted_tDBOutput_20=nb_line_inserted_tDBOutput_20 + insertedCount_tDBOutput_20;
+	nb_line_rejected_tDBOutput_20=nb_line_rejected_tDBOutput_20 + rejectedCount_tDBOutput_20;
+	
+        globalMap.put("tDBOutput_20_NB_LINE",nb_line_tDBOutput_20);
+        globalMap.put("tDBOutput_20_NB_LINE_UPDATED",nb_line_update_tDBOutput_20);
+        globalMap.put("tDBOutput_20_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_20);
+        globalMap.put("tDBOutput_20_NB_LINE_DELETED",nb_line_deleted_tDBOutput_20);
+        globalMap.put("tDBOutput_20_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_20);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_route_upd");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_20", true);
+end_Hash.put("tDBOutput_20", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_20 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_14 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_14";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_14_NB_LINE",nb_line_tLogRow_14);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row71");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_14", true);
+end_Hash.put("tLogRow_14", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_14 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_24"
+					     			globalMap.remove("tHash_Lookup_row73"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_47 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_47";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_47 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_24 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_24";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_24 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_20 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_20";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_20") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_20 = null;
+                if ((pstmtToClose_tDBOutput_20 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_20")) != null) {
+                    pstmtToClose_tDBOutput_20.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_20") == null){
+            java.sql.Connection ctn_tDBOutput_20 = null;
+            if((ctn_tDBOutput_20 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_20")) != null){
+                try {
+                    ctn_tDBOutput_20.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_20) {
+                    String errorMessage_tDBOutput_20 = "failed to close the connection in tDBOutput_20 :" + sqlEx_tDBOutput_20.getMessage();
+                    System.err.println(errorMessage_tDBOutput_20);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_20 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_14 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_14";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_14 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_47_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row73Struct implements routines.system.IPersistableComparableLookupRow<row73Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public String source;
+
+				public String getSource () {
+					return this.source;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cdprev == null) ? 0 : this.cdprev.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row73Struct other = (row73Struct) obj;
+		
+						if (this.cdprev == null) {
+							if (other.cdprev != null)
+								return false;
+						
+						} else if (!this.cdprev.equals(other.cdprev))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row73Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            other.source = this.source;
+	            
+	}
+
+	public void copyKeysDataTo(row73Struct other) {
+
+		other.cdprev = this.cdprev;
+	            	
+	}
+
+
+
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cdprev = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cd = readString(dis,ois);
+					
+						this.cddt = readDate(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+						this.source = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeString(this.cd, dos, oos);
+					
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+						writeString(this.source, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",source="+source);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row73Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cdprev, other.cdprev);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_48Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_48_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row73Struct row73 = new row73Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row73 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row73", false);
+		start_Hash.put("tAdvancedHash_row73", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row73");
+					}
+				
+		int tos_count_tAdvancedHash_row73 = 0;
+		
+
+			   		// connection name:row73
+			   		// source node:tDBInput_48 - inputs:(after_tDBInput_47) outputs:(row73,row73) | target node:tAdvancedHash_row73 - inputs:(row73) outputs:()
+			   		// linked node: tMap_24 - inputs:(row72,row73) outputs:(dmd_lookup_route_upd)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row73 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row73Struct> tHash_Lookup_row73 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row73Struct>getLookup(matchingModeEnum_row73);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row73", tHash_Lookup_row73);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row73 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_48 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_48", false);
+		start_Hash.put("tDBInput_48", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_48";
+
+	
+		int tos_count_tDBInput_48 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_48 = 0;
+		    java.sql.Connection conn_tDBInput_48 = null;
+				String driverClass_tDBInput_48 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_48 = java.lang.Class.forName(driverClass_tDBInput_48);
+				String dbUser_tDBInput_48 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_48 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_48 = decryptedPassword_tDBInput_48;
+				
+				String url_tDBInput_48 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_48 = java.sql.DriverManager.getConnection(url_tDBInput_48,dbUser_tDBInput_48,dbPwd_tDBInput_48);
+		        
+				conn_tDBInput_48.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_48 = conn_tDBInput_48.createStatement();
+
+		    String dbquery_tDBInput_48 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"desc\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\".\"source\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_route\"";
+			
+
+            	globalMap.put("tDBInput_48_QUERY",dbquery_tDBInput_48);
+		    java.sql.ResultSet rs_tDBInput_48 = null;
+
+		    try {
+		    	rs_tDBInput_48 = stmt_tDBInput_48.executeQuery(dbquery_tDBInput_48);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_48 = rs_tDBInput_48.getMetaData();
+		    	int colQtyInRs_tDBInput_48 = rsmd_tDBInput_48.getColumnCount();
+
+		    String tmpContent_tDBInput_48 = null;
+		    
+		    
+		    while (rs_tDBInput_48.next()) {
+		        nb_line_tDBInput_48++;
+		        
+							if(colQtyInRs_tDBInput_48 < 1) {
+								row73.cd = null;
+							} else {
+	                         		
+        	row73.cd = routines.system.JDBCUtil.getString(rs_tDBInput_48, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_48 < 2) {
+								row73.cddt = null;
+							} else {
+										
+			row73.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_48, 2);
+		                    }
+							if(colQtyInRs_tDBInput_48 < 3) {
+								row73.cdprev = null;
+							} else {
+	                         		
+        	row73.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_48, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_48 < 4) {
+								row73.desc = null;
+							} else {
+	                         		
+        	row73.desc = routines.system.JDBCUtil.getString(rs_tDBInput_48, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_48 < 5) {
+								row73.source = null;
+							} else {
+	                         		
+        	row73.source = routines.system.JDBCUtil.getString(rs_tDBInput_48, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_48 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_48 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_48";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_48++;
+
+/**
+ * [tDBInput_48 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_48 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_48";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_48 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row73 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row73");
+					}
+					
+
+
+			   
+			   
+
+					row73Struct row73_HashRow = new row73Struct();
+		   	   	   
+				
+				row73_HashRow.cd = row73.cd;
+				
+				row73_HashRow.cddt = row73.cddt;
+				
+				row73_HashRow.cdprev = row73.cdprev;
+				
+				row73_HashRow.desc = row73.desc;
+				
+				row73_HashRow.source = row73.source;
+				
+			tHash_Lookup_row73.put(row73_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row73++;
+
+/**
+ * [tAdvancedHash_row73 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row73 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row73 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row73 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row73 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_48 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_48";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_48 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_48 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_48";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_48 != null) {
+		rs_tDBInput_48.close();
+	}
+	if (stmt_tDBInput_48 != null) {
+		stmt_tDBInput_48.close();
+	}
+	if(conn_tDBInput_48 != null && !conn_tDBInput_48.isClosed()) {
+		
+			conn_tDBInput_48.commit();
+			
+		
+			conn_tDBInput_48.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_48_NB_LINE",nb_line_tDBInput_48);
+ 
+
+ok_Hash.put("tDBInput_48", true);
+end_Hash.put("tDBInput_48", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_48 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row73 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+
+tHash_Lookup_row73.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row73");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row73", true);
+end_Hash.put("tAdvancedHash_row73", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row73 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_48 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_48";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_48 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row73 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row73";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row73 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_48_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row74Struct implements routines.system.IPersistableRow<row74Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row74Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_supplier_insStruct implements routines.system.IPersistableRow<dmd_lookup_supplier_insStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_supplier_insStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row75Struct implements routines.system.IPersistableRow<row75Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row75Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_49Struct implements routines.system.IPersistableRow<after_tDBInput_49Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_49Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_49Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_49_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_50Process(globalMap);
+
+		row75Struct row75 = new row75Struct();
+dmd_lookup_supplier_insStruct dmd_lookup_supplier_ins = new dmd_lookup_supplier_insStruct();
+row74Struct row74 = new row74Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_16 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_16", false);
+		start_Hash.put("tLogRow_16", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_16";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row74");
+					}
+				
+		int tos_count_tLogRow_16 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_16 = "|";
+		java.io.PrintStream consoleOut_tLogRow_16 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_16 = null;
+		int nb_line_tLogRow_16 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_16 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_23 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_23", false);
+		start_Hash.put("tDBOutput_23", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_23";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_supplier_ins");
+					}
+				
+		int tos_count_tDBOutput_23 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_23 = null;
+	dbschema_tDBOutput_23 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_23 = null;
+if(dbschema_tDBOutput_23 == null || dbschema_tDBOutput_23.trim().length() == 0) {
+	tableName_tDBOutput_23 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_23 = dbschema_tDBOutput_23 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_23 = 0;
+int nb_line_update_tDBOutput_23 = 0;
+int nb_line_inserted_tDBOutput_23 = 0;
+int nb_line_deleted_tDBOutput_23 = 0;
+int nb_line_rejected_tDBOutput_23 = 0;
+
+int deletedCount_tDBOutput_23=0;
+int updatedCount_tDBOutput_23=0;
+int insertedCount_tDBOutput_23=0;
+int rejectedCount_tDBOutput_23=0;
+
+boolean whetherReject_tDBOutput_23 = false;
+
+java.sql.Connection conn_tDBOutput_23 = null;
+String dbUser_tDBOutput_23 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_23 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_23 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_23 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_23 = decryptedPassword_tDBOutput_23;
+
+    conn_tDBOutput_23 = java.sql.DriverManager.getConnection(url_tDBOutput_23,dbUser_tDBOutput_23,dbPwd_tDBOutput_23);
+	
+	resourceMap.put("conn_tDBOutput_23", conn_tDBOutput_23);
+        conn_tDBOutput_23.setAutoCommit(false);
+        int commitEvery_tDBOutput_23 = 10000;
+        int commitCounter_tDBOutput_23 = 0;
+
+
+   int batchSize_tDBOutput_23 = 10000;
+   int batchSizeCounter_tDBOutput_23=0;
+
+int count_tDBOutput_23=0;
+	    String insert_tDBOutput_23 = "INSERT INTO \"" + tableName_tDBOutput_23 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_23 = conn_tDBOutput_23.prepareStatement(insert_tDBOutput_23);
+	    resourceMap.put("pstmt_tDBOutput_23", pstmt_tDBOutput_23);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_23 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_25 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_25", false);
+		start_Hash.put("tMap_25", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_25";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row75");
+					}
+				
+		int tos_count_tMap_25 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row76Struct> tHash_Lookup_row76 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row76Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row76Struct>) 
+					globalMap.get( "tHash_Lookup_row76" ))
+					;					
+					
+	
+
+row76Struct row76HashKey = new row76Struct();
+row76Struct row76Default = new row76Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_25__Struct  {
+}
+Var__tMap_25__Struct Var__tMap_25 = new Var__tMap_25__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_supplier_insStruct dmd_lookup_supplier_ins_tmp = new dmd_lookup_supplier_insStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_25 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_49 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_49", false);
+		start_Hash.put("tDBInput_49", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_49";
+
+	
+		int tos_count_tDBInput_49 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_49 = 0;
+		    java.sql.Connection conn_tDBInput_49 = null;
+				String driverClass_tDBInput_49 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_49 = java.lang.Class.forName(driverClass_tDBInput_49);
+				String dbUser_tDBInput_49 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_49 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_49 = decryptedPassword_tDBInput_49;
+				
+				String url_tDBInput_49 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_49 = java.sql.DriverManager.getConnection(url_tDBInput_49,dbUser_tDBInput_49,dbPwd_tDBInput_49);
+		        
+				conn_tDBInput_49.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_49 = conn_tDBInput_49.createStatement();
+
+		    String dbquery_tDBInput_49 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"invalid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\"";
+			
+
+            	globalMap.put("tDBInput_49_QUERY",dbquery_tDBInput_49);
+		    java.sql.ResultSet rs_tDBInput_49 = null;
+
+		    try {
+		    	rs_tDBInput_49 = stmt_tDBInput_49.executeQuery(dbquery_tDBInput_49);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_49 = rs_tDBInput_49.getMetaData();
+		    	int colQtyInRs_tDBInput_49 = rsmd_tDBInput_49.getColumnCount();
+
+		    String tmpContent_tDBInput_49 = null;
+		    
+		    
+		    while (rs_tDBInput_49.next()) {
+		        nb_line_tDBInput_49++;
+		        
+							if(colQtyInRs_tDBInput_49 < 1) {
+								row75.cd = null;
+							} else {
+	                         		
+        	row75.cd = routines.system.JDBCUtil.getString(rs_tDBInput_49, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_49 < 2) {
+								row75.cddt = null;
+							} else {
+										
+			row75.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_49, 2);
+		                    }
+							if(colQtyInRs_tDBInput_49 < 3) {
+								row75.cdprev = null;
+							} else {
+	                         		
+        	row75.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_49, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_49 < 4) {
+								row75.invalid = null;
+							} else {
+		                          
+            row75.invalid = rs_tDBInput_49.getShort(4);
+            if(rs_tDBInput_49.wasNull()){
+                    row75.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_49 < 5) {
+								row75.desc = null;
+							} else {
+	                         		
+        	row75.desc = routines.system.JDBCUtil.getString(rs_tDBInput_49, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_49 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_49 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_49";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_49++;
+
+/**
+ * [tDBInput_49 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_49 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_49";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_49 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_25 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_25";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row75");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_25 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_25 = false;
+		  boolean mainRowRejected_tMap_25 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row76" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow76 = false;
+       		  	    	
+       		  	    	
+ 							row76Struct row76ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_25) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_25 = false;
+								
+                        		    		    row76HashKey.cd = row75.cd ;
+                        		    		
+
+								
+		                        	row76HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row76.lookup( row76HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row76.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_25 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row76 != null && tHash_Lookup_row76.getCount(row76HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row76' and it contains more one result from keys :  row76.cd = '" + row76HashKey.cd + "'");
+								} // G 071
+							
+
+							row76Struct row76 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row76Struct fromLookup_row76 = null;
+							row76 = row76Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row76 !=null && tHash_Lookup_row76.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row76 = tHash_Lookup_row76.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row76 != null) {
+								row76 = fromLookup_row76;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_25__Struct Var = Var__tMap_25;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_supplier_ins = null;
+
+if(!rejectedInnerJoin_tMap_25 ) {
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
+
+// # Output reject table : 'dmd_lookup_supplier_ins'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_25 ) {
+dmd_lookup_supplier_ins_tmp.dmd_id = row75.cd ;
+dmd_lookup_supplier_ins_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_supplier_ins_tmp.dmd_entity_name = "dmd_lookup_supplier";
+dmd_lookup_supplier_ins_tmp.row_action = "i";
+dmd_lookup_supplier_ins = dmd_lookup_supplier_ins_tmp;
+} // closing filter/reject
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_25 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_25++;
+
+/**
+ * [tMap_25 main ] stop
+ */
+	
+	/**
+	 * [tMap_25 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_25";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_25 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_supplier_ins"
+if(dmd_lookup_supplier_ins != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_23 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_23";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_supplier_ins");
+					}
+					
+
+
+
+            row74 = null;
+        whetherReject_tDBOutput_23 = false;
+                    if(dmd_lookup_supplier_ins.dmd_id == null) {
+pstmt_tDBOutput_23.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_23.setString(1, dmd_lookup_supplier_ins.dmd_id);
+}
+
+                    if(dmd_lookup_supplier_ins.sync_process_id == null) {
+pstmt_tDBOutput_23.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_23.setString(2, dmd_lookup_supplier_ins.sync_process_id);
+}
+
+                    if(dmd_lookup_supplier_ins.dmd_entity_name == null) {
+pstmt_tDBOutput_23.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_23.setString(3, dmd_lookup_supplier_ins.dmd_entity_name);
+}
+
+                    if(dmd_lookup_supplier_ins.row_action == null) {
+pstmt_tDBOutput_23.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_23.setString(4, dmd_lookup_supplier_ins.row_action);
+}
+
+			
+    		pstmt_tDBOutput_23.addBatch();
+    		nb_line_tDBOutput_23++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_23++;
+    		  
+            if(!whetherReject_tDBOutput_23) {
+                            row74 = new row74Struct();
+                                row74.dmd_id = dmd_lookup_supplier_ins.dmd_id;
+                                row74.sync_process_id = dmd_lookup_supplier_ins.sync_process_id;
+                                row74.dmd_entity_name = dmd_lookup_supplier_ins.dmd_entity_name;
+                                row74.row_action = dmd_lookup_supplier_ins.row_action;
+            }
+    			if ((batchSize_tDBOutput_23 > 0) && (batchSize_tDBOutput_23 <= batchSizeCounter_tDBOutput_23)) {
+                try {
+						int countSum_tDBOutput_23 = 0;
+						    
+						for(int countEach_tDBOutput_23: pstmt_tDBOutput_23.executeBatch()) {
+							countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+						}
+				    	
+				    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+				    	
+            	    	batchSizeCounter_tDBOutput_23 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_23){
+				    	java.sql.SQLException ne_tDBOutput_23 = e_tDBOutput_23.getNextException(),sqle_tDBOutput_23=null;
+				    	String errormessage_tDBOutput_23;
+						if (ne_tDBOutput_23 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_23 = new java.sql.SQLException(e_tDBOutput_23.getMessage() + "\ncaused by: " + ne_tDBOutput_23.getMessage(), ne_tDBOutput_23.getSQLState(), ne_tDBOutput_23.getErrorCode(), ne_tDBOutput_23);
+							errormessage_tDBOutput_23 = sqle_tDBOutput_23.getMessage();
+						}else{
+							errormessage_tDBOutput_23 = e_tDBOutput_23.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_23 = 0;
+						for(int countEach_tDBOutput_23: e_tDBOutput_23.getUpdateCounts()) {
+							countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+						}
+						
+				    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+				    	
+				    	System.err.println(errormessage_tDBOutput_23);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_23++;
+                if(commitEvery_tDBOutput_23 <= commitCounter_tDBOutput_23) {
+                if ((batchSize_tDBOutput_23 > 0) && (batchSizeCounter_tDBOutput_23 > 0)) {
+                try {
+                		int countSum_tDBOutput_23 = 0;
+                		    
+						for(int countEach_tDBOutput_23: pstmt_tDBOutput_23.executeBatch()) {
+							countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+            	    	
+                batchSizeCounter_tDBOutput_23 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_23){
+			    	java.sql.SQLException ne_tDBOutput_23 = e_tDBOutput_23.getNextException(),sqle_tDBOutput_23=null;
+			    	String errormessage_tDBOutput_23;
+					if (ne_tDBOutput_23 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_23 = new java.sql.SQLException(e_tDBOutput_23.getMessage() + "\ncaused by: " + ne_tDBOutput_23.getMessage(), ne_tDBOutput_23.getSQLState(), ne_tDBOutput_23.getErrorCode(), ne_tDBOutput_23);
+						errormessage_tDBOutput_23 = sqle_tDBOutput_23.getMessage();
+					}else{
+						errormessage_tDBOutput_23 = e_tDBOutput_23.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_23 = 0;
+					for(int countEach_tDBOutput_23: e_tDBOutput_23.getUpdateCounts()) {
+						countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+					}
+					
+			    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+			    	
+			    	System.err.println(errormessage_tDBOutput_23);
+			    	
+				}
+            }
+                	conn_tDBOutput_23.commit();
+                	
+                	commitCounter_tDBOutput_23=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_23++;
+
+/**
+ * [tDBOutput_23 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_23 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_23 process_data_begin ] stop
+ */
+// Start of branch "row74"
+if(row74 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_16 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_16";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row74");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_16 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row74.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_16.append(
+				                String.valueOf(row74.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_16.append("|");
+    			
+
+
+   				
+	    		if(row74.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_16.append(
+				                String.valueOf(row74.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_16.append("|");
+    			
+
+
+   				
+	    		if(row74.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_16.append(
+				                String.valueOf(row74.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_16.append("|");
+    			
+
+
+   				
+	    		if(row74.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_16.append(
+				                String.valueOf(row74.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_16 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_16 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_16);
+                    }
+                    consoleOut_tLogRow_16.println(strBuffer_tLogRow_16.toString());
+                    consoleOut_tLogRow_16.flush();
+                    nb_line_tLogRow_16++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_16++;
+
+/**
+ * [tLogRow_16 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_16 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_16";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_16 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_16 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_16";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_16 process_data_end ] stop
+ */
+
+} // End of branch "row74"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_23 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_23 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_supplier_ins"
+
+
+
+
+	
+	/**
+	 * [tMap_25 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_25";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_25 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_49 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_49";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_49 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_49 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_49";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_49 != null) {
+		rs_tDBInput_49.close();
+	}
+	if (stmt_tDBInput_49 != null) {
+		stmt_tDBInput_49.close();
+	}
+	if(conn_tDBInput_49 != null && !conn_tDBInput_49.isClosed()) {
+		
+			conn_tDBInput_49.commit();
+			
+		
+			conn_tDBInput_49.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_49_NB_LINE",nb_line_tDBInput_49);
+ 
+
+ok_Hash.put("tDBInput_49", true);
+end_Hash.put("tDBInput_49", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_49 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_25 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_25";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row76 != null) {
+						tHash_Lookup_row76.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row76" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row75");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_25", true);
+end_Hash.put("tMap_25", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_25 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_23 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_23";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_23 = 0;
+				if (pstmt_tDBOutput_23 != null && batchSizeCounter_tDBOutput_23 > 0) {
+						
+					for(int countEach_tDBOutput_23: pstmt_tDBOutput_23.executeBatch()) {
+						countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_23){
+	    	java.sql.SQLException ne_tDBOutput_23 = e_tDBOutput_23.getNextException(),sqle_tDBOutput_23=null;
+	    	String errormessage_tDBOutput_23;
+			if (ne_tDBOutput_23 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_23 = new java.sql.SQLException(e_tDBOutput_23.getMessage() + "\ncaused by: " + ne_tDBOutput_23.getMessage(), ne_tDBOutput_23.getSQLState(), ne_tDBOutput_23.getErrorCode(), ne_tDBOutput_23);
+				errormessage_tDBOutput_23 = sqle_tDBOutput_23.getMessage();
+			}else{
+				errormessage_tDBOutput_23 = e_tDBOutput_23.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_23 = 0;
+			for(int countEach_tDBOutput_23: e_tDBOutput_23.getUpdateCounts()) {
+				countSum_tDBOutput_23 += (countEach_tDBOutput_23 < 0 ? 0 : countEach_tDBOutput_23);
+			}
+			
+	    		insertedCount_tDBOutput_23 += countSum_tDBOutput_23;
+	    	
+	    	System.err.println(errormessage_tDBOutput_23);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_23 != null) {
+        		
+            pstmt_tDBOutput_23.close();
+            resourceMap.remove("pstmt_tDBOutput_23");
+        }
+    resourceMap.put("statementClosed_tDBOutput_23", true);
+			
+			conn_tDBOutput_23.commit();
+			
+		
+    	conn_tDBOutput_23 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_23", true);
+    	
+
+	nb_line_deleted_tDBOutput_23=nb_line_deleted_tDBOutput_23+ deletedCount_tDBOutput_23;
+	nb_line_update_tDBOutput_23=nb_line_update_tDBOutput_23 + updatedCount_tDBOutput_23;
+	nb_line_inserted_tDBOutput_23=nb_line_inserted_tDBOutput_23 + insertedCount_tDBOutput_23;
+	nb_line_rejected_tDBOutput_23=nb_line_rejected_tDBOutput_23 + rejectedCount_tDBOutput_23;
+	
+        globalMap.put("tDBOutput_23_NB_LINE",nb_line_tDBOutput_23);
+        globalMap.put("tDBOutput_23_NB_LINE_UPDATED",nb_line_update_tDBOutput_23);
+        globalMap.put("tDBOutput_23_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_23);
+        globalMap.put("tDBOutput_23_NB_LINE_DELETED",nb_line_deleted_tDBOutput_23);
+        globalMap.put("tDBOutput_23_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_23);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_supplier_ins");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_23", true);
+end_Hash.put("tDBOutput_23", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_23 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_16 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_16";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_16_NB_LINE",nb_line_tLogRow_16);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row74");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_16", true);
+end_Hash.put("tLogRow_16", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_16 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_25"
+					     			globalMap.remove("tHash_Lookup_row76"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_49 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_49";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_49 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_25 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_25";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_25 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_23 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_23";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_23") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_23 = null;
+                if ((pstmtToClose_tDBOutput_23 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_23")) != null) {
+                    pstmtToClose_tDBOutput_23.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_23") == null){
+            java.sql.Connection ctn_tDBOutput_23 = null;
+            if((ctn_tDBOutput_23 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_23")) != null){
+                try {
+                    ctn_tDBOutput_23.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_23) {
+                    String errorMessage_tDBOutput_23 = "failed to close the connection in tDBOutput_23 :" + sqlEx_tDBOutput_23.getMessage();
+                    System.err.println(errorMessage_tDBOutput_23);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_23 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_16 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_16";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_16 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_49_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row76Struct implements routines.system.IPersistableComparableLookupRow<row76Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cd == null) ? 0 : this.cd.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row76Struct other = (row76Struct) obj;
+		
+						if (this.cd == null) {
+							if (other.cd != null)
+								return false;
+						
+						} else if (!this.cd.equals(other.cd))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row76Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.invalid = this.invalid;
+	            other.desc = this.desc;
+	            other.is_latest = this.is_latest;
+	            
+	}
+
+	public void copyKeysDataTo(row76Struct other) {
+
+		other.cd = this.cd;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cddt = readDate(dis,ois);
+					
+						this.cdprev = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+						this.desc = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.cdprev, dos, oos);
+					
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+						writeString(this.desc, dos, oos);
+					
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row76Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cd, other.cd);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_50Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_50_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row76Struct row76 = new row76Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row76 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row76", false);
+		start_Hash.put("tAdvancedHash_row76", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row76");
+					}
+				
+		int tos_count_tAdvancedHash_row76 = 0;
+		
+
+			   		// connection name:row76
+			   		// source node:tDBInput_50 - inputs:(after_tDBInput_49) outputs:(row76,row76) | target node:tAdvancedHash_row76 - inputs:(row76) outputs:()
+			   		// linked node: tMap_25 - inputs:(row75,row76) outputs:(dmd_lookup_supplier_ins)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row76 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row76Struct> tHash_Lookup_row76 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row76Struct>getLookup(matchingModeEnum_row76);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row76", tHash_Lookup_row76);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row76 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_50 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_50", false);
+		start_Hash.put("tDBInput_50", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_50";
+
+	
+		int tos_count_tDBInput_50 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_50 = 0;
+		    java.sql.Connection conn_tDBInput_50 = null;
+				String driverClass_tDBInput_50 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_50 = java.lang.Class.forName(driverClass_tDBInput_50);
+				String dbUser_tDBInput_50 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_50 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_50 = decryptedPassword_tDBInput_50;
+				
+				String url_tDBInput_50 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_50 = java.sql.DriverManager.getConnection(url_tDBInput_50,dbUser_tDBInput_50,dbPwd_tDBInput_50);
+		        
+				conn_tDBInput_50.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_50 = conn_tDBInput_50.createStatement();
+
+		    String dbquery_tDBInput_50 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"invalid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\"";
+			
+
+            	globalMap.put("tDBInput_50_QUERY",dbquery_tDBInput_50);
+		    java.sql.ResultSet rs_tDBInput_50 = null;
+
+		    try {
+		    	rs_tDBInput_50 = stmt_tDBInput_50.executeQuery(dbquery_tDBInput_50);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_50 = rs_tDBInput_50.getMetaData();
+		    	int colQtyInRs_tDBInput_50 = rsmd_tDBInput_50.getColumnCount();
+
+		    String tmpContent_tDBInput_50 = null;
+		    
+		    
+		    while (rs_tDBInput_50.next()) {
+		        nb_line_tDBInput_50++;
+		        
+							if(colQtyInRs_tDBInput_50 < 1) {
+								row76.cd = null;
+							} else {
+	                         		
+        	row76.cd = routines.system.JDBCUtil.getString(rs_tDBInput_50, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_50 < 2) {
+								row76.cddt = null;
+							} else {
+										
+			row76.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_50, 2);
+		                    }
+							if(colQtyInRs_tDBInput_50 < 3) {
+								row76.cdprev = null;
+							} else {
+	                         		
+        	row76.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_50, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_50 < 4) {
+								row76.invalid = null;
+							} else {
+		                          
+            row76.invalid = rs_tDBInput_50.getShort(4);
+            if(rs_tDBInput_50.wasNull()){
+                    row76.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_50 < 5) {
+								row76.desc = null;
+							} else {
+	                         		
+        	row76.desc = routines.system.JDBCUtil.getString(rs_tDBInput_50, 5, false);
+		                    }
+							if(colQtyInRs_tDBInput_50 < 6) {
+								row76.is_latest = null;
+							} else {
+	                         		
+            row76.is_latest = rs_tDBInput_50.getBoolean(6);
+            if(rs_tDBInput_50.wasNull()){
+                    row76.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_50 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_50 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_50";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_50++;
+
+/**
+ * [tDBInput_50 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_50 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_50";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_50 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row76 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row76");
+					}
+					
+
+
+			   
+			   
+
+					row76Struct row76_HashRow = new row76Struct();
+		   	   	   
+				
+				row76_HashRow.cd = row76.cd;
+				
+				row76_HashRow.cddt = row76.cddt;
+				
+				row76_HashRow.cdprev = row76.cdprev;
+				
+				row76_HashRow.invalid = row76.invalid;
+				
+				row76_HashRow.desc = row76.desc;
+				
+				row76_HashRow.is_latest = row76.is_latest;
+				
+			tHash_Lookup_row76.put(row76_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row76++;
+
+/**
+ * [tAdvancedHash_row76 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row76 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row76 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row76 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row76 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_50 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_50";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_50 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_50 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_50";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_50 != null) {
+		rs_tDBInput_50.close();
+	}
+	if (stmt_tDBInput_50 != null) {
+		stmt_tDBInput_50.close();
+	}
+	if(conn_tDBInput_50 != null && !conn_tDBInput_50.isClosed()) {
+		
+			conn_tDBInput_50.commit();
+			
+		
+			conn_tDBInput_50.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_50_NB_LINE",nb_line_tDBInput_50);
+ 
+
+ok_Hash.put("tDBInput_50", true);
+end_Hash.put("tDBInput_50", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_50 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row76 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+
+tHash_Lookup_row76.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row76");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row76", true);
+end_Hash.put("tAdvancedHash_row76", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row76 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_50 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_50";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_50 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row76 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row76";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row76 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_50_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row77Struct implements routines.system.IPersistableRow<row77Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row77Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_supplier_updStruct implements routines.system.IPersistableRow<dmd_lookup_supplier_updStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_supplier_updStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row78Struct implements routines.system.IPersistableRow<row78Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row78Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_51Struct implements routines.system.IPersistableRow<after_tDBInput_51Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// Short
+				
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_51Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_51Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_51_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_52Process(globalMap);
+
+		row78Struct row78 = new row78Struct();
+dmd_lookup_supplier_updStruct dmd_lookup_supplier_upd = new dmd_lookup_supplier_updStruct();
+row77Struct row77 = new row77Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_18 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_18", false);
+		start_Hash.put("tLogRow_18", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_18";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row77");
+					}
+				
+		int tos_count_tLogRow_18 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_18 = "|";
+		java.io.PrintStream consoleOut_tLogRow_18 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_18 = null;
+		int nb_line_tLogRow_18 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_18 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_26 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_26", false);
+		start_Hash.put("tDBOutput_26", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_26";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_supplier_upd");
+					}
+				
+		int tos_count_tDBOutput_26 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_26 = null;
+	dbschema_tDBOutput_26 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_26 = null;
+if(dbschema_tDBOutput_26 == null || dbschema_tDBOutput_26.trim().length() == 0) {
+	tableName_tDBOutput_26 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_26 = dbschema_tDBOutput_26 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_26 = 0;
+int nb_line_update_tDBOutput_26 = 0;
+int nb_line_inserted_tDBOutput_26 = 0;
+int nb_line_deleted_tDBOutput_26 = 0;
+int nb_line_rejected_tDBOutput_26 = 0;
+
+int deletedCount_tDBOutput_26=0;
+int updatedCount_tDBOutput_26=0;
+int insertedCount_tDBOutput_26=0;
+int rejectedCount_tDBOutput_26=0;
+
+boolean whetherReject_tDBOutput_26 = false;
+
+java.sql.Connection conn_tDBOutput_26 = null;
+String dbUser_tDBOutput_26 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_26 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_26 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_26 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_26 = decryptedPassword_tDBOutput_26;
+
+    conn_tDBOutput_26 = java.sql.DriverManager.getConnection(url_tDBOutput_26,dbUser_tDBOutput_26,dbPwd_tDBOutput_26);
+	
+	resourceMap.put("conn_tDBOutput_26", conn_tDBOutput_26);
+        conn_tDBOutput_26.setAutoCommit(false);
+        int commitEvery_tDBOutput_26 = 10000;
+        int commitCounter_tDBOutput_26 = 0;
+
+
+   int batchSize_tDBOutput_26 = 10000;
+   int batchSizeCounter_tDBOutput_26=0;
+
+int count_tDBOutput_26=0;
+	    String insert_tDBOutput_26 = "INSERT INTO \"" + tableName_tDBOutput_26 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_26 = conn_tDBOutput_26.prepareStatement(insert_tDBOutput_26);
+	    resourceMap.put("pstmt_tDBOutput_26", pstmt_tDBOutput_26);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_26 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_26 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_26", false);
+		start_Hash.put("tMap_26", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_26";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row78");
+					}
+				
+		int tos_count_tMap_26 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row79Struct> tHash_Lookup_row79 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row79Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row79Struct>) 
+					globalMap.get( "tHash_Lookup_row79" ))
+					;					
+					
+	
+
+row79Struct row79HashKey = new row79Struct();
+row79Struct row79Default = new row79Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_26__Struct  {
+}
+Var__tMap_26__Struct Var__tMap_26 = new Var__tMap_26__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_supplier_updStruct dmd_lookup_supplier_upd_tmp = new dmd_lookup_supplier_updStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_26 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_51 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_51", false);
+		start_Hash.put("tDBInput_51", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_51";
+
+	
+		int tos_count_tDBInput_51 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_51 = 0;
+		    java.sql.Connection conn_tDBInput_51 = null;
+				String driverClass_tDBInput_51 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_51 = java.lang.Class.forName(driverClass_tDBInput_51);
+				String dbUser_tDBInput_51 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_51 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_51 = decryptedPassword_tDBInput_51;
+				
+				String url_tDBInput_51 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_51 = java.sql.DriverManager.getConnection(url_tDBInput_51,dbUser_tDBInput_51,dbPwd_tDBInput_51);
+		        
+				conn_tDBInput_51.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_51 = conn_tDBInput_51.createStatement();
+
+		    String dbquery_tDBInput_51 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"invalid\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_supplier\"";
+			
+
+            	globalMap.put("tDBInput_51_QUERY",dbquery_tDBInput_51);
+		    java.sql.ResultSet rs_tDBInput_51 = null;
+
+		    try {
+		    	rs_tDBInput_51 = stmt_tDBInput_51.executeQuery(dbquery_tDBInput_51);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_51 = rs_tDBInput_51.getMetaData();
+		    	int colQtyInRs_tDBInput_51 = rsmd_tDBInput_51.getColumnCount();
+
+		    String tmpContent_tDBInput_51 = null;
+		    
+		    
+		    while (rs_tDBInput_51.next()) {
+		        nb_line_tDBInput_51++;
+		        
+							if(colQtyInRs_tDBInput_51 < 1) {
+								row78.cd = null;
+							} else {
+	                         		
+        	row78.cd = routines.system.JDBCUtil.getString(rs_tDBInput_51, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_51 < 2) {
+								row78.cddt = null;
+							} else {
+										
+			row78.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_51, 2);
+		                    }
+							if(colQtyInRs_tDBInput_51 < 3) {
+								row78.cdprev = null;
+							} else {
+	                         		
+        	row78.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_51, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_51 < 4) {
+								row78.invalid = null;
+							} else {
+		                          
+            row78.invalid = rs_tDBInput_51.getShort(4);
+            if(rs_tDBInput_51.wasNull()){
+                    row78.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_51 < 5) {
+								row78.desc = null;
+							} else {
+	                         		
+        	row78.desc = routines.system.JDBCUtil.getString(rs_tDBInput_51, 5, false);
+		                    }
+							if(colQtyInRs_tDBInput_51 < 6) {
+								row78.is_latest = null;
+							} else {
+	                         		
+            row78.is_latest = rs_tDBInput_51.getBoolean(6);
+            if(rs_tDBInput_51.wasNull()){
+                    row78.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_51 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_51 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_51";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_51++;
+
+/**
+ * [tDBInput_51 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_51 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_51";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_51 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_26 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_26";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row78");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_26 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_26 = false;
+		  boolean mainRowRejected_tMap_26 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row79" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow79 = false;
+       		  	    	
+       		  	    	
+ 							row79Struct row79ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_26) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_26 = false;
+								
+                        		    		    row79HashKey.cdprev = row78.cd ;
+                        		    		
+
+								
+		                        	row79HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row79.lookup( row79HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row79.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_26 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row79 != null && tHash_Lookup_row79.getCount(row79HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row79' and it contains more one result from keys :  row79.cdprev = '" + row79HashKey.cdprev + "'");
+								} // G 071
+							
+
+							row79Struct row79 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row79Struct fromLookup_row79 = null;
+							row79 = row79Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row79 !=null && tHash_Lookup_row79.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row79 = tHash_Lookup_row79.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row79 != null) {
+								row79 = fromLookup_row79;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_26__Struct Var = Var__tMap_26;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_supplier_upd = null;
+
+if(!rejectedInnerJoin_tMap_26 ) {
+
+// # Output table : 'dmd_lookup_supplier_upd'
+dmd_lookup_supplier_upd_tmp.dmd_id = row78.cd ;
+dmd_lookup_supplier_upd_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_supplier_upd_tmp.dmd_entity_name = "dmd_lookup_supplier";
+dmd_lookup_supplier_upd_tmp.row_action = "u";
+dmd_lookup_supplier_upd = dmd_lookup_supplier_upd_tmp;
+}  // closing inner join bracket (2)
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_26 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_26++;
+
+/**
+ * [tMap_26 main ] stop
+ */
+	
+	/**
+	 * [tMap_26 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_26";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_26 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_supplier_upd"
+if(dmd_lookup_supplier_upd != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_26 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_26";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_supplier_upd");
+					}
+					
+
+
+
+            row77 = null;
+        whetherReject_tDBOutput_26 = false;
+                    if(dmd_lookup_supplier_upd.dmd_id == null) {
+pstmt_tDBOutput_26.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_26.setString(1, dmd_lookup_supplier_upd.dmd_id);
+}
+
+                    if(dmd_lookup_supplier_upd.sync_process_id == null) {
+pstmt_tDBOutput_26.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_26.setString(2, dmd_lookup_supplier_upd.sync_process_id);
+}
+
+                    if(dmd_lookup_supplier_upd.dmd_entity_name == null) {
+pstmt_tDBOutput_26.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_26.setString(3, dmd_lookup_supplier_upd.dmd_entity_name);
+}
+
+                    if(dmd_lookup_supplier_upd.row_action == null) {
+pstmt_tDBOutput_26.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_26.setString(4, dmd_lookup_supplier_upd.row_action);
+}
+
+			
+    		pstmt_tDBOutput_26.addBatch();
+    		nb_line_tDBOutput_26++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_26++;
+    		  
+            if(!whetherReject_tDBOutput_26) {
+                            row77 = new row77Struct();
+                                row77.dmd_id = dmd_lookup_supplier_upd.dmd_id;
+                                row77.sync_process_id = dmd_lookup_supplier_upd.sync_process_id;
+                                row77.dmd_entity_name = dmd_lookup_supplier_upd.dmd_entity_name;
+                                row77.row_action = dmd_lookup_supplier_upd.row_action;
+            }
+    			if ((batchSize_tDBOutput_26 > 0) && (batchSize_tDBOutput_26 <= batchSizeCounter_tDBOutput_26)) {
+                try {
+						int countSum_tDBOutput_26 = 0;
+						    
+						for(int countEach_tDBOutput_26: pstmt_tDBOutput_26.executeBatch()) {
+							countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+						}
+				    	
+				    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+				    	
+            	    	batchSizeCounter_tDBOutput_26 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_26){
+				    	java.sql.SQLException ne_tDBOutput_26 = e_tDBOutput_26.getNextException(),sqle_tDBOutput_26=null;
+				    	String errormessage_tDBOutput_26;
+						if (ne_tDBOutput_26 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_26 = new java.sql.SQLException(e_tDBOutput_26.getMessage() + "\ncaused by: " + ne_tDBOutput_26.getMessage(), ne_tDBOutput_26.getSQLState(), ne_tDBOutput_26.getErrorCode(), ne_tDBOutput_26);
+							errormessage_tDBOutput_26 = sqle_tDBOutput_26.getMessage();
+						}else{
+							errormessage_tDBOutput_26 = e_tDBOutput_26.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_26 = 0;
+						for(int countEach_tDBOutput_26: e_tDBOutput_26.getUpdateCounts()) {
+							countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+						}
+						
+				    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+				    	
+				    	System.err.println(errormessage_tDBOutput_26);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_26++;
+                if(commitEvery_tDBOutput_26 <= commitCounter_tDBOutput_26) {
+                if ((batchSize_tDBOutput_26 > 0) && (batchSizeCounter_tDBOutput_26 > 0)) {
+                try {
+                		int countSum_tDBOutput_26 = 0;
+                		    
+						for(int countEach_tDBOutput_26: pstmt_tDBOutput_26.executeBatch()) {
+							countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+            	    	
+                batchSizeCounter_tDBOutput_26 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_26){
+			    	java.sql.SQLException ne_tDBOutput_26 = e_tDBOutput_26.getNextException(),sqle_tDBOutput_26=null;
+			    	String errormessage_tDBOutput_26;
+					if (ne_tDBOutput_26 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_26 = new java.sql.SQLException(e_tDBOutput_26.getMessage() + "\ncaused by: " + ne_tDBOutput_26.getMessage(), ne_tDBOutput_26.getSQLState(), ne_tDBOutput_26.getErrorCode(), ne_tDBOutput_26);
+						errormessage_tDBOutput_26 = sqle_tDBOutput_26.getMessage();
+					}else{
+						errormessage_tDBOutput_26 = e_tDBOutput_26.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_26 = 0;
+					for(int countEach_tDBOutput_26: e_tDBOutput_26.getUpdateCounts()) {
+						countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+					}
+					
+			    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+			    	
+			    	System.err.println(errormessage_tDBOutput_26);
+			    	
+				}
+            }
+                	conn_tDBOutput_26.commit();
+                	
+                	commitCounter_tDBOutput_26=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_26++;
+
+/**
+ * [tDBOutput_26 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_26 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_26";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_26 process_data_begin ] stop
+ */
+// Start of branch "row77"
+if(row77 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_18 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_18";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row77");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_18 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row77.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_18.append(
+				                String.valueOf(row77.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_18.append("|");
+    			
+
+
+   				
+	    		if(row77.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_18.append(
+				                String.valueOf(row77.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_18.append("|");
+    			
+
+
+   				
+	    		if(row77.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_18.append(
+				                String.valueOf(row77.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_18.append("|");
+    			
+
+
+   				
+	    		if(row77.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_18.append(
+				                String.valueOf(row77.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_18 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_18 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_18);
+                    }
+                    consoleOut_tLogRow_18.println(strBuffer_tLogRow_18.toString());
+                    consoleOut_tLogRow_18.flush();
+                    nb_line_tLogRow_18++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_18++;
+
+/**
+ * [tLogRow_18 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_18 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_18";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_18 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_18 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_18";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_18 process_data_end ] stop
+ */
+
+} // End of branch "row77"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_26 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_26";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_26 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_supplier_upd"
+
+
+
+
+	
+	/**
+	 * [tMap_26 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_26";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_26 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_51 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_51";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_51 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_51 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_51";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_51 != null) {
+		rs_tDBInput_51.close();
+	}
+	if (stmt_tDBInput_51 != null) {
+		stmt_tDBInput_51.close();
+	}
+	if(conn_tDBInput_51 != null && !conn_tDBInput_51.isClosed()) {
+		
+			conn_tDBInput_51.commit();
+			
+		
+			conn_tDBInput_51.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_51_NB_LINE",nb_line_tDBInput_51);
+ 
+
+ok_Hash.put("tDBInput_51", true);
+end_Hash.put("tDBInput_51", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_51 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_26 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_26";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row79 != null) {
+						tHash_Lookup_row79.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row79" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row78");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_26", true);
+end_Hash.put("tMap_26", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_26 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_26 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_26";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_26 = 0;
+				if (pstmt_tDBOutput_26 != null && batchSizeCounter_tDBOutput_26 > 0) {
+						
+					for(int countEach_tDBOutput_26: pstmt_tDBOutput_26.executeBatch()) {
+						countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_26){
+	    	java.sql.SQLException ne_tDBOutput_26 = e_tDBOutput_26.getNextException(),sqle_tDBOutput_26=null;
+	    	String errormessage_tDBOutput_26;
+			if (ne_tDBOutput_26 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_26 = new java.sql.SQLException(e_tDBOutput_26.getMessage() + "\ncaused by: " + ne_tDBOutput_26.getMessage(), ne_tDBOutput_26.getSQLState(), ne_tDBOutput_26.getErrorCode(), ne_tDBOutput_26);
+				errormessage_tDBOutput_26 = sqle_tDBOutput_26.getMessage();
+			}else{
+				errormessage_tDBOutput_26 = e_tDBOutput_26.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_26 = 0;
+			for(int countEach_tDBOutput_26: e_tDBOutput_26.getUpdateCounts()) {
+				countSum_tDBOutput_26 += (countEach_tDBOutput_26 < 0 ? 0 : countEach_tDBOutput_26);
+			}
+			
+	    		insertedCount_tDBOutput_26 += countSum_tDBOutput_26;
+	    	
+	    	System.err.println(errormessage_tDBOutput_26);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_26 != null) {
+        		
+            pstmt_tDBOutput_26.close();
+            resourceMap.remove("pstmt_tDBOutput_26");
+        }
+    resourceMap.put("statementClosed_tDBOutput_26", true);
+			
+			conn_tDBOutput_26.commit();
+			
+		
+    	conn_tDBOutput_26 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_26", true);
+    	
+
+	nb_line_deleted_tDBOutput_26=nb_line_deleted_tDBOutput_26+ deletedCount_tDBOutput_26;
+	nb_line_update_tDBOutput_26=nb_line_update_tDBOutput_26 + updatedCount_tDBOutput_26;
+	nb_line_inserted_tDBOutput_26=nb_line_inserted_tDBOutput_26 + insertedCount_tDBOutput_26;
+	nb_line_rejected_tDBOutput_26=nb_line_rejected_tDBOutput_26 + rejectedCount_tDBOutput_26;
+	
+        globalMap.put("tDBOutput_26_NB_LINE",nb_line_tDBOutput_26);
+        globalMap.put("tDBOutput_26_NB_LINE_UPDATED",nb_line_update_tDBOutput_26);
+        globalMap.put("tDBOutput_26_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_26);
+        globalMap.put("tDBOutput_26_NB_LINE_DELETED",nb_line_deleted_tDBOutput_26);
+        globalMap.put("tDBOutput_26_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_26);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_supplier_upd");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_26", true);
+end_Hash.put("tDBOutput_26", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_26 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_18 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_18";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_18_NB_LINE",nb_line_tLogRow_18);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row77");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_18", true);
+end_Hash.put("tLogRow_18", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_18 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_26"
+					     			globalMap.remove("tHash_Lookup_row79"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_51 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_51";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_51 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_26 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_26";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_26 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_26 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_26";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_26") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_26 = null;
+                if ((pstmtToClose_tDBOutput_26 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_26")) != null) {
+                    pstmtToClose_tDBOutput_26.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_26") == null){
+            java.sql.Connection ctn_tDBOutput_26 = null;
+            if((ctn_tDBOutput_26 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_26")) != null){
+                try {
+                    ctn_tDBOutput_26.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_26) {
+                    String errorMessage_tDBOutput_26 = "failed to close the connection in tDBOutput_26 :" + sqlEx_tDBOutput_26.getMessage();
+                    System.err.println(errorMessage_tDBOutput_26);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_26 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_18 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_18";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_18 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_51_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row79Struct implements routines.system.IPersistableComparableLookupRow<row79Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public Short invalid;
+
+				public Short getInvalid () {
+					return this.invalid;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cdprev == null) ? 0 : this.cdprev.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row79Struct other = (row79Struct) obj;
+		
+						if (this.cdprev == null) {
+							if (other.cdprev != null)
+								return false;
+						
+						} else if (!this.cdprev.equals(other.cdprev))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row79Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.invalid = this.invalid;
+	            other.desc = this.desc;
+	            
+	}
+
+	public void copyKeysDataTo(row79Struct other) {
+
+		other.cdprev = this.cdprev;
+	            	
+	}
+
+
+
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cdprev = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cd = readString(dis,ois);
+					
+						this.cddt = readDate(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.invalid = null;
+           				} else {
+           			    	this.invalid = dis.readShort();
+           				}
+					
+						this.desc = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeString(this.cd, dos, oos);
+					
+						writeDate(this.cddt, dos, oos);
+					
+						if(this.invalid == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeShort(this.invalid);
+		            	}
+					
+						writeString(this.desc, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",invalid="+String.valueOf(invalid));
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row79Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cdprev, other.cdprev);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_52Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_52_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row79Struct row79 = new row79Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row79 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row79", false);
+		start_Hash.put("tAdvancedHash_row79", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row79");
+					}
+				
+		int tos_count_tAdvancedHash_row79 = 0;
+		
+
+			   		// connection name:row79
+			   		// source node:tDBInput_52 - inputs:(after_tDBInput_51) outputs:(row79,row79) | target node:tAdvancedHash_row79 - inputs:(row79) outputs:()
+			   		// linked node: tMap_26 - inputs:(row78,row79) outputs:(dmd_lookup_supplier_upd)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row79 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row79Struct> tHash_Lookup_row79 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row79Struct>getLookup(matchingModeEnum_row79);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row79", tHash_Lookup_row79);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row79 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_52 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_52", false);
+		start_Hash.put("tDBInput_52", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_52";
+
+	
+		int tos_count_tDBInput_52 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_52 = 0;
+		    java.sql.Connection conn_tDBInput_52 = null;
+				String driverClass_tDBInput_52 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_52 = java.lang.Class.forName(driverClass_tDBInput_52);
+				String dbUser_tDBInput_52 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_52 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_52 = decryptedPassword_tDBInput_52;
+				
+				String url_tDBInput_52 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_52 = java.sql.DriverManager.getConnection(url_tDBInput_52,dbUser_tDBInput_52,dbPwd_tDBInput_52);
+		        
+				conn_tDBInput_52.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_52 = conn_tDBInput_52.createStatement();
+
+		    String dbquery_tDBInput_52 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"invalid\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_supplier\"";
+			
+
+            	globalMap.put("tDBInput_52_QUERY",dbquery_tDBInput_52);
+		    java.sql.ResultSet rs_tDBInput_52 = null;
+
+		    try {
+		    	rs_tDBInput_52 = stmt_tDBInput_52.executeQuery(dbquery_tDBInput_52);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_52 = rs_tDBInput_52.getMetaData();
+		    	int colQtyInRs_tDBInput_52 = rsmd_tDBInput_52.getColumnCount();
+
+		    String tmpContent_tDBInput_52 = null;
+		    
+		    
+		    while (rs_tDBInput_52.next()) {
+		        nb_line_tDBInput_52++;
+		        
+							if(colQtyInRs_tDBInput_52 < 1) {
+								row79.cd = null;
+							} else {
+	                         		
+        	row79.cd = routines.system.JDBCUtil.getString(rs_tDBInput_52, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_52 < 2) {
+								row79.cddt = null;
+							} else {
+										
+			row79.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_52, 2);
+		                    }
+							if(colQtyInRs_tDBInput_52 < 3) {
+								row79.cdprev = null;
+							} else {
+	                         		
+        	row79.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_52, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_52 < 4) {
+								row79.invalid = null;
+							} else {
+		                          
+            row79.invalid = rs_tDBInput_52.getShort(4);
+            if(rs_tDBInput_52.wasNull()){
+                    row79.invalid = null;
+            }
+		                    }
+							if(colQtyInRs_tDBInput_52 < 5) {
+								row79.desc = null;
+							} else {
+	                         		
+        	row79.desc = routines.system.JDBCUtil.getString(rs_tDBInput_52, 5, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_52 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_52 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_52";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_52++;
+
+/**
+ * [tDBInput_52 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_52 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_52";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_52 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row79 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row79");
+					}
+					
+
+
+			   
+			   
+
+					row79Struct row79_HashRow = new row79Struct();
+		   	   	   
+				
+				row79_HashRow.cd = row79.cd;
+				
+				row79_HashRow.cddt = row79.cddt;
+				
+				row79_HashRow.cdprev = row79.cdprev;
+				
+				row79_HashRow.invalid = row79.invalid;
+				
+				row79_HashRow.desc = row79.desc;
+				
+			tHash_Lookup_row79.put(row79_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row79++;
+
+/**
+ * [tAdvancedHash_row79 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row79 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row79 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row79 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row79 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_52 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_52";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_52 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_52 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_52";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_52 != null) {
+		rs_tDBInput_52.close();
+	}
+	if (stmt_tDBInput_52 != null) {
+		stmt_tDBInput_52.close();
+	}
+	if(conn_tDBInput_52 != null && !conn_tDBInput_52.isClosed()) {
+		
+			conn_tDBInput_52.commit();
+			
+		
+			conn_tDBInput_52.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_52_NB_LINE",nb_line_tDBInput_52);
+ 
+
+ok_Hash.put("tDBInput_52", true);
+end_Hash.put("tDBInput_52", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_52 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row79 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+
+tHash_Lookup_row79.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row79");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row79", true);
+end_Hash.put("tAdvancedHash_row79", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row79 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_52 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_52";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_52 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row79 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row79";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row79 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_52_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row80Struct implements routines.system.IPersistableRow<row80Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row80Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_uom_insStruct implements routines.system.IPersistableRow<dmd_lookup_uom_insStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_uom_insStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row81Struct implements routines.system.IPersistableRow<row81Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row81Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_53Struct implements routines.system.IPersistableRow<after_tDBInput_53Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_53Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_53Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_53_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_54Process(globalMap);
+
+		row81Struct row81 = new row81Struct();
+dmd_lookup_uom_insStruct dmd_lookup_uom_ins = new dmd_lookup_uom_insStruct();
+row80Struct row80 = new row80Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_20 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_20", false);
+		start_Hash.put("tLogRow_20", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_20";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row80");
+					}
+				
+		int tos_count_tLogRow_20 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_20 = "|";
+		java.io.PrintStream consoleOut_tLogRow_20 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_20 = null;
+		int nb_line_tLogRow_20 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_20 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_28 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_28", false);
+		start_Hash.put("tDBOutput_28", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_28";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_uom_ins");
+					}
+				
+		int tos_count_tDBOutput_28 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_28 = null;
+	dbschema_tDBOutput_28 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_28 = null;
+if(dbschema_tDBOutput_28 == null || dbschema_tDBOutput_28.trim().length() == 0) {
+	tableName_tDBOutput_28 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_28 = dbschema_tDBOutput_28 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_28 = 0;
+int nb_line_update_tDBOutput_28 = 0;
+int nb_line_inserted_tDBOutput_28 = 0;
+int nb_line_deleted_tDBOutput_28 = 0;
+int nb_line_rejected_tDBOutput_28 = 0;
+
+int deletedCount_tDBOutput_28=0;
+int updatedCount_tDBOutput_28=0;
+int insertedCount_tDBOutput_28=0;
+int rejectedCount_tDBOutput_28=0;
+
+boolean whetherReject_tDBOutput_28 = false;
+
+java.sql.Connection conn_tDBOutput_28 = null;
+String dbUser_tDBOutput_28 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_28 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_28 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_28 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_28 = decryptedPassword_tDBOutput_28;
+
+    conn_tDBOutput_28 = java.sql.DriverManager.getConnection(url_tDBOutput_28,dbUser_tDBOutput_28,dbPwd_tDBOutput_28);
+	
+	resourceMap.put("conn_tDBOutput_28", conn_tDBOutput_28);
+        conn_tDBOutput_28.setAutoCommit(false);
+        int commitEvery_tDBOutput_28 = 10000;
+        int commitCounter_tDBOutput_28 = 0;
+
+
+   int batchSize_tDBOutput_28 = 10000;
+   int batchSizeCounter_tDBOutput_28=0;
+
+int count_tDBOutput_28=0;
+	    String insert_tDBOutput_28 = "INSERT INTO \"" + tableName_tDBOutput_28 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_28 = conn_tDBOutput_28.prepareStatement(insert_tDBOutput_28);
+	    resourceMap.put("pstmt_tDBOutput_28", pstmt_tDBOutput_28);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_28 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_27 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_27", false);
+		start_Hash.put("tMap_27", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_27";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row81");
+					}
+				
+		int tos_count_tMap_27 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row82Struct> tHash_Lookup_row82 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row82Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row82Struct>) 
+					globalMap.get( "tHash_Lookup_row82" ))
+					;					
+					
+	
+
+row82Struct row82HashKey = new row82Struct();
+row82Struct row82Default = new row82Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_27__Struct  {
+}
+Var__tMap_27__Struct Var__tMap_27 = new Var__tMap_27__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_uom_insStruct dmd_lookup_uom_ins_tmp = new dmd_lookup_uom_insStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_27 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_53 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_53", false);
+		start_Hash.put("tDBInput_53", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_53";
+
+	
+		int tos_count_tDBInput_53 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_53 = 0;
+		    java.sql.Connection conn_tDBInput_53 = null;
+				String driverClass_tDBInput_53 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_53 = java.lang.Class.forName(driverClass_tDBInput_53);
+				String dbUser_tDBInput_53 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_53 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_53 = decryptedPassword_tDBInput_53;
+				
+				String url_tDBInput_53 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_53 = java.sql.DriverManager.getConnection(url_tDBInput_53,dbUser_tDBInput_53,dbPwd_tDBInput_53);
+		        
+				conn_tDBInput_53.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_53 = conn_tDBInput_53.createStatement();
+
+		    String dbquery_tDBInput_53 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\"";
+			
+
+            	globalMap.put("tDBInput_53_QUERY",dbquery_tDBInput_53);
+		    java.sql.ResultSet rs_tDBInput_53 = null;
+
+		    try {
+		    	rs_tDBInput_53 = stmt_tDBInput_53.executeQuery(dbquery_tDBInput_53);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_53 = rs_tDBInput_53.getMetaData();
+		    	int colQtyInRs_tDBInput_53 = rsmd_tDBInput_53.getColumnCount();
+
+		    String tmpContent_tDBInput_53 = null;
+		    
+		    
+		    while (rs_tDBInput_53.next()) {
+		        nb_line_tDBInput_53++;
+		        
+							if(colQtyInRs_tDBInput_53 < 1) {
+								row81.cd = null;
+							} else {
+	                         		
+        	row81.cd = routines.system.JDBCUtil.getString(rs_tDBInput_53, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_53 < 2) {
+								row81.cddt = null;
+							} else {
+										
+			row81.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_53, 2);
+		                    }
+							if(colQtyInRs_tDBInput_53 < 3) {
+								row81.cdprev = null;
+							} else {
+	                         		
+        	row81.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_53, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_53 < 4) {
+								row81.desc = null;
+							} else {
+	                         		
+        	row81.desc = routines.system.JDBCUtil.getString(rs_tDBInput_53, 4, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_53 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_53 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_53";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_53++;
+
+/**
+ * [tDBInput_53 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_53 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_53";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_53 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_27 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_27";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row81");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_27 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_27 = false;
+		  boolean mainRowRejected_tMap_27 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row82" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow82 = false;
+       		  	    	
+       		  	    	
+ 							row82Struct row82ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_27) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_27 = false;
+								
+                        		    		    row82HashKey.cd = row81.cd ;
+                        		    		
+
+								
+		                        	row82HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row82.lookup( row82HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row82.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_27 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row82 != null && tHash_Lookup_row82.getCount(row82HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row82' and it contains more one result from keys :  row82.cd = '" + row82HashKey.cd + "'");
+								} // G 071
+							
+
+							row82Struct row82 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row82Struct fromLookup_row82 = null;
+							row82 = row82Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row82 !=null && tHash_Lookup_row82.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row82 = tHash_Lookup_row82.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row82 != null) {
+								row82 = fromLookup_row82;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_27__Struct Var = Var__tMap_27;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_uom_ins = null;
+
+if(!rejectedInnerJoin_tMap_27 ) {
+} // closing inner join bracket (1)
+// ###### START REJECTS ##### 
+
+// # Output reject table : 'dmd_lookup_uom_ins'
+// # Filter conditions 
+if( rejectedInnerJoin_tMap_27 ) {
+dmd_lookup_uom_ins_tmp.dmd_id = row81.cd ;
+dmd_lookup_uom_ins_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_uom_ins_tmp.dmd_entity_name = "dmd_lookup_uom";
+dmd_lookup_uom_ins_tmp.row_action = "i";
+dmd_lookup_uom_ins = dmd_lookup_uom_ins_tmp;
+} // closing filter/reject
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_27 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_27++;
+
+/**
+ * [tMap_27 main ] stop
+ */
+	
+	/**
+	 * [tMap_27 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_27";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_27 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_uom_ins"
+if(dmd_lookup_uom_ins != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_28 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_28";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_uom_ins");
+					}
+					
+
+
+
+            row80 = null;
+        whetherReject_tDBOutput_28 = false;
+                    if(dmd_lookup_uom_ins.dmd_id == null) {
+pstmt_tDBOutput_28.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_28.setString(1, dmd_lookup_uom_ins.dmd_id);
+}
+
+                    if(dmd_lookup_uom_ins.sync_process_id == null) {
+pstmt_tDBOutput_28.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_28.setString(2, dmd_lookup_uom_ins.sync_process_id);
+}
+
+                    if(dmd_lookup_uom_ins.dmd_entity_name == null) {
+pstmt_tDBOutput_28.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_28.setString(3, dmd_lookup_uom_ins.dmd_entity_name);
+}
+
+                    if(dmd_lookup_uom_ins.row_action == null) {
+pstmt_tDBOutput_28.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_28.setString(4, dmd_lookup_uom_ins.row_action);
+}
+
+			
+    		pstmt_tDBOutput_28.addBatch();
+    		nb_line_tDBOutput_28++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_28++;
+    		  
+            if(!whetherReject_tDBOutput_28) {
+                            row80 = new row80Struct();
+                                row80.dmd_id = dmd_lookup_uom_ins.dmd_id;
+                                row80.sync_process_id = dmd_lookup_uom_ins.sync_process_id;
+                                row80.dmd_entity_name = dmd_lookup_uom_ins.dmd_entity_name;
+                                row80.row_action = dmd_lookup_uom_ins.row_action;
+            }
+    			if ((batchSize_tDBOutput_28 > 0) && (batchSize_tDBOutput_28 <= batchSizeCounter_tDBOutput_28)) {
+                try {
+						int countSum_tDBOutput_28 = 0;
+						    
+						for(int countEach_tDBOutput_28: pstmt_tDBOutput_28.executeBatch()) {
+							countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+						}
+				    	
+				    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+				    	
+            	    	batchSizeCounter_tDBOutput_28 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_28){
+				    	java.sql.SQLException ne_tDBOutput_28 = e_tDBOutput_28.getNextException(),sqle_tDBOutput_28=null;
+				    	String errormessage_tDBOutput_28;
+						if (ne_tDBOutput_28 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_28 = new java.sql.SQLException(e_tDBOutput_28.getMessage() + "\ncaused by: " + ne_tDBOutput_28.getMessage(), ne_tDBOutput_28.getSQLState(), ne_tDBOutput_28.getErrorCode(), ne_tDBOutput_28);
+							errormessage_tDBOutput_28 = sqle_tDBOutput_28.getMessage();
+						}else{
+							errormessage_tDBOutput_28 = e_tDBOutput_28.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_28 = 0;
+						for(int countEach_tDBOutput_28: e_tDBOutput_28.getUpdateCounts()) {
+							countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+						}
+						
+				    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+				    	
+				    	System.err.println(errormessage_tDBOutput_28);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_28++;
+                if(commitEvery_tDBOutput_28 <= commitCounter_tDBOutput_28) {
+                if ((batchSize_tDBOutput_28 > 0) && (batchSizeCounter_tDBOutput_28 > 0)) {
+                try {
+                		int countSum_tDBOutput_28 = 0;
+                		    
+						for(int countEach_tDBOutput_28: pstmt_tDBOutput_28.executeBatch()) {
+							countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+            	    	
+                batchSizeCounter_tDBOutput_28 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_28){
+			    	java.sql.SQLException ne_tDBOutput_28 = e_tDBOutput_28.getNextException(),sqle_tDBOutput_28=null;
+			    	String errormessage_tDBOutput_28;
+					if (ne_tDBOutput_28 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_28 = new java.sql.SQLException(e_tDBOutput_28.getMessage() + "\ncaused by: " + ne_tDBOutput_28.getMessage(), ne_tDBOutput_28.getSQLState(), ne_tDBOutput_28.getErrorCode(), ne_tDBOutput_28);
+						errormessage_tDBOutput_28 = sqle_tDBOutput_28.getMessage();
+					}else{
+						errormessage_tDBOutput_28 = e_tDBOutput_28.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_28 = 0;
+					for(int countEach_tDBOutput_28: e_tDBOutput_28.getUpdateCounts()) {
+						countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+					}
+					
+			    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+			    	
+			    	System.err.println(errormessage_tDBOutput_28);
+			    	
+				}
+            }
+                	conn_tDBOutput_28.commit();
+                	
+                	commitCounter_tDBOutput_28=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_28++;
+
+/**
+ * [tDBOutput_28 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_28 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_28";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_28 process_data_begin ] stop
+ */
+// Start of branch "row80"
+if(row80 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_20 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_20";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row80");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_20 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row80.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_20.append(
+				                String.valueOf(row80.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_20.append("|");
+    			
+
+
+   				
+	    		if(row80.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_20.append(
+				                String.valueOf(row80.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_20.append("|");
+    			
+
+
+   				
+	    		if(row80.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_20.append(
+				                String.valueOf(row80.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_20.append("|");
+    			
+
+
+   				
+	    		if(row80.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_20.append(
+				                String.valueOf(row80.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_20 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_20 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_20);
+                    }
+                    consoleOut_tLogRow_20.println(strBuffer_tLogRow_20.toString());
+                    consoleOut_tLogRow_20.flush();
+                    nb_line_tLogRow_20++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_20++;
+
+/**
+ * [tLogRow_20 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_20 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_20 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_20 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_20 process_data_end ] stop
+ */
+
+} // End of branch "row80"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_28 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_28";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_28 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_uom_ins"
+
+
+
+
+	
+	/**
+	 * [tMap_27 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_27";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_27 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_53 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_53";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_53 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_53 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_53";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_53 != null) {
+		rs_tDBInput_53.close();
+	}
+	if (stmt_tDBInput_53 != null) {
+		stmt_tDBInput_53.close();
+	}
+	if(conn_tDBInput_53 != null && !conn_tDBInput_53.isClosed()) {
+		
+			conn_tDBInput_53.commit();
+			
+		
+			conn_tDBInput_53.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_53_NB_LINE",nb_line_tDBInput_53);
+ 
+
+ok_Hash.put("tDBInput_53", true);
+end_Hash.put("tDBInput_53", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_53 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_27 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_27";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row82 != null) {
+						tHash_Lookup_row82.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row82" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row81");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_27", true);
+end_Hash.put("tMap_27", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_27 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_28 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_28";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_28 = 0;
+				if (pstmt_tDBOutput_28 != null && batchSizeCounter_tDBOutput_28 > 0) {
+						
+					for(int countEach_tDBOutput_28: pstmt_tDBOutput_28.executeBatch()) {
+						countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_28){
+	    	java.sql.SQLException ne_tDBOutput_28 = e_tDBOutput_28.getNextException(),sqle_tDBOutput_28=null;
+	    	String errormessage_tDBOutput_28;
+			if (ne_tDBOutput_28 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_28 = new java.sql.SQLException(e_tDBOutput_28.getMessage() + "\ncaused by: " + ne_tDBOutput_28.getMessage(), ne_tDBOutput_28.getSQLState(), ne_tDBOutput_28.getErrorCode(), ne_tDBOutput_28);
+				errormessage_tDBOutput_28 = sqle_tDBOutput_28.getMessage();
+			}else{
+				errormessage_tDBOutput_28 = e_tDBOutput_28.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_28 = 0;
+			for(int countEach_tDBOutput_28: e_tDBOutput_28.getUpdateCounts()) {
+				countSum_tDBOutput_28 += (countEach_tDBOutput_28 < 0 ? 0 : countEach_tDBOutput_28);
+			}
+			
+	    		insertedCount_tDBOutput_28 += countSum_tDBOutput_28;
+	    	
+	    	System.err.println(errormessage_tDBOutput_28);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_28 != null) {
+        		
+            pstmt_tDBOutput_28.close();
+            resourceMap.remove("pstmt_tDBOutput_28");
+        }
+    resourceMap.put("statementClosed_tDBOutput_28", true);
+			
+			conn_tDBOutput_28.commit();
+			
+		
+    	conn_tDBOutput_28 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_28", true);
+    	
+
+	nb_line_deleted_tDBOutput_28=nb_line_deleted_tDBOutput_28+ deletedCount_tDBOutput_28;
+	nb_line_update_tDBOutput_28=nb_line_update_tDBOutput_28 + updatedCount_tDBOutput_28;
+	nb_line_inserted_tDBOutput_28=nb_line_inserted_tDBOutput_28 + insertedCount_tDBOutput_28;
+	nb_line_rejected_tDBOutput_28=nb_line_rejected_tDBOutput_28 + rejectedCount_tDBOutput_28;
+	
+        globalMap.put("tDBOutput_28_NB_LINE",nb_line_tDBOutput_28);
+        globalMap.put("tDBOutput_28_NB_LINE_UPDATED",nb_line_update_tDBOutput_28);
+        globalMap.put("tDBOutput_28_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_28);
+        globalMap.put("tDBOutput_28_NB_LINE_DELETED",nb_line_deleted_tDBOutput_28);
+        globalMap.put("tDBOutput_28_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_28);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_uom_ins");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_28", true);
+end_Hash.put("tDBOutput_28", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_28 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_20 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_20";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_20_NB_LINE",nb_line_tLogRow_20);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row80");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_20", true);
+end_Hash.put("tLogRow_20", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_20 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_27"
+					     			globalMap.remove("tHash_Lookup_row82"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_53 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_53";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_53 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_27 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_27";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_27 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_28 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_28";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_28") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_28 = null;
+                if ((pstmtToClose_tDBOutput_28 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_28")) != null) {
+                    pstmtToClose_tDBOutput_28.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_28") == null){
+            java.sql.Connection ctn_tDBOutput_28 = null;
+            if((ctn_tDBOutput_28 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_28")) != null){
+                try {
+                    ctn_tDBOutput_28.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_28) {
+                    String errorMessage_tDBOutput_28 = "failed to close the connection in tDBOutput_28 :" + sqlEx_tDBOutput_28.getMessage();
+                    System.err.println(errorMessage_tDBOutput_28);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_28 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_20 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_20";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_20 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_53_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row82Struct implements routines.system.IPersistableComparableLookupRow<row82Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cd == null) ? 0 : this.cd.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row82Struct other = (row82Struct) obj;
+		
+						if (this.cd == null) {
+							if (other.cd != null)
+								return false;
+						
+						} else if (!this.cd.equals(other.cd))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row82Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            other.is_latest = this.is_latest;
+	            
+	}
+
+	public void copyKeysDataTo(row82Struct other) {
+
+		other.cd = this.cd;
+	            	
+	}
+
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cddt = readDate(dis,ois);
+					
+						this.cdprev = readString(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.cdprev, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row82Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cd, other.cd);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_54Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_54_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row82Struct row82 = new row82Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row82 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row82", false);
+		start_Hash.put("tAdvancedHash_row82", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row82");
+					}
+				
+		int tos_count_tAdvancedHash_row82 = 0;
+		
+
+			   		// connection name:row82
+			   		// source node:tDBInput_54 - inputs:(after_tDBInput_53) outputs:(row82,row82) | target node:tAdvancedHash_row82 - inputs:(row82) outputs:()
+			   		// linked node: tMap_27 - inputs:(row81,row82) outputs:(dmd_lookup_uom_ins)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row82 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row82Struct> tHash_Lookup_row82 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row82Struct>getLookup(matchingModeEnum_row82);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row82", tHash_Lookup_row82);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row82 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_54 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_54", false);
+		start_Hash.put("tDBInput_54", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_54";
+
+	
+		int tos_count_tDBInput_54 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_54 = 0;
+		    java.sql.Connection conn_tDBInput_54 = null;
+				String driverClass_tDBInput_54 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_54 = java.lang.Class.forName(driverClass_tDBInput_54);
+				String dbUser_tDBInput_54 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_54 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_54 = decryptedPassword_tDBInput_54;
+				
+				String url_tDBInput_54 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_54 = java.sql.DriverManager.getConnection(url_tDBInput_54,dbUser_tDBInput_54,dbPwd_tDBInput_54);
+		        
+				conn_tDBInput_54.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_54 = conn_tDBInput_54.createStatement();
+
+		    String dbquery_tDBInput_54 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\"";
+			
+
+            	globalMap.put("tDBInput_54_QUERY",dbquery_tDBInput_54);
+		    java.sql.ResultSet rs_tDBInput_54 = null;
+
+		    try {
+		    	rs_tDBInput_54 = stmt_tDBInput_54.executeQuery(dbquery_tDBInput_54);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_54 = rs_tDBInput_54.getMetaData();
+		    	int colQtyInRs_tDBInput_54 = rsmd_tDBInput_54.getColumnCount();
+
+		    String tmpContent_tDBInput_54 = null;
+		    
+		    
+		    while (rs_tDBInput_54.next()) {
+		        nb_line_tDBInput_54++;
+		        
+							if(colQtyInRs_tDBInput_54 < 1) {
+								row82.cd = null;
+							} else {
+	                         		
+        	row82.cd = routines.system.JDBCUtil.getString(rs_tDBInput_54, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_54 < 2) {
+								row82.cddt = null;
+							} else {
+										
+			row82.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_54, 2);
+		                    }
+							if(colQtyInRs_tDBInput_54 < 3) {
+								row82.cdprev = null;
+							} else {
+	                         		
+        	row82.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_54, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_54 < 4) {
+								row82.desc = null;
+							} else {
+	                         		
+        	row82.desc = routines.system.JDBCUtil.getString(rs_tDBInput_54, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_54 < 5) {
+								row82.is_latest = null;
+							} else {
+	                         		
+            row82.is_latest = rs_tDBInput_54.getBoolean(5);
+            if(rs_tDBInput_54.wasNull()){
+                    row82.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_54 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_54 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_54";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_54++;
+
+/**
+ * [tDBInput_54 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_54 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_54";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_54 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row82 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row82");
+					}
+					
+
+
+			   
+			   
+
+					row82Struct row82_HashRow = new row82Struct();
+		   	   	   
+				
+				row82_HashRow.cd = row82.cd;
+				
+				row82_HashRow.cddt = row82.cddt;
+				
+				row82_HashRow.cdprev = row82.cdprev;
+				
+				row82_HashRow.desc = row82.desc;
+				
+				row82_HashRow.is_latest = row82.is_latest;
+				
+			tHash_Lookup_row82.put(row82_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row82++;
+
+/**
+ * [tAdvancedHash_row82 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row82 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row82 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row82 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row82 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_54 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_54";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_54 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_54 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_54";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_54 != null) {
+		rs_tDBInput_54.close();
+	}
+	if (stmt_tDBInput_54 != null) {
+		stmt_tDBInput_54.close();
+	}
+	if(conn_tDBInput_54 != null && !conn_tDBInput_54.isClosed()) {
+		
+			conn_tDBInput_54.commit();
+			
+		
+			conn_tDBInput_54.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_54_NB_LINE",nb_line_tDBInput_54);
+ 
+
+ok_Hash.put("tDBInput_54", true);
+end_Hash.put("tDBInput_54", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_54 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row82 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+
+tHash_Lookup_row82.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row82");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row82", true);
+end_Hash.put("tAdvancedHash_row82", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row82 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_54 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_54";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_54 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row82 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row82";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row82 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_54_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row83Struct implements routines.system.IPersistableRow<row83Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row83Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class dmd_lookup_uom_updStruct implements routines.system.IPersistableRow<dmd_lookup_uom_updStruct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String dmd_id;
+
+				public String getDmd_id () {
+					return this.dmd_id;
+				}
+				
+			    public String sync_process_id;
+
+				public String getSync_process_id () {
+					return this.sync_process_id;
+				}
+				
+			    public String dmd_entity_name;
+
+				public String getDmd_entity_name () {
+					return this.dmd_entity_name;
+				}
+				
+			    public String row_action;
+
+				public String getRow_action () {
+					return this.row_action;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.dmd_id = readString(dis);
+					
+					this.sync_process_id = readString(dis);
+					
+					this.dmd_entity_name = readString(dis);
+					
+					this.row_action = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.dmd_id,dos);
+					
+					// String
+				
+						writeString(this.sync_process_id,dos);
+					
+					// String
+				
+						writeString(this.dmd_entity_name,dos);
+					
+					// String
+				
+						writeString(this.row_action,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("dmd_id="+dmd_id);
+		sb.append(",sync_process_id="+sync_process_id);
+		sb.append(",dmd_entity_name="+dmd_entity_name);
+		sb.append(",row_action="+row_action);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(dmd_lookup_uom_updStruct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class row84Struct implements routines.system.IPersistableRow<row84Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row84Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+
+public static class after_tDBInput_55Struct implements routines.system.IPersistableRow<after_tDBInput_55Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+			    public Boolean is_latest;
+
+				public Boolean getIs_latest () {
+					return this.is_latest;
+				}
+				
+
+
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+	private java.util.Date readDate(ObjectInputStream dis) throws IOException{
+		java.util.Date dateReturn = null;
+        int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+    private void writeDate(java.util.Date date1, ObjectOutputStream dos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+    }
+
+    public void readData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cd = readString(dis);
+					
+					this.cddt = readDate(dis);
+					
+					this.cdprev = readString(dis);
+					
+					this.desc = readString(dis);
+					
+			            length = dis.readByte();
+           				if (length == -1) {
+           	    			this.is_latest = null;
+           				} else {
+           			    	this.is_latest = dis.readBoolean();
+           				}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cd,dos);
+					
+					// java.util.Date
+				
+						writeDate(this.cddt,dos);
+					
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+					// String
+				
+						writeString(this.desc,dos);
+					
+					// Boolean
+				
+						if(this.is_latest == null) {
+			                dos.writeByte(-1);
+						} else {
+               				dos.writeByte(0);
+           			    	dos.writeBoolean(this.is_latest);
+		            	}
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+		sb.append(",is_latest="+String.valueOf(is_latest));
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(after_tDBInput_55Struct other) {
+
+		int returnValue = -1;
+		
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_55Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_55_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+		tDBInput_56Process(globalMap);
+
+		row84Struct row84 = new row84Struct();
+dmd_lookup_uom_updStruct dmd_lookup_uom_upd = new dmd_lookup_uom_updStruct();
+row83Struct row83 = new row83Struct();
+
+
+
+
+
+
+	
+	/**
+	 * [tLogRow_23 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tLogRow_23", false);
+		start_Hash.put("tLogRow_23", System.currentTimeMillis());
+		
+	
+	currentComponent="tLogRow_23";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row83");
+					}
+				
+		int tos_count_tLogRow_23 = 0;
+		
+
+	///////////////////////
+	
+		final String OUTPUT_FIELD_SEPARATOR_tLogRow_23 = "|";
+		java.io.PrintStream consoleOut_tLogRow_23 = null;	
+
+ 		StringBuilder strBuffer_tLogRow_23 = null;
+		int nb_line_tLogRow_23 = 0;
+///////////////////////    			
+
+
+
+ 
+
+
+
+/**
+ * [tLogRow_23 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBOutput_29 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBOutput_29", false);
+		start_Hash.put("tDBOutput_29", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBOutput_29";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"dmd_lookup_uom_upd");
+					}
+				
+		int tos_count_tDBOutput_29 = 0;
+		
+
+
+
+
+
+String dbschema_tDBOutput_29 = null;
+	dbschema_tDBOutput_29 = context.dmd_db_schema;
+	
+
+String tableName_tDBOutput_29 = null;
+if(dbschema_tDBOutput_29 == null || dbschema_tDBOutput_29.trim().length() == 0) {
+	tableName_tDBOutput_29 = ("dmd_sync_log");
+} else {
+	tableName_tDBOutput_29 = dbschema_tDBOutput_29 + "\".\"" + ("dmd_sync_log");
+}
+
+int nb_line_tDBOutput_29 = 0;
+int nb_line_update_tDBOutput_29 = 0;
+int nb_line_inserted_tDBOutput_29 = 0;
+int nb_line_deleted_tDBOutput_29 = 0;
+int nb_line_rejected_tDBOutput_29 = 0;
+
+int deletedCount_tDBOutput_29=0;
+int updatedCount_tDBOutput_29=0;
+int insertedCount_tDBOutput_29=0;
+int rejectedCount_tDBOutput_29=0;
+
+boolean whetherReject_tDBOutput_29 = false;
+
+java.sql.Connection conn_tDBOutput_29 = null;
+String dbUser_tDBOutput_29 = null;
+
+	
+    java.lang.Class.forName("org.postgresql.Driver");
+    
+        String url_tDBOutput_29 = "jdbc:postgresql://"+context.dmd_db_host+":"+context.dmd_db_port+"/"+context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+    dbUser_tDBOutput_29 = context.dmd_db_user;
+
+	final String decryptedPassword_tDBOutput_29 = context.dmd_db_password; 
+
+    String dbPwd_tDBOutput_29 = decryptedPassword_tDBOutput_29;
+
+    conn_tDBOutput_29 = java.sql.DriverManager.getConnection(url_tDBOutput_29,dbUser_tDBOutput_29,dbPwd_tDBOutput_29);
+	
+	resourceMap.put("conn_tDBOutput_29", conn_tDBOutput_29);
+        conn_tDBOutput_29.setAutoCommit(false);
+        int commitEvery_tDBOutput_29 = 10000;
+        int commitCounter_tDBOutput_29 = 0;
+
+
+   int batchSize_tDBOutput_29 = 10000;
+   int batchSizeCounter_tDBOutput_29=0;
+
+int count_tDBOutput_29=0;
+	    String insert_tDBOutput_29 = "INSERT INTO \"" + tableName_tDBOutput_29 + "\" (\"dmd_id\",\"sync_process_id\",\"dmd_entity_name\",\"row_action\") VALUES (?,?,?,?)";
+	    
+	    java.sql.PreparedStatement pstmt_tDBOutput_29 = conn_tDBOutput_29.prepareStatement(insert_tDBOutput_29);
+	    resourceMap.put("pstmt_tDBOutput_29", pstmt_tDBOutput_29);
+	    
+
+ 
+
+
+
+/**
+ * [tDBOutput_29 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tMap_28 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tMap_28", false);
+		start_Hash.put("tMap_28", System.currentTimeMillis());
+		
+	
+	currentComponent="tMap_28";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row84");
+					}
+				
+		int tos_count_tMap_28 = 0;
+		
+
+
+
+
+// ###############################
+// # Lookup's keys initialization
+	
+		org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row85Struct> tHash_Lookup_row85 = (org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row85Struct>) 
+				((org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row85Struct>) 
+					globalMap.get( "tHash_Lookup_row85" ))
+					;					
+					
+	
+
+row85Struct row85HashKey = new row85Struct();
+row85Struct row85Default = new row85Struct();
+// ###############################        
+
+// ###############################
+// # Vars initialization
+class  Var__tMap_28__Struct  {
+}
+Var__tMap_28__Struct Var__tMap_28 = new Var__tMap_28__Struct();
+// ###############################
+
+// ###############################
+// # Outputs initialization
+dmd_lookup_uom_updStruct dmd_lookup_uom_upd_tmp = new dmd_lookup_uom_updStruct();
+// ###############################
+
+        
+        
+
+
+
+        
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+/**
+ * [tMap_28 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_55 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_55", false);
+		start_Hash.put("tDBInput_55", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_55";
+
+	
+		int tos_count_tDBInput_55 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_55 = 0;
+		    java.sql.Connection conn_tDBInput_55 = null;
+				String driverClass_tDBInput_55 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_55 = java.lang.Class.forName(driverClass_tDBInput_55);
+				String dbUser_tDBInput_55 = context.dmd_db_user;
+				
+				
+	final String decryptedPassword_tDBInput_55 = context.dmd_db_password; 
+				
+				String dbPwd_tDBInput_55 = decryptedPassword_tDBInput_55;
+				
+				String url_tDBInput_55 = "jdbc:postgresql://" + context.dmd_db_host + ":" + context.dmd_db_port + "/" + context.dmd_db_name + "?" + context.dmd_db_additionalparams;
+				
+				conn_tDBInput_55 = java.sql.DriverManager.getConnection(url_tDBInput_55,dbUser_tDBInput_55,dbPwd_tDBInput_55);
+		        
+				conn_tDBInput_55.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_55 = conn_tDBInput_55.createStatement();
+
+		    String dbquery_tDBInput_55 = "SELECT \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cd\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cddt\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"cdprev\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"desc\", \n  \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\".\"is_latest\"\nFROM \""+context.dmd_db_name+"\".\""+context.dmd_db_schema+"\".\"dmd_lookup_uom\"";
+			
+
+            	globalMap.put("tDBInput_55_QUERY",dbquery_tDBInput_55);
+		    java.sql.ResultSet rs_tDBInput_55 = null;
+
+		    try {
+		    	rs_tDBInput_55 = stmt_tDBInput_55.executeQuery(dbquery_tDBInput_55);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_55 = rs_tDBInput_55.getMetaData();
+		    	int colQtyInRs_tDBInput_55 = rsmd_tDBInput_55.getColumnCount();
+
+		    String tmpContent_tDBInput_55 = null;
+		    
+		    
+		    while (rs_tDBInput_55.next()) {
+		        nb_line_tDBInput_55++;
+		        
+							if(colQtyInRs_tDBInput_55 < 1) {
+								row84.cd = null;
+							} else {
+	                         		
+        	row84.cd = routines.system.JDBCUtil.getString(rs_tDBInput_55, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_55 < 2) {
+								row84.cddt = null;
+							} else {
+										
+			row84.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_55, 2);
+		                    }
+							if(colQtyInRs_tDBInput_55 < 3) {
+								row84.cdprev = null;
+							} else {
+	                         		
+        	row84.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_55, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_55 < 4) {
+								row84.desc = null;
+							} else {
+	                         		
+        	row84.desc = routines.system.JDBCUtil.getString(rs_tDBInput_55, 4, false);
+		                    }
+							if(colQtyInRs_tDBInput_55 < 5) {
+								row84.is_latest = null;
+							} else {
+	                         		
+            row84.is_latest = rs_tDBInput_55.getBoolean(5);
+            if(rs_tDBInput_55.wasNull()){
+                    row84.is_latest = null;
+            }
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_55 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_55 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_55";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_55++;
+
+/**
+ * [tDBInput_55 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_55 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_55";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_55 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tMap_28 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_28";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row84");
+					}
+					
+
+		
+		
+		boolean hasCasePrimitiveKeyWithNull_tMap_28 = false;
+		
+        // ###############################
+        // # Input tables (lookups)
+		  boolean rejectedInnerJoin_tMap_28 = false;
+		  boolean mainRowRejected_tMap_28 = false;
+            				    								  
+		
+
+				///////////////////////////////////////////////
+				// Starting Lookup Table "row85" 
+				///////////////////////////////////////////////
+
+
+				
+				
+                            
+ 					    boolean forceLooprow85 = false;
+       		  	    	
+       		  	    	
+ 							row85Struct row85ObjectFromLookup = null;
+                          
+		           		  	if(!rejectedInnerJoin_tMap_28) { // G_TM_M_020
+
+								
+								hasCasePrimitiveKeyWithNull_tMap_28 = false;
+								
+                        		    		    row85HashKey.cdprev = row84.cd ;
+                        		    		
+
+								
+		                        	row85HashKey.hashCodeDirty = true;
+                        		
+	  					
+	  							
+			  					
+			  					
+	  					
+		  							tHash_Lookup_row85.lookup( row85HashKey );
+
+	  							
+
+	  							
+
+ 								
+								  
+								  if(!tHash_Lookup_row85.hasNext()) { // G_TM_M_090
+
+  								
+		  				
+	  								
+			  							rejectedInnerJoin_tMap_28 = true;
+	  								
+						
+									
+  									  		
+ 								
+								  
+								  } // G_TM_M_090
+
+  								
+
+
+
+							} // G_TM_M_020
+			           		  	  
+							
+				           		if(tHash_Lookup_row85 != null && tHash_Lookup_row85.getCount(row85HashKey) > 1) { // G 071
+			  							
+			  						
+									 		
+									//System.out.println("WARNING: UNIQUE MATCH is configured for the lookup 'row85' and it contains more one result from keys :  row85.cdprev = '" + row85HashKey.cdprev + "'");
+								} // G 071
+							
+
+							row85Struct row85 = null;
+                    		  	 
+							   
+                    		  	 
+	       		  	    	row85Struct fromLookup_row85 = null;
+							row85 = row85Default;
+										 
+							
+								 
+							
+							
+								if (tHash_Lookup_row85 !=null && tHash_Lookup_row85.hasNext()) { // G 099
+								
+							
+								
+								fromLookup_row85 = tHash_Lookup_row85.next();
+
+							
+							
+								} // G 099
+							
+							
+
+							if(fromLookup_row85 != null) {
+								row85 = fromLookup_row85;
+							}
+							
+							
+							
+			  							
+								
+	                    		  	
+		                    
+	            	
+	            	
+	            // ###############################
+        { // start of Var scope
+        
+	        // ###############################
+        	// # Vars tables
+        
+Var__tMap_28__Struct Var = Var__tMap_28;// ###############################
+        // ###############################
+        // # Output tables
+
+dmd_lookup_uom_upd = null;
+
+if(!rejectedInnerJoin_tMap_28 ) {
+
+// # Output table : 'dmd_lookup_uom_upd'
+dmd_lookup_uom_upd_tmp.dmd_id = row84.cd ;
+dmd_lookup_uom_upd_tmp.sync_process_id = (String)globalMap.get("current_process_id");
+dmd_lookup_uom_upd_tmp.dmd_entity_name = "dmd_lookup_uom";
+dmd_lookup_uom_upd_tmp.row_action = "u";
+dmd_lookup_uom_upd = dmd_lookup_uom_upd_tmp;
+}  // closing inner join bracket (2)
+// ###############################
+
+} // end of Var scope
+
+rejectedInnerJoin_tMap_28 = false;
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+	tos_count_tMap_28++;
+
+/**
+ * [tMap_28 main ] stop
+ */
+	
+	/**
+	 * [tMap_28 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_28";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_28 process_data_begin ] stop
+ */
+// Start of branch "dmd_lookup_uom_upd"
+if(dmd_lookup_uom_upd != null) { 
+
+
+
+	
+	/**
+	 * [tDBOutput_29 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_29";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"dmd_lookup_uom_upd");
+					}
+					
+
+
+
+            row83 = null;
+        whetherReject_tDBOutput_29 = false;
+                    if(dmd_lookup_uom_upd.dmd_id == null) {
+pstmt_tDBOutput_29.setNull(1, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_29.setString(1, dmd_lookup_uom_upd.dmd_id);
+}
+
+                    if(dmd_lookup_uom_upd.sync_process_id == null) {
+pstmt_tDBOutput_29.setNull(2, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_29.setString(2, dmd_lookup_uom_upd.sync_process_id);
+}
+
+                    if(dmd_lookup_uom_upd.dmd_entity_name == null) {
+pstmt_tDBOutput_29.setNull(3, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_29.setString(3, dmd_lookup_uom_upd.dmd_entity_name);
+}
+
+                    if(dmd_lookup_uom_upd.row_action == null) {
+pstmt_tDBOutput_29.setNull(4, java.sql.Types.VARCHAR);
+} else {pstmt_tDBOutput_29.setString(4, dmd_lookup_uom_upd.row_action);
+}
+
+			
+    		pstmt_tDBOutput_29.addBatch();
+    		nb_line_tDBOutput_29++;
+    		  
+    		  
+    		  batchSizeCounter_tDBOutput_29++;
+    		  
+            if(!whetherReject_tDBOutput_29) {
+                            row83 = new row83Struct();
+                                row83.dmd_id = dmd_lookup_uom_upd.dmd_id;
+                                row83.sync_process_id = dmd_lookup_uom_upd.sync_process_id;
+                                row83.dmd_entity_name = dmd_lookup_uom_upd.dmd_entity_name;
+                                row83.row_action = dmd_lookup_uom_upd.row_action;
+            }
+    			if ((batchSize_tDBOutput_29 > 0) && (batchSize_tDBOutput_29 <= batchSizeCounter_tDBOutput_29)) {
+                try {
+						int countSum_tDBOutput_29 = 0;
+						    
+						for(int countEach_tDBOutput_29: pstmt_tDBOutput_29.executeBatch()) {
+							countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+						}
+				    	
+				    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+				    	
+            	    	batchSizeCounter_tDBOutput_29 = 0;
+                }catch (java.sql.BatchUpdateException e_tDBOutput_29){
+				    	java.sql.SQLException ne_tDBOutput_29 = e_tDBOutput_29.getNextException(),sqle_tDBOutput_29=null;
+				    	String errormessage_tDBOutput_29;
+						if (ne_tDBOutput_29 != null) {
+							// build new exception to provide the original cause
+							sqle_tDBOutput_29 = new java.sql.SQLException(e_tDBOutput_29.getMessage() + "\ncaused by: " + ne_tDBOutput_29.getMessage(), ne_tDBOutput_29.getSQLState(), ne_tDBOutput_29.getErrorCode(), ne_tDBOutput_29);
+							errormessage_tDBOutput_29 = sqle_tDBOutput_29.getMessage();
+						}else{
+							errormessage_tDBOutput_29 = e_tDBOutput_29.getMessage();
+						}
+				    	
+				    	int countSum_tDBOutput_29 = 0;
+						for(int countEach_tDBOutput_29: e_tDBOutput_29.getUpdateCounts()) {
+							countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+						}
+						
+				    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+				    	
+				    	System.err.println(errormessage_tDBOutput_29);
+				    	
+					}
+    			}
+    		
+    		    commitCounter_tDBOutput_29++;
+                if(commitEvery_tDBOutput_29 <= commitCounter_tDBOutput_29) {
+                if ((batchSize_tDBOutput_29 > 0) && (batchSizeCounter_tDBOutput_29 > 0)) {
+                try {
+                		int countSum_tDBOutput_29 = 0;
+                		    
+						for(int countEach_tDBOutput_29: pstmt_tDBOutput_29.executeBatch()) {
+							countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+						}
+            	    	
+            	    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+            	    	
+                batchSizeCounter_tDBOutput_29 = 0;
+               }catch (java.sql.BatchUpdateException e_tDBOutput_29){
+			    	java.sql.SQLException ne_tDBOutput_29 = e_tDBOutput_29.getNextException(),sqle_tDBOutput_29=null;
+			    	String errormessage_tDBOutput_29;
+					if (ne_tDBOutput_29 != null) {
+						// build new exception to provide the original cause
+						sqle_tDBOutput_29 = new java.sql.SQLException(e_tDBOutput_29.getMessage() + "\ncaused by: " + ne_tDBOutput_29.getMessage(), ne_tDBOutput_29.getSQLState(), ne_tDBOutput_29.getErrorCode(), ne_tDBOutput_29);
+						errormessage_tDBOutput_29 = sqle_tDBOutput_29.getMessage();
+					}else{
+						errormessage_tDBOutput_29 = e_tDBOutput_29.getMessage();
+					}
+			    	
+			    	int countSum_tDBOutput_29 = 0;
+					for(int countEach_tDBOutput_29: e_tDBOutput_29.getUpdateCounts()) {
+						countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+					}
+					
+			    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+			    	
+			    	System.err.println(errormessage_tDBOutput_29);
+			    	
+				}
+            }
+                	conn_tDBOutput_29.commit();
+                	
+                	commitCounter_tDBOutput_29=0;
+                }
+
+ 
+
+
+	tos_count_tDBOutput_29++;
+
+/**
+ * [tDBOutput_29 main ] stop
+ */
+	
+	/**
+	 * [tDBOutput_29 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_29";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_29 process_data_begin ] stop
+ */
+// Start of branch "row83"
+if(row83 != null) { 
+
+
+
+	
+	/**
+	 * [tLogRow_23 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_23";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row83");
+					}
+					
+///////////////////////		
+						
+
+
+
+				strBuffer_tLogRow_23 = new StringBuilder();
+
+
+
+
+   				
+	    		if(row83.dmd_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_23.append(
+				                String.valueOf(row83.dmd_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_23.append("|");
+    			
+
+
+   				
+	    		if(row83.sync_process_id != null) { //              
+                    							
+       
+				strBuffer_tLogRow_23.append(
+				                String.valueOf(row83.sync_process_id)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_23.append("|");
+    			
+
+
+   				
+	    		if(row83.dmd_entity_name != null) { //              
+                    							
+       
+				strBuffer_tLogRow_23.append(
+				                String.valueOf(row83.dmd_entity_name)							
+				);
+
+
+							
+	    		} //  			
+
+    			strBuffer_tLogRow_23.append("|");
+    			
+
+
+   				
+	    		if(row83.row_action != null) { //              
+                    							
+       
+				strBuffer_tLogRow_23.append(
+				                String.valueOf(row83.row_action)							
+				);
+
+
+							
+	    		} //  			
+ 
+
+                    if (globalMap.get("tLogRow_CONSOLE")!=null)
+                    {
+                    	consoleOut_tLogRow_23 = (java.io.PrintStream) globalMap.get("tLogRow_CONSOLE");
+                    }
+                    else
+                    {
+                    	consoleOut_tLogRow_23 = new java.io.PrintStream(new java.io.BufferedOutputStream(System.out));
+                    	globalMap.put("tLogRow_CONSOLE",consoleOut_tLogRow_23);
+                    }
+                    consoleOut_tLogRow_23.println(strBuffer_tLogRow_23.toString());
+                    consoleOut_tLogRow_23.flush();
+                    nb_line_tLogRow_23++;
+//////
+
+//////                    
+                    
+///////////////////////    			
+
+ 
+
+
+	tos_count_tLogRow_23++;
+
+/**
+ * [tLogRow_23 main ] stop
+ */
+	
+	/**
+	 * [tLogRow_23 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_23 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tLogRow_23 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_23 process_data_end ] stop
+ */
+
+} // End of branch "row83"
+
+
+
+
+	
+	/**
+	 * [tDBOutput_29 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_29";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBOutput_29 process_data_end ] stop
+ */
+
+} // End of branch "dmd_lookup_uom_upd"
+
+
+
+
+	
+	/**
+	 * [tMap_28 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_28";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_28 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_55 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_55";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_55 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_55 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_55";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_55 != null) {
+		rs_tDBInput_55.close();
+	}
+	if (stmt_tDBInput_55 != null) {
+		stmt_tDBInput_55.close();
+	}
+	if(conn_tDBInput_55 != null && !conn_tDBInput_55.isClosed()) {
+		
+			conn_tDBInput_55.commit();
+			
+		
+			conn_tDBInput_55.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_55_NB_LINE",nb_line_tDBInput_55);
+ 
+
+ok_Hash.put("tDBInput_55", true);
+end_Hash.put("tDBInput_55", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_55 end ] stop
+ */
+
+	
+	/**
+	 * [tMap_28 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_28";
+
+	
+
+
+// ###############################
+// # Lookup hashes releasing
+					if(tHash_Lookup_row85 != null) {
+						tHash_Lookup_row85.endGet();
+					}
+					globalMap.remove( "tHash_Lookup_row85" );
+
+					
+					
+				
+// ###############################      
+
+
+
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row84");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tMap_28", true);
+end_Hash.put("tMap_28", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tMap_28 end ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_29 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_29";
+
+	
+
+
+
+	    try {
+				int countSum_tDBOutput_29 = 0;
+				if (pstmt_tDBOutput_29 != null && batchSizeCounter_tDBOutput_29 > 0) {
+						
+					for(int countEach_tDBOutput_29: pstmt_tDBOutput_29.executeBatch()) {
+						countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+					}
+						
+				}
+		    	
+		    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+		    	
+	    }catch (java.sql.BatchUpdateException e_tDBOutput_29){
+	    	java.sql.SQLException ne_tDBOutput_29 = e_tDBOutput_29.getNextException(),sqle_tDBOutput_29=null;
+	    	String errormessage_tDBOutput_29;
+			if (ne_tDBOutput_29 != null) {
+				// build new exception to provide the original cause
+				sqle_tDBOutput_29 = new java.sql.SQLException(e_tDBOutput_29.getMessage() + "\ncaused by: " + ne_tDBOutput_29.getMessage(), ne_tDBOutput_29.getSQLState(), ne_tDBOutput_29.getErrorCode(), ne_tDBOutput_29);
+				errormessage_tDBOutput_29 = sqle_tDBOutput_29.getMessage();
+			}else{
+				errormessage_tDBOutput_29 = e_tDBOutput_29.getMessage();
+			}
+	    	
+	    	int countSum_tDBOutput_29 = 0;
+			for(int countEach_tDBOutput_29: e_tDBOutput_29.getUpdateCounts()) {
+				countSum_tDBOutput_29 += (countEach_tDBOutput_29 < 0 ? 0 : countEach_tDBOutput_29);
+			}
+			
+	    		insertedCount_tDBOutput_29 += countSum_tDBOutput_29;
+	    	
+	    	System.err.println(errormessage_tDBOutput_29);
+	    	
+		}
+	    
+        if(pstmt_tDBOutput_29 != null) {
+        		
+            pstmt_tDBOutput_29.close();
+            resourceMap.remove("pstmt_tDBOutput_29");
+        }
+    resourceMap.put("statementClosed_tDBOutput_29", true);
+			
+			conn_tDBOutput_29.commit();
+			
+		
+    	conn_tDBOutput_29 .close();
+    	
+    	resourceMap.put("finish_tDBOutput_29", true);
+    	
+
+	nb_line_deleted_tDBOutput_29=nb_line_deleted_tDBOutput_29+ deletedCount_tDBOutput_29;
+	nb_line_update_tDBOutput_29=nb_line_update_tDBOutput_29 + updatedCount_tDBOutput_29;
+	nb_line_inserted_tDBOutput_29=nb_line_inserted_tDBOutput_29 + insertedCount_tDBOutput_29;
+	nb_line_rejected_tDBOutput_29=nb_line_rejected_tDBOutput_29 + rejectedCount_tDBOutput_29;
+	
+        globalMap.put("tDBOutput_29_NB_LINE",nb_line_tDBOutput_29);
+        globalMap.put("tDBOutput_29_NB_LINE_UPDATED",nb_line_update_tDBOutput_29);
+        globalMap.put("tDBOutput_29_NB_LINE_INSERTED",nb_line_inserted_tDBOutput_29);
+        globalMap.put("tDBOutput_29_NB_LINE_DELETED",nb_line_deleted_tDBOutput_29);
+        globalMap.put("tDBOutput_29_NB_LINE_REJECTED", nb_line_rejected_tDBOutput_29);
+    
+	
+
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"dmd_lookup_uom_upd");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tDBOutput_29", true);
+end_Hash.put("tDBOutput_29", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBOutput_29 end ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_23 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_23";
+
+	
+
+
+//////
+//////
+globalMap.put("tLogRow_23_NB_LINE",nb_line_tLogRow_23);
+
+///////////////////////    			
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row83");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tLogRow_23", true);
+end_Hash.put("tLogRow_23", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tLogRow_23 end ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+					     			//free memory for "tMap_28"
+					     			globalMap.remove("tHash_Lookup_row85"); 
+				     			
+				try{
+					
+	
+	/**
+	 * [tDBInput_55 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_55";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_55 finally ] stop
+ */
+
+	
+	/**
+	 * [tMap_28 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tMap_28";
+
+	
+
+ 
+
+
+
+/**
+ * [tMap_28 finally ] stop
+ */
+
+	
+	/**
+	 * [tDBOutput_29 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBOutput_29";
+
+	
+
+
+
+    try {
+    if (resourceMap.get("statementClosed_tDBOutput_29") == null) {
+                java.sql.PreparedStatement pstmtToClose_tDBOutput_29 = null;
+                if ((pstmtToClose_tDBOutput_29 = (java.sql.PreparedStatement) resourceMap.remove("pstmt_tDBOutput_29")) != null) {
+                    pstmtToClose_tDBOutput_29.close();
+                }
+    }
+    } finally {
+        if(resourceMap.get("finish_tDBOutput_29") == null){
+            java.sql.Connection ctn_tDBOutput_29 = null;
+            if((ctn_tDBOutput_29 = (java.sql.Connection)resourceMap.get("conn_tDBOutput_29")) != null){
+                try {
+                    ctn_tDBOutput_29.close();
+                } catch (java.sql.SQLException sqlEx_tDBOutput_29) {
+                    String errorMessage_tDBOutput_29 = "failed to close the connection in tDBOutput_29 :" + sqlEx_tDBOutput_29.getMessage();
+                    System.err.println(errorMessage_tDBOutput_29);
+                }
+            }
+        }
+    }
+ 
+
+
+
+/**
+ * [tDBOutput_29 finally ] stop
+ */
+
+	
+	/**
+	 * [tLogRow_23 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tLogRow_23";
+
+	
+
+ 
+
+
+
+/**
+ * [tLogRow_23 finally ] stop
+ */
+
+
+
+
+
+
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_55_SUBPROCESS_STATE", 1);
+	}
+	
+
+
+public static class row85Struct implements routines.system.IPersistableComparableLookupRow<row85Struct> {
+    final static byte[] commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+    static byte[] commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[0];
+	protected static final int DEFAULT_HASHCODE = 1;
+    protected static final int PRIME = 31;
+    protected int hashCode = DEFAULT_HASHCODE;
+    public boolean hashCodeDirty = true;
+
+    public String loopKey;
+
+
+
+	
+			    public String cd;
+
+				public String getCd () {
+					return this.cd;
+				}
+				
+			    public java.util.Date cddt;
+
+				public java.util.Date getCddt () {
+					return this.cddt;
+				}
+				
+			    public String cdprev;
+
+				public String getCdprev () {
+					return this.cdprev;
+				}
+				
+			    public String desc;
+
+				public String getDesc () {
+					return this.desc;
+				}
+				
+
+
+	@Override
+	public int hashCode() {
+		if (this.hashCodeDirty) {
+			final int prime = PRIME;
+			int result = DEFAULT_HASHCODE;
+	
+						result = prime * result + ((this.cdprev == null) ? 0 : this.cdprev.hashCode());
+					
+    		this.hashCode = result;
+    		this.hashCodeDirty = false;
+		}
+		return this.hashCode;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		final row85Struct other = (row85Struct) obj;
+		
+						if (this.cdprev == null) {
+							if (other.cdprev != null)
+								return false;
+						
+						} else if (!this.cdprev.equals(other.cdprev))
+						
+							return false;
+					
+
+		return true;
+    }
+
+	public void copyDataTo(row85Struct other) {
+
+		other.cd = this.cd;
+	            other.cddt = this.cddt;
+	            other.cdprev = this.cdprev;
+	            other.desc = this.desc;
+	            
+	}
+
+	public void copyKeysDataTo(row85Struct other) {
+
+		other.cdprev = this.cdprev;
+	            	
+	}
+
+
+
+
+	private String readString(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			byte[] byteArray = new byte[length];
+			dis.read(byteArray);
+			strReturn = new String(byteArray, utf8Charset);
+		}
+		return strReturn;
+	}
+
+	private void writeString(String str, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+	}
+
+	private java.util.Date readDate(DataInputStream dis, ObjectInputStream ois) throws IOException{
+		java.util.Date dateReturn = null;
+		int length = 0;
+        length = dis.readByte();
+		if (length == -1) {
+			dateReturn = null;
+		} else {
+	    	dateReturn = new Date(dis.readLong());
+		}
+		return dateReturn;
+	}
+
+	private void writeDate(java.util.Date date1, DataOutputStream dos, ObjectOutputStream oos) throws IOException{
+		if(date1 == null) {
+            dos.writeByte(-1);
+		} else {
+			dos.writeByte(0);
+	    	dos.writeLong(date1.getTime());
+    	}
+	}
+
+	private String readString(ObjectInputStream dis) throws IOException{
+		String strReturn = null;
+		int length = 0;
+        length = dis.readInt();
+		if (length == -1) {
+			strReturn = null;
+		} else {
+			if(length > commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length) {
+				if(length < 1024 && commonByteArray_LOCAL_PROJECT_dmd_delta_finder.length == 0) {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[1024];
+				} else {
+   					commonByteArray_LOCAL_PROJECT_dmd_delta_finder = new byte[2 * length];
+   				}
+			}
+			dis.readFully(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length);
+			strReturn = new String(commonByteArray_LOCAL_PROJECT_dmd_delta_finder, 0, length, utf8Charset);
+		}
+		return strReturn;
+	}
+
+    private void writeString(String str, ObjectOutputStream dos) throws IOException{
+		if(str == null) {
+            dos.writeInt(-1);
+		} else {
+            byte[] byteArray = str.getBytes(utf8Charset);
+	    	dos.writeInt(byteArray.length);
+			dos.write(byteArray);
+    	}
+    }
+
+    public void readKeysData(ObjectInputStream dis) {
+
+		synchronized(commonByteArrayLock_LOCAL_PROJECT_dmd_delta_finder) {
+
+        	try {
+
+        		int length = 0;
+		
+					this.cdprev = readString(dis);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+      }
+
+
+    }
+
+    public void writeKeysData(ObjectOutputStream dos) {
+        try {
+
+		
+					// String
+				
+						writeString(this.cdprev,dos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
+
+    /**
+     * Fill Values data by reading ObjectInputStream.
+     */
+    public void readValuesData(DataInputStream dis, ObjectInputStream ois) {
+        try {
+
+			int length = 0;
+		
+						this.cd = readString(dis,ois);
+					
+						this.cddt = readDate(dis,ois);
+					
+						this.desc = readString(dis,ois);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+
+		
+
+        }
+
+		
+
+    }
+
+    /**
+     * Return a byte array which represents Values data.
+     */
+    public void writeValuesData(DataOutputStream dos, ObjectOutputStream oos) {
+        try {
+
+		
+						writeString(this.cd, dos, oos);
+					
+						writeDate(this.cddt, dos, oos);
+					
+						writeString(this.desc, dos, oos);
+					
+        	} catch (IOException e) {
+	            throw new RuntimeException(e);
+        	}
+
+    }
+
+
+    public String toString() {
+
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString());
+		sb.append("[");
+		sb.append("cd="+cd);
+		sb.append(",cddt="+String.valueOf(cddt));
+		sb.append(",cdprev="+cdprev);
+		sb.append(",desc="+desc);
+	    sb.append("]");
+
+	    return sb.toString();
+    }
+
+    /**
+     * Compare keys
+     */
+    public int compareTo(row85Struct other) {
+
+		int returnValue = -1;
+		
+						returnValue = checkNullsAndCompare(this.cdprev, other.cdprev);
+						if(returnValue != 0) {
+							return returnValue;
+						}
+
+					
+	    return returnValue;
+    }
+
+
+    private int checkNullsAndCompare(Object object1, Object object2) {
+        int returnValue = 0;
+		if (object1 instanceof Comparable && object2 instanceof Comparable) {
+            returnValue = ((Comparable) object1).compareTo(object2);
+        } else if (object1 != null && object2 != null) {
+            returnValue = compareStrings(object1.toString(), object2.toString());
+        } else if (object1 == null && object2 != null) {
+            returnValue = 1;
+        } else if (object1 != null && object2 == null) {
+            returnValue = -1;
+        } else {
+            returnValue = 0;
+        }
+
+        return returnValue;
+    }
+
+    private int compareStrings(String string1, String string2) {
+        return string1.compareTo(string2);
+    }
+
+
+}
+public void tDBInput_56Process(final java.util.Map<String, Object> globalMap) throws TalendException {
+	globalMap.put("tDBInput_56_SUBPROCESS_STATE", 0);
+
+ final boolean execStat = this.execStat;
+	
+		String iterateId = "";
+	
+	
+	String currentComponent = "";
+	java.util.Map<String, Object> resourceMap = new java.util.HashMap<String, Object>();
+
+	try {
+			// TDI-39566 avoid throwing an useless Exception
+			boolean resumeIt = true;
+			if (globalResumeTicket == false && resumeEntryMethodName != null) {
+				String currentMethodName = new java.lang.Exception().getStackTrace()[0].getMethodName();
+				resumeIt = resumeEntryMethodName.equals(currentMethodName);
+			}
+			if (resumeIt || globalResumeTicket) { //start the resume
+				globalResumeTicket = true;
+
+
+
+		row85Struct row85 = new row85Struct();
+
+
+
+
+	
+	/**
+	 * [tAdvancedHash_row85 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tAdvancedHash_row85", false);
+		start_Hash.put("tAdvancedHash_row85", System.currentTimeMillis());
+		
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+					if(execStat) {
+						runStat.updateStatOnConnection(resourceMap,iterateId,0,0,"row85");
+					}
+				
+		int tos_count_tAdvancedHash_row85 = 0;
+		
+
+			   		// connection name:row85
+			   		// source node:tDBInput_56 - inputs:(after_tDBInput_55) outputs:(row85,row85) | target node:tAdvancedHash_row85 - inputs:(row85) outputs:()
+			   		// linked node: tMap_28 - inputs:(row84,row85) outputs:(dmd_lookup_uom_upd)
+			   
+			   		org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE matchingModeEnum_row85 = 
+			   			org.talend.designer.components.lookup.common.ICommonLookup.MATCHING_MODE.UNIQUE_MATCH;
+			   			
+			   
+	   			org.talend.designer.components.lookup.memory.AdvancedMemoryLookup<row85Struct> tHash_Lookup_row85 =org.talend.designer.components.lookup.memory.AdvancedMemoryLookup.
+	   						<row85Struct>getLookup(matchingModeEnum_row85);
+	   						   
+		   	   	   globalMap.put("tHash_Lookup_row85", tHash_Lookup_row85);
+		   	   	   
+				
+           
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row85 begin ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_56 begin ] start
+	 */
+
+	
+
+	
+		
+		ok_Hash.put("tDBInput_56", false);
+		start_Hash.put("tDBInput_56", System.currentTimeMillis());
+		
+	
+	currentComponent="tDBInput_56";
+
+	
+		int tos_count_tDBInput_56 = 0;
+		
+	
+    
+	
+		    int nb_line_tDBInput_56 = 0;
+		    java.sql.Connection conn_tDBInput_56 = null;
+				String driverClass_tDBInput_56 = "org.postgresql.Driver";
+			    java.lang.Class jdbcclazz_tDBInput_56 = java.lang.Class.forName(driverClass_tDBInput_56);
+				String dbUser_tDBInput_56 = context.dmd_db_stg_user;
+				
+				
+	final String decryptedPassword_tDBInput_56 = context.dmd_db_stg_password; 
+				
+				String dbPwd_tDBInput_56 = decryptedPassword_tDBInput_56;
+				
+				String url_tDBInput_56 = "jdbc:postgresql://" + context.dmd_db_stg_host + ":" + context.dmd_db_stg_port + "/" + context.dmd_db_stg_name + "?" + context.dmd_db_stg_additionalparams;
+				
+				conn_tDBInput_56 = java.sql.DriverManager.getConnection(url_tDBInput_56,dbUser_tDBInput_56,dbPwd_tDBInput_56);
+		        
+				conn_tDBInput_56.setAutoCommit(false);
+			
+		    
+			java.sql.Statement stmt_tDBInput_56 = conn_tDBInput_56.createStatement();
+
+		    String dbquery_tDBInput_56 = "SELECT \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cd\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cddt\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"cdprev\", \n  \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\".\"desc\"\nFROM \""+context.dmd_db_stg_name+"\".\""+context.dmd_db_stg_schema+"\".\"dmd_lookup_uom\"";
+			
+
+            	globalMap.put("tDBInput_56_QUERY",dbquery_tDBInput_56);
+		    java.sql.ResultSet rs_tDBInput_56 = null;
+
+		    try {
+		    	rs_tDBInput_56 = stmt_tDBInput_56.executeQuery(dbquery_tDBInput_56);
+		    	java.sql.ResultSetMetaData rsmd_tDBInput_56 = rs_tDBInput_56.getMetaData();
+		    	int colQtyInRs_tDBInput_56 = rsmd_tDBInput_56.getColumnCount();
+
+		    String tmpContent_tDBInput_56 = null;
+		    
+		    
+		    while (rs_tDBInput_56.next()) {
+		        nb_line_tDBInput_56++;
+		        
+							if(colQtyInRs_tDBInput_56 < 1) {
+								row85.cd = null;
+							} else {
+	                         		
+        	row85.cd = routines.system.JDBCUtil.getString(rs_tDBInput_56, 1, false);
+		                    }
+							if(colQtyInRs_tDBInput_56 < 2) {
+								row85.cddt = null;
+							} else {
+										
+			row85.cddt = routines.system.JDBCUtil.getDate(rs_tDBInput_56, 2);
+		                    }
+							if(colQtyInRs_tDBInput_56 < 3) {
+								row85.cdprev = null;
+							} else {
+	                         		
+        	row85.cdprev = routines.system.JDBCUtil.getString(rs_tDBInput_56, 3, false);
+		                    }
+							if(colQtyInRs_tDBInput_56 < 4) {
+								row85.desc = null;
+							} else {
+	                         		
+        	row85.desc = routines.system.JDBCUtil.getString(rs_tDBInput_56, 4, false);
+		                    }
+					
+
+
+ 
+
+
+
+/**
+ * [tDBInput_56 begin ] stop
+ */
+	
+	/**
+	 * [tDBInput_56 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_56";
+
+	
+
+ 
+
+
+	tos_count_tDBInput_56++;
+
+/**
+ * [tDBInput_56 main ] stop
+ */
+	
+	/**
+	 * [tDBInput_56 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_56";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_56 process_data_begin ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row85 main ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+					if(execStat){
+						runStat.updateStatOnConnection(iterateId,1,1,"row85");
+					}
+					
+
+
+			   
+			   
+
+					row85Struct row85_HashRow = new row85Struct();
+		   	   	   
+				
+				row85_HashRow.cd = row85.cd;
+				
+				row85_HashRow.cddt = row85.cddt;
+				
+				row85_HashRow.cdprev = row85.cdprev;
+				
+				row85_HashRow.desc = row85.desc;
+				
+			tHash_Lookup_row85.put(row85_HashRow);
+			
+            
+
+
+
+
+ 
+
+
+	tos_count_tAdvancedHash_row85++;
+
+/**
+ * [tAdvancedHash_row85 main ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row85 process_data_begin ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row85 process_data_begin ] stop
+ */
+	
+	/**
+	 * [tAdvancedHash_row85 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row85 process_data_end ] stop
+ */
+
+
+
+	
+	/**
+	 * [tDBInput_56 process_data_end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_56";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_56 process_data_end ] stop
+ */
+	
+	/**
+	 * [tDBInput_56 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_56";
+
+	
+
+	}
+}finally{
+	if (rs_tDBInput_56 != null) {
+		rs_tDBInput_56.close();
+	}
+	if (stmt_tDBInput_56 != null) {
+		stmt_tDBInput_56.close();
+	}
+	if(conn_tDBInput_56 != null && !conn_tDBInput_56.isClosed()) {
+		
+			conn_tDBInput_56.commit();
+			
+		
+			conn_tDBInput_56.close();
+			
+			if("com.mysql.cj.jdbc.Driver".equals((String)globalMap.get("driverClass_"))
+			    && routines.system.BundleUtils.inOSGi()) {
+			        Class.forName("com.mysql.cj.jdbc.AbandonedConnectionCleanupThread").
+			            getMethod("checkedShutdown").invoke(null, (Object[]) null);
+			}
+			
+	}
+	
+}
+globalMap.put("tDBInput_56_NB_LINE",nb_line_tDBInput_56);
+ 
+
+ok_Hash.put("tDBInput_56", true);
+end_Hash.put("tDBInput_56", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tDBInput_56 end ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row85 end ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+
+tHash_Lookup_row85.endPut();
+
+				if(execStat){
+			  		runStat.updateStat(resourceMap,iterateId,2,0,"row85");
+			  	}
+			  	
+ 
+
+ok_Hash.put("tAdvancedHash_row85", true);
+end_Hash.put("tAdvancedHash_row85", System.currentTimeMillis());
+
+
+
+
+/**
+ * [tAdvancedHash_row85 end ] stop
+ */
+
+
+
+				}//end the resume
+
+				
+
+
+
+	
+			}catch(java.lang.Exception e){	
+				
+				TalendException te = new TalendException(e, currentComponent, globalMap);
+				
+				throw te;
+			}catch(java.lang.Error error){	
+				
+					runStat.stopThreadStat();
+				
+				throw error;
+			}finally{
+				
+				try{
+					
+	
+	/**
+	 * [tDBInput_56 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tDBInput_56";
+
+	
+
+ 
+
+
+
+/**
+ * [tDBInput_56 finally ] stop
+ */
+
+	
+	/**
+	 * [tAdvancedHash_row85 finally ] start
+	 */
+
+	
+
+	
+	
+	currentComponent="tAdvancedHash_row85";
+
+	
+
+ 
+
+
+
+/**
+ * [tAdvancedHash_row85 finally ] stop
+ */
+
+
+
+				}catch(java.lang.Exception e){	
+					//ignore
+				}catch(java.lang.Error error){
+					//ignore
+				}
+				resourceMap = null;
+			}
+		
+
+		globalMap.put("tDBInput_56_SUBPROCESS_STATE", 1);
 	}
 	
     public String resuming_logs_dir_path = null;
@@ -66343,7 +91224,6 @@ if(execStat) {
     long end = 0;
 
     startTime = System.currentTimeMillis();
-        talendStats_STATS.addMessage("begin");
 
 
 
@@ -66361,11 +91241,6 @@ e_tPrejob_1.printStackTrace();
 }
 
 
-        try {
-            talendStats_STATSProcess(globalMap);
-        } catch (java.lang.Exception e) {
-            e.printStackTrace();
-        }
 
 this.globalResumeTicket = false;//to run others jobs
 
@@ -66531,6 +91406,96 @@ globalMap.put("tDBInput_36_SUBPROCESS_STATE", -1);
 e_tDBInput_36.printStackTrace();
 
 }
+try {
+errorCode = null;tDBInput_37Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_37) {
+globalMap.put("tDBInput_37_SUBPROCESS_STATE", -1);
+
+e_tDBInput_37.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_39Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_39) {
+globalMap.put("tDBInput_39_SUBPROCESS_STATE", -1);
+
+e_tDBInput_39.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_41Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_41) {
+globalMap.put("tDBInput_41_SUBPROCESS_STATE", -1);
+
+e_tDBInput_41.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_43Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_43) {
+globalMap.put("tDBInput_43_SUBPROCESS_STATE", -1);
+
+e_tDBInput_43.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_45Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_45) {
+globalMap.put("tDBInput_45_SUBPROCESS_STATE", -1);
+
+e_tDBInput_45.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_47Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_47) {
+globalMap.put("tDBInput_47_SUBPROCESS_STATE", -1);
+
+e_tDBInput_47.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_49Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_49) {
+globalMap.put("tDBInput_49_SUBPROCESS_STATE", -1);
+
+e_tDBInput_49.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_51Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_51) {
+globalMap.put("tDBInput_51_SUBPROCESS_STATE", -1);
+
+e_tDBInput_51.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_53Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_53) {
+globalMap.put("tDBInput_53_SUBPROCESS_STATE", -1);
+
+e_tDBInput_53.printStackTrace();
+
+}
+try {
+errorCode = null;tDBInput_55Process(globalMap);
+if(!"failure".equals(status)) { status = "end"; }
+}catch (TalendException e_tDBInput_55) {
+globalMap.put("tDBInput_55_SUBPROCESS_STATE", -1);
+
+e_tDBInput_55.printStackTrace();
+
+}
 
 this.globalResumeTicket = true;//to run tPostJob
 
@@ -66555,12 +91520,6 @@ e_tPostjob_1.printStackTrace();
         endUsedMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
         if (false) {
             System.out.println((endUsedMemory - startUsedMemory) + " bytes memory increase when running : dmd_delta_finder");
-        }
-        talendStats_STATS.addMessage(status==""?"end":status, (end-startTime));
-        try {
-            talendStats_STATSProcess(globalMap);
-        } catch (java.lang.Exception e) {
-            e.printStackTrace();
         }
 
 
@@ -66720,6 +91679,6 @@ if (execStat) {
     ResumeUtil resumeUtil = null;
 }
 /************************************************************************************************
- *     1552023 characters generated by Talend Open Studio for Data Integration 
- *     on the 13 January, 2021 3:11:37 PM IST
+ *     2106304 characters generated by Talend Open Studio for Data Integration 
+ *     on the 9 December, 2021 7:23:00 PM IST
  ************************************************************************************************/

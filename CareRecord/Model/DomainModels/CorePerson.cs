@@ -20,10 +20,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystorematerialised_CorePerson : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_CorePerson : Interneuron.CareRecord.Infrastructure.Domain.EntityBase, IEquatable<entitystorematerialised_CorePerson>
     {
         public string PersonId { get; set; }
         public string RowId { get; set; }
@@ -58,5 +59,26 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Religioncode { get; set; }
         public string Religiontext { get; set; }
         public bool? Deathindicator { get; set; }
+        public string Primarylanguagecode { get; set; }
+        public string Primarylanguagetext { get; set; }
+        public string Interpreterrequired { get; set; }
+
+        public bool Equals([AllowNull] entitystorematerialised_CorePerson other)
+        {
+            //Check whether the compared object is null.
+            if (Object.ReferenceEquals(other, null)) return false;
+
+            //Check whether the compared object references the same data.
+            if (Object.ReferenceEquals(this, other)) return true;
+
+            //Check whether the products' properties are equal.
+            return PersonId.Equals(other.PersonId);
+        }
+
+        public override int GetHashCode()
+        {
+            //Calculate the hash code for the product.
+            return PersonId.GetHashCode();
+        }
     }
 }

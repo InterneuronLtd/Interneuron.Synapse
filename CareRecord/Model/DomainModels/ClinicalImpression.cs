@@ -22,7 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Interneuron.CareRecord.Model.DomainModels
+namespace Interneuron.CareRecord.Model.DomainModels.Manual
 {
     public class ClinicalImpression
     {

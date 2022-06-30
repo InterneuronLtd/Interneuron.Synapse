@@ -1,0 +1,47 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "TERMINOLOGY_URI"
+  },
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/terminology/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "TERMINOLOGY_URI",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/terminology/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/formulary/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "TERMINOLOGY_URI",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/formulary/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/fdb/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "FDB_API_URI",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/fdb/{everything}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ]
+}

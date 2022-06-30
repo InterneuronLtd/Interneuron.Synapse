@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_CoreNextofkin : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_CoreNextofkin : Interneuron.CareRecord.Infrastructure.Domain.EntityBase, IEquatable<entitystorematerialised_CoreNextofkin>
     {
         public string NextofkinId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -82,5 +83,25 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Statustext { get; set; }
         public string PersonId { get; set; }
         public string EncounterId { get; set; }
+        public DateTime? Startdate { get; set; }
+        public decimal? Setid { get; set; }
+
+        public bool Equals([AllowNull] entitystorematerialised_CoreNextofkin other)
+        {
+            //Check whether the compared object is null.
+            if (Object.ReferenceEquals(other, null)) return false;
+
+            //Check whether the compared object references the same data.
+            if (Object.ReferenceEquals(this, other)) return true;
+
+            //Check whether the products' properties are equal.
+            return NextofkinId.Equals(other.NextofkinId);
+        }
+
+        public override int GetHashCode()
+        {
+            //Calculate the hash code for the product.
+            return NextofkinId.GetHashCode();
+        }
     }
 }

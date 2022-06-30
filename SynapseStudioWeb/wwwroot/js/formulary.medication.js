@@ -575,7 +575,9 @@ function getDMDVersion(url, args, beforeLoad, afterLoad) {
             }
             if (!data || data.length == 0) return;
 
-            var str = data.replace("nhsbsa_dmd_", "").substr(0, data.indexOf("_") - 1);
+            //var str = data.replace("nhsbsa_dmd_", "").substr(0, data.indexOf("_") - 1);
+
+            var str = data;
 
             $('#dmdVersion').html(str);
         });

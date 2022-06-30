@@ -3,17 +3,17 @@
     ViewData["Title"] = "ManageRoleScope";
 }
 
-<h2>Manage Role Scope</h2>
+<h2>Manage Role - Scopes</h2>
 
 <div class="well" style="margin-top: 15px;">
     <div class="row">
         <div class="col-md-12">
 
             <div class="col-lg-3">
-                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRole?id=" +ViewBag.roleid)>Local Logins</a>
+                <a class="btn btn-sm btn-primary btn-block" href=@("../ManageRole/" +ViewBag.roleid)>Local Logins</a>
             </div>
             <div class="col-lg-3">
-                <a class="btn btn-sm btn-primary btn-block" href="@("ManageExternalusers?id=" +ViewBag.roleid)">External Users</a>
+                <a class="btn btn-sm btn-primary btn-block" href="@("../ManageExternalusers/" +ViewBag.roleid)">External Users</a>
             </div>
         </div>
     </div>
@@ -79,7 +79,7 @@
                                             <td>@item["Name"]</td>
                                             <td>@item["Description"]</td>
                                             <td>
-                                                <a href=@("RemoveScopeRole?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
+                                                <a href=@("../RemoveScopeRole?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
                                             </td>
                                         </tr>
                                     }

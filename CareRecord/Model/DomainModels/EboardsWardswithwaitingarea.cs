@@ -28,5 +28,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Wardcode { get; set; }
         public string Warddisplay { get; set; }
         public string Wardorder { get; set; }
+        public bool? Issuspended { get; set; }
     }
 }

@@ -33,5 +33,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Ethnicgroup { get; set; }
         public string Religion { get; set; }
         public string Maritalstatus { get; set; }
+        public string Firstlanguage { get; set; }
     }
 }

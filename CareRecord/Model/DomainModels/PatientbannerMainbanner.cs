@@ -34,11 +34,13 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Ethnicgroup { get; set; }
         public string Religion { get; set; }
         public string Maritalstatus { get; set; }
+        public string Firstlanguage { get; set; }
         public string Nhsnumber { get; set; }
         public string Hospitalnumber { get; set; }
         public string Address { get; set; }
         public string Contactdetails { get; set; }
         public string Consultingdoctortext { get; set; }
         public string Currentlyadmittedto { get; set; }
+        public string Allergies { get; set; }
     }
 }

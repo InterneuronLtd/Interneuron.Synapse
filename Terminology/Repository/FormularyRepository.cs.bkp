@@ -1,0 +1,610 @@
+﻿////using Interneuron.Terminology.Infrastructure.Domain;
+////using Interneuron.Terminology.Repository.DBModelsContext;
+////using Microsoft.EntityFrameworkCore;
+////using System;
+////using System.Collections.Generic;
+////using System.Text;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Dapper;
+//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Infrastructure.Domain.DSLs;
+//using Interneuron.Terminology.Model.DomainModels;
+//using Interneuron.Terminology.Model.Search;
+//using Interneuron.Terminology.Repository.DBModelsContext;
+//using Microsoft.EntityFrameworkCore;
+//using Microsoft.Extensions.Configuration;
+
+//namespace Interneuron.Terminology.Repository
+//{
+//    public partial class FormularyRepository<TEntity> : Repository<TEntity>, IFormularyRepository<TEntity> where TEntity : EntityBase
+//    {
+//        private TerminologyDBContext _dbContext;
+//        private readonly IConfiguration _configuration;
+//        private IEnumerable<IEntityEventHandler> _entityEventHandlers;
+
+//        public FormularyRepository(TerminologyDBContext dbContext, IConfiguration configuration, IEnumerable<IEntityEventHandler> entityEventHandlers) : base(dbContext, entityEventHandlers)
+//        {
+//            _dbContext = dbContext;
+//            _configuration = configuration;
+//            _entityEventHandlers = entityEventHandlers;
+//        }
+
+//        ///// <summary>
+//        ///// Search for the records based on criteria and where the record is latest version
+//        ///// </summary>
+//        ///// <param name="filterCriteria"></param>
+//        ///// <returns></returns>
+//        //public async Task<IEnumerable<TEntity>> SearchFormularyByFilterCriteria(FormularyFilterCriteria filterCriteria)
+//        //{
+//        //    IEnumerable<FormularyBasicSearchResultModel> results;
+
+//        //    if (filterCriteria.IsNull()) return null;
+
+//        //    var searchTerm = !filterCriteria.SearchTerm.IsEmpty() ? filterCriteria.SearchTerm.Trim() : null;
+//        //    var recordStsCodes = filterCriteria.RecStatusCds.IsCollectionValid() ? filterCriteria.RecStatusCds : null;
+//        //    var formularyStsCodes = filterCriteria.FormularyStatusCd.IsCollectionValid() ? filterCriteria.FormularyStatusCd : null;
+//        //    var ShowOnlyArchived = filterCriteria.ShowOnlyArchived.HasValue ? filterCriteria.ShowOnlyArchived.Value : false;
+//        //    var showOnlyDuplicate = filterCriteria.ShowOnlyDuplicate.HasValue ? filterCriteria.ShowOnlyDuplicate.Value : false;
+//        //    var includeDeleted = filterCriteria.IncludeDeleted.HasValue ? filterCriteria.IncludeDeleted.Value : false;
+
+//        //    string tokenToSearch = null;
+//        //    string codeToSearch = null;
+
+//        //    if (searchTerm.IsNotEmpty())
+//        //    {
+//        //        var isSearcForCode = long.TryParse(searchTerm, out long searchCode);
+//        //        if (isSearcForCode)
+//        //        {
+//        //            codeToSearch = searchCode.ToString();
+//        //        }
+//        //        else
+//        //        {
+//        //            var searchTermTokens = searchTerm.Split(" ");
+//        //            searchTermTokens.Each(s => { if (s.IsNotEmpty()) tokenToSearch = $"{tokenToSearch} & {s}:*"; });
+//        //            tokenToSearch = tokenToSearch.TrimStart(' ', '&');
+//        //        }
+//        //    }
+
+//        //    if (ShowOnlyArchived)
+//        //    {
+//        //        recordStsCodes = formularyStsCodes = null;
+//        //        showOnlyDuplicate = includeDeleted = false;
+//        //    }
+
+//        //    //If Formulary Status has both formulary and non-formulary then make it null - since it includes both
+//        //    if (formularyStsCodes != null && formularyStsCodes.Contains("001") && formularyStsCodes.Contains("002"))
+//        //    {
+//        //        formularyStsCodes = null;
+//        //    }
+
+//        //    var qryStmt = $"SELECT * from local_formulary.udf_formulary_search_nodes_with_descendents_temp(@in_name, @in_recordstatus_codes, @in_rnoh_formulary_status_codes, @in_search_code)";
+
+//        //    var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//        //    using (var conn = new Npgsql.NpgsqlConnection(connString))
+//        //    {
+//        //        results = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt, new { in_name = tokenToSearch, in_recordstatus_codes = recordStsCodes, in_rnoh_formulary_status_codes = formularyStsCodes, in_search_code = codeToSearch });
+//        //    }
+
+//        //    if (results.IsCollectionValid())
+//        //    {
+//        //        if (ShowOnlyArchived)
+//        //        {
+//        //            results = results.Where(r => r.RecStatusCode == TerminologyConstants.RECORDSTATUS_ARCHIVED);
+//        //        }
+//        //        else
+//        //        {
+//        //            results = results.Where(r => r.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED);
+//        //        }
+
+//        //        if (!includeDeleted)
+//        //            results = results.Where(r => r.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+
+//        //        if (showOnlyDuplicate)
+//        //            results = results.Where(r => r.IsDuplicate == true);
+//        //    }
+//        //    if (results == null) return null;
+
+//        //    return (IEnumerable<TEntity>)results;
+//        //}
+
+//        /// <summary>
+//        /// Search for the records based on criteria and where the record is latest version
+//        /// </summary>
+//        /// <param name="filterCriteria"></param>
+//        /// <returns></returns>
+//        public async Task<IEnumerable<TEntity>> SearchFormularyBySearchTerm(string searchTerm)
+//        {
+//            IEnumerable<FormularyBasicSearchResultModel> results;
+
+//            if (searchTerm.IsEmpty()) return null;
+
+//            string tokenToSearch = null;
+//            string codeToSearch = null;
+
+//            var isSearcForCode = long.TryParse(searchTerm, out long searchCode);
+//            if (isSearcForCode)
+//            {
+//                codeToSearch = searchCode.ToString();
+//            }
+//            else
+//            {
+//                var searchTermTokens = searchTerm.Split(" ");
+//                searchTermTokens.Each(s => { if (s.IsNotEmpty()) tokenToSearch = $"{tokenToSearch} & {s}:*"; });
+//                tokenToSearch = tokenToSearch.TrimStart(' ', '&');
+//            }
+
+
+//            var qryStmt = $"SELECT * from local_formulary.udf_formulary_search_nodes_with_descendents(@in_name, @in_search_code)";
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                results = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt, new { in_name = tokenToSearch, in_search_code = codeToSearch });
+//            }
+
+//            if (results == null) return null;
+
+//            return (IEnumerable<TEntity>)results;
+//        }
+
+//        public async Task<IEnumerable<TEntity>> GetLatestAMPNodesWithBasicResultsForAttributes(string searchTerm, List<string> recordStatusCodes, List<string> formularyStatusCodes, List<string> flags)
+//        {
+//            IEnumerable<FormularyBasicSearchResultModel> basicSearchResults = null;
+
+//            string tokenToSearch = null;
+//            string codeToSearch = null;
+
+//            if (searchTerm.IsNotEmpty())
+//            {
+//                var isSearcForCode = long.TryParse(searchTerm, out long searchCode);
+//                if (isSearcForCode)
+//                {
+//                    codeToSearch = searchCode.ToString();
+//                }
+//                else
+//                {
+//                    var searchTermTokens = searchTerm.Split(" ");
+//                    searchTermTokens.Each(s => { if (s.IsNotEmpty()) tokenToSearch = $"{tokenToSearch} & {s}:*"; });
+//                    tokenToSearch = tokenToSearch.TrimStart(' ', '&');
+//                }
+//            }
+
+//            var qryStmt = @$"select distinct 
+//                 fh.formulary_id as formularyid,
+//	             fh.version_id as  versionid,
+//	             fh.formulary_version_id as formularyversionid,
+//	             fh.name,
+//	             fh.code,
+//	             fh.product_type as  producttype,
+//	             fh.parent_code as parentcode,
+//	             fh.parent_name as parentname,
+//	             fh.parent_product_type as parentproducttype,
+//	             fh.is_latest as islatest,
+//	             fh.is_duplicate as isduplicate,
+//	             fh.rec_status_code as recstatuscode,
+//	             detail.rnoh_formulary_statuscd as rnohformularystatuscd,
+//	             detail.prescribable
+//              from local_formulary.formulary_header fh
+//              inner join local_formulary.formulary_detail detail on detail.formulary_version_id = fh.formulary_version_id
+//              where fh.is_latest = true
+//                and(fh.product_type = 'AMP')
+//                and (@in_name::text is null or fh.name_tokens @@ to_tsquery(@in_name))
+//				and (@in_search_code::text is null or fh.code = @in_search_code)
+//				and (@in_recordstatus_codes::text[] is null or fh.rec_status_code = any(@in_recordstatus_codes))
+//				and (@in_rnoh_formulary_status_codes::text[] is null or detail.rnoh_formulary_statuscd = any(@in_rnoh_formulary_status_codes))
+//                { GetConditionByFlags(flags, "detail")}";
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            var in_recordstatus_code_vals = recordStatusCodes.IsCollectionValid() ? recordStatusCodes : null;
+//            var in_rnoh_formulary_status_code_vals = formularyStatusCodes.IsCollectionValid() ? formularyStatusCodes : null;
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                basicSearchResults = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt,
+//                    new
+//                    {
+//                        in_name = tokenToSearch,
+//                        in_search_code = codeToSearch,
+//                        in_recordstatus_codes = in_recordstatus_code_vals,
+//                        in_rnoh_formulary_status_codes = in_rnoh_formulary_status_code_vals,
+//                    });
+//            }
+
+//            /*
+//             *
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                basicSearchResults = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt,
+//                    new { in_name = tokenToSearch, in_search_code = codeToSearch, in_recordstatus_codes = recordStatusCodes.IsCollectionValid() ? recordStatusCodes : null, in_rnoh_formulary_status_codes = formularyStatusCodes.IsCollectionValid() ? formularyStatusCodes : null });
+//            }
+//            */
+
+//            return (IEnumerable<TEntity>)basicSearchResults;
+//        }
+
+//        private string GetConditionByFlags(List<string> flags, string detailTableAlias)
+//        {
+//            if (!flags.IsCollectionValid()) return string.Empty;
+
+//            var conditionalString = "";
+
+//            var columnNames = GetColumnNames();
+
+//            flags.Each(flag =>
+//            {
+//                if (flag.IsNotEmpty() && columnNames.ContainsKey(flag))
+//                {
+//                    var columnName = columnNames[flag];
+//                    var typeOfCol = "s";
+
+//                    var splitByType = columnName.Split("|");
+//                    if (splitByType.Length > 1)
+//                    {
+//                        columnName = splitByType[0];
+//                        typeOfCol = splitByType[1];
+//                    }
+
+//                    if (typeOfCol == "b")
+//                        conditionalString = $"{conditionalString } and {detailTableAlias}.{columnName} = true";
+//                    else
+//                        conditionalString = $"{conditionalString } and {detailTableAlias}.{columnName} = '1'";
+//                }
+//            });
+
+//            return conditionalString;
+//        }
+
+//        private Dictionary<string, string> GetColumnNames()
+//        {
+//            return new Dictionary<string, string>
+//            {
+//                {"BlackTriangle","black_triangle"},
+//                {"CFCFree","cfc_free"},
+//                {"ClinicalTrialMedication","clinical_trial_medication"},
+//                {"CriticalDrug","critical_drug"},
+//                {"CustomControlledDrug","is_custom_controlled_drug|b"},
+//                {"Diluent","is_diluent|b"},
+//                {"EMAAdditionalMonitoring","ema_additional_monitoring"},
+//                {"ExpensiveMedication","expensive_medication"},
+//                {"GastroResistant","is_gastro_resistant|b"},
+//                {"GlutenFree","gluten_free"},
+//                {"HighAlertMedication","high_alert_medication"},
+//                {"IgnoreDuplicateWarnings","ignore_duplicate_warnings"},
+//                {"IVtoOral","is_blood_product|b"},
+//                { "IsIndicationMandatory", "is_indication_mandatory|b"},
+//                {"ModifiedRelease","is_modified_release|b"},
+//                {"NotforPRN","not_for_prn"},
+//                {"OutpatientMedication","outpatient_medication_cd"},
+//                {"Parallelimport","parallel_import"},
+//                {"Prescribable","prescribable|b"},
+//                {"PreservativeFree","preservative_free"},
+//                {"SugarFree","sugar_free"},
+//                {"UnlicensedMedication","unlicensed_medication_cd"},
+//                {"WitnessingRequired","witnessing_required"}
+//            };
+//        }
+
+//        public async Task<IEnumerable<TEntity>> GetLatestTopLevelNodesWithBasicResults()
+//        {
+//            IEnumerable<FormularyBasicSearchResultModel> basicSearchResults = null;
+
+
+//            var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_latest_top_nodes()";
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                basicSearchResults = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt);
+//            }
+
+//            return (IEnumerable<TEntity>)basicSearchResults;
+//        }
+
+//        //public async Task<IEnumerable<TEntity>> GetLatestTopLevelNodesWithBasicResults(List<string> recordStsCodes, List<string> formularyStsCodes)
+//        //{
+//        //    IEnumerable<FormularyBasicSearchResultModel> basicSearchResults = null;
+
+//        //    //If Formulary Status has both formulary and non-formulary then make it null - since it includes both
+//        //    if (formularyStsCodes != null && formularyStsCodes.Contains("001") && formularyStsCodes.Contains("002"))
+//        //    {
+//        //        formularyStsCodes = null;
+//        //    }
+
+//        //    var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_latest_top_nodes(@in_recordstatus_codes, @in_rnoh_formulary_status_codes)";
+
+//        //    var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//        //    using (var conn = new Npgsql.NpgsqlConnection(connString))
+//        //    {
+//        //        basicSearchResults = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt,
+//        //            new { in_recordstatus_codes = recordStsCodes.IsCollectionValid() ? recordStsCodes : null, in_rnoh_formulary_status_codes = formularyStsCodes.IsCollectionValid() ? formularyStsCodes : null });
+//        //    }
+
+//        //    return (IEnumerable<TEntity>)basicSearchResults;
+//        //}
+
+
+
+//        //        public IQueryable<TEntity> SearchFormularyByFilterCriteria(FormularyFilterCriteria filterCriteria)
+//        //        {
+//        //            var baseQuery = this._dbContext.FormularyHeader.Where(fh => fh.IsLatest == true);
+
+//        //            if (!filterCriteria.ShowArchieved.HasValue && !filterCriteria.ShowArchieved.Value)
+//        //                baseQuery = baseQuery.Where(q => q.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED); //Not Archived
+
+//        //            var query = FilterBySearchTerm(baseQuery, filterCriteria);
+
+//        //            if (filterCriteria.RecStatusCds.IsCollectionValid())
+//        //                query = FilterByRecStatusCodes(query, filterCriteria);
+
+//        //            if (filterCriteria.FormularyStatusCd.IsCollectionValid())
+//        //                query = FilterByFormularyCode(query, filterCriteria);
+
+//        //            if (!filterCriteria.ShowDuplicate.HasValue || !filterCriteria.ShowDuplicate.Value) //No duplicated record by default
+//        //                query = query.Where(q => q.IsDuplicate == null || q.IsDuplicate == false);
+
+
+//        //            var result = query.Select(res => new FormularyBasicSearchResultModel()
+//        //            {
+//        //                FormularyId = res.FormularyId,
+//        //                VersionId = res.VersionId,
+//        //                FormularyVersionId = res.FormularyVersionId,
+//        //                RowId = res.Createdby,
+//        //                Createddate = res.Createddate,
+//        //                Createdby = res.Createdby,
+//        //                IsDuplicate = res.IsDuplicate,
+//        //                IsLatest = res.IsLatest,
+//        //                Code = res.Code,
+//        //                Name = res.Name,
+//        //                ProductType = res.ProductType,
+//        //                RecStatusCode = res.RecStatusCode,
+//        //                RecSource = res.RecSource,
+//        //                ParentCode = res.ParentCode,
+//        //                ParentName = res.ParentName,
+//        //                ParentProductType = res.ParentProductType
+//        //            }).Distinct();
+
+//        //#if DEBUG
+//        //            var sqlGenerated = this.GetSql(query);
+//        //#endif
+//        //            return (IQueryable<TEntity>)result;
+//        //        }
+
+//        public IQueryable<TEntity> GetFormularyDetail(string id)
+//        {
+//            var query = this._dbContext.FormularyHeader
+//                .Include(hdr => hdr.FormularyDetail)// Include<FormularyDetail>("FormularyDetail");
+//                .Include(hdr => hdr.FormularyAdditionalCode)
+//                .Include(hdr => hdr.FormularyIndication)
+//                .Include(hdr => hdr.FormularyIngredient)
+//                .Include(hdr => hdr.FormularyRouteDetail)
+//                .Include(hdr => hdr.FormularyOntologyForm)
+//                .Include(hdr => hdr.FormularyExcipient)
+//                .Where(hdr => hdr.FormularyVersionId == id);
+
+//            return (IQueryable<TEntity>)query;
+//        }
+
+//        public IQueryable<TEntity> GetFormularyListForIds(List<string> ids, bool onlyNonDeleted = false)
+//        {
+//            var query = this._dbContext.FormularyHeader
+//                .Include(hdr => hdr.FormularyDetail)
+//                .Include(hdr => hdr.FormularyAdditionalCode)
+//                .Include(hdr => hdr.FormularyIndication)
+//                .Include(hdr => hdr.FormularyIngredient)
+//                .Include(hdr => hdr.FormularyRouteDetail)
+//                .Include(hdr => hdr.FormularyExcipient)
+//                .Where(hdr => ids.Contains(hdr.FormularyVersionId));
+
+//            if (onlyNonDeleted)
+//            {
+//                query = query.Where(hdr => hdr.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+//            }
+
+//            return (IQueryable<TEntity>)query;
+//        }
+
+//        /// <summary>
+//        /// Returns the latest version of formularies for the codes
+//        /// </summary>
+//        /// <param name="codes"></param>
+//        /// <param name="onlyNonDeleted"></param>
+//        /// <returns></returns>
+//        public IQueryable<TEntity> GetLatestFormulariesByCodes(string[] codes, bool onlyNonDeleted = false)
+//        {
+//            var query = this._dbContext.FormularyHeader
+//                .Include(hdr => hdr.FormularyDetail)// Include<FormularyDetail>("FormularyDetail");
+//                .Include(hdr => hdr.FormularyAdditionalCode)
+//                .Include(hdr => hdr.FormularyIndication)
+//                .Include(hdr => hdr.FormularyIngredient)
+//                .Include(hdr => hdr.FormularyRouteDetail)
+//                .Include(hdr => hdr.FormularyExcipient)
+//                .Where(hdr => codes.Contains(hdr.Code)
+//                && hdr.IsLatest == true);
+
+//            if (onlyNonDeleted)
+//            {
+//                query = query.Where(hdr => hdr.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+//            }
+
+//            return (IQueryable<TEntity>)query;
+//        }
+
+//        //public async Task<T> SaveFormularyItem<T>(T formularyDataItem) where T : TEntity
+//        //{
+//        //    if (formularyDataItem == null) return null;
+
+//        //var formularyData = formularyDataItem as FormularyHeader;
+
+//        //    if (!formularyData.Name.IsEmpty())
+//        //        formularyData.NameTokens = EF.Functions.ToTsVector(formularyData.Name);
+
+//        //    if (!formularyData.ParentName.IsEmpty())
+//        //        formularyData.ParentNameTokens = EF.Functions.ToTsVector(formularyData.ParentName);
+
+//        //    this._dbContext.FormularyHeader.Add(formularyData);
+
+//        //    var savedSts = await this.SaveChangesAsync();
+
+//        //    if (savedSts <= 0) return null;
+
+//        //    return formularyDataItem;
+//        //}
+
+//        public async Task<IEnumerable<TEntity>> GetFormularyDescendentForCodes(string[] codes, bool onlyNonDeleted = true)
+//        {
+//            if (!codes.IsCollectionValid()) return null;
+
+//            //var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_descendents(@in_formulary_version_ids)";
+
+//            var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_descendents_by_codes(@in_codes)";
+
+//            IEnumerable<FormularyBasicSearchResultModel> results;
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                results = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt, new { in_codes = codes });
+//            }
+//            if (results == null) return null;
+
+//            if (onlyNonDeleted)
+//                results = results.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+
+//            return (IEnumerable<TEntity>)results;
+//        }
+
+//        public async Task<IEnumerable<TEntity>> GetFormularyImmediateDescendentForCodes(string[] codes, bool onlyNonDeleted = true)
+//        {
+//            if (!codes.IsCollectionValid()) return null;
+
+//            var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_next_descendents_by_codes(@in_codes)";
+
+//            IEnumerable<FormularyBasicSearchResultModel> results;
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                results = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt, new { in_codes = codes });
+//            }
+//            if (results == null) return null;
+
+//            if (onlyNonDeleted)
+//                results = results.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+
+//            return (IEnumerable<TEntity>)results;
+//        }
+
+//        public async Task<IEnumerable<TEntity>> GetFormularyAncestorForCodes(string[] codes, bool onlyNonDeleted = true)
+//        {
+//            if (!codes.IsCollectionValid()) return null;
+
+//            var qryStmt = $"SELECT * from local_formulary.udf_formulary_get_ancestors_by_codes(@in_codes)";
+
+//            IEnumerable<FormularyBasicSearchResultModel> results;
+
+//            var connString = _configuration.GetValue<string>("TerminologyConfig:Connectionstring");
+
+//            using (var conn = new Npgsql.NpgsqlConnection(connString))
+//            {
+//                results = await conn.QueryAsync<FormularyBasicSearchResultModel>(qryStmt, new { in_codes = codes });
+//            }
+//            if (results == null) return null;
+
+//            if (onlyNonDeleted)
+//                results = results.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+
+//            return (IEnumerable<TEntity>)results;
+//        }
+
+//        public IEnumerable<TEntity> GetLatestFormulariesBriefInfoByNameOrCode(string productNameOrCode, string productType = null, bool isExactMatch = false)
+//        {
+//            //Only Non-deleted records and latest
+//            var query = this._dbContext.FormularyHeader
+//                            .Where(rec => rec.IsLatest == true && rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_DELETED);
+
+//            if (productNameOrCode.IsNotEmpty())
+//            {
+//                if (isExactMatch)
+//                {
+//                    query = query.Where(rec => (rec.Name.ToLower() == productNameOrCode.ToLower()) || (rec.Code == productNameOrCode));
+//                }
+//                else
+//                {
+//                    var searchTermTokens = productNameOrCode.Split(" ");
+
+//                    var tokenToSearch = "";
+
+//                    searchTermTokens.Each(s => { if (s.IsNotEmpty()) { tokenToSearch = $"{tokenToSearch} & {s}:*"; } });
+
+//                    tokenToSearch = tokenToSearch.TrimStart(' ', '&');
+
+//                    query = query.Where(q => q.NameTokens.Matches(EF.Functions.ToTsQuery(tokenToSearch)) || q.Code == productNameOrCode);
+//                }
+//            }
+//            if (productType.IsNotEmpty())
+//            {
+//                query = query.Where(q => q.ProductType.ToLower() == productType.ToLower());
+//            }
+
+//            return (IEnumerable<TEntity>)query.ToList();
+//        }
+
+//        private IQueryable<FormularyHeader> FilterByShowDuplicate(IQueryable<FormularyHeader> query, FormularyFilterCriteria filterCriteria)
+//        {
+//            query = query.Where(q => q.IsDuplicate == null | q.IsDuplicate == true);
+
+//            return query;
+//        }
+
+//        private IQueryable<FormularyHeader> FilterByRecStatusCodes(IQueryable<FormularyHeader> query, FormularyFilterCriteria filterCriteria)
+//        {
+//            var recStatuses = filterCriteria.RecStatusCds.ToArray();
+//            query = query.Where(q => q.RecStatusCode != null && recStatuses.Contains(q.RecStatusCode));
+
+//            return query;
+//        }
+
+//        private IQueryable<FormularyHeader> FilterByFormularyCode(IQueryable<FormularyHeader> query, FormularyFilterCriteria filterCriteria)
+//        {
+//            var formularyStatusCds = filterCriteria.FormularyStatusCd.ToArray();
+
+//            query = query.Where(q => q.FormularyDetail != null && formularyStatusCds.Contains(q.FormularyDetail.FirstOrDefault().RnohFormularyStatuscd));
+
+//            return query;
+//        }
+
+//        private IQueryable<FormularyHeader> FilterBySearchTerm(IQueryable<FormularyHeader> query, FormularyFilterCriteria filterCriteria)
+//        {
+//            var searchTerm = filterCriteria.SearchTerm;
+
+//            if (searchTerm.IsEmpty()) return query;
+
+//            //var searchTermTokens = searchTerm.Split(" ");
+
+//            //var tokenToSearch = "";
+
+//            //searchTermTokens.Each(s => tokenToSearch = $"{tokenToSearch} & {s}:*");
+
+//            //tokenToSearch = tokenToSearch.TrimStart(' ', '&');
+
+//            //query = query.Where(q => q.NameTokens.Matches(EF.Functions.ToTsQuery(tokenToSearch)) || q.Code == searchTerm);
+
+//            query = query.Where(q => EF.Functions.ILike(q.Name, $"%{searchTerm}%") || EF.Functions.ILike(q.Name, $"{searchTerm}%") || EF.Functions.ILike(q.Name, $"%{searchTerm}") || q.Code == searchTerm);
+
+//            return query;
+//        }
+//    }
+//}

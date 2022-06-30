@@ -47,7 +47,12 @@ namespace SynapseStudioWeb.AppCode.Constants
         public const string IDENTIFICATION_CODE_TYPE = "Identification";
 
         public const string DRAFT_STATUS_CD = "001";
+        public const string READY_FOR_REVIEW_STATUS_CD = "002";
+        public const string ACTIVE_STATUS_CD = "003";
         public const string ARCHIEVED_STATUS_CD = "004";
+        public const string INACTIVE_STATUS_CD = "005";
+        public const string DELETED_STATUS_CD = "006";
+
 
         public const string DEFAULT_DROPDOWN_TEXT = "Please Select";
 

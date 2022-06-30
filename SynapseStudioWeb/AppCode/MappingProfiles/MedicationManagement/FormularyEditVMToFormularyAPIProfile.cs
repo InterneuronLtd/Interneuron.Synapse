@@ -76,6 +76,7 @@ namespace SynapseStudioWeb.AppCode.MappingProfiles.MedicationManagement
                 .ForMember(dest => dest.Diluents, opt => opt.MapFrom(src => ConvertCodeNameModelsWithDefaultsToCodeDescAPI(src.Diluents)))
                 .ForMember(dest => dest.SafetyMessages, opt => opt.MapFrom(src => ConvertCodeNameModelsWithDefaultsToCodeDescAPI(src.SafetyMessages)))
                 .ForMember(dest => dest.IsCustomControlledDrug, opt => opt.MapFrom(src => src.IsCustomControlledDrug == true))
+                .ForMember(dest => dest.IsPrescriptionPrintingRequired, opt => opt.MapFrom(src => src.IsPrescriptionPrintingRequired == true))
                 .ForMember(dest => dest.IsIndicationMandatory, opt => opt.MapFrom(src => src.IsIndicationMandatory == true));
 
 

@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Deployables\1.1\**" />
+    <Content Remove="Deployables\1.1\**" />
+    <EmbeddedResource Remove="Deployables\1.1\**" />
+    <None Remove="Deployables\1.1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="AppCode\Commands\FormularyCommand.Create.cs.bkp" />
+    <None Remove="AppCode\Commands\FormularyCommand.Edit.cs.bkp" />
+    <None Remove="AppCode\Commands\FormularyCommand.FileImport.cs.bkp" />
+    <None Remove="AppCode\Commands\FormularyCommand.Import.cs.bkp" />
+    <None Remove="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundAMPFormularyBuilder_copy.cs.tbr" />
+    <None Remove="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundVMPFormularyBuilder - Copy.cs.tbr" />
+    <None Remove="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundVTMFormularyBuilder - Copy.cs.tbr" />
+    <None Remove="AppCode\Validators\CreateFormularyRequestValidator.cs.bkp" />
+    <None Remove="AppCode\Validators\EditFormularyRequestValidator.cs.bkp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="AppCode\Commands\FormularyCommand.Create.cs.bkp" />
+    <Compile Include="AppCode\Commands\FormularyCommand.Edit.cs.bkp" />
+    <Compile Include="AppCode\Commands\FormularyCommand.FileImport.cs.bkp" />
+    <Compile Include="AppCode\Commands\FormularyCommand.Import.cs.bkp" />
+    <Compile Include="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundAMPFormularyBuilder_copy.cs.tbr" />
+    <Compile Include="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundVMPFormularyBuilder - Copy.cs.tbr" />
+    <Compile Include="AppCode\Queries\FormularyRuleBasedQueryProcessor\RuleBoundVTMFormularyBuilder - Copy.cs.tbr" />
+    <Compile Include="AppCode\Validators\CreateFormularyRequestValidator.cs.bkp" />
+    <Compile Include="AppCode\Validators\EditFormularyRequestValidator.cs.bkp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+    <PackageReference Include="Serilog" Version="2.11.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.3.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.1" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.18" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Common\Interneuron.Common.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Infrastructure\Caching\Interneuron.Caching.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Infrastructure\Exceptions\CustomExceptions\Interneuron.CustomExceptions.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Infrastructure\Exceptions\Web\Interneuron.Web.Exceptions.csproj" />
+    <ProjectReference Include="..\FDB\Client\Interneuron.FDBAPI.Client.csproj" />
+    <ProjectReference Include="..\Infrastructure\Interneuron.Terminology.Infrastructure.csproj" />
+    <ProjectReference Include="..\Model\Interneuron.Terminology.Model.csproj" />
+    <ProjectReference Include="..\Repository\Interneuron.Terminology.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AppCode\DSLs\" />
+    <Folder Include="Deployables\ETLJobs_Source\" />
+  </ItemGroup>
+
+</Project>

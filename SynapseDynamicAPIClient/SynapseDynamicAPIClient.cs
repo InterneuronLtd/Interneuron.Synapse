@@ -246,6 +246,20 @@ namespace Interneuron.Synapse
 
         /* ListController Controller ends */
 
+        /* AuthenticatorController Controller Begins */
+
+        public string GetSmartCardToken(string userId)
+        {
+            return GetData("Authenticator/GetSmartCardToken?userId=" + userId);
+        }
+
+        public void RemoveSmartCardToken(string userId)
+        {
+            DeleteData("Authenticator/RemoveSmartCardToken?userId=" + userId);
+        }
+
+        /* AuthenticatorController Controller Ends */
+
         private string PostData(string endpoint, object postData)
         {
             var response = _client.PostAsJsonAsync(endpoint, postData).Result;

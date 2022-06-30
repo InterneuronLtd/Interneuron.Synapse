@@ -37,6 +37,7 @@ using SynapseDynamicAPI.Formatters;
 using Swashbuckle.AspNetCore.Swagger;
 using SynapseDynamicAPI.Infrastructure.Filters;
 using Interneuron.Common.Extensions;
+using Microsoft.OpenApi.Models;
 
 namespace SynapseDynamicAPI
 {
@@ -126,22 +127,28 @@ namespace SynapseDynamicAPI
 
             services.AddSwaggerGen(conf =>
             {
-                conf.DescribeAllEnumsAsStrings();
-                conf.SwaggerDoc(swaggerName, new Info
+                //conf.DescribeAllEnumsAsStrings();
+
+                conf.SwaggerDoc(swaggerName, new OpenApiInfo
                 {
                     Title = "Synapse Dynamic HTTP API",
                     Version = swaggerVer,
                     Description = "The Dynamic Service HTTP API",
-                    TermsOfService = "The Synapse Dynamic Service HTTP API"
+                    //TermsOfService = "The Synapse Dynamic Service HTTP API"
                 });
 
-                conf.AddSecurityDefinition("oauth2", new OAuth2Scheme
+                conf.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
-                    Type = "oauth2",
-                    Flow = "implicit",
-                    AuthorizationUrl = $"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/authorize",
-                    TokenUrl = $"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/token",
-                    Scopes = GetScopes(swaggerAccessScopes)
+                    Type = SecuritySchemeType.OAuth2,
+                    Flows = new OpenApiOAuthFlows()
+                    {
+                        Implicit = new OpenApiOAuthFlow()
+                        {
+                            AuthorizationUrl = new Uri($"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/authorize"),
+                            TokenUrl = new Uri($"{SynapseCoreSettingsSection.GetValue<string>("AuthorizationAuthority")}/connect/token"),
+                            Scopes = GetScopes(swaggerAccessScopes)
+                        }
+                    }
                 });
 
                 conf.OperationFilter<AuthorizeCheckOperationFilter>();
@@ -182,7 +189,7 @@ namespace SynapseDynamicAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             //if (env.IsDevelopment())
             //{
@@ -197,13 +204,23 @@ namespace SynapseDynamicAPI
                 };
             });
 
+            app.UseStaticFiles();
+
+
+            app.UseRouting();
+            app.UseCors("AllowAllHeaders");
+
             app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             app.UseMiddleware<InterneuronSerilogLoggingMiddleware>();
 
-            app.UseCors("AllowAllHeaders");
-
-            app.UseMvc();
+            //app.UseMvc();
 
             app.UseSwagger();
 

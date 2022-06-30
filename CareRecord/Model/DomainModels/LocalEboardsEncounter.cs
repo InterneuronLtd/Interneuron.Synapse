@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_LocalEboardsEncounter : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_LocalEboardsEncounter : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string EboardsEncounterId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -55,5 +55,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public DateTime? Allocateddate { get; set; }
         public string Allocatedtime { get; set; }
         public bool? Hasbeeninbed { get; set; }
+        public string Bedtransferdatetime { get; set; }
     }
 }

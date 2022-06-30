@@ -51,5 +51,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Reasonfordelete { get; set; }
         public string Reasonforincompleteobservations { get; set; }
         public string Eventcorrelationid { get; set; }
+        public bool? Incomplete { get; set; }
     }
 }

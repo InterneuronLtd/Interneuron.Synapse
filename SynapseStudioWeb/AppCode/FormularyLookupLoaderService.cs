@@ -72,6 +72,25 @@ namespace SynapseStudioWeb.AppCode
             return dataDictionary;
         }
 
+        public async Task<Dictionary<string, string>> GetLatestRoutesLookup(Action<Dictionary<string, string>> onResultFetch = null)
+        {
+            string token = _httpContext.Session.GetString("access_token");
+
+            var dataDictionary = new Dictionary<string, string>();
+
+            var dataLkp = await DataService.TerminologyAPIService.GetRoutes(token);
+
+            if (dataLkp.IsCollectionValid())
+            {
+                dataDictionary = dataLkp.Where(rec => rec.Recordstatus == 1 && (rec.IsLatest == true || rec.IsLatest.HasValue == false)).ToDictionary(k => k.Cd.ToString(), v => v.Desc);
+            }
+
+            dataDictionary = dataDictionary ?? new Dictionary<string, string>();
+
+            onResultFetch?.Invoke(dataDictionary);
+            return dataDictionary;
+        }
+
         //public async Task<Dictionary<string, string>> GetFormAndRoutesLookup(Action<Dictionary<string, string>> onResultFetch = null)
         //{
         //    string token = _httpContext.Session.GetString("access_token");
@@ -120,6 +139,26 @@ namespace SynapseStudioWeb.AppCode
             return dataDictionary;
         }
 
+        public async Task<Dictionary<string, string>> GetLatestIngredientsLookup(Action<Dictionary<string, string>> onResultFetch = null)
+        {
+            string token = _httpContext.Session.GetString("access_token");
+
+            var dataDictionary = new Dictionary<string, string>();
+
+            var dataLkp = await TerminologyAPIService.GetIngredients(token);
+
+            if (dataLkp.IsCollectionValid())
+            {
+                dataDictionary = dataLkp.Where(rec => rec.Recordstatus == 1 && !rec.Invalid.HasValue && (rec.IsLatest == true || rec.IsLatest.HasValue == false)).ToDictionary(k => k.Isid.ToString(), v => v.Nm);
+
+            }
+
+            dataDictionary = dataDictionary ?? new Dictionary<string, string>();
+
+            onResultFetch?.Invoke(dataDictionary);
+            return dataDictionary;
+        }
+
         public async Task<Dictionary<string, string>> GetUOMsLookup(Action<Dictionary<string, string>> onResultFetch = null)
         {
             string token = _httpContext.Session.GetString("access_token");
@@ -136,6 +175,25 @@ namespace SynapseStudioWeb.AppCode
 
                     _httpContext.Session.SetObject(SynapseSession.UOMsLkpKey, dataDictionary);
                 }
+            }
+
+            dataDictionary = dataDictionary ?? new Dictionary<string, string>();
+
+            onResultFetch?.Invoke(dataDictionary);
+            return dataDictionary;
+        }
+
+        public async Task<Dictionary<string, string>> GetLatestUOMsLookup(Action<Dictionary<string, string>> onResultFetch = null)
+        {
+            string token = _httpContext.Session.GetString("access_token");
+
+            var dataDictionary = new Dictionary<string, string>();
+
+            var dataLkp = await TerminologyAPIService.GetUOMs(token);
+
+            if (dataLkp.IsCollectionValid())
+            {
+                dataDictionary = dataLkp.Where(rec => rec.Recordstatus == 1 && (rec.IsLatest == true || rec.IsLatest.HasValue == false)).ToDictionary(k => k.Cd.ToString(), v => v.Desc);
             }
 
             dataDictionary = dataDictionary ?? new Dictionary<string, string>();
@@ -168,6 +226,26 @@ namespace SynapseStudioWeb.AppCode
             return dataDictionary;
         }
 
+        public async Task<Dictionary<string, string>> GetLatestSuppliersLookup(Action<Dictionary<string, string>> onResultFetch = null)
+        {
+            string token = _httpContext.Session.GetString("access_token");
+
+            var dataDictionary = new Dictionary<string, string>();
+
+            var dataLkp = await TerminologyAPIService.GetSuppliers(token);
+
+            if (dataLkp.IsCollectionValid())
+            {
+                dataDictionary = dataLkp.Where(rec => rec.Recordstatus == 1 && (rec.IsLatest == true || rec.IsLatest.HasValue == false)).ToDictionary(k => k.Cd.ToString(), v => v.Desc);
+
+            }
+
+            dataDictionary = dataDictionary ?? new Dictionary<string, string>();
+
+            onResultFetch?.Invoke(dataDictionary);
+            return dataDictionary;
+        }
+
         public async Task<Dictionary<string, string>> GetFormCodesLookup(Action<Dictionary<string, string>> onResultFetch = null)
         {
             string token = _httpContext.Session.GetString("access_token");
@@ -184,6 +262,26 @@ namespace SynapseStudioWeb.AppCode
 
                     _httpContext.Session.SetObject(SynapseSession.FormsLkpKey, dataDictionary);
                 }
+            }
+
+            dataDictionary = dataDictionary ?? new Dictionary<string, string>();
+
+            onResultFetch?.Invoke(dataDictionary);
+            return dataDictionary;
+        }
+
+
+        public async Task<Dictionary<string, string>> GetLatestFormCodesLookup(Action<Dictionary<string, string>> onResultFetch = null)
+        {
+            string token = _httpContext.Session.GetString("access_token");
+
+            var dataDictionary = new Dictionary<string, string>();
+
+            var dataLkp = await DataService.TerminologyAPIService.GetFormCodes(token);
+
+            if (dataLkp.IsCollectionValid())
+            {
+                dataDictionary = dataLkp.Where(rec => rec.Recordstatus == 1 && (rec.IsLatest == true || rec.IsLatest.HasValue == false)).ToDictionary(k => k.Cd.ToString(), v => v.Desc);
             }
 
             dataDictionary = dataDictionary ?? new Dictionary<string, string>();

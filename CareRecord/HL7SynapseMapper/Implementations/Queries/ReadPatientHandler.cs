@@ -38,10 +38,10 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
         private const string SearchKeyIdentifier = "search_patient";
 
         private IServiceProvider _provider;
-        private IReadOnlyRepository<entitystore_CorePerson1> _storeCorePersonRepo;
+        private IReadOnlyRepository<entitystorematerialised_CorePerson> _storeCorePersonRepo;
         private IFHIRParam _fhirParam;
 
-        public ReadPatientHandler(IServiceProvider provider, IMapper mapper, IReadOnlyRepository<entitystore_CorePerson1> storeCorePersonRepo, IGenericSearchRepository genericSearchRepo) : base(provider, mapper, genericSearchRepo)
+        public ReadPatientHandler(IServiceProvider provider, IMapper mapper, IReadOnlyRepository<entitystorematerialised_CorePerson> storeCorePersonRepo, IGenericSearchRepository genericSearchRepo) : base(provider, mapper, genericSearchRepo)
         {
             this._provider = provider;
             this._storeCorePersonRepo = storeCorePersonRepo;
@@ -76,7 +76,7 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
             return resourceData;
         }
 
-        private entitystore_CorePerson1 CheckInEntityStore(IFHIRParam fhirParam)
+        private entitystorematerialised_CorePerson CheckInEntityStore(IFHIRParam fhirParam)
         {
             return _storeCorePersonRepo.ItemsAsReadOnly.Where(p => p.PersonId == fhirParam.ResourceId).OrderByDescending(x => x.Sequenceid).FirstOrDefault();
         }
@@ -92,7 +92,7 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
             {
                 new SynapseSearchTerm($"personIdData.{nameof(entitystorematerialised_CorePersonidentifier.Idtypecode)}", DefaultSearchExpressionProvider.EqualsOperator, this._defaultHospitalRefNo, new DefaultSearchExpressionProvider()),
 
-                new SynapseSearchTerm($"personIdData.{nameof(entitystorematerialised_CorePerson.PersonId)}", StringSearchExpressionProvider.EqualsOperator, _fhirParam.ResourceId, new StringSearchExpressionProvider())
+                new SynapseSearchTerm($"personIdData.{nameof(entitystorematerialised_CorePersonidentifier.Idnumber)}", DefaultSearchExpressionProvider.EqualsOperator, _fhirParam.ResourceId, new DefaultSearchExpressionProvider())
             };
 
             return searchTerms;

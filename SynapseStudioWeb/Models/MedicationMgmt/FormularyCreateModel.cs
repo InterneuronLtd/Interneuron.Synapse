@@ -152,6 +152,8 @@ namespace SynapseStudioWeb.Models.MedicationMgmt
 
         public bool IsCustomControlledDrug { get; set; }
 
+        public bool IsPrescriptionPrintingRequired { get; set; }
+
         public List<CodeNameSelectorModel> Diluents { get; set; }
 
         public bool IsIndicationMandatory { get; set; }

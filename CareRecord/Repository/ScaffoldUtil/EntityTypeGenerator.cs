@@ -22,7 +22,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
+//using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -30,12 +30,14 @@ using System.Text.RegularExpressions;
 
 namespace Interneuron.CareRecord.Repository
 {
-    public class EntityTypeGenerator : CSharpEntityTypeGenerator
+    public class EntityTypeGenerator //: CSharpEntityTypeGenerator
     {
-        public EntityTypeGenerator(ICSharpHelper helper)
-          : base(helper)
+        public EntityTypeGenerator()//ICSharpHelper helper)
+          //: base(helper)
         {
         }
+
+        /* 
 
         public override string WriteCode(IEntityType type, string @namespace, bool useDataAnnotations)
         {
@@ -196,5 +198,7 @@ namespace Interneuron.CareRecord.Repository
 
             return code;
         }
+
+        */
     }
 }

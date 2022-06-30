@@ -36,8 +36,8 @@ namespace Interneuron.CareRecord.HL7SynapseService.Interfaces
         {
             if (typeName.EqualsIgnoreCase("custom_observation"))
             {
-                var readHandler = this._provider.GetService(typeof(ReadObservationHandler)) as ReadObservationHandler;
-                return readHandler;
+                //var readHandler = this._provider.GetService(typeof(ReadObservationHandler)) as ReadObservationHandler;
+                //return readHandler;
             }
             return null;
         }

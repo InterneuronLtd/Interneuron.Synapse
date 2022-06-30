@@ -19,7 +19,7 @@
 
 
 ﻿using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
+//using Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Interneuron.CareRecord.Repository
@@ -28,8 +28,8 @@ namespace Interneuron.CareRecord.Repository
     {
         public void ConfigureDesignTimeServices(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<ICSharpEntityTypeGenerator, EntityTypeGenerator>();
-            serviceCollection.AddSingleton<ICSharpDbContextGenerator, DBContextGenerator>();
+            //serviceCollection.AddSingleton<ICSharpEntityTypeGenerator, EntityTypeGenerator>();
+            //serviceCollection.AddSingleton<ICSharpDbContextGenerator, DBContextGenerator>();
         }
     }
 }

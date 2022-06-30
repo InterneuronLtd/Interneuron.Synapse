@@ -54,8 +54,7 @@ namespace Interneuron.CareRecord.API.AppCode.Formatters
             Binary binary = new Binary
             {
                 ContentType = contentType,
-                //Content = memoryStream.ToArray()
-                Data = memoryStream.ToArray()
+                Content = memoryStream.ToArray()
             };
 
             return await InputFormatterResult.SuccessAsync(binary);

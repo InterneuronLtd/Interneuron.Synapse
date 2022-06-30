@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_LocalDemo1Exportentity1111 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_LocalDemo1Exportentity1111 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string Demo1Exportentity1111Id { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }

@@ -26,6 +26,7 @@ namespace Interneuron.CareRecord.Model.DomainModels
     public partial class baseview_PatientbannerColumn2 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string PersonId { get; set; }
+        public string EncounterId { get; set; }
         public DateTime? Datefinished { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }

@@ -45,7 +45,17 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Extensions
 
             if (type.IsNotEmpty() && type.EqualsIgnoreCase("result"))
             {
-                return typeof(Observation);
+                return typeof(DiagnosticReport);
+            }
+
+            if (type.IsNotEmpty() && type.EqualsIgnoreCase("procedure"))
+            {
+                return typeof(Procedure);
+            }
+
+            if (type.IsNotEmpty() && type.EqualsIgnoreCase("report"))
+            {
+                return typeof(DiagnosticReport);
             }
 
 

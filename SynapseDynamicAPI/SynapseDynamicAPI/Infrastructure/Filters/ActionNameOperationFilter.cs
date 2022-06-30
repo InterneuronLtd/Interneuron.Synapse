@@ -19,6 +19,7 @@
 
 
 ﻿using Interneuron.Common.Extensions;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace SynapseDynamicAPI.Infrastructure.Filters
     //Not being used - to change the endpoint name - only for reference
     public class ActionNameOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             context.ApiDescription.RelativePath = ((Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor)context.ApiDescription.ActionDescriptor).ActionName;
 
@@ -48,18 +49,18 @@ namespace SynapseDynamicAPI.Infrastructure.Filters
 
     public class ActionNameOperationFilter1 : IDocumentFilter
     {
-        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
         {
             swaggerDoc.Paths.Each(p =>
             {
 
-                if (p.Value != null)
-                {
-                    if (p.Value.Delete is Swashbuckle.AspNetCore.Swagger.Operation op)
-                    {
-                        //p.key = $"/{op.OperationId}";
-                    }
-                }
+                //if (p.Value != null)
+                //{
+                //    if (p.Value.Delete is Swashbuckle.AspNetCore.Swagger.Operation op)
+                //    {
+                //        //p.key = $"/{op.OperationId}";
+                //    }
+                //}
             });
             if (context != null && context.ApiDescriptions != null)
             {

@@ -19,6 +19,7 @@
 
 
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace SynapseDynamicAPI.Infrastructure.Filters
 {
     public class AuthorizeCheckOperationFilter : IOperationFilter
     {
-        public void Apply(Operation operation, OperationFilterContext context)
+        public void Apply(OpenApiOperation operation, OperationFilterContext context)
         {
             // Check for authorize attribute
             var hasAuthorize = context.MethodInfo.DeclaringType.GetCustomAttributes(true).OfType<AuthorizeAttribute>().Any() ||
@@ -36,16 +37,14 @@ namespace SynapseDynamicAPI.Infrastructure.Filters
 
             if (!hasAuthorize) return;
 
-            operation.Responses.TryAdd("401", new Response { Description = "Unauthorized" });
-            operation.Responses.TryAdd("403", new Response { Description = "Forbidden" });
+            operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
 
-            operation.Security = new List<IDictionary<string, IEnumerable<string>>>
-            {
-                new Dictionary<string, IEnumerable<string>>
-                {
-                    { "oauth2", new [] { "dynamicapi" } }
-                }
-            };
+            OpenApiSecurityRequirement securityRequirement = new OpenApiSecurityRequirement();
+            securityRequirement.Add(new OpenApiSecurityScheme() { Type = SecuritySchemeType.OAuth2 }, new[] { "dynamicapi" });
+
+
+            operation.Security = new List<OpenApiSecurityRequirement> { securityRequirement };
         }
     }
 }

@@ -299,5 +299,106 @@ namespace SynapseDynamicAPI.Services
             }
             return retVal;
         }
+
+        public static NpgsqlConnection GetPGLock(string lockId)
+        {
+            var getAdvisoryLockCmd = $"SELECT pg_try_advisory_lock(hashtext('{lockId}'))";
+
+            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable("connectionString_SynapseDataStore"));
+
+            //NpgsqlConnection con = new NpgsqlConnection("Server=interneuron-ind-db-test.cjdliyabgdwt.ap-south-1.rds.amazonaws.com;User Id=Inddbtestadmin;Password=N3ur0n!inddbtest;Database=DEV_synapse;Port=5432;");
+            //NpgsqlConnection con = new NpgsqlConnection("Server=localhost;Port=5433;User Id=postgres;Password=password;");
+
+            try
+            {
+                con.Open();
+
+                var commandQuery = new NpgsqlCommand(getAdvisoryLockCmd, con);
+                var acquireResult = commandQuery.ExecuteScalar();
+                if (acquireResult != null && bool.TryParse(acquireResult.ToString(), out var islockAcquired) && islockAcquired)
+                {
+                    return con;
+                }
+            }
+            catch (Exception e)
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    ReleasePGLockAndCloseConnection(lockId, con);
+                }
+                LogSQLError(getAdvisoryLockCmd, e.StackTrace, e.Message, e.Source, System.Guid.NewGuid().ToString(), "getlock:" + lockId);
+            }
+
+            if (con.State == ConnectionState.Open)
+            {
+                con.Close();
+                con.Dispose();
+
+            }
+            return null;
+        }
+
+        public static NpgsqlConnection GetPGLockWithWait(string lockId)
+        {
+            var getAdvisoryLockCmd = $"SELECT pg_advisory_lock(hashtext('{lockId}'))";
+
+            NpgsqlConnection con = new NpgsqlConnection(Environment.GetEnvironmentVariable("connectionString_SynapseDataStore"));
+            //NpgsqlConnection con = new NpgsqlConnection("Server=interneuron-ind-db-test.cjdliyabgdwt.ap-south-1.rds.amazonaws.com;User Id=Inddbtestadmin;Password=N3ur0n!inddbtest;Database=DEV_synapse;Port=5432;");
+            // NpgsqlConnection con = new NpgsqlConnection("Server=localhost;Port=5433;User Id=postgres;Password=password;");
+
+            try
+            {
+                con.Open();
+                var commandQuery = new NpgsqlCommand(getAdvisoryLockCmd, con);
+                commandQuery.ExecuteNonQuery();
+                return con;
+
+            }
+            catch (Exception e)
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    ReleasePGLockAndCloseConnection(lockId, con);
+                }
+                LogSQLError(getAdvisoryLockCmd, e.StackTrace, e.Message, e.Source, System.Guid.NewGuid().ToString(), "getlock:" + lockId);
+            }
+
+            return null;
+        }
+
+
+        public static bool ReleasePGLockAndCloseConnection(string lockId, NpgsqlConnection con)
+        {
+            var releaseAdvisoryLockCmd = $"SELECT pg_advisory_unlock(hashtext('{lockId}'))";
+
+            try
+            {
+                var commandQuery = new NpgsqlCommand(releaseAdvisoryLockCmd, con);
+                var releaseResult = commandQuery.ExecuteScalar();
+                con.Close();
+                con.Dispose();
+                if (releaseResult != null && bool.TryParse(releaseResult.ToString(), out var islockReleased) && islockReleased)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                if (con.State == ConnectionState.Open)
+                {
+                    con.Close();
+                    con.Dispose();
+                }
+                LogSQLError(releaseAdvisoryLockCmd, e.StackTrace, e.Message, e.Source, System.Guid.NewGuid().ToString(), "releaselock:" + lockId);
+            }
+
+            return false;
+
+        }
+
     }
 }

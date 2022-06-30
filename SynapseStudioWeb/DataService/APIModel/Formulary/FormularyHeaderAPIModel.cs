@@ -213,6 +213,8 @@ namespace SynapseStudioWeb.DataService.APIModel
         public bool? Prescribable { get; set; }
         public string PrescribableSource { get; set; }
         public bool? IsCustomControlledDrug { get; set; }
+
+        public bool? IsPrescriptionPrintingRequired { get; set; }
         public List<FormularyLookupAPIModel> Diluents { get; set; }
         public bool? IsIndicationMandatory { get; set; }
 

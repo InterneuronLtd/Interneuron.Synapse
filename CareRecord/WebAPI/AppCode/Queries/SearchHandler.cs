@@ -42,7 +42,7 @@ namespace Interneuron.CareRecord.API.AppCode
 
         public FhirResponse Handle(IKey key, SearchParams searchParameters)
         {
-            Validate.TypeName(key.TypeName);
+            //Validate.TypeName(key.TypeName);
 
             Validate.HasSearchParameters(searchParameters);
 

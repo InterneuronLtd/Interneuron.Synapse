@@ -3,16 +3,15 @@
     ViewData["Title"] = "Manage External users";
 }
 
-
+<h2>Manage Role - External Users</h2>
 <div class="well" style="margin-top: 15px;">
     <div class="row">
         <div class="col-md-12">
-
             <div class="col-lg-3">
-                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRole?id=" +ViewBag.roleid)>Local Logins</a>
+                <a class="btn btn-sm btn-primary btn-block" href=@("../ManageRole/" + ViewBag.roleid)>Local Logins</a>
             </div>
             <div class="col-lg-3">
-                <a class="btn btn-sm btn-primary btn-block" href=@("ManageRoleScope?id=" +ViewBag.roleid)>Scopes</a>
+                <a class="btn btn-sm btn-primary btn-block" href=@("../ManageRoleScope/" + ViewBag.roleid)>Scopes</a>
             </div>
         </div>
     </div>
@@ -99,7 +98,7 @@
                                             <td>@item["ExternalSubjectId"]</td>
                                             <td>@item["Idp"]</td>
                                             <td>
-                                                <a href=@("RemoveExternaluser?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
+                                                <a href=@("../RemoveExternaluser?id=" + item["Id"]+"&roleid=" +ViewBag.roleid) style="float:left;color:#2a9fd6">Remove</a>
                                             </td>
                                         </tr>
                                     }

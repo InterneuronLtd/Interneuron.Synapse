@@ -33,5 +33,6 @@ namespace SynapseStudioWeb.DataService.APIModel
         public long? Isidprev { get; set; }
         public short? Invalid { get; set; }
         public string Nm { get; set; }
+        public bool? IsLatest { get; set; }
     }
 }

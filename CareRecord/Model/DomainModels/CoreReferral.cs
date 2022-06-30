@@ -77,5 +77,26 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Specialty { get; set; }
         public string Priority { get; set; }
         public string Source { get; set; }
+        public string Referralstatus { get; set; }
+        public string Priorityidentifiercode { get; set; }
+        public string Priorityidentifiertext { get; set; }
+        public string Priorityidentifiersystem { get; set; }
+        public string Typecode { get; set; }
+        public string Typetext { get; set; }
+        public string Typesystem { get; set; }
+        public string Disposition { get; set; }
+        public string Category { get; set; }
+        public string Referralnumber { get; set; }
+        public string Reasoncode { get; set; }
+        public string Reasontext { get; set; }
+        public string Reasonsystem { get; set; }
+        public string Referralreference { get; set; }
+        public string Cancertypecode { get; set; }
+        public string Cancertypetext { get; set; }
+        public string Cancertypesystem { get; set; }
+        public string Closurereasoncode { get; set; }
+        public string Closurereasonctext { get; set; }
+        public string Closurereasoncsystem { get; set; }
+        public DateTime? Expirationdate { get; set; }
     }
 }

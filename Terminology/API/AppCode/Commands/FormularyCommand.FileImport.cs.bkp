@@ -1,0 +1,242 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.FDBAPI.Client.DataModels;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary.Requests;
+//using Interneuron.Terminology.API.AppCode.Queries;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Commands
+//{
+//    public partial class FormularyCommand : IFormularyCommands
+//    {
+//        public async Task<CreateEditFormularyDTO> FileImport(CreateEditFormularyRequest request)
+//        {
+//            var response = new CreateEditFormularyDTO
+//            {
+//                Status = new StatusDTO { StatusCode = TerminologyConstants.STATUS_SUCCESS, StatusMessage = "", ErrorMessages = new List<string>() },
+//                Data = new List<FormularyDTO>()
+//            };
+
+//            var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//            var uniqueCodes = request.RequestsData.Select(req => req.Code).Distinct().ToArray();
+
+//            //Considering non-deleted records only for comparision
+//            var existingFormulariesFromDB = formularyRepo.GetLatestFormulariesByCodes(uniqueCodes, true).ToList();
+
+//            var codesAndProductTypes = request.RequestsData.Select(res => new FDBDataRequest()
+//            {
+//                ProductType = res.ProductType,
+//                ProductCode = res.Code
+//            }).ToList();
+
+//            await PreFillFDBRecords1(codesAndProductTypes);
+
+//            await PopulateFormularyDataForFileImport(request, existingFormulariesFromDB, formularyRepo, response);
+
+//            return response;
+//        }
+
+//        private async Task PopulateFormularyDataForFileImport(CreateEditFormularyRequest request, List<FormularyHeader> existingFormulariesFromDB, IFormularyRepository<FormularyHeader> formularyRepo, CreateEditFormularyDTO response)
+//        {
+//            var toBeSavedFormularies = new List<FormularyHeader>();
+
+//            var contextAndNonContextFields = GetContextFieldsFromConfig();
+
+//            var contextFields = contextAndNonContextFields.comparableContextFields;// GetComparableContextFields();//this should come from Configuration
+
+//            var nonContextFields = contextAndNonContextFields.comparableNonContextFields;// GetComparableNonContextFields();
+
+//            var suppliers = await GetSuppliers();
+
+//            foreach (var requestData in request.RequestsData)
+//            {
+//                var formularyHeader = CreateHeader(requestData);
+
+//                PopulateFormularyDetail(requestData.Detail, formularyHeader);
+
+//                //await AddFDBDetailsForProductTypeAndCode(formularyHeader);
+//                AddFDBDetailsForProductTypeAndCode(formularyHeader);
+
+//                RefactorDetail(formularyHeader, suppliers);
+
+//                PopulateFormularyRouteDetailsForFileImport(requestData, formularyHeader);
+
+//                await PopulateFormularyFromDMDForFileImport(requestData, formularyHeader);
+
+//                //PopulateFormularyIndications(requestData, formularyHeader);
+
+//                //PopulateFormularyAdditionalCodes(requestData, formularyHeader);
+
+//                //PopulateFormularyOntologyFormDetails(requestData, formularyHeader);
+
+//                if (existingFormulariesFromDB.IsCollectionValid())
+//                {
+//                    //Consider non-archived and non-deleted records. Records returned from Db are only in non-deleted status only
+//                    var onlyValidSameRecordsInDb = existingFormulariesFromDB.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED).ToList();
+//                    if (onlyValidSameRecordsInDb.IsCollectionValid())
+//                    {
+//                        CheckForDuplicationAndSave(formularyRepo, formularyHeader, onlyValidSameRecordsInDb, response, toBeSavedFormularies, contextFields, nonContextFields);
+//                    }
+//                    else
+//                    {
+//                        formularyRepo.Add(formularyHeader);
+//                        toBeSavedFormularies.Add(formularyHeader);
+//                    }
+//                }
+//                else
+//                {
+//                    formularyRepo.Add(formularyHeader);
+//                    toBeSavedFormularies.Add(formularyHeader);
+//                }
+//            }
+
+//            formularyRepo.SaveChanges();
+
+//            if (toBeSavedFormularies.IsCollectionValid())
+//            {
+//                toBeSavedFormularies.Each(saveFormulary =>
+//                {
+//                    RePopulateDTOPostSave(saveFormulary, response);
+//                });
+//            }
+//        }
+
+//        private void PopulateFormularyRouteDetailsForFileImport(FormularyDTO request, FormularyHeader formularyHeader)
+//        {
+//            if (request.FormularyRouteDetails.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyRouteDetail = _mapper.Map<List<FormularyRouteDetail>>(request.FormularyRouteDetails);// new List<FormularyRouteDetail>();
+
+//                formularyHeader.FormularyRouteDetail.Each(rt =>
+//                {
+//                    rt.FormularyVersionId = formularyHeader.FormularyVersionId;
+//                    rt.Source = rt.Source.IsNotEmpty() ? rt.Source.Trim() : TerminologyConstants.DMD_DATA_SRC;//For file import the source should be DMD
+//                });
+
+//                //request.FormularyRouteDetails.Each(rt =>
+//                //{
+//                //    var routeDetail = new FormularyRouteDetail
+//                //    {
+//                //        FormularyVersionId = formularyHeader.FormularyVersionId,
+
+//                //        RouteCd = rt.RouteCd,
+//                //        RouteFieldTypeCd = rt.RouteFieldTypeCd,
+//                //        Source = rt.Source.IsNotEmpty() ? rt.Source.Trim() : TerminologyConstants.DMD_ROUTE_SRC//For file import the source should be DMD
+//                //    };
+
+//                //    formularyHeader.FormularyRouteDetail.Add(routeDetail);
+//                //});
+//            }
+//        }
+
+//        private void RefactorDetail(FormularyHeader formularyHeader, Dictionary<string, string> suppliers)
+//        {
+//            if (formularyHeader == null || !formularyHeader.FormularyDetail.IsCollectionValid()) return;
+
+//            var detail = formularyHeader.FormularyDetail.First();
+
+
+//            if (suppliers.IsCollectionValid() && detail.SupplierCd.IsNotNull() && string.Compare(formularyHeader.ProductType, "amp", true) == 0 && suppliers.ContainsKey(detail.SupplierCd))
+//            {
+//                formularyHeader.Name = $"{formularyHeader.Name} ({suppliers[detail.SupplierCd]})";
+//            }
+//        }
+
+
+//        private async Task<Dictionary<string, string>> GetSuppliers()
+//        {
+//            var suppliersLookup = new Dictionary<string, string>();
+//            //Query and get DMD information
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+//            var suppliers = await dmdQueries.GetLookup<DmdLookupSupplierDTO>(LookupType.DMDSupplier);
+
+//            if (!suppliers.IsCollectionValid()) return suppliersLookup;
+
+//            suppliers.Each(sup =>
+//            {
+//                suppliersLookup[sup.Cd] = sup.Desc;
+//            });
+
+//            return suppliersLookup;
+//        }
+
+//        private async Task PopulateFormularyFromDMDForFileImport(FormularyDTO requestData, FormularyHeader formularyHeader)
+//        {
+//            if (requestData == null || requestData.Code.IsNull()) return;
+
+//            //Query and get DMD information
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+
+//            var dmdResults = await dmdQueries.GetDMDFullDataForCodes(new string[] { requestData.Code });
+
+//            if (!dmdResults.IsCollectionValid()) return;
+
+//            var detail = formularyHeader.FormularyDetail.First();
+
+//            dmdResults.Each(dmdRes =>
+//            {
+//                detail.DoseFormCd = dmdRes.DoseForm?.Cd?.ToString();
+//                detail.UnitDoseFormSize = dmdRes.Udfs;
+//                detail.UnitDoseFormUnits = dmdRes.UnitDoseUOM?.Cd;
+//                detail.UnitDoseUnitOfMeasureCd = dmdRes.UnitDoseFormSizeUOM?.Cd;
+//                detail.BasisOfPreferredNameCd = dmdRes.BasisOfName?.Cd?.ToString();
+//                detail.CurrentLicensingAuthorityCd = dmdRes.LicensingAuthority?.Cd?.ToString();
+//                detail.EmaAdditionalMonitoring = dmdRes.Ema;
+//                detail.ParallelImport = dmdRes.ParallelImport;
+
+//                detail.SugarFree = dmdRes.SugF;
+//                detail.GlutenFree = dmdRes.GluF;
+//                detail.PreservativeFree = dmdRes.PresF;
+//                detail.CfcFree = dmdRes.CfcF;
+
+//                if (dmdRes.OntologyFormRoutes.IsCollectionValid())
+//                {
+//                    formularyHeader.FormularyOntologyForm = new List<FormularyOntologyForm>();
+
+//                    dmdRes.OntologyFormRoutes.Each(ont =>
+//                    {
+
+//                        var ontoForm = new FormularyOntologyForm
+//                        {
+//                            FormCd = ont.Cd?.ToString(),
+//                            FormularyVersionId = formularyHeader.FormularyVersionId
+//                        };
+
+//                        formularyHeader.FormularyOntologyForm.Add(ontoForm);
+//                    });
+//                }
+
+//                if (requestData.ProductType.IsNotNull() && string.Compare(requestData.ProductType, "vmp", true) == 0)
+//                {
+//                    if (dmdRes.VMPIngredients.IsCollectionValid())
+//                    {
+//                        formularyHeader.FormularyIngredient = new List<FormularyIngredient>();
+
+//                        dmdRes.VMPIngredients.Each(ing =>
+//                        {
+//                            var ingredient = new FormularyIngredient();
+
+//                            ingredient.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                            ingredient.BasisOfPharmaceuticalStrengthCd = ing.BasisStrntcd.ToString();
+//                            ingredient.IngredientCd = ing.Isid;
+//                            ingredient.StrengthValueNumerator = ing.StrntNmrtrVal?.ToString();
+//                            ingredient.StrengthValueNumeratorUnitCd = ing.StrntNmrtrUomcd;
+//                            ingredient.StrengthValueDenominator = ing.StrntDnmtrVal?.ToString();
+//                            ingredient.StrengthValueDenominatorUnitCd = ing.StrntDnmtrUomcd;
+
+//                            formularyHeader.FormularyIngredient.Add(ingredient);
+//                        });
+//                    }
+//                }
+//            });
+//        }
+//    }
+//}

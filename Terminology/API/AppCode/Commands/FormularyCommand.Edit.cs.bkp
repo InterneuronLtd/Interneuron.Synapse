@@ -1,0 +1,253 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary.Requests;
+//using Interneuron.Terminology.API.AppCode.Extensions;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Commands
+//{
+//    public partial class FormularyCommand
+//    {
+//        public CreateEditFormularyDTO UpdateFormulary(CreateEditFormularyRequest request)
+//        {
+//            var response = new CreateEditFormularyDTO
+//            {
+//                Status = new StatusDTO { StatusCode = TerminologyConstants.STATUS_SUCCESS, StatusMessage = "", ErrorMessages = new List<string>() },
+//                Data = new List<FormularyDTO>()
+//            };
+
+//            var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//            var uniqueIds = request.RequestsData.Select(req => req.FormularyVersionId).Distinct().ToList();
+
+//            var uniqueCodes = request.RequestsData.Select(req => req.Code).Distinct().ToList();
+
+//            //Considering non-deleted records only, for this comparision
+//            var existingFormulariesFromDB = formularyRepo.GetFormularyListForIds(uniqueIds, true).ToList();
+
+//            var existingFormulariesByCodes = formularyRepo.GetLatestFormulariesByCodes(uniqueCodes.ToArray(), true).ToList();
+
+//            var toBeSavedFormularies = new List<FormularyHeader>();
+
+//            var contextAndNonContextFields = GetContextFieldsFromConfig();
+
+//            var contextFields = contextAndNonContextFields.comparableContextFields;// GetComparableContextFields();//this should come from Configuration
+
+//            var nonContextFields = contextAndNonContextFields.comparableNonContextFields;// GetComparableNonContextFields();
+
+//            var hasValidRecords = ValidateAllRecords(existingFormulariesFromDB, uniqueIds, response);
+
+//            if (!hasValidRecords)
+//            {
+//                response.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                return response;
+//            }
+
+//            var newRecordsPersisted = new List<FormularyHeader>();
+
+//            uniqueIds.Each(recId =>
+//            {
+//                var updatedRecord = UpdateRecord(recId, request, existingFormulariesFromDB, formularyRepo, existingFormulariesByCodes);
+
+//                newRecordsPersisted.Add(updatedRecord);
+//            });
+
+//            formularyRepo.SaveChanges();
+
+//            if (newRecordsPersisted.IsCollectionValid())
+//            {
+//                newRecordsPersisted.Each(rec =>
+//                {
+//                    RePopulateDTOPostSave(rec, response);
+//                });
+//            }
+
+//            return response;
+//        }
+
+//        private FormularyHeader UpdateRecord(string recId, CreateEditFormularyRequest request, List<FormularyHeader> existingFormulariesFromDB, IFormularyRepository<FormularyHeader> formularyRepo, List<FormularyHeader> existingFormulariesByCodes)
+//        {
+//            var recFromRequest = request.RequestsData.Single(req => req.FormularyVersionId == recId);
+
+//            if (recFromRequest.RecStatusCode == TerminologyConstants.RECORDSTATUS_APPROVED)
+//            {
+//                //Check if there are any other latest records with same code apart from the current record
+//                var duplicateFormulariesWithSameCodeFromDb = existingFormulariesByCodes.Where(dup => dup.Code == recFromRequest.Code && dup.FormularyVersionId != recId && dup.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED && dup.IsLatest == true);
+
+//                //Mark those other records as deleted
+//                if (duplicateFormulariesWithSameCodeFromDb.IsCollectionValid())
+//                {
+//                    DeleteRecordWithSimilarCodeForEdit(duplicateFormulariesWithSameCodeFromDb, formularyRepo);
+//                }
+//            }
+
+//            var existingRecFromDb = existingFormulariesFromDB.Single(req => req.FormularyVersionId == recId);
+
+//            var newRecord = CreateHeaderForEdit(recFromRequest, existingRecFromDb);
+
+//            PopulateFormularyDetailForEdit(recFromRequest.Detail, newRecord, existingRecFromDb);
+
+//            PopulateFormularyRouteDetailsForEdit(recFromRequest, newRecord);
+
+//            PopulateFormularyIngredients(recFromRequest, newRecord);
+
+//            //PopulateFormularyIndications(recFromRequest, newRecord);
+
+//            //PopulateFormularyOntologyFormDetails(recFromRequest, newRecord);
+
+//            PopulateFormularyAdditionalCodes(recFromRequest, newRecord);
+
+//            formularyRepo.Add(newRecord);
+
+//            existingRecFromDb.IsLatest = false;
+//            formularyRepo.Update(existingRecFromDb);
+
+//            return newRecord;
+//        }
+
+//        private void PopulateFormularyDetailForEdit(FormularyDetailDTO detailInrequest, FormularyHeader formularyHeader, FormularyHeader existingRecFromDb)
+//        {
+//            formularyHeader.FormularyDetail = new List<FormularyDetail>();
+
+//            var formularyDetail = _mapper.Map<FormularyDetail>(detailInrequest);
+
+//            formularyDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//            formularyDetail.RnohFormularyStatuscd = formularyDetail.RnohFormularyStatuscd ?? TerminologyConstants.FORMULARYSTATUS_FORMULARY;
+
+//            //Rule: If Prescribing status has been set based on the rules - it cannnot be overridden
+//            if (existingRecFromDb.FormularyDetail.IsCollectionValid())
+//            {
+//                var existingDetail = existingRecFromDb.FormularyDetail.First();
+//                if(existingDetail.PrescribableSource == TerminologyConstants.DMD_DATA_SRC)//If set from DMD - Cannot be overridden
+//                {
+//                    formularyDetail.PrescribableSource = existingDetail.PrescribableSource;
+//                    formularyDetail.Prescribable = existingDetail.Prescribable;
+//                }
+//            }
+
+//            formularyHeader.FormularyDetail.Add(formularyDetail);
+//        }
+
+//        private void PopulateFormularyRouteDetailsForEdit(FormularyDTO request, FormularyHeader formularyHeader)
+//        {
+//            if (request.FormularyRouteDetails.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyRouteDetail = _mapper.Map<List<FormularyRouteDetail>>(request.FormularyRouteDetails);// new List<FormularyRouteDetail>();
+
+//                formularyHeader.FormularyRouteDetail.Each(routeDetail =>
+//                {
+//                    routeDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//                    routeDetail.Source = routeDetail.Source.IsNotEmpty() ? routeDetail.Source.Trim() : TerminologyConstants.MANUAL_DATA_SRC;//No Source mentioned and hence manual
+//                });
+
+//                //request.FormularyRouteDetails.Each(rt =>
+//                //{
+//                //    var routeDetail = new FormularyRouteDetail();
+//                //    routeDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                //    routeDetail.RouteCd = rt.RouteCd;
+//                //    routeDetail.RouteFieldTypeCd = rt.RouteFieldTypeCd;
+//                //    routeDetail.Source = rt.Source.IsNotEmpty() ? rt.Source.Trim() : TerminologyConstants.MANUAL_ROUTE_SRC;//No Source mentioned and hence manual
+
+//                //    formularyHeader.FormularyRouteDetail.Add(routeDetail);
+//                //});
+//            }
+//        }
+
+//        private bool DeleteRecordWithSimilarCodeForEdit(IEnumerable<FormularyHeader> duplicateFormulariesWithSameCodeFromDb, IFormularyRepository<FormularyHeader> formularyRepo)
+//        {
+//            //Update the old records with IsLatest = false
+//            //Add new record with Delete status
+
+//            if (!duplicateFormulariesWithSameCodeFromDb.IsCollectionValid()) return false;
+
+//            duplicateFormulariesWithSameCodeFromDb.Each(dup =>
+//            {
+//                if (dup != null)
+//                {
+//                    var rootEntityIdentifier = Guid.NewGuid().ToString();
+
+//                    var dupAsNew = dup.CloneFormulary(_mapper, rootEntityIdentifier);
+
+//                    dupAsNew.RecStatusCode = TerminologyConstants.RECORDSTATUS_DELETED;
+//                    dupAsNew.RecStatuschangeDate = DateTime.UtcNow;
+//                    dupAsNew.FormularyVersionId = rootEntityIdentifier;
+//                    dupAsNew.IsLatest = true;
+//                    dupAsNew.VersionId = dup.VersionId + 1;
+
+//                    formularyRepo.Add(dupAsNew);
+
+//                    dup.IsLatest = false;
+//                    formularyRepo.Update(dup);
+//                }
+//            });
+
+//            return true;
+//        }
+
+//        private FormularyHeader CreateHeaderForEdit(FormularyDTO request, FormularyHeader existingRecFromDb)
+//        {
+//            var formularyHeader = new FormularyHeader();
+
+//            formularyHeader = _mapper.Map(request, formularyHeader);
+
+//            formularyHeader.FormularyId = existingRecFromDb.FormularyId;
+//            formularyHeader.VersionId = existingRecFromDb.VersionId + 1;
+//            formularyHeader.FormularyVersionId = Guid.NewGuid().ToString();
+//            formularyHeader.IsLatest = true;
+//            formularyHeader.IsDuplicate = existingRecFromDb.IsDuplicate;// false;//Need to check
+//            formularyHeader.DuplicateOfFormularyId = existingRecFromDb.DuplicateOfFormularyId;
+
+//            formularyHeader.Code = request.Code?.Trim();
+//            formularyHeader.Name = request.Name?.Trim();
+//            formularyHeader.ParentCode = request.ParentCode?.Trim();
+//            formularyHeader.ParentName = null;
+//            formularyHeader.ParentProductType = request.ParentProductType?.Trim();
+//            formularyHeader.ProductType = request.ProductType?.Trim();
+
+//            formularyHeader.RecSource = existingRecFromDb.RecSource?.Trim();// "Manual";
+//            formularyHeader.RecStatusCode = request.RecStatusCode ?? TerminologyConstants.RECORDSTATUS_DRAFT;//Draft
+//            formularyHeader.RecStatuschangeMsg = request.RecStatuschangeMsg;
+//            formularyHeader.RecStatuschangeDate = DateTime.UtcNow;
+
+//            formularyHeader.VtmId = request.VtmId.IsNotEmpty() ? request.VtmId.Trim() : ((string.Compare(request.ParentProductType, "vtm", true) == 0) ? request.ParentCode : null);
+
+//            formularyHeader.VmpId = request.VmpId.IsNotEmpty() ? request.VmpId.Trim() : ((string.Compare(formularyHeader.ParentProductType, "vmp", true) == 0) ? request.ParentCode : null);
+
+//            return formularyHeader;
+//        }
+
+
+//        private bool ValidateAllRecords(List<FormularyHeader> existingFormulariesFromDB, List<string> uniqueIds, CreateEditFormularyDTO response)
+//        {
+//            if (!existingFormulariesFromDB.IsCollectionValid())
+//            {
+//                response.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                response.Status.ErrorMessages.Add(NO_MATCHING_RECORDS_MSG);
+
+//                return false;
+//            }
+
+//            var hasAnyInvalidRecs = false;
+//            uniqueIds.Each(recId =>
+//            {
+//                //Is this record exists and is a latest record in the system - It might have updated already in the system - Do not update then
+//                if (!existingFormulariesFromDB.Any(rec => rec.FormularyVersionId == recId && rec.IsLatest.GetValueOrDefault() == true))
+//                {
+//                    hasAnyInvalidRecs = true;
+//                    response.Status.ErrorMessages.Add("This record does not exist or is not latest in the system: Id: {0}".ToFormat(recId));
+//                }
+//            });
+
+//            if (hasAnyInvalidRecs) return false;
+//            return true;
+//        }
+//    }
+//}

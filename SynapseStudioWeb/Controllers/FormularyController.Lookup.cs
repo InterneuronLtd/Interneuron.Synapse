@@ -77,6 +77,22 @@ namespace SynapseStudioWeb.Controllers
         }
 
         [HttpGet]
+        [Route("Formulary/SearchLatestIngredients")]
+        public async Task<JsonResult> SearchLatestIngredients(string q)
+        {
+            var ingredients = await _formularyLookupService.GetLatestIngredientsLookup();
+
+            if (!ingredients.IsCollectionValid())
+            {
+                return Json(null);
+            }
+
+            var matchingIngredients = ingredients.Where((kv) => kv.Value.Contains(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            return Json(matchingIngredients);
+        }
+
+        [HttpGet]
         [Route("Formulary/SearchAMPByName")]
         public async Task<IActionResult> SearchAMPByName(string q)
         {
@@ -234,6 +250,30 @@ namespace SynapseStudioWeb.Controllers
         }
 
         [HttpGet]
+        [Route("Formulary/SearchLatestUOMs")]
+        public async Task<JsonResult> SearchLatestUOMs(string q)
+        {
+            var uoms = await _formularyLookupService.GetLatestUOMsLookup();
+
+            if (!uoms.IsCollectionValid())
+            {
+                return Json(null);
+            }
+
+            var matchingStartsWith = uoms.Where((kv) => kv.Value.StartsWith(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            var matchingContains = uoms.Where((kv) => kv.Value.Contains(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            if (!matchingStartsWith.IsCollectionValid()) return Json(matchingContains);
+            if (!matchingContains.IsCollectionValid()) return Json(matchingStartsWith);
+
+            matchingStartsWith.AddRange(matchingContains);
+            matchingStartsWith = matchingStartsWith.Distinct(rec => rec.id).ToList();
+
+            return Json(matchingStartsWith);
+        }
+
+        [HttpGet]
         [Route("Formulary/SearchSuppliers")]
         public async Task<JsonResult> SearchSuppliers(string q)
         {
@@ -258,10 +298,53 @@ namespace SynapseStudioWeb.Controllers
         }
 
         [HttpGet]
+        [Route("Formulary/SearchLatestSuppliers")]
+        public async Task<JsonResult> SearchLatestSuppliers(string q)
+        {
+            var uoms = await _formularyLookupService.GetLatestSuppliersLookup();
+
+            if (!uoms.IsCollectionValid())
+            {
+                return Json(null);
+            }
+
+            var matchingStartsWith = uoms.Where((kv) => kv.Value.StartsWith(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            var matchingContains = uoms.Where((kv) => kv.Value.Contains(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            if (!matchingStartsWith.IsCollectionValid()) return Json(matchingContains);
+            if (!matchingContains.IsCollectionValid()) return Json(matchingStartsWith);
+
+            matchingStartsWith.AddRange(matchingContains);
+            matchingStartsWith = matchingStartsWith.Distinct(rec => rec.id).ToList();
+
+            return Json(matchingStartsWith);
+        }
+
+        [HttpGet]
         [Route("Formulary/SearchFormulations")]
         public async Task<JsonResult> SearchFormulations(string q)
         {
             var forms = await _formularyLookupService.GetFormCodesLookup();
+
+            if (!forms.IsCollectionValid()) return Json(null);
+
+            var matchingFormsStartsWith = forms.Where((kv) => kv.Value.StartsWith(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+            var matchingFormsContains = forms.Where((kv) => kv.Value.Contains(q, StringComparison.OrdinalIgnoreCase)).Select(kv => new { id = kv.Key, name = kv.Value }).ToList();
+
+            if (!matchingFormsStartsWith.IsCollectionValid()) return Json(matchingFormsContains);
+            if (!matchingFormsContains.IsCollectionValid()) return Json(matchingFormsStartsWith);
+
+            matchingFormsStartsWith.AddRange(matchingFormsContains);
+            matchingFormsStartsWith = matchingFormsStartsWith.Distinct(rec => rec.id).ToList();
+            return Json(matchingFormsStartsWith);
+        }
+
+        [HttpGet]
+        [Route("Formulary/SearchLatestFormulations")]
+        public async Task<JsonResult> SearchLatestFormulations(string q)
+        {
+            var forms = await _formularyLookupService.GetLatestFormCodesLookup();
 
             if (!forms.IsCollectionValid()) return Json(null);
 
@@ -363,6 +446,42 @@ namespace SynapseStudioWeb.Controllers
         }
 
         [HttpGet]
+        [Route("Formulary/SearchLatestRoutes")]
+        public async Task<JsonResult> SearchLatestRoutes(string q)
+        {
+            if (q.IsEmpty()) return Json(null);
+
+            var routesInSession = await _formularyLookupService.GetLatestRoutesLookup();
+
+            if (!routesInSession.IsCollectionValid())
+            {
+                string token = HttpContext.Session.GetString("access_token");
+                var routes = await TerminologyAPIService.GetRoutes(token);
+
+                if (!routes.IsCollectionValid())
+                    return Json(null);
+
+                var matchingRoutes = routes.Where(rec => rec.Desc.ToLower().StartsWith(q.ToLower())).ToList();
+
+                if (!matchingRoutes.IsCollectionValid())
+                    return Json(null);
+
+                var routesAsCodeName = matchingRoutes.Select(rec => new CodeNameSelectorModel { Id = rec.Cd, Name = rec.Desc, IsReadonly = false, Source = TerminologyConstants.MANUAL_DATA_SOURCE, SourceColor = TerminologyConstants.GetColorForRecordSource(TerminologyConstants.MANUAL_DATA_SOURCE) });
+
+                return Json(routesAsCodeName);
+            }
+
+            var matchingRoutesInSession = routesInSession.Where(rec => rec.Value.ToLower().StartsWith(q.ToLower())).ToList();
+
+            if (!matchingRoutesInSession.IsCollectionValid())
+                return Json(null);
+
+            var routesAsLkp = matchingRoutesInSession.Select(rec => new CodeNameSelectorModel { Id = rec.Key, Name = rec.Value, IsReadonly = false, Source = TerminologyConstants.MANUAL_DATA_SOURCE, SourceColor = TerminologyConstants.GetColorForRecordSource(TerminologyConstants.MANUAL_DATA_SOURCE) });
+
+            return Json(routesAsLkp);
+        }
+
+        [HttpGet]
         [Route("Formulary/SearchIndication")]
         public async Task<JsonResult> SearchIndication(string q)
         {
@@ -378,8 +497,6 @@ namespace SynapseStudioWeb.Controllers
 
             return Json(resultsAsCodeText);
         }
-
-
 
         [HttpGet]
         [Route("Formulary/SearchTradeFamily")]
@@ -445,6 +562,53 @@ namespace SynapseStudioWeb.Controllers
             additionalCodeSystems.Insert(0, new FormularyLookupAPIModel { Cd = "", Desc = "Please Select", Recordstatus = 1 });
 
             return Json(additionalCodeSystems);
+        }
+
+        [HttpGet]
+        [Route("Formulary/SearchIndicationWithDisorderAndFinding")]
+        public async Task<JsonResult> SearchIndicationWithDisorderAndFinding(string q)
+        {
+            const string disorderSemanticTag = "disorder";
+
+            var token = HttpContext.Session.GetString("access_token");
+
+            var disorderSearchResult = await TerminologyAPIService.SearchSNOMEDData(q, disorderSemanticTag, token);
+
+            IEnumerable<CodeNameSelectorModel> disorderResultsAsCodeText = Enumerable.Empty<CodeNameSelectorModel>();
+
+            if (disorderSearchResult == null || !disorderSearchResult.Data.IsCollectionValid())
+            {
+                disorderResultsAsCodeText = Enumerable.Empty<CodeNameSelectorModel>();
+            }
+
+            if (disorderSearchResult != null && disorderSearchResult.Data.IsCollectionValid())
+            {
+                disorderResultsAsCodeText = disorderSearchResult.Data.Select(rec => new CodeNameSelectorModel { Id = rec.Code, Name = rec.Term, IsReadonly = false, Source = TerminologyConstants.MANUAL_DATA_SOURCE, SourceColor = TerminologyConstants.GetColorForRecordSource(TerminologyConstants.MANUAL_DATA_SOURCE) });
+            }
+            
+
+            const string findingSemanticTag = "finding";
+
+            var findingSearchResult = await TerminologyAPIService.SearchSNOMEDData(q, findingSemanticTag, token);
+
+            IEnumerable<CodeNameSelectorModel> findingResultsAsCodeText = Enumerable.Empty<CodeNameSelectorModel>();
+
+            if (findingSearchResult == null || !findingSearchResult.Data.IsCollectionValid())
+            {
+                findingResultsAsCodeText = Enumerable.Empty<CodeNameSelectorModel>();
+            }
+
+
+            if (findingSearchResult != null && findingSearchResult.Data.IsCollectionValid())
+            {
+                findingResultsAsCodeText = findingSearchResult.Data.Select(rec => new CodeNameSelectorModel { Id = rec.Code, Name = rec.Term, IsReadonly = false, Source = TerminologyConstants.MANUAL_DATA_SOURCE, SourceColor = TerminologyConstants.GetColorForRecordSource(TerminologyConstants.MANUAL_DATA_SOURCE) });
+            }
+
+            IEnumerable<CodeNameSelectorModel> combinedResultsAsCodeText = Enumerable.Empty<CodeNameSelectorModel>();
+
+            combinedResultsAsCodeText = disorderResultsAsCodeText.Concat(findingResultsAsCodeText);
+
+            return Json(combinedResultsAsCodeText);
         }
 
     }

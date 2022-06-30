@@ -35,21 +35,205 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
         public EncounterMapperProfile()
         {
             CreateMap<entitystorematerialised_CoreEncounter, Encounter>()
-                .ForMember(dest => dest.Meta, opt => opt.MapFrom(src => GetMeta(src)))
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.EncounterId))
+                //.ForMember(dest => dest.Meta, opt => opt.MapFrom(src => GetMeta(src)))
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Visitnumber))
                 .ForMember(dest => dest.Identifier, opt => opt.MapFrom(src => GetEncounterIdentifiers(src)))
                 .ForMember(dest => dest.Period, opt => opt.MapFrom(src => GetEncounterPeriod(src)))
-                .ForMember(dest => dest.ReasonCode, opt => opt.MapFrom(src => GetReasonCodes(src)))
+                .ForMember(dest => dest.Reason, opt => opt.MapFrom(src => GetReasonCodes(src)))
                 .ForMember(dest => dest.Hospitalization, opt => opt.MapFrom(src => GetHospitalizationDetails(src)))
                 .ForMember(dest => dest.Class, opt => opt.MapFrom(src => GetClass(src)))
                 .ForMember(dest => dest.Status, opt => {
                     opt.PreCondition(src => !src.Episodestatuscode.IsEmpty());
                     opt.MapFrom(src => GetStatus(src)); 
-                });
+                })
+                .ForMember(dest => dest.Location, opt => {
+                    opt.PreCondition(src => src.Assignedpatientlocationpointofcare.IsNotEmpty());
+                    opt.MapFrom(src => GetPatientLocation(src));
+                })
+                .ForMember(dest => dest.Participant, opt => opt.MapFrom(src => GetParticipants(src)))
+                .ForMember(dest => dest.Extension, opt => opt.MapFrom(src => GetEncounterExtensions(src)));
 
             CreateMap<entitystorematerialised_CorePersonidentifier, Encounter>()
                 // .ForMember(dest => dest.Subject, opt => opt.MapFrom(src => GetSubject(src)));
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom<EncounterSubjectResolver>());
+        }
+
+        private List<Extension> GetEncounterExtensions(entitystorematerialised_CoreEncounter src)
+        {
+            var extensions = new List<Extension>();
+
+            if (src.Hospitalservicecode.IsNotEmpty())
+            {
+                var extension = new Extension();
+                extension.Url = "Specialty";
+                extension.Value = new FhirString(src.Hospitalservicetext);
+                extension.ElementId = src.Hospitalservicecode;
+
+                extensions.Add(extension);
+            }
+
+            return extensions;
+        }
+
+        private List<ParticipantComponent> GetParticipants(entitystorematerialised_CoreEncounter src)
+        {
+            var participants = new List<ParticipantComponent>();
+
+            if (src.Consultingdoctortext.IsNotEmpty())
+            {
+                var participant = new ParticipantComponent();
+                participant.Type = new List<CodeableConcept>()
+                {
+                    new CodeableConcept
+                    { 
+                        Coding = new List<Coding>() 
+                        {
+                            new Coding
+                            {
+                                System = "http://hl7.org/fhir/v3/ParticipationType",
+                                Code = "CON",
+                                Display = "consultant"
+                            }
+                        }                    
+                    }
+                };
+                participant.Individual = new ResourceReference
+                {                    
+                    Identifier = new Identifier 
+                    {
+                        Value = src.Consultingdoctorid
+                    },
+                    Display = src.Consultingdoctortext
+                };
+                participants.Add(participant);
+            }
+
+            if (src.Referringdoctortext.IsNotEmpty())
+            {
+                var participant = new ParticipantComponent();
+                participant.Type = new List<CodeableConcept>()
+                {
+                    new CodeableConcept
+                    {
+                        Coding = new List<Coding>()
+                        {
+                            new Coding
+                            {
+                                System = "http://hl7.org/fhir/v3/ParticipationType",
+                                Code = "REF",
+                                Display = "referrer"
+                            }
+                        }
+                    }
+                };
+                participant.Individual = new ResourceReference
+                {
+                    Identifier = new Identifier
+                    {
+                        Value = src.Referringdoctorid
+                    },
+                    Display = src.Referringdoctortext
+                };
+                participants.Add(participant);
+            }
+
+            if (src.Admittingdoctortext.IsNotEmpty())
+            {
+                var participant = new ParticipantComponent();
+                participant.Type = new List<CodeableConcept>()
+                {
+                    new CodeableConcept
+                    {
+                        Coding = new List<Coding>()
+                        {
+                            new Coding
+                            {
+                                System = "http://hl7.org/fhir/v3/ParticipationType",
+                                Code = "ADM",
+                                Display = "admitter"
+                            }
+                        }
+                    }
+                };
+                participant.Individual = new ResourceReference
+                {
+                    Identifier = new Identifier
+                    {
+                        Value = src.Admittingdoctorcode
+                    },
+                    Display = src.Admittingdoctortext
+                };
+                participants.Add(participant);
+            }
+
+            return participants;
+        }
+
+        private List<LocationComponent> GetPatientLocation(entitystorematerialised_CoreEncounter src)
+        {
+            var locations = new List<LocationComponent>();
+
+            if (src.Assignedpatientlocationpointofcare.IsNotEmpty())
+            {
+                var location = new LocationComponent();
+                location.Location = new ResourceReference();
+                location.Location.Identifier = new Identifier { Value = src.Assignedpatientlocationpointofcare };
+                location.Location.Display = src.Assignedpatientlocationpointofcare;
+                location.Extension = new List<Extension>()
+                {
+                    new Extension
+                    {
+                        Value = new Identifier
+                        {
+                            Value = "Ward",                            
+                        },
+                        ElementId = "wa"
+                    }
+                };
+                locations.Add(location);
+            }
+
+            if (src.Assignedpatientlocationbay.IsNotEmpty())
+            {
+                var location = new LocationComponent();
+                location.Location = new ResourceReference();
+                location.Location.Identifier = new Identifier { Value = src.Assignedpatientlocationbay };
+                location.Location.Display = src.Assignedpatientlocationbay;
+                location.Extension = new List<Extension>()
+                {
+                    new Extension
+                    {
+                        Value = new Identifier
+                        {
+                            Value = "Bay",
+                        },
+                        ElementId = "bay"
+                    }
+                };
+                locations.Add(location);
+            }
+
+            if (src.Assignedpatientlocationbed.IsNotEmpty())
+            {
+                var location = new LocationComponent();
+                location.Location = new ResourceReference();
+                location.Location.Identifier = new Identifier { Value = src.Assignedpatientlocationbed };
+                location.Location.Display = src.Assignedpatientlocationbed;
+                location.Extension = new List<Extension>()
+                {
+                    new Extension
+                    {
+                        Value = new Identifier
+                        {
+                            Value = "Bed",
+                        },
+                        ElementId = "bd"
+                    }
+                };
+                locations.Add(location);
+            }
+
+            return locations;
         }
 
         private Meta GetMeta(entitystorematerialised_CoreEncounter src)
@@ -137,8 +321,9 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
 
             if (coreEncounter.IsNull()) return period;
 
-            period.Start = Convert.ToString(coreEncounter.Admitdatetime);
-            period.End = Convert.ToString(coreEncounter.Dischargedatetime);
+            period.Start = Convert.ToString(new FhirDateTime(coreEncounter.Admitdatetime.Value));
+            if (coreEncounter.Dischargedatetime != null)
+                period.End = Convert.ToString(new FhirDateTime(coreEncounter.Dischargedatetime.Value));
 
             return period;
         }
@@ -155,10 +340,14 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
 
             Coding coding = new Coding
             {
-                Code = coreEncounter.Admitreasoncode
+                System = "LocalCode",
+                Code = coreEncounter.Admitreasoncode,
+                Display = coreEncounter.Admitreasontext
             };
 
             reasonCode.Coding.Add(coding);
+
+            reasonCodes.Add(reasonCode);
 
             return reasonCodes;
         }
@@ -208,14 +397,8 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
         {
             var subject = new ResourceReference
             {
-                Identifier = new Identifier(),
-                Reference = "Patient"
+                Reference = $"Patient/{personIdentifier.Idnumber}"
             };
-
-            if (personIdentifier.IsNull()) return subject;
-
-            subject.Identifier.Value = personIdentifier.Idnumber;
-            subject.Identifier.System = personIdentifier.Idtypecode ?? _defaultHospitalRefNo;
 
             return subject;
         }

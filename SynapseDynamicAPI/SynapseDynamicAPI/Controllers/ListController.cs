@@ -1516,8 +1516,12 @@ namespace SynapseDynamicAPI.Controllers
             foreach (DataRow row in dtEntityRelation.Rows)
             {
                 string parentEntity = Convert.ToString(row["parentsynapsenamespacename"]) + "_" + Convert.ToString(row["parententityname"]);
+
+                if (!contextQuery.ToString().Contains($"{entities.GetValueOrDefault(parentEntity)}.{Convert.ToString(row["parentattributename"])}"))
+                {
+                    contextQuery.Append(entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]) + ", ");
+                }               
                 
-                contextQuery.Append(entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]) + ", ");
             }
 
             string selectParameters = contextQuery.ToString().TrimEnd(", ");
@@ -1541,9 +1545,12 @@ namespace SynapseDynamicAPI.Controllers
 
                 string parentEntity = Convert.ToString(row["parentsynapsenamespacename"]) + "_" + Convert.ToString(row["parententityname"]);
 
-                contextQuery.Append(" left join entitystorematerialised." + parentEntity + " as " + entities.GetValueOrDefault(parentEntity));
+                if (!contextQuery.ToString().Contains($"left join entitystorematerialised.{parentEntity} as {entities.GetValueOrDefault(parentEntity)}"))
+                {
+                    contextQuery.Append(" left join entitystorematerialised." + parentEntity + " as " + entities.GetValueOrDefault(parentEntity));
 
-                contextQuery.Append(" on " + entities.GetValueOrDefault(entity) + "." + Convert.ToString(row["parentattributename"]) + " = " + entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]));
+                    contextQuery.Append(" on " + entities.GetValueOrDefault(entity) + "." + Convert.ToString(row["parentattributename"]) + " = " + entities.GetValueOrDefault(parentEntity) + "." + Convert.ToString(row["parentattributename"]));                
+                }
             }
 
             contextQuery.Append(" where " + entities.First().Value + "." + defaultcontextfield + " = @defaultcontextfield");

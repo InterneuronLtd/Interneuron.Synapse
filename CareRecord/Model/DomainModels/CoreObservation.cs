@@ -47,5 +47,9 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Value { get; set; }
         public bool? Hasbeenammended { get; set; }
         public string Eventcorrelationid { get; set; }
+        public string Route { get; set; }
+        public string Note { get; set; }
+        public string Device { get; set; }
+        public string Method { get; set; }
     }
 }

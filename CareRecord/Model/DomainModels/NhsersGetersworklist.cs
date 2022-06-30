@@ -25,5 +25,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
 {
     public partial class baseview_NhsersGetersworklist : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
+        public string Ubrn { get; set; }
     }
 }

@@ -100,8 +100,9 @@ namespace SynapseStudioWeb.Controllers
             DataServices.executeSQLStatement(query, parameters, "connectionString_SynapseIdentityStore");
             return RedirectToAction("SecurityManager", "Security");
         }
+
         [HttpPost]
-        public ActionResult CreatRole(IFormCollection collection)
+        public ActionResult CreateRole(IFormCollection collection)
         {
             var RoleName = collection["RoleName"];
             string sql = "INSERT INTO \"AspNetRoles\"(\"Id\", \"Name\", \"NormalizedName\") VALUES (@id, @name, @nname);";
@@ -125,22 +126,30 @@ namespace SynapseStudioWeb.Controllers
         }
         public IActionResult ManageRole(string id)
         {
-            ViewBag.SearchLogin = new DataTable();
-            ViewBag.Userroles = LoadUsersInRole(id);
-            ViewBag.roleid = id;
+            InitViewBag(id, new DataTable(), LoadUsersInRole(id));
             return View();
         }
-      
+
         public ActionResult SearchLogin(IFormCollection collection)
         {
             var Logintext = collection["Logintext"];
             var roleid = collection["roleid"];
             string sql = "SELECT \"Id\", \"UserName\" FROM \"AspNetUsers\" where \"Id\" not in (select \"UserId\" from \"AspNetUserLogins\" ) and \"UserName\" like '" + Logintext.ToString() + "%'  ;";
             DataSet ds = DataServices.DataSetFromSQL(sql, null, "connectionString_SynapseIdentityStore");
+
+            InitViewBag(roleid, ds.Tables[0], LoadUsersInRole(roleid.ToString()));
             ViewBag.SearchLogin = ds.Tables[0];
             ViewBag.Userroles = LoadUsersInRole(roleid.ToString());
             ViewBag.roleid = roleid;
-            return View("ManageRole");
+            return View("ManageRole", new { id = roleid });
+            
+            //return RedirectToAction("ManageRole", "RoleManager", new { id = roleid });
+        }
+        private void InitViewBag(string id, DataTable searchLoginData, DataTable usersInRoleData)
+        {
+            ViewBag.SearchLogin = new DataTable();
+            ViewBag.Userroles = LoadUsersInRole(id);
+            ViewBag.roleid = id;
         }
 
         public DataTable LoadUsersInRole(string id)
@@ -168,7 +177,7 @@ namespace SynapseStudioWeb.Controllers
             {
                
             }
-            return RedirectToAction("ManageRole", "RoleManager", new { @id = roleid });
+            return RedirectToAction("ManageRole", "RoleManager", new { id = roleid });
         }
 
         public IActionResult RemoveRole(string id, string roleid)
@@ -188,7 +197,8 @@ namespace SynapseStudioWeb.Controllers
 
             }
 
-            return RedirectToAction("ManageRole", "RoleManager", new { @id = roleid });
+            //return View("ManageRole", new { @id = roleid });
+            return RedirectToAction("ManageRole", "RoleManager", new { id = roleid });
         }
 
         public IActionResult ManageRoleScope(string id)
@@ -231,7 +241,7 @@ namespace SynapseStudioWeb.Controllers
             {
               
             }
-            return RedirectToAction("ManageRoleScope", "RoleManager", new { @id = roleid });
+            return RedirectToAction("ManageRoleScope", "RoleManager", new { id = roleid });
         }
      
         [NonAction]
@@ -269,7 +279,7 @@ namespace SynapseStudioWeb.Controllers
                
             }
 
-            return RedirectToAction("ManageRoleScope", "RoleManager", new { @id = roleid });
+            return RedirectToAction("ManageRoleScope", "RoleManager", new { id = roleid });
         }
 
 
@@ -281,7 +291,7 @@ namespace SynapseStudioWeb.Controllers
             ViewBag.rolescope = ToSelectList(dt, "Id", "Name");
             ViewBag.ExpernalUsers = LoadExterusermapped(id);
             ViewBag.roleid = id;
-            return View();
+            return View("ManageExternalusers");
         }
         protected DataTable LoadExterusermapped(string id)
         {
@@ -317,7 +327,7 @@ namespace SynapseStudioWeb.Controllers
             {
 
             }
-            return RedirectToAction("ManageExternalusers", "RoleManager", new { @id = roleid });
+            return RedirectToAction("ManageExternalusers", new { id = roleid });
         }
 
         public IActionResult RemoveExternaluser(string id, string roleid)
@@ -338,10 +348,8 @@ namespace SynapseStudioWeb.Controllers
 
             }
 
-            return RedirectToAction("ManageExternalusers", "RoleManager", new { @id = roleid });
+            //return ManageExternalusers(roleid);
+            return RedirectToAction("ManageExternalusers" , new { id = roleid });
         }
-
-
-
     }
 }

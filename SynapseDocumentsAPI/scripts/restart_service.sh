@@ -1,0 +1,2 @@
+sudo systemctl restart synapsedocumentsapi.service
+sudo systemctl restart nginx

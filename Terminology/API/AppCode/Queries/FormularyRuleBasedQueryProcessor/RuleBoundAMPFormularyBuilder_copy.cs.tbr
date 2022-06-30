@@ -1,0 +1,133 @@
+﻿//using AutoMapper;
+//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using Interneuron.Terminology.Model.Search;
+//using Microsoft.CodeAnalysis.CSharp.Syntax;
+//using System;
+//using System.Collections.Concurrent;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Queries
+//{
+//    public class RuleBoundAMPFormularyBuilder : RuleBoundBaseFormularyBuilder
+//    {
+//        private FormularyHeader _parentFormulary;
+//        private FormularyDTO _parentFormularyDTO;
+
+//        public RuleBoundAMPFormularyBuilder(IServiceProvider serviceProvider) : base(serviceProvider)
+//        {
+
+//        }
+
+//        public override void CreateIngredients()
+//        {
+//            if (_parentFormularyDTO != null && _parentFormularyDTO.FormularyIngredients.IsCollectionValid())
+//            {
+//                _formularyDTO.FormularyIngredients = _parentFormularyDTO.FormularyIngredients;
+//            }
+//        }
+
+//        public override void CreateRouteDetails()
+//        {
+//            //Routes will be associated to the AMP and hence below lines are commented
+//            //Convert routes of current record from DAO to DTO
+
+//            //if (_parentFormularyDTO != null && _parentFormularyDTO.FormularyRouteDetails.IsCollectionValid())
+//            //{
+//            //    _formularyDTO.FormularyRouteDetails = _parentFormularyDTO.FormularyRouteDetails?.Distinct(rec => rec.RouteCd).ToList();
+//            //}
+
+//            //Convert routes of current record at AMP level from DAO to DTO
+//            base.CreateRouteDetails();
+//        }
+
+//        public override async Task CreateBase(FormularyHeader formularyDAO)
+//        {
+//            _formularyDAO = formularyDAO;
+
+//            _formularyDTO = this._mapper.Map<FormularyDTO>(formularyDAO);
+
+//            var repo = this._provider.GetService(typeof(IFormularyRepository<FormularyBasicSearchResultModel>)) as IFormularyRepository<FormularyBasicSearchResultModel>;
+
+//            var nodes = await repo.GetFormularyAncestorForCodes(new string[] { _formularyDAO.Code });
+
+//            if (nodes.IsCollectionValid())
+//            {
+//                var parentId = nodes.Where(rec => string.Compare(rec.ProductType, "VMP", true) == 0)?.Select(rec => rec.FormularyVersionId)?.SingleOrDefault();
+
+//                if (parentId.IsNotEmpty())
+//                {
+//                    var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//                    _parentFormulary = formularyRepo.GetFormularyListForIds(new List<string> { parentId })?.SingleOrDefault();
+
+//                    _parentFormularyDTO = _mapper.Map<FormularyDTO>(_parentFormulary);
+                    
+//                    _formularyDTO.VtmId = _parentFormularyDTO.VtmId;
+//                    _formularyDTO.VmpId = _parentFormularyDTO.Code;
+
+//                    var detail = _parentFormulary.FormularyDetail.FirstOrDefault();
+
+//                    if (detail != null)
+//                        _parentFormularyDTO.Detail = _mapper.Map<FormularyDetailDTO>(detail);
+
+//                    if (_parentFormulary.FormularyIngredient.IsCollectionValid())
+//                        _parentFormularyDTO.FormularyIngredients = _mapper.Map<List<FormularyIngredientDTO>>(_parentFormulary.FormularyIngredient);
+
+//                    if (_parentFormulary.FormularyRouteDetail.IsCollectionValid())
+//                        _parentFormularyDTO.FormularyRouteDetails = _mapper.Map<List<FormularyRouteDetailDTO>>(_parentFormulary.FormularyRouteDetail);
+
+//                    if (_parentFormulary.FormularyAdditionalCode.IsCollectionValid())
+//                        _parentFormularyDTO.FormularyAdditionalCodes = _mapper.Map<List<FormularyAdditionalCodeDTO>>(_parentFormulary.FormularyAdditionalCode);
+//                }
+//            }
+//        }
+
+//        public override void CreateDetails()
+//        {
+//            base.CreateDetails();
+
+//            var formularyDetailObj = _formularyDTO?.Detail;
+
+//            var parentFormularyDetailObj = _parentFormularyDTO?.Detail;
+
+//            if (_formularyDTO.IsNotNull() && parentFormularyDetailObj != null)
+//            {
+//                formularyDetailObj.UnitDoseUnitOfMeasureCd = parentFormularyDetailObj?.UnitDoseUnitOfMeasureCd;
+//                formularyDetailObj.FormCd = parentFormularyDetailObj.FormCd;
+//                formularyDetailObj.DoseFormCd = parentFormularyDetailObj.DoseFormCd;
+//                formularyDetailObj.RoundingFactorCd = parentFormularyDetailObj.RoundingFactorCd;
+//                formularyDetailObj.UnitDoseFormSize = parentFormularyDetailObj.UnitDoseFormSize;
+//                formularyDetailObj.UnitDoseFormUnits = parentFormularyDetailObj.UnitDoseFormUnits;
+//                formularyDetailObj.UnitDoseUnitOfMeasureCd = parentFormularyDetailObj.UnitDoseUnitOfMeasureCd;
+//                formularyDetailObj.CustomWarnings = parentFormularyDetailObj.CustomWarnings;
+//                formularyDetailObj.Endorsements = parentFormularyDetailObj.Endorsements;
+//                formularyDetailObj.MedusaPreparationInstructions = parentFormularyDetailObj.MedusaPreparationInstructions;
+//                formularyDetailObj.BlackTriangle = parentFormularyDetailObj.BlackTriangle;
+//                formularyDetailObj.BlackTriangleSource = parentFormularyDetailObj.BlackTriangleSource;
+//                formularyDetailObj.CfcFree = parentFormularyDetailObj.CfcFree;
+//                formularyDetailObj.ControlledDrugCategoryCd = parentFormularyDetailObj.ControlledDrugCategoryCd;
+//                formularyDetailObj.ControlledDrugCategorySource = parentFormularyDetailObj.ControlledDrugCategorySource;
+//                formularyDetailObj.CriticalDrug = parentFormularyDetailObj.CriticalDrug;
+//                formularyDetailObj.Cytotoxic = parentFormularyDetailObj.Cytotoxic;
+//                formularyDetailObj.GlutenFree = parentFormularyDetailObj.GlutenFree;
+//                formularyDetailObj.HighAlertMedication = parentFormularyDetailObj.HighAlertMedication;
+//                formularyDetailObj.HighAlertMedicationSource = parentFormularyDetailObj.HighAlertMedicationSource;
+//                formularyDetailObj.PreservativeFree = parentFormularyDetailObj.PreservativeFree;
+//                formularyDetailObj.SugarFree = parentFormularyDetailObj.SugarFree;
+//                formularyDetailObj.TitrationTypeCd = parentFormularyDetailObj.TitrationTypeCd;
+//                formularyDetailObj.IgnoreDuplicateWarnings = parentFormularyDetailObj.IgnoreDuplicateWarnings;
+//            }
+
+
+//            if (formularyDetailObj.IsNotNull())
+//            {
+//                _formularyDTO.Detail = this._mapper.Map<FormularyDetailDTO>(formularyDetailObj);
+//            }
+//        }
+//    }
+//}

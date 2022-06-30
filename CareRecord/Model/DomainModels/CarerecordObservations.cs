@@ -42,8 +42,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Oxygensaturations { get; set; }
         public string Height { get; set; }
         public string Weight { get; set; }
-        public string Bristolstoolchart { get; set; }
-        public string Painscore { get; set; }
         public string Painscoreatrest { get; set; }
         public string Painscorewithmovement { get; set; }
         public string Isonoxygen { get; set; }
@@ -51,9 +49,17 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Device { get; set; }
         public string Inspireoxygenpercentage { get; set; }
         public string Inspireoxygenlitrepermin { get; set; }
-        public string Glucose { get; set; }
         public string Earlywarningscore { get; set; }
+        public string Glucose { get; set; }
+        public string Respiratorydistress { get; set; }
         public string Escalationofcare { get; set; }
         public string Monitoring { get; set; }
+        public string Ispatientsick { get; set; }
+        public string Concernsaboutpatient { get; set; }
+        public string Couldbeinfection { get; set; }
+        public string Reasonfornotescalating { get; set; }
+        public string Escalatedtowhom { get; set; }
+        public string Monitoringcomments { get; set; }
+        public string Dfnconcern { get; set; }
     }
 }

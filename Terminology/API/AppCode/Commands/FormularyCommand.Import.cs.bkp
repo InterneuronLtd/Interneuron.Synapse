@@ -1,0 +1,1257 @@
+﻿//using AutoMapper;
+//using Interneuron.Common.Extensions;
+//using Interneuron.FDBAPI.Client;
+//using Interneuron.FDBAPI.Client.DataModels;
+//using Interneuron.Terminology.API.AppCode.Commands.ImportRules;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary;
+//using Interneuron.Terminology.API.AppCode.DTOs.SNOMED;
+//using Interneuron.Terminology.API.AppCode.Extensions;
+//using Interneuron.Terminology.API.AppCode.Queries;
+//using Interneuron.Terminology.Infrastructure;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using Microsoft.Extensions.Configuration;
+//using Newtonsoft.Json;
+//using System;
+//using System.Collections.Concurrent;
+//using System.Collections.Generic;
+//using System.Dynamic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Commands
+//{
+//    public partial class FormularyCommand : IFormularyCommands
+//    {
+//        const string INVALID_INPUT_MSG = "Invalid Input\n";
+
+//        const string DUPLICATE_MSG = "Record(s) with the same context details already exists in the System. Added the record as 'Duplicate'. Details - Code : {0}\n";
+
+//        const string COMPLETE_MATCHING_RECS_MSG = "Matching Code '{0}' already exists. The duplicate record has not been added";
+
+
+//        private IServiceProvider _provider;
+//        private IMapper _mapper;
+//        private IConfiguration _configuration;
+//        private APIRequestContext _requestContext;
+//        private IFormularyQueries _formularyQueries;
+//        private IDMDQueries _dMDQueries;
+//        private string _defaultFormularyStatusCode = TerminologyConstants.FORMULARYSTATUS_FORMULARY;
+//        private string _defaultRecordStatusCode = TerminologyConstants.RECORDSTATUS_DRAFT;
+//        private Dictionary<string, List<string>> _cautionsForCodes;
+//        private Dictionary<string, List<string>> _sideEffectsForCodes;
+//        private Dictionary<string, List<string>> _safetyMessagesForCodes;
+//        private Dictionary<string, List<FDBIdText>> _contraIndicationsForCodes;
+//        private Dictionary<string, List<FDBIdText>> _licensedUsesForCodes;
+//        private Dictionary<string, List<FDBIdText>> _unLicensedUsesForCodes;
+//        private Dictionary<string, bool?> _highRiskFlagForCodes;
+//        private Dictionary<string, (string, string)> _therapeuticClassForCodes;
+
+//        private Dictionary<string, bool> _blackTriangleFlagForCodes;
+//        private ConcurrentDictionary<string, List<DmdAmpDrugrouteDTO>> _dmdAMPRouteMappings;
+//        private ConcurrentDictionary<string, List<FormularyExcipient>> _dmdAMPExcipientsForCodes;
+//        private ConcurrentDictionary<string, List<FormularyAdditionalCode>> _dmdAdditionalCodesForCodes;
+//        private ConcurrentDictionary<string, SnomedTradeFamiliesDTO> _snomedTradeFamilyMappings;
+
+//        public FormularyCommand(IServiceProvider provider, IConfiguration configuration, IMapper mapper, APIRequestContext requestContext, IFormularyQueries formularyQueries, IDMDQueries dMDQueries)
+//        {
+//            _provider = provider;
+//            _mapper = mapper;
+//            _configuration = configuration;
+//            _requestContext = requestContext;
+//            _formularyQueries = formularyQueries;
+//            _dMDQueries = dMDQueries;
+//        }
+
+//        public async Task<ImportFormularyResultsDTO> ImportByCodes(List<string> dmdCodes, string defaultFormularyStatusCode = TerminologyConstants.FORMULARYSTATUS_FORMULARY, string defaultRecordStatusCode = TerminologyConstants.RECORDSTATUS_DRAFT)
+//        {
+//            _defaultFormularyStatusCode = defaultFormularyStatusCode;
+//            _defaultRecordStatusCode = defaultRecordStatusCode;
+
+//            var importFormularyDTO = new ImportFormularyResultsDTO()
+//            {
+//                Status = new StatusDTO { StatusCode = TerminologyConstants.STATUS_SUCCESS, StatusMessage = "", ErrorMessages = new List<string>() },
+//                DMDCodes = dmdCodes,
+//                Data = new List<FormularyDTO>()
+//            };//Status 2 = fail
+
+//            if (!dmdCodes.IsCollectionValid())
+//            {
+//                importFormularyDTO.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                importFormularyDTO.Status.ErrorMessages.Add(INVALID_INPUT_MSG);
+
+//                return importFormularyDTO;
+//            }
+//            var maxAllowedImport = _configuration.GetSection("TerminologyConfig").GetValue<int>("MaxAllowedImport");
+
+//            if (dmdCodes.Count > maxAllowedImport)
+//            {
+//                importFormularyDTO.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                const string MaxAllowedRecsMSG = "Cannot import more than {0} records.";
+//                importFormularyDTO.Status.ErrorMessages.Add(MaxAllowedRecsMSG.ToFormat(maxAllowedImport));
+//                return importFormularyDTO;
+//            }
+
+//            //Query and get DMD information
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+
+//            var dmdResults = await dmdQueries.GetDMDFullDataForCodes(dmdCodes.ToArray());
+
+//            if (!dmdResults.IsCollectionValid())
+//            {
+//                importFormularyDTO.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                importFormularyDTO.Status.ErrorMessages.Add(INVALID_INPUT_MSG);
+
+//                return importFormularyDTO;
+//            }
+
+//            var hasValidRecs = ValidateRecordsForImport(dmdResults, importFormularyDTO);
+
+//            if (!hasValidRecs)
+//            {
+//                importFormularyDTO.Status.StatusCode = TerminologyConstants.STATUS_BAD_REQUEST;
+//                return importFormularyDTO;
+//            }
+
+//            await PrefillDataForImport(dmdResults);
+
+//            HandleImportSave(dmdCodes, dmdResults, importFormularyDTO);
+
+//            return importFormularyDTO;
+//        }
+
+//        private bool ValidateRecordsForImport(List<DMDDetailResultDTO> dmdResults, ImportFormularyResultsDTO importFormularyDTO)
+//        {
+//            var uniqueCodes = dmdResults.Select(rec => rec.Code).ToList();
+//            if (!uniqueCodes.IsCollectionValid()) return false;
+
+//            //Check if there is any existing AMP which is in the draft status in this set of records
+//            var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//            var draftAmps = formularyRepo.ItemsAsReadOnly.Where(rec => rec.IsLatest == true && uniqueCodes.Contains(rec.Code) && rec.ProductType == "AMP" && rec.RecStatusCode == TerminologyConstants.RECORDSTATUS_DRAFT).ToList();
+//            if (draftAmps.IsCollectionValid())
+//            {
+//                importFormularyDTO.Status.ErrorMessages.Add("Cannot import records. There are already existing AMPs in the draft status.");
+//                return false;
+//            }
+
+//            return true;
+//        }
+
+//        private async Task PrefillDataForImport(List<DMDDetailResultDTO> dmdResults)
+//        {
+//            var codesAndProductTypes = dmdResults.Select(res => new FDBDataRequest()
+//            {
+//                ProductType = res.LogicalLevel.GetDMDLevelCodeByLogicalLevel(),
+//                ProductCode = res.Code
+//            }).ToList();
+
+//            AssignExcipients(dmdResults);
+
+//            await PrefillAdditionalCodesForDMDCodes(dmdResults);
+
+//            PrefillTradeFamiliesFromSNOMED(dmdResults);
+
+//            PrefillAllAMPMappedRoutesFromDMD(dmdResults);
+
+//            await PreFillFDBRecords1(codesAndProductTypes);
+//        }
+
+//        private void PrefillTradeFamiliesFromSNOMED(List<DMDDetailResultDTO> dmdResults)
+//        {
+//            _snomedTradeFamilyMappings = new ConcurrentDictionary<string, SnomedTradeFamiliesDTO>();
+//            var dmdCodes = dmdResults?.Select(rec => rec.Code).Distinct().ToList();
+
+//            if (!dmdCodes.IsCollectionValid()) return;
+
+//            var snomedCTQueries = this._provider.GetService(typeof(ISnomedCTQueries)) as ISnomedCTQueries;
+//            var tradeFamiliies = snomedCTQueries.GetTradeFamilyForConceptIds(dmdCodes);
+
+//            if (!tradeFamiliies.IsCollectionValid()) return;
+
+//            dmdCodes.AsParallel().Each(rec =>
+//            {
+//                var tradeFamilyForCode = tradeFamiliies?.FirstOrDefault(tf => tf.BrandedDrugId == rec);
+
+//                if (tradeFamilyForCode != null)
+//                {
+//                    _snomedTradeFamilyMappings[rec] = tradeFamilyForCode;
+//                }
+//            });
+//        }
+
+//        private async Task PrefillAdditionalCodesForDMDCodes(List<DMDDetailResultDTO> dmdResults)
+//        {
+//            _dmdAdditionalCodesForCodes = new ConcurrentDictionary<string, List<FormularyAdditionalCode>>();
+
+//            var dmdCodes = dmdResults?.Select(rec => rec.Code).Distinct().ToList();
+
+//            if (!dmdCodes.IsCollectionValid()) return;
+
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+
+//            var dmdATCCodes = await dmdQueries.GetAllATCCodesFromDMD();
+
+//            var dmdBNFCodes = await dmdQueries.GetAllBNFCodesFromDMD();
+
+//            if (!dmdATCCodes.IsCollectionValid() && !dmdBNFCodes.IsCollectionValid()) return;
+
+//            dmdCodes.AsParallel().Each(rec =>
+//            {
+//                var atcForDMD = dmdATCCodes?.Where(atc => atc.DmdCd == rec).ToList();
+//                var bnfsForDMD = dmdBNFCodes?.Where(atc => atc.DmdCd == rec).ToList();
+
+//                _dmdAdditionalCodesForCodes[rec] = new List<FormularyAdditionalCode>();
+
+//                if (atcForDMD.IsCollectionValid())
+//                {
+//                    var formularyAddnls = _mapper.Map<List<FormularyAdditionalCode>>(atcForDMD);
+//                    _dmdAdditionalCodesForCodes[rec].AddRange(formularyAddnls);
+//                }
+//                if (bnfsForDMD.IsCollectionValid())
+//                {
+//                    var formularyAddnls = _mapper.Map<List<FormularyAdditionalCode>>(bnfsForDMD);
+//                    _dmdAdditionalCodesForCodes[rec].AddRange(formularyAddnls);
+//                }
+//            });
+//        }
+
+//        private void AssignExcipients(List<DMDDetailResultDTO> dmdResults)
+//        {
+//            var dmdCodes = dmdResults.Where(rec => rec.LogicalLevel == 3)?.Select(rec => rec.Code).Distinct().ToList();//Only for AMPs
+
+//            _dmdAMPExcipientsForCodes = new ConcurrentDictionary<string, List<FormularyExcipient>>();
+
+//            if (!dmdCodes.IsCollectionValid()) return;
+
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+
+//            var dmdAMPExcipients = dmdQueries.GetAMPExcipientsForCodes(dmdCodes);
+
+//            if (dmdAMPExcipients.IsCollectionValid())
+//            {
+//                dmdAMPExcipients.AsParallel().Each(rec =>
+//                {
+//                    var formularyExcipient = _mapper.Map<FormularyExcipient>(rec);
+
+//                    if (_dmdAMPExcipientsForCodes.ContainsKey(rec.Apid))
+//                        _dmdAMPExcipientsForCodes[rec.Apid].Add(formularyExcipient);
+//                    else
+//                        _dmdAMPExcipientsForCodes[rec.Apid] = new List<FormularyExcipient> { formularyExcipient };
+//                });
+//            }
+//        }
+
+//        private void PrefillAllAMPMappedRoutesFromDMD(List<DMDDetailResultDTO> dmdResults)
+//        {
+//            var dmdCodes = dmdResults.Where(rec => rec.LogicalLevel == 3)?.Select(rec => rec.Code).Distinct().ToList();//Only for AMPs
+
+//            _dmdAMPRouteMappings = new ConcurrentDictionary<string, List<DmdAmpDrugrouteDTO>>();
+
+//            if (!dmdCodes.IsCollectionValid()) return;
+
+//            var dmdQueries = this._provider.GetService(typeof(IDMDQueries)) as IDMDQueries;
+
+//            var dmdAMPDrugRoutes = dmdQueries.GetAMPDrugRoutesForCodes(dmdCodes);
+
+//            if (!dmdAMPDrugRoutes.IsCollectionValid()) return;
+
+//            dmdAMPDrugRoutes.AsParallel().Each(rec =>
+//            {
+//                if (_dmdAMPRouteMappings.ContainsKey(rec.Apid))
+//                    _dmdAMPRouteMappings[rec.Apid].Add(rec);
+//                else
+//                    _dmdAMPRouteMappings[rec.Apid] = new List<DmdAmpDrugrouteDTO> { rec };
+//            });
+//        }
+
+//        private void HandleImportSave(List<string> dmdCodes, List<DMDDetailResultDTO> dmdResults, ImportFormularyResultsDTO importFormularyDTO)
+//        {
+//            var formularyHeaderRepo = this._provider.GetService(typeof(IRepository<FormularyHeader>)) as IRepository<FormularyHeader>;
+
+//            var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//            //var existingFormulariesFromDB = formularyRepo.Items.Where(item => dmdCodes.Contains(item.Code)).ToList();
+//            var existingFormulariesFromDB = formularyRepo.GetLatestFormulariesByCodes(dmdCodes.ToArray(), true).ToList();
+
+//            var existingCodes = new HashSet<string>();
+
+//            if (existingFormulariesFromDB.IsCollectionValid())
+//            {
+//                //Consider non-archived and non-deleted records. Records returned from Db are only in non-deleted status only
+//                var onlyValidSameRecordsInDb = existingFormulariesFromDB.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED).ToList();
+//                if (onlyValidSameRecordsInDb.IsCollectionValid())
+//                {
+//                    existingFormulariesFromDB = onlyValidSameRecordsInDb;
+//                    existingCodes = existingFormulariesFromDB.Select(item => item.Code).Distinct().ToHashSet();
+//                }
+//            }
+
+//            #region TBR - No need to check the context fields
+//            //var contextAndNonContextFields = GetContextFieldsFromConfig();
+//            //var contextFields = contextAndNonContextFields.comparableContextFields;// GetComparableContextFields();//this should come from Configuration
+//            //var nonContextFields = contextAndNonContextFields.comparableNonContextFields;// GetComparableNonContextFields();
+//            #endregion TBR - No need to check the context fields
+
+//            var formulariesToSave = PopulateFormulariesForImport(dmdResults, existingCodes, existingFormulariesFromDB, importFormularyDTO);
+
+//            SaveFormulariesForImport(formulariesToSave, formularyHeaderRepo);
+
+//            if (formulariesToSave.IsCollectionValid())
+//            {
+//                formulariesToSave.Each(saveFormulary =>
+//                {
+//                    PopulateDTO(saveFormulary, importFormularyDTO);
+//                });
+//            }
+//        }
+
+//        private void SaveFormulariesForImport(List<FormularyHeader> formulariesToSave, IRepository<FormularyHeader> formularyHeaderRepo)
+//        {
+//            if (formulariesToSave.IsCollectionValid())
+//            {
+//                formulariesToSave.Each(saveFormulary =>
+//                {
+//                    formularyHeaderRepo.Add(saveFormulary);
+//                });
+
+//                formularyHeaderRepo.SaveChanges();
+//            }
+//        }
+
+//        private List<FormularyHeader> PopulateFormulariesForImport(List<DMDDetailResultDTO> dmdResults, HashSet<string> existingCodes, List<FormularyHeader> existingFormulariesFromDB, ImportFormularyResultsDTO importFormularyDTO)
+//        {
+//            var formulariesToSave = new List<FormularyHeader>();
+
+//            var dmdResultsToUpdate = GetImportableDMDResults(dmdResults, existingFormulariesFromDB, importFormularyDTO);
+
+//            if (!dmdResultsToUpdate.IsCollectionValid()) return formulariesToSave;
+
+//            //Map results to 
+//            foreach (var res in dmdResultsToUpdate)
+//            {
+//                var formularyHeader = CreateHeaderForImport(res);
+
+//                PopulateFormularyDetailForImport(res, formularyHeader);
+
+//                PopulateFormularyIngredientsForImport(res, formularyHeader);
+
+//                PopulateFormularyExcipientsForImport(res, formularyHeader);
+
+//                PopulateFormularyRouteDetailsForImport(res, formularyHeader);
+
+//                PopulateFormularyAdditionalCodesForImport(res, formularyHeader);
+
+//                //Not required for now - but will be imported
+//                //PopulateFormularyOntologyFormDetails(res, formularyHeader);
+
+//                ApplyRules(res, formularyHeader);
+
+//                //No need to have the duplicate records anymore
+//                //if (existingCodes.IsCollectionValid() && existingCodes.Contains(formularyHeader.Code))
+//                //{
+//                //    CheckForDuplicationAndSave(formularyHeader, existingFormulariesFromDB, importFormularyDTO);
+//                //}
+
+//                formulariesToSave.Add(formularyHeader);
+//            }
+
+//            return formulariesToSave;
+//        }
+
+//        private List<DMDDetailResultDTO> GetImportableDMDResults(List<DMDDetailResultDTO> dmdResults, List<FormularyHeader> existingFormulariesFromDB, ImportFormularyResultsDTO importFormularyDTO)
+//        {
+//            //Note: This may have to be changed later -- we cannot completely ignore the VTM or VMP if it already exists
+//            //We may have to overwrite the record from DMD with the editable properties later
+//            var existingVTMandVMPCodes = new List<string>();
+
+//            //If already vtm and vmp exists -- no need to update it
+//            if (existingFormulariesFromDB.IsCollectionValid())
+//            {
+//                existingVTMandVMPCodes = existingFormulariesFromDB.Where(rec => rec.IsLatest == true && string.Compare(rec.ProductType, "vtm", true) == 0 || string.Compare(rec.ProductType, "vmp", true) == 0).Select(rec => rec.Code).ToList();
+//            }
+
+//            if (existingVTMandVMPCodes.IsCollectionValid())
+//            {
+//                dmdResults = dmdResults.Where(rec => !existingVTMandVMPCodes.Contains(rec.Code)).ToList();
+//            }
+//            if (!dmdResults.IsCollectionValid())
+//            {
+//                importFormularyDTO.Status.ErrorMessages.Add("Cannot import records. These records already exists in draft status.");
+//            }
+
+//            return dmdResults;
+//        }
+
+
+//        private void PopulateFormularyAdditionalCodesForImport(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            if ((!_dmdAdditionalCodesForCodes.IsCollectionValid() || !_dmdAdditionalCodesForCodes.ContainsKey(formularyHeader.Code)) &&
+//                (!_therapeuticClassForCodes.IsCollectionValid() || !_therapeuticClassForCodes.ContainsKey(formularyHeader.Code))) return;
+
+//            var addnlCodes = new List<FormularyAdditionalCode>();
+
+//            if (_dmdAdditionalCodesForCodes.IsCollectionValid() && _dmdAdditionalCodesForCodes.ContainsKey(formularyHeader.Code))
+//            {
+//                var dmdAddnlCodes = _dmdAdditionalCodesForCodes[formularyHeader.Code];
+
+//                dmdAddnlCodes = dmdAddnlCodes?.Where(rec => rec.AdditionalCode.IsNotEmpty()).ToList();
+
+//                dmdAddnlCodes?.Each(rec => addnlCodes.Add(rec));
+//            }
+
+//            if (_therapeuticClassForCodes.IsCollectionValid() && _therapeuticClassForCodes.ContainsKey(formularyHeader.Code))
+//            {
+//                var theraupeticClassificationCode = _therapeuticClassForCodes[formularyHeader.Code];
+//                if (theraupeticClassificationCode.Item1.IsNotEmpty())
+//                {
+//                    addnlCodes.Add(new FormularyAdditionalCode
+//                    {
+//                        CodeType = TerminologyConstants.CODE_SYSTEM_CLASSIFICATION_TYPE,
+//                        AdditionalCode = theraupeticClassificationCode.Item1,
+//                        AdditionalCodeDesc = theraupeticClassificationCode.Item2,
+//                        AdditionalCodeSystem = TerminologyConstants.FDB_DATA_SRC,
+//                        Source = TerminologyConstants.FDB_DATA_SRC
+//                    });
+//                }
+//            }
+
+//            addnlCodes.Each(rec =>
+//            {
+//                rec.FormularyVersionId = formularyHeader.FormularyVersionId;
+//            });
+
+//            formularyHeader.FormularyAdditionalCode = addnlCodes;
+//        }
+
+//        private void PopulateFormularyExcipientsForImport(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            if (!_dmdAMPExcipientsForCodes.IsCollectionValid() || !_dmdAMPExcipientsForCodes.ContainsKey(formularyHeader.Code)) return;
+
+//            var excipients = _dmdAMPExcipientsForCodes[formularyHeader.Code];
+
+//            if (!excipients.IsCollectionValid()) return;
+
+//            excipients.Each(rec =>
+//            {
+//                rec.FormularyVersionId = formularyHeader.FormularyVersionId;
+//            });
+
+//            formularyHeader.FormularyExcipient = excipients;
+//        }
+
+//        //private void CheckForDuplicationAndSave(FormularyHeader formularyHeader, List<FormularyHeader> existingFormulariesFromDB, ImportFormularyResultsDTO importFormularyDTO)
+//        //{
+//        //    if (existingFormulariesFromDB.Any(recInDb => recInDb.Code == formularyHeader.Code && recInDb.ProductType == formularyHeader.ProductType))
+//        //    {
+//        //        var originalRecord = existingFormulariesFromDB.Single(recInDb => recInDb.Code == formularyHeader.Code && recInDb.IsDuplicate.GetValueOrDefault() == false);
+
+//        //        formularyHeader.IsDuplicate = true; //the record is marked duplicate
+
+//        //        formularyHeader.DuplicateOfFormularyId = originalRecord.FormularyVersionId;
+
+//        //        importFormularyDTO.Status.ErrorMessages.Add(DUPLICATE_MSG.ToFormat(formularyHeader.Code));
+//        //    }
+//        //}
+
+//        //private void CheckForDuplicationAndSave(IRepository<FormularyHeader> formularyRepo, FormularyHeader formularyHeader, List<FormularyHeader> existingFormulariesFromDB, ImportFormularyResultsDTO importFormularyDTO, List<FormularyHeader> savedFormularies, Dictionary<string, HashSet<string>> contextFields, Dictionary<string, HashSet<string>> nonContextFields)
+//        //{
+//        //    //Note: These validatiors are not longer applicable - Check whether the same code and product type already exists, and if exists mark as duplicate
+//        //    //The validator will check if any of the record in the system matches the context fields passed as parameter
+//        //    //var similarInContextFieldsValidator = new SimilarFormularyValidator(formularyHeader, existingFormulariesFromDB, contextFields);
+//        //    //var contextValidationResult = similarInContextFieldsValidator.Validate();
+//        //    //var similarInContextFields = contextValidationResult.IsValid;
+
+//        //    //The validator will check if any of the record in the system matches the non-context fields passed as parameter
+//        //    //var similarInNonContextFieldsValidator = new SimilarFormularyValidator(formularyHeader, existingFormulariesFromDB, nonContextFields);
+//        //    //var nonContextValidationResult = similarInNonContextFieldsValidator.Validate();
+//        //    //var similarInNonContextFields = nonContextValidationResult.IsValid;
+
+//        //    //if (!similarInContextFields) // context fields not matching -- add records, else add as duplicate
+//        //    if(existingFormulariesFromDB.Any(recInDb => recInDb.Code == formularyHeader.Code && recInDb.ProductType == formularyHeader.ProductType))//Please check note above
+//        //    {
+//        //        formularyRepo.Add(formularyHeader);
+//        //        savedFormularies.Add(formularyHeader);
+//        //    }
+//        //    //else if (similarInContextFields && !similarInNonContextFields) //context matching but not non-context fields - mark it as duplicate and save
+//        //    else
+//        //    {
+//        //        var originalRecord = existingFormulariesFromDB.Single(recInDb => recInDb.Code == formularyHeader.Code && recInDb.IsDuplicate.GetValueOrDefault() == false);
+
+//        //        formularyHeader.IsDuplicate = true; //the record is marked duplicate
+
+//        //        formularyHeader.DuplicateOfFormularyId = originalRecord.FormularyVersionId;// nonContextValidationResult.Data["FormularyVersionId"];
+
+//        //        formularyRepo.Add(formularyHeader);
+
+//        //        savedFormularies.Add(formularyHeader);
+
+//        //        importFormularyDTO.Status.ErrorMessages.Add(DUPLICATE_MSG.ToFormat(formularyHeader.Code));
+//        //    }
+//        //    //else
+//        //    //{
+//        //    //    //All data exists in the db for this record
+//        //    //    importFormularyDTO.Status.ErrorMessages.Add(COMPLETE_MATCHING_RECS_MSG.ToFormat(formularyHeader.Code));
+//        //    //}
+//        //}
+
+//        private void PopulateFormularyRouteDetailsForImport(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            //This will populate to VMPs only
+//            //No Need to populate at the VMP Level
+//            //if (res.Routes.IsCollectionValid())
+//            //{
+//            //    formularyHeader.FormularyRouteDetail = _mapper.Map<List<FormularyRouteDetail>>(res.Routes.ToList());// new List<FormularyRouteDetail>();
+
+//            //    formularyHeader.FormularyRouteDetail.Each(routeDetail =>
+//            //    {
+//            //        routeDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//            //        routeDetail.RouteFieldTypeCd = TerminologyConstants.ROUTEFIELDTYPE_NORMAL; //Normal
+//            //        routeDetail.Source = routeDetail.Source ?? TerminologyConstants.DMD_DATA_SRC;
+//            //    });
+//            //}
+
+//            //This will populate to AMPs only
+//            PopulateFormularyRouteDetailsForAMPs(res, formularyHeader);
+//        }
+
+//        private void PopulateFormularyRouteDetailsForAMPs(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            if (!_dmdAMPRouteMappings.IsCollectionValid() || !_dmdAMPRouteMappings.ContainsKey(formularyHeader.Code)) return;
+
+//            formularyHeader.FormularyRouteDetail = formularyHeader.FormularyRouteDetail ?? new List<FormularyRouteDetail>();
+
+//            var dmdRouteForAMPs = _dmdAMPRouteMappings[formularyHeader.Code];
+
+//            var ampRoutes = _mapper.Map<List<FormularyRouteDetail>>(dmdRouteForAMPs);
+
+//            if (!ampRoutes.IsCollectionValid()) return;
+
+//            ampRoutes.Each(routeDetail =>
+//            {
+//                routeDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//                routeDetail.RouteFieldTypeCd = TerminologyConstants.ROUTEFIELDTYPE_NORMAL; //Normal
+//                routeDetail.Source = TerminologyConstants.DMD_DATA_SRC;
+
+//                formularyHeader.FormularyRouteDetail.Add(routeDetail);
+//            });
+//        }
+
+//        //private void PopulateFormularyOntologyFormDetails(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        //{
+//        //    if (res.OntologyFormRoutes.IsCollectionValid())
+//        //    {
+//        //        formularyHeader.FormularyOntologyForm = new List<FormularyOntologyForm>();
+
+//        //        res.OntologyFormRoutes.Each(rt =>
+//        //        {
+//        //            var ontologyDetail = new FormularyOntologyForm();
+//        //            ontologyDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//        //            ontologyDetail.FormCd = rt.Cd?.ToString();
+
+//        //            formularyHeader.FormularyOntologyForm.Add(ontologyDetail);
+//        //        });
+//        //    }
+//        //}
+
+//        private void PopulateFormularyIngredientsForImport(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            if (res.VMPIngredients.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyIngredient = new List<FormularyIngredient>();
+
+//                res.VMPIngredients.Each(ing =>
+//                {
+//                    var ingredient = new FormularyIngredient();
+//                    ingredient.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                    ingredient.BasisOfPharmaceuticalStrengthCd = ing.BasisStrntcd?.ToString();
+//                    ingredient.IngredientCd = ing.Isid?.ToString();
+//                    ingredient.StrengthValueNumerator = ing.StrntNmrtrVal?.ToString();
+//                    ingredient.StrengthValueNumeratorUnitCd = ing.StrntNmrtrUomcd?.ToString();
+//                    ingredient.StrengthValueDenominator = ing.StrntDnmtrVal?.ToString();
+//                    ingredient.StrengthValueDenominatorUnitCd = ing.StrntDnmtrUomcd?.ToString();
+
+//                    formularyHeader.FormularyIngredient.Add(ingredient);
+//                });
+//            }
+//        }
+
+//        private void PopulateFormularyDetailForImport(DMDDetailResultDTO res, FormularyHeader formularyHeader)
+//        {
+//            formularyHeader.FormularyDetail = new List<FormularyDetail>();
+
+//            var formularyDetail = new FormularyDetail();
+
+//            formularyDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//            formularyDetail.RnohFormularyStatuscd = _defaultFormularyStatusCode ?? TerminologyConstants.FORMULARYSTATUS_NONFORMULARY;
+
+//            if (res.BasisOfName != null)
+//                formularyDetail.BasisOfPreferredNameCd = res.BasisOfName.Cd?.ToString();
+
+//            formularyDetail.CfcFree = res.CfcF;
+//            formularyDetail.GlutenFree = res.GluF;
+//            formularyDetail.PreservativeFree = res.PresF;
+//            formularyDetail.SugarFree = res.SugF;
+//            formularyDetail.UnitDoseFormSize = res.Udfs;
+
+//            if (res.UnitDoseFormSizeUOM != null)
+//                formularyDetail.UnitDoseFormUnits = res.UnitDoseFormSizeUOM.Cd?.ToString();
+
+//            if (res.UnitDoseUOM != null)
+//                formularyDetail.UnitDoseUnitOfMeasureCd = res.UnitDoseUOM.Cd?.ToString();
+
+//            if (res.DoseForm != null)
+//                formularyDetail.DoseFormCd = res.DoseForm.Cd?.ToString();
+
+//            formularyDetail.EmaAdditionalMonitoring = res.Ema;
+
+//            if (res.LicensingAuthority != null)
+//                formularyDetail.CurrentLicensingAuthorityCd = res.LicensingAuthority.Cd?.ToString();
+
+//            formularyDetail.ParallelImport = res.ParallelImport;
+
+//            if (res.AvailableRestriction != null)
+//                formularyDetail.RestrictionsOnAvailabilityCd = res.AvailableRestriction.Cd?.ToString();
+
+//            if (res.ControlDrugCategory != null)
+//            {
+//                formularyDetail.ControlledDrugCategoryCd = res.ControlDrugCategory.Cd?.ToString();
+//                formularyDetail.ControlledDrugCategorySource = TerminologyConstants.DMD_DATA_SRC;
+//            }
+
+//            if (res.PrescribingStatus != null)
+//                formularyDetail.PrescribingStatusCd = res.PrescribingStatus.Cd?.ToString();
+
+//            if (res.SupplierCode != null)
+//                formularyDetail.SupplierCd = res.SupplierCode?.ToString();
+
+//            if (res.Form != null)
+//                formularyDetail.FormCd = res.Form.Cd?.ToString();
+
+//            if (formularyHeader.Code.IsNotEmpty() && _snomedTradeFamilyMappings.ContainsKey(formularyHeader.Code))
+//            {
+//                var tfDTO = _snomedTradeFamilyMappings[formularyHeader.Code];
+//                formularyDetail.TradeFamilyCd = tfDTO.TradeFamilyId;
+//                formularyDetail.TradeFamilyName = tfDTO.TradeFamilyTerm;
+//            }
+
+//            //This will be overridden by the rules later
+//            formularyDetail.Prescribable = true;
+//            formularyDetail.PrescribableSource = TerminologyConstants.DMD_DATA_SRC;
+
+//            formularyHeader.FormularyDetail.Add(formularyDetail);
+
+//            //await AddFDBDetailsForProductTypeAndCode(formularyHeader);
+//            AddFDBDetailsForProductTypeAndCode(formularyHeader);
+//        }
+
+//        private void ApplyRules(DMDDetailResultDTO dMDDetailResultDTO, FormularyHeader formularyHeader)
+//        {
+//            //Identity the product type and apply the rules
+//            IImportRule importRule = null;
+//            if (string.Compare(formularyHeader.ProductType, "vtm", true) == 0)
+//                importRule = new VTMImportRule(dMDDetailResultDTO, formularyHeader);
+//            else if (string.Compare(formularyHeader.ProductType, "vmp", true) == 0)
+//                importRule = new VMPImportRule(dMDDetailResultDTO, formularyHeader);
+//            else if (string.Compare(formularyHeader.ProductType, "amp", true) == 0)
+//                importRule = new AMPImportRule(dMDDetailResultDTO, formularyHeader);
+//            else
+//                importRule = new NullImportRule(dMDDetailResultDTO, formularyHeader);
+
+//            importRule.MutateByRules();
+//        }
+
+
+//        private FormularyHeader CreateHeaderForImport(DMDDetailResultDTO res)
+//        {
+//            var formularyHeader = new FormularyHeader();
+
+//            formularyHeader.FormularyId = Guid.NewGuid().ToString();
+//            formularyHeader.VersionId = 1;
+//            formularyHeader.FormularyVersionId = Guid.NewGuid().ToString();
+//            formularyHeader.IsLatest = true;
+//            formularyHeader.IsDuplicate = false;//Need to check
+
+//            formularyHeader.Code = res.Code;
+//            formularyHeader.CodeSystem = TerminologyConstants.DEFAULT_IDENTIFICATION_CODE_SYSTEM;
+
+//            formularyHeader.Name = res.Name;
+//            formularyHeader.ParentCode = res.ParentCode;
+//            formularyHeader.ParentName = null;
+//            formularyHeader.ParentProductType = res.LogicalLevel.GetDMDParentLevelCodeByLogicalLevel();
+//            formularyHeader.ProductType = res.LogicalLevel.GetDMDLevelCodeByLogicalLevel();
+
+//            formularyHeader.RecSource = TerminologyConstants.RECORD_SOURCE_IMPORT;// "Import";
+//            formularyHeader.RecStatusCode = _defaultRecordStatusCode ;// TerminologyConstants.RECORDSTATUS_DRAFT;//Draft
+//            formularyHeader.RecStatuschangeDate = DateTime.UtcNow;
+
+//            formularyHeader.VtmId = (string.Compare(formularyHeader.ParentProductType, "vtm", true) == 0) ? formularyHeader.ParentCode : null;
+
+//            formularyHeader.VmpId = (string.Compare(formularyHeader.ParentProductType, "vmp", true) == 0) ? formularyHeader.ParentCode : null;
+
+//            return formularyHeader;
+//        }
+
+//        #region TBR
+//        //    private Dictionary<string, HashSet<string>> GetComparableContextFields1()
+//        //    {
+//        //        //For Import - Should come from configuration
+
+//        //        var contextFields = new Dictionary<string, HashSet<string>>();
+
+//        //        contextFields.Add("formulary_header", new HashSet<string>
+//        //        {
+//        //            "Name",
+//        //            "ProductType",
+//        //            "Code",
+//        //            "VtmId",
+//        //            "VmpId"
+//        //        });
+
+//        //        contextFields.Add("formulary_detail", new HashSet<string>
+//        //        {
+//        //            "ControlledDrugCategoryCd",
+//        //            "DoseFormCd",
+//        //            "UnitDoseFormUnits",
+//        //            "UnitDoseUnitOfMeasureCd",
+//        //            "FormCd",
+//        //            "SupplierCd"
+//        //        });
+
+//        //        contextFields.Add("formulary_ingredient", new HashSet<string>
+//        //        {
+//        //             "IngredientCd",
+//        //            "StrengthValueNumerator",
+//        //            "StrengthValueNumeratorUnitCd",
+//        //            "StrengthValueDenominator",
+//        //            "StrengthValueDenominatorUnitCd"
+//        //});
+
+//        //        contextFields.Add("formulary_ontologyform", new HashSet<string>
+//        //        {
+//        //             "FormCd"
+//        //        });
+
+//        //        return contextFields;
+//        //    }
+
+//        //    private Dictionary<string, HashSet<string>> GetComparableNonContextFields1()
+//        //{
+//        //    var comparableFields = new Dictionary<string, HashSet<string>>();
+
+//        //    comparableFields.Add("formulary_header", new HashSet<string>
+//        //    {
+
+//        //    });
+
+//        //    comparableFields.Add("formulary_additionalcodes", new HashSet<string>
+//        //    {
+//        //        "AdditionalCode",
+//        //        "AdditionalCodeSystem"
+//        //    });
+
+//        //    comparableFields.Add("formulary_detail", new HashSet<string>
+//        //    {
+//        //        "MedicationTypeCode",
+//        //        "CodeSystem",
+//        //        "RnohFormularyStatuscd",
+//        //        "OrderableCd",
+//        //        "InpatientMedicationCd",
+//        //        "OutpatientMedicationCd",
+//        //        "PrescribingStatusCd",
+//        //        "RulesCd",
+//        //        "UnlicensedMedicationCd",
+//        //        "DefinedDailyDose",
+//        //        "NotForPrn",
+//        //        "HighAlertMedication",
+//        //        "IgnoreDuplicateWarnings",
+//        //        "MedusaPreparationInstructions",
+//        //        "DrugClass",
+//        //        "CriticalDrug",
+//        //        "Cytotoxic",
+//        //        "ClinicalTrialMedication",
+//        //        "Fluid",
+//        //        "Antibiotic",
+//        //        "Anticoagulant",
+//        //        "Antipsychotic",
+//        //        "Antimicrobial",
+//        //        "AddReviewReminder",
+//        //        "IvToOral",
+//        //        "TitrationTypeCd",
+//        //        "RoundingFactorCd",
+//        //        "MaxDoseNumerator",
+//        //        "MaximumDoseUnitCd",
+//        //        "WitnessingRequired",
+//        //        "RestrictedPrescribing",
+//        //        "NiceTa",
+//        //        "MarkedModifierCd",
+//        //        "Insulins",
+//        //        "MentalHealthDrug",
+//        //        "BasisOfPreferredNameCd",
+//        //        "SugarFree",
+//        //        "GlutenFree",
+//        //        "PreservativeFree",
+//        //        "CfcFree",
+//        //        "UnitDoseFormSize",
+//        //        "TradeFamilyCd",
+//        //        "OrderableFormtypeCd",
+//        //        "ModifiedReleaseCd",
+//        //        "BlackTriangle",
+//        //        "CurrentLicensingAuthorityCd",
+//        //        "EmaAdditionalMonitoring",
+//        //        "ParallelImport",
+//        //        "RestrictionsOnAvailabilityCd"
+//        //    });
+
+//        //    comparableFields.Add("formulary_indication", new HashSet<string>
+//        //    {
+//        //         "IndicationCd"
+//        //    });
+
+//        //    comparableFields.Add("formulary_ingredient", new HashSet<string>
+//        //    {
+//        //         "IngredientCd",
+//        //         "BasisOfPharmaceuticalStrengthCd",
+//        //    });
+
+//        //    comparableFields.Add("formulary_routedetail", new HashSet<string>
+//        //    {
+//        //         "RouteCd",
+//        //         "RouteFieldTypeCd"
+//        //    });
+
+//        //    return comparableFields;
+//        //}
+//        #endregion TBR
+
+//        private (Dictionary<string, HashSet<string>> comparableContextFields, Dictionary<string, HashSet<string>> comparableNonContextFields) GetContextFieldsFromConfig()
+//        {
+//            var comparableContextFields = new Dictionary<string, HashSet<string>>();
+//            var comparableNonContextFields = new Dictionary<string, HashSet<string>>();
+
+//            const string CONTEXT_KEY = "DUPLICATION_CHECK_FIELDS";
+
+//            var configurationQueries = this._provider.GetService(typeof(IConfigurationQueries)) as IConfigurationQueries;
+
+//            var configData = configurationQueries.GetConfigurationByName(CONTEXT_KEY);
+
+//            if (configData != null)
+//            {
+//                dynamic configInfo = JsonConvert.DeserializeObject<ExpandoObject>(configData.ConfigJson);
+
+//                if (configInfo != null)
+//                {
+//                    FillContextFields(comparableContextFields, configInfo.context);
+//                    FillContextFields(comparableNonContextFields, configInfo.noncontext);
+
+//                    //var contextObj = configInfo.context;
+
+//                    //if (contextObj != null)
+//                    //{
+//                    //    var headerVals = (contextObj.header as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var additonalCodeVals = (contextObj.additonalcodes as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var detailVals = (contextObj.detail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var ingredientVals = (contextObj.ingredient as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var indicationVals = (contextObj.indication as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+
+//                    //    var ontologyVals = (contextObj.ontology as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var routedetailVals = (contextObj.routedetail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //}
+
+//                    //var noncontextObj = configInfo.noncontext;
+
+//                    //if (noncontextObj != null)
+//                    //{
+//                    //    var headerVals = (contextObj.header as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var additonalCodeVals = (noncontextObj.additonalcodes as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var detailVals = (noncontextObj.detail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var ingredientVals = (noncontextObj.ingredient as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var indicationVals = (noncontextObj.indication as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //    var routedetailVals = (noncontextObj.routedetail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//                    //}
+//                }
+//            }
+
+//            return (comparableContextFields, comparableNonContextFields);
+//        }
+
+
+//        private void FillContextFields(Dictionary<string, HashSet<string>> comparableFields, dynamic contextObj)
+//        {
+//            if (contextObj == null) return;
+
+//            comparableFields["formulary_header"] = !CommonExtensions.HasProperty(contextObj, "header") ? new HashSet<string>() : (contextObj.header as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_additionalcodes"] = !CommonExtensions.HasProperty(contextObj, "additonalcodes") ? new HashSet<string>() : (contextObj.additonalcodes as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_detail"] = !CommonExtensions.HasProperty(contextObj, "detail") ? new HashSet<string>() : (contextObj.detail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_ingredient"] = !CommonExtensions.HasProperty(contextObj, "ingredient") ? new HashSet<string>() : (contextObj.ingredient as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_indication"] = !CommonExtensions.HasProperty(contextObj, "indication") ? new HashSet<string>() : (contextObj.indication as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_ontologyform"] = !CommonExtensions.HasProperty(contextObj, "ontology") ? new HashSet<string>() : (contextObj.ontology as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//            comparableFields["formulary_routedetail"] = !CommonExtensions.HasProperty(contextObj, "routedetail") ? new HashSet<string>() : (contextObj.routedetail as IEnumerable<object>)?.Select(rec => rec.ToString()).Distinct().ToHashSet();
+//        }
+
+//        private void PopulateDTO(FormularyHeader formularyHeader, ImportFormularyResultsDTO importFormularyDTO)
+//        {
+//            var headerDTO = _mapper.Map<FormularyDTO>(formularyHeader);
+
+//            if (formularyHeader.FormularyDetail.IsCollectionValid())
+//                headerDTO.Detail = _mapper.Map<FormularyDetailDTO>(formularyHeader.FormularyDetail.First());
+
+//            if (formularyHeader.FormularyAdditionalCode.IsCollectionValid())
+//            {
+//                headerDTO.FormularyAdditionalCodes = _mapper.Map<List<FormularyAdditionalCodeDTO>>(formularyHeader.FormularyAdditionalCode.ToList()); //new List<FormularyAdditionalCodeDTO>();
+
+//                //formularyHeader.FormularyAdditionalCode.Each(hdr =>
+//                //{
+//                //    headerDTO.FormularyAdditionalCodes.Add(_mapper.Map<FormularyAdditionalCodeDTO>(hdr));
+//                //});
+//            }
+
+//            //if (formularyHeader.FormularyIndication.IsCollectionValid())
+//            //{
+//            //    headerDTO.FormularyIndications = _mapper.Map<List<FormularyIndicationDTO>>(formularyHeader.FormularyIndication.ToList()); //new List<FormularyIndicationDTO>();
+
+//            //    //formularyHeader.FormularyIndication.Each(ind =>
+//            //    //{
+//            //    //    headerDTO.FormularyIndications.Add(_mapper.Map<FormularyIndicationDTO>(ind));
+//            //    //});
+//            //}
+
+//            //if (formularyHeader.FormularyOntologyForm.IsCollectionValid())
+//            //{
+//            //    headerDTO.FormularyOntologyForms = _mapper.Map<List<FormularyOntologyFormDTO>>(formularyHeader.FormularyOntologyForm.ToList()); //new List<FormularyOntologyFormDTO>();
+
+//            //    //formularyHeader.FormularyOntologyForm.Each(onto =>
+//            //    //{
+//            //    //    headerDTO.FormularyOntologyForms.Add(_mapper.Map<FormularyOntologyFormDTO>(onto));
+//            //    //});
+//            //}
+
+//            if (formularyHeader.FormularyIngredient.IsCollectionValid())
+//            {
+//                headerDTO.FormularyIngredients = _mapper.Map<List<FormularyIngredientDTO>>(formularyHeader.FormularyIngredient.ToList()); // new List<FormularyIngredientDTO>();
+
+//                //formularyHeader.FormularyIngredient.Each(ing =>
+//                //{
+//                //    headerDTO.FormularyIngredients.Add(_mapper.Map<FormularyIngredientDTO>(ing));
+//                //});
+//            }
+
+//            if (formularyHeader.FormularyRouteDetail.IsCollectionValid())
+//            {
+//                headerDTO.FormularyRouteDetails = _mapper.Map<List<FormularyRouteDetailDTO>>(formularyHeader.FormularyRouteDetail.ToList()); //new List<FormularyRouteDetailDTO>();
+
+//                //formularyHeader.FormularyRouteDetail.Each(route =>
+//                //{
+//                //    headerDTO.FormularyRouteDetails.Add(_mapper.Map<FormularyRouteDetailDTO>(route));
+
+//                //});
+//            }
+
+//            importFormularyDTO.Data.Add(headerDTO);
+//        }
+
+//        public void AddFDBDetailsForProductTypeAndCode(FormularyHeader recordToImport)
+//        {
+//            if (!recordToImport.FormularyDetail.IsCollectionValid()) return;
+
+//            recordToImport.FormularyDetail.Each(detail =>
+//            {
+//                detail.Caution = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_cautionsForCodes, TerminologyConstants.FDB_DATA_SRC);
+//                detail.SideEffect = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_sideEffectsForCodes, TerminologyConstants.FDB_DATA_SRC);
+//                detail.SafetyMessage = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_safetyMessagesForCodes, TerminologyConstants.FDB_DATA_SRC);
+//                detail.ContraIndication = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_contraIndicationsForCodes, TerminologyConstants.FDB_DATA_SRC);
+//                detail.LicensedUse = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_licensedUsesForCodes, TerminologyConstants.FDB_DATA_SRC);
+//                detail.UnlicensedUse = recordToImport.Code.SafeGetStringifiedCodeDescListForCode(_unLicensedUsesForCodes, TerminologyConstants.FDB_DATA_SRC);
+
+//                if (_highRiskFlagForCodes.IsCollectionValid() && _highRiskFlagForCodes.ContainsKey(recordToImport.Code))
+//                {
+//                    detail.HighAlertMedication = (_highRiskFlagForCodes[recordToImport.Code].HasValue && _highRiskFlagForCodes[recordToImport.Code].Value) ? "1" : null;
+//                    detail.HighAlertMedicationSource = (detail.HighAlertMedication == "1") ? TerminologyConstants.FDB_DATA_SRC : null;
+//                }
+
+//                if (_blackTriangleFlagForCodes.IsCollectionValid() && _blackTriangleFlagForCodes.ContainsKey(recordToImport.Code))
+//                {
+//                    detail.BlackTriangle = _blackTriangleFlagForCodes[recordToImport.Code] ? "1" : null;
+//                    detail.BlackTriangleSource = (detail.BlackTriangle == "1") ? TerminologyConstants.FDB_DATA_SRC : null;
+//                }
+//            });
+
+//        }
+
+//        public async Task AddFDBDetailsForProductTypeAndCode1(FormularyHeader recordToImport)//TBA
+//        {
+//            if (!recordToImport.FormularyDetail.IsCollectionValid()) return;
+
+//            var baseFDBUrl = _configuration.GetSection("FDB").GetValue<string>("BaseURL");
+
+//            var token = _requestContext.AuthToken;
+
+//            var fdbClient = new FDBAPIClient(baseFDBUrl);
+
+//            var cautionsTask = fdbClient.GetCautionsByCode(recordToImport.ProductType, recordToImport.Code, token);//string[]
+//            var sideEffectsTask = fdbClient.GetSideEffectsByCode(recordToImport.ProductType, recordToImport.Code, token);//string[]
+//            var safetyMessagesTask = fdbClient.GetSafetyMessagesByCode(recordToImport.ProductType, recordToImport.Code, token);//string[]
+//            var contraIndicationsTask = fdbClient.GetContraIndicationsByCode(recordToImport.ProductType, recordToImport.Code, token);//string[]
+//            var licensedUsesTask = fdbClient.GetLicensedUseByCode(recordToImport.ProductType, recordToImport.Code, token);//string[]
+//            var unLicensedUsesTask = fdbClient.GetUnLicensedUseByCode(recordToImport.ProductType, recordToImport.Code, token);
+//            var blackTriangleFlagTask = fdbClient.GetAdverseEffectsFlagByCode(recordToImport.Code, token);
+
+//            await Task.WhenAll(cautionsTask, sideEffectsTask, safetyMessagesTask, contraIndicationsTask, licensedUsesTask, unLicensedUsesTask, blackTriangleFlagTask);
+
+//            var cautions = await cautionsTask;
+//            var sideEffects = await sideEffectsTask;
+//            var safetyMessages = await safetyMessagesTask;
+//            var contraIndications = await contraIndicationsTask;
+//            var licensedUses = await licensedUsesTask;
+//            var unLicensedUses = await unLicensedUsesTask;
+//            var blackTriangleFlag = await blackTriangleFlagTask;
+
+//            recordToImport.FormularyDetail.Each(detail =>
+//            {
+//                if (cautions.IsCollectionValid())
+//                {
+//                    detail.Caution = JsonConvert.SerializeObject(cautions);
+//                }
+//                if (sideEffects.IsCollectionValid())
+//                {
+//                    detail.SideEffect = JsonConvert.SerializeObject(sideEffects);
+//                }
+//                if (safetyMessages.IsCollectionValid())
+//                {
+//                    detail.SafetyMessage = JsonConvert.SerializeObject(safetyMessages);
+//                }
+
+//                if (contraIndications.IsCollectionValid())
+//                {
+//                    var indicationsData = contraIndications.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var indicationsDataAsString = JsonConvert.SerializeObject(indicationsData);
+//                    detail.ContraIndication = indicationsDataAsString;
+//                }
+
+//                if (licensedUses.IsCollectionValid())
+//                {
+//                    var licensedUseData = licensedUses.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var licensedUseDataAsString = JsonConvert.SerializeObject(licensedUseData);
+//                    detail.LicensedUse = licensedUseDataAsString;
+//                }
+//                if (unLicensedUses.IsCollectionValid())
+//                {
+//                    var unlicensedUseData = unLicensedUses.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var unlicensedUseDataAsString = JsonConvert.SerializeObject(unlicensedUseData);
+//                    detail.UnlicensedUse = unlicensedUseDataAsString;
+//                }
+
+//                if (blackTriangleFlag.HasValue && blackTriangleFlag.Value)
+//                {
+//                    detail.BlackTriangle = "1";
+//                    detail.BlackTriangleSource = TerminologyConstants.FDB_DATA_SRC;
+//                }
+//            });
+
+//        }
+
+//        private async Task<bool> PreFillFDBRecords(List<DMDDetailResultDTO> dmdResults, ImportFormularyResultsDTO importFormularyResultsDTO)
+//        {
+//            if (!dmdResults.IsCollectionValid()) return false;
+
+//            var cautionsForCodes = new ConcurrentDictionary<string, string>();
+//            var sideEffectsForCodes = new ConcurrentDictionary<string, string>();
+//            var safetyMessagesForCodes = new ConcurrentDictionary<string, string>();
+//            var contraIndicationsForCodes = new ConcurrentDictionary<string, string>();
+//            var licensedUsesForCodes = new ConcurrentDictionary<string, string>();
+//            var unLicensedUsesForCodes = new ConcurrentDictionary<string, string>();
+
+//            foreach (var result in dmdResults)
+//            {
+//                var baseFDBUrl = _configuration.GetSection("FDB").GetValue<string>("BaseURL");
+
+//                var token = _requestContext.AuthToken;
+
+//                var fdbClient = new FDBAPIClient(baseFDBUrl);
+//                var productType = result.LogicalLevel.GetDMDLevelCodeByLogicalLevel();
+//                var code = result.Code;
+
+//                var cautionsTask = fdbClient.GetCautionsByCode1(result.LogicalLevel.GetDMDLevelCodeByLogicalLevel(), result.Code, token);//string[]
+//                var sideEffectsTask = fdbClient.GetSideEffectsByCode1(productType, code, token);//string[]
+//                var safetyMessagesTask = fdbClient.GetSafetyMessagesByCode1(productType, code, token);//string[]
+//                var contraIndicationsTask = fdbClient.GetContraIndicationsByCode1(productType, code, token);//string[]
+//                var licensedUsesTask = fdbClient.GetLicensedUseByCode1(productType, code, token);//string[]
+//                var unLicensedUsesTask = fdbClient.GetUnLicensedUseByCode1(productType, code, token);//string[]
+
+//                await Task.WhenAll(cautionsTask, sideEffectsTask, safetyMessagesTask, contraIndicationsTask, licensedUsesTask, unLicensedUsesTask);
+
+//                var cautionsResult = await cautionsTask; var sideEffectsResult = await sideEffectsTask; var safetyMessagesResult = await safetyMessagesTask; var contraIndicationsResult = await contraIndicationsTask; var licensedUsesResult = await licensedUsesTask; var unLicensedUsesResult = await unLicensedUsesTask;
+
+//                if (cautionsResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success || sideEffectsResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success || safetyMessagesResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success || contraIndicationsResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success || licensedUsesResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success || unLicensedUsesResult.StatusCode != FDBAPI.Client.DataModels.StatusCode.Success)
+//                {
+//                    importFormularyResultsDTO.Status.StatusCode = TerminologyConstants.STATUS_FAIL;
+//                    importFormularyResultsDTO.Status.ErrorMessages.Add("Ërror getting FDB data for Code: {0}".ToFormat(code));
+//                    return false;
+//                }
+
+//                if (cautionsResult.Data.IsCollectionValid())
+//                {
+//                    cautionsForCodes[code] = JsonConvert.SerializeObject(cautionsResult.Data);
+//                }
+//                if (sideEffectsResult.Data.IsCollectionValid())
+//                {
+//                    sideEffectsForCodes[code] = JsonConvert.SerializeObject(sideEffectsResult.Data);
+//                }
+//                if (safetyMessagesResult.Data.IsCollectionValid())
+//                {
+//                    safetyMessagesForCodes[code] = JsonConvert.SerializeObject(safetyMessagesResult.Data);
+//                }
+
+//                if (contraIndicationsResult.Data.IsCollectionValid())
+//                {
+//                    var indicationsData = contraIndicationsResult.Data.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var indicationsDataAsString = JsonConvert.SerializeObject(indicationsData);
+//                    contraIndicationsForCodes[code] = indicationsDataAsString;
+//                }
+
+//                if (licensedUsesResult.Data.IsCollectionValid())
+//                {
+//                    var licensedUseData = licensedUsesResult.Data.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var licensedUseDataAsString = JsonConvert.SerializeObject(licensedUseData);
+//                    licensedUsesForCodes[code] = licensedUseDataAsString;
+//                }
+//                if (unLicensedUsesResult.Data.IsCollectionValid())
+//                {
+//                    var unlicensedUseData = unLicensedUsesResult.Data.Select(rec => new { Cd = rec.Id, Desc = rec.Text });
+//                    var unlicensedUseDataAsString = JsonConvert.SerializeObject(unlicensedUseData);
+//                    unLicensedUsesForCodes[code] = unlicensedUseDataAsString;
+//                }
+//            }
+
+//            return true;
+//        }
+
+//        private async Task<bool> PreFillFDBRecords1(List<FDBDataRequest> codesAndProductTypes)
+//        {
+//            if (!codesAndProductTypes.IsCollectionValid()) return false;
+
+//            var ampOnlyCodes = codesAndProductTypes.Where(rec => string.Compare(rec.ProductType, "amp", true) == 0).ToList();
+
+//            var baseFDBUrl = _configuration.GetSection("FDB").GetValue<string>("BaseURL");
+//            var token = _requestContext.AuthToken;
+//            var fdbClient = new FDBAPIClient(baseFDBUrl);
+
+
+//            var cautionsTask = fdbClient.GetCautionsByCodes(ampOnlyCodes, token);
+//            var sideEffectsTask = fdbClient.GetSideEffectsByCodes(ampOnlyCodes, token);
+//            var safetyMessagesTask = fdbClient.GetSafetyMessagesByCodes(ampOnlyCodes, token);
+//            var contraIndicationsTask = fdbClient.GetContraIndicationsByCodes(ampOnlyCodes, token);
+//            var licensedUsesTask = fdbClient.GetLicensedUseByCodes(ampOnlyCodes, token);
+//            var unLicensedUsesTask = fdbClient.GetUnLicensedUseByCodes(ampOnlyCodes, token);
+//            var blackTriangleFlagTask = fdbClient.GetAdverseEffectsFlagByCodes(ampOnlyCodes, token);
+//            var highRiskFlagTask = fdbClient.GetHighRiskFlagByCodes(ampOnlyCodes, token);
+//            var theraupeuticClassTask = fdbClient.GetTherapeuticClassificationGroupsByCodes(ampOnlyCodes, token);
+
+//            var cautionsResult = await cautionsTask; var sideEffectsResult = await sideEffectsTask; var safetyMessagesResult = await safetyMessagesTask; var contraIndicationsResult = await contraIndicationsTask; var licensedUsesResult = await licensedUsesTask; var unLicensedUsesResult = await unLicensedUsesTask;
+//            var highRiskFlag = await highRiskFlagTask;
+//            var theraupeuticClass = await theraupeuticClassTask;
+
+//            if (cautionsResult.Data.IsCollectionValid())
+//            {
+//                _cautionsForCodes = cautionsResult.Data;
+//            }
+//            if (sideEffectsResult.Data.IsCollectionValid())
+//            {
+//                _sideEffectsForCodes = sideEffectsResult.Data;
+//            }
+//            if (safetyMessagesResult.Data.IsCollectionValid())
+//            {
+//                _safetyMessagesForCodes = safetyMessagesResult.Data;
+//            }
+
+//            if (contraIndicationsResult.Data.IsCollectionValid())
+//            {
+//                _contraIndicationsForCodes = contraIndicationsResult.Data;
+//            }
+
+//            if (licensedUsesResult.Data.IsCollectionValid())
+//            {
+//                _licensedUsesForCodes = licensedUsesResult.Data;
+//            }
+//            if (unLicensedUsesResult.Data.IsCollectionValid())
+//            {
+//                _unLicensedUsesForCodes = unLicensedUsesResult.Data;
+//            }
+
+//            var blackTriangleFlag = await blackTriangleFlagTask;
+
+//            if (blackTriangleFlag.Data.IsCollectionValid())
+//            {
+//                _blackTriangleFlagForCodes = blackTriangleFlag.Data;
+//            }
+
+//            if (highRiskFlag.Data.IsCollectionValid())
+//            {
+//                _highRiskFlagForCodes = highRiskFlag.Data;
+//            }
+
+//            _therapeuticClassForCodes = theraupeuticClass?.Data;
+
+//            return true;
+//        }
+
+//        /// <summary>
+//        /// To be used instead of 1 when network call is costly
+//        /// </summary>
+//        /// <param name="codesAndProductTypes"></param>
+//        /// <returns></returns>
+//        private async Task<bool> PreFillFDBRecords2(List<FDBDataRequest> codesAndProductTypes)
+//        {
+//            if (!codesAndProductTypes.IsCollectionValid()) return false;
+
+//            var baseFDBUrl = _configuration.GetSection("FDB").GetValue<string>("BaseURL");
+//            var token = _requestContext.AuthToken;
+//            var fdbClient = new FDBAPIClient(baseFDBUrl);
+
+//            var fdbDetails = await fdbClient.GetFDBDetailByCodes(codesAndProductTypes, token);
+
+//            if (fdbDetails == null || fdbDetails.StatusCode != StatusCode.Success || fdbDetails.Data == null) return false;
+
+//            var result = fdbDetails.Data;
+
+//            if (result.Cautions.IsCollectionValid())
+//            {
+//                _cautionsForCodes = result.Cautions;
+//            }
+//            if (result.SideEffects.IsCollectionValid())
+//            {
+//                _sideEffectsForCodes = result.SideEffects;
+//            }
+//            if (result.SafetyMessages.IsCollectionValid())
+//            {
+//                _safetyMessagesForCodes = result.SafetyMessages;
+//            }
+
+//            if (result.ContraIndications.IsCollectionValid())
+//            {
+//                _contraIndicationsForCodes = result.ContraIndications;
+//            }
+
+//            if (result.LicensedUses.IsCollectionValid())
+//            {
+//                _licensedUsesForCodes = result.LicensedUses;
+//            }
+//            if (result.UnLicensedUses.IsCollectionValid())
+//            {
+//                _unLicensedUsesForCodes = result.UnLicensedUses;
+//            }
+
+//            if (result.AdverseEffects.IsCollectionValid())
+//            {
+//                _blackTriangleFlagForCodes = result.AdverseEffects;
+//            }
+
+
+//            return true;
+
+//        }
+//    }
+//}

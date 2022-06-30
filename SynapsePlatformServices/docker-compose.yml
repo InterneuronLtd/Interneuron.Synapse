@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+ app:
+  build:        
+    context: .
+    dockerfile: Dockerfile
+  container_name: synapseplatformservices
+  image: synapseplatformservices
+  ports:
+    - "80:80"

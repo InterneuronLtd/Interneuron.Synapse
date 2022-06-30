@@ -686,7 +686,7 @@ $(document).ready(function () {
     //$('#historyModal').on('shown.bs.modal', function (e) {
     //    applyPagingToHistoryTable();
     //});
-   
+
     //$("#historySearch").on("keyup", function () {
     //    var value = $(this).val();
 
@@ -707,10 +707,10 @@ $(document).ready(function () {
     //            }
     //        });
 
-            
+
     //        $('#historyPagination').pagination('updateItems', totalRecords);
     //    }
-        
+
     //});
 });
 
@@ -1220,12 +1220,52 @@ function getHistoryOfFormularies(url, args, beforeLoad, afterLoad) {
             $('#historyOutput').html(str);
 
             //applyPagingToHistoryTable();
-            $("#tblHistory").fancyTable({
-                sortable: false,
-                pagination: true,
-                perPage: 15,
-                globalSearch: false
+            //$("#tblHistory").fancyTable({
+            //    sortable: false,
+            //    pagination: true,
+            //    perPage: 15,
+            //    globalSearch: false
+            //});
+
+            $('#tblHistory').DataTable().destroy();
+
+            var foot = $("#tblHistory").find('tfoot');
+
+            if (!foot.length) foot = $('<tfoot>').appendTo('#tblHistory');
+
+            foot.append($('<tr><th scope="col">Date/Time</th><th scope="col">User</th><th scope="col">Product Name & Code</th><th scope="col">Status</th><th scope="col">Updated</th></tr>'));
+
+            $('#tblHistory tfoot').css('display', 'table-header-group');
+
+            // Setup - add a text input to each footer cell
+            $('#tblHistory tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });
+
+            // DataTable
+            $('#tblHistory').DataTable({
+                dom: 'lrt',
+                ordering: false,
+                initComplete: function () {
+                    // Apply the search
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var that = this;
+
+                            $('input', this.footer()).on('keyup change clear', function () {
+                                if (that.search() !== this.value) {
+                                    that.search(this.value).draw();
+                                }
+                            });
+                        });
+                },
+            });
+
+            $('#tblHistory thead').children().slice(1).remove();
+
+            $('#tblHistory tfoot tr').appendTo('#tblHistory thead');
 
             $('#pnlUpdateProgress').hide();
         });

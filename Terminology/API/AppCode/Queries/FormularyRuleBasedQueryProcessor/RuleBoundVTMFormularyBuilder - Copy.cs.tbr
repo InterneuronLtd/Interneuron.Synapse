@@ -1,0 +1,241 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using Interneuron.Terminology.Model.Search;
+//using System;
+//using System.Collections.Concurrent;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+
+//namespace Interneuron.Terminology.API.AppCode.Queries
+//{
+//    public class RuleBoundVTMFormularyBuilder : RuleBoundBaseFormularyBuilder
+//    {
+//        private List<FormularyHeader> _childFormularies;
+//        private ConcurrentBag<FormularyDTO> _childFormulariesDTO;
+//        private ConcurrentBag<FormularyCustomWarningDTO> _childCustomWarningsDTO;
+//        private ConcurrentBag<string> _childEndorsementsDTO;
+//        private ConcurrentBag<string> _childBlackTrianglesDTO;
+//        private ConcurrentBag<FormularyAdditionalCodeDTO> _childAdditionalCodesDTO;
+//        private ConcurrentBag<FormularyRouteDetailDTO> _childRouteDetailsDTO;
+//        private ConcurrentBag<FormularyDetailDTO> _childFormulariesDetailDTO;
+
+//        public RuleBoundVTMFormularyBuilder(IServiceProvider serviceProvider) : base(serviceProvider)
+//        {
+//        }
+
+//        public override void CreateAdditionalCodes()
+//        {
+//            _formularyDTO.FormularyAdditionalCodes = new List<FormularyAdditionalCodeDTO>();
+
+//            if (_childFormularies.IsCollectionValid())
+//            {
+//                ProjectClassificationCodesFromChildNodes();
+//            }
+
+//            //Add Additional Identity Codes
+//            if (!_formularyDAO.FormularyAdditionalCode.IsCollectionValid()) return;
+
+//            var addlIdentityCodes = _formularyDAO.FormularyAdditionalCode.Where(rec => string.Compare(rec.CodeType, TerminologyConstants.CODE_SYSTEM_IDENTIFICATION_TYPE, true) == 0)?.ToList();
+
+//            if (!addlIdentityCodes.IsCollectionValid()) return;
+//            _formularyDTO.FormularyAdditionalCodes.AddRange(this._mapper.Map<List<FormularyAdditionalCodeDTO>>(addlIdentityCodes));
+//        }
+
+//        public override void CreateRouteDetails()
+//        {
+//            _formularyDTO.FormularyRouteDetails = new List<FormularyRouteDetailDTO>();
+
+//            if (_childRouteDetailsDTO.IsCollectionValid())
+//            {
+//                var distinctRoutes = _childRouteDetailsDTO.Distinct(rec => rec.RouteCd).ToList();
+
+//                _formularyDTO.FormularyRouteDetails.AddRange(distinctRoutes);
+//            }
+//        }
+
+//        public override void CreateDetails()
+//        {
+//            base.CreateDetails();
+
+//            //derive details from child nodes
+//            var detail = _formularyDTO.Detail;
+
+//            //If All child VMPs are set with blacktriangle then set to true
+//            detail.BlackTriangle = _childBlackTrianglesDTO?.All(rec => rec == "1") == true  ? "1" : null;
+//            detail.CustomWarnings = _childCustomWarningsDTO?.Distinct(rec => rec.Source).ToList();
+//            detail.Endorsements = _childEndorsementsDTO?.Distinct(rec => rec).ToList();
+
+//            //If any one of the critical drug is set to true
+//            detail.CriticalDrug = _childFormulariesDetailDTO?.Any(rec => rec.CriticalDrug == "1") == true ? "1" : null;
+//        }
+
+//        public override async Task CreateBase(FormularyHeader formularyDAO)
+//        {
+//            await base.CreateBase(formularyDAO);
+
+//            var repo = this._provider.GetService(typeof(IFormularyRepository<FormularyBasicSearchResultModel>)) as IFormularyRepository<FormularyBasicSearchResultModel>;
+
+//            var nodes = await repo.GetFormularyDescendentForCodes(new string[] { _formularyDAO.Code });
+
+//            if (nodes.IsCollectionValid())
+//            {
+//                var childIds = nodes.Where(rec => string.Compare(rec.ProductType, "VMP", true) == 0)?.Select(rec => rec.FormularyVersionId)?.ToList();
+
+//                if (childIds.IsCollectionValid())
+//                {
+//                    var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//                    _childFormularies = formularyRepo.GetFormularyListForIds(childIds)?.ToList();
+
+//                    _childFormulariesDTO = new ConcurrentBag<FormularyDTO>();
+
+//                    _childFormularies.AsParallel().Each(child =>
+//                    {
+//                        var header = _mapper.Map<FormularyDTO>(child);
+
+//                        var detail = child.FormularyDetail.FirstOrDefault();
+
+//                        if (detail != null)
+//                            header.Detail = _mapper.Map<FormularyDetailDTO>(detail);
+
+//                        //if (child.FormularyIngredient.IsCollectionValid())
+//                        //    header.FormularyIngredients = _mapper.Map<List<FormularyIngredientDTO>>(child.FormularyIngredient);
+
+//                        if (child.FormularyRouteDetail.IsCollectionValid())
+//                            header.FormularyRouteDetails = _mapper.Map<List<FormularyRouteDetailDTO>>(child.FormularyRouteDetail);
+
+//                        if (child.FormularyAdditionalCode.IsCollectionValid())
+//                            header.FormularyAdditionalCodes = _mapper.Map<List<FormularyAdditionalCodeDTO>>(child.FormularyAdditionalCode);
+
+//                        _childFormulariesDTO.Add(header);
+//                    });
+
+//                    PopulateAttrsFromChildFormularies();
+//                }
+//            }
+
+//        }
+
+//        private void ProjectClassificationCodesFromChildNodes()
+//        {
+//            if (!_childAdditionalCodesDTO.IsCollectionValid()) return;
+
+//            //Project the classification codes from VMP to VTM
+//            //Only if each classification type has only one record
+//            var codeSystemLkp = new ConcurrentDictionary<string, Dictionary<string, FormularyAdditionalCodeDTO>>();
+
+//            var classificationTypeCodes = _childAdditionalCodesDTO
+//                   .Where(rec => string.Compare(rec.CodeType, TerminologyConstants.CODE_SYSTEM_CLASSIFICATION_TYPE, true) == 0)?
+//                   .Distinct()?.ToList();
+
+//            //Check whether each type has only one record
+//            if (classificationTypeCodes.IsCollectionValid())
+//            {
+//                classificationTypeCodes.Each(rec =>
+//                {
+//                    if (codeSystemLkp.ContainsKey(rec.AdditionalCodeSystem))
+//                    {
+//                        if (!codeSystemLkp[rec.AdditionalCodeSystem].ContainsKey(rec.AdditionalCode))
+//                        {
+//                            codeSystemLkp[rec.AdditionalCodeSystem].Add(rec.AdditionalCode, rec);
+//                        }
+//                    }
+//                    else
+//                    {
+//                        codeSystemLkp[rec.AdditionalCodeSystem] = new Dictionary<string, FormularyAdditionalCodeDTO> { { rec.AdditionalCode, rec } };
+//                    }
+//                });
+//            }
+
+//            if (!codeSystemLkp.IsCollectionValid()) return;
+
+//            foreach (var csItem in codeSystemLkp)
+//            {
+//                //Consider that code system only if it has same code for that classification code system
+//                if (csItem.Value != null && csItem.Value.Count > 1)
+//                {
+//                    var codeData = csItem.Value.First().Value;
+//                    if (codeData != null)
+//                        _formularyDTO.FormularyAdditionalCodes.Add(codeData);
+//                }
+//            }
+
+//            //Parallel.ForEach(_childFormularies, (childFormulary) =>
+//            //{
+//            //    //foreach (var childFormulary in _childFormularies)
+//            //    //{
+//            //    if (childFormulary.FormularyAdditionalCode.IsCollectionValid())
+//            //    {
+//            //        var classificationTypeCodes = childFormulary.FormularyAdditionalCode
+//            //        .Where(rec => string.Compare(rec.CodeType, TerminologyConstants.CODE_SYSTEM_CLASSIFICATION_TYPE, true) == 0)?
+//            //        .Distinct()?.ToList();
+
+//            //        //Check whether each type has only one record
+//            //        if (classificationTypeCodes.IsCollectionValid())
+//            //        {
+//            //            classificationTypeCodes.Each(rec =>
+//            //            {
+//            //                if (codeSystemLkp.ContainsKey(rec.AdditionalCodeSystem))
+//            //                {
+//            //                    if (!codeSystemLkp[rec.AdditionalCodeSystem].ContainsKey(rec.AdditionalCode))
+//            //                    {
+//            //                        codeSystemLkp[rec.AdditionalCodeSystem].Add(rec.AdditionalCode, rec);
+//            //                    }
+//            //                }
+//            //                else
+//            //                {
+//            //                    codeSystemLkp[rec.AdditionalCodeSystem] = new Dictionary<string, FormularyAdditionalCode> { { rec.AdditionalCode, rec } };
+//            //                }
+//            //            });
+//            //        }
+//            //    }
+//            //});
+
+//            //if (!codeSystemLkp.IsCollectionValid()) return;
+
+//            //foreach (var csItem in codeSystemLkp)
+//            //{
+//            //    //Consider that code system only if it has same code for that classification code system
+//            //    if (csItem.Value != null && csItem.Value.Count > 1)
+//            //    {
+//            //        var codeData = csItem.Value.First().Value;
+//            //        if (codeData != null)
+//            //            _formularyDTO.FormularyAdditionalCodes.Add(this._mapper.Map<FormularyAdditionalCode>(codeData));
+//            //    }
+//            //}
+//        }
+
+//        private void PopulateAttrsFromChildFormularies()
+//        {
+//            if (!_childFormulariesDTO.IsCollectionValid()) return;
+
+//            _childCustomWarningsDTO = new ConcurrentBag<FormularyCustomWarningDTO>();
+//            _childEndorsementsDTO = new ConcurrentBag<string>();
+//            _childBlackTrianglesDTO = new ConcurrentBag<string>();
+//            _childAdditionalCodesDTO = new ConcurrentBag<FormularyAdditionalCodeDTO>();
+//            _childRouteDetailsDTO = new ConcurrentBag<FormularyRouteDetailDTO>();
+//            _childFormulariesDetailDTO = new ConcurrentBag<FormularyDetailDTO>();
+
+//            _childFormulariesDTO.AsParallel().Each(childFormulary =>
+//            {
+//                var detail = childFormulary.Detail;
+
+//                if (detail != null)
+//                {
+//                    detail.CustomWarnings?.Each(rec => { _childCustomWarningsDTO.Add(rec); });
+//                    detail.Endorsements?.Each(rec => { _childEndorsementsDTO.Add(rec); });
+//                    _childBlackTrianglesDTO.Add(detail.BlackTriangle);
+//                    _childFormulariesDetailDTO.Add(detail);
+//                }
+
+//                childFormulary.FormularyAdditionalCodes?.Each(rec => { _childAdditionalCodesDTO.Add(rec); });
+
+//                childFormulary.FormularyRouteDetails?.Each(rec => { _childRouteDetailsDTO.Add(rec); });
+//            });
+//        }
+//    }
+//}

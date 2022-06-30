@@ -30,6 +30,7 @@ using SynapseStudioWeb.Models.MedicinalMgmt;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -196,7 +197,14 @@ namespace SynapseStudioWeb.Helpers
 
             if (defaultText.IsNotEmpty())
             {
-                list.Insert(0, new SelectListItem() { Value = "", Text = defaultText.Trim(), Selected = true });
+                if(selected.IsEmpty())
+                {
+                    list.Insert(0, new SelectListItem() { Value = "", Text = defaultText.Trim(), Selected = true });
+                }
+                else
+                {
+                    list.Insert(0, new SelectListItem() { Value = "", Text = defaultText.Trim() });
+                }
             }
 
             if (!keyValuePairs.IsCollectionValid()) return null;
@@ -274,6 +282,21 @@ namespace SynapseStudioWeb.Helpers
             }
 
             return input;
+        }
+
+        public static Nullable<T> ToNullable<T>(this string s) where T : struct
+        {
+            Nullable<T> result = new Nullable<T>();
+            try
+            {
+                if (!string.IsNullOrEmpty(s) && s.Trim().Length > 0)
+                {
+                    TypeConverter conv = TypeDescriptor.GetConverter(typeof(T));
+                    result = (T)conv.ConvertFrom(s);
+                }
+            }
+            catch { }
+            return result;
         }
     }
 }

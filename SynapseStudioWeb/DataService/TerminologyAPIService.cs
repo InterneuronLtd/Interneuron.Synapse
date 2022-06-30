@@ -627,6 +627,151 @@ namespace SynapseStudioWeb.DataService
         {
             return await InvokeService<List<FormularyHistoryModel>>($"{FormularyAPI_URI}/gethistoryofformularies", token, HttpMethod.Get);
         }
+
+        public static async Task<TerminologyAPIResponse<List<FormularyLocalLicensedUseModel>>> GetLocalLicensedUse(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<FormularyLocalLicensedUseModel>>($"{FormularyAPI_URI}/getlocallicenseduse", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<FormularyLocalUnlicensedUseModel>>> GetLocalUnlicensedUse(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<FormularyLocalUnlicensedUseModel>>($"{FormularyAPI_URI}/getlocalunlicenseduse", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<FormularyLocalLicensedRouteModel>>> GetLocalLicensedRoute(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<FormularyLocalLicensedRouteModel>>($"{FormularyAPI_URI}/getlocallicensedroute", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<FormularyLocalUnlicensedRouteModel>>> GetLocalUnlicensedRoute(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<FormularyLocalUnlicensedRouteModel>>($"{FormularyAPI_URI}/getlocalunlicensedroute", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<CustomWarningModel>>> GetCustomWarning(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<CustomWarningModel>>($"{FormularyAPI_URI}/getcustomwarning", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<ReminderModel>>> GetReminder(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<ReminderModel>>($"{FormularyAPI_URI}/getreminder", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<EndorsementModel>>> GetEndorsement(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<EndorsementModel>>($"{FormularyAPI_URI}/getendorsement", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<MedusaPreparationInstructionModel>>> GetMedusaPreparationInstruction(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<MedusaPreparationInstructionModel>>($"{FormularyAPI_URI}/getmedusapreparationinstruction", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<TitrationTypeModel>>> GetTitrationType(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<TitrationTypeModel>>($"{FormularyAPI_URI}/gettitrationtype", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<RoundingFactorModel>>> GetRoundingFactor(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<RoundingFactorModel>>($"{FormularyAPI_URI}/getroundingfactor", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<CompatibleDiluentModel>>> GetCompatibleDiluent(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<CompatibleDiluentModel>>($"{FormularyAPI_URI}/getcompatiblediluent", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<ClinicalTrialMedicationModel>>> GetClinicalTrialMedication(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<ClinicalTrialMedicationModel>>($"{FormularyAPI_URI}/getclinicaltrialmedication", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<GastroResistantModel>>> GetGastroResistant(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<GastroResistantModel>>($"{FormularyAPI_URI}/getgastroresistant", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<CriticalDrugModel>>> GetCriticalDrug(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<CriticalDrugModel>>($"{FormularyAPI_URI}/getcriticaldrug", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<ModifiedReleaseModel>>> GetModifiedRelease(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<ModifiedReleaseModel>>($"{FormularyAPI_URI}/getmodifiedrelease", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<ExpensiveMedicationModel>>> GetExpensiveMedication(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<ExpensiveMedicationModel>>($"{FormularyAPI_URI}/getexpensivemedication", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<HighAlertMedicationModel>>> GetHighAlertMedication(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<HighAlertMedicationModel>>($"{FormularyAPI_URI}/gethighalertmedication", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<IVToOralModel>>> GetIVToOral(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<IVToOralModel>>($"{FormularyAPI_URI}/getivtooral", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<NotForPRNModel>>> GetNotForPRN(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<NotForPRNModel>>($"{FormularyAPI_URI}/getnotforprn", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<BloodProductModel>>> GetBloodProduct(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<BloodProductModel>>($"{FormularyAPI_URI}/getbloodproduct", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<DiluentModel>>> GetDiluent(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<DiluentModel>>($"{FormularyAPI_URI}/getdiluent", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<PrescribableModel>>> GetPrescribable(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<PrescribableModel>>($"{FormularyAPI_URI}/getprescribable", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<OutpatientMedicationModel>>> GetOutpatientMedication(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<OutpatientMedicationModel>>($"{FormularyAPI_URI}/getoutpatientmedication", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<IgnoreDuplicateWarningModel>>> GetIgnoreDuplicateWarning(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<IgnoreDuplicateWarningModel>>($"{FormularyAPI_URI}/getignoreduplicatewarning", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<ControlledDrugModel>>> GetControlledDrug(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<ControlledDrugModel>>($"{FormularyAPI_URI}/getcontrolleddrug", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<PrescriptionPrintingRequiredModel>>> GetPrescriptionPrintingRequired(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<PrescriptionPrintingRequiredModel>>($"{FormularyAPI_URI}/getprescriptionprintingrequired", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<IndicationMandatoryModel>>> GetIndicationMandatory(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<IndicationMandatoryModel>>($"{FormularyAPI_URI}/getindicationmandatory", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<WitnessingRequiredModel>>> GetWitnessingRequired(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<WitnessingRequiredModel>>($"{FormularyAPI_URI}/getwitnessingrequired", token, HttpMethod.Post, formularyVersionIds);
+        }
+
+        public static async Task<TerminologyAPIResponse<List<FormularyStatusModel>>> GetFormularyStatus(List<string> formularyVersionIds, string token)
+        {
+            return await InvokeService<List<FormularyStatusModel>>($"{FormularyAPI_URI}/getformularystatus", token, HttpMethod.Post, formularyVersionIds);
+        }
     }
 }
 

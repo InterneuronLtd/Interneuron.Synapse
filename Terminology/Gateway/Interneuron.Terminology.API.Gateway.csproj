@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\lib\css\**" />
+    <Compile Remove="wwwroot\lib\js\**" />
+    <Content Remove="wwwroot\lib\css\**" />
+    <Content Remove="wwwroot\lib\js\**" />
+    <EmbeddedResource Remove="wwwroot\lib\css\**" />
+    <EmbeddedResource Remove="wwwroot\lib\js\**" />
+    <None Remove="wwwroot\lib\css\**" />
+    <None Remove="wwwroot\lib\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
+    <PackageReference Include="AspNetCore.HealthChecks.Uris" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.5" />
+    <PackageReference Include="Ocelot" Version="18.0.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
+    <PackageReference Include="Serilog.Enrichers.Environment" Version="2.2.0" />
+    <PackageReference Include="Serilog.Exceptions" Version="8.1.0" />
+    <PackageReference Include="Serilog.Sinks.PostgreSQL" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BuildingBlocks\Common\Interneuron.Common.csproj" />
+    <ProjectReference Include="..\..\BuildingBlocks\Infrastructure\Exceptions\Web\Interneuron.Web.Exceptions.csproj" />
+  </ItemGroup>
+
+</Project>

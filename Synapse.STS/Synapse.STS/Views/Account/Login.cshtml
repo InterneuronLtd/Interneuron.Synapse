@@ -4,7 +4,11 @@
 
 <div class="login-page">
     <div class="page-header">
-        <h1>Login</h1>
+        <h1>
+            <img class="icon" src="~/InterneuronIcon.png" height="35">
+            Synapse Identity Server
+            @*<small>(build {version})</small>*@
+        </h1>
     </div>
 
     @Html.Partial("_ValidationSummary")
@@ -16,7 +20,7 @@
             <div class="col-sm-6">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Local Login</h3>
+                        <h3 class="panel-title">Login</h3>
                     </div>
                     <div class="panel-body">
 
@@ -47,8 +51,16 @@
                                     </div>*@
 
                                 <div class="form-group">
-                                    <button class="btn btn-primary" name="button" value="login">Login</button>
-                                    <button class="btn btn-default" name="button" value="cancel">Cancel</button>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-default btn-sm" name="button" value="cancel">Cancel</button>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary btn-block" style="float: right !important;" name="button" value="login">Login</button>
+                                        </div>
+                                    </div>
+                                    
+                                    
                                 </div>
                             </fieldset>
                         </form>

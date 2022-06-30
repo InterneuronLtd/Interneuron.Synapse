@@ -30,6 +30,11 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Admitdatetime { get; set; }
         public string Assignedpatientlocationpointofcare { get; set; }
         public string Assignedpatientlocationlocationtypetext { get; set; }
+        public string Assignedpatientlocationlocationtypecode { get; set; }
+        public string Admittingdoctorcode { get; set; }
+        public string Attendingdoctorcode { get; set; }
+        public string Attendingdoctortext { get; set; }
+        public string Referringdoctorid { get; set; }
         public string Fullnamewithhospno { get; set; }
         public string Locationwithconsultant { get; set; }
         public string Badge { get; set; }
@@ -95,6 +100,7 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Locatorboardtitleward { get; set; }
         public string Wardinformationformatted { get; set; }
         public string Wardnamelarge { get; set; }
+        public string Wardcomment1 { get; set; }
         public string Patientbanner { get; set; }
         public string ColBed { get; set; }
         public string ColStatus { get; set; }
@@ -113,6 +119,7 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string ColActions { get; set; }
         public string ColBadges { get; set; }
         public string ColRadiology { get; set; }
+        public string Tcilist { get; set; }
         public string Dynamiccss { get; set; }
         public string Wbbbedstatus { get; set; }
         public string Bednumbercolour { get; set; }

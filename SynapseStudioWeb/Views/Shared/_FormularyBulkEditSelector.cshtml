@@ -225,7 +225,7 @@
 
     function removeFromBulkEdit(item) {
         let parentPanel = $(item).closest('.bulk-edit-item-panel');
-        let codeToBeRemoved = $(parentPanel).data('code');
+        let codeToBeRemoved = $(parentPanel).data('formularyVersionId');
         if (!codeToBeRemoved) return;
         let selectedRecordsAsString = sessionStorage.getItem(studio.Storage.STORAGE_KEYS.FORMULARY_BULK_SELECT_IDs);
         if (!selectedRecordsAsString) return;

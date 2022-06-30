@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+ app:
+  build:        
+    context: .
+    dockerfile: Dockerfile
+  container_name: terminologyapi
+  image: terminologyapi
+  ports:
+    - "80:80"

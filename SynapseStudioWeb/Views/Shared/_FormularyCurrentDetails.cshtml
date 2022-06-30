@@ -1657,6 +1657,31 @@
                         }
                     </tr>
                 }
+                @if (Model.IsDiffPrescriptionPrintingRequired)
+                {
+                    <tr>
+                        <td>
+                            Prescription Printing Required
+                        </td>
+                        @if (Model.IsDiffPrescriptionPrintingRequired)
+                        {
+                            <td>
+                                @if (Model.IsPrescriptionPrintingRequired)
+                                {
+                                    @Html.Label("Yes")
+                                }
+                                else
+                                {
+                                    @Html.Label("No")
+                                }
+                            </td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </tr>
+                }
                 @if (Model.IsDiffIndicationIsMandatory)
                 {
                     <tr>

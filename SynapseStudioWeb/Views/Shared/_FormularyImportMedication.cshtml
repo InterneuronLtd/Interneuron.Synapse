@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
         <div class="modal-content" style="min-height:600px;">
             <div class="modal-header">
-                <h5 class="modal-title" id="addMedication">Add Medication (DMD Version : <label id="dmdVersion"></label>)</h5>
+                <h5 class="modal-title" id="addMedication">Staged Database (DMD Version : <label id="dmdVersion"></label>)</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -13,11 +13,11 @@
                         <input id="txtSearchDMDMed" class="form-control" placeholder="Search Medication (Min 3 characters)" />
                     </div>
                     <div class="col-8">
-                        <input type="button" id="btnSearchDMDMedication" class="col-md-4 btn btn-primary" value="Search" />
+                        <input type="button" id="btnSearchDMDMedication" class="col-md-4 btn btn-primary" value="Search Current MMC Database" />
                         <p class="col-md-1 py-2 font-weight-bolder font-italic">
                             OR
                         </p>
-                        <input type="button" id="btnSyncPendingDMDs" class="col-md-5 btn btn-info" value="Get DMD Pending for Sync" />
+                        <input type="button" id="btnSyncPendingDMDs" class="col-md-5 btn btn-info" value="Search Staged Database" />
                         <div class="text-right">
                             <a class="fas fa-file-upload" asp-controller="Formulary" asp-action="importfile" id="lnkFileUploadRedirect" style="cursor:pointer; font-size:1.5rem;" title="Initial Sync">
                             </a>

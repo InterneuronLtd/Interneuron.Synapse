@@ -21,7 +21,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Hl7.Fhir.Model;
 using Interneuron.CareRecord.API.AppCode;
 using Interneuron.CareRecord.API.AppCode.Core;
 using Interneuron.CareRecord.API.AppCode.Extensions;
@@ -29,6 +31,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace Interneuron.CareRecord.API.Controllers
@@ -40,11 +43,13 @@ namespace Interneuron.CareRecord.API.Controllers
     {
         private ILogger<FhirGenericController> _logger;
         private IServiceProvider _provider;
+        private readonly IConfiguration _configuration;
 
-        public FhirGenericController(ILogger<FhirGenericController> logger, IServiceProvider provider)
+        public FhirGenericController(ILogger<FhirGenericController> logger, IServiceProvider provider, IConfiguration configuration)
         {
             this._logger = logger;
             this._provider = provider;
+            this._configuration = configuration;
         }
 
         [HttpGet, Route("{type}/{id}")]
@@ -63,7 +68,7 @@ namespace Interneuron.CareRecord.API.Controllers
             var handler = queryHandlerFactory.GetHandler(nameof(Read));
 
             return await new TaskFactory().StartNew(()=> handler.Handle(fhirParams));
-        }
+         }
 
         [HttpGet, Route("{type}/{id}/{versionId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -102,5 +107,66 @@ namespace Interneuron.CareRecord.API.Controllers
             return await new TaskFactory().StartNew(() => handler.Handle(key, searchparams));
         }
 
+        [HttpPost, Route("$GetStructuredRecord")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status410Gone)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<FhirResponse>> GetStructuredRecord([FromBody] Parameters parameters)
+        {
+            var includeDemographicsOnlyParam = parameters.Parameter.FirstOrDefault(x => x.Name == "demographicsOnly");
+            if (includeDemographicsOnlyParam == null)
+            {
+                return FhirResponse.WithError(HttpStatusCode.BadRequest, "Missing demographicsOnly parameter.");
+            }
+
+            if (includeDemographicsOnlyParam.Part == null)
+            {
+                return FhirResponse.WithError(HttpStatusCode.BadRequest, "Missing Part in demographicsOnly parameter.");
+            }
+
+            var includeDemographicsOnlyPart = includeDemographicsOnlyParam.Part.FirstOrDefault(x => x.Name == "includeDemographicsOnly");
+
+            if (includeDemographicsOnlyPart == null)
+            {
+                return FhirResponse.WithError(HttpStatusCode.BadRequest, "Missing includeDemographicsOnly Part in demographicsOnly parameter.");
+            }
+
+            var nhsNumberParameter = parameters.Parameter.FirstOrDefault(x => x.Name == "patientNHSNumber");
+
+            var nhsNumber = nhsNumberParameter.Value as Identifier;
+
+
+            if (includeDemographicsOnlyPart.Value.Matches(new FhirBoolean(true)))
+            {
+                var patientResource = Read("Patient", nhsNumber.Value).Result.Value;
+
+                Bundle bundle = new Bundle();
+                bundle.Entry = new List<Bundle.EntryComponent>();
+
+                Bundle.EntryComponent bundleEntry = new Bundle.EntryComponent();
+                bundleEntry.Resource = patientResource.Resource;
+                bundle.Type = Bundle.BundleType.Collection;
+                bundle.Entry.Add(bundleEntry);
+
+                return new FhirResponse(System.Net.HttpStatusCode.OK, bundle);
+            }
+            else
+            {
+                List<IKey> fhirParams = new List<IKey>();
+
+                foreach (var type in _configuration.GetSection("CareRecordConfig").GetSection("SupportedHL7Types").Get<string[]>())
+                {
+                    fhirParams.Add(Key.Create(type, nhsNumber.Value));
+                }
+
+                var queryHandlerFactory = this._provider.GetService(typeof(QueryHandlerFactory)) as QueryHandlerFactory;
+
+                var handler = queryHandlerFactory.GetHandler(nameof(Read));
+
+                return await new TaskFactory().StartNew(() => handler.Handle(fhirParams));
+            }
+        }
     }
 }

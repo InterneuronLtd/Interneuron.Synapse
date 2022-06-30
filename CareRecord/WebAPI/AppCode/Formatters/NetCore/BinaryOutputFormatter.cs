@@ -44,7 +44,7 @@ namespace Interneuron.CareRecord.API.AppCode.Formatters
             {
                 Binary binary = (Binary)context.Object;
                 //var stream = new MemoryStream(binary.Content);
-                var stream = new MemoryStream(binary.Data);
+                var stream = new MemoryStream(binary.Content);
                 context.HttpContext.Response.Headers.Add("Content-Type", binary.ContentType);
                 await stream.CopyToAsync(context.HttpContext.Response.Body);
             }

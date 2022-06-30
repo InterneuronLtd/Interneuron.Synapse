@@ -39,9 +39,15 @@ namespace Interneuron.CareRecord.Repository.QueryBuilders
                 case "search_encounter":
                     return this._provider.GetService(typeof(EncounterSearchQueryBuilder)) as EncounterSearchQueryBuilder;
                 case "search_observation":
-                    return this._provider.GetService(typeof(ObservationResultSearchQueryBuilder)) as ObservationResultSearchQueryBuilder;
+                    return this._provider.GetService(typeof(ObservationSearchQueryBuilder)) as ObservationSearchQueryBuilder;
                 case "search_patient":
                     return this._provider.GetService(typeof(PatientSearchQueryBuilder)) as PatientSearchQueryBuilder;
+                case "search_procedure":
+                    return this._provider.GetService(typeof(ProcedureSearchQueryBuilder)) as ProcedureSearchQueryBuilder;
+                case "search_report":
+                    return this._provider.GetService(typeof(ReportSearchQueryBuilder)) as ReportSearchQueryBuilder;
+                case "search_result":
+                    return this._provider.GetService(typeof(ObservationResultSearchQueryBuilder)) as ObservationResultSearchQueryBuilder;
             }
             return null;
         }

@@ -28,6 +28,8 @@ namespace Interneuron.CareRecord.API.AppCode
     {
         FhirResponse Handle(IKey fHIRParam);
 
+        FhirResponse Handle(List<IKey> fHIRParam);
+
         FhirResponse Handle(IKey fhirParam, params object[] parameters);
 
         FhirResponse Handle(IKey fhirParam, IEnumerable<object> parameters = null);

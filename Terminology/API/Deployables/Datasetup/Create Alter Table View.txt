@@ -1,0 +1,59 @@
+CREATE TABLE local_formulary.formulary_local_route_detail (
+	"_row_id" varchar(255) NOT NULL DEFAULT uuid_generate_v4(),
+	"_createdtimestamp" timestamptz NULL DEFAULT timezone('UTC'::text, now()),
+	"_createddate" timestamp NULL DEFAULT now(),
+	"_createdby" varchar(255) NULL,
+	"_timezonename" varchar(255) NULL,
+	"_timezoneoffset" int4 NULL,
+	"_tenant" varchar(255) NULL,
+	formulary_version_id varchar(255) NULL,
+	route_cd varchar(50) NULL,
+	route_field_type_cd varchar(50) NULL,
+	"_updatedtimestamp" timestamptz NULL DEFAULT timezone('UTC'::text, now()),
+	"_updateddate" timestamp NULL DEFAULT now(),
+	"_updatedby" varchar(255) NULL,
+	"source" varchar(100) NULL,
+	CONSTRAINT formulary_local_route_detail_pk PRIMARY KEY (_row_id)
+);
+
+ALTER TABLE local_formulary.formulary_local_route_detail ADD CONSTRAINT formulary_local_route_detail_fk FOREIGN KEY (formulary_version_id) REFERENCES local_formulary.formulary_header(formulary_version_id);
+
+ALTER TABLE terminology.dmd_lookup_form ADD is_latest bool NULL;
+ALTER TABLE terminology.dmd_lookup_ingredient ADD is_latest bool NULL;
+ALTER TABLE terminology.dmd_lookup_route ADD is_latest bool NULL;
+ALTER TABLE terminology.dmd_lookup_supplier ADD is_latest bool NULL;
+ALTER TABLE terminology.dmd_lookup_uom ADD is_latest bool NULL;
+ALTER TABLE local_formulary.formulary_detail ADD COLUMN reminder text;
+ALTER TABLE local_formulary.formulary_detail ALTER COLUMN medusa_preparation_instructions TYPE text;
+ALTER TABLE local_formulary.lookup_common ADD additionalproperties text NULL;
+ALTER TABLE local_formulary.formulary_detail add column local_licensed_use text;
+ALTER TABLE local_formulary.formulary_detail add column local_unlicensed_use text;
+
+
+CREATE MATERIALIZED VIEW terminology.snomedct_modified_release_mat
+TABLESPACE pg_default
+AS select distinct 
+	sr.refsetid as mr_id,
+	case sr.refsetid 
+	when '999000501000001105' then '12'
+	when '999000511000001107' then '24'
+	end as mr_cd,
+   	dp_dest.conceptid AS drug_id,
+   	dp_dest.term AS drug_term,
+    to_tsvector('english'::regconfig, dp_dest.term) AS drug_term_tokens
+ FROM terminology.snomedct_simplerefset_latest_mat sr
+     JOIN terminology.snomedct_relationship_latest_mat rf ON sr.referencedcomponentid::text = rf.destinationid::text
+     JOIN terminology.snomedct_description_latest_mat dp_dest ON dp_dest.conceptid::text = rf.destinationid::text
+     JOIN terminology.snomedct_description_latest_mat dp_src ON dp_src.conceptid::text = rf.sourceid::text
+  WHERE (sr.refsetid::text = '999000501000001105'::text or sr.refsetid::text = '999000511000001107'::text)
+  AND dp_dest.typeid::text = '900000000000013009'::text 
+  AND dp_src.typeid::text = '900000000000013009'::text AND sr.active = '1'::bpchar 
+  AND rf.active = '1'::bpchar AND dp_dest.active = '1'::bpchar 
+  AND dp_src.active = '1'::bpchar
+  WITH DATA;
+
+-- View indexes:
+CREATE INDEX snomedct_modified_release_mat_drug_id_idx ON terminology.snomedct_modified_release_mat USING btree (drug_id);
+CREATE INDEX snomedct_modified_release_mat_drug_term_tokens_idx ON terminology.snomedct_modified_release_mat USING gin (drug_term_tokens);
+CREATE INDEX snomedct_modified_release_mat_mr_id_idx ON terminology.snomedct_modified_release_mat USING btree (mr_id);
+CREATE INDEX snomedct_modified_release_mat_drug_term_idx ON terminology.snomedct_modified_release_mat USING btree (drug_term);

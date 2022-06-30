@@ -26,28 +26,15 @@ namespace SynapseDynamicAPI.Services
 {
     internal static class AuthenticatorServices
     {
-        private static Object repositoryAccessLock;
+        private static Object repositoryAccessLock = new object();
 
-        static AuthenticatorServices()
-        {
-            smartCardTokenRepository = new Dictionary<string, string>();
-            repositoryAccessLock = new object();
-        }
-
-        private static Dictionary<string, string> smartCardTokenRepository;
+        private static Dictionary<string, string> smartCardTokenRepository = new Dictionary<string, string>();
 
         public static void SaveSmartCardToken(SmartCardUserModel user) 
         {
             lock (repositoryAccessLock)
             {
-                if (smartCardTokenRepository.ContainsKey(user.UserId))
-                {
-                    smartCardTokenRepository[user.UserId] = user.SmartCardToken;
-                }
-                else
-                {
-                    smartCardTokenRepository.Add(user.UserId, user.SmartCardToken);
-                }
+                smartCardTokenRepository[user.UserId] = user.SmartCardToken;
             }
         }
 

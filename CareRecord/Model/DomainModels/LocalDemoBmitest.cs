@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_LocalDemoBmitest : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_LocalDemoBmitest : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string DemoBmitestId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -42,5 +42,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string PersonId { get; set; }
         public string Weightofperson { get; set; }
         public string Bmiofperson { get; set; }
+        public string Terminologysystem { get; set; }
     }
 }

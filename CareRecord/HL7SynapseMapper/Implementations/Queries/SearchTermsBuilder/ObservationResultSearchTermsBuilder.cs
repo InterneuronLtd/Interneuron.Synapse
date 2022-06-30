@@ -48,7 +48,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Implementations.Queri
                     { "_id", ResultIdSearchCriteria },
                     { "_lastUpdated", (paramVal)=>
                         {
-                            return new List<SynapseSearchTerm>() { new SynapseSearchTerm($"resultData.{nameof(entitystorematerialised_CoreResult1.Createddate)}", DateTimeSearchExpressionProvider.GreaterThanEqualToOperator, paramVal.Substring(2,paramVal.Length-2), new DateTimeSearchExpressionProvider()) };
+                            return new List<SynapseSearchTerm>() { new SynapseSearchTerm($"resultData.{nameof(entitystorematerialised_CoreResult.Createddate)}", DateTimeSearchExpressionProvider.GreaterThanEqualToOperator, paramVal.Substring(2,paramVal.Length-2), new DateTimeSearchExpressionProvider()) };
                         }
                     },
                     { "Patient.DateOfBirth", PatientDOBCriteria
@@ -106,7 +106,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Implementations.Queri
 
         private List<SynapseSearchTerm> ResultIdSearchCriteria(string paramVal)
         {
-            return new List<SynapseSearchTerm>() { new SynapseSearchTerm($"resultData.{nameof(entitystorematerialised_CoreResult1.ResultId)}", StringSearchExpressionProvider.EqualsOperator, paramVal, new StringSearchExpressionProvider())
+            return new List<SynapseSearchTerm>() { new SynapseSearchTerm($"resultData.{nameof(entitystorematerialised_CoreResult.ResultId)}", StringSearchExpressionProvider.EqualsOperator, paramVal, new StringSearchExpressionProvider())
             };
         }
     }

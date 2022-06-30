@@ -31,7 +31,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
     {
         public ObservationDTOObservationProfile()
         {
-            CreateMap<ObservationDTO, entitystore_CoreObservation1>()
+            CreateMap<ObservationDTO, entitystorematerialised_CoreObservation>()
                 .ForMember(dest => dest.Createdby, opt => opt.MapFrom(s => s._Createdby))
                 .ForMember(dest => dest.ObservationeventId, opt => opt.MapFrom(s => s.Observationevent_Id))
                 .ForMember(dest => dest.ObservationtypeId, opt => opt.MapFrom(s => s.Observationtype_Id))
@@ -43,7 +43,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
                 .ForMember(dest => dest.Createdtimestamp, opt => opt.Ignore())
                 .ForMember(dest => dest.Createddate, opt => opt.Ignore());
 
-            CreateMap<ObservationEventDTO, entitystore_CoreObservationevent1>()
+            CreateMap<ObservationEventDTO, entitystorematerialised_CoreObservationevent>()
                 .ForMember(dest => dest.Createdby, opt => opt.MapFrom(s => s._Createdby))
                 .ForMember(dest => dest.PersonId, opt => opt.MapFrom(s => s.Person_Id))
                 .ForMember(dest => dest.ObservationeventId, opt => opt.MapFrom(s => s.Observationevent_Id))
@@ -70,9 +70,9 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
                 .ForMember(dest => dest.EncounterId, opt => opt.MapFrom(s => s.Encounter_Id));
 
 
-            CreateMap<entitystore_CoreObservation1, ObservationDTO>();
+            CreateMap<entitystorematerialised_CoreObservation, ObservationDTO>();
                 
-            CreateMap<entitystore_CoreObservationevent1, ObservationEventDTO>();
+            CreateMap<entitystorematerialised_CoreObservationevent, ObservationEventDTO>();
 
             CreateMap<entitystorematerialised_CoreObservationevent, ObservationEventDTO>();
             CreateMap<entitystorematerialised_CoreObservation, ObservationDTO>();

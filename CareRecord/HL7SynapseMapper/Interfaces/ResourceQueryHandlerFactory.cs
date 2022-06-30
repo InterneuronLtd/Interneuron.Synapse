@@ -32,23 +32,41 @@ namespace Interneuron.CareRecord.HL7SynapseService.Interfaces
         {
             this._provider = provider;
         }
-        public IResourceQueryHandler GetHandler(Type fhirResourceType)
+        public IResourceQueryHandler GetHandler(string fhirResourceType)
         {
-            if (fhirResourceType == typeof(Patient))
+            if (fhirResourceType == "Patient")
             {
                 var readHandler = this._provider.GetService(typeof(ReadPatientHandler)) as ReadPatientHandler;
                 return readHandler; // new ReadPatientHandler(this._provider);
             }
 
-            if (fhirResourceType == typeof(Encounter))
+            if (fhirResourceType == "Encounter")
             {
                 var readHandler = this._provider.GetService(typeof(ReadEncounterHandler)) as ReadEncounterHandler;
                 return readHandler; // new ReadEncounterHandler(this._provider);
             }
 
-            if (fhirResourceType == typeof(Observation))
+            if (fhirResourceType == "Observation")
+            {
+                var readHandler = this._provider.GetService(typeof(ReadObservationHandler)) as ReadObservationHandler;
+                return readHandler;
+            }
+
+            if (fhirResourceType == "Result")
             {
                 var readHandler = this._provider.GetService(typeof(ReadResultHandler)) as ReadResultHandler;
+                return readHandler;
+            }
+
+            if (fhirResourceType == "Report")
+            {
+                var readHandler = this._provider.GetService(typeof(ReadReportHandler)) as ReadReportHandler;
+                return readHandler;
+            }
+
+            if (fhirResourceType == "Procedure")
+            {
+                var readHandler = this._provider.GetService(typeof(ReadProcedureHandler)) as ReadProcedureHandler;
                 return readHandler;
             }
             return null;

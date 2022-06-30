@@ -20,6 +20,8 @@
 
 ﻿using Interneuron.Common.Extensions;
 using SynapseStudioWeb.Models.MedicationMgmt;
+using SynapseStudioWeb.Models.MedicinalMgmt;
+using System.Collections.Generic;
 
 namespace SynapseStudioWeb.Controllers.MedicationManagement.BulkEditMergeHandlers
 {
@@ -102,6 +104,7 @@ namespace SynapseStudioWeb.Controllers.MedicationManagement.BulkEditMergeHandler
 
             editedData.OutpatientMedication = editedData.NullableOutpatientMedication ?? modelFromDB.OutpatientMedication;
 
+            editedData.TitrationTypesEditableId = editedData.TitrationTypesEditableId ?? modelFromDB.TitrationTypesEditableId;
 
             if (!editedData.TitrationTypes.IsCollectionValid())
             {
@@ -122,6 +125,8 @@ namespace SynapseStudioWeb.Controllers.MedicationManagement.BulkEditMergeHandler
 
             editedData.IsCustomControlledDrug = editedData.NullableIsCustomControlledDrug ?? modelFromDB.IsCustomControlledDrug;
 
+            editedData.IsPrescriptionPrintingRequired = editedData.NullableIsPrescriptionPrintingRequired ?? modelFromDB.IsPrescriptionPrintingRequired;
+
             if (!editedData.Diluents.IsCollectionValid())
             {
                 editedData.Diluents = modelFromDB.Diluents;
@@ -136,6 +141,66 @@ namespace SynapseStudioWeb.Controllers.MedicationManagement.BulkEditMergeHandler
             editedData.Status = editedData.Status ?? modelFromDB.Status;
 
             editedData.RecStatuschangeMsg = editedData.RecStatuschangeMsg ?? modelFromDB.RecStatuschangeMsg;
+
+            if (editedData.DelLocalLicensedIndication)
+            {
+                editedData.LocalLicensedUse = new List<CodeNameSelectorModel>();
+            }
+
+            if (editedData.DelLocalUnlicensedIndication)
+            {
+                editedData.LocalUnlicensedUse = new List<CodeNameSelectorModel>();
+            }
+
+            if (editedData.DelLocalLicensedRoute)
+            {
+                editedData.LocalLicensedRoute = new List<CodeNameSelectorModel>();
+            }
+
+            if(editedData.DelLocalUnlicensedRoute)
+            {
+                editedData.LocalUnlicensedRoute = new List<CodeNameSelectorModel>();
+            }
+
+            if (editedData.DelMedusaPrepIns)
+            {
+                editedData.MedusaPreparationInstructionsEditable = string.Empty;
+            }
+
+            if (editedData.DelCompatibleDiluents)
+            {
+                editedData.Diluents = new List<CodeNameSelectorModel>();
+            }
+
+            if (editedData.DelCustomWarning)
+            {
+                editedData.CustomWarnings = new List<FormularyCustomWarningModel>();
+            }
+
+            if (editedData.DelReminder)
+            {
+                editedData.Reminders = new List<FormularyReminderModel>();
+            }
+
+            if (editedData.DelEndorsement)
+            {
+                editedData.Endorsements = new List<string>();
+            }
+
+            if (editedData.DelRoundingFactor)
+            {
+                editedData.RoundingFactorCd = null;
+            }
+
+            //if (editedData.DelFormularyStatus)
+            //{
+            //    editedData.RnohFormularyStatuscd = null;
+            //}
+
+            if (editedData.DelTitrationType)
+            {
+                editedData.TitrationTypesEditableId = null;
+            }
         }
     }
 }

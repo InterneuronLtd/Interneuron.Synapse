@@ -23,24 +23,10 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystorematerialised_TerminusPatientlist1 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class baseview_TerminusPatientlist1 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string PatientlistId { get; set; }
-        public string RowId { get; set; }
-        public int? Sequenceid { get; set; }
-        public string Contextkey { get; set; }
-        public DateTime? Createdtimestamp { get; set; }
-        public DateTime? Createddate { get; set; }
-        public string Createdsource { get; set; }
-        public string Createdmessageid { get; set; }
-        public string Createdby { get; set; }
-        public short? Recordstatus { get; set; }
-        public string Timezonename { get; set; }
-        public int? Timezoneoffset { get; set; }
-        public string Tenant { get; set; }
         public string Patientlistname { get; set; }
-        public string Status { get; set; }
-        public bool? Isdefault { get; set; }
-        public int? Displayorder { get; set; }
+        public long? Counts { get; set; }
     }
 }

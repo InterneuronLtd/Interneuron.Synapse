@@ -176,7 +176,7 @@
                                 <p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
                         </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -186,7 +186,7 @@
                          </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
                         </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -195,7 +195,7 @@
                             <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>Source: @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.FDB_DATA_SOURCE </p><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
                         </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -204,7 +204,7 @@
                             <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left><p>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule3")<br/>@SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule3")</p></div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
                         </div>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedUse)" data-isdisabled="true" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -1059,6 +1059,32 @@
                                 <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
                             }
                             @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Custom_Controlled"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
+                            }
+
+                        </div>" onclick="showFormularyCntrlTooltip(this)" onmouseover="showFormularyCntrlTooltip(this)"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsPrescriptionPrintingRequired" class="col-sm-5 col-form-label">Prescription Printing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsPrescriptionPrintingRequired)
+                            <span class="icon-tooltip fas fa-info-circle text-info text-left" data-tooltip-content="<div class=text-left>
+
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Prescription_Printing_Required"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VMP_Is_Prescription_Printing_Required"), "any", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VMP_Rule1")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Prescription_Printing_Required"), "all", true) == 0)
+                            {
+                                <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule2")</p> <br />
+                            }
+                            @if (string.Compare(SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetFormularyRules("VTM_Is_Prescription_Printing_Required"), "any", true) == 0)
                             {
                                 <p> @SynapseStudioWeb.AppCode.Constants.TerminologyConstants.GetMergeRuleDesc("VTM_Rule1")</p> <br />
                             }

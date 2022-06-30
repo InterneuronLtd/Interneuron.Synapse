@@ -1,0 +1,176 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary.Requests;
+//using System.Collections.Generic;
+
+//namespace Interneuron.Terminology.API.AppCode.Validators
+//{
+//    public class CreateFormularyRequestValidator : ITerminologyValidator
+//    {
+//        private const string NO_DATA_TO_SAVE_MSG = "No Data to save";
+//        private const string INGREDIENT_MISSING_MSG = "One of the ingredient detail is missing in the data. Code {0}, Name: {1}";
+//        private const string SUPPLIER_MISSING_MSG = "One of the AMP related detail is missing in the data. Code {0}, Name: {1}";
+//        private const string ROUTE_MISSING_MSG = "One of the route detail is missing in the data. Code {0}, Name: {1}";
+//        private const string DETAIL_MISSING_MSG = "Key details are missing in the data. Code {0}, Name: {1}";
+
+//        private CreateEditFormularyRequest _request;
+
+//        public CreateFormularyRequestValidator(CreateEditFormularyRequest request)
+//        {
+//            _request = request;
+//        }
+
+//        public TerminologyValidationResult Validate()
+//        {
+//            var validationResult = CheckRequestHasData();
+//            if (!validationResult.IsValid)
+//                return validationResult;
+
+//            //Check for mandatory fields
+//            validationResult = CheckMandatory();
+
+//            return validationResult;
+//        }
+
+//        private TerminologyValidationResult CheckRequestHasData()
+//        {
+//            var validationResult = new TerminologyValidationResult();
+
+//            validationResult.IsValid = true;
+
+//            if (_request == null || !_request.RequestsData.IsCollectionValid())
+//            {
+//                validationResult.IsValid = false;
+//                validationResult.ValidationErrors = new List<string> { NO_DATA_TO_SAVE_MSG };
+//            }
+
+//            return validationResult;
+//        }
+
+//        private TerminologyValidationResult CheckMandatory()
+//        {
+//            var validationResult = new TerminologyValidationResult();
+//            validationResult.IsValid = true;
+//            validationResult.ValidationErrors = new List<string>();
+
+//            foreach (var req in _request.RequestsData)
+//            {
+//                if (req == null)
+//                {
+//                    validationResult.IsValid = false;
+//                    validationResult.ValidationErrors.Add("'Empty' request object. Data cannot be saved.");
+
+//                    return validationResult;
+//                }
+
+//                var areHeaderFieldsEmpty = req.Code.IsEmpty() || req.CodeSystem.IsEmpty() || req.ProductType.IsEmpty() || req.Name.IsEmpty()
+//                     || req.RecStatusCode.IsEmpty();
+
+//                if (areHeaderFieldsEmpty)
+//                {
+//                    validationResult.ValidationErrors.Add("Key details are missing in the data.");
+
+//                    validationResult.IsValid = false;
+//                    return validationResult;
+//                }
+
+//                var areDetailFieldsEmpty = req.Detail.IsNull() || req.Detail.RnohFormularyStatuscd.IsEmpty();
+
+//                if (areDetailFieldsEmpty)
+//                {
+//                    validationResult.ValidationErrors.Add(DETAIL_MISSING_MSG.ToFormat(req.Code, req.Name));
+
+//                    validationResult.IsValid = false;
+//                    return validationResult;
+//                }
+
+
+
+//                //Nothing specific for VTM
+//                //if(string.Compare(req.ProductType.Trim(), "vtm", true) == 0)
+//                //{
+//                //    //Perform vtm validation
+//                //}
+
+//                if (string.Compare(req.ProductType.Trim(), "amp", true) == 0)
+//                {
+//                    //Perform amp validation
+//                    if (req.Detail.SupplierCd.IsEmpty())
+//                    {
+//                        validationResult.ValidationErrors.Add(SUPPLIER_MISSING_MSG.ToFormat(req.Code, req.Name));
+//                        validationResult.IsValid = false;
+//                        return validationResult;
+//                    }
+//                }
+
+//                if (string.Compare(req.ProductType.Trim(), "vmp", true) == 0)
+//                {
+//                    //Perform vmp validation
+//                    if (!CheckVMPSpecificData(req))
+//                    {
+//                        validationResult.ValidationErrors.Add(INGREDIENT_MISSING_MSG.ToFormat(req.Code, req.Name));
+//                        validationResult.IsValid = false;
+//                        return validationResult;
+//                    }
+
+//                    if (!CheckRouterDetails(req))
+//                    {
+//                        validationResult.ValidationErrors.Add(ROUTE_MISSING_MSG.ToFormat(req.Code, req.Name));
+
+//                        validationResult.IsValid = false;
+//                        return validationResult;
+//                    }
+//                }
+
+//                return validationResult;
+//            }
+
+//            return null;
+//        }
+
+//        private bool CheckVMPSpecificData(FormularyDTO req)
+//        {
+//            //var vmpDetailEmpty = req.Detail.DoseFormCd.IsEmpty() || !req.Detail.UnitDoseFormSize.HasValue || req.Detail.UnitDoseFormUnits.IsEmpty() || req.Detail.UnitDoseUnitOfMeasureCd.IsEmpty() || req.Detail.ControlledDrugCategoryCd.IsEmpty();
+
+//            //TBA
+//            var vmpDetailEmpty = req.Detail.DoseFormCd.IsEmpty();// || req.Detail.ControlledDrugCategoryCd.IsEmpty();
+
+//            if (vmpDetailEmpty) return false;
+
+//            if (req.FormularyIngredients.IsCollectionValid())
+//            {
+
+//                foreach (var ing in req.FormularyIngredients)
+//                {
+//                    var ingEmpty = ing.IngredientCd.IsEmpty() || ing.StrengthValueNumeratorUnitCd.IsEmpty() || ing.StrengthValueNumerator.IsEmpty();
+
+//                    if (ingEmpty) return false;
+//                }
+//            }
+
+//            //if (req.FormularyOntologyForms.IsCollectionValid())
+//            //{
+//            //    foreach (var ing in req.FormularyOntologyForms)
+//            //    {
+//            //        if (ing.FormCd.IsEmpty()) return false;
+//            //    }
+//            //}
+
+//            return true;
+//        }
+
+//        private bool CheckRouterDetails(FormularyDTO req)
+//        {
+//            if (req.FormularyRouteDetails.IsCollectionValid())
+//            {
+//                foreach (var route in req.FormularyRouteDetails)
+//                {
+//                    if (route.RouteCd.IsEmpty()) return false;
+//                }
+
+//            }
+//            return true;
+
+//        }
+//    }
+//}

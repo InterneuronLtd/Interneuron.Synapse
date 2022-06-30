@@ -32,8 +32,8 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
     {
         public ObservationResultMapperProfile()
         {
-            CreateMap<entitystorematerialised_CoreResult1, Observation>()
-                .ForMember(dest => dest.Meta, opt => opt.MapFrom(src => GetMeta(src)))
+            CreateMap<entitystorematerialised_CoreResult, Observation>()
+                //.ForMember(dest => dest.Meta, opt => opt.MapFrom(src => GetMeta(src)))
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ResultId))
                 .ForMember(dest => dest.Identifier, opt => opt.MapFrom(src => GetResultIdentifiers(src)))
                 .ForMember(dest => dest.Code, opt => opt.MapFrom(src => GetResultCode(src)))
@@ -63,16 +63,15 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             CreateMap<entitystorematerialised_CorePersonidentifier, Observation>()
                 .ForMember(dest => dest.Subject, opt => opt.MapFrom<ObservationResultSubjectResolver>());
 
-            CreateMap<entitystorematerialised_CoreOrder1, Observation>()
+            CreateMap<entitystorematerialised_CoreOrder, Observation>()
                 .ForMember(dest => dest.Issued, opt =>
                 {
                     opt.PreCondition(cnd => cnd.Statuschangedatetime.HasValue);
                     opt.MapFrom(src => src.Statuschangedatetime);
                 });
-
         }
 
-        private Meta GetMeta(entitystorematerialised_CoreResult1 src)
+        private Meta GetMeta(entitystorematerialised_CoreResult src)
         {
             if (src.IsNull() || !src.Createdtimestamp.HasValue) return null;
 
@@ -83,7 +82,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             };
         }
 
-        private Element GetValue(entitystorematerialised_CoreResult1 result)
+        private Element GetValue(entitystorematerialised_CoreResult result)
         {
             if (int.TryParse(result.Observationvalue, out int intValue))
             {
@@ -115,7 +114,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             }
         }
 
-        private List<CodeableConcept> GetInterpretation(entitystorematerialised_CoreResult1 result)
+        private List<CodeableConcept> GetInterpretation(entitystorematerialised_CoreResult result)
         {
             var interpretations = new List<CodeableConcept>();
 
@@ -135,7 +134,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return interpretations;
         }
 
-        private List<ResourceReference> GetPerformer(entitystorematerialised_CoreResult1 src, Observation obs)
+        private List<ResourceReference> GetPerformer(entitystorematerialised_CoreResult src, Observation obs)
         {
             var referenceResources = new List<ResourceReference>();
 
@@ -152,7 +151,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return referenceResources;
         }
 
-        private List<Observation.ReferenceRangeComponent> GetReferenceRange(entitystorematerialised_CoreResult1 result, Observation obs)
+        private List<Observation.ReferenceRangeComponent> GetReferenceRange(entitystorematerialised_CoreResult result, Observation obs)
         {
             var referenceRanges = new List<Observation.ReferenceRangeComponent>();
 
@@ -161,12 +160,12 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
 
             Observation.ReferenceRangeComponent referenceRange = new Observation.ReferenceRangeComponent();
 
-            referenceRange.Low = new SimpleQuantity
+            referenceRange.Low = new Quantity
             {
                 Value = Decimal.TryParse(result.Referencerangelow, out Decimal refLow) ? refLow : default(decimal?)
             };
 
-            referenceRange.High = new SimpleQuantity
+            referenceRange.High = new Quantity
             {
                 Value = Decimal.TryParse(result.Referencerangehigh, out Decimal refHigh) ? refHigh : default(decimal?)
             };
@@ -175,7 +174,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return referenceRanges;
         }
 
-        private ObservationStatus GetStatus(entitystorematerialised_CoreResult1 coreObservationResult)
+        private ObservationStatus GetStatus(entitystorematerialised_CoreResult coreObservationResult)
         {
             if (coreObservationResult.Observationresultstatus.IsEmpty()) return default(ObservationStatus);
 
@@ -209,7 +208,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return default(ObservationStatus); ;
         }
 
-        private FhirDateTime GetEffective(entitystorematerialised_CoreResult1 coreObservationResult)
+        private FhirDateTime GetEffective(entitystorematerialised_CoreResult coreObservationResult)
         {
             if (coreObservationResult.Observationdatetime.HasValue)
             {
@@ -220,7 +219,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return null;
         }
 
-        private CodeableConcept GetResultCode(entitystorematerialised_CoreResult1 coreObservationResult)
+        private CodeableConcept GetResultCode(entitystorematerialised_CoreResult coreObservationResult)
         {
             var obsCodes = new CodeableConcept();
 
@@ -234,7 +233,7 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
             return obsCodes;
         }
 
-        private List<Identifier> GetResultIdentifiers(entitystorematerialised_CoreResult1 coreObservationResult)
+        private List<Identifier> GetResultIdentifiers(entitystorematerialised_CoreResult coreObservationResult)
         {
             var identifiers = new List<Identifier>();
 
@@ -263,14 +262,8 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.AutoMapperProfiles
         {
             var subject = new ResourceReference
             {
-                Identifier = new Identifier(),
-                Reference = "Patient"
+                Reference = $"Patient/{personIdentifier.Idnumber}"
             };
-
-            if (personIdentifier.IsNull()) return subject;
-
-            subject.Identifier.Value = personIdentifier.Idnumber;
-            subject.Identifier.System = personIdentifier.Idtypecode ?? _defaultHospitalRefNo;
 
             return subject;
         }

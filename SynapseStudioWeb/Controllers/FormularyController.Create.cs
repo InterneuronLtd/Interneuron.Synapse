@@ -64,7 +64,7 @@ namespace SynapseStudioWeb.Controllers
 
             if (identificationTypes.IsCollectionValid())
             {
-                ViewBag.IndentificationCodeTypes = identificationTypes.Where(rec => rec.Value != TerminologyConstants.PRIMARY_IDENTIFICATION_CODE_TYPE)?.ToDictionary(k => k.Key, v => v.Value).ToSelectList(TerminologyConstants.DEFAULT_DROPDOWN_TEXT);
+                ViewBag.IndentificationCodeTypes = identificationTypes?.ToDictionary(k => k.Key, v => v.Value).ToSelectList(TerminologyConstants.DEFAULT_DROPDOWN_TEXT);
             }
 
             ViewBag.RecordStatuses = await GetAssignableStatuses(status);

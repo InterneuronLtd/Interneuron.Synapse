@@ -329,8 +329,8 @@ body {
     font-family: "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #BDBDBD;
-    background-color: #060606;
+    color: #fff;
+    background-color: #424D83 !important;
 }
 
 input,
@@ -343,7 +343,7 @@ textarea {
 }
 
 a {
-    color: #2a9fd6;
+    color: #fff;
     text-decoration: none;
 }
 
@@ -673,7 +673,7 @@ a.bg-danger:hover {
 .page-header {
     padding-bottom: 9px;
     margin: 40px 0 20px;
-    border-bottom: 1px solid #282828;
+/*    border-bottom: 1px solid #282828;*/
 }
 
 ul,
@@ -2542,8 +2542,8 @@ select[multiple].input-lg {
 
 .btn-primary {
     color: #ffffff;
-    background-color: #2a9fd6;
-    border-color: #2a9fd6;
+    background-color: #2e355b;
+    border-color: #2e355b;
 }
 
     .btn-primary:hover,
@@ -2552,8 +2552,8 @@ select[multiple].input-lg {
     .btn-primary.active,
     .open .dropdown-toggle.btn-primary {
         color: #ffffff;
-        background-color: #2386b4;
-        border-color: #1f79a3;
+        background-color: #2e355b;
+        border-color: #2e355b;
     }
 
     .btn-primary:active,
@@ -4475,7 +4475,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     min-height: 50px;
     margin-bottom: 20px;
     border: 1px solid transparent;
-    background-color: #0277bd !important;
+    background-color: #424D83 !important;
 }
 
 @media (min-width: 768px) {
@@ -5820,7 +5820,7 @@ a.list-group-item-danger {
 
 .panel {
     margin-bottom: 20px;
-    background-color: #222222;
+    background-color: #67709B;
     border: 1px solid transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -6054,8 +6054,8 @@ a.list-group-item-danger {
 }
 
     .panel-default > .panel-heading {
-        color: #BDBDBD;
-        background-color: #3c3c3c;
+        color: #fff;
+        background-color: #2e355b;
         border-color: #282828;
     }
 
@@ -6945,7 +6945,7 @@ button.close {
 }
 
 .navbar {
-    border-bottom: 1px solid #282828;
+   
 }
 
 .text-primary,

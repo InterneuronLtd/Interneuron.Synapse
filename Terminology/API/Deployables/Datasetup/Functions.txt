@@ -1,0 +1,417 @@
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_blood_product(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, bloodproduct character varying, bloodproductmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_blood_product::text as bloodproduct, md5(is_blood_product::text) bloodproductmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_blood_product, bloodproductmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_clinical_trial_medication(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, clinicaltrialmedication character varying, clinicaltrialmedicationmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case clinical_trial_medication when '0' then 'false' when '1' then 'true' else null end as clinicaltrialmedication, md5(clinical_trial_medication) clinicaltrialmedicationmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by clinical_trial_medication, clinicaltrialmedicationmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_compatible_diluent(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, compatiblediluent character varying, compatiblediluentmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, diluent as compatiblediluent, md5(diluent) compatiblediluentmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by diluent, compatiblediluentmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_controlled_drug(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, controlleddrug character varying, controlleddrugmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_custom_controlled_drug::text as controlleddrug, md5(is_custom_controlled_drug::text) controlleddrugmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_custom_controlled_drug, controlleddrugmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_critical_drug(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, criticaldrug character varying, criticaldrugmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case critical_drug when '0' then 'false' when '1' then 'true' else null end as criticaldrug, md5(critical_drug) criticaldrugmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by critical_drug, criticaldrugmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_custom_warning(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, customwarning character varying, customwarningmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, custom_warning as customwarning, md5(custom_warning) customwarningmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by custom_warning, customwarningmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_diluent(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, diluent character varying, diluentmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_diluent::text as diluent, md5(is_diluent::text) diluentmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_diluent, diluentmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_endorsement(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, endorsement character varying, endorsementmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, endorsement, md5(endorsement) endorsementmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by endorsement, endorsementmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_expensive_medication(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, expensivemedication character varying, expensivemedicationmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case expensive_medication when '0' then 'false' when '1' then 'true' else null end as expensivemedication, md5(expensive_medication) expensivemedicationmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by expensive_medication, expensivemedicationmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_formulary_status(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, formularystatus character varying, formularystatusmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, rnoh_formulary_statuscd as formularystatus, md5(rnoh_formulary_statuscd) formularystatusmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by rnoh_formulary_statuscd, formularystatusmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_gastro_resistant(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, gastroresistant character varying, gastroresistantmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_gastro_resistant::text as gastroresistant, md5(is_gastro_resistant::text) gastroresistantmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_gastro_resistant, gastroresistantmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_high_alert_medication(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, highalertmedication character varying, highalertmedicationmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case high_alert_medication when '0' then 'false' when '1' then 'true' else null end as highalertmedication, md5(high_alert_medication) highalertmedicationmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by high_alert_medication, highalertmedicationmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_ignore_duplicate_warning(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, ignoreduplicatewarning character varying, ignoreduplicatewarningmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case ignore_duplicate_warnings when '0' then 'false' when '1' then 'true' else null end as ignoreduplicatewarning, md5(ignore_duplicate_warnings) ignoreduplicatewarningmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by ignore_duplicate_warnings, ignoreduplicatewarningmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_indication_mandatory(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, indicationmandatory character varying, indicationmandatorymd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_indication_mandatory::text as indicationmandatory, md5(is_indication_mandatory::text) indicationmandatorymd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_indication_mandatory, indicationmandatorymd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_iv_to_oral(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, ivtooral character varying, ivtooralmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case iv_to_oral when '0' then 'false' when '1' then 'true' else null end as ivtooral, md5(iv_to_oral) ivtooralmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by iv_to_oral, ivtooralmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_local_licensed_route(in_formularyversionids text[])
+ RETURNS TABLE(formularyversionid character varying, locallicensedroute character varying, locallicensedroutemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select formulary_version_id as formularyversionid, jsonb_agg(route_cd)::text as locallicensedroute, md5(jsonb_agg(route_cd)::text) locallicensedroutemd5 
+from local_formulary.formulary_local_route_detail
+where route_field_type_cd = '003' and formulary_version_id = any(in_formularyversionids)
+group by formulary_version_id;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_local_licensed_use(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, locallicenseduse character varying, locallicensedusemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, local_licensed_use as locallicenseduse, md5(local_licensed_use) locallicensedusemd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by local_licensed_use, locallicensedusemd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_local_unlicensed_route(in_formularyversionids text[])
+ RETURNS TABLE(formularyversionid character varying, localunlicensedroute character varying, localunlicensedroutemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select formulary_version_id as formularyversionid, jsonb_agg(route_cd)::text as localunlicensedroute, md5(jsonb_agg(route_cd)::text) as localunlicensedroutemd5 
+from local_formulary.formulary_local_route_detail
+where route_field_type_cd = '002' and formulary_version_id = any(in_formularyversionids)
+group by formulary_version_id
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_local_unlicensed_use(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, localunlicenseduse character varying, localunlicensedusemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, local_unlicensed_use as localunlicenseduse, md5(local_unlicensed_use) localunlicensedusemd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by local_unlicensed_use, localunlicensedusemd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_medusa_preparation_instruction(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, medusapreparationinstruction character varying, medusapreparationinstructionmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, medusa_preparation_instructions as medusapreparationinstruction, md5(medusa_preparation_instructions) medusapreparationinstructionmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by medusapreparationinstruction, medusapreparationinstructionmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_modified_release(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, modifiedrelease character varying, modifiedreleasemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, is_modified_release::text as modifiedrelease, md5(is_modified_release::text) modifiedreleasemd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by is_modified_release, modifiedreleasemd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_not_for_prn(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, notforprn character varying, notforprnmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case not_for_prn when '0' then 'false' when '1' then 'true' else null end as notforprn, md5(not_for_prn) notforprnmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by not_for_prn, notforprnmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_outpatient_medication(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, outpatientmedication character varying, outpatientmedicationmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case outpatient_medication_cd when '0' then 'false' when '1' then 'true' else null end as outpatientmedication, md5(outpatient_medication_cd) outpatientmedicationmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by outpatient_medication_cd, outpatientmedicationmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_prescribable(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, prescribable character varying, prescribablemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, prescribable::text as prescribable, md5(prescribable::text) prescribablemd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by prescribable, prescribablemd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_reminder(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, reminder character varying, remindermd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, reminder, md5(reminder) remindermd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by reminder, remindermd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_rounding_factor(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, roundingfactor character varying, roundingfactormd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, rounding_factor_cd as roundingfactor, md5(rounding_factor_cd) roundingfactormd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by rounding_factor_cd, roundingfactormd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_titration_type(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, titrationtype character varying, titrationtypemd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, titration_type_cd as titrationtype, md5(titration_type_cd) titrationtypemd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by titration_type_cd, titrationtypemd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_witnessing_required(in_formularyversionids text[])
+ RETURNS TABLE(formularycount bigint, witnessingrequired character varying, witnessingrequiredmd5 character varying)
+ LANGUAGE sql
+AS $function$
+
+select count(formulary_version_id) as formularycount, case witnessing_required when '0' then 'false' when '1' then 'true' else null end as witnessingrequired, md5(witnessing_required) witnessingrequiredmd5 
+from local_formulary.formulary_detail
+where formulary_version_id = any(in_formularyversionids)
+group by witnessing_required, witnessingrequiredmd5;
+
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_latest_top_nodes()
+ RETURNS TABLE(formularyid character varying, versionid integer, formularyversionid character varying, name text, code character varying, producttype character varying, parentcode character varying, parentname text, parentproducttype character varying, isduplicate boolean, recstatuscode character varying, rnohformularystatuscd character varying)
+ LANGUAGE plpgsql
+AS $function$
+begin
+	RETURN QUERY
+
+		select distinct 
+				fh.formulary_id,
+				fh.version_id,
+				fh.formulary_version_id,
+				fh."name" as "name" ,
+				fh.code,
+				fh.product_type,
+				fh.parent_code,
+				fh.parent_name,
+				fh.parent_product_type,
+				fh.is_duplicate,
+				fh.rec_status_code,
+				detail.rnoh_formulary_statuscd
+			from local_formulary.formulary_header fh 
+			inner join local_formulary.formulary_detail detail on detail.formulary_version_id  = fh.formulary_version_id 
+			where fh.is_latest = true
+			and (fh.product_type = 'VTM' or fh.parent_code is null or fh.parent_code = '')
+			and (fh.rec_status_code != '006' or fh.rec_status_code is null or fh.rec_status_code = '');
+	
+end
+$function$
+;
+
+CREATE OR REPLACE FUNCTION local_formulary.udf_formulary_get_next_descendents_by_codes(in_codes text[])
+ RETURNS TABLE(formularyid character varying, versionid integer, formularyversionid character varying, name text, code character varying, producttype character varying, parentcode character varying, parentname text, parentproducttype character varying, isduplicate boolean, recstatuscode character varying)
+ LANGUAGE sql
+AS $function$
+		select distinct 
+			fh.formulary_id,
+			fh.version_id,
+			fh.formulary_version_id,
+			fh."name" as "name" ,
+			fh.code,
+			fh.product_type,
+			fh.parent_code,
+			fh.parent_name,
+			fh.parent_product_type,
+			fh.is_duplicate,
+			fh.rec_status_code 
+		from local_formulary.formulary_header fh 
+		inner join unnest(in_codes) m(code) on m.code = fh.parent_code 
+		where fh.is_latest = true and (fh.rec_status_code != '006' or fh.rec_status_code is null or fh.rec_status_code = '');
+		
+
+$function$
+;

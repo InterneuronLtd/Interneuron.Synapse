@@ -18,14 +18,14 @@
 //along with this program.If not, see<http://www.gnu.org/licenses/>.
 
 
-using AutoMapper;
-using Interneuron.CareRecord.HL7SynapseHandler.Service.Models;
+﻿using AutoMapper;
 using Interneuron.CareRecord.HL7SynapseService.Interfaces;
 using Interneuron.CareRecord.HL7SynapseService.Models;
 using Interneuron.CareRecord.Infrastructure.Domain;
+using Interneuron.CareRecord.Infrastructure.Search;
 using Interneuron.CareRecord.Model.DomainModels;
+using Interneuron.CareRecord.Repository;
 using Interneuron.Common.Extensions;
-using Interneuron.Infrastructure.CustomExceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,53 +33,69 @@ using System.Text;
 
 namespace Interneuron.CareRecord.HL7SynapseService.Implementations
 {
-    public class ReadObservationHandler : ISynapseQueryHandler
+    public class ReadObservationHandler : BaseReadQueryHandler
     {
-        public SynapseResourceData Handle(string personId)
-        {
-            var observationRoots = GetObservations(personId);
-
-            SynapseResourceData synResourceData = new SynapseResourceData();
-
-            synResourceData.SynapseResources = new List<SynapseResource>();
-
-            observationRoots.Each(o => {
-                synResourceData.SynapseResources.Add(o);
-            });
-
-            return synResourceData;
-        }
+        private const string SearchKeyIdentifier = "search_observation";
 
         private IServiceProvider _provider;
-        private IMapper _mapper;
+        private IReadOnlyRepository<entitystorematerialised_CoreObservation> _coreObservationRepo;
+        private IFHIRParam _fhirParam;
 
-        private IRepository<entitystorematerialised_CoreObservationevent> _matCoreObservationEventRepo;
-        private IRepository<entitystorematerialised_CoreObservation> _matCoreObservationRepo;
-
-        public ReadObservationHandler(IServiceProvider provider, IMapper mapper, IRepository<entitystorematerialised_CoreObservationevent> matCoreObservationEventRepo, IRepository<entitystorematerialised_CoreObservation> matCoreObservationRepo)
+        public ReadObservationHandler(IServiceProvider provider, IMapper mapper, IReadOnlyRepository<entitystorematerialised_CoreObservation> coreObservationRepo, IGenericSearchRepository genericSearchRepo) : base(provider, mapper, genericSearchRepo)
         {
             this._provider = provider;
-            this._mapper = mapper;
-            this._matCoreObservationEventRepo = matCoreObservationEventRepo;
-            this._matCoreObservationRepo = matCoreObservationRepo;
+            this._coreObservationRepo = coreObservationRepo;
+        }
+        public override ResourceData Handle(IFHIRParam fhirParam)
+        {
+            this._fhirParam = fhirParam;
+
+            base.OnNoSearchResults = () => NoResultsHandler(fhirParam);
+
+            return base.Handle(fhirParam);
         }
 
-        private List<ObservationRoot> GetObservations(string personId)
+        private ResourceData NoResultsHandler(IFHIRParam fhirParam)
         {
-            List<ObservationRoot> observationRoots = new List<ObservationRoot>();
+            var resourceData = new ResourceData(fhirParam);
 
-            var observationEvents = _matCoreObservationEventRepo.ItemsAsReadOnly.Where(ev => ev.PersonId == personId).ToList();
+            var storeCoreObservationResult = CheckInEntityStore(fhirParam);
 
-            if (observationEvents == null || !observationEvents.IsCollectionValid()) return null;
+            if (storeCoreObservationResult == null || storeCoreObservationResult.ObservationId == null) return resourceData;
 
-            foreach (entitystorematerialised_CoreObservationevent observationEvent in observationEvents)
+            if (storeCoreObservationResult.Recordstatus == 2) // Observation Result in Deleted State
             {
-                var observations = _matCoreObservationRepo.ItemsAsReadOnly.Where(ev => ev.ObservationeventId == observationEvent.ObservationeventId).ToList();
+                resourceData.Resource = null;
+                resourceData.DeletedDate = storeCoreObservationResult.Createddate;
+                resourceData.IsDeleted = true;
 
-                observationRoots.Add(new ObservationRoot { ObservationEvent = this._mapper.Map<ObservationEventDTO>(observationEvent), Observations = this._mapper.Map<List<ObservationDTO>>(observations) });
+                return resourceData;
             }
 
-            return observationRoots;
+            return resourceData;
+        }
+
+        private entitystorematerialised_CoreObservation CheckInEntityStore(IFHIRParam fhirParam)
+        {
+            return _coreObservationRepo.ItemsAsReadOnly.Where(e => e.ObservationId == fhirParam.ResourceId).OrderByDescending(x => x.Sequenceid).FirstOrDefault();
+
+        }
+
+        public override string GetSarchEntityIdentifier()
+        {
+            return SearchKeyIdentifier;
+        }
+
+        public override List<SynapseSearchTerm> GetSynapseSearchTerms()
+        {
+            var searchTerms = new List<SynapseSearchTerm>
+            {
+                new SynapseSearchTerm($"personIdData.{nameof(entitystorematerialised_CorePersonidentifier.Idtypecode)}", DefaultSearchExpressionProvider.EqualsOperator, this._defaultHospitalRefNo, new DefaultSearchExpressionProvider()),
+
+                new SynapseSearchTerm($"personIdData.{nameof(entitystorematerialised_CorePersonidentifier.Idnumber)}", DefaultSearchExpressionProvider.EqualsOperator, _fhirParam.ResourceId, new DefaultSearchExpressionProvider())
+            };
+
+            return searchTerms;
         }
     }
 }

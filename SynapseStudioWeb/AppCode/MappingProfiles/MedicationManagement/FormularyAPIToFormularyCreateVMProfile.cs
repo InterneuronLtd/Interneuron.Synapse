@@ -101,6 +101,7 @@ namespace SynapseStudioWeb.AppCode.MappingProfiles.MedicationManagement
                 .ForMember(dest => dest.IsDiluent, opt => opt.MapFrom(src => src.IsDiluent == true))
                 .ForMember(dest => dest.IsBloodProduct, opt => opt.MapFrom(src => src.IsBloodProduct == true))
                 .ForMember(dest => dest.IsCustomControlledDrug, opt => opt.MapFrom(src => src.IsCustomControlledDrug == true))
+                .ForMember(dest => dest.IsPrescriptionPrintingRequired, opt => opt.MapFrom(src => src.IsPrescriptionPrintingRequired == true))
                 .ForMember(dest => dest.IsModifiedRelease, opt => opt.MapFrom(src => src.IsModifiedRelease == true))
                 .ForMember(dest => dest.IsGastroResistant, opt => opt.MapFrom(src => src.IsGastroResistant == true))
                 .ForMember(dest => dest.IsIndicationMandatory, opt => opt.MapFrom(src => src.IsIndicationMandatory == true));

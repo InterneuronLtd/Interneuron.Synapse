@@ -23,23 +23,15 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystorematerialised_MetaPersona1 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class baseview_MetaPersona1 : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string PersonaId { get; set; }
-        public string RowId { get; set; }
-        public int? Sequenceid { get; set; }
-        public string Contextkey { get; set; }
-        public DateTime? Createdtimestamp { get; set; }
-        public DateTime? Createddate { get; set; }
-        public string Createdsource { get; set; }
-        public string Createdmessageid { get; set; }
-        public string Createdby { get; set; }
-        public short? Recordstatus { get; set; }
-        public string Timezonename { get; set; }
-        public int? Timezoneoffset { get; set; }
-        public string Tenant { get; set; }
-        public string Displayname { get; set; }
+        public string Personadispname { get; set; }
         public string Personaname { get; set; }
+        public int? Personadisporder { get; set; }
+        public string PersonacontextId { get; set; }
+        public string Displayname { get; set; }
+        public string Contextname { get; set; }
         public int? Displayorder { get; set; }
     }
 }

@@ -38,12 +38,12 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Implementations
         private IServiceProvider _provider;
         private IMapper _mapper;
 
-        private IRepository<entitystore_CoreObservationevent1> _coreObservationEventRepo;
-        private IRepository<entitystore_CoreObservation1> _coreObservationRepo;
+        private IRepository<entitystorematerialised_CoreObservationevent> _coreObservationEventRepo;
+        private IRepository<entitystorematerialised_CoreObservation> _coreObservationRepo;
         private IRepository<entitystorematerialised_CoreObservationevent> _matCoreObservationEventRepo;
         private IRepository<entitystorematerialised_CoreObservation> _matCoreObservationRepo;
 
-        public CreateObservationHandler(IServiceProvider provider, IMapper mapper, IRepository<entitystore_CoreObservationevent1> coreObservationEventRepo, IRepository<entitystore_CoreObservation1> coreObservationRepo, IRepository<entitystorematerialised_CoreObservationevent> matCoreObservationEventRepo, IRepository<entitystorematerialised_CoreObservation> matCoreObservationRepo)
+        public CreateObservationHandler(IServiceProvider provider, IMapper mapper, IRepository<entitystorematerialised_CoreObservationevent> coreObservationEventRepo, IRepository<entitystorematerialised_CoreObservation> coreObservationRepo, IRepository<entitystorematerialised_CoreObservationevent> matCoreObservationEventRepo, IRepository<entitystorematerialised_CoreObservation> matCoreObservationRepo)
         {
             this._provider = provider;
             this._mapper = mapper;
@@ -112,13 +112,13 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Implementations
             var eventId = observationEventDTO.Observationevent_Id = Guid.NewGuid().ToString();
             var correlationId = observationEventDTO.Eventcorrelationid = Guid.NewGuid().ToString();
 
-            var eventModel = this._mapper.Map<entitystore_CoreObservationevent1>(observationEventDTO);
+            var eventModel = this._mapper.Map<entitystorematerialised_CoreObservationevent>(observationEventDTO);
 
             this._coreObservationEventRepo.Add(eventModel);
 
             if (observationsDTO.IsCollectionValid())
             {
-                var observationsModel = this._mapper.Map<List<entitystore_CoreObservation1>>(observationsDTO);
+                var observationsModel = this._mapper.Map<List<entitystorematerialised_CoreObservation>>(observationsDTO);
 
                 observationsModel.Each(obs =>
                 {
@@ -144,13 +144,13 @@ namespace Interneuron.CareRecord.HL7SynapseHandler.Service.Implementations
             var eventId = observationEventDTO.Observationevent_Id; //.IsNotEmpty() ?  = Guid.NewGuid().ToString();
             var correlationId = observationEventDTO.Eventcorrelationid = Guid.NewGuid().ToString();
 
-            var eventModel = this._mapper.Map<entitystore_CoreObservationevent1>(observationEventDTO);
+            var eventModel = this._mapper.Map<entitystorematerialised_CoreObservationevent>(observationEventDTO);
 
             this._coreObservationEventRepo.Add(eventModel);
 
             if (observationsDTO.IsCollectionValid())
             {
-                var observationsModel = this._mapper.Map<List<entitystore_CoreObservation1>>(observationsDTO);
+                var observationsModel = this._mapper.Map<List<entitystorematerialised_CoreObservation>>(observationsDTO);
 
                 observationsModel.Each(obs =>
                 {

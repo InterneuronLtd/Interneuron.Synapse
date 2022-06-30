@@ -38,6 +38,7 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string ArrivalTime { get; set; }
         public string Dynamiccss { get; set; }
         public double? Losminutes { get; set; }
+        public string Loshours { get; set; }
         public string Los { get; set; }
         public string PresentingComplaint { get; set; }
         public string Clinician { get; set; }

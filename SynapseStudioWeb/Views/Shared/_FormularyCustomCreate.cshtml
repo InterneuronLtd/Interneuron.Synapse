@@ -115,25 +115,25 @@
                     <div class="form-group row">
                         <label for="localLicensedUse" class="col-sm-5 col-form-label">Local Licensed Indications</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localLicensedUse")" name="localLicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="localUnlicensedUse" class="col-sm-5 col-form-label">Local Unlicensed Indications</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("localUnlicensedUse")" name="localUnlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="licenseduse" class="col-sm-5 col-form-label">Licensed Indications</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("licensedUse")" name="licensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="unlicenseduse" class="col-sm-5 col-form-label">Unlicensed Indications</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndication")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedUse)" data-isdisabled="false" data-singleselect="false" id="@DeriveId("unlicensedUse")" name="unlicensedUse" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchIndicationWithDisorderAndFinding")" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -145,7 +145,7 @@
                     <div class="form-group row">
                         <label for="Supplier" class="col-sm-5 col-form-label">Supplier</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Supplier, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Supplier")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.Supplier), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchSuppliers")}" })
+                            @Html.TextBoxFor(m => m.Supplier, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Supplier")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.Supplier), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchLatestSuppliers")}" })
                         </div>
                     </div>
                     @*<div class="form-group row">
@@ -195,31 +195,31 @@
                     <div class="form-group row">
                         <label for="Route" class="col-sm-5 col-form-label">Local Licensed Route</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.LocalLicensedRoute, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("localLicensedRoute")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedRoute), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchRoutes") })
+                            @Html.TextBoxFor(m => m.LocalLicensedRoute, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("localLicensedRoute")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalLicensedRoute), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchLatestRoutes") })
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="localunlicensedroute" class="col-sm-5 col-form-label">Local Unlicensed Route</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchRoutes") data-isdisabled="false" id="@DeriveId("localUnlicensedRoute")" type="text" name="LocalUnlicensedRoute" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.LocalUnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchLatestRoutes") data-isdisabled="false" id="@DeriveId("localUnlicensedRoute")" type="text" name="LocalUnlicensedRoute" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="Route" class="col-sm-5 col-form-label">Licensed Route</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.Route, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Route")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Route), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchRoutes") })
+                            @Html.TextBoxFor(m => m.Route, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("Route")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.Route), data_singleselect = "false", data_isdisabled = "false", data_query_url = DeriveAbsUrl("/Formulary/SearchLatestRoutes") })
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="unlicensedroute" class="col-sm-5 col-form-label">Unlicensed Route</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchRoutes") data-isdisabled="false" id="@DeriveId("unlicensedRoute")" name="unlicensedRoute" type="text" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameListToJsonArray(Model.UnlicensedRoute)" data-singleselect="false" data-query-url=@DeriveAbsUrl("/Formulary/SearchLatestRoutes") data-isdisabled="false" id="@DeriveId("unlicensedRoute")" name="unlicensedRoute" type="text" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="FormCd" class="col-sm-5 col-form-label">Formulation</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.FormCd, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("FormCd")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.FormCd), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchFormulations")}" })
+                            @Html.TextBoxFor(m => m.FormCd, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("FormCd")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.FormCd), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchLatestFormulations")}" })
                         </div>
                     </div>
                     <div class="form-group row">
@@ -231,13 +231,13 @@
                     <div class="form-group row">
                         <label for="unitdoseformunits" class="col-sm-5 col-form-label">Unit dose form units</label>
                         <div class="col-sm-7">
-                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseFormUnits)" data-isdisabled="false" data-singleselect="true" id="@DeriveId("unitDoseFormUnits")" name="unitDoseFormUnits" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchUOMs")" />
+                            <input class="form-control studio-autocomplete" data-existingdata="@SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseFormUnits)" data-isdisabled="false" data-singleselect="true" id="@DeriveId("unitDoseFormUnits")" name="unitDoseFormUnits" type="text" data-query-url="@DeriveAbsUrl("/Formulary/SearchLatestUOMs")" />
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="UnitDoseUnitOfMeasure" class="col-sm-5 col-form-label">Unit dose unit of measure</label>
                         <div class="col-sm-7">
-                            @Html.TextBoxFor(m => m.UnitDoseUnitOfMeasure, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("UnitDoseUnitOfMeasure")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseUnitOfMeasure), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchUOMs")}" })
+                            @Html.TextBoxFor(m => m.UnitDoseUnitOfMeasure, new { @class = "form-control studio-autocomplete", @id = $"{DeriveId("UnitDoseUnitOfMeasure")}", data_existingdata = SynapseStudioWeb.Helpers.Extensions.SerializeCodeNameItemToJsonArray(Model.UnitDoseUnitOfMeasure), data_singleselect = "true", data_isdisabled = "false", data_query_url = $"{DeriveAbsUrl("/Formulary/SearchLatestUOMs")}" })
                         </div>
                     </div>
                     <div class="card mb-2">
@@ -524,6 +524,12 @@
                         <label for="IsCustomControlledDrug" class="col-sm-5 col-form-label">Controlled Drug</label>
                         <div class="col-sm-7">
                             @Html.CheckBoxFor(m => m.IsCustomControlledDrug)
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="IsPrescriptionPrintingRequired" class="col-sm-5 col-form-label">Prescription Printing Required</label>
+                        <div class="col-sm-7">
+                            @Html.CheckBoxFor(m => m.IsPrescriptionPrintingRequired)
                         </div>
                     </div>
                     <div class="form-group row">

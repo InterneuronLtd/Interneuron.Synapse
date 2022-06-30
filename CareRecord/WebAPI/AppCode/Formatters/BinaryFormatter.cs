@@ -65,8 +65,7 @@ namespace Interneuron.CareRecord.API.AppCode.Formatters
             readStream.CopyTo(stream);
             Binary binary = new Binary
             {
-                //Content = stream.ToArray(),
-                Data = stream.ToArray(),
+                Content = stream.ToArray(),
                 ContentType = contentType
             };
 
@@ -76,8 +75,7 @@ namespace Interneuron.CareRecord.API.AppCode.Formatters
         public override System.Threading.Tasks.Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, System.Net.TransportContext transportContext)
         {
             Binary binary = (Binary)value;
-            //var stream = new MemoryStream(binary.Content);
-            var stream = new MemoryStream(binary.Data);
+            var stream = new MemoryStream(binary.Content);
             content.Headers.ContentType = new MediaTypeHeaderValue(binary.ContentType);
             stream.CopyTo(writeStream);
             stream.Flush();

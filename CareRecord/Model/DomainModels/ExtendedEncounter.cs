@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_ExtendedEncounter : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_ExtendedEncounter : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string EncounterId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -52,5 +52,55 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Intendedbed { get; set; }
         public DateTime? Originaledd { get; set; }
         public DateTime? Originaleddts { get; set; }
+        public DateTime? Expectedleaveofabsencereturndate { get; set; }
+        public DateTime? Decisiontoadmitdate { get; set; }
+        public string Managementintention { get; set; }
+        public DateTime? Consultantepisodestartdate { get; set; }
+        public DateTime? Consultantepisodeenddate { get; set; }
+        public string Specialtytreatmentfunctioncode { get; set; }
+        public string Specialtytreatmentfunctiontext { get; set; }
+        public string Specialtytreatmentfunctioncodingsystem { get; set; }
+        public string Specialtytreatmentfunctionaltcodingsystem { get; set; }
+        public string Referralsource { get; set; }
+        public string Servicetyperequestedcode { get; set; }
+        public string Servicetyperequestedtext { get; set; }
+        public string Servicetyperequestedcodingsystem { get; set; }
+        public string Servicetyperequestedaltcode { get; set; }
+        public string Servicetyperequestedalttext { get; set; }
+        public string Servicetyperequestedaltcodingsystem { get; set; }
+        public DateTime? Referralreceiveddate { get; set; }
+        public DateTime? Referraldate { get; set; }
+        public string Referralmethodcode { get; set; }
+        public string Referralmethodtext { get; set; }
+        public string Writtenreferralindicator { get; set; }
+        public DateTime? Readyfordischargedate { get; set; }
+        public string Nhsnumbertracingstatus { get; set; }
+        public string Delayeddischargereasoncode { get; set; }
+        public string Delayeddischargereasontext { get; set; }
+        public string Outcomeofattendancecode { get; set; }
+        public string Outcomeofattendancetext { get; set; }
+        public string Firstattendanceindicatorcode { get; set; }
+        public string Firstattendanceindicatortext { get; set; }
+        public string Firstattendanceindicatorcodingsystem { get; set; }
+        public string Firstattendanceindicatoraltcode { get; set; }
+        public string Firstattendanceindicatoralttext { get; set; }
+        public string Firstattendanceindicatoraltcodingsystem { get; set; }
+        public string Cancelledbycode { get; set; }
+        public string Cancelledbytext { get; set; }
+        public string Cancellationreasoncode { get; set; }
+        public string Cancellationreasontext { get; set; }
+        public DateTime? Datethisprovider { get; set; }
+        public DateTime? Originaldateonlist { get; set; }
+        public DateTime? Guaranteedadmissiondate { get; set; }
+        public DateTime? Suspensionstartdate { get; set; }
+        public DateTime? Suspensionenddate { get; set; }
+        public DateTime? Tcidate { get; set; }
+        public string Reasonforremoval { get; set; }
+        public DateTime? Removaldate { get; set; }
+        public string Outcomeofofferofadmission { get; set; }
+        public string Waitinglisttypecode { get; set; }
+        public string Waitinglisttypetext { get; set; }
+        public string Reasonforexceedingguaranteedate { get; set; }
+        public DateTime? Lastreviewdate { get; set; }
     }
 }

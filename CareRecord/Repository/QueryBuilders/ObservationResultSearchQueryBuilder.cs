@@ -29,20 +29,24 @@ namespace Interneuron.CareRecord.Repository.QueryBuilders
     {
         public override List<dynamic> Execute(List<SynapseSearchTerm> synapseSearchTerms)
         {
-            var baseQuery = (from result in this.dbContext.entitystorematerialised_CoreResult1
+            var baseQuery = (from result in this.dbContext.entitystorematerialised_CoreResult
                              join person in this.dbContext.entitystorematerialised_CorePerson on
                              result.PersonId equals person.PersonId
                              join personIden in this.dbContext.entitystorematerialised_CorePersonidentifier on
                              person.PersonId equals personIden.PersonId
-                             join resultOrder in this.dbContext.entitystorematerialised_CoreOrder1 on
+                             join resultOrder in this.dbContext.entitystorematerialised_CoreOrder on
                              result.OrderId equals resultOrder.OrderId into orderTemp
                              from order in orderTemp.DefaultIfEmpty()
+                             join resultNotes in this.dbContext.entitystorematerialised_CoreNote on
+                             result.ResultId equals resultNotes.Parentid into notetemp
+                             from note in notetemp.DefaultIfEmpty()
                              select new
                              {
+                                 orderData = order,
                                  resultData = result,
                                  personData = person,
                                  personIdData = personIden,
-                                 orderData = order
+                                 noteData = note,
                              });
 
             var searchOp = new GenericSearchOpProcessor();
@@ -53,17 +57,26 @@ namespace Interneuron.CareRecord.Repository.QueryBuilders
                 .OrderByDescending((entity) => entity.resultData.Createdtimestamp)
                 .Select(entity => new
                 {
+                    orders = entity.orderData,
                     result = entity.resultData,
-                    patientIdentifer = entity.personIdData
+                    patientIdentifer = entity.personIdData,
+                    notes = entity.noteData,
                 })
                 .ToList();
 
             if (matResults.IsCollectionValid())
             {
-                var results = matResults.Select(m => m.result).ToList();
+                var orders = matResults.Select(m => m.orders).Distinct().ToList();
+                var results = matResults.Select(m => m.result).Distinct().ToList();
                 var patientIdentifier = matResults.Select(m => m.patientIdentifer).FirstOrDefault();
+                var notes = matResults.Select(m => m.notes).Distinct().ToList();
 
-                return new List<dynamic> { results, patientIdentifier };
+                return new List<dynamic> { 
+                    orders, 
+                    results, 
+                    patientIdentifier, 
+                    notes
+                };
             }
 
             return null;

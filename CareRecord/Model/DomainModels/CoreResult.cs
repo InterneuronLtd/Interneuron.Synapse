@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_CoreResult : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_CoreResult : Interneuron.CareRecord.Infrastructure.Domain.EntityBase, IEquatable<entitystorematerialised_CoreResult>
     {
         public string ResultId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -41,8 +42,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string PersonId { get; set; }
         public string EncounterId { get; set; }
         public int? Setid { get; set; }
-        //public string Units { get; set; }
-        //public string Value { get; set; }
         public string Referencerange { get; set; }
         public DateTime? Analysisdatetime { get; set; }
         public string Identifiercode { get; set; }
@@ -75,5 +74,23 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Reportstatustext { get; set; }
         public DateTime? Reportexaminationdate { get; set; }
         public string Scantype { get; set; }
+
+        public bool Equals([AllowNull] entitystorematerialised_CoreResult other)
+        {
+            //Check whether the compared object is null.
+            if (Object.ReferenceEquals(other, null)) return false;
+
+            //Check whether the compared object references the same data.
+            if (Object.ReferenceEquals(this, other)) return true;
+
+            //Check whether the products' properties are equal.
+            return ResultId.Equals(other.ResultId);
+        }
+
+        public override int GetHashCode()
+        {
+            //Calculate the hash code for the product.
+            return ResultId.GetHashCode();
+        }
     }
 }

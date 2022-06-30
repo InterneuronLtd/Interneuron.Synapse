@@ -75,11 +75,11 @@ namespace Interneuron.CareRecord.API.AppCode.Core
             return string.Format("{0}: {1} {2} ({3})", (int)StatusCode, StatusCode.ToString(), details, location);
         }
 
-        //public static FhirResponse WithError(HttpStatusCode code, string message, params object[] args)
-        //{
-        //    OperationOutcome outcome = new OperationOutcome();
-        //    outcome.AddError(string.Format(message, args));
-        //    return new FhirResponse(code, outcome);
-        //}
+        public static FhirResponse WithError(HttpStatusCode code, string message, params object[] args)
+        {
+            OperationOutcome outcome = new OperationOutcome();
+            outcome.AddError(string.Format(message, args));
+            return new FhirResponse(code, outcome);
+        }
     }
 }

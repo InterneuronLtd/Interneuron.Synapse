@@ -162,6 +162,8 @@ namespace SynapseStudioWeb.Models.MedicationMgmt
 
         public bool IsCustomControlledDrug { get; set; }
 
+        public bool IsPrescriptionPrintingRequired { get; set; }
+
         public List<CodeNameSelectorModel> Diluents { get; set; }
 
         public bool IsIndicationMandatory { get; set; }
@@ -189,6 +191,8 @@ namespace SynapseStudioWeb.Models.MedicationMgmt
         public bool IsDiffParallelImport { get; set; }
         public bool IsDiffIgnoreDuplicateWarnings { get; set; }
         public bool IsDiffControlledDrug { get; set; }
+
+        public bool IsDiffPrescriptionPrintingRequired { get; set; }
         public bool IsDiffIndicationIsMandatory { get; set; }
         public bool IsDiffWitnessingRequired { get; set; }
 
@@ -233,12 +237,56 @@ namespace SynapseStudioWeb.Models.MedicationMgmt
         public bool? NullableIsBloodProduct { get; set; }
         public bool? NullableIsDiluent { get; set; }
         public bool? NullableIsCustomControlledDrug { get; set; }
+
+        public bool? NullableIsPrescriptionPrintingRequired { get; set; }
         public bool? NullableIsIndicationMandatory { get; set; }
         public bool? NullableIsGastroResistant { get; set; }
         public bool? NullableIsModifiedRelease { get; set; }
-
+        public bool DelLocalLicensedIndication { get; set; }
+        public bool DelLocalUnlicensedIndication { get; set; }
+        public bool DelLocalLicensedRoute { get; set; }
+        public bool DelLocalUnlicensedRoute { get; set; }
+        public bool DelMedusaPrepIns { get; set; }
+        public bool DelCompatibleDiluents { get; set; }
+        public bool DelCustomWarning { get; set; }
+        public bool DelReminder { get; set; }
+        public bool DelEndorsement { get; set; }
+        public bool DelRoundingFactor{ get; set; }
+        //public bool DelFormularyStatus { get; set; }
+        public bool DelTitrationType { get; set; }
         public string SerializedOriginalObj { get; set; }
 
+        public bool DisplayLocalLicensedIndicationLbl { get; set; }
+        public bool DisplayLocalUnlicensedIndicationLbl { get; set; }
+        public bool DisplayRoundingFactorLbl { get; set; }
+        public bool DisplayLocalLicensedRouteLbl { get; set; }
+        public bool DisplayLocalUnlicensedRouteLbl { get; set; }
+        public bool DisplayCustomWarningsLbl { get; set; }
+        public bool DisplayRemindersLbl { get; set; }
+        public bool DisplayEndorsementsLbl { get; set; }
+        public bool DisplayMedusaPreparationLbl { get; set; }
+        public bool DisplayTitrationTypeLbl { get; set; }
+        public bool DisplayCompatibleDiluentLbl { get; set; }
+        public bool DisplayClinicalTrialMedicationLbl { get; set; }
+        public bool DisplayCriticalDrugLbl { get; set; }
+        public bool DisplayGastroResistantLbl { get; set; }
+        public bool DisplayModifiedReleaseLbl { get; set; }
+        public bool DisplayExpensiveMedicationLbl { get; set; }
+        public bool DisplayHighAlertMedicationLbl { get; set; }
+        public bool DisplayIVToOralLbl { get; set; }
+        public bool DisplayNotForPRNLbl { get; set; }
+        public bool DisplayBloodProductLbl { get; set; }
+        public bool DisplayDiluentLbl { get; set; }
+        public bool DisplayPrescribableLbl { get; set; }
+        public bool DisplayOutpatientMedicationLbl { get; set; }
+        public bool DisplayIgnoreDuplicateWarningLbl { get; set; }
+        public bool DisplayControlledDrugLbl { get; set; }
+
+        public bool DisplayPrescriptionPrintingRequiredLbl { get; set; }
+        public bool DisplayIndicationMandatoryLbl { get; set; }
+        public bool DisplayWitnessingRequiredLbl { get; set; }
+        public bool DisplayStatusLbl { get; set; }
+        public bool DisplayFormularyStatusLbl { get; set; }
 
         /*
          * if (orginalObj.ClinicalTrialMedication == editedData.ClinicalTrialMedication)

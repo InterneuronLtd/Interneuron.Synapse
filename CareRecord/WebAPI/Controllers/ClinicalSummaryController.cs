@@ -19,6 +19,7 @@
 
 
 ﻿using Interneuron.CareRecord.API.AppCode.DTO;
+using Interneuron.CareRecord.Model.DomainModels.Manual;
 using Interneuron.CareRecord.Model.DomainModels;
 using Interneuron.Common.Extensions;
 using InterneuronAutonomic.API;
@@ -580,10 +581,10 @@ namespace Interneuron.CareRecord.API.Controllers
 
 
             SelectStatement selectStatement = new SelectStatement();
-            selectStatement.selectstatement = "SELECT *";
+            selectStatement.selectstatement = "SELECT * ";
 
             OrderByGroupByStatement orderByGroupByStatement = new OrderByGroupByStatement();
-            orderByGroupByStatement.ordergroupbystatement = "ORDER BY reportissueddatetime desc LIMIT 1";
+            orderByGroupByStatement.ordergroupbystatement = "ORDER BY 2 DESC";
 
             List<object> body = new List<object>();
             body.Add(filters);
@@ -616,7 +617,9 @@ namespace Interneuron.CareRecord.API.Controllers
 
             Filter filter = new Filter();
             filter.filterClause = "person_id = @person_id and encounter_id = @encounter_id " 
-                                + "and prescriptionstatus_id = 'fd8833de-213b-4570-8cc7-67babfa31393' and (__medications::text ilike '%paracetamol%' or __medications::text ilike '%\"isantimicrobial\":true%')";
+                                + "and prescriptionstatus_id in ('fd8833de-213b-4570-8cc7-67babfa31393', '63e946cd-b4a4-4f60-9c18-a384c49486ea', 'fe406230-be68-4ad6-a979-ef15c42365cf') "
+                                + "and prescriptioncontext_id = '18075621-59fd-4daa-a891-6bb492db087e' "
+                                + "and (__medications::text ilike '%paracetamol%' or __medications::text ilike '%\"isantimicrobial\":true%')";
 
             Filters filters = new Filters();
             filters.filters.Add(filter);
@@ -634,7 +637,7 @@ namespace Interneuron.CareRecord.API.Controllers
             filterParameters.filterparams.Add(encounterIdParameter);
 
             SelectStatement selectStatement = new SelectStatement();
-            selectStatement.selectstatement = "SELECT prescription_id, person_id, encounter_id, __posology, __medications, __routes, createdby, lastmodifiedon";
+            selectStatement.selectstatement = "SELECT * ";
 
             OrderByGroupByStatement orderByGroupByStatement = new OrderByGroupByStatement();
             orderByGroupByStatement.ordergroupbystatement = "ORDER BY lastmodifiedon desc";
@@ -732,7 +735,7 @@ namespace Interneuron.CareRecord.API.Controllers
 
         [HttpPost]
         [Route("PostTask/{personId}")]
-        public async Task<string> PostTask(string personId, [FromBody] Model.DomainModels.Task tsk)
+        public async Task<string> PostTask(string personId, [FromBody] Model.DomainModels.Manual.Task tsk)
         {
             if (tsk.IsNull())
                 return null;
@@ -771,7 +774,7 @@ namespace Interneuron.CareRecord.API.Controllers
                 }
             }
 
-            Model.DomainModels.Task t = new Model.DomainModels.Task();
+            Model.DomainModels.Manual.Task t = new Model.DomainModels.Manual.Task();
 
             t.allocateddatetime = tsk.allocateddatetime;
             t.allocatedto = tsk.allocatedto;
@@ -982,7 +985,7 @@ namespace Interneuron.CareRecord.API.Controllers
             var result = await new TaskFactory<string>().StartNew(() =>
             {
 
-                return _dynamicAPIClient.GetBaseViewListByPost("clinicalsummary_gettasks", CreateGenericClinicalSummaryFilter(personId));
+                return _dynamicAPIClient.GetBaseViewListByPost("clinicalsummary_gettasks", CreateTaskFilter(personId));
             });
 
             return result;
@@ -1206,6 +1209,47 @@ namespace Interneuron.CareRecord.API.Controllers
             });
 
             return providerObject;
+        }
+
+        private List<object> CreateTaskFilter(string personId)
+        {
+            Filter filter = new Filter();
+            //filter.filterClause = "person_id = @person_id and encounter_id = @encounter_id and clinicalsummary_id = @clinicalsummary_id";
+            filter.filterClause = "person_id = @person_id";
+
+            Filters filters = new Filters();
+            filters.filters.Add(filter);
+
+            FilterParameter personIdParameter = new FilterParameter();
+            personIdParameter.paramName = "person_id";
+            personIdParameter.paramValue = personId;
+
+            //FilterParameter encounterIdParameter = new FilterParameter();
+            //encounterIdParameter.paramName = "encounter_id";
+            //encounterIdParameter.paramValue = encounterId;
+
+            //FilterParameter clinicalSummaryIdParameter = new FilterParameter();
+            //clinicalSummaryIdParameter.paramName = "clinicalsummary_id";
+            //clinicalSummaryIdParameter.paramValue = clinicalSummaryId;
+
+            FilterParameters filterParameters = new FilterParameters();
+            filterParameters.filterparams.Add(personIdParameter);
+            //filterParameters.filterparams.Add(encounterIdParameter);
+            //filterParameters.filterparams.Add(clinicalSummaryIdParameter);
+
+            SelectStatement selectStatement = new SelectStatement();
+            selectStatement.selectstatement = "SELECT * ";
+
+            OrderByGroupByStatement orderByGroupByStatement = new OrderByGroupByStatement();
+            orderByGroupByStatement.ordergroupbystatement = "ORDER BY person_id";
+
+            List<object> body = new List<object>();
+            body.Add(filters);
+            body.Add(filterParameters);
+            body.Add(selectStatement);
+            body.Add(orderByGroupByStatement);
+
+            return body;
         }
 
     }

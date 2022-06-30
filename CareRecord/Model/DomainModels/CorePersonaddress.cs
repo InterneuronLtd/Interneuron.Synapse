@@ -20,14 +20,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_CorePersonaddress : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_CorePersonaddress : Interneuron.CareRecord.Infrastructure.Domain.EntityBase, IEquatable<entitystorematerialised_CorePersonaddress>
     {
         public string PersonaddressId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -48,5 +49,23 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Country { get; set; }
         public string Otheraddressdetails { get; set; }
         public bool? Isprimaryaddress { get; set; }
+
+        public bool Equals([AllowNull] entitystorematerialised_CorePersonaddress other)
+        {
+            //Check whether the compared object is null.
+            if (Object.ReferenceEquals(other, null)) return false;
+
+            //Check whether the compared object references the same data.
+            if (Object.ReferenceEquals(this, other)) return true;
+
+            //Check whether the products' properties are equal.
+            return PersonaddressId.Equals(other.PersonaddressId);
+        }
+
+        public override int GetHashCode()
+        {
+            //Calculate the hash code for the product.
+            return PersonaddressId.GetHashCode();
+        }
     }
 }

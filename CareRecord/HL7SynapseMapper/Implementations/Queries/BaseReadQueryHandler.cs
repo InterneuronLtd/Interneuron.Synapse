@@ -71,7 +71,7 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
             OnPostSuccessfullProcess?.Invoke(resourceData);
 
             return resourceData;
-        }
+        } 
 
         public abstract string GetSarchEntityIdentifier();
 
@@ -83,12 +83,12 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
 
             if (mainEntityInResult == null) return;
 
-            dynamic mainEntity;
+            dynamic mainEntity = mainEntityInResult;
 
-            if (mainEntityInResult is System.Collections.IEnumerable)
-                mainEntity = mainEntityInResult[0];
-            else
-                mainEntity = mainEntityInResult;
+            //if (mainEntityInResult is System.Collections.IEnumerable)
+            //    mainEntity = mainEntityInResult[0];
+            //else
+            //    mainEntity = mainEntityInResult;
 
             var resourceEntityType = fhirParam.TypeName.GetHL7ModelType();
 
@@ -98,33 +98,51 @@ namespace Interneuron.CareRecord.HL7SynapseService.Implementations
 
             AppendWithSubsequentData(resourceEntityType, data, searchResults);
 
-            resourceData.Resource = data;
+            if (data is System.Collections.IEnumerable && data.Count != 1)
+            {
+                Hl7.Fhir.Model.Bundle bundle = new Hl7.Fhir.Model.Bundle();
+
+                foreach (var entry in data) 
+                {
+                    Hl7.Fhir.Model.Bundle.EntryComponent entryComponent = new Hl7.Fhir.Model.Bundle.EntryComponent();
+                    entryComponent.Resource = entry;
+                    bundle.Entry.Add(entryComponent);
+                }
+
+                resourceData.Resource = bundle;
+                return;
+            }
+
+            resourceData.Resource = data[0];
 
         }
 
         private void AppendWithSubsequentData(Type resourceEntityType, dynamic dataItem, List<dynamic> searchResults)
         {
-            for (int resIndex = 1; resIndex < searchResults.Count; resIndex++)
+            foreach (var data in dataItem)
             {
-                var result = searchResults[resIndex];
-
-                if (result != null)
+                for (int resIndex = 1; resIndex < searchResults.Count; resIndex++)
                 {
-                    if (result is System.Collections.IEnumerable)
+                    var result = searchResults[resIndex];
+
+                    if (result != null)
                     {
-                        foreach (var resultData in result)
+                        if (result is System.Collections.IEnumerable)
                         {
-                            if (resultData != null)
+                            foreach (var resultData in result)
                             {
-                                var dataType = TypeExtensions.ConvertToListOrType(resourceEntityType, resultData);
-                                this._mapper.Map(resultData, dataItem, resultData.GetType(), dataType);
+                                if (resultData != null)
+                                {
+                                    var dataType = TypeExtensions.ConvertToListOrType(resourceEntityType, resultData);
+                                    this._mapper.Map(resultData, data, resultData.GetType(), dataType);
+                                }
                             }
                         }
-                    }
-                    else
-                    {
-                        var dataType = TypeExtensions.ConvertToListOrType(resourceEntityType, result);
-                        this._mapper.Map(result, dataItem, result.GetType(), dataType);
+                        else
+                        {
+                            var dataType = TypeExtensions.ConvertToListOrType(resourceEntityType, result);
+                            this._mapper.Map(result, data, result.GetType(), dataType);
+                        }
                     }
                 }
             }

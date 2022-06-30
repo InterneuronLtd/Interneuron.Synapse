@@ -32,5 +32,6 @@ namespace SynapseStudioWeb.Models.MedicinalMgmt
         public DateTime? Cddt { get; set; }
         public string Cdprev { get; set; }
         public string Desc { get; set; }
+        public bool? IsLatest { get; set; }
     }
 }

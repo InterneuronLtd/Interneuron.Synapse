@@ -23,11 +23,11 @@ using System.Collections.Generic;
 
 namespace Interneuron.CareRecord.Model.DomainModels
 {
-    public partial class entitystore_LocalAneClinicalnotes : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
+    public partial class entitystorematerialised_LocalAneClinicalnotes : Interneuron.CareRecord.Infrastructure.Domain.EntityBase
     {
         public string AneClinicalnotesId { get; set; }
         public string RowId { get; set; }
-        public int Sequenceid { get; set; }
+        public int? Sequenceid { get; set; }
         public string Contextkey { get; set; }
         public DateTime? Createdtimestamp { get; set; }
         public DateTime? Createddate { get; set; }
@@ -40,5 +40,6 @@ namespace Interneuron.CareRecord.Model.DomainModels
         public string Tenant { get; set; }
         public string PersonId { get; set; }
         public string Clinicalnotes { get; set; }
+        public string AneCodingIdClinicalnotes { get; set; }
     }
 }

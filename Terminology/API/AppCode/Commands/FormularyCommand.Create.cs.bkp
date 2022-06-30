@@ -1,0 +1,321 @@
+﻿//using Interneuron.Common.Extensions;
+//using Interneuron.Terminology.API.AppCode.DTOs;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary;
+//using Interneuron.Terminology.API.AppCode.DTOs.Formulary.Requests;
+//using Interneuron.Terminology.API.AppCode.Validators;
+//using Interneuron.Terminology.Infrastructure.Domain;
+//using Interneuron.Terminology.Model.DomainModels;
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+
+//namespace Interneuron.Terminology.API.AppCode.Commands
+//{
+//    public partial class FormularyCommand : IFormularyCommands
+//    {
+//        public CreateEditFormularyDTO CreateFormulary(CreateEditFormularyRequest request)
+//        {
+//            var response = new CreateEditFormularyDTO
+//            {
+//                Status = new StatusDTO { StatusCode = TerminologyConstants.STATUS_SUCCESS, StatusMessage = "", ErrorMessages = new List<string>() },
+//                Data = new List<FormularyDTO>()
+//            };
+
+//            var formularyRepo = this._provider.GetService(typeof(IFormularyRepository<FormularyHeader>)) as IFormularyRepository<FormularyHeader>;
+
+//            var uniqueCodes = request.RequestsData.Select(req => req.Code).Distinct().ToArray();
+
+//            //Considering non-deleted records only for comparision
+//            var existingFormulariesFromDB = formularyRepo.GetLatestFormulariesByCodes(uniqueCodes, true).ToList();
+
+//            var toBeSavedFormularies = new List<FormularyHeader>();
+
+//            var contextAndNonContextFields = GetContextFieldsFromConfig();
+
+//            var contextFields = contextAndNonContextFields.comparableContextFields;// GetComparableContextFields();//this should come from Configuration
+
+//            var nonContextFields = contextAndNonContextFields.comparableNonContextFields;// GetComparableNonContextFields();
+
+//            request.RequestsData.Each(requestData =>
+//            {
+//                var formularyHeader = CreateHeader(requestData);
+
+//                PopulateFormularyDetail(requestData.Detail, formularyHeader);
+
+//                PopulateFormularyRouteDetails(requestData, formularyHeader);
+
+//                PopulateFormularyIngredients(requestData, formularyHeader);
+
+//                //PopulateFormularyIndications(requestData, formularyHeader);
+
+//                PopulateFormularyAdditionalCodes(requestData, formularyHeader);
+
+//                //PopulateFormularyOntologyFormDetails(requestData, formularyHeader);
+
+//                if (existingFormulariesFromDB.IsCollectionValid())
+//                {
+//                    //Consider non-archived and non-deleted records. Records returned from Db are only in non-deleted status only
+//                    var onlyValidSameRecordsInDb = existingFormulariesFromDB.Where(rec => rec.RecStatusCode != TerminologyConstants.RECORDSTATUS_ARCHIVED).ToList();
+//                    if (onlyValidSameRecordsInDb.IsCollectionValid())
+//                    {
+//                        CheckForDuplicationAndSave(formularyRepo, formularyHeader, onlyValidSameRecordsInDb, response, toBeSavedFormularies, contextFields, nonContextFields);
+//                    }
+//                    else
+//                    {
+//                        formularyRepo.Add(formularyHeader);
+//                        toBeSavedFormularies.Add(formularyHeader);
+//                    }
+//                }
+//                else
+//                {
+//                    formularyRepo.Add(formularyHeader);
+//                    toBeSavedFormularies.Add(formularyHeader);
+//                }
+//            });
+
+//            formularyRepo.SaveChanges();
+
+//            if (toBeSavedFormularies.IsCollectionValid())
+//            {
+//                toBeSavedFormularies.Each(saveFormulary =>
+//                {
+//                    RePopulateDTOPostSave(saveFormulary, response);
+
+//                });
+//            }
+
+//            return response;
+//        }
+
+//        private void CheckForDuplicationAndSave(IRepository<FormularyHeader> formularyRepo, FormularyHeader formularyHeader, List<FormularyHeader> onlyValidSameRecordsInDb, CreateEditFormularyDTO outputDTO, List<FormularyHeader> toBeSavedFormularies, Dictionary<string, HashSet<string>> contextFields, Dictionary<string, HashSet<string>> nonContextFields)
+//        {
+//            //The validator will check if any of the record in the system matches the context fields passed as parameter
+//            var similarInContextFieldsValidator = new SimilarFormularyValidator(formularyHeader, onlyValidSameRecordsInDb, contextFields);
+//            var contextValidationResult = similarInContextFieldsValidator.Validate();
+//            var similarInContextFields = contextValidationResult.IsValid;
+
+//            //The validator will check if any of the record in the system matches the non-context fields passed as parameter
+//            var similarInNonContextFieldsValidator = new SimilarFormularyValidator(formularyHeader, onlyValidSameRecordsInDb, nonContextFields);
+//            var nonContextValidationResult = similarInNonContextFieldsValidator.Validate();
+//            var similarInNonContextFields = nonContextValidationResult.IsValid;
+
+//            if (similarInContextFields || similarInNonContextFields) // Should not be same at all - wheteher context or non-context
+//            {
+//                //All data exists in the db for this record
+//                outputDTO.Status.ErrorMessages.Add(COMPLETE_MATCHING_RECS_MSG.ToFormat(formularyHeader.Code));
+//            }
+//            else
+//            {
+//                formularyRepo.Add(formularyHeader);
+
+//                toBeSavedFormularies.Add(formularyHeader);
+//            }
+//        }
+
+//        private FormularyHeader CreateHeader(FormularyDTO request)
+//        {
+//            var formularyHeader = new FormularyHeader();
+
+//            formularyHeader.FormularyId = Guid.NewGuid().ToString();
+//            formularyHeader.VersionId = 1;
+//            formularyHeader.FormularyVersionId = Guid.NewGuid().ToString();
+//            formularyHeader.IsLatest = true;
+//            formularyHeader.IsDuplicate = false;//Need to check
+
+//            formularyHeader.Code = request.Code?.Trim();
+//            formularyHeader.CodeSystem = request.CodeSystem.IsNotEmpty() ? request.CodeSystem : TerminologyConstants.DEFAULT_IDENTIFICATION_CODE_SYSTEM;
+
+//            formularyHeader.Name = request.Name?.Trim();
+//            formularyHeader.ParentCode = request.ParentCode?.Trim();
+//            formularyHeader.ParentName = null;
+//            formularyHeader.ParentProductType = request.ParentProductType?.Trim();
+//            formularyHeader.ProductType = request.ProductType?.Trim();
+
+//            formularyHeader.RecSource = TerminologyConstants.MANUAL_DATA_SRC;// "Manual";
+//            formularyHeader.RecStatusCode = TerminologyConstants.RECORDSTATUS_DRAFT;//Draft
+//            formularyHeader.RecStatuschangeDate = DateTime.UtcNow;
+
+//            formularyHeader.VtmId = request.VtmId.IsNotEmpty() ? request.VtmId.Trim() : ((string.Compare(request.ParentProductType, "vtm", true) == 0) ? request.ParentCode : null);
+
+//            formularyHeader.VmpId = request.VmpId.IsNotEmpty() ? request.VmpId.Trim() : ((string.Compare(request.ParentProductType, "vmp", true) == 0) ? request.ParentCode : null);
+
+//            return formularyHeader;
+//        }
+
+//        private void PopulateFormularyDetail(FormularyDetailDTO detailInrequest, FormularyHeader formularyHeader)
+//        {
+//            formularyHeader.FormularyDetail = new List<FormularyDetail>();
+
+//            var formularyDetail = _mapper.Map<FormularyDetail>(detailInrequest);
+
+//            formularyDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//            formularyDetail.RnohFormularyStatuscd = formularyDetail.RnohFormularyStatuscd ?? TerminologyConstants.FORMULARYSTATUS_FORMULARY;
+
+//            formularyHeader.FormularyDetail.Add(formularyDetail);
+//        }
+
+//        private void PopulateFormularyRouteDetails(FormularyDTO request, FormularyHeader formularyHeader)
+//        {
+//            if (request.FormularyRouteDetails.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyRouteDetail = _mapper.Map<List<FormularyRouteDetail>>(request.FormularyRouteDetails); // new List<FormularyRouteDetail>();
+
+//                formularyHeader.FormularyRouteDetail.Each(detail =>
+//                {
+//                    detail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//                    detail.Source = detail.Source ?? TerminologyConstants.MANUAL_DATA_SRC;//Should be manual since formulary is added manually by RNOH
+//                });
+
+//                //request.FormularyRouteDetails.Each(rt =>
+//                //{
+//                //    var routeDetail = new FormularyRouteDetail();
+//                //    routeDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                //    routeDetail.RouteCd = rt.RouteCd;
+//                //    routeDetail.RouteFieldTypeCd = rt.RouteFieldTypeCd;
+//                //    routeDetail.Source = rt.Source ?? TerminologyConstants.MANUAL_ROUTE_SRC;//Should be manual since formulary is added manually
+
+//                //    formularyHeader.FormularyRouteDetail.Add(routeDetail);
+//                //});
+//            }
+//        }
+
+//        private void PopulateFormularyAdditionalCodes(FormularyDTO request, FormularyHeader formularyHeader)
+//        {
+//            if (request.FormularyAdditionalCodes.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyAdditionalCode = _mapper.Map<List<FormularyAdditionalCode>>(request.FormularyAdditionalCodes);// new List<FormularyAdditionalCode>();
+
+//                formularyHeader.FormularyAdditionalCode.Each(detail =>
+//                {
+//                    detail.FormularyVersionId = formularyHeader.FormularyVersionId;
+//                    detail.Source = detail.Source ?? TerminologyConstants.MANUAL_DATA_SRC;//Should be manual since formulary is added manually
+//                });
+
+//                //request.FormularyAdditionalCodes.Each(rt =>
+//                //{
+//                //    var detail = new FormularyAdditionalCode();
+//                //    detail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                //    detail.AdditionalCode = rt.AdditionalCode;
+//                //    detail.AdditionalCodeSystem = rt.AdditionalCodeSystem;
+
+//                //    formularyHeader.FormularyAdditionalCode.Add(detail);
+//                //});
+//            }
+//        }
+
+//        private void PopulateFormularyIngredients(FormularyDTO request, FormularyHeader formularyHeader)
+//        {
+//            if (request.FormularyIngredients.IsCollectionValid())
+//            {
+//                formularyHeader.FormularyIngredient = new List<FormularyIngredient>();
+
+//                request.FormularyIngredients.Each(ing =>
+//                {
+//                    var ingredient = new FormularyIngredient();
+//                    ingredient.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//                    ingredient.BasisOfPharmaceuticalStrengthCd = ing.BasisOfPharmaceuticalStrengthCd;
+//                    ingredient.IngredientCd = ing.IngredientCd?.ToString();
+//                    ingredient.StrengthValueNumerator = ing.StrengthValueNumerator?.ToString();
+//                    ingredient.StrengthValueNumeratorUnitCd = ing.StrengthValueNumeratorUnitCd?.ToString();
+//                    ingredient.StrengthValueDenominator = ing.StrengthValueDenominator;
+//                    ingredient.StrengthValueDenominatorUnitCd = ing.StrengthValueDenominatorUnitCd;
+
+//                    formularyHeader.FormularyIngredient.Add(ingredient);
+//                });
+//            }
+//        }
+
+//        //private void PopulateFormularyIndications(FormularyDTO request, FormularyHeader formularyHeader)
+//        //{
+//        //    if (request.FormularyIndications.IsCollectionValid())
+//        //    {
+//        //        formularyHeader.FormularyIndication = new List<FormularyIndication>();
+
+//        //        request.FormularyIndications.Each(ing =>
+//        //        {
+//        //            var indication = new FormularyIndication();
+//        //            indication.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//        //            indication.IndicationCd = ing.IndicationCd;
+//        //            indication.IndicationName = ing.IndicationName;
+
+//        //            formularyHeader.FormularyIndication.Add(indication);
+//        //        });
+//        //    }
+//        //}
+
+//        //private void PopulateFormularyOntologyFormDetails(FormularyDTO request, FormularyHeader formularyHeader)
+//        //{
+//        //    if (request.FormularyOntologyForms.IsCollectionValid())
+//        //    {
+//        //        formularyHeader.FormularyOntologyForm = new List<FormularyOntologyForm>();
+
+//        //        request.FormularyOntologyForms.Each(rt =>
+//        //        {
+//        //            var ontologyDetail = new FormularyOntologyForm();
+//        //            ontologyDetail.FormularyVersionId = formularyHeader.FormularyVersionId;
+
+//        //            ontologyDetail.FormCd = rt.FormCd;
+
+//        //            formularyHeader.FormularyOntologyForm.Add(ontologyDetail);
+//        //        });
+//        //    }
+//        //}
+
+//        private void RePopulateDTOPostSave(FormularyHeader formularyHeader, CreateEditFormularyDTO createFormularyDTO)
+//        {
+//            var headerDTO = _mapper.Map<FormularyDTO>(formularyHeader);
+
+//            if (formularyHeader.FormularyDetail.IsCollectionValid())
+//                headerDTO.Detail = _mapper.Map<FormularyDetailDTO>(formularyHeader.FormularyDetail.First());
+
+//            if (formularyHeader.FormularyAdditionalCode.IsCollectionValid())
+//            {
+//                headerDTO.FormularyAdditionalCodes = _mapper.Map<List<FormularyAdditionalCodeDTO>>(formularyHeader.FormularyAdditionalCode.ToList());// new List<FormularyAdditionalCodeDTO>();
+
+//                //formularyHeader.FormularyAdditionalCode.Each(hdr =>
+//                //{
+//                //    headerDTO.FormularyAdditionalCodes.Add(_mapper.Map<FormularyAdditionalCodeDTO>(hdr));
+
+//                //});
+//            }
+
+//            //if (formularyHeader.FormularyIndication.IsCollectionValid())
+//            //{
+//            //    headerDTO.FormularyIndications = _mapper.Map<List<FormularyIndicationDTO>>(formularyHeader.FormularyIndication.ToList()); // new List<FormularyIndicationDTO>();
+
+//            //    //formularyHeader.FormularyIndication.Each(ind =>
+//            //    //{
+//            //    //    headerDTO.FormularyIndications.Add(_mapper.Map<FormularyIndicationDTO>(ind));
+
+//            //    //});
+//            //}
+
+//            if (formularyHeader.FormularyIngredient.IsCollectionValid())
+//            {
+//                headerDTO.FormularyIngredients = _mapper.Map<List<FormularyIngredientDTO>>(formularyHeader.FormularyIngredient.ToList()); // new List<FormularyIngredientDTO>();
+
+//                //formularyHeader.FormularyIngredient.Each(ing =>
+//                //{
+//                //    headerDTO.FormularyIngredients.Add(_mapper.Map<FormularyIngredientDTO>(ing));
+//                //});
+//            }
+
+//            if (formularyHeader.FormularyRouteDetail.IsCollectionValid())
+//            {
+//                headerDTO.FormularyRouteDetails = _mapper.Map<List<FormularyRouteDetailDTO>>(formularyHeader.FormularyRouteDetail.ToList());// new List<FormularyRouteDetailDTO>();
+
+//                //formularyHeader.FormularyRouteDetail.Each(route =>
+//                //{
+//                //    headerDTO.FormularyRouteDetails.Add(_mapper.Map<FormularyRouteDetailDTO>(route));
+//                //});
+//            }
+
+//            createFormularyDTO.Data.Add(headerDTO);
+//        }
+//    }
+//}
