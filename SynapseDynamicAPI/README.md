@@ -104,7 +104,7 @@ We are currently working on our documentation, but if you have any feedback or i
 ## License
 
 Interneuron Synapse
-Copyright(C) 2019  Interneuron CIC
+Copyright(C) 2023  Interneuron Holdings Ltd
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 

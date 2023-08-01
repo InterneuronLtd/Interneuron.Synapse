@@ -210,7 +210,7 @@ If you are using a certificate to sign tokens, please ensure that the certificat
 ## 📝 License
 
 /Interneuron Synapse
-//Copyright(C) 2019  Interneuron CIC
+//Copyright(C) 2023  Interneuron Holdings Ltd
 
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
